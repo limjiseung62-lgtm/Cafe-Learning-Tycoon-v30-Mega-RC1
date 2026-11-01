@@ -1,13 +1,13 @@
-import { megaLateForecast } from './megaLateForecast.js';
-import { adoptInterior, isShopDeployment } from './megaInventory.js';
-import { environmentPlacements, paintEnvironment } from './megaArt.js';
-import { expansionForecast } from './megaExpansionForecast.js';
-import { AudioManager } from './audioManager.js';
-import { deploymentLocalStorage } from './deploymentStorage.js';
-import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js';
-import { ensureGrowthWriteLock } from './growthWriteLock.js';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js';
-import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js';
+import { megaLateForecast } from './megaLateForecast.js?v=v30-rc1-5973f32a35f5';
+import { adoptInterior, isShopDeployment } from './megaInventory.js?v=v30-rc1-5973f32a35f5';
+import { environmentPlacements, paintEnvironment } from './megaArt.js?v=v30-rc1-5973f32a35f5';
+import { expansionForecast } from './megaExpansionForecast.js?v=v30-rc1-5973f32a35f5';
+import { AudioManager } from './audioManager.js?v=v30-rc1-5973f32a35f5';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=v30-rc1-5973f32a35f5';
+import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js?v=v30-rc1-5973f32a35f5';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v30-rc1-5973f32a35f5';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=v30-rc1-5973f32a35f5';
+import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js?v=v30-rc1-5973f32a35f5';
 export function expansionAction(container, repo, source, refresh) {
     if (!source.mega || !document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.match(/^v30[cde]-/))
         return;

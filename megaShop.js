@@ -1,6 +1,6 @@
-import { adoptInterior, inventorySku, interiorPlanOwned } from './megaInventory.js';
-import { validateMegaPlan, megaKey, validMega } from './megaSpace.js';
-import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js';
+import { adoptInterior, inventorySku, interiorPlanOwned } from './megaInventory.js?v=v30-rc1-5973f32a35f5';
+import { validateMegaPlan, megaKey, validMega } from './megaSpace.js?v=v30-rc1-5973f32a35f5';
+import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=v30-rc1-5973f32a35f5';
 export function buyInterior(source, sku, expectedNext, now = new Date().toISOString()) { const s = adoptInterior(source), item = inventorySku(sku), inv = s.mega?.inventory; if (!item || !inv)
     return { ok: false, reason: '가구 정보를 다시 확인해 주세요.' }; if (s.campaign?.run && !s.campaign.run.closed)
     return { ok: false, reason: '영업을 마친 뒤 구매해요.' }; if (inv.next !== expectedNext)

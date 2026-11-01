@@ -1,15 +1,15 @@
-import { megaPointClear } from './megaSpace.js';
-import { validManagement } from './managementState.js';
-import { validMiniSession, validMiniCollection, pauseCredit, expireMini } from './miniGames.js';
-import { validSpecialization } from './specialization.js';
-import { validBranch } from "./growthBranch.js";
-import { validateGrowthSave } from './growthSave.js';
-import { createGrowthSession } from './sessionFactory.js';
-import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js';
-import { LearningSession, LearningProgressRepository } from './learningSession.js';
-import { LearningAnalyticsV1 } from './learningAnalytics.js';
-import { providerForPool } from './learningIntegration.js';
-import { validAbilityRun } from "./staffAbilities.js";
+import { megaPointClear } from './megaSpace.js?v=v30-rc1-5973f32a35f5';
+import { validManagement } from './managementState.js?v=v30-rc1-5973f32a35f5';
+import { validMiniSession, validMiniCollection, pauseCredit, expireMini } from './miniGames.js?v=v30-rc1-5973f32a35f5';
+import { validSpecialization } from './specialization.js?v=v30-rc1-5973f32a35f5';
+import { validBranch } from "./growthBranch.js?v=v30-rc1-5973f32a35f5";
+import { validateGrowthSave } from './growthSave.js?v=v30-rc1-5973f32a35f5';
+import { createGrowthSession } from './sessionFactory.js?v=v30-rc1-5973f32a35f5';
+import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=v30-rc1-5973f32a35f5';
+import { LearningSession, LearningProgressRepository } from './learningSession.js?v=v30-rc1-5973f32a35f5';
+import { LearningAnalyticsV1 } from './learningAnalytics.js?v=v30-rc1-5973f32a35f5';
+import { providerForPool } from './learningIntegration.js?v=v30-rc1-5973f32a35f5';
+import { validAbilityRun } from "./staffAbilities.js?v=v30-rc1-5973f32a35f5";
 export const withoutCampaign = (save) => { const copy = structuredClone(save); delete copy.campaign; delete copy.eventState; delete copy.portfolio; return copy; };
 const goodInt = (n) => Number.isSafeInteger(n) && Number(n) >= 0;
 export function validCampaign(value) { try {

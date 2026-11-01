@@ -1,8 +1,8 @@
-import { ensureGrowthWriteLock } from './growthWriteLock.js';
-import { createGrowthSave } from './growthSave.js';
-import { ensurePortfolio, syncSharedFurniture, portfolioCafes, cafeNames, canSwitchCafe, switchCafe, transferStaff } from './cafePortfolio.js';
-import { recruitById } from './recruitConfig.js';
-import { escapeText as esc } from './questionRenderer.js';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v30-rc1-5973f32a35f5';
+import { createGrowthSave } from './growthSave.js?v=v30-rc1-5973f32a35f5';
+import { ensurePortfolio, syncSharedFurniture, portfolioCafes, cafeNames, canSwitchCafe, switchCafe, transferStaff } from './cafePortfolio.js?v=v30-rc1-5973f32a35f5';
+import { recruitById } from './recruitConfig.js?v=v30-rc1-5973f32a35f5';
+import { escapeText as esc } from './questionRenderer.js?v=v30-rc1-5973f32a35f5';
 export async function openCafePicker(repo, done, back) {
     if (!await ensureGrowthWriteLock())
         return;

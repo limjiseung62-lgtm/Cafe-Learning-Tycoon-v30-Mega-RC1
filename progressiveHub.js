@@ -1,12 +1,12 @@
-import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js';
-import { goalsHtml } from './progressiveGoals.js';
-import { landmarkNames, districtVisitors } from './progressiveFinance.js';
-import { openManagementAlbum } from './managementAlbumUi.js';
-import { syncManagementAlbum } from './managementAlbum.js';
-import { investmentReason, franchiseQuote } from './progressiveGuidance.js';
-import { investmentTierLimit, investmentCatalog, progressiveEconomyConfig as config, investVillage, foundFranchise, upgradeFranchise, branchYield, branchUpgradeCost, branchRequirement, buildLandmark, progressiveTownName } from './progressiveEconomy.js';
-import { ensureGrowthWriteLock } from './growthWriteLock.js';
-import { unlocked } from './progressiveFeatures.js';
+import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=v30-rc1-5973f32a35f5';
+import { goalsHtml } from './progressiveGoals.js?v=v30-rc1-5973f32a35f5';
+import { landmarkNames, districtVisitors } from './progressiveFinance.js?v=v30-rc1-5973f32a35f5';
+import { openManagementAlbum } from './managementAlbumUi.js?v=v30-rc1-5973f32a35f5';
+import { syncManagementAlbum } from './managementAlbum.js?v=v30-rc1-5973f32a35f5';
+import { investmentReason, franchiseQuote } from './progressiveGuidance.js?v=v30-rc1-5973f32a35f5';
+import { investmentTierLimit, investmentCatalog, progressiveEconomyConfig as config, investVillage, foundFranchise, upgradeFranchise, branchYield, branchUpgradeCost, branchRequirement, buildLandmark, progressiveTownName } from './progressiveEconomy.js?v=v30-rc1-5973f32a35f5';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v30-rc1-5973f32a35f5';
+import { unlocked } from './progressiveFeatures.js?v=v30-rc1-5973f32a35f5';
 export async function openProgressiveHub(repo, onClose) {
     if (!await ensureGrowthWriteLock())
         return;

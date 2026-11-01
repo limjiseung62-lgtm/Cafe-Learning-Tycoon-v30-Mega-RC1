@@ -1,4 +1,4 @@
-import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js';
+import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=v30-rc1-5973f32a35f5';
 export const layoutKey = (level, branch) => (branch ?? 'base') + ':' + level;
 export const overlap = (a, b) => a.left < b.right - .01 && a.right > b.left + .01 && a.top < b.bottom - .01 && a.bottom > b.top + .01;
 export const tableRect = (t) => ({ left: t.x - 7.2 * t.scale, right: t.x + 7.2 * t.scale, top: t.y - 18.5 * t.scale, bottom: t.y + .6 });

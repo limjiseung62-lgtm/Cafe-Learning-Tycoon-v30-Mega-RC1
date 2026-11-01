@@ -1,9 +1,9 @@
-import { specializationCatalog } from './specializationConfig.js';
-import { validFurnitureUnlocks } from './furnitureCatalog.js';
-import { allBoardCatalog as boardCatalog, allDecorationCatalog as decorationCatalog, decorSlots } from './longGrowthConfig.js';
-import { customers } from './data.js';
-import { specialTypes, specialDefinition } from './phase4Config.js';
-import { helperCatalog, hospitalityDefinition } from './hospitalityConfig.js';
+import { specializationCatalog } from './specializationConfig.js?v=v30-rc1-5973f32a35f5';
+import { validFurnitureUnlocks } from './furnitureCatalog.js?v=v30-rc1-5973f32a35f5';
+import { allBoardCatalog as boardCatalog, allDecorationCatalog as decorationCatalog, decorSlots } from './longGrowthConfig.js?v=v30-rc1-5973f32a35f5';
+import { customers } from './data.js?v=v30-rc1-5973f32a35f5';
+import { specialTypes, specialDefinition } from './phase4Config.js?v=v30-rc1-5973f32a35f5';
+import { helperCatalog, hospitalityDefinition } from './hospitalityConfig.js?v=v30-rc1-5973f32a35f5';
 export const createLongGrowth = () => ({ version: 1, owned: [], placed: {}, visitors: {}, titles: [], albums: [], boards: [] });
 export const visitorCatalog = [...customers.map(c => ({ id: 'normal:' + c.visualKey, name: c.name, visual: c.visualKey, line: c.characterTrait })), ...specialTypes.map(t => { const c = specialDefinition(t); return { id: 'special:' + t, name: c.name, visual: c.visualKey, line: c.characterTrait }; }), ...helperCatalog.map(h => ({ id: 'helper:' + h.id, name: h.name, visual: hospitalityDefinition(h.id).visualKey, line: h.line })), { id: 'judge', name: '특별 주문 심사위원', visual: hospitalityDefinition('judge').visualKey, line: '오늘의 특별한 한 접시를 기다릴게요.' }];
 export const allVisitorCatalog = [...visitorCatalog, ...specializationCatalog.map(s => ({ id: 'specialization:' + s.id, name: s.guest, visual: s.visual, line: s.line }))];

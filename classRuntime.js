@@ -1,16 +1,16 @@
-import { commonTransactionOpen } from './commonLearningTransaction.js';
-import { validImpactState } from './classImpact.js';
-import { createRandomClassMatch } from './sessionFactory.js';
-import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js';
-import { decodeGuestCheckpoint } from './guestCheckpoint.js';
-import { LearningSession } from './learningSession.js';
-import { LearningAnalyticsV1 } from './learningAnalytics.js';
-import { providerForPool } from './learningIntegration.js';
-import { validBranch } from './growthBranch.js';
-import { validSpecialization } from './specialization.js';
-import { beginMiniSession, offerMini, validMiniSession, validMiniCollection } from './miniGames.js';
-import { ordinaryKinds, majorKinds } from './classRandom.js';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js';
+import { commonTransactionOpen } from './commonLearningTransaction.js?v=v30-rc1-5973f32a35f5';
+import { validImpactState } from './classImpact.js?v=v30-rc1-5973f32a35f5';
+import { createRandomClassMatch } from './sessionFactory.js?v=v30-rc1-5973f32a35f5';
+import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=v30-rc1-5973f32a35f5';
+import { decodeGuestCheckpoint } from './guestCheckpoint.js?v=v30-rc1-5973f32a35f5';
+import { LearningSession } from './learningSession.js?v=v30-rc1-5973f32a35f5';
+import { LearningAnalyticsV1 } from './learningAnalytics.js?v=v30-rc1-5973f32a35f5';
+import { providerForPool } from './learningIntegration.js?v=v30-rc1-5973f32a35f5';
+import { validBranch } from './growthBranch.js?v=v30-rc1-5973f32a35f5';
+import { validSpecialization } from './specialization.js?v=v30-rc1-5973f32a35f5';
+import { beginMiniSession, offerMini, validMiniSession, validMiniCollection } from './miniGames.js?v=v30-rc1-5973f32a35f5';
+import { ordinaryKinds, majorKinds } from './classRandom.js?v=v30-rc1-5973f32a35f5';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=v30-rc1-5973f32a35f5';
 export const classSaveKey = 'class-random-v1', classLockKey = 'class-random-lock';
 export function captureClass(g, packId, engine, analytics, readVisits) { if (!g.classRandom)
     throw Error('Not random CLASS'); return { version: 1, clock: g.classClock(), duration: g.durationSeconds, packId, elapsed: g.elapsedTime, closed: g.status === 'CLOSED', state: structuredClone(g.classRandom), cafe: classroomCafeCheckpoint(g), guests: structuredClone(g.guests), workers: structuredClone(g.service.workers), purchases: structuredClone(g.telemetry.upgradePurchases), phase4: structuredClone(g.telemetry.phase4), branch: structuredClone(g.growthBranch), specialization: structuredClone(g.specialization), miniGames: structuredClone(g.miniGames), miniCollection: structuredClone(g.miniCollection), learning: { session: engine.checkpoint(), analytics: analytics.checkpoint(), readVisits } }; }

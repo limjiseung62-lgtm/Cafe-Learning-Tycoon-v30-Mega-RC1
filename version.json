@@ -14,6 +14,8 @@
     48
   ],
   "releaseNotes": "RELEASE-NOTES.html",
-  "sourceCandidate": "a3f6369809e2e560453863f5baa939ef92cbf721",
-  "testUrl": "https://limjiseung62-lgtm.github.io/Cafe-Learning-Tycoon-v30-Mega-RC1/"
+  "sourceCandidate": "5973f32a35f595506b858eb102e3e96a27f0d310",
+  "testUrl": "https://limjiseung62-lgtm.github.io/Cafe-Learning-Tycoon-v30-Mega-RC1/",
+  "cacheToken": "v30-rc1-5973f32a35f5",
+  "build": "native-picker-resume-2"
 }

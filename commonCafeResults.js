@@ -1,10 +1,10 @@
-import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js';
-import { CommonCafeFlow } from './commonCafeFlow.js';
-import { commonQuestion } from './commonLearningCatalog.js';
-import { loadCommonRuntime } from './commonBankLoader.js';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js';
-import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js';
-import { worksheetHtml } from './twinWorksheet.js';
+import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js?v=v30-rc1-5973f32a35f5';
+import { CommonCafeFlow } from './commonCafeFlow.js?v=v30-rc1-5973f32a35f5';
+import { commonQuestion } from './commonLearningCatalog.js?v=v30-rc1-5973f32a35f5';
+import { loadCommonRuntime } from './commonBankLoader.js?v=v30-rc1-5973f32a35f5';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=v30-rc1-5973f32a35f5';
+import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=v30-rc1-5973f32a35f5';
+import { worksheetHtml } from './twinWorksheet.js?v=v30-rc1-5973f32a35f5';
 const mounted = new WeakMap();
 const archiveExpected = new WeakMap();
 export async function restoreCommonArchive(flow, saved) { const raw = deploymentLocalStorage.getItem(archiveKey(saved.learningRecordId)); const cp = raw ? await flow.loaded.module.decode(raw) : saved; await flow.restore(cp); archiveExpected.set(flow, raw); }

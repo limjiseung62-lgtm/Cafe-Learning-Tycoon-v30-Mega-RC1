@@ -1,6 +1,6 @@
-import { QuestionPackCatalog } from './questionPack.js';
-import { loadCommonRuntime } from './commonBankLoader.js';
-import { safeCommonDiagram } from './questionRenderer.js';
+import { QuestionPackCatalog } from './questionPack.js?v=v30-rc1-5973f32a35f5';
+import { loadCommonRuntime } from './commonBankLoader.js?v=v30-rc1-5973f32a35f5';
+import { safeCommonDiagram } from './questionRenderer.js?v=v30-rc1-5973f32a35f5';
 export const commonDeployment = () => typeof document !== 'undefined' && document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content') === 'v30e-common-local';
 export function commonQuestion(q, packId, choices, subject, unitLabel) { if (q.metadata.questionType !== 'single-choice' || (q.render.inputKind !== undefined && q.render.inputKind !== 'choice') || !Array.isArray(q.render.choices) || new Set(q.render.choices.map((c) => c.text)).size !== q.render.choices.length || q.render.svg && !safeCommonDiagram(q.render.svg))
     throw Error('아직 카페에서 검증되지 않은 문항 형식이에요. 다른 문제로 바꿔 채우지 않아요.'); const answer = q.render.choices.find((c) => c.id === q.assessment.answer.choiceId)?.text; if (!answer)
@@ -83,22 +83,45 @@ export function mountCommonPicker(select, catalog) {
             skillBox.append(l);
         }
     } };
-    const render = (fromPack = false) => { const chosen = catalog.subjects.find(s => s.packId === select.value) ?? catalog.subjects[0]; options(subject, catalog.subjects.map(s => ({ value: s.subject, label: s.label })), fromPack ? chosen.subject : subject.value); const s = catalog.subjects.find(s => s.subject === subject.value), current = catalog.choices(s.subject)[0], u = s.units.find(u => u.semesterKey === current.semesterKey && u.unitId === current.unitId); options(grade, [...new Set(s.units.map(u => u.grade))].map(n => ({ value: String(n), label: n + '학년' })), fromPack ? String(u.grade) : grade.value); options(semester, [...new Set(s.units.filter(u => u.grade === Number(grade.value)).map(u => u.semester))].map(n => ({ value: String(n), label: n + '학기' })), fromPack ? String(u.semester) : semester.value); unitBox.querySelectorAll('label').forEach(n => n.remove()); const units = s.units.filter(u => u.grade === Number(grade.value) && u.semester === Number(semester.value)), selected = catalog.choices(s.subject); for (const u of units) {
-        const l = document.createElement('label'), i = document.createElement('input');
-        i.type = 'checkbox';
-        i.value = u.unitId;
-        i.checked = selected.some(c => c.semesterKey === u.semesterKey && c.unitId === u.unitId);
-        i.disabled = select.disabled;
-        i.onchange = apply;
-        l.append(i, document.createTextNode(u.order + '. ' + u.unitLabel));
-        unitBox.append(l);
-    } for (const c of controls)
-        c.disabled = select.disabled; apply(); };
+    let syncing = false;
+    const render = (fromPack = false) => { if (syncing)
+        return; syncing = true; try {
+        const chosen = catalog.subjects.find(s => s.packId === select.value) ?? catalog.subjects[0];
+        options(subject, catalog.subjects.map(s => ({ value: s.subject, label: s.label })), fromPack ? chosen.subject : subject.value);
+        const s = catalog.subjects.find(s => s.subject === subject.value), current = catalog.choices(s.subject)[0], u = s.units.find(u => u.semesterKey === current.semesterKey && u.unitId === current.unitId);
+        options(grade, [...new Set(s.units.map(u => u.grade))].map(n => ({ value: String(n), label: n + '학년' })), fromPack ? String(u.grade) : grade.value);
+        options(semester, [...new Set(s.units.filter(u => u.grade === Number(grade.value)).map(u => u.semester))].map(n => ({ value: String(n), label: n + '학기' })), fromPack ? String(u.semester) : semester.value);
+        unitBox.querySelectorAll('label').forEach(n => n.remove());
+        const units = s.units.filter(u => u.grade === Number(grade.value) && u.semester === Number(semester.value)), selected = catalog.choices(s.subject);
+        for (const u of units) {
+            const l = document.createElement('label'), i = document.createElement('input');
+            i.type = 'checkbox';
+            i.value = u.unitId;
+            i.checked = selected.some(c => c.semesterKey === u.semesterKey && c.unitId === u.unitId);
+            i.disabled = select.disabled;
+            i.onchange = apply;
+            l.append(i, document.createTextNode(u.order + '. ' + u.unitLabel));
+            unitBox.append(l);
+        }
+        for (const c of controls)
+            c.disabled = select.disabled;
+        if (fromPack) {
+            skills();
+            host.querySelector('#study-title').textContent = s.label + ' · ' + catalog.choices(s.subject).map(c => c.unitLabel).join(', ');
+        }
+        else
+            apply();
+    }
+    finally {
+        syncing = false;
+    } };
     subject.onchange = grade.onchange = semester.onchange = () => render();
+    const changed = () => render(true);
+    select.addEventListener('change', changed);
     host.append(panel);
     select.hidden = true;
     render(true);
     const observer = new MutationObserver(() => { panel.querySelectorAll('input,select').forEach(c => c.disabled = select.disabled); });
     observer.observe(select, { attributes: true, attributeFilter: ['disabled'] });
-    return () => observer.disconnect();
+    return () => { observer.disconnect(); select.removeEventListener('change', changed); };
 }
