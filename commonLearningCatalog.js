@@ -1,9 +1,11 @@
-import { QuestionPackCatalog } from './questionPack.js?v=v30-rc1-5973f32a35f5';
-import { loadCommonRuntime } from './commonBankLoader.js?v=v30-rc1-5973f32a35f5';
-import { safeCommonDiagram } from './questionRenderer.js?v=v30-rc1-5973f32a35f5';
+import { QuestionPackCatalog } from './questionPack.js?v=v30-rc1-e02fc6e73d9a';
+import { loadCommonRuntime } from './commonBankLoader.js?v=v30-rc1-e02fc6e73d9a';
+import { safeCommonDiagram } from './questionRenderer.js?v=v30-rc1-e02fc6e73d9a';
 export const commonDeployment = () => typeof document !== 'undefined' && document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content') === 'v30e-common-local';
+export function commonAnswerText(q) { const text = q.render?.choices?.find((c) => c.id === q.assessment?.answer?.choiceId)?.text; if (typeof text !== 'string' || !text)
+    throw Error('정답 연결을 확인해 주세요.'); return text; }
 export function commonQuestion(q, packId, choices, subject, unitLabel) { if (q.metadata.questionType !== 'single-choice' || (q.render.inputKind !== undefined && q.render.inputKind !== 'choice') || !Array.isArray(q.render.choices) || new Set(q.render.choices.map((c) => c.text)).size !== q.render.choices.length || q.render.svg && !safeCommonDiagram(q.render.svg))
-    throw Error('아직 카페에서 검증되지 않은 문항 형식이에요. 다른 문제로 바꿔 채우지 않아요.'); const answer = q.render.choices.find((c) => c.id === q.assessment.answer.choiceId)?.text; if (!answer)
+    throw Error('아직 카페에서 검증되지 않은 문항 형식이에요. 다른 문제로 바꿔 채우지 않아요.'); const answer = commonAnswerText(q); if (!answer)
     throw Error('정답 연결을 확인해 주세요.'); return { problemId: q.questionId, questionId: q.questionId, sourceId: q.questionId, packId, subject: subject === 'math' ? '수학' : '과학', grade: q.metadata.grade, semester: q.metadata.semester, unit: unitLabel, type: 'multiple_choice', difficulty: q.metadata.difficulty, question: q.render.text, prompt: q.render.text, choices: q.render.choices.map((c) => c.text), choiceIds: q.render.choices.map((c) => c.id), answer, explanation: q.assessment.explanation, diagram: q.render.svg || undefined, skillId: q.metadata.skillIds[0], tags: [unitLabel], packVersion: q.metadata.packVersion, commonRef: q.questionRef, commonChoice: { subject, choices } }; }
 export class CommonLearningCatalog extends QuestionPackCatalog {
     subjects;

@@ -1,6 +1,6 @@
-import { sceneRoads, sceneProps, lakeShore, riverPath } from './villageNavigation.js?v=v30-rc1-5973f32a35f5';
-import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=v30-rc1-5973f32a35f5';
-import { escapeText as esc } from './questionRenderer.js?v=v30-rc1-5973f32a35f5';
+import { sceneRoads, sceneProps, lakeShore, riverPath } from './villageNavigation.js?v=v30-rc1-e02fc6e73d9a';
+import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=v30-rc1-e02fc6e73d9a';
+import { escapeText as esc } from './questionRenderer.js?v=v30-rc1-e02fc6e73d9a';
 const art = (key) => customerPoseArt(selectCustomerPose(key, 'ENTERING', 'right'));
 const asset = 'assets/web/village-v2/';
 const propFrames = [[0, 0, 512, 385], [512, 0, 512, 385], [1024, 0, 512, 385], [0, 385, 512, 280], [512, 385, 512, 300], [1024, 385, 512, 300], [0, 665, 512, 359], [512, 685, 512, 339], [1024, 685, 512, 339]];

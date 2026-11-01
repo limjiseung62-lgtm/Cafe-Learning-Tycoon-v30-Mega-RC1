@@ -1,6 +1,6 @@
-import { eventBalance } from './eventConfig.js?v=v30-rc1-5973f32a35f5';
-import { escapeText as esc } from './questionRenderer.js?v=v30-rc1-5973f32a35f5';
-import { missionGoal, noticeTone } from './eventPresentation.js?v=v30-rc1-5973f32a35f5';
+import { eventBalance } from './eventConfig.js?v=v30-rc1-e02fc6e73d9a';
+import { escapeText as esc } from './questionRenderer.js?v=v30-rc1-e02fc6e73d9a';
+import { missionGoal, noticeTone } from './eventPresentation.js?v=v30-rc1-e02fc6e73d9a';
 let previous = '', previousGame = null, collapsed = false;
 export function renderEventPanel(game, problemOpen) {
     if (previousGame !== game) {

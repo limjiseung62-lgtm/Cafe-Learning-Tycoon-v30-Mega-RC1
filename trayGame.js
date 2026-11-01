@@ -1,4 +1,4 @@
-import { arcadeOpen, difficultyIndex, randomFor } from './arcadeTypes.js?v=v30-rc1-5973f32a35f5';
+import { arcadeOpen, difficultyIndex, randomFor } from './arcadeTypes.js?v=v30-rc1-e02fc6e73d9a';
 export const trayWidth = 9, trayHeight = 7;
 export function trayMap(seed, difficulty, round, mapVersion = 5) { const r = randomFor(seed + round * 3571), path = [27]; let x = 0, y = 3; while (x < 8) {
     if (x % 2 === 1) {

@@ -1,5 +1,5 @@
-import { captureRoster } from "./staffRecruitment.js?v=v30-rc1-5973f32a35f5";
-import { growthBaseFor, growthExpectedFor } from './sessionFactory.js?v=v30-rc1-5973f32a35f5';
+import { captureRoster } from "./staffRecruitment.js?v=v30-rc1-e02fc6e73d9a";
+import { growthBaseFor, growthExpectedFor } from './sessionFactory.js?v=v30-rc1-e02fc6e73d9a';
 export function captureGrowth(game, base, now = new Date().toISOString()) { const roster = game.roster ? captureRoster(game.roster, game.service.paid) : undefined; const t = game.telemetry.phase4, b = base.specialCustomerStats; const types = structuredClone(b.types); for (const [key, v] of Object.entries(t.specialCustomerTypes)) {
     const old = types[key] ?? { spawned: 0, served: 0 };
     types[key] = { spawned: old.spawned + v.spawned, served: old.served + v.served };

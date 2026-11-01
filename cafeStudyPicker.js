@@ -1,5 +1,5 @@
-import { CommonLearningCatalog, mountCommonPicker } from './commonLearningCatalog.js?v=v30-rc1-5973f32a35f5';
-import { questionCatalog } from './questionPack.js?v=v30-rc1-5973f32a35f5';
+import { CommonLearningCatalog, mountCommonPicker } from './commonLearningCatalog.js?v=v30-rc1-e02fc6e73d9a';
+import { questionCatalog } from './questionPack.js?v=v30-rc1-e02fc6e73d9a';
 const cleanups = new WeakMap();
 /** Café controls only. This never changes eligibility, pack IDs, grading or saved scopes. */
 export function mountCafeStudyPicker(select, packs) {

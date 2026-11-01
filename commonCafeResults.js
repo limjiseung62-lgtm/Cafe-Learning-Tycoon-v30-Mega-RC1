@@ -1,10 +1,10 @@
-import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js?v=v30-rc1-5973f32a35f5';
-import { CommonCafeFlow } from './commonCafeFlow.js?v=v30-rc1-5973f32a35f5';
-import { commonQuestion } from './commonLearningCatalog.js?v=v30-rc1-5973f32a35f5';
-import { loadCommonRuntime } from './commonBankLoader.js?v=v30-rc1-5973f32a35f5';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=v30-rc1-5973f32a35f5';
-import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=v30-rc1-5973f32a35f5';
-import { worksheetHtml } from './twinWorksheet.js?v=v30-rc1-5973f32a35f5';
+import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js?v=v30-rc1-e02fc6e73d9a';
+import { CommonCafeFlow } from './commonCafeFlow.js?v=v30-rc1-e02fc6e73d9a';
+import { commonQuestion, commonAnswerText } from './commonLearningCatalog.js?v=v30-rc1-e02fc6e73d9a';
+import { loadCommonRuntime } from './commonBankLoader.js?v=v30-rc1-e02fc6e73d9a';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=v30-rc1-e02fc6e73d9a';
+import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=v30-rc1-e02fc6e73d9a';
+import { worksheetHtml } from './twinWorksheet.js?v=v30-rc1-e02fc6e73d9a';
 const mounted = new WeakMap();
 const archiveExpected = new WeakMap();
 export async function restoreCommonArchive(flow, saved) { const raw = deploymentLocalStorage.getItem(archiveKey(saved.learningRecordId)); const cp = raw ? await flow.loaded.module.decode(raw) : saved; await flow.restore(cp); archiveExpected.set(flow, raw); }
@@ -81,7 +81,7 @@ export async function openNotebook(flow, save, changed) {
         list.textContent = '남아 있는 오답이 없어요!'; for (const note of notes) {
         const q = flow.sources.get(note.sourceId).bank.getQuestion(note.rootQuestionRef), article = document.createElement('article');
         const firstWrong = note.history?.find((a) => a.role === 'base' && a.status === 'incorrect'), firstLabel = q.render.choices.find((c) => c.id === firstWrong?.response)?.text ?? '기록 없음';
-        article.innerHTML = '<p>' + escapeText(q.metadata.grade + '학년 ' + q.metadata.semester + '학기 · ' + (flow.choices.find(c => c.unitId === q.metadata.unitId)?.unitLabel ?? '학습 개념')) + '</p><p>' + renderQuestionText(q.render.text) + '</p>' + renderDiagram(q.render.svg, '도형', true) + '<p>처음 선택: ' + renderQuestionText(firstLabel) + '</p><details><summary>정답·해설 확인</summary><p>' + renderQuestionText(q.assessment.answerLabel) + '</p><p>' + renderQuestionText(q.assessment.explanation) + '</p></details><p>현재 연속 정답 ' + (note.consecutiveCorrect ?? 0) + '/2</p><button class="primary">도전하기</button>';
+        article.innerHTML = '<p>' + escapeText(q.metadata.grade + '학년 ' + q.metadata.semester + '학기 · ' + (flow.choices.find(c => c.unitId === q.metadata.unitId)?.unitLabel ?? '학습 개념')) + '</p><p>' + renderQuestionText(q.render.text) + '</p>' + renderDiagram(q.render.svg, '도형', true) + '<p>처음 선택: ' + renderQuestionText(firstLabel) + '</p><details><summary>정답·해설 확인</summary><p>' + renderQuestionText(commonAnswerText(q)) + '</p><p>' + renderQuestionText(q.assessment.explanation) + '</p></details><p>현재 연속 정답 ' + (note.consecutiveCorrect ?? 0) + '/2</p><button class="primary">도전하기</button>';
         article.querySelector('button').onclick = () => { if (busy)
             return; busy = true; void flow.startChallenge(note.sourceId, note.reviewEntryId).then(async (r) => { if (r.status === 'started' || r.status === 'resumed') {
             if (r.status === 'resumed')
@@ -113,8 +113,14 @@ export async function openNotebook(flow, save, changed) {
     dialog.addEventListener('close', () => { dialog.remove(); changed?.(); });
     dialog.addEventListener('cancel', e => { if (busy)
         e.preventDefault(); });
-    await paint();
-    dialog.showModal();
+    try {
+        await paint();
+        dialog.showModal();
+    }
+    catch (error) {
+        dialog.remove();
+        throw error;
+    }
 }
 export function installCommonArchiveMenu() { document.addEventListener('cafe-mode-view', () => { const card = document.querySelector('.welcome-card'); if (!card || card.querySelector('#common-archive-open'))
     return; const button = document.createElement('button'); button.id = 'common-archive-open'; button.className = 'secondary'; button.textContent = '지난 학습 · 오답노트'; button.onclick = () => { const picker = document.createElement('dialog'); picker.className = 'common-notebook'; picker.innerHTML = '<h2>지난 학습 기록</h2><div data-list></div><button class="secondary" data-export-all>전체 학습 JSON 백업</button><label>전체 학습 JSON 가져오기<textarea data-import-all aria-label="전체 학습 JSON"></textarea></label><button class="secondary" data-restore-all>학습 JSON 확인 후 가져오기</button><p data-import-status role="status"></p><div data-files></div><button class="secondary" data-close>닫기</button>'; document.body.append(picker); picker.querySelector('[data-close]').addEventListener('click', () => { picker.close(); picker.remove(); }); let list; try {
