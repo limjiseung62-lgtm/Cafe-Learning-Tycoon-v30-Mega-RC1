@@ -1,0 +1,2 @@
+// Fixed three-profile/three-seed paired fixture comparisons, not a personal return promise.
+export const megaLateForecast = [{ "from": 10, "to": 20, "n": 9, "fromCrew": 5, "toCrew": 8, "min": 4963, "max": 56823, "median": 20560, "totalCapital": 1731200, "payback": 84.2023346303502 }, { "from": 20, "to": 30, "n": 9, "fromCrew": 8, "toCrew": 12, "min": 4252, "max": 64765, "median": 34167, "totalCapital": 3315600, "payback": 97.04100447800509 }];

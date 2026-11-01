@@ -1,0 +1,19 @@
+{
+  "version": "3.0.0-mega-rc.1",
+  "status": "public-student-test",
+  "officialUnchanged": true,
+  "storagePrefix": "cafe-v30-mega-common-rc1/",
+  "subjects": {
+    "math": 49233,
+    "science": 104,
+    "korean": 0
+  },
+  "maxGrowthLevel": 30,
+  "maxFloor": [
+    64,
+    48
+  ],
+  "releaseNotes": "RELEASE-NOTES.html",
+  "sourceCandidate": "a3f6369809e2e560453863f5baa939ef92cbf721",
+  "testUrl": "https://limjiseung62-lgtm.github.io/Cafe-Learning-Tycoon-v30-Mega-RC1/"
+}

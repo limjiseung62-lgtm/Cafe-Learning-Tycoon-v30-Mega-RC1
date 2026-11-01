@@ -1,0 +1,1 @@
+export const commonCatalogSHA256 = '70c01dc6ef90165f755c8d59a904e1ebb7506c45bc0e8941c1d9dfa138ea58df';

@@ -1,0 +1,65 @@
+{
+  "collectionPackId": "QB-MATH-G3-G6-COMMON",
+  "collectionVersion": "2.0.0-public-data-candidate",
+  "nativeReferenceNamespacePreserved": true,
+  "doNotRewriteNativeQuestionRefPackIdOrVersion": true,
+  "recordBothCollectionPinAndNativeRef": true,
+  "semesters": [
+    {
+      "semesterKey": "g3s1",
+      "nativePackId": "QB-G3-S1-GOLD",
+      "nativePackVersion": "g3-s1-gold/0.1.4-review",
+      "nativeContentVersion": "G3S1:2fe0aa3f9a70660fc208f2a8daf9f1dd81192549c247e17e8d567abe1d83077b",
+      "sha256": "b2c0f796bcbc8e7b2bdbd400cc8f2d43ce28d8e4cc0e001abdbca8f02022c91e"
+    },
+    {
+      "semesterKey": "g3s2",
+      "nativePackId": "QB-G3-S2-GOLD",
+      "nativePackVersion": "g3-s2-gold/0.1.7-review",
+      "nativeContentVersion": "G3S2:5b430bef6edd144b5d7bea3d8f63e818544adb1ae0f71fdb82770cde6a891fbd",
+      "sha256": "a2569ce0599f01610c889a2fb98e3c5f57f172f6e661a3ccec3b281a9d939947"
+    },
+    {
+      "semesterKey": "g4s1",
+      "nativePackId": null,
+      "nativePackVersion": "g4-s1-gold/0.1.4.4-coverage-review",
+      "nativeContentVersion": "G4S1C:1c5827a318f5770e29811d31b8345ea75f4ec2fc6c9b24be224cbba108ccb6ad",
+      "sha256": "2c16802c255f063e5b3616d3968daba8eb160e2226bd0e8e59f57bf899a682a2"
+    },
+    {
+      "semesterKey": "g4s2",
+      "nativePackId": null,
+      "nativePackVersion": "variety-final/0.1.0-review",
+      "nativeContentVersion": "VARIETY:c396cd942af44fe8965851709ce21b6204186b717c2b8c524a77618590857c90",
+      "sha256": "e0d84c0ff17d9b8cdfeca7557b27917c5e9dea45a7e809f5deee3f2ba63c8995"
+    },
+    {
+      "semesterKey": "g5s1",
+      "nativePackId": "QB-G5-S1-GOLD",
+      "nativePackVersion": "g5-s1-gold/0.1.2-review",
+      "nativeContentVersion": "G5S1:7271844b7dfa54322713474354cd031d8127f0f8a2d5c350f58bca906217b111",
+      "sha256": "01b4a0e42dd849415aaeffa99f8a653fa3ed04e9d8c0110508c85934b4bf839e"
+    },
+    {
+      "semesterKey": "g5s2",
+      "nativePackId": "QB-G5-S2-GOLD",
+      "nativePackVersion": "g5-s2-gold/0.1.4-review",
+      "nativeContentVersion": "G5S2:1d79fe921b36701121352faf1374ff24d319c8053e59b20bfa674ab89bfe792a",
+      "sha256": "acc00d79940146e860ea78d2d5f7748bed149bf18d66ea4b0141a749655da244"
+    },
+    {
+      "semesterKey": "g6s1",
+      "nativePackId": "QB-G6-S1-GOLD",
+      "nativePackVersion": "g6-s1-gold/0.1.4-review",
+      "nativeContentVersion": "G6S1:3572cfbf7264834c6faff4898b81f9d006a6675ea223ca9a3aa1e42921ff55cf",
+      "sha256": "6154687ceb31f103e73cb34b5e2c4ed5f4385301059f951411a2474de1dee4e6"
+    },
+    {
+      "semesterKey": "g6s2",
+      "nativePackId": "QB-G6-S2-GOLD",
+      "nativeContentVersion": "G6S2:05070de2850341888f0e2795842c4d16156c240e77e1ed783f818fbd65bfbb1a",
+      "sha256": "cf8b9cafe22b0369ed39010e2466ff4880fe9592a7035c7d4ff8efaafbb6da04"
+    }
+  ],
+  "runtimeBinariesNotIncluded": true
+}

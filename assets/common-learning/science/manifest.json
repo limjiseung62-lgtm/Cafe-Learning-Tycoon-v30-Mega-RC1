@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "common-public-runtime-manifest/1",
+  "packId": "QB-SCIENCE-G4-S2-U2-UNIFIED",
+  "dataVersion": "science-unified/0.1.3-1.0.0-candidate",
+  "runtimeVersion": "common-public-runtime/1.1.0-unified-candidate",
+  "catalogDigest": "94d7d1bb201114509f67d6800650141f152be420f078abc501b0a102465c26a8",
+  "policyImplementationDigest": "a424092487b43f94b46d655143758790af406b5279e49c66b1c97924b04128a5",
+  "rendererDigest": "ca6b74a67bffbc85b50dcdfbcaf137103f7da781bc7040589b675364d6413026",
+  "files": [
+    {
+      "path": "labels.json",
+      "bytes": 1133,
+      "sha256": "d4fb18b3869b2a74b2bee40a3681dc818521062749383a7b85a836c2becaba6c",
+      "role": "runtime-code-or-style"
+    },
+    {
+      "path": "native-reference-map.json",
+      "bytes": 223,
+      "sha256": "08f4cbdda8f4aba712e05dc89b6bb895213e9038d05e4172ce8324bc022a9e82",
+      "role": "native-reference-map"
+    },
+    {
+      "path": "png.mjs",
+      "bytes": 12374,
+      "sha256": "9b90d1af5af4ee1a3abc80b788bf171da0ccffe023d9b4f6941f26a348f01c29",
+      "role": "runtime-code-or-style"
+    },
+    {
+      "path": "question-renderer.mjs",
+      "bytes": 2768,
+      "sha256": "ca6b74a67bffbc85b50dcdfbcaf137103f7da781bc7040589b675364d6413026",
+      "role": "runtime-code-or-style"
+    },
+    {
+      "path": "renderer-extension.mjs",
+      "bytes": 3675,
+      "sha256": "57911fbea84670b8b83025e56ae308b678a13f23494b866e0eb81a26a90b48e0",
+      "role": "runtime-code-or-style"
+    },
+    {
+      "path": "report-port.mjs",
+      "bytes": 660,
+      "sha256": "b47523e53663aeb43e32d6d88a587e97bd76127c1180226c5253b3569e9c16cc",
+      "role": "runtime-code-or-style"
+    },
+    {
+      "path": "report.mjs",
+      "bytes": 21416,
+      "sha256": "1e65c792a26793910376d0cbc50402ac02472b40a23ba38523e572fa00b94f8a",
+      "role": "runtime-code-or-style"
+    },
+    {
+      "path": "runtime.mjs",
+      "bytes": 48238,
+      "sha256": "a424092487b43f94b46d655143758790af406b5279e49c66b1c97924b04128a5",
+      "role": "runtime-code-or-style"
+    },
+    {
+      "path": "science-data.json",
+      "bytes": 475407,
+      "sha256": "94d7d1bb201114509f67d6800650141f152be420f078abc501b0a102465c26a8",
+      "role": "approved-data"
+    },
+    {
+      "path": "ui.css",
+      "bytes": 8593,
+      "sha256": "5a693333cc5e0e67ab4cb3ce75f536ca97e68088845deb669333ff18ba0e6df6",
+      "role": "runtime-code-or-style"
+    }
+  ],
+  "operationalApproval": false,
+  "teacherApprovalReused": true,
+  "rightsSourceAuthorizationReused": true,
+  "questionCount": 104,
+  "equivalentGroups": 26,
+  "minimumFlowGroups": 26,
+  "recent12ReservedGroups": 0,
+  "longTermLimitation": "Four distinct approved examples per equivalence group; after recent use hold and resume after actual history advances. No relaxation.",
+  "originalCafePackageChanged": false,
+  "mathRuntimeChanged": false,
+  "policy": "SCHOOL-QUEST-UNIFIED-LEARNING-v1.0",
+  "scienceDelaySupplement": {
+    "afterWrong": [
+      3,
+      5
+    ],
+    "afterReviewCorrect": [
+      6,
+      10
+    ],
+    "replacesImmediate": false
+  }
+}

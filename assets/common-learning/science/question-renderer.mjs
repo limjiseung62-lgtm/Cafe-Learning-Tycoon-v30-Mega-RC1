@@ -1,0 +1,13 @@
+export const escapeText=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const stylesheet=new URL('./ui.css',import.meta.url).href;
+export function mathText(text){return escapeText(text).replace(/(?<![\d/])(\d+)\/(\d+)(?![\d/])/g,(_,a,b)=>`<math aria-label="${b}분의 ${a}"><mfrac><mn>${a}</mn><mn>${b}</mn></mfrac></math>`);}
+export class QBQuestion extends HTMLElement{
+ constructor(){super();this.attachShadow({mode:'open'});}
+ set question(q){this.q=q;this.render();}
+ render(){const q=this.q;if(!q)return;this.shadowRoot.innerHTML=`<link rel="stylesheet" href="${stylesheet}"><article class="question"><p class="question-prompt">${mathText(q.text)}</p>${q.imageText?`<p class="picture-stimulus">${escapeText(q.imageText)}</p>`:''}<div id="stimulus" class="stimulus"></div><fieldset class="answers"><legend class="sr-only">답 선택 또는 입력</legend>${q.choices?.length?q.choices.map((c,i)=>`<label class="answer-option"><input type="radio" name="answer" value="${escapeText(c.id)}"><b>${i+1}</b><span>${mathText(c.text)} ${escapeText(c.unit??'')}</span></label>`).join(''):q.inputKind==='fraction'?'<label>분수 답 <input id="whole" type="number" placeholder="자연수 (선택)"><input id="numerator" type="number" placeholder="분자"><input id="denominator" type="number" min="1" placeholder="분모"></label>':`<label>답 입력 <input id="short-answer" autocomplete="off" aria-label="답 입력"><span>${escapeText(q.unit??'')}</span></label>`}</fieldset></article>`;
+ if(q.svg){const markup=/\bxmlns\s*=/.test(q.svg)?q.svg:q.svg.replace('<svg','<svg xmlns="http://www.w3.org/2000/svg"');const doc=new DOMParser().parseFromString(markup,'image/svg+xml');const svg=doc.documentElement;if(svg.nodeName==='svg'&&svg.namespaceURI==='http://www.w3.org/2000/svg'&&!doc.querySelector('parsererror,script,foreignObject')){for(const el of [svg,...svg.querySelectorAll('*')])for(const a of [...el.attributes])if(/^on/i.test(a.name)||/href|src/i.test(a.name))el.removeAttribute(a.name);this.shadowRoot.getElementById('stimulus').append(document.importNode(svg,true));}}
+ }
+ get response(){if(this.q.choices?.length)return this.shadowRoot.querySelector('input:checked')?.value??null;if(this.q.inputKind==='fraction'){let o={numerator:Number(this.shadowRoot.getElementById('numerator').value),denominator:Number(this.shadowRoot.getElementById('denominator').value)};const w=this.shadowRoot.getElementById('whole').value;if(w)o.whole=Number(w);return o;}const value=this.shadowRoot.getElementById('short-answer').value;return this.q.unit?{value,unit:this.q.unit}:value;}
+ lock(){for(const x of this.shadowRoot.querySelectorAll('input'))x.disabled=true;}
+}
+customElements.define('qb-question',QBQuestion);
