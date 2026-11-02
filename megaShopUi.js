@@ -1,14 +1,15 @@
-import { megaOperatingGrade } from './megaOperations.js?v=v30-rc1-5bf787ba0cb4';
-import { megaZones } from './megaZones.js?v=v30-rc1-5bf787ba0cb4';
-import { adoptInterior, interiorCatalog, inventorySku, tableSeatCount, isShopDeployment } from './megaInventory.js?v=v30-rc1-5bf787ba0cb4';
-import { buyInterior, saveInteriorLayout } from './megaShop.js?v=v30-rc1-5bf787ba0cb4';
-import { ensureMegaPlan, megaKey, megaDimensions, megaChairs, validateMegaPlan, megaBudget, iso, uniso } from './megaSpace.js?v=v30-rc1-5bf787ba0cb4';
-import { furnitureFor } from './furnitureCatalog.js?v=v30-rc1-5bf787ba0cb4';
-import { furnitureUnlocked, prepareFurniture } from './furnitureUnlocks.js?v=v30-rc1-5bf787ba0cb4';
-import { allDecorationCatalog } from './longGrowthConfig.js?v=v30-rc1-5bf787ba0cb4';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=v30-rc1-5bf787ba0cb4';
-import { paintMegaDecor, environmentPlacements, paintEnvironment, megaImage } from './megaArt.js?v=v30-rc1-5bf787ba0cb4';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v30-rc1-5bf787ba0cb4';
+import { openTouchInterior } from './touchInteriorUi.js?v=furniture-ux-dd837b78b1a8';
+import { megaOperatingGrade } from './megaOperations.js?v=furniture-ux-dd837b78b1a8';
+import { megaZones } from './megaZones.js?v=furniture-ux-dd837b78b1a8';
+import { adoptInterior, interiorCatalog, inventorySku, tableSeatCount, isShopDeployment } from './megaInventory.js?v=furniture-ux-dd837b78b1a8';
+import { buyInterior, saveInteriorLayout } from './megaShop.js?v=furniture-ux-dd837b78b1a8';
+import { ensureMegaPlan, megaKey, megaDimensions, megaChairs, validateMegaPlan, megaBudget, iso, uniso } from './megaSpace.js?v=furniture-ux-dd837b78b1a8';
+import { furnitureFor } from './furnitureCatalog.js?v=furniture-ux-dd837b78b1a8';
+import { furnitureUnlocked, prepareFurniture } from './furnitureUnlocks.js?v=furniture-ux-dd837b78b1a8';
+import { allDecorationCatalog } from './longGrowthConfig.js?v=furniture-ux-dd837b78b1a8';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=furniture-ux-dd837b78b1a8';
+import { paintMegaDecor, environmentPlacements, paintEnvironment, megaImage } from './megaArt.js?v=furniture-ux-dd837b78b1a8';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=furniture-ux-dd837b78b1a8';
 const name = (sku) => inventorySku(sku)?.name ?? allDecorationCatalog.find(d => 'decor-' + d.id === sku)?.name ?? sku;
 const assigned = (p) => new Set([...p.tables.flatMap(t => [t.id, ...(t.chairs ?? []).map(c => c.id)]), ...p.decor.map(d => d.id), ...(p.fixtures ?? []).map(d => d.id)]);
 function shell(title, exit) { const el = document.createElement('section'); el.className = 'mega-edit-dialog interior-dialog'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', title); document.body.append(el); el.onkeydown = e => { if (e.key === 'Escape')
@@ -21,7 +22,7 @@ export function interiorActions(host, repo, save, refresh) { if (!isShopDeployme
     b.onclick = () => void open(repo, refresh, save);
     host.append(b);
 } const p = document.createElement('p'); p.textContent = '시작 테이블2개·의자4개·필수 주방은 무료예요. 증축 후 빈 공간은 구매한 가구로 직접 꾸며요. 의자가 있는 자리만 손님이 앉아요.'; host.append(p); return true; }
-export async function openInteriorShop(repo, refresh, initial) {
+async function openLegacyInteriorShop(repo, refresh, initial) {
     if (!await ensureGrowthWriteLock())
         return;
     const abort = new AbortController();
@@ -81,7 +82,7 @@ export async function openInteriorShop(repo, refresh, initial) {
     document.addEventListener('mega-art-ready', paintThumbs, { signal: abort.signal });
     render();
 }
-export async function openInteriorEditor(repo, refresh, initial) {
+export async function openLegacyInteriorEditor(repo, refresh, initial) {
     if (!await ensureGrowthWriteLock())
         return;
     const read = repo.read();
@@ -328,3 +329,5 @@ export async function openInteriorEditor(repo, refresh, initial) {
     };
     render();
 }
+export const openInteriorEditor = (repo, refresh, initial) => openTouchInterior(repo, refresh, initial, 'inventory');
+export const openInteriorShop = (repo, refresh, initial) => openTouchInterior(repo, refresh, initial, 'shop');

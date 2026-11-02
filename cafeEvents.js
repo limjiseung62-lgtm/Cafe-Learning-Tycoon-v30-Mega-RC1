@@ -1,6 +1,6 @@
-import { unlocked } from './progressiveFeatures.js?v=v30-rc1-5bf787ba0cb4';
-import { specializationById } from './specializationConfig.js?v=v30-rc1-5bf787ba0cb4';
-import { eventBalance as b, eventSchedule, allMissionCatalog, incidentCatalog } from './eventConfig.js?v=v30-rc1-5bf787ba0cb4';
+import { unlocked } from './progressiveFeatures.js?v=furniture-ux-dd837b78b1a8';
+import { specializationById } from './specializationConfig.js?v=furniture-ux-dd837b78b1a8';
+import { eventBalance as b, eventSchedule, allMissionCatalog, incidentCatalog } from './eventConfig.js?v=furniture-ux-dd837b78b1a8';
 export class CafeEvents {
     enabled = false;
     duration = 0;

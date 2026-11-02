@@ -1,6 +1,6 @@
-import { deploymentLocalStorage as storage, deploymentPrefix } from './deploymentStorage.js?v=v30-rc1-5bf787ba0cb4';
-import { loadCommonRuntime } from './commonBankLoader.js?v=v30-rc1-5bf787ba0cb4';
-import { CommonCafeFlow } from './commonCafeFlow.js?v=v30-rc1-5bf787ba0cb4';
+import { deploymentLocalStorage as storage, deploymentPrefix } from './deploymentStorage.js?v=furniture-ux-dd837b78b1a8';
+import { loadCommonRuntime } from './commonBankLoader.js?v=furniture-ux-dd837b78b1a8';
+import { CommonCafeFlow } from './commonCafeFlow.js?v=furniture-ux-dd837b78b1a8';
 /** An additive envelope: native café JSON remains byte-for-byte inside cafe. */
 export function commonDeployment() { return deploymentPrefix() === 'cafe-v30-mega-common-rc1/'; }
 export function commonRecordEntries() { const out = []; for (let i = 0; i < storage.length; i++) {

@@ -1,10 +1,10 @@
-import { validManager } from './managerState.js?v=v30-rc1-5bf787ba0cb4';
-import { megaZones } from './megaZones.js?v=v30-rc1-5bf787ba0cb4';
-import { validInterior, tableSeatCount } from './megaInventory.js?v=v30-rc1-5bf787ba0cb4';
-import { allDecorationCatalog } from './longGrowthConfig.js?v=v30-rc1-5bf787ba0cb4';
-import { cafeGrowthBalance } from './modeBalance.js?v=v30-rc1-5bf787ba0cb4';
-import { tableKinds, turn } from './freeLayoutModel.js?v=v30-rc1-5bf787ba0cb4';
-import { furnitureFor } from './furnitureCatalog.js?v=v30-rc1-5bf787ba0cb4';
+import { validManager } from './managerState.js?v=furniture-ux-dd837b78b1a8';
+import { megaZones } from './megaZones.js?v=furniture-ux-dd837b78b1a8';
+import { validInterior, tableSeatCount } from './megaInventory.js?v=furniture-ux-dd837b78b1a8';
+import { allDecorationCatalog } from './longGrowthConfig.js?v=furniture-ux-dd837b78b1a8';
+import { cafeGrowthBalance } from './modeBalance.js?v=furniture-ux-dd837b78b1a8';
+import { tableKinds, turn } from './freeLayoutModel.js?v=furniture-ux-dd837b78b1a8';
+import { furnitureFor } from './furnitureCatalog.js?v=furniture-ux-dd837b78b1a8';
 export const megaDimensions = [[8, 6], [10, 7], [12, 8], [12, 10], [14, 10], [14, 12], [16, 12], [16, 14], [18, 14], [20, 16]].concat(Array.from({ length: 20 }, (_, i) => { const l = i + 11; return l < 20 ? [20, 16] : l < 30 ? [40, 30] : [64, 48]; }));
 export const megaBudget = [4, 6, 6, 8, 8, 10, 12, 12, 14, 14, ...Array(9).fill(14), ...Array(10).fill(48), 96];
 export const megaKey = (level, branch) => (branch ?? 'base') + ':' + level;

@@ -1,7 +1,7 @@
-import { unlocked } from './progressiveFeatures.js?v=v30-rc1-5bf787ba0cb4';
-import { ensureSpecialInventory, specialPreparation, reservedTeamTarget } from './specialInventory.js?v=v30-rc1-5bf787ba0cb4';
-import { managementFor } from './managementState.js?v=v30-rc1-5bf787ba0cb4';
-import { offerMini } from './miniGames.js?v=v30-rc1-5bf787ba0cb4';
+import { unlocked } from './progressiveFeatures.js?v=furniture-ux-dd837b78b1a8';
+import { ensureSpecialInventory, specialPreparation, reservedTeamTarget } from './specialInventory.js?v=furniture-ux-dd837b78b1a8';
+import { managementFor } from './managementState.js?v=furniture-ux-dd837b78b1a8';
+import { offerMini } from './miniGames.js?v=furniture-ux-dd837b78b1a8';
 export const specialBusinessCatalog = [{ id: 'birthday', name: '생일 파티', level: 3, target: 2, mission: 'birthday', description: '생일 손님 2팀을 대접하고 문제 2개를 맞혀요.' }, { id: 'reservation', name: '단체 예약', level: 1, target: 1, mission: 'rush', description: '예약 주문을 대접하고 문제 2개를 맞혀요.' }, { id: 'festival', name: '축제 야외 영업', level: 2, target: 2, mission: 'birthday', description: '마을 2단계부터, 축제 손님과 문제 2개에 도전해요.' }, { id: 'vip', name: '특별 VIP 행사', level: 4, target: 1, mission: 'gourmet', description: '특별 주문 도전을 풀고 미식가를 대접해요.' }];
 export function planSpecialBusiness(save, id, manual = false) { if (!unlocked(save, 'specialBusiness'))
     return false; const item = specialBusinessCatalog.find(x => x.id === id); if (!item || save.cafeLevel < item.level || id === 'festival' && (save.village?.progression?.stage ?? 1) < 2)

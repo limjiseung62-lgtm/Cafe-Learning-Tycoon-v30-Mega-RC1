@@ -1,5 +1,5 @@
-import { unlocked } from './progressiveFeatures.js?v=v30-rc1-5bf787ba0cb4';
-import { createLongGrowth, grantDecoration } from './longGrowth.js?v=v30-rc1-5bf787ba0cb4';
+import { unlocked } from './progressiveFeatures.js?v=furniture-ux-dd837b78b1a8';
+import { createLongGrowth, grantDecoration } from './longGrowth.js?v=furniture-ux-dd837b78b1a8';
 export const villageStages = [
     { stage: 1, name: '작은 마을', points: 0, sessions: 0, quests: 0, trust: 0, message: '이웃과 첫 인사를 나눠요.' },
     { stage: 2, name: '활기찬 광장', points: 25, sessions: 1, quests: 1, trust: 1, message: '광장이 새롭게 단장됐어요!' },

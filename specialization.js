@@ -1,5 +1,5 @@
-import { unlocked } from './progressiveFeatures.js?v=v30-rc1-5bf787ba0cb4';
-import { specializationById, belongsToBranch } from './specializationConfig.js?v=v30-rc1-5bf787ba0cb4';
+import { unlocked } from './progressiveFeatures.js?v=furniture-ux-dd837b78b1a8';
+import { specializationById, belongsToBranch } from './specializationConfig.js?v=furniture-ux-dd837b78b1a8';
 export function validSpecialization(v) { try {
     const s = v;
     return !!s && s.version === 1 && !!specializationById(s.selected) && typeof s.selectedAt === 'string' && Number.isFinite(Date.parse(s.selectedAt)) && Array.isArray(s.receipts) && s.receipts.length <= 300 && new Set(s.receipts.map(r => r.id)).size === s.receipts.length && s.receipts.every(r => typeof r.id === 'string' && r.id.length <= 160 && typeof r.business === 'string' && r.business.length <= 128 && typeof r.event === 'string' && specializationById(s.selected).events.some((_, i) => r.event === 'spec-' + s.selected + '-' + i) && ['success', 'failed', 'cancelled'].includes(r.outcome)) && Array.isArray(s.collections) && s.collections.length <= 3 && new Set(s.collections).size === s.collections.length && s.collections.every(id => ['souvenir', 'recipe', 'title'].includes(id)) && JSON.stringify(s).length < 200000;

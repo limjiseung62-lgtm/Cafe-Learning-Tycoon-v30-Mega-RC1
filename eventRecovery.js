@@ -1,7 +1,7 @@
-import { deploymentLocalStorage } from './deploymentStorage.js?v=v30-rc1-5bf787ba0cb4';
-import { classroomCafeCheckpoint, restoreClassroomCafe } from './classroomCheckpoint.js?v=v30-rc1-5bf787ba0cb4';
-import { createClassMatch } from './sessionFactory.js?v=v30-rc1-5bf787ba0cb4';
-import { questionCatalog } from './questionPack.js?v=v30-rc1-5bf787ba0cb4';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=furniture-ux-dd837b78b1a8';
+import { classroomCafeCheckpoint, restoreClassroomCafe } from './classroomCheckpoint.js?v=furniture-ux-dd837b78b1a8';
+import { createClassMatch } from './sessionFactory.js?v=furniture-ux-dd837b78b1a8';
+import { questionCatalog } from './questionPack.js?v=furniture-ux-dd837b78b1a8';
 const key = 'cafe.v15.session-recovery';
 export class EventRecovery {
     current;

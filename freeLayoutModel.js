@@ -1,5 +1,5 @@
-import { furnitureChairSize, furnitureSeatLift } from './furnitureCatalog.js?v=v30-rc1-5bf787ba0cb4';
-import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=v30-rc1-5bf787ba0cb4';
+import { furnitureChairSize, furnitureSeatLift } from './furnitureCatalog.js?v=furniture-ux-dd837b78b1a8';
+import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=furniture-ux-dd837b78b1a8';
 export const tableKinds = { two: { name: '2인 테이블', seats: 2, w: 8, h: 5, artWidth: 16, row: 0 }, four: { name: '4인 테이블', seats: 4, w: 12, h: 6, artWidth: 20, row: 1 }, long: { name: '긴 단체 테이블', seats: 6, w: 19, h: 6, artWidth: 26, row: 2 } };
 export const freeKey = (level, branch) => (branch ?? 'base') + ':' + level;
 export const seatBudget = (level) => [4, 6, 6, 8, 8, 10, 12, 12, 14, 14, 14, 14, 14, 14, 14][level - 1];

@@ -1,17 +1,17 @@
-import { unlocked } from './progressiveFeatures.js?v=v30-rc1-5bf787ba0cb4';
-import { imageReady } from './imageLoading.js?v=v30-rc1-5bf787ba0cb4';
-import { specializationRoom } from './specializationConfig.js?v=v30-rc1-5bf787ba0cb4';
-import { furnitureCatalog, furnitureFor } from './furnitureCatalog.js?v=v30-rc1-5bf787ba0cb4';
-import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=v30-rc1-5bf787ba0cb4';
-import { placementCandidates, placementIsValid, autoArrangeDecor } from './freePlacementChoices.js?v=v30-rc1-5bf787ba0cb4';
-import { freePlanFor, validateFree, commitFree, freePreset } from './freeLayout.js?v=v30-rc1-5bf787ba0cb4';
-import { defaultFreePlan, tableKinds, seatBudget, freeParts, freeDecorBox, freeFixed, wallDecor } from './freeLayoutModel.js?v=v30-rc1-5bf787ba0cb4';
-import { createSpace, floorPath } from './spatial.js?v=v30-rc1-5bf787ba0cb4';
-import { freeFurniture, freeSprite, freeHallLayers, furnitureVisualVersion, refreshFurnitureArt } from './freeFurniture.js?v=v30-rc1-5bf787ba0cb4';
-import { branchCatalog } from './growthBranch.js?v=v30-rc1-5bf787ba0cb4';
-import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=v30-rc1-5bf787ba0cb4';
-import { escapeText as esc } from './questionRenderer.js?v=v30-rc1-5bf787ba0cb4';
-import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=v30-rc1-5bf787ba0cb4';
+import { unlocked } from './progressiveFeatures.js?v=furniture-ux-dd837b78b1a8';
+import { imageReady } from './imageLoading.js?v=furniture-ux-dd837b78b1a8';
+import { specializationRoom } from './specializationConfig.js?v=furniture-ux-dd837b78b1a8';
+import { furnitureCatalog, furnitureFor } from './furnitureCatalog.js?v=furniture-ux-dd837b78b1a8';
+import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=furniture-ux-dd837b78b1a8';
+import { placementCandidates, placementIsValid, autoArrangeDecor } from './freePlacementChoices.js?v=furniture-ux-dd837b78b1a8';
+import { freePlanFor, validateFree, commitFree, freePreset } from './freeLayout.js?v=furniture-ux-dd837b78b1a8';
+import { defaultFreePlan, tableKinds, seatBudget, freeParts, freeDecorBox, freeFixed, wallDecor } from './freeLayoutModel.js?v=furniture-ux-dd837b78b1a8';
+import { createSpace, floorPath } from './spatial.js?v=furniture-ux-dd837b78b1a8';
+import { freeFurniture, freeSprite, freeHallLayers, furnitureVisualVersion, refreshFurnitureArt } from './freeFurniture.js?v=furniture-ux-dd837b78b1a8';
+import { branchCatalog } from './growthBranch.js?v=furniture-ux-dd837b78b1a8';
+import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=furniture-ux-dd837b78b1a8';
+import { escapeText as esc } from './questionRenderer.js?v=furniture-ux-dd837b78b1a8';
+import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=furniture-ux-dd837b78b1a8';
 export async function openFreeEditor(repo, initial, onClose) {
     if (!unlocked(initial, 'decor'))
         return;

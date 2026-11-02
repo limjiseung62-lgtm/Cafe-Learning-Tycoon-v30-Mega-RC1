@@ -1,5 +1,5 @@
-import { unlocked } from './progressiveFeatures.js?v=v30-rc1-5bf787ba0cb4';
-import { branchCatalog, branchPreview, canOfferBranch, isBranch } from './growthBranch.js?v=v30-rc1-5bf787ba0cb4';
+import { unlocked } from './progressiveFeatures.js?v=furniture-ux-dd837b78b1a8';
+import { branchCatalog, branchPreview, canOfferBranch, isBranch } from './growthBranch.js?v=furniture-ux-dd837b78b1a8';
 const sessions = new WeakMap();
 let deferred = new WeakSet();
 // Presentation copy only. Branch IDs, eligibility and persistence remain unchanged.

@@ -1,6 +1,6 @@
-import { QuestionPackCatalog } from './questionPack.js?v=v30-rc1-5bf787ba0cb4';
-import { loadCommonRuntime } from './commonBankLoader.js?v=v30-rc1-5bf787ba0cb4';
-import { safeCommonDiagram } from './questionRenderer.js?v=v30-rc1-5bf787ba0cb4';
+import { QuestionPackCatalog } from './questionPack.js?v=furniture-ux-dd837b78b1a8';
+import { loadCommonRuntime } from './commonBankLoader.js?v=furniture-ux-dd837b78b1a8';
+import { safeCommonDiagram } from './questionRenderer.js?v=furniture-ux-dd837b78b1a8';
 export const commonDeployment = () => typeof document !== 'undefined' && document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content') === 'v30e-common-local';
 export function commonAnswerText(q) { const text = q.render?.choices?.find((c) => c.id === q.assessment?.answer?.choiceId)?.text; if (typeof text !== 'string' || !text)
     throw Error('정답 연결을 확인해 주세요.'); return text; }
