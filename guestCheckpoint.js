@@ -1,8 +1,8 @@
-import { growthMenuDefinitions } from './menuResearch.js?v=v30-rc1-e02fc6e73d9a';
-import { specializationById } from './specializationConfig.js?v=v30-rc1-e02fc6e73d9a';
-import { customers } from './data.js?v=v30-rc1-e02fc6e73d9a';
-import { specialDefinition, specialTypes } from './phase4Config.js?v=v30-rc1-e02fc6e73d9a';
-import { hospitalityDefinition, helperCatalog } from './hospitalityConfig.js?v=v30-rc1-e02fc6e73d9a';
+import { growthMenuDefinitions } from './menuResearch.js?v=v30-rc1-f88374ed22e0';
+import { specializationById } from './specializationConfig.js?v=v30-rc1-f88374ed22e0';
+import { customers } from './data.js?v=v30-rc1-f88374ed22e0';
+import { specialDefinition, specialTypes } from './phase4Config.js?v=v30-rc1-f88374ed22e0';
+import { hospitalityDefinition, helperCatalog } from './hospitalityConfig.js?v=v30-rc1-f88374ed22e0';
 export function decodeGuestCheckpoint(value, g, level, limits) {
     try {
         const items = value;
@@ -28,7 +28,7 @@ export function decodeGuestCheckpoint(value, g, level, limits) {
                 if (consumed && ['ENTERING', 'MOVING_TO_SEAT', 'ORDERING', 'WAITING_FOR_FOOD'].includes(item.state) || !consumed && ['PREPARING', 'SERVING', 'EATING', 'PAYING'].includes(item.state))
                     return null;
             }
-            if (item.megaServiceRate !== undefined && (g.mode !== 'CAFE_GROWTH' || !g.mega?.extended || level < 20 || ![1, 1.08, 1.18].includes(item.megaServiceRate)))
+            if (item.megaServiceRate !== undefined && (g.mode !== 'CAFE_GROWTH' || !g.mega?.extended || item.megaServiceRate !== 1 && level < 20 || ![1, 1.08, 1.18].includes(item.megaServiceRate)))
                 return null;
             if (item.miniReaction && (g.mode !== 'CAFE_GROWTH' && !g.classRandom || typeof item.miniReaction.success !== 'boolean' || !finite(item.miniReaction.until)))
                 return null;

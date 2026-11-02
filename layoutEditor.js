@@ -1,14 +1,14 @@
-import { openMegaEditor } from './megaEditor.js?v=v30-rc1-e02fc6e73d9a';
-import { isMegaDeployment } from './megaSpace.js?v=v30-rc1-e02fc6e73d9a';
-import { openFreeEditor } from './freeLayoutEditor.js?v=v30-rc1-e02fc6e73d9a';
-import { planFor, defaultPlan, validatePlan, commitPlan } from './cafeLayout.js?v=v30-rc1-e02fc6e73d9a';
-import { layoutFacilities, tableRect, decorRect } from './layoutModel.js?v=v30-rc1-e02fc6e73d9a';
-import { createSpace, floorPath, hallGrowthSpecs } from './spatial.js?v=v30-rc1-e02fc6e73d9a';
-import { branchRoom, branchCatalog } from './growthBranch.js?v=v30-rc1-e02fc6e73d9a';
-import { sprite } from './art.js?v=v30-rc1-e02fc6e73d9a';
-import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=v30-rc1-e02fc6e73d9a';
-import { escapeText as esc } from './questionRenderer.js?v=v30-rc1-e02fc6e73d9a';
-import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=v30-rc1-e02fc6e73d9a';
+import { openMegaEditor } from './megaEditor.js?v=v30-rc1-f88374ed22e0';
+import { isMegaDeployment } from './megaSpace.js?v=v30-rc1-f88374ed22e0';
+import { openFreeEditor } from './freeLayoutEditor.js?v=v30-rc1-f88374ed22e0';
+import { planFor, defaultPlan, validatePlan, commitPlan } from './cafeLayout.js?v=v30-rc1-f88374ed22e0';
+import { layoutFacilities, tableRect, decorRect } from './layoutModel.js?v=v30-rc1-f88374ed22e0';
+import { createSpace, floorPath, hallGrowthSpecs } from './spatial.js?v=v30-rc1-f88374ed22e0';
+import { branchRoom, branchCatalog } from './growthBranch.js?v=v30-rc1-f88374ed22e0';
+import { sprite } from './art.js?v=v30-rc1-f88374ed22e0';
+import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=v30-rc1-f88374ed22e0';
+import { escapeText as esc } from './questionRenderer.js?v=v30-rc1-f88374ed22e0';
+import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=v30-rc1-f88374ed22e0';
 export async function openLegacyLayoutEditor(repo, initial, onClose) {
     document.getElementById('layout-editor')?.remove();
     const dialog = document.createElement('section');

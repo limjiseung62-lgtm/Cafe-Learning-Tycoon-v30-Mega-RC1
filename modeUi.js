@@ -1,45 +1,46 @@
-import { wrapCommonBackup, unpackCommonBackup, commonDeployment } from './commonBackup.js?v=v30-rc1-e02fc6e73d9a';
-import { commonTransactionOpen } from './commonLearningTransaction.js?v=v30-rc1-e02fc6e73d9a';
-import { mountCafeStudyPicker } from './cafeStudyPicker.js?v=v30-rc1-e02fc6e73d9a';
-import { megaSetupActions } from './megaEditor.js?v=v30-rc1-e02fc6e73d9a';
-import { v27Deployment } from './classRandom.js?v=v30-rc1-e02fc6e73d9a';
-import { classRuntime } from './classRuntime.js?v=v30-rc1-e02fc6e73d9a';
-import { createRandomClassMatch } from './sessionFactory.js?v=v30-rc1-e02fc6e73d9a';
+import { mountLiveManagement } from './liveManagementUi.js?v=v30-rc1-f88374ed22e0';
+import { wrapCommonBackup, unpackCommonBackup, commonDeployment } from './commonBackup.js?v=v30-rc1-f88374ed22e0';
+import { commonTransactionOpen } from './commonLearningTransaction.js?v=v30-rc1-f88374ed22e0';
+import { mountCafeStudyPicker } from './cafeStudyPicker.js?v=v30-rc1-f88374ed22e0';
+import { megaSetupActions } from './megaEditor.js?v=v30-rc1-f88374ed22e0';
+import { v27Deployment } from './classRandom.js?v=v30-rc1-f88374ed22e0';
+import { classRuntime } from './classRuntime.js?v=v30-rc1-f88374ed22e0';
+import { createRandomClassMatch } from './sessionFactory.js?v=v30-rc1-f88374ed22e0';
 let preparedBackupUrl;
 if (typeof addEventListener === 'function')
     addEventListener('pagehide', () => { if (preparedBackupUrl)
         URL.revokeObjectURL(preparedBackupUrl); });
-import { goalsHtml } from './progressiveGoals.js?v=v30-rc1-e02fc6e73d9a';
-import { openProgressiveHub } from './progressiveHub.js?v=v30-rc1-e02fc6e73d9a';
-import { alignMissionBusiness, unlocked, featureLevels } from './progressiveFeatures.js?v=v30-rc1-e02fc6e73d9a';
-import { openProgressiveBusiness } from './progressiveEconomy.js?v=v30-rc1-e02fc6e73d9a';
-import { createProgressiveGrowthSave } from './growthSave.js?v=v30-rc1-e02fc6e73d9a';
-import { v26Deployment } from './progressiveFeatures.js?v=v30-rc1-e02fc6e73d9a';
-import { createProgressiveClassMatch } from './sessionFactory.js?v=v30-rc1-e02fc6e73d9a';
-import { organizeGrowthMenu } from './studentNavigation.js?v=v30-rc1-e02fc6e73d9a';
-import { openManagementHub } from './managementHub.js?v=v30-rc1-e02fc6e73d9a';
-import { chooseManagementStrategy } from './managementUi.js?v=v30-rc1-e02fc6e73d9a';
-import { managementFor } from './managementState.js?v=v30-rc1-e02fc6e73d9a';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=v30-rc1-e02fc6e73d9a';
-import { openCafePicker } from './cafePicker.js?v=v30-rc1-e02fc6e73d9a';
-import { cafeNames } from './cafePortfolio.js?v=v30-rc1-e02fc6e73d9a';
-import { openVillage } from './villageUi.js?v=v30-rc1-e02fc6e73d9a';
-import { openLayoutEditor } from './layoutEditor.js?v=v30-rc1-e02fc6e73d9a';
-import { rosterFor, syncRosterSave } from './staffRecruitment.js?v=v30-rc1-e02fc6e73d9a';
-import { openCrewDialog } from './recruitUi.js?v=v30-rc1-e02fc6e73d9a';
-import { ensureGrowthWriteLock, releaseGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=v30-rc1-e02fc6e73d9a';
-import { chooseLongMission, prepareLongState } from './longGrowthUi.js?v=v30-rc1-e02fc6e73d9a';
-import { exportGrowth, parseGrowthBackup, checkBackupRun } from './growthBackup.js?v=v30-rc1-e02fc6e73d9a';
-import { growthRuntime } from './growthRuntime.js?v=v30-rc1-e02fc6e73d9a';
-import { concepts, seededRandom } from './cafeRun.js?v=v30-rc1-e02fc6e73d9a';
-import { createClassMatch } from './sessionFactory.js?v=v30-rc1-e02fc6e73d9a';
-import { createGrowthSave } from './growthSave.js?v=v30-rc1-e02fc6e73d9a';
-import { GrowthSessionController } from './growthSession.js?v=v30-rc1-e02fc6e73d9a';
-import { LocalSaveRepository, BrowserGrowthRepository, CandidateSaveRepository, growthStorageKey } from './saveRepository.js?v=v30-rc1-e02fc6e73d9a';
-import { policyFor } from './sessionModes.js?v=v30-rc1-e02fc6e73d9a';
-import { balance } from './config.js?v=v30-rc1-e02fc6e73d9a';
-import { questionCatalog } from './questionPack.js?v=v30-rc1-e02fc6e73d9a';
-import { escapeText } from './questionRenderer.js?v=v30-rc1-e02fc6e73d9a';
+import { goalsHtml } from './progressiveGoals.js?v=v30-rc1-f88374ed22e0';
+import { openProgressiveHub } from './progressiveHub.js?v=v30-rc1-f88374ed22e0';
+import { alignMissionBusiness, unlocked, featureLevels } from './progressiveFeatures.js?v=v30-rc1-f88374ed22e0';
+import { openProgressiveBusiness } from './progressiveEconomy.js?v=v30-rc1-f88374ed22e0';
+import { createProgressiveGrowthSave } from './growthSave.js?v=v30-rc1-f88374ed22e0';
+import { v26Deployment } from './progressiveFeatures.js?v=v30-rc1-f88374ed22e0';
+import { createProgressiveClassMatch } from './sessionFactory.js?v=v30-rc1-f88374ed22e0';
+import { organizeGrowthMenu } from './studentNavigation.js?v=v30-rc1-f88374ed22e0';
+import { openManagementHub } from './managementHub.js?v=v30-rc1-f88374ed22e0';
+import { chooseManagementStrategy } from './managementUi.js?v=v30-rc1-f88374ed22e0';
+import { managementFor } from './managementState.js?v=v30-rc1-f88374ed22e0';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=v30-rc1-f88374ed22e0';
+import { openCafePicker } from './cafePicker.js?v=v30-rc1-f88374ed22e0';
+import { cafeNames } from './cafePortfolio.js?v=v30-rc1-f88374ed22e0';
+import { openVillage } from './villageUi.js?v=v30-rc1-f88374ed22e0';
+import { openLayoutEditor } from './layoutEditor.js?v=v30-rc1-f88374ed22e0';
+import { rosterFor, syncRosterSave } from './staffRecruitment.js?v=v30-rc1-f88374ed22e0';
+import { openCrewDialog } from './recruitUi.js?v=v30-rc1-f88374ed22e0';
+import { ensureGrowthWriteLock, releaseGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=v30-rc1-f88374ed22e0';
+import { chooseLongMission, prepareLongState } from './longGrowthUi.js?v=v30-rc1-f88374ed22e0';
+import { exportGrowth, parseGrowthBackup, checkBackupRun } from './growthBackup.js?v=v30-rc1-f88374ed22e0';
+import { growthRuntime } from './growthRuntime.js?v=v30-rc1-f88374ed22e0';
+import { concepts, seededRandom } from './cafeRun.js?v=v30-rc1-f88374ed22e0';
+import { createClassMatch } from './sessionFactory.js?v=v30-rc1-f88374ed22e0';
+import { createGrowthSave } from './growthSave.js?v=v30-rc1-f88374ed22e0';
+import { GrowthSessionController } from './growthSession.js?v=v30-rc1-f88374ed22e0';
+import { LocalSaveRepository, BrowserGrowthRepository, CandidateSaveRepository, growthStorageKey } from './saveRepository.js?v=v30-rc1-f88374ed22e0';
+import { policyFor } from './sessionModes.js?v=v30-rc1-f88374ed22e0';
+import { balance } from './config.js?v=v30-rc1-f88374ed22e0';
+import { questionCatalog } from './questionPack.js?v=v30-rc1-f88374ed22e0';
+import { escapeText } from './questionRenderer.js?v=v30-rc1-f88374ed22e0';
 const e = (id) => document.getElementById(id);
 const study = () => '<div id="study-content" class="study-content"><span>학습 내용</span><strong id="study-title">문제를 준비하고 있어요…</strong><select id="study-pack" aria-label="학습 내용" hidden></select></div><p id="pack-error" class="save-error" aria-live="polite"></p><button type="button" id="pack-retry" class="text-button pack-retry" hidden>다시 시도</button>';
 export function browserSaveRepository() { try {
@@ -149,7 +150,7 @@ export class ModeFlow {
         this.packError();
     } if (view === this.view)
         e('pack-retry').onclick = () => { void this.populatePacks(true); }; }
-    packError() { this.loadFailed = true; this.controls(true); e('pack-error').textContent = '문제를 불러오지 못했어요. 다시 시도해 주세요.'; e('pack-retry').hidden = false; }
+    packError(error) { this.loadFailed = true; this.controls(true); const message = error instanceof Error ? error.message : ''; e('pack-error').textContent = /직원|손님|카페 상태|학습 기록 복원|공통 학습 백업/.test(message) ? '이어하기 정보를 복원하지 못했어요. 카페를 초기화하지 말고 JSON 백업을 보관해 주세요. · ' + message : '문제를 불러오지 못했어요. 기존 저장은 유지돼요. 연결을 확인하고 다시 시도해 주세요.'; e('pack-retry').hidden = false; }
     async problems(resume) { questionCatalog.prepareResume(resume); const id = e('study-pack').value; if (!id || !(await questionCatalog.selectable(this.card().querySelector('#continue-growth,#new-growth,#reset-growth') || v26Deployment() ? 'growth' : undefined)).some(p => p.packId === id))
         throw Error('inactive pack'); return (await questionCatalog.load(id)).questions; }
     async begin(factory, pool, view, resuming = false) { if (!resuming)
@@ -391,9 +392,9 @@ export class ModeFlow {
             prepareLongState(g, selection.state);
         } return g; }, pool, view, !!save.campaign?.run && !this.freshGrowth);
     }
-    catch {
+    catch (error) {
         if (view === this.view)
-            this.packError();
+            this.packError(error);
     }
     finally {
         this.busy = false;
@@ -466,7 +467,7 @@ export class ModeFlow {
     confirm(message, action) { if (document.getElementById('mode-confirm'))
         return; const dialog = document.createElement('section'); dialog.id = 'mode-confirm'; dialog.className = 'mode-confirm'; dialog.setAttribute('role', 'dialog'); dialog.setAttribute('aria-modal', 'true'); dialog.setAttribute('aria-label', '카페 확인'); dialog.innerHTML = '<div><h2>한 번 더 확인해요</h2><p>' + message + '</p><button id="confirm-cancel" class="secondary">취소</button><button id="confirm-yes" class="primary">확인하고 진행</button></div>'; document.body.append(dialog); e('confirm-cancel').onclick = () => dialog.remove(); e('confirm-yes').onclick = () => { if (!dialog.isConnected)
         return; dialog.remove(); action(); }; e('confirm-cancel').focus(); }
-    attach(game, pool) { this.pool = pool; this.endedGame = null; this.controller = game.policy.persistence === 'saved-cafe' ? new GrowthSessionController(game, this.repository, undefined, (save, base) => growthRuntime.enrich(save, base)) : null; if (this.controller)
+    attach(game, pool) { this.pool = pool; this.endedGame = null; this.controller = game.policy.persistence === 'saved-cafe' ? new GrowthSessionController(game, this.repository, undefined, (save, base) => growthRuntime.enrich(save, base)) : null; mountLiveManagement(game, this.controller); if (this.controller)
         this.feedback(this.controller.save());
     else
         e('save-status').textContent = ''; const cafeRead = this.repository.read(); e('mode-label').textContent = game.policy.label + (game.mode === 'CAFE_GROWTH' && cafeRead.status === 'ready' && cafeRead.save.portfolio ? ' · ' + cafeNames[cafeRead.save.portfolio.activeCafeId] : ''); const resumeClass = !!game.classRandom && game.durationSeconds === 1800; e('end-business').hidden = !this.controller && !resumeClass; e('end-business').textContent = resumeClass ? '이번 CLASS 마치기' : '영업 마치기'; e('end-business').onclick = () => this.confirm(resumeClass ? '이번 CLASS를 지금 끝내고 결과표를 볼까요? 이어하기는 끝나요.' : '지금 영업을 마치고 카페를 저장할까요?', () => { if (resumeClass)

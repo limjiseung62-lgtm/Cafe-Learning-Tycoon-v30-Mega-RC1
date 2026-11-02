@@ -1,7 +1,7 @@
-import { economicGoals } from './progressiveGoals.js?v=v30-rc1-e02fc6e73d9a';
-import { recordedCapital } from './progressiveFinance.js?v=v30-rc1-e02fc6e73d9a';
-import { featureLevels } from './progressiveFeatures.js?v=v30-rc1-e02fc6e73d9a';
-import { investmentTierLimit, branchUpgradeCost, branchYield, progressiveEconomyConfig as config } from './progressiveEconomy.js?v=v30-rc1-e02fc6e73d9a';
+import { economicGoals } from './progressiveGoals.js?v=v30-rc1-f88374ed22e0';
+import { recordedCapital } from './progressiveFinance.js?v=v30-rc1-f88374ed22e0';
+import { featureLevels } from './progressiveFeatures.js?v=v30-rc1-f88374ed22e0';
+import { investmentTierLimit, branchUpgradeCost, branchYield, progressiveEconomyConfig as config } from './progressiveEconomy.js?v=v30-rc1-f88374ed22e0';
 export const featureNames = { missions: '미션 보드', recruitment: '직원 구인', cake: '케이크 미니게임', decor: '카페 꾸미기', oven: '오븐 미니게임', branch: '카페 분기', flowers: '꽃 미니게임', reviews: '평판·리뷰', research: '메뉴 연구', strategy: '영업 전략', sort: '주문 분류', village: '마을 탐험', investment: '마을 투자', specialization: '카페 전문화', machine: '머신 수리', education: '직원 교육', specialBusiness: '특별 영업', delivery: '배달', festival: '마을 축제', tray: '트레이 배달', franchise: '자동 운영 지점', landmark: '랜드마크' };
 export function nextUnlock(level) { const next = Math.min(...Object.values(featureLevels).filter(n => n > level)); return Number.isFinite(next) ? 'Lv.' + next + ' · ' + Object.keys(featureLevels).filter(f => featureLevels[f] === next).map(f => featureNames[f]).join(' · ') : '모든 레벨 기능 해금 · 시설별 조건은 별도 확인'; }
 export function investmentReason(s, field) { const v = s.v26, tier = v.investments[field], cost = config.investmentCosts[tier]; if (tier === 5)

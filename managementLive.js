@@ -1,11 +1,11 @@
-import { unlocked } from './progressiveFeatures.js?v=v30-rc1-e02fc6e73d9a';
-import { specialPreparationHtml } from './specialPreparationUi.js?v=v30-rc1-e02fc6e73d9a';
-import { strategyCatalog } from './managementEngine.js?v=v30-rc1-e02fc6e73d9a';
-import { specialBusinessCatalog } from './specialBusiness.js?v=v30-rc1-e02fc6e73d9a';
-import { recruitById } from './recruitConfig.js?v=v30-rc1-e02fc6e73d9a';
-import { managementStyles } from './managementUi.js?v=v30-rc1-e02fc6e73d9a';
-import { dispatchDelivery, prepareSpecialBusiness, specialOperationStatus } from './specialBusiness.js?v=v30-rc1-e02fc6e73d9a';
-import { escapeText as esc } from './questionRenderer.js?v=v30-rc1-e02fc6e73d9a';
+import { unlocked } from './progressiveFeatures.js?v=v30-rc1-f88374ed22e0';
+import { specialPreparationHtml } from './specialPreparationUi.js?v=v30-rc1-f88374ed22e0';
+import { strategyCatalog } from './managementEngine.js?v=v30-rc1-f88374ed22e0';
+import { specialBusinessCatalog } from './specialBusiness.js?v=v30-rc1-f88374ed22e0';
+import { recruitById } from './recruitConfig.js?v=v30-rc1-f88374ed22e0';
+import { managementStyles } from './managementUi.js?v=v30-rc1-f88374ed22e0';
+import { dispatchDelivery, prepareSpecialBusiness, specialOperationStatus } from './specialBusiness.js?v=v30-rc1-f88374ed22e0';
+import { escapeText as esc } from './questionRenderer.js?v=v30-rc1-f88374ed22e0';
 let current, flush = () => false, last = '';
 export function beginManagementUi(g, save) { document.getElementById('management-live')?.remove(); document.getElementById('delivery-dialog')?.remove(); current = g.mode === 'CAFE_GROWTH' ? g : undefined; flush = save; last = ''; managementStyles(); }
 export function pollManagementUi(g) { if (current !== g || !g.management?.run)

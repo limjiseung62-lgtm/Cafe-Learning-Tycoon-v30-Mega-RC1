@@ -1,4 +1,4 @@
-import { staffBalance } from './config.js?v=v30-rc1-e02fc6e73d9a';
+import { staffBalance } from './config.js?v=v30-rc1-f88374ed22e0';
 export const staffDefinitions = [{ staffId: 'staff-1', name: '봄이', visualKey: 'spring' }, { staffId: 'staff-2', name: '준이', visualKey: 'jun' }, { staffId: 'staff-3', name: '하루', visualKey: 'haru' }, { staffId: 'staff-4', name: '루나', visualKey: 'luna' }, { staffId: 'staff-5', name: '도담', visualKey: 'dodam' }];
 export const staffVisuals = { owner: { face: '🧑‍🍳', apron: '#795f42', accessory: '☕' }, spring: { face: '👩', apron: '#d4898f', accessory: '🌸' }, jun: { face: '👨‍🦱', apron: '#7d9cc1', accessory: '🎧' }, haru: { face: '👩‍🦰', apron: '#9aaf70', accessory: '🌿' }, luna: { face: '👩‍🦳', apron: '#ac8dbb', accessory: '⭐' }, dodam: { face: '👨‍🦲', apron: '#d8a562', accessory: '🎀' } };
 export class StaffSystem {
@@ -77,6 +77,46 @@ export class StaffSystem {
         const i = this.workers.indexOf(w), seat = w.orderId === null ? undefined : this.seats[orderSeats.get(w.orderId) ?? -1];
         w.position = w.state === 'SERVING' && seat ? { x: seat.x, y: seat.y + 5 } : ['MOVING_TO_TABLE', 'PICKING_UP'].includes(w.state) ? { ...movement.pickups[i % movement.pickups.length] } : { ...movement.homes[i] };
     } }
+    /** Explicit player recovery: relocate to checked waiting floor, preserving delivery ownership and cargo. */
+    recoverPositions(avoid = []) {
+        const m = this.movement;
+        if (!m?.canStand)
+            return { ok: false, moved: 0, reason: '이 매장에서는 위치 복구를 사용할 수 없어요.' };
+        const gap = m.clearance ?? 4, d = (a, b) => Math.hypot(a.x - b.x, (a.y - b.y) * 2 / 3), chosen = [];
+        const candidates = [...m.homes, ...m.homes.flatMap(home => [5, 10, 15, 20].flatMap(r => Array.from({ length: 8 }, (_, i) => ({ x: home.x + r * Math.cos(i * Math.PI / 4), y: home.y + r * 1.5 * Math.sin(i * Math.PI / 4) }))))];
+        for (const w of this.workers) {
+            const order = w.orderId === null ? undefined : this.currentOrders.get(w.orderId), seat = order ? this.seats[order.seat] : undefined;
+            const targets = seat ? [{ x: seat.x, y: seat.y + 5 }, ...m.pickups] : m.pickups;
+            const point = candidates.find(p => m.canStand(p) && [...avoid, ...chosen].every(q => d(p, q) >= gap + .2) && m.pickups.every(q => d(p, q) >= gap + .2) && targets.every(t => { try {
+                return m.route(p, t).length > 0;
+            }
+            catch {
+                return false;
+            } }));
+            if (!point)
+                return { ok: false, moved: 0, reason: '안전한 복귀 공간이 부족해요. 통로를 먼저 확보해 주세요.' };
+            chosen.push(point);
+        }
+        // No partial relocation when a safe place cannot be found for the whole crew.
+        this.routes.clear();
+        this.pickupClaims.clear();
+        this.yielding.clear();
+        this.retryAt.clear();
+        this.workers.forEach((w, i) => {
+            this.report(w, 'player-position-recovery');
+            w.position = { ...chosen[i] };
+            this.progress.delete(w.staffId);
+            if (w.orderId === null) {
+                w.state = 'IDLE';
+                w.elapsed = 0;
+            }
+            else if (w.state === 'SERVING')
+                this.change(w, 'MOVING_TO_TABLE');
+            else if (w.state === 'PICKING_UP')
+                this.change(w, 'MOVING_TO_PICKUP');
+        });
+        return { ok: true, moved: this.workers.length, reason: '직원이 안전한 위치에서 다시 움직여요. 진행 중인 주문과 음식은 유지했어요.' };
+    }
     // Headless balance simulations retain their automatic driver. Interactive play opts in.
     manualOwner = false;
     claimOwner(order) { const w = this.workers[0]; if (!this.manualOwner || this.paid.length || w.state !== 'IDLE' || !order.ready || !order.active || this.workers.some(worker => worker.orderId === order.id))

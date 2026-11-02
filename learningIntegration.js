@@ -1,7 +1,7 @@
-import { deploymentLocalStorage } from './deploymentStorage.js?v=v30-rc1-e02fc6e73d9a';
-import { JsonQuestionProvider, legacyQuestions } from './questionPack.js?v=v30-rc1-e02fc6e73d9a';
-import { LearningSession, LearningProgressRepository } from './learningSession.js?v=v30-rc1-e02fc6e73d9a';
-import { LocalProblemRepository } from './problems.js?v=v30-rc1-e02fc6e73d9a';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=v30-rc1-f88374ed22e0';
+import { JsonQuestionProvider, legacyQuestions } from './questionPack.js?v=v30-rc1-f88374ed22e0';
+import { LearningSession, LearningProgressRepository } from './learningSession.js?v=v30-rc1-f88374ed22e0';
+import { LocalProblemRepository } from './problems.js?v=v30-rc1-f88374ed22e0';
 let storage = null;
 try {
     if (typeof deploymentLocalStorage !== 'undefined')

@@ -1,5 +1,5 @@
-import { hasGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=v30-rc1-e02fc6e73d9a';
-import { validateGrowthSave, migrateGrowthSave } from './growthSave.js?v=v30-rc1-e02fc6e73d9a';
+import { hasGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=v30-rc1-f88374ed22e0';
+import { validateGrowthSave, migrateGrowthSave } from './growthSave.js?v=v30-rc1-f88374ed22e0';
 export const growthStorageKey = 'cafe-learning-tycoon.growth.v1';
 /** A local candidate reads a legacy cafe until its first write, then uses its own copy. */
 export class CandidateSaveRepository {
@@ -59,6 +59,15 @@ export class LocalSaveRepository {
             }
             if (JSON.stringify(value) !== JSON.stringify(expected))
                 return { ok: false, message: '다른 창에서 카페가 변경됐어요. 다시 열어 주세요.' };
+        }
+        if (current !== null) {
+            let prior;
+            try {
+                prior = JSON.parse(current);
+            }
+            catch { /* Explicit replacement already retained the corrupt original. */ }
+            if (prior?.campaign?.run?.cafe && !this.storage.getItem(this.key + '.before-growth-guests-v1'))
+                this.storage.setItem(this.key + '.before-growth-guests-v1', current);
         }
         if (save.management && current !== null && !this.storage.getItem(this.key + '.before-management-v25'))
             this.storage.setItem(this.key + '.before-management-v25', current);

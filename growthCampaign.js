@@ -1,15 +1,16 @@
-import { megaPointClear } from './megaSpace.js?v=v30-rc1-e02fc6e73d9a';
-import { validManagement } from './managementState.js?v=v30-rc1-e02fc6e73d9a';
-import { validMiniSession, validMiniCollection, pauseCredit, expireMini } from './miniGames.js?v=v30-rc1-e02fc6e73d9a';
-import { validSpecialization } from './specialization.js?v=v30-rc1-e02fc6e73d9a';
-import { validBranch } from "./growthBranch.js?v=v30-rc1-e02fc6e73d9a";
-import { validateGrowthSave } from './growthSave.js?v=v30-rc1-e02fc6e73d9a';
-import { createGrowthSession } from './sessionFactory.js?v=v30-rc1-e02fc6e73d9a';
-import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=v30-rc1-e02fc6e73d9a';
-import { LearningSession, LearningProgressRepository } from './learningSession.js?v=v30-rc1-e02fc6e73d9a';
-import { LearningAnalyticsV1 } from './learningAnalytics.js?v=v30-rc1-e02fc6e73d9a';
-import { providerForPool } from './learningIntegration.js?v=v30-rc1-e02fc6e73d9a';
-import { validAbilityRun } from "./staffAbilities.js?v=v30-rc1-e02fc6e73d9a";
+import { guestPose } from './spatial.js?v=v30-rc1-f88374ed22e0';
+import { megaPointClear } from './megaSpace.js?v=v30-rc1-f88374ed22e0';
+import { validManagement } from './managementState.js?v=v30-rc1-f88374ed22e0';
+import { validMiniSession, validMiniCollection, pauseCredit, expireMini } from './miniGames.js?v=v30-rc1-f88374ed22e0';
+import { validSpecialization } from './specialization.js?v=v30-rc1-f88374ed22e0';
+import { validBranch } from "./growthBranch.js?v=v30-rc1-f88374ed22e0";
+import { validateGrowthSave } from './growthSave.js?v=v30-rc1-f88374ed22e0';
+import { createGrowthSession } from './sessionFactory.js?v=v30-rc1-f88374ed22e0';
+import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=v30-rc1-f88374ed22e0';
+import { LearningSession, LearningProgressRepository } from './learningSession.js?v=v30-rc1-f88374ed22e0';
+import { LearningAnalyticsV1 } from './learningAnalytics.js?v=v30-rc1-f88374ed22e0';
+import { providerForPool } from './learningIntegration.js?v=v30-rc1-f88374ed22e0';
+import { validAbilityRun } from "./staffAbilities.js?v=v30-rc1-f88374ed22e0";
 export const withoutCampaign = (save) => { const copy = structuredClone(save); delete copy.campaign; delete copy.eventState; delete copy.portfolio; return copy; };
 const goodInt = (n) => Number.isSafeInteger(n) && Number(n) >= 0;
 export function validCampaign(value) { try {
@@ -41,20 +42,27 @@ export function adaptiveLevel(elapsed, record) { const recent = record.recent.sl
 else if (recent.length === 5 && rate >= .8)
     level++; const ceiling = elapsed < 180 ? Math.max(1, record.level - 1) : elapsed < 660 ? Math.min(3, record.level + 1) : 3; return Math.max(1, Math.min(ceiling, level, 3)); }
 export function restoreGrowthRun(run, pool, now = Date.now()) { const g = createGrowthSession(run.base, Math.random, 900); g.management = structuredClone(run.management ?? run.base.management); g.miniGames = structuredClone(run.miniGames); g.miniCollection = structuredClone(run.miniCollection ?? run.base.miniCollection); g.specialization = structuredClone(run.specialization ?? run.base.specialization); g.growthBranch = structuredClone(run.growthBranch ?? run.base.growthBranch); g.service.workers.splice(1); g.enableEvents(); if (!restoreCafeCheckpoint(g, run.cafe))
-    throw Error('중단한 카페 상태를 확인해 주세요. 원본은 보존됩니다.'); g.enableHallGrowth(); if (run.workers) {
+    throw Error('중단한 카페 상태를 확인해 주세요. 원본은 보존됩니다.'); g.enableHallGrowth(); const legacyMissingGuests = run.cafe.guests === undefined && run.cafe.eventState === undefined; if (run.workers) {
     const ids = g.service.workers.map(w => w.staffId);
     if (!Array.isArray(run.workers) || run.workers.length !== ids.length)
         throw Error('직원 복원 오류');
     for (const [i, w] of run.workers.entries()) {
-        if (w.staffId !== ids[i] || w.level !== g.service.workers[i].level || !['IDLE', 'CLAIMING_ORDER', 'MOVING_TO_PICKUP', 'PICKING_UP', 'MOVING_TO_TABLE', 'SERVING', 'RETURNING'].includes(w.state) || !Number.isFinite(w.elapsed) || w.elapsed < 0 || !w.position || ![w.position.x, w.position.y].every(Number.isFinite) || ![w.cargo, w.remaining].every(items => Array.isArray(items) && items.length <= 100 && items.every(id => g.menus.some(m => m.menuId === id) || id === 'event-signature')) || w.orderId !== null && !g.guests.some(x => x.id === w.orderId && ['PREPARING', 'SERVING'].includes(x.state)))
+        if (w.staffId !== ids[i] || w.level !== g.service.workers[i].level || !['IDLE', 'CLAIMING_ORDER', 'MOVING_TO_PICKUP', 'PICKING_UP', 'MOVING_TO_TABLE', 'SERVING', 'RETURNING'].includes(w.state) || !Number.isFinite(w.elapsed) || w.elapsed < 0 || !w.position || ![w.position.x, w.position.y].every(Number.isFinite) || ![w.cargo, w.remaining].every(items => Array.isArray(items) && items.length <= 100 && items.every(id => g.menus.some(m => m.menuId === id) || id === 'event-signature')) || !legacyMissingGuests && w.orderId !== null && !g.guests.some(x => x.id === w.orderId && ['PREPARING', 'SERVING'].includes(x.state)))
             throw Error('직원 상태 오류');
-        Object.assign(g.service.workers[i], { position: { ...w.position }, state: w.state, cargo: [...w.cargo], remaining: [...w.remaining], orderId: w.orderId, elapsed: w.elapsed });
+        if (legacyMissingGuests) { /* Old early-level saves omitted guests. Cancel only unrecoverable transit work, never replay a sale or manufacture stock. Keep original checkpoint untouched for backup. */
+            Object.assign(g.service.workers[i], { state: 'IDLE', cargo: [], remaining: [], orderId: null, elapsed: 0 });
+        }
+        else
+            Object.assign(g.service.workers[i], { position: { ...w.position }, state: w.state, cargo: [...w.cargo], remaining: [...w.remaining], orderId: w.orderId, elapsed: w.elapsed });
     }
     for (const guest of g.guests)
         if (run.cafe.guests?.find(x => x.id === guest.id)?.state === 'SERVING')
             guest.state = 'SERVING';
-} if (g.serviceSpace?.megaPlan && g.service.workers.some(w => !megaPointClear(g.serviceSpace.megaPlan, w.position)))
-    throw Error('직원 이동 위치를 확인해 주세요. 원본 저장은 보존됩니다.'); if (run.abilityRun)
+} if (g.serviceSpace?.megaPlan && (g.service.workers.some(w => !megaPointClear(g.serviceSpace.megaPlan, w.position)) || g.service.workers.some((w, i) => g.service.workers.slice(i + 1).some(other => Math.hypot(w.position.x - other.position.x, (w.position.y - other.position.y) * 2 / 3) < 2.9)))) {
+    const repaired = g.service.recoverPositions(g.guests.map(guest => guestPose(guest, g.serviceSpace)));
+    if (!repaired.ok)
+        throw Error('직원 이동 위치를 복원할 안전한 통로가 없어요. 원본 저장은 보존됩니다.');
+} if (run.abilityRun)
     g.staffAbilities.restore(run.abilityRun); const learning = new LearningSession(providerForPool(pool)); const analytics = new LearningAnalyticsV1(run.packId); if (!learning.restoreCheckpoint(run.learning.session) || !analytics.restore(run.learning.analytics))
     throw Error('학습 기록 복원 실패 · 기존 저장은 보존됩니다.'); const finiteTree = (value) => typeof value === 'number' ? Number.isFinite(value) && value >= 0 : typeof value === 'string' || typeof value === 'boolean' || value === null || typeof value === 'object' && Object.values(value).every(finiteTree); if (!run.phase4 || !finiteTree(run.phase4) || Object.entries(g.telemetry.phase4).some(([key, value]) => typeof run.phase4[key] !== typeof value || Array.isArray(value) !== Array.isArray(run.phase4[key])))
     throw Error('매출 이력 복원 오류'); Object.assign(g.telemetry.phase4, structuredClone(run.phase4)); for (const [key, value] of Object.entries(run.hospitality)) {

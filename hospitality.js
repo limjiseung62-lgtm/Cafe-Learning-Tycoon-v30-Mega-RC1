@@ -1,5 +1,5 @@
-import { unlocked } from './progressiveFeatures.js?v=v30-rc1-e02fc6e73d9a';
-import { helperCatalog, hospitalityBalance as b } from './hospitalityConfig.js?v=v30-rc1-e02fc6e73d9a';
+import { unlocked } from './progressiveFeatures.js?v=v30-rc1-f88374ed22e0';
+import { helperCatalog, hospitalityBalance as b } from './hospitalityConfig.js?v=v30-rc1-f88374ed22e0';
 export class Hospitality {
     enabled = false;
     questions = [];
@@ -27,9 +27,9 @@ export class Hospitality {
         this.specialVisits++;
         this.lastSpecial = g.elapsedTime;
         return 'judge';
-    } if (this.helperVisits >= b.helperLimits[g.mode] || g.elapsedTime - this.lastHelper < b.helperCooldown || roll < b.specialChance || roll >= b.specialChance + b.helperChance)
+    } const livingGrowth = g.mode === 'CAFE_GROWTH' && !!g.mega?.extended, due = livingGrowth && this.helperVisits < 3 && g.elapsedTime >= 120 + this.helperVisits * 240; if (this.helperVisits >= (livingGrowth ? 3 : b.helperLimits[g.mode]) || g.elapsedTime - this.lastHelper < b.helperCooldown || !due && (roll < b.specialChance || roll >= b.specialChance + b.helperChance))
         return null; const available = helperCatalog.filter(h => h.unlock <= g.cafeLevel && !g.guests.some(x => x.helperType === h.id)); if (!available.length)
-        return null; const h = available[Math.min(available.length - 1, Math.floor((roll - b.specialChance) / b.helperChance * available.length))]; this.helperVisits++; this.lastHelper = g.elapsedTime; return h.id; }
+        return null; const h = available[due ? this.helperVisits % available.length : Math.min(available.length - 1, Math.floor((roll - b.specialChance) / b.helperChance * available.length))]; this.helperVisits++; this.lastHelper = g.elapsedTime; return h.id; }
     normalBonus(g, x) { if (!unlocked(g, 'missions'))
         return 0; if (!this.enabled || x.specialType || x.helperType || x.signature)
         return 0; let n = 0; if (this.patissierOrders && g.elapsedTime < this.patissierUntil) {

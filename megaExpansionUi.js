@@ -1,18 +1,19 @@
-import { megaLateForecast } from './megaLateForecast.js?v=v30-rc1-e02fc6e73d9a';
-import { adoptInterior, isShopDeployment } from './megaInventory.js?v=v30-rc1-e02fc6e73d9a';
-import { environmentPlacements, paintEnvironment } from './megaArt.js?v=v30-rc1-e02fc6e73d9a';
-import { expansionForecast } from './megaExpansionForecast.js?v=v30-rc1-e02fc6e73d9a';
-import { AudioManager } from './audioManager.js?v=v30-rc1-e02fc6e73d9a';
-import { deploymentLocalStorage } from './deploymentStorage.js?v=v30-rc1-e02fc6e73d9a';
-import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js?v=v30-rc1-e02fc6e73d9a';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v30-rc1-e02fc6e73d9a';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=v30-rc1-e02fc6e73d9a';
-import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js?v=v30-rc1-e02fc6e73d9a';
+import { megaLateForecast } from './megaLateForecast.js?v=v30-rc1-f88374ed22e0';
+import { adoptInterior, isShopDeployment } from './megaInventory.js?v=v30-rc1-f88374ed22e0';
+import { environmentPlacements, paintEnvironment } from './megaArt.js?v=v30-rc1-f88374ed22e0';
+import { expansionForecast } from './megaExpansionForecast.js?v=v30-rc1-f88374ed22e0';
+import { AudioManager } from './audioManager.js?v=v30-rc1-f88374ed22e0';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=v30-rc1-f88374ed22e0';
+import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js?v=v30-rc1-f88374ed22e0';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v30-rc1-f88374ed22e0';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=v30-rc1-f88374ed22e0';
+import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js?v=v30-rc1-f88374ed22e0';
 export function expansionAction(container, repo, source, refresh) {
     if (!source.mega || !document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.match(/^v30[cde]-/))
         return;
     const button = document.createElement('button');
     button.textContent = '매장 증축 · 면적과 비용 비교';
+    button.className = 'mega-expansion-entry';
     button.onclick = () => {
         const read = repo.read();
         if (read.status !== 'ready')
