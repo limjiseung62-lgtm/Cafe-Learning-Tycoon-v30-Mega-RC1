@@ -1,6 +1,6 @@
-import { customers } from './data.js?v=v30-rc1-f88374ed22e0';
-import { newProgressiveState, unlocked } from './progressiveFeatures.js?v=v30-rc1-f88374ed22e0';
-import { initializeFinance, branchReport } from './progressiveFinance.js?v=v30-rc1-f88374ed22e0';
+import { customers } from './data.js?v=v30-rc1-0dab56eed3a7';
+import { newProgressiveState, unlocked } from './progressiveFeatures.js?v=v30-rc1-0dab56eed3a7';
+import { initializeFinance, branchReport } from './progressiveFinance.js?v=v30-rc1-0dab56eed3a7';
 export const investmentCatalog = [{ id: 'commerce', name: '상업', city: '상업도시', visual: '시장 가판대와 상점 간판', effect: '일반·단체 손님', tile: 6 }, { id: 'tourism', name: '관광', city: '관광마을', visual: '전망 벤치·산책 화단', effect: '관광객·특별 손님', tile: 3 }, { id: 'culture', name: '문화', city: '예술도시', visual: '광장 공연 무대·장식', effect: '예술가·행사 손님', tile: 7 }, { id: 'housing', name: '주거', city: '전원마을', visual: '주택 골목·생활 쉼터', effect: '이웃·단골 손님', tile: 4 }];
 export const progressiveEconomyConfig = { investmentCosts: [1500, 7000, 25000, 70000, 160000], branchCosts: [108000, 306000, 720000], branchIncome: [9000, 18000, 30000], upgradeFactors: [.2, .21, .22, .24], maxBranchLevel: 5, landmarkCosts: [250000, 750000, 1800000, 8000000, 24000000, 60000000], revenueCap: .12 };
 export function initializeProgressive(s) { s.v26 ??= newProgressiveState(); return s.v26; }

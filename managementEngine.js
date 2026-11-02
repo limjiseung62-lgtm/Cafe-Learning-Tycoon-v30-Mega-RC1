@@ -1,8 +1,8 @@
-import { unlocked } from './progressiveFeatures.js?v=v30-rc1-f88374ed22e0';
-import { ensureSpecialInventory, reservationIndex } from './specialInventory.js?v=v30-rc1-f88374ed22e0';
-import { serviceReview, abandonedReview } from './managementReview.js?v=v30-rc1-f88374ed22e0';
-import { observeEducation } from './staffEducation.js?v=v30-rc1-f88374ed22e0';
-import { pollSpecialBusiness } from './specialBusiness.js?v=v30-rc1-f88374ed22e0';
+import { unlocked } from './progressiveFeatures.js?v=v30-rc1-0dab56eed3a7';
+import { ensureSpecialInventory, reservationIndex } from './specialInventory.js?v=v30-rc1-0dab56eed3a7';
+import { serviceReview, abandonedReview } from './managementReview.js?v=v30-rc1-0dab56eed3a7';
+import { observeEducation } from './staffEducation.js?v=v30-rc1-0dab56eed3a7';
+import { pollSpecialBusiness } from './specialBusiness.js?v=v30-rc1-0dab56eed3a7';
 export const strategyCatalog = [{ id: 'fast', name: '빠른 서비스', visual: 'coffee', detail: '일반 손님과 작은 주문을 차근차근 처리해요.', event: '주방·서빙 미션', crew: '하루의 준비 · 태오의 운반', mission: '주문 8건 서빙' }, { id: 'care', name: '정성 서비스', visual: 'cake', detail: '기다림을 줄이고 단골과 특별 손님을 대접해요.', event: '접객·재고 구조 미션', crew: '봄이의 친절 · 루나의 접객', mission: '기다림 45초 이내로 5건 서빙' }, { id: 'group', name: '단체 주문', visual: 'bread', detail: '예약 손님을 위해 재고와 직원을 준비해요.', event: '단체·생일 주문 미션', crew: '준이의 재고 · 태오의 운반', mission: '음식 18개 서빙' }];
 export function startManagement(g, id) { if (!unlocked(g, 'reviews'))
     return; const m = g.management; if (g.mode !== 'CAFE_GROWTH' || !m?.strategy)

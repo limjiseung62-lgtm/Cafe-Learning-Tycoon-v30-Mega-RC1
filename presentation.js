@@ -1,4 +1,4 @@
-import { customerPoses } from './customerPoses.js?v=v30-rc1-f88374ed22e0';
+import { customerPoses } from './customerPoses.js?v=v30-rc1-0dab56eed3a7';
 // The top edge of the existing counter foreground polygon, in room percent.
 const counterEdge = [[0, 59], [19, 64], [32, 75], [47, 85], [52, 86], [53, 79], [62, 74], [65, 64], [83, 64], [100, 65]];
 export function counterBoundaryY(x) { for (let i = 1; i < counterEdge.length; i++) {
