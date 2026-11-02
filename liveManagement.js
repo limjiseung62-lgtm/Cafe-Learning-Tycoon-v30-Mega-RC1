@@ -1,5 +1,5 @@
-import { guestPose } from './spatial.js?v=v30-rc1-5bf787ba0cb4';
-import { createMegaSpace, ensureMegaPlan, megaPointClear, megaRoute } from './megaSpace.js?v=v30-rc1-5bf787ba0cb4';
+import { guestPose } from './spatial.js?v=integrated-3bf575d7c25f';
+import { createMegaSpace, ensureMegaPlan, megaPointClear, megaRoute } from './megaSpace.js?v=integrated-3bf575d7c25f';
 export let liveManagementOpen = false;
 const projection = (s) => { const p = structuredClone(s); delete p.campaign; return p; };
 export function liveManagementRepository(g, c) {

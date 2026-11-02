@@ -1,14 +1,14 @@
-import { openMegaEditor } from './megaEditor.js?v=v30-rc1-5bf787ba0cb4';
-import { isMegaDeployment } from './megaSpace.js?v=v30-rc1-5bf787ba0cb4';
-import { openFreeEditor } from './freeLayoutEditor.js?v=v30-rc1-5bf787ba0cb4';
-import { planFor, defaultPlan, validatePlan, commitPlan } from './cafeLayout.js?v=v30-rc1-5bf787ba0cb4';
-import { layoutFacilities, tableRect, decorRect } from './layoutModel.js?v=v30-rc1-5bf787ba0cb4';
-import { createSpace, floorPath, hallGrowthSpecs } from './spatial.js?v=v30-rc1-5bf787ba0cb4';
-import { branchRoom, branchCatalog } from './growthBranch.js?v=v30-rc1-5bf787ba0cb4';
-import { sprite } from './art.js?v=v30-rc1-5bf787ba0cb4';
-import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=v30-rc1-5bf787ba0cb4';
-import { escapeText as esc } from './questionRenderer.js?v=v30-rc1-5bf787ba0cb4';
-import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=v30-rc1-5bf787ba0cb4';
+import { openMegaEditor } from './megaEditor.js?v=integrated-3bf575d7c25f';
+import { isMegaDeployment } from './megaSpace.js?v=integrated-3bf575d7c25f';
+import { openFreeEditor } from './freeLayoutEditor.js?v=integrated-3bf575d7c25f';
+import { planFor, defaultPlan, validatePlan, commitPlan } from './cafeLayout.js?v=integrated-3bf575d7c25f';
+import { layoutFacilities, tableRect, decorRect } from './layoutModel.js?v=integrated-3bf575d7c25f';
+import { createSpace, floorPath, hallGrowthSpecs } from './spatial.js?v=integrated-3bf575d7c25f';
+import { branchRoom, branchCatalog } from './growthBranch.js?v=integrated-3bf575d7c25f';
+import { sprite } from './art.js?v=integrated-3bf575d7c25f';
+import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=integrated-3bf575d7c25f';
+import { escapeText as esc } from './questionRenderer.js?v=integrated-3bf575d7c25f';
+import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=integrated-3bf575d7c25f';
 export async function openLegacyLayoutEditor(repo, initial, onClose) {
     document.getElementById('layout-editor')?.remove();
     const dialog = document.createElement('section');

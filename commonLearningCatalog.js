@@ -1,7 +1,7 @@
-import { QuestionPackCatalog } from './questionPack.js?v=v30-rc1-5bf787ba0cb4';
-import { loadCommonRuntime } from './commonBankLoader.js?v=v30-rc1-5bf787ba0cb4';
-import { safeCommonDiagram } from './questionRenderer.js?v=v30-rc1-5bf787ba0cb4';
-export const commonDeployment = () => typeof document !== 'undefined' && document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content') === 'v30e-common-local';
+import { QuestionPackCatalog } from './questionPack.js?v=integrated-3bf575d7c25f';
+import { loadCommonRuntime } from './commonBankLoader.js?v=integrated-3bf575d7c25f';
+import { safeCommonDiagram } from './questionRenderer.js?v=integrated-3bf575d7c25f';
+export const commonDeployment = () => typeof document !== 'undefined' && ['v30e-common-local', 'v30e-v31-local'].includes(document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content') ?? '');
 export function commonAnswerText(q) { const text = q.render?.choices?.find((c) => c.id === q.assessment?.answer?.choiceId)?.text; if (typeof text !== 'string' || !text)
     throw Error('정답 연결을 확인해 주세요.'); return text; }
 export function commonQuestion(q, packId, choices, subject, unitLabel) { if (q.metadata.questionType !== 'single-choice' || (q.render.inputKind !== undefined && q.render.inputKind !== 'choice') || !Array.isArray(q.render.choices) || new Set(q.render.choices.map((c) => c.text)).size !== q.render.choices.length || q.render.svg && !safeCommonDiagram(q.render.svg))

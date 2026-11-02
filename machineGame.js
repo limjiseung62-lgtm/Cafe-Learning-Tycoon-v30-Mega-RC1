@@ -1,4 +1,4 @@
-import { arcadeOpen, difficultyIndex, randomFor } from './arcadeTypes.js?v=v30-rc1-5bf787ba0cb4';
+import { arcadeOpen, difficultyIndex, randomFor } from './arcadeTypes.js?v=integrated-3bf575d7c25f';
 export const rotatePipe = (mask) => ((mask << 1) & 15) | (mask >> 3);
 const opposite = [4, 8, 1, 2], bits = [1, 2, 4, 8], dx = [0, 1, 0, -1], dy = [-1, 0, 1, 0];
 export function machineBlueprint(seed, difficulty, puzzle) { const size = 3 + difficultyIndex(difficulty), r = randomFor(seed + puzzle * 104729), path = [0]; let x = 0, y = 0; while (x < size - 1 || y < size - 1) {

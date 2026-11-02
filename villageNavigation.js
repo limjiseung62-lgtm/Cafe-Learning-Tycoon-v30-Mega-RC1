@@ -1,4 +1,4 @@
-import { townScene, lakeScene } from './villageSceneData.js?v=v30-rc1-5bf787ba0cb4';
+import { townScene, lakeScene } from './villageSceneData.js?v=integrated-3bf575d7c25f';
 export const sceneFor = (id) => id === 'town' ? townScene : lakeScene;
 export const navCell = 20, footRadius = 10;
 export const lakeShore = 'M235 305 C320 180 510 160 650 235 C735 280 830 240 915 320 C940 375 880 425 900 455 C945 500 970 590 900 690 C960 790 825 755 770 845 C710 940 540 925 390 850 C280 795 220 690 190 590 C160 485 150 400 235 305Z';
@@ -52,11 +52,28 @@ const roads = (s) => { if (!roadCache.has(s))
 export function bridgeDeck(p, r = footRadius) { return p.x >= 925 + r && p.x <= 1125 - r && p.y >= 255 + r && p.y <= 305 - r; }
 export function lakeWater(p, r = 0) { return insidePolygon(p, shorePoints) || lineDistance(p, shorePoints) < r || lineDistance(p, riverPoints) < 37.5 + r; }
 const rectHit = (p, r, pad = 0) => p.x > r.x - pad && p.x < r.x + r.w + pad && p.y > r.y - pad && p.y < r.y + r.h + pad;
+/** Exact city road segments in spatial bins; immutable scene keys retain collision semantics. */
+const cityRoadBins = new WeakMap();
+function onCityRoad(scene, p, r) { let bins = cityRoadBins.get(scene); if (!bins) {
+    bins = new Map();
+    const pad = scene.roadHalfWidth ?? 37;
+    for (const road of roads(scene))
+        for (let i = 1; i < road.points.length; i++) {
+            const a = road.points[i - 1], b = road.points[i];
+            for (let y = Math.max(0, Math.floor((Math.min(a.y, b.y) - pad) / 100)); y <= Math.min(11, Math.floor((Math.max(a.y, b.y) + pad) / 100)); y++)
+                for (let x = Math.max(0, Math.floor((Math.min(a.x, b.x) - pad) / 100)); x <= Math.min(15, Math.floor((Math.max(a.x, b.x) + pad) / 100)); x++) {
+                    const key = y * 16 + x, list = bins.get(key) ?? [];
+                    list.push([a, b]);
+                    bins.set(key, list);
+                }
+        }
+    cityRoadBins.set(scene, bins);
+} return (bins.get(Math.floor(p.y / 100) * 16 + Math.floor(p.x / 100)) ?? []).some(([a, b]) => segmentDistance(p, a, b) <= (scene.roadHalfWidth ?? 37) - r); }
 function baseOpen(scene, p, r = footRadius) { if (!Number.isFinite(p.x) || !Number.isFinite(p.y) || p.x < r || p.y < r || p.x > 1600 - r || p.y > 1200 - r)
     return false; if (scene.blockers?.some(b => rectHit(p, b, r)))
     return false; if (scene.buildings.some(b => rectHit(p, b.footprint, r)))
     return false; if (scene.id === 'lake' && lakeWater(p, r) && !bridgeDeck(p, r))
-    return false; const plaza = scene.id === 'town' && ((p.x - 775) / (191 - r)) ** 2 + ((p.y - 660) / (132 - r)) ** 2 <= 1; return plaza || roads(scene).some(road => lineDistance(p, road.points) <= 37 - r); }
+    return false; const plaza = scene.id === 'town' && ((p.x - 775) / (191 - r)) ** 2 + ((p.y - 660) / (132 - r)) ** 2 <= 1; return plaza || (scene.city ? onCityRoad(scene, p, r) : roads(scene).some(road => lineDistance(p, road.points) <= (scene.roadHalfWidth ?? 37) - r)); }
 const propCache = new WeakMap();
 export function sceneProps(scene) {
     if (propCache.has(scene))
@@ -136,9 +153,23 @@ export function nearestScenePoint(scene, p) { const candidates = mesh(scene).poi
     }
 } return { ...best }; }
 const index = (p) => Math.floor(p.y / 20) * 80 + Math.floor(p.x / 20);
-export function sceneSegmentOpen(scene, a, b) { const n = Math.ceil(distance(a, b) / 2); for (let i = 0; i <= n; i++)
-    if (!sceneWalkable(scene, { x: a.x + (b.x - a.x) * i / (n || 1), y: a.y + (b.y - a.y) * i / (n || 1) }))
-        return false; return true; }
+const citySegmentCache = new WeakMap();
+export function sceneSegmentOpen(scene, a, b) { const grid = (p) => p.x % 20 === 10 && p.y % 20 === 10 && p.x >= 10 && p.y >= 10 && p.x < 1600 && p.y < 1200, cacheable = scene.city && grid(a) && grid(b); let cache, key = 0; if (cacheable) {
+    cache = citySegmentCache.get(scene);
+    if (!cache) {
+        cache = new Map();
+        citySegmentCache.set(scene, cache);
+    }
+    const x = index(a), y = index(b);
+    key = Math.min(x, y) * 4800 + Math.max(x, y);
+    const hit = cache.get(key);
+    if (hit !== undefined)
+        return hit;
+} const n = Math.ceil(distance(a, b) / 2); for (let i = 0; i <= n; i++)
+    if (!sceneWalkable(scene, { x: a.x + (b.x - a.x) * i / (n || 1), y: a.y + (b.y - a.y) * i / (n || 1) })) {
+        cache?.set(key, false);
+        return false;
+    } cache?.set(key, true); return true; }
 export function scenePath(scene, from, to) { if (!sceneWalkable(scene, to))
     return []; const a = nearestScenePoint(scene, from), b = nearestScenePoint(scene, to), start = index(a), goal = index(b), m = mesh(scene), queue = [start], g = new Map([[start, 0]]), parent = new Map(); const point = (i) => ({ x: i % 80 * 20 + 10, y: Math.floor(i / 80) * 20 + 10 }); while (queue.length) {
     queue.sort((x, y) => g.get(x) + distance(point(x), b) - g.get(y) - distance(point(y), b));

@@ -1,6 +1,6 @@
-import { sceneRoads, sceneProps, lakeShore, riverPath } from './villageNavigation.js?v=v30-rc1-5bf787ba0cb4';
-import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=v30-rc1-5bf787ba0cb4';
-import { escapeText as esc } from './questionRenderer.js?v=v30-rc1-5bf787ba0cb4';
+import { sceneRoads, sceneProps, lakeShore, riverPath } from './villageNavigation.js?v=integrated-3bf575d7c25f';
+import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=integrated-3bf575d7c25f';
+import { escapeText as esc } from './questionRenderer.js?v=integrated-3bf575d7c25f';
 const art = (key) => customerPoseArt(selectCustomerPose(key, 'ENTERING', 'right'));
 const asset = 'assets/web/village-v2/';
 const propFrames = [[0, 0, 512, 385], [512, 0, 512, 385], [1024, 0, 512, 385], [0, 385, 512, 280], [512, 385, 512, 300], [1024, 385, 512, 300], [0, 665, 512, 359], [512, 685, 512, 339], [1024, 685, 512, 339]];
@@ -11,7 +11,7 @@ export function sceneEnvironment(scene, founded = false) {
     let ground = `<defs><pattern id="${prefix}-stone" width="120" height="120" patternUnits="userSpaceOnUse"><image href="${asset}stone.webp" width="120" height="120"/></pattern>` + (scene.id === 'lake' ? `<pattern id="${prefix}-water" width="480" height="480" patternUnits="userSpaceOnUse"><image href="${asset}water-soft.webp" width="480" height="480"/></pattern>` : '') + '</defs>';
     if (scene.id === 'lake')
         ground += `<path d="${riverPath}" fill="none" stroke="#dbd6ad" stroke-width="110"/><path d="${riverPath}" fill="none" stroke="url(#${prefix}-water)" stroke-width="75"/><path d="${lakeShore}" fill="#d6d2a1" stroke="#91a780" stroke-width="36"/><path d="${lakeShore}" fill="url(#${prefix}-water)" stroke="#e3d8ac" stroke-width="14"/>`;
-    for (const [color, width] of [['#89976a', 88], ['#e2d0a7', 82], [`url(#${prefix}-stone)`, 74]])
+    for (const [color, width] of [['#89976a', (scene.roadHalfWidth ?? 37) * 2 + 14], ['#e2d0a7', (scene.roadHalfWidth ?? 37) * 2 + 8], [`url(#${prefix}-stone)`, (scene.roadHalfWidth ?? 37) * 2]])
         for (const road of roads)
             ground += `<path d="${road.d}" stroke="${color}" stroke-width="${width}" fill="none" stroke-linecap="round"/>`;
     if (scene.id === 'town')
@@ -23,7 +23,7 @@ export function sceneEnvironment(scene, founded = false) {
         const site = scene.id === 'lake' && b.id === 'site';
         html += `<button class="scene-building ${site ? 'lake-site' : ''}" data-building="${b.id}" aria-label="${esc(b.name)}까지 이동" style="left:${b.x}px;top:${b.y}px;z-index:${b.y};width:${b.w}px;height:${b.w * 2 / 3}px">` + (site && !founded ? '<span class="scene-empty-plot" aria-hidden="true"></span>' : buildingArt(scene, b.id, b.tile, b.w)) + `<b class="scene-label">${site && founded ? '2호점 카페' : esc(b.name)}</b></button>`;
     }
-    if (scene.id === 'town' && scene.progressionStage) {
+    if (scene.id === 'town' && scene.progressionStage && !scene.city) {
         if (stage < 5)
             html += `<span class="scene-sprite scene-prop growth-gate" data-growth-gate style="left:1460px;top:685px;z-index:700;${spriteStyle(5, 210, true)}" aria-hidden="true"></span><span class="growth-world-sign" style="left:1470px;top:575px">호숫가 길 정비 중</span>`;
         else

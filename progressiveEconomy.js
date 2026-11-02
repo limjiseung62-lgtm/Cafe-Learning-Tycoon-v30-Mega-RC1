@@ -1,6 +1,7 @@
-import { customers } from './data.js?v=v30-rc1-5bf787ba0cb4';
-import { newProgressiveState, unlocked } from './progressiveFeatures.js?v=v30-rc1-5bf787ba0cb4';
-import { initializeFinance, branchReport } from './progressiveFinance.js?v=v30-rc1-5bf787ba0cb4';
+import { branchOperatingReport } from './enterpriseState.js?v=integrated-3bf575d7c25f';
+import { customers } from './data.js?v=integrated-3bf575d7c25f';
+import { newProgressiveState, unlocked } from './progressiveFeatures.js?v=integrated-3bf575d7c25f';
+import { initializeFinance, branchReport } from './progressiveFinance.js?v=integrated-3bf575d7c25f';
 export const investmentCatalog = [{ id: 'commerce', name: '상업', city: '상업도시', visual: '시장 가판대와 상점 간판', effect: '일반·단체 손님', tile: 6 }, { id: 'tourism', name: '관광', city: '관광마을', visual: '전망 벤치·산책 화단', effect: '관광객·특별 손님', tile: 3 }, { id: 'culture', name: '문화', city: '예술도시', visual: '광장 공연 무대·장식', effect: '예술가·행사 손님', tile: 7 }, { id: 'housing', name: '주거', city: '전원마을', visual: '주택 골목·생활 쉼터', effect: '이웃·단골 손님', tile: 4 }];
 export const progressiveEconomyConfig = { investmentCosts: [1500, 7000, 25000, 70000, 160000], branchCosts: [108000, 306000, 720000], branchIncome: [9000, 18000, 30000], upgradeFactors: [.2, .21, .22, .24], maxBranchLevel: 5, landmarkCosts: [250000, 750000, 1800000, 8000000, 24000000, 60000000], revenueCap: .12 };
 export function initializeProgressive(s) { s.v26 ??= newProgressiveState(); return s.v26; }
@@ -16,7 +17,8 @@ export function progressiveTownName(s) { const v = s.v26; if (v?.identity)
     return '햇살 ' + investmentCatalog.find(c => c.id === v.identity).city; return (s.village?.progression?.stage ?? 1) >= 2 ? '햇살 마을' : '햇살 골목'; }
 export function branchRequirement(s, id) { const v = s.v26, stage = s.village?.progression?.stage ?? 1; return [2, 3, 4].includes(id) && !!v && unlocked(s, 'franchise') && stage >= id + 1 && (id === 2 || v.branches.some(b => b.id === id - 1)) && (id === 2 || v.maxLevel >= 15 && investmentTotal(v) >= (id === 3 ? 8 : 12)); }
 export const branchUpgradeCost = (id, level) => level < 5 ? Math.round(progressiveEconomyConfig.branchCosts[id - 2] * progressiveEconomyConfig.upgradeFactors[level - 1]) : null;
-export function branchYield(s, b) { return Math.round(progressiveEconomyConfig.branchIncome[b.id - 2] * (1 + (b.level - 1) * .2) * (1 + s.investments[b.region] * .01)); }
+export function branchBaseYield(s, b) { return Math.round(progressiveEconomyConfig.branchIncome[b.id - 2] * (1 + (b.level - 1) * .2) * (1 + s.investments[b.region] * .01)); }
+export function branchYield(s, b) { return branchOperatingReport(s, b, branchBaseYield(s, b)).net; }
 export function foundFranchise(s, id, region) { if (!canEditProgressive(s) || !branchRequirement(s, id) || s.v26.branches.some(b => b.id === id) || !investmentCatalog.some(c => c.id === region))
     return false; const cost = progressiveEconomyConfig.branchCosts[id - 2]; if (s.money < cost)
     return false; const ledger = initializeFinance(s.v26); ledger.spent[id] = (ledger.spent[id] ?? 0) + cost; s.money -= cost; s.v26.branches.push({ id, level: 1, region }); return true; }
@@ -40,7 +42,21 @@ export function settleFranchises(g, id, eligible) { const v = g.progressiveState
 } if (completion.completedIds.length >= 10000)
     return 0; completion.completedIds.push(id); v.settledThrough = a.serial; delete v.inflight; const amount = eligible && g.elapsedTime >= 900 - 1e-5 ? v.branches.reduce((n, b) => n + branchYield(v, b), 0) : 0; const ledger = initializeFinance(v), details = eligible && g.elapsedTime >= 900 - 1e-5 ? v.branches.map(b => branchReport(v, b, a.serial)) : []; for (const d of details)
     ledger.earned[d.id] = (ledger.earned[d.id] ?? 0) + d.amount; if (eligible && g.elapsedTime >= 900 - 1e-5)
-    ledger.recentIncome = [...ledger.recentIncome, Math.round(g.stats.revenue + amount)].slice(-5); v.lastPayout = { id, amount, details }; g.money += amount; return amount; }
+    ledger.recentIncome = [...ledger.recentIncome, Math.round(g.stats.revenue + amount)].slice(-5); if (v.enterprise?.status === 'founded' && eligible && g.elapsedTime >= 900 - 1e-5) {
+    const reports = v.branches.map(b => branchOperatingReport(v, b, branchBaseYield(v, b)));
+    const gross = reports.reduce((a, r) => a + r.gross, 0), cost = reports.reduce((a, r) => a + r.cost, 0);
+    v.enterprise.totals ??= v.enterprise.history.reduce((a, r) => ({ gross: a.gross + r.gross, cost: a.cost + r.cost, net: a.net + r.net }), { gross: 0, cost: 0, net: 0 });
+    v.enterprise.totals.gross += gross;
+    v.enterprise.totals.cost += cost;
+    v.enterprise.totals.net += amount;
+    v.enterprise.history.push({ id, gross, cost, net: amount });
+    v.enterprise.history = v.enterprise.history.slice(-100);
+    for (const b of v.branches) {
+        const o = v.enterprise.branches[b.id];
+        if (o)
+            o.reputation = Math.min(100, o.reputation + (o.employees > 0 ? 1 : 0));
+    }
+} v.lastPayout = { id, amount, details }; g.money += amount; return amount; }
 export function investmentRevenue(g) { const v = g.progressiveState; return v && g.mode === 'CAFE_GROWTH' ? 1 + Math.min(progressiveEconomyConfig.revenueCap, investmentTotal(v) * .006) : 1; }
 export function investmentSpawn(g) { return g.progressiveState && g.mode === 'CAFE_GROWTH' ? Math.max(.9, 1 - investmentTotal(g.progressiveState) * .005) : 1; }
 export function investmentVisitor(g, guest) { const v = g.progressiveState; if (!v || !unlocked(g, 'investment') || !investmentTotal(v))

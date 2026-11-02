@@ -1,10 +1,10 @@
-import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js?v=v30-rc1-5bf787ba0cb4';
-import { CommonCafeFlow } from './commonCafeFlow.js?v=v30-rc1-5bf787ba0cb4';
-import { commonQuestion, commonAnswerText } from './commonLearningCatalog.js?v=v30-rc1-5bf787ba0cb4';
-import { loadCommonRuntime } from './commonBankLoader.js?v=v30-rc1-5bf787ba0cb4';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=v30-rc1-5bf787ba0cb4';
-import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=v30-rc1-5bf787ba0cb4';
-import { worksheetHtml } from './twinWorksheet.js?v=v30-rc1-5bf787ba0cb4';
+import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js?v=integrated-3bf575d7c25f';
+import { CommonCafeFlow } from './commonCafeFlow.js?v=integrated-3bf575d7c25f';
+import { commonQuestion, commonAnswerText } from './commonLearningCatalog.js?v=integrated-3bf575d7c25f';
+import { loadCommonRuntime } from './commonBankLoader.js?v=integrated-3bf575d7c25f';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=integrated-3bf575d7c25f';
+import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=integrated-3bf575d7c25f';
+import { worksheetHtml } from './twinWorksheet.js?v=integrated-3bf575d7c25f';
 const mounted = new WeakMap();
 const archiveExpected = new WeakMap();
 export async function restoreCommonArchive(flow, saved) { const raw = deploymentLocalStorage.getItem(archiveKey(saved.learningRecordId)); const cp = raw ? await flow.loaded.module.decode(raw) : saved; await flow.restore(cp); archiveExpected.set(flow, raw); }

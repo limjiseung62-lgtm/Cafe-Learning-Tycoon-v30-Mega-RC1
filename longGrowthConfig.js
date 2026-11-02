@@ -1,5 +1,5 @@
-import { miniDecor } from './miniGameConfig.js?v=v30-rc1-5bf787ba0cb4';
-import { specializationBoards, specializationDecor } from './specializationConfig.js?v=v30-rc1-5bf787ba0cb4';
+import { miniDecor } from './miniGameConfig.js?v=integrated-3bf575d7c25f';
+import { specializationBoards, specializationDecor } from './specializationConfig.js?v=integrated-3bf575d7c25f';
 // Only CAFE_GROWTH consumes these settings. Approved class-match values stay untouched.
 export const longGrowthLevels = [
     { level: 7, name: '햇살 정원 카페', capacity: 9 },

@@ -1,4 +1,4 @@
-import { scenePath, sceneWalkable, sceneCamera, sceneSegmentOpen } from './villageNavigation.js?v=v30-rc1-5bf787ba0cb4';
+import { scenePath, sceneWalkable, sceneCamera, sceneSegmentOpen } from './villageNavigation.js?v=integrated-3bf575d7c25f';
 export class VillageExplorer {
     o;
     position;
@@ -144,7 +144,10 @@ export class VillageExplorer {
     };
     paint(immediate = false, dt = .016) { if (this.o.viewport.scrollTop)
         this.o.viewport.scrollTop = 0; if (this.o.viewport.scrollLeft)
-        this.o.viewport.scrollLeft = 0; const desired = sceneCamera(this.view, this.position, this.overview), factor = immediate || !this.cameraReady ? 1 : 1 - Math.exp(-dt / .10); this.camera.x += (desired.x - this.camera.x) * factor; this.camera.y += (desired.y - this.camera.y) * factor; this.cameraReady = true; const transform = `translate3d(${this.camera.x}px,${this.camera.y}px,0) scale(${desired.scale})`; if (this.o.map.style.transform !== transform)
+        this.o.viewport.scrollLeft = 0; const desired = sceneCamera(this.view, this.position, this.overview); if (this.overview && this.o.centerOverview) {
+        desired.x = (this.view.width - 1600 * desired.scale) / 2;
+        desired.y = (this.view.height - 1200 * desired.scale) / 2;
+    } const factor = immediate || !this.cameraReady ? 1 : 1 - Math.exp(-dt / .10); this.camera.x += (desired.x - this.camera.x) * factor; this.camera.y += (desired.y - this.camera.y) * factor; this.cameraReady = true; const transform = `translate3d(${this.camera.x}px,${this.camera.y}px,0) scale(${desired.scale})`; if (this.o.map.style.transform !== transform)
         this.o.map.style.transform = transform; this.player.style.left = this.position.x + 'px'; this.player.style.top = this.position.y + 'px'; this.player.style.zIndex = String(Math.floor(this.position.y)); this.player.classList.toggle('walking', this.moving); }
     destroy() { if (this.destroyed)
         return; this.o.onCheckpoint(); this.destroyed = true; cancelAnimationFrame(this.frame); this.resize.disconnect(); document.removeEventListener('keydown', this.keydown); document.removeEventListener('keyup', this.keyup); document.removeEventListener('visibilitychange', this.visibility); window.removeEventListener('pagehide', this.checkpoint); window.removeEventListener('blur', this.blur); window.removeEventListener('pointerup', this.release); window.removeEventListener('pointercancel', this.release); }

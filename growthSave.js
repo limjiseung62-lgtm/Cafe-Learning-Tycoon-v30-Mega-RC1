@@ -1,34 +1,35 @@
-import { adoptInterior, isShopDeployment } from './megaInventory.js?v=v30-rc1-5bf787ba0cb4';
-import { validMega, newMegaState, isMegaDeployment } from './megaSpace.js?v=v30-rc1-5bf787ba0cb4';
-import { newProgressiveState, validProgressive } from './progressiveFeatures.js?v=v30-rc1-5bf787ba0cb4';
-import { growthMenuDefinitions } from './menuResearch.js?v=v30-rc1-5bf787ba0cb4';
-import { validManagement, validCafeAlbum } from './managementState.js?v=v30-rc1-5bf787ba0cb4';
-import { validPortfolio, portfolioMatches } from './cafePortfolio.js?v=v30-rc1-5bf787ba0cb4';
-import { validVillage } from './village.js?v=v30-rc1-5bf787ba0cb4';
-import { validMiniCollection } from './miniGames.js?v=v30-rc1-5bf787ba0cb4';
-import { validSpecialization } from './specialization.js?v=v30-rc1-5bf787ba0cb4';
-import { belongsToBranch } from './specializationConfig.js?v=v30-rc1-5bf787ba0cb4';
-import { furnitureUnlocked } from './furnitureUnlocks.js?v=v30-rc1-5bf787ba0cb4';
-import { furnitureFor } from './furnitureCatalog.js?v=v30-rc1-5bf787ba0cb4';
-import { validFreeLayouts } from './freeLayout.js?v=v30-rc1-5bf787ba0cb4';
-import { validLayouts } from './cafeLayout.js?v=v30-rc1-5bf787ba0cb4';
-import { validGrowthEconomy } from './growthEconomy.js?v=v30-rc1-5bf787ba0cb4';
-import { validLongGrowth } from './longGrowth.js?v=v30-rc1-5bf787ba0cb4';
-import { validCampaign } from './growthCampaign.js?v=v30-rc1-5bf787ba0cb4';
-import { validEventCheckpoint } from './cafeEvents.js?v=v30-rc1-5bf787ba0cb4';
-import { menuDefinitions } from './data.js?v=v30-rc1-5bf787ba0cb4';
-import { staffDefinitions } from './staff.js?v=v30-rc1-5bf787ba0cb4';
-import { cafeGrowthBalance } from './modeBalance.js?v=v30-rc1-5bf787ba0cb4';
-import { specialTypes } from './phase4Config.js?v=v30-rc1-5bf787ba0cb4';
-import { validBranch } from "./growthBranch.js?v=v30-rc1-5bf787ba0cb4";
-import { validRoster, rosterMirror, crewLimit } from "./staffRecruitment.js?v=v30-rc1-5bf787ba0cb4";
+import { adoptInterior, isShopDeployment } from './megaInventory.js?v=integrated-3bf575d7c25f';
+import { validMega, newMegaState, isMegaDeployment } from './megaSpace.js?v=integrated-3bf575d7c25f';
+import { newProgressiveState, validProgressive } from './progressiveFeatures.js?v=integrated-3bf575d7c25f';
+import { growthMenuDefinitions } from './menuResearch.js?v=integrated-3bf575d7c25f';
+import { validManagement, validCafeAlbum } from './managementState.js?v=integrated-3bf575d7c25f';
+import { validPortfolio, portfolioMatches } from './cafePortfolio.js?v=integrated-3bf575d7c25f';
+import { validVillage } from './village.js?v=integrated-3bf575d7c25f';
+import { validMiniCollection } from './miniGames.js?v=integrated-3bf575d7c25f';
+import { validSpecialization } from './specialization.js?v=integrated-3bf575d7c25f';
+import { belongsToBranch } from './specializationConfig.js?v=integrated-3bf575d7c25f';
+import { furnitureUnlocked } from './furnitureUnlocks.js?v=integrated-3bf575d7c25f';
+import { furnitureFor } from './furnitureCatalog.js?v=integrated-3bf575d7c25f';
+import { validFreeLayouts } from './freeLayout.js?v=integrated-3bf575d7c25f';
+import { validLayouts } from './cafeLayout.js?v=integrated-3bf575d7c25f';
+import { validGrowthEconomy } from './growthEconomy.js?v=integrated-3bf575d7c25f';
+import { validLongGrowth } from './longGrowth.js?v=integrated-3bf575d7c25f';
+import { validCampaign } from './growthCampaign.js?v=integrated-3bf575d7c25f';
+import { validEventCheckpoint } from './cafeEvents.js?v=integrated-3bf575d7c25f';
+import { menuDefinitions } from './data.js?v=integrated-3bf575d7c25f';
+import { staffDefinitions } from './staff.js?v=integrated-3bf575d7c25f';
+import { cafeGrowthBalance } from './modeBalance.js?v=integrated-3bf575d7c25f';
+import { specialTypes } from './phase4Config.js?v=integrated-3bf575d7c25f';
+import { validBranch } from "./growthBranch.js?v=integrated-3bf575d7c25f";
+import { validRoster, rosterMirror, crewLimit } from "./staffRecruitment.js?v=integrated-3bf575d7c25f";
 const integer = (v, min = 0, max = Number.MAX_SAFE_INTEGER) => typeof v === 'number' && Number.isSafeInteger(v) && v >= min && v <= max;
 const object = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const date = (v) => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(v) && Number.isFinite(Date.parse(v));
 export function validateGrowthSave(v) { if (!object(v) || v.mega !== undefined && (!validMega(v.mega) || Object.values(v.mega.plans).some(p => p.decor.some(d => !v.longTerm?.owned.includes(d.decorId)) || p.tables.some(t => !furnitureUnlocked(v.longTerm, furnitureFor(t.kind, t.furnitureId).id)))) || v.v26 !== undefined && !validProgressive(v.v26) || v.management !== undefined && !validManagement(v.management) || v.managementAlbum !== undefined && !validCafeAlbum(v.managementAlbum, v.mega?.extended ? 30 : 15) || v.portfolio !== undefined && (!validPortfolio(v.portfolio) || !portfolioMatches(v)) || v.village !== undefined && !validVillage(v.village) || v.miniCollection !== undefined && !validMiniCollection(v.miniCollection) || v.specialization !== undefined && (!validSpecialization(v.specialization) || Number(v.cafeLevel) < 11 || !belongsToBranch(v.specialization.selected, v.growthBranch?.active)) || v.freeLayouts !== undefined && !validFreeLayouts(v.freeLayouts) || v.layouts !== undefined && !validLayouts(v.layouts) || v.roster !== undefined && (!validRoster(v.roster, crewLimit(v)) || !rosterMirror(v.roster, v.staffOwned, v.staffLevels)) || v.growthBranch !== undefined && (!validBranch(v.growthBranch) || Number(v.cafeLevel) < 7) || v.growthEconomy !== undefined && !validGrowthEconomy(v.growthEconomy) || v.longTerm !== undefined && !validLongGrowth(v.longTerm, v.mega?.extended ? 30 : 15) || v.campaign !== undefined && !validCampaign(v.campaign) || v.eventState !== undefined && !validEventCheckpoint(v.eventState) || v.schemaVersion !== 1 || v.mode !== 'CAFE_GROWTH' || !date(v.createdAt) || !date(v.updatedAt) || Date.parse(v.createdAt) > Date.parse(v.updatedAt) || !integer(v.cafeLevel, 1, v.mega?.extended ? 30 : 15) || !integer(v.warehouseLevel, 1, 6) || !integer(v.money))
     return false; if (v.layouts && Object.values(v.layouts.plans).some(p => p.decor.some(d => !v.longTerm?.owned.includes(d.decorId))))
     return false; if (v.freeLayouts && Object.values(v.freeLayouts.plans).some(p => p.decor.some(d => !v.longTerm?.owned.includes(d.decorId)) || p.tables.some(t => !furnitureUnlocked(v.longTerm, furnitureFor(t.kind, t.furnitureId).id))))
-    return false; const ids = growthMenuDefinitions(v.cafeLevel, v.management).map(m => m.menuId); if (v.management?.run?.special?.inventory?.orders.some(order => order.some(o => !ids.includes(o.menuId))))
+    return false; const ids = growthMenuDefinitions(v.cafeLevel, v.management).map(m => m.menuId); if (Object.values(v.v26?.enterprise?.branches ?? {}).some(b => !ids.includes(b.menu)))
+    return false; if (v.management?.run?.special?.inventory?.orders.some(order => order.some(o => !ids.includes(o.menuId))))
     return false; if (!Array.isArray(v.unlockedMenuIds) || new Set(v.unlockedMenuIds).size !== ids.length || v.unlockedMenuIds.length !== ids.length || !ids.every(id => v.unlockedMenuIds instanceof Array && v.unlockedMenuIds.includes(id)))
     return false; if (!object(v.menuLevels) || Object.keys(v.menuLevels).length !== ids.length || !ids.every(id => object(v.menuLevels) && integer(v.menuLevels[id], 1, 5)))
     return false; if (!Array.isArray(v.staffOwned) || v.staffOwned.length > crewLimit(v) || !v.staffOwned.every((id, i) => v.roster ? true : id === staffDefinitions[i]?.staffId) || !object(v.staffLevels) || Object.keys(v.staffLevels).length !== v.staffOwned.length || !v.staffOwned.every(id => object(v.staffLevels) && integer(v.staffLevels[id], 1, 5)))

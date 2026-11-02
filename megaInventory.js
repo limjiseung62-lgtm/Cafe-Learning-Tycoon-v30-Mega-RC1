@@ -1,6 +1,6 @@
-import { furnitureCatalog, furnitureFor } from './furnitureCatalog.js?v=v30-rc1-5bf787ba0cb4';
-import { allDecorationCatalog, decorationCatalog } from './longGrowthConfig.js?v=v30-rc1-5bf787ba0cb4';
-import { tableKinds } from './freeLayoutModel.js?v=v30-rc1-5bf787ba0cb4';
+import { furnitureCatalog, furnitureFor } from './furnitureCatalog.js?v=integrated-3bf575d7c25f';
+import { allDecorationCatalog, decorationCatalog } from './longGrowthConfig.js?v=integrated-3bf575d7c25f';
+import { tableKinds } from './freeLayoutModel.js?v=integrated-3bf575d7c25f';
 export const isShopDeployment = () => typeof document !== 'undefined' && document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.match(/^v30[de]-/) != null;
 export const interiorCatalog = [...furnitureCatalog.map((f, i) => ({ sku: f.id, name: f.name, type: 'table', cost: [8000, 16000, 26000, 12000, 24000, 28000, 34000, 24000, 36000][i], bundle: f.id === 'dessert-sofa' ? 2 : f.id === 'bakery-bench' ? 4 : 0, level: [1, 3, 5, 3, 7, 5, 7, 7, 9][i] })), { sku: 'service-prep', name: '서빙 준비대', type: 'fixture', cost: 24000, bundle: 0, level: 4 }, { sku: 'chair', name: '호환 의자·좌석 쿠션', type: 'chair', cost: 1500, bundle: 0, level: 1 }, ...decorationCatalog.map((d, i) => ({ sku: 'decor-' + d.id, name: d.name, type: 'decor', cost: [3000, 5000, 5000, 4000, 6000, 12000, 8000, 4000][i], bundle: 0, level: i < 4 ? 1 : 3 }))];
 export function inventorySku(sku) { return interiorCatalog.find(d => d.sku === sku); }
