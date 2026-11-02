@@ -1,4 +1,4 @@
-import { breads, flowers, colors, craftStats, ovenTiming, loadOven, takeOven, submitOven, placeFlower, submitFlowers, flowerEvaluation, moveFlower } from './craftGames.js?v=furniture-ux-dd837b78b1a8';
+import { breads, flowers, colors, craftStats, ovenTiming, loadOven, takeOven, submitOven, placeFlower, submitFlowers, flowerEvaluation, moveFlower } from './craftGames.js?v=v30-rc1-5bf787ba0cb4';
 export const craftAtlas = 'assets/web/craft-games/supplies.webp';
 let sound = () => { };
 export function setCraftSound(fn) { sound = fn; }

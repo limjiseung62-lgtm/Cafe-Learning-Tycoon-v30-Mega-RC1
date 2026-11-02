@@ -1,7 +1,7 @@
-import { attachManagerSession } from './managerUi.js?v=furniture-ux-dd837b78b1a8';
-import { expansionAction } from './megaExpansionUi.js?v=furniture-ux-dd837b78b1a8';
-import { openInteriorShop, openInteriorEditor } from './megaShopUi.js?v=furniture-ux-dd837b78b1a8';
-import { liveManagementRepository, liveManagementOpen, setLiveManagementOpen } from './liveManagement.js?v=furniture-ux-dd837b78b1a8';
+import { attachManagerSession } from './managerUi.js?v=v30-rc1-5bf787ba0cb4';
+import { expansionAction } from './megaExpansionUi.js?v=v30-rc1-5bf787ba0cb4';
+import { openInteriorShop, openInteriorEditor } from './megaShopUi.js?v=v30-rc1-5bf787ba0cb4';
+import { liveManagementRepository, liveManagementOpen, setLiveManagementOpen } from './liveManagement.js?v=v30-rc1-5bf787ba0cb4';
 export function mountLiveManagement(g, c) { document.getElementById('live-mega-management')?.remove(); if (!c || g.mode !== 'CAFE_GROWTH' || !g.mega) {
     attachManagerSession(g, null);
     return;

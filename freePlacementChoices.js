@@ -1,7 +1,7 @@
-import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=furniture-ux-dd837b78b1a8';
-import { validateFree } from './freeLayout.js?v=furniture-ux-dd837b78b1a8';
-import { freeParts, freeDecorBox, freeFixed, freeFloor, wallDecor, tableKinds } from './freeLayoutModel.js?v=furniture-ux-dd837b78b1a8';
-import { overlap } from './layoutModel.js?v=furniture-ux-dd837b78b1a8';
+import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=v30-rc1-5bf787ba0cb4';
+import { validateFree } from './freeLayout.js?v=v30-rc1-5bf787ba0cb4';
+import { freeParts, freeDecorBox, freeFixed, freeFloor, wallDecor, tableKinds } from './freeLayoutModel.js?v=v30-rc1-5bf787ba0cb4';
+import { overlap } from './layoutModel.js?v=v30-rc1-5bf787ba0cb4';
 /** Suggestions sample the whole floor; they never limit direct grid placement. */
 export function* placementCandidates(plan, id) {
     const item = [...plan.tables, ...plan.decor].find(o => o.id === id);

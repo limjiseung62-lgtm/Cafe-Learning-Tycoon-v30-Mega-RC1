@@ -1,4 +1,4 @@
-import { expansionQuote } from './megaExpansion.js?v=furniture-ux-dd837b78b1a8';
+import { expansionQuote } from './megaExpansion.js?v=v30-rc1-5bf787ba0cb4';
 export function managerAdvice(g, save, now = Date.now()) {
     const id = g.mega?.manager?.selected;
     if (!id)
