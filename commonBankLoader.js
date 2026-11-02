@@ -1,4 +1,4 @@
-import { commonBankPins } from './commonBankPins.js?v=v30-rc1-0dab56eed3a7';
+import { commonBankPins } from './commonBankPins.js?v=v30-rc1-5bf787ba0cb4';
 const cache = new Map();
 async function digest(b) { return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new Uint8Array(b).buffer)), x => x.toString(16).padStart(2, '0')).join(''); }
 /** Transport compression is lossless. Supplier manifest/data/reference hashes remain unchanged. */

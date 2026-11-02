@@ -14,8 +14,8 @@
     48
   ],
   "releaseNotes": "RELEASE-NOTES.html",
-  "sourceCandidate": "0dab56eed3a73876f676e5df6afa149cc97189c1",
+  "sourceCandidate": "5bf787ba0cb4113c758e14af6956283054f1cb45",
   "testUrl": "https://limjiseung62-lgtm.github.io/Cafe-Learning-Tycoon-v30-Mega-RC1/",
-  "cacheToken": "v30-rc1-0dab56eed3a7",
-  "build": "growth-resume-recovery-1"
+  "cacheToken": "v30-rc1-5bf787ba0cb4",
+  "build": "manager-companion-1"
 }

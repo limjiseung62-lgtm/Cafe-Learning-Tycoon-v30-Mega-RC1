@@ -1,4 +1,5 @@
-import { ensureMegaPlan, megaDimensions, validMega, validateMegaPlan } from './megaSpace.js?v=v30-rc1-0dab56eed3a7';
+import { beginManagerConstruction } from './managerState.js?v=v30-rc1-5bf787ba0cb4';
+import { ensureMegaPlan, megaDimensions, validMega, validateMegaPlan } from './megaSpace.js?v=v30-rc1-5bf787ba0cb4';
 export const expansionStages = [{ level: 1, size: [8, 6], cost: 0, requiredLevel: 1 }, { level: 4, size: [12, 10], cost: 100000, requiredLevel: 4 }, { level: 10, size: [20, 16], cost: 500000, requiredLevel: 10 }, { level: 20, size: [40, 30], cost: 3000000, requiredLevel: 20 }, { level: 30, size: [64, 48], cost: 15000000, requiredLevel: 30 }];
 export function adoptPaidSpace(save) { const copy = structuredClone(save); if (copy.mega && typeof document !== 'undefined' && document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-'))
     copy.mega.extended = true; if (copy.mega && !copy.mega.paid) {
@@ -28,6 +29,7 @@ export function prepareExpansion(source, expectedLevel, now = new Date().toISOSt
         if (validateMegaPlan(p).length || !validMega(save.mega))
             return { ok: false, reason: '기존 가구와 새 주방이 겹쳐요. 배치를 먼저 확인해 주세요. 기존 배치는 보존돼요.' };
         save.mega.paid.receipts.push({ id: receipt, from: quote.level, to: next.level, cost: next.cost, at: now });
+        beginManagerConstruction(save.mega, receipt, Date.parse(now));
         save.money -= next.cost;
         save.updatedAt = now;
         return { ok: true, save };

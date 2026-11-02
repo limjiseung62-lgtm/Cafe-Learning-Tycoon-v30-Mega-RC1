@@ -1,0 +1,16 @@
+export const managerCatalog = [{ id: 'yuna', name: '유나', field: '전략·매출·투자 분석', intro: '차근차근 모은 돈으로 더 큰 꿈을 설계해요. 중요한 선택은 사장님이 해요.', row: 0, color: '#6b8971' }, { id: 'hajun', name: '하준', field: '직원·손님·서비스', intro: '손님과 직원의 이야기에 귀 기울일게요. 함께 편안한 카페를 만들어요.', row: 1, color: '#cb9873' }, { id: 'soi', name: '소이', field: '메뉴·인테리어·브랜드', intro: '새 공간에 우리만의 색을 담아요. 사장님의 아이디어를 함께 키워요!', row: 2, color: '#9d89b5' }];
+const ids = new Set(managerCatalog.map(m => m.id));
+export function validManager(v) { if (!v || typeof v !== 'object')
+    return false; const s = v; return s.version === 1 && ['construction', 'pending', 'deferred', 'selected'].includes(s.status) && ['paid-expansion', 'legacy-expanded'].includes(s.source) && (s.receiptId === null || typeof s.receiptId === 'string' && /^space:\d+:\d+$/.test(s.receiptId)) && Number.isSafeInteger(s.completeAt) && s.completeAt >= 0 && typeof s.introduced === 'boolean' && (s.selected === null || ids.has(s.selected)) && ((s.status === 'selected') === (s.selected !== null)) && (s.recruitedAt === null || Number.isSafeInteger(s.recruitedAt) && s.recruitedAt >= 0) && (s.status !== 'selected' || s.introduced && s.recruitedAt !== null) && !!s.adviceSeen && typeof s.adviceSeen === 'object' && !Array.isArray(s.adviceSeen) && Object.keys(s.adviceSeen).length <= 20 && Object.entries(s.adviceSeen).every(([k, t]) => /^[a-z-]{1,40}$/.test(k) && Number.isSafeInteger(t) && t >= 0) && Object.keys(s).every(k => ['version', 'status', 'source', 'receiptId', 'completeAt', 'introduced', 'selected', 'recruitedAt', 'adviceSeen'].includes(k)); }
+export function beginManagerConstruction(m, receiptId, now) { if (m.manager || !m.paid?.receipts.some(r => r.id === receiptId && r.from === 1 && r.cost > 0))
+    return false; m.manager = { version: 1, status: 'construction', source: 'paid-expansion', receiptId, completeAt: Math.floor(now) + 6000, introduced: false, selected: null, recruitedAt: null, adviceSeen: {} }; return true; }
+/** Grandfather existing physical ownership, never infer eligibility from cafe level. */
+export function ensureManager(m) { if (!m || m.manager || !m.paid || m.paid.spaceLevel <= 1)
+    return false; m.manager = { version: 1, status: 'pending', source: 'legacy-expanded', receiptId: m.paid.receipts.find(r => r.from === 1)?.id ?? null, completeAt: 0, introduced: false, selected: null, recruitedAt: null, adviceSeen: {} }; return true; }
+export function completeManagerConstruction(m, now, skip = false) { const s = m.manager; if (!s || s.status !== 'construction' || !m.paid?.receipts.some(r => r.id === s.receiptId && r.from === 1 && r.cost > 0) || !skip && now < s.completeAt)
+    return false; s.status = 'pending'; return true; }
+export function selectManager(m, id, now = Date.now()) { const s = m.manager; if (!s || !['pending', 'deferred'].includes(s.status) || !ids.has(id))
+    return false; s.selected = id; s.status = 'selected'; s.introduced = true; s.recruitedAt = Math.floor(now); return true; }
+export function deferManager(m) { const s = m.manager; if (!s || !['pending', 'deferred'].includes(s.status))
+    return false; s.introduced = true; s.status = 'deferred'; return true; }
+export const managerById = (id) => managerCatalog.find(m => m.id === id);

@@ -1,32 +1,33 @@
-import { megaSaleFactor } from './megaOperations.js?v=v30-rc1-0dab56eed3a7';
-import { megaGrowthBalance, megaSpawnSeconds } from './megaGrowthEconomy.js?v=v30-rc1-0dab56eed3a7';
-import { tableSeatCount } from './megaInventory.js?v=v30-rc1-0dab56eed3a7';
-import { megaEnabled, ensureMegaPlan, createMegaSpace, megaRoute, megaTravelSeconds, megaPointClear } from './megaSpace.js?v=v30-rc1-0dab56eed3a7';
-import { randomClassBalance, classRandomConfig, pollClassEvents, classSpecial } from './classRandom.js?v=v30-rc1-0dab56eed3a7';
-import { investmentRevenue, investmentSpawn, investmentVisitor, pollInvestmentEvents } from './progressiveEconomy.js?v=v30-rc1-0dab56eed3a7';
-import { classProgressiveConfig } from './classProgressiveBalance.js?v=v30-rc1-0dab56eed3a7';
-import { unlocked } from './progressiveFeatures.js?v=v30-rc1-0dab56eed3a7';
-import { protectedSpecialStock, reservedGuestOrder, reservationIndex, takeReservedFood } from './specialInventory.js?v=v30-rc1-0dab56eed3a7';
-import { pollManagement, strategyGuest, strategyQuantity } from './managementEngine.js?v=v30-rc1-0dab56eed3a7';
-import { pollMini, miniPaused, activeMini } from './miniGames.js?v=v30-rc1-0dab56eed3a7';
-import { specializationById } from './specializationConfig.js?v=v30-rc1-0dab56eed3a7';
-import { chooseFurnitureSeat } from './furnitureSeating.js?v=v30-rc1-0dab56eed3a7';
-import { layoutEconomyConfig } from './layoutEconomyConfig.js?v=v30-rc1-0dab56eed3a7';
-import { freeKey } from './freeLayoutModel.js?v=v30-rc1-0dab56eed3a7';
-import { layoutKey } from './layoutModel.js?v=v30-rc1-0dab56eed3a7';
-import { CafeEvents } from './cafeEvents.js?v=v30-rc1-0dab56eed3a7';
-import { CafeRun } from './cafeRun.js?v=v30-rc1-0dab56eed3a7';
-import { Hospitality } from './hospitality.js?v=v30-rc1-0dab56eed3a7';
-import { hospitalityDefinition, hospitalityBalance } from './hospitalityConfig.js?v=v30-rc1-0dab56eed3a7';
-import { chooseSpecial, specialDefinition, itemCatalog } from './phase4Config.js?v=v30-rc1-0dab56eed3a7';
-import { policyFor } from './sessionModes.js?v=v30-rc1-0dab56eed3a7';
-import { chooseCustomer, chooseOrderMenu } from './customerRules.js?v=v30-rc1-0dab56eed3a7';
-import { StaffSystem } from './staff.js?v=v30-rc1-0dab56eed3a7';
-import { createSpace, floorPath, floorStandable } from './spatial.js?v=v30-rc1-0dab56eed3a7';
-import { LocalTelemetry } from './telemetry.js?v=v30-rc1-0dab56eed3a7';
-import { balance } from './config.js?v=v30-rc1-0dab56eed3a7';
-import { createMenus, customers, menuDefinitions } from './data.js?v=v30-rc1-0dab56eed3a7';
-import { StaffAbilities } from "./staffAbilities.js?v=v30-rc1-0dab56eed3a7";
+import { tickManager } from './managerActor.js?v=v30-rc1-5bf787ba0cb4';
+import { megaSaleFactor } from './megaOperations.js?v=v30-rc1-5bf787ba0cb4';
+import { megaGrowthBalance, megaSpawnSeconds } from './megaGrowthEconomy.js?v=v30-rc1-5bf787ba0cb4';
+import { tableSeatCount } from './megaInventory.js?v=v30-rc1-5bf787ba0cb4';
+import { megaEnabled, ensureMegaPlan, createMegaSpace, megaRoute, megaTravelSeconds, megaPointClear } from './megaSpace.js?v=v30-rc1-5bf787ba0cb4';
+import { randomClassBalance, classRandomConfig, pollClassEvents, classSpecial } from './classRandom.js?v=v30-rc1-5bf787ba0cb4';
+import { investmentRevenue, investmentSpawn, investmentVisitor, pollInvestmentEvents } from './progressiveEconomy.js?v=v30-rc1-5bf787ba0cb4';
+import { classProgressiveConfig } from './classProgressiveBalance.js?v=v30-rc1-5bf787ba0cb4';
+import { unlocked } from './progressiveFeatures.js?v=v30-rc1-5bf787ba0cb4';
+import { protectedSpecialStock, reservedGuestOrder, reservationIndex, takeReservedFood } from './specialInventory.js?v=v30-rc1-5bf787ba0cb4';
+import { pollManagement, strategyGuest, strategyQuantity } from './managementEngine.js?v=v30-rc1-5bf787ba0cb4';
+import { pollMini, miniPaused, activeMini } from './miniGames.js?v=v30-rc1-5bf787ba0cb4';
+import { specializationById } from './specializationConfig.js?v=v30-rc1-5bf787ba0cb4';
+import { chooseFurnitureSeat } from './furnitureSeating.js?v=v30-rc1-5bf787ba0cb4';
+import { layoutEconomyConfig } from './layoutEconomyConfig.js?v=v30-rc1-5bf787ba0cb4';
+import { freeKey } from './freeLayoutModel.js?v=v30-rc1-5bf787ba0cb4';
+import { layoutKey } from './layoutModel.js?v=v30-rc1-5bf787ba0cb4';
+import { CafeEvents } from './cafeEvents.js?v=v30-rc1-5bf787ba0cb4';
+import { CafeRun } from './cafeRun.js?v=v30-rc1-5bf787ba0cb4';
+import { Hospitality } from './hospitality.js?v=v30-rc1-5bf787ba0cb4';
+import { hospitalityDefinition, hospitalityBalance } from './hospitalityConfig.js?v=v30-rc1-5bf787ba0cb4';
+import { chooseSpecial, specialDefinition, itemCatalog } from './phase4Config.js?v=v30-rc1-5bf787ba0cb4';
+import { policyFor } from './sessionModes.js?v=v30-rc1-5bf787ba0cb4';
+import { chooseCustomer, chooseOrderMenu } from './customerRules.js?v=v30-rc1-5bf787ba0cb4';
+import { StaffSystem } from './staff.js?v=v30-rc1-5bf787ba0cb4';
+import { createSpace, floorPath, floorStandable } from './spatial.js?v=v30-rc1-5bf787ba0cb4';
+import { LocalTelemetry } from './telemetry.js?v=v30-rc1-5bf787ba0cb4';
+import { balance } from './config.js?v=v30-rc1-5bf787ba0cb4';
+import { createMenus, customers, menuDefinitions } from './data.js?v=v30-rc1-5bf787ba0cb4';
+import { StaffAbilities } from "./staffAbilities.js?v=v30-rc1-5bf787ba0cb4";
 export class CafeGame {
     durationSeconds;
     random;
@@ -385,6 +386,7 @@ export class CafeGame {
         }
     } }
     step(dt) {
+        tickManager(this, dt);
         pollClassEvents(this);
         if (this.progressive && this.mode === 'CAFE_GROWTH' && !this.events.enabled && unlocked(this, 'missions'))
             this.enableEvents();

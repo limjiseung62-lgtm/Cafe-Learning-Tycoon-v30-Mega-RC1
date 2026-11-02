@@ -1,14 +1,15 @@
-import { adoptInterior, isShopDeployment } from './megaInventory.js?v=v30-rc1-0dab56eed3a7';
-import { adoptPaidSpace } from './megaExpansion.js?v=v30-rc1-0dab56eed3a7';
-import { isPaidDeployment } from './megaSpace.js?v=v30-rc1-0dab56eed3a7';
-import { newClassState, seededStep } from './classRandom.js?v=v30-rc1-0dab56eed3a7';
-import { createManagement } from './managementState.js?v=v30-rc1-0dab56eed3a7';
-import { growthMenuDefinitions } from './menuResearch.js?v=v30-rc1-0dab56eed3a7';
-import { desiredLakeMini } from './lakeDistrict.js?v=v30-rc1-0dab56eed3a7';
-import { recruitById } from "./recruitConfig.js?v=v30-rc1-0dab56eed3a7";
-import { CafeGame } from './game.js?v=v30-rc1-0dab56eed3a7';
-import { policyFor } from './sessionModes.js?v=v30-rc1-0dab56eed3a7';
-import { createGrowthSave, validateGrowthSave } from './growthSave.js?v=v30-rc1-0dab56eed3a7';
+import { ensureManager } from './managerState.js?v=v30-rc1-5bf787ba0cb4';
+import { adoptInterior, isShopDeployment } from './megaInventory.js?v=v30-rc1-5bf787ba0cb4';
+import { adoptPaidSpace } from './megaExpansion.js?v=v30-rc1-5bf787ba0cb4';
+import { isPaidDeployment } from './megaSpace.js?v=v30-rc1-5bf787ba0cb4';
+import { newClassState, seededStep } from './classRandom.js?v=v30-rc1-5bf787ba0cb4';
+import { createManagement } from './managementState.js?v=v30-rc1-5bf787ba0cb4';
+import { growthMenuDefinitions } from './menuResearch.js?v=v30-rc1-5bf787ba0cb4';
+import { desiredLakeMini } from './lakeDistrict.js?v=v30-rc1-5bf787ba0cb4';
+import { recruitById } from "./recruitConfig.js?v=v30-rc1-5bf787ba0cb4";
+import { CafeGame } from './game.js?v=v30-rc1-5bf787ba0cb4';
+import { policyFor } from './sessionModes.js?v=v30-rc1-5bf787ba0cb4';
+import { createGrowthSave, validateGrowthSave } from './growthSave.js?v=v30-rc1-5bf787ba0cb4';
 const growthExpected = new WeakMap();
 export const setGrowthExpected = (g, s) => growthExpected.set(g, structuredClone(s));
 export const growthExpectedFor = (g) => growthExpected.get(g);
@@ -27,7 +28,7 @@ export function createGrowthSession(save = createGrowthSave(), random = Math.ran
     g.management.strategy ??= 'care';
 } if (g.management && save.v26)
     g.management.progressiveLevel = save.cafeLevel; g.growthCafeId = save.portfolio?.activeCafeId ?? 'cafe-1'; g.lakeMini = desiredLakeMini(save); g.village = structuredClone(save.village); if (g.village && save.v26)
-    g.village.progressiveLevel = save.cafeLevel; g.miniCollection = structuredClone(save.miniCollection); g.specialization = structuredClone(save.specialization); g.mega = structuredClone(save.mega); g.freeLayouts = structuredClone(save.freeLayouts); g.layouts = structuredClone(save.layouts); g.roster = structuredClone(save.roster); g.cafeLevel = save.cafeLevel; g.growthBranch = structuredClone(save.growthBranch); g.money = save.money; g.warehouseLevel = save.warehouseLevel; g.menus = growthMenuDefinitions(save.cafeLevel, save.management).filter(m => save.unlockedMenuIds.includes(m.menuId)).map(m => ({ ...m, currentLevel: save.menuLevels[m.menuId], stock: Math.min(g.warehouse.capacity, save.v26?.stock?.[m.menuId] ?? 0), maxStock: g.warehouse.capacity })); g.service.maxPaid = g.staffLimit; for (const id of save.staffOwned) {
+    g.village.progressiveLevel = save.cafeLevel; g.miniCollection = structuredClone(save.miniCollection); g.specialization = structuredClone(save.specialization); g.mega = structuredClone(save.mega); ensureManager(g.mega); g.freeLayouts = structuredClone(save.freeLayouts); g.layouts = structuredClone(save.layouts); g.roster = structuredClone(save.roster); g.cafeLevel = save.cafeLevel; g.growthBranch = structuredClone(save.growthBranch); g.money = save.money; g.warehouseLevel = save.warehouseLevel; g.menus = growthMenuDefinitions(save.cafeLevel, save.management).filter(m => save.unlockedMenuIds.includes(m.menuId)).map(m => ({ ...m, currentLevel: save.menuLevels[m.menuId], stock: Math.min(g.warehouse.capacity, save.v26?.stock?.[m.menuId] ?? 0), maxStock: g.warehouse.capacity })); g.service.maxPaid = g.staffLimit; for (const id of save.staffOwned) {
     const w = g.service.hire(save.roster ? recruitById(id) : undefined);
     if (w.staffId !== id)
         throw Error('Invalid staff order');

@@ -1,5 +1,5 @@
-import { progressiveEconomyConfig as config, investmentCatalog, investmentTierLimit, branchUpgradeCost, branchRequirement } from './progressiveEconomy.js?v=v30-rc1-0dab56eed3a7';
-import { landmarkNames } from './progressiveFinance.js?v=v30-rc1-0dab56eed3a7';
+import { progressiveEconomyConfig as config, investmentCatalog, investmentTierLimit, branchUpgradeCost, branchRequirement } from './progressiveEconomy.js?v=v30-rc1-5bf787ba0cb4';
+import { landmarkNames } from './progressiveFinance.js?v=v30-rc1-5bf787ba0cb4';
 export function economicGoals(s) { const v = s.v26; if (!v)
     return []; const rows = []; for (const c of investmentCatalog) {
     const tier = v.investments[c.id], cost = config.investmentCosts[tier];

@@ -1,9 +1,10 @@
-import { megaZones } from './megaZones.js?v=v30-rc1-0dab56eed3a7';
-import { validInterior, tableSeatCount } from './megaInventory.js?v=v30-rc1-0dab56eed3a7';
-import { allDecorationCatalog } from './longGrowthConfig.js?v=v30-rc1-0dab56eed3a7';
-import { cafeGrowthBalance } from './modeBalance.js?v=v30-rc1-0dab56eed3a7';
-import { tableKinds, turn } from './freeLayoutModel.js?v=v30-rc1-0dab56eed3a7';
-import { furnitureFor } from './furnitureCatalog.js?v=v30-rc1-0dab56eed3a7';
+import { validManager } from './managerState.js?v=v30-rc1-5bf787ba0cb4';
+import { megaZones } from './megaZones.js?v=v30-rc1-5bf787ba0cb4';
+import { validInterior, tableSeatCount } from './megaInventory.js?v=v30-rc1-5bf787ba0cb4';
+import { allDecorationCatalog } from './longGrowthConfig.js?v=v30-rc1-5bf787ba0cb4';
+import { cafeGrowthBalance } from './modeBalance.js?v=v30-rc1-5bf787ba0cb4';
+import { tableKinds, turn } from './freeLayoutModel.js?v=v30-rc1-5bf787ba0cb4';
+import { furnitureFor } from './furnitureCatalog.js?v=v30-rc1-5bf787ba0cb4';
 export const megaDimensions = [[8, 6], [10, 7], [12, 8], [12, 10], [14, 10], [14, 12], [16, 12], [16, 14], [18, 14], [20, 16]].concat(Array.from({ length: 20 }, (_, i) => { const l = i + 11; return l < 20 ? [20, 16] : l < 30 ? [40, 30] : [64, 48]; }));
 export const megaBudget = [4, 6, 6, 8, 8, 10, 12, 12, 14, 14, ...Array(9).fill(14), ...Array(10).fill(48), 96];
 export const megaKey = (level, branch) => (branch ?? 'base') + ':' + level;
@@ -246,7 +247,7 @@ export function megaPickups(level, anchorWidth, prepIsland = false, starterOnly 
 export function megaHomes(level) { const [w, h] = megaDimensions[level - 1]; return Array.from({ length: level >= 30 ? 13 : level >= 20 ? 9 : 6 }, (_, i) => toEngine({ x: Math.round((w - 1.5 - i * 1.2) * 4) / 4, y: h - .5 })); }
 export function validMega(v) { try {
     const s = v;
-    return !!s && validPaid(s.paid) && validInterior(s) && (s.extended === undefined || s.extended === true) && s.version === 1 && ['new', 'confirmed-copy'].includes(s.source) && !!s.plans && Object.keys(s.plans).length > 0 && Object.keys(s.plans).length <= 100 && Object.entries(s.plans).every(([key, p]) => key === megaKey(p.level, p.branch) && (p.level <= 10 || s.extended === true) && !validateMegaPlan(p).length && p.tables.reduce((a, t) => a + tableSeatCount(t), 0) >= (s.inventory ? 1 : cafeGrowthBalance.cafes[Math.min(15, p.level) - 1].maxCustomers));
+    return !!s && (s.manager === undefined || validManager(s.manager) && !!s.paid && s.paid.spaceLevel > 1) && validPaid(s.paid) && validInterior(s) && (s.extended === undefined || s.extended === true) && s.version === 1 && ['new', 'confirmed-copy'].includes(s.source) && !!s.plans && Object.keys(s.plans).length > 0 && Object.keys(s.plans).length <= 100 && Object.entries(s.plans).every(([key, p]) => key === megaKey(p.level, p.branch) && (p.level <= 10 || s.extended === true) && !validateMegaPlan(p).length && p.tables.reduce((a, t) => a + tableSeatCount(t), 0) >= (s.inventory ? 1 : cafeGrowthBalance.cafes[Math.min(15, p.level) - 1].maxCustomers));
 }
 catch {
     return false;

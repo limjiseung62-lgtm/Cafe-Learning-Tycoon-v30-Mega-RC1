@@ -1,17 +1,17 @@
-import { settleFranchises } from './progressiveEconomy.js?v=v30-rc1-0dab56eed3a7';
-import { syncManagementAlbum } from './managementAlbum.js?v=v30-rc1-0dab56eed3a7';
-import { startManagement, settleManagement } from './managementEngine.js?v=v30-rc1-0dab56eed3a7';
-import { syncSharedFurniture } from './cafePortfolio.js?v=v30-rc1-0dab56eed3a7';
-import { syncLake, desiredLakeMini } from './lakeDistrict.js?v=v30-rc1-0dab56eed3a7';
-import { syncVillage, villageMetrics } from './village.js?v=v30-rc1-0dab56eed3a7';
-import { beginMiniSession, pauseCredit, pollMini } from './miniGames.js?v=v30-rc1-0dab56eed3a7';
-import { captureRoster } from "./staffRecruitment.js?v=v30-rc1-0dab56eed3a7";
-import { economyState, settleGrowthEconomy } from './growthEconomy.js?v=v30-rc1-0dab56eed3a7';
-import { longStateFor } from './longGrowthUi.js?v=v30-rc1-0dab56eed3a7';
-import { createGrowthSession, setGrowthExpected, growthBaseFor } from './sessionFactory.js?v=v30-rc1-0dab56eed3a7';
-import { restoreGrowthRun, captureRun, studyRecord, adaptiveLevel } from './growthCampaign.js?v=v30-rc1-0dab56eed3a7';
-import { LearningSession } from './learningSession.js?v=v30-rc1-0dab56eed3a7';
-import { providerForPool } from './learningIntegration.js?v=v30-rc1-0dab56eed3a7';
+import { settleFranchises } from './progressiveEconomy.js?v=v30-rc1-5bf787ba0cb4';
+import { syncManagementAlbum } from './managementAlbum.js?v=v30-rc1-5bf787ba0cb4';
+import { startManagement, settleManagement } from './managementEngine.js?v=v30-rc1-5bf787ba0cb4';
+import { syncSharedFurniture } from './cafePortfolio.js?v=v30-rc1-5bf787ba0cb4';
+import { syncLake, desiredLakeMini } from './lakeDistrict.js?v=v30-rc1-5bf787ba0cb4';
+import { syncVillage, villageMetrics } from './village.js?v=v30-rc1-5bf787ba0cb4';
+import { beginMiniSession, pauseCredit, pollMini } from './miniGames.js?v=v30-rc1-5bf787ba0cb4';
+import { captureRoster } from "./staffRecruitment.js?v=v30-rc1-5bf787ba0cb4";
+import { economyState, settleGrowthEconomy } from './growthEconomy.js?v=v30-rc1-5bf787ba0cb4';
+import { longStateFor } from './longGrowthUi.js?v=v30-rc1-5bf787ba0cb4';
+import { createGrowthSession, setGrowthExpected, growthBaseFor } from './sessionFactory.js?v=v30-rc1-5bf787ba0cb4';
+import { restoreGrowthRun, captureRun, studyRecord, adaptiveLevel } from './growthCampaign.js?v=v30-rc1-5bf787ba0cb4';
+import { LearningSession } from './learningSession.js?v=v30-rc1-5bf787ba0cb4';
+import { providerForPool } from './learningIntegration.js?v=v30-rc1-5bf787ba0cb4';
 class GrowthRuntime {
     grants = null;
     anchorPause = 0;
@@ -24,6 +24,8 @@ class GrowthRuntime {
     state = null;
     create(save, pool, fresh = false, businessId) { const run = fresh ? undefined : save.campaign?.run; if (run) {
         const restored = restoreGrowthRun(run, pool);
+        if (restored.game.mega && save.mega?.manager)
+            restored.game.mega.manager = structuredClone(save.mega.manager);
         restored.game.progressiveState = structuredClone(save.v26);
         restored.game.growthCafeId = save.portfolio?.activeCafeId ?? 'cafe-1';
         restored.game.lakeMini = desiredLakeMini(save);

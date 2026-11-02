@@ -1,7 +1,7 @@
-import { megaZones } from './megaZones.js?v=v30-rc1-0dab56eed3a7';
-import { megaArtFrames } from './megaArtFrames.js?v=v30-rc1-0dab56eed3a7';
-import { webAsset } from './webAsset.js?v=v30-rc1-0dab56eed3a7';
-import { iso, megaDimensions, fixedMega } from './megaSpace.js?v=v30-rc1-0dab56eed3a7';
+import { megaZones } from './megaZones.js?v=v30-rc1-5bf787ba0cb4';
+import { megaArtFrames } from './megaArtFrames.js?v=v30-rc1-5bf787ba0cb4';
+import { webAsset } from './webAsset.js?v=v30-rc1-5bf787ba0cb4';
+import { iso, megaDimensions, fixedMega } from './megaSpace.js?v=v30-rc1-5bf787ba0cb4';
 export const environmentIds = ['fridge', 'sink', 'coffee', 'pastry', 'oven', 'prep', 'coffee-sage', 'shelf', 'wall-left', 'wall-right', 'window-left', 'window-right', 'entrance', 'plant', 'wall-shelf', 'wall-lamp'];
 const images = new Map();
 const fragments = new Map();

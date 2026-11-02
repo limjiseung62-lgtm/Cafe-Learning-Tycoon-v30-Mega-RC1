@@ -1,13 +1,14 @@
-import { megaLateForecast } from './megaLateForecast.js?v=v30-rc1-0dab56eed3a7';
-import { adoptInterior, isShopDeployment } from './megaInventory.js?v=v30-rc1-0dab56eed3a7';
-import { environmentPlacements, paintEnvironment } from './megaArt.js?v=v30-rc1-0dab56eed3a7';
-import { expansionForecast } from './megaExpansionForecast.js?v=v30-rc1-0dab56eed3a7';
-import { AudioManager } from './audioManager.js?v=v30-rc1-0dab56eed3a7';
-import { deploymentLocalStorage } from './deploymentStorage.js?v=v30-rc1-0dab56eed3a7';
-import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js?v=v30-rc1-0dab56eed3a7';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v30-rc1-0dab56eed3a7';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=v30-rc1-0dab56eed3a7';
-import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js?v=v30-rc1-0dab56eed3a7';
+import { finishManagerConstructionInRepository } from './managerUi.js?v=v30-rc1-5bf787ba0cb4';
+import { megaLateForecast } from './megaLateForecast.js?v=v30-rc1-5bf787ba0cb4';
+import { adoptInterior, isShopDeployment } from './megaInventory.js?v=v30-rc1-5bf787ba0cb4';
+import { environmentPlacements, paintEnvironment } from './megaArt.js?v=v30-rc1-5bf787ba0cb4';
+import { expansionForecast } from './megaExpansionForecast.js?v=v30-rc1-5bf787ba0cb4';
+import { AudioManager } from './audioManager.js?v=v30-rc1-5bf787ba0cb4';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=v30-rc1-5bf787ba0cb4';
+import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js?v=v30-rc1-5bf787ba0cb4';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v30-rc1-5bf787ba0cb4';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=v30-rc1-5bf787ba0cb4';
+import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js?v=v30-rc1-5bf787ba0cb4';
 export function expansionAction(container, repo, source, refresh) {
     if (!source.mega || !document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.match(/^v30[cde]-/))
         return;
@@ -79,12 +80,13 @@ export function expansionAction(container, repo, source, refresh) {
             status.textContent = '공사 중 · 바닥과 벽을 넓히고 있어요.';
             preview.style.opacity = '.65';
         } }, 1800); setTimeout(() => { if (dialog.isConnected) {
+            finishManagerConstructionInRepository(repo);
             construction.value = 3;
             status.textContent = '새 공간 공개! 기존 가구는 그대로예요. 원하는 공간으로 꾸며 보세요.';
             preview.style.opacity = '1';
             preview.style.transform = 'scale(1)';
             void audio.effect('levelup');
-        } }, 3800); dialog.querySelector('[data-confirm]').disabled = true; const skip = document.createElement('button'); skip.textContent = '완공 보기 · 연출 건너뛰기'; skip.style.minHeight = '44px'; skip.onclick = () => { dialog.remove(); refresh(); }; dialog.append(skip); setTimeout(() => { if (dialog.isConnected) {
+        } }, 3800); dialog.querySelector('[data-confirm]').disabled = true; const skip = document.createElement('button'); skip.textContent = '완공 보기 · 연출 건너뛰기'; skip.style.minHeight = '44px'; skip.onclick = () => { finishManagerConstructionInRepository(repo); dialog.remove(); refresh(); }; dialog.append(skip); setTimeout(() => { if (dialog.isConnected) {
             dialog.remove();
             refresh();
         } }, 6000); };

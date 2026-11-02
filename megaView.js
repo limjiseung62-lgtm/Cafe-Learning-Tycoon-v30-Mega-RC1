@@ -1,17 +1,19 @@
-import { megaOperatingGrade } from './megaOperations.js?v=v30-rc1-0dab56eed3a7';
-import { megaZones } from './megaZones.js?v=v30-rc1-0dab56eed3a7';
-import { livingWalkAsset } from './megaLivingArt.js?v=v30-rc1-0dab56eed3a7';
-import { MegaActorMotion } from './megaActorMotion.js?v=v30-rc1-0dab56eed3a7';
-import { MegaFramePacer } from './megaFramePacer.js?v=v30-rc1-0dab56eed3a7';
-import { megaEntrances, megaEnabled, megaDimensions, iso, toTile, megaChairs, megaMetrics } from './megaSpace.js?v=v30-rc1-0dab56eed3a7';
-import { selectCustomerPose, selectedPoseAsset } from './customerPoses.js?v=v30-rc1-0dab56eed3a7';
-import { workerFrame } from './motionSprites.js?v=v30-rc1-0dab56eed3a7';
-import { guestMotion, workerMotion } from './characterMotion.js?v=v30-rc1-0dab56eed3a7';
-import { motionFrame } from './animationPresentation.js?v=v30-rc1-0dab56eed3a7';
-import { furnitureFor } from './furnitureCatalog.js?v=v30-rc1-0dab56eed3a7';
-import { megaFurnitureFrames } from './megaFurnitureFrames.js?v=v30-rc1-0dab56eed3a7';
-import { furnitureFrames } from './furnitureFrames.js?v=v30-rc1-0dab56eed3a7';
-import { paintMegaDecor, megaImage as image, cachedFragment, paintArtFloor, environmentPlacements, megaArtMetrics, furnitureProjection, environmentSprite } from './megaArt.js?v=v30-rc1-0dab56eed3a7';
+import { managerActor, managerSprite } from './managerActor.js?v=v30-rc1-5bf787ba0cb4';
+import { managerById } from './managerState.js?v=v30-rc1-5bf787ba0cb4';
+import { megaOperatingGrade } from './megaOperations.js?v=v30-rc1-5bf787ba0cb4';
+import { megaZones } from './megaZones.js?v=v30-rc1-5bf787ba0cb4';
+import { livingWalkAsset } from './megaLivingArt.js?v=v30-rc1-5bf787ba0cb4';
+import { MegaActorMotion } from './megaActorMotion.js?v=v30-rc1-5bf787ba0cb4';
+import { MegaFramePacer } from './megaFramePacer.js?v=v30-rc1-5bf787ba0cb4';
+import { megaEntrances, megaEnabled, megaDimensions, iso, toTile, megaChairs, megaMetrics } from './megaSpace.js?v=v30-rc1-5bf787ba0cb4';
+import { selectCustomerPose, selectedPoseAsset } from './customerPoses.js?v=v30-rc1-5bf787ba0cb4';
+import { workerFrame } from './motionSprites.js?v=v30-rc1-5bf787ba0cb4';
+import { guestMotion, workerMotion } from './characterMotion.js?v=v30-rc1-5bf787ba0cb4';
+import { motionFrame } from './animationPresentation.js?v=v30-rc1-5bf787ba0cb4';
+import { furnitureFor } from './furnitureCatalog.js?v=v30-rc1-5bf787ba0cb4';
+import { megaFurnitureFrames } from './megaFurnitureFrames.js?v=v30-rc1-5bf787ba0cb4';
+import { furnitureFrames } from './furnitureFrames.js?v=v30-rc1-5bf787ba0cb4';
+import { paintMegaDecor, megaImage as image, cachedFragment, paintArtFloor, environmentPlacements, megaArtMetrics, furnitureProjection, environmentSprite } from './megaArt.js?v=v30-rc1-5bf787ba0cb4';
 const baseWorkers = { owner: [22, 76, 228, 429], 'staff-1': [274, 100, 234, 407], 'staff-2': [532, 70, 221, 434], 'staff-3': [782, 79, 241, 430], 'staff-4': [1045, 104, 232, 401], 'staff-5': [1310, 98, 203, 406] };
 export const paintMegaFloor = paintArtFloor;
 export function paintMegaBox(c, x, y, w, h, z, color) { const a = iso({ x, y }), b = iso({ x: x + w, y }), d = iso({ x, y: y + h }), e = iso({ x: x + w, y: y + h }); for (const [pts, fill] of [[[a, b, { x: b.x, y: b.y - z }, { x: a.x, y: a.y - z }], '#b38c5d'], [[b, e, { x: e.x, y: e.y - z }, { x: b.x, y: b.y - z }], '#8e6e4b'], [[{ x: a.x, y: a.y - z }, { x: b.x, y: b.y - z }, { x: e.x, y: e.y - z }, { x: d.x, y: d.y - z }], color]]) {
@@ -33,6 +35,8 @@ export function paintMegaChair(c, t, ch) { if (!furniture(c, t, ch))
 export function paintMegaTable(c, t) { if (furniture(c, t))
     return; const horizontal = t.rotation % 180 === 0, w = t.kind === 'long' ? 2.3 : t.kind === 'four' ? 1.7 : 1, W = horizontal ? w : .65, H = horizontal ? .65 : w; paintMegaBox(c, t.x - W / 2, t.y - H / 2, W, H, 22, t.furnitureId?.includes('marble') ? '#f0e9df' : t.furnitureId?.includes('sofa') ? '#c0accb' : '#d9ad72'); const a = iso(t); c.fillStyle = '#f9edd8'; c.beginPath(); c.ellipse(a.x, a.y - 13, 4, 2, 0, 0, Math.PI * 2); c.fill(); }
 export class MegaView {
+    onManagerFocus = () => { const g = this.game, a = g && managerActor(g); if (!a)
+        return; this.center = iso(toTile(a.position)); this.target = Math.max(this.fitScale, 1.25); this.clamp(); this.paint(); };
     actors = new MegaActorMotion();
     pacer = new MegaFramePacer();
     host = null;
@@ -91,6 +95,7 @@ export class MegaView {
             room.append(host);
             this.host = host;
             document.addEventListener('mega-art-ready', this.onArt);
+            document.addEventListener('cafe-manager-focus', this.onManagerFocus);
             document.addEventListener('visibilitychange', this.onVisibility);
             this.canvas = host.querySelector('canvas');
             host.querySelectorAll('[data-camera]').forEach(b => b.onclick = () => { const id = b.dataset.camera; if (id === 'fit')
@@ -295,6 +300,34 @@ export class MegaView {
                     c.fillRect(q.x + (facing === 'left' ? -11 : 6), q.y - 16, 5, 4);
                 } } });
         }
+        const companion = managerActor(g), managerId = g.mega?.manager?.selected;
+        let managerHit = this.host.querySelector('.manager-world-hit');
+        if (companion && managerId) {
+            const tile = toTile(companion.position), q = iso(tile), frame = managerSprite(g);
+            if (visible(q) && frame)
+                objects.push({ depth: tile.x + tile.y, draw: () => { this.shadow(c, q, 1.1); this.sprite(c, frame, q, companion.facing, 39, 1); if (companion.talkUntil > g.elapsedTime)
+                        this.bubble(c, q, '함께 고민해요'); } });
+            if (!managerHit) {
+                managerHit = document.createElement('button');
+                managerHit.className = 'manager-world-hit';
+                managerHit.innerHTML = '<span></span>';
+                managerHit.onpointerdown = e => { e.preventDefault(); e.stopPropagation(); document.dispatchEvent(new CustomEvent('cafe-manager-talk')); };
+                managerHit.onclick = e => { e.stopPropagation(); if (e.detail === 0)
+                    document.dispatchEvent(new CustomEvent('cafe-manager-talk')); };
+                this.host.append(managerHit);
+            }
+            managerHit.hidden = !visible(q);
+            managerHit.dataset.motion = companion.talkUntil > g.elapsedTime ? 'TALK' : companion.moving ? 'WALK' : 'IDLE';
+            managerHit.dataset.direction = (companion.back ? 'back-' : 'front-') + companion.facing;
+            managerHit.setAttribute('aria-label', managerById(managerId).name + ' 매니저와 대화');
+            managerHit.querySelector('span').textContent = managerById(managerId).name + ' · 매니저';
+            managerHit.style.left = ((q.x - this.center.x) * this.zoom + this.width / 2) + 'px';
+            managerHit.style.top = (this.canvas.offsetTop + (q.y - this.center.y) * this.zoom + this.height / 2) + 'px';
+            managerHit.style.width = Math.max(48, 25 * this.zoom) + 'px';
+            managerHit.style.height = Math.max(48, 42 * this.zoom) + 'px';
+        }
+        else if (managerHit)
+            managerHit.hidden = true;
         this.actors.retain(new Set([...g.guests.map(x => 'g' + x.id), ...g.service.workers.map(x => 'w' + x.staffId)]));
         for (const o of objects.sort((a, b) => a.depth - b.depth))
             o.draw();
@@ -320,7 +353,7 @@ export class MegaView {
     } const [x, y, w, h] = a.box, W = height * w / h; c.save(); c.globalAlpha = alpha; c.translate(q.x, q.y); if (a.nativeFacing && a.nativeFacing !== facing)
         c.scale(-1, 1); const sx = img.naturalWidth / a.width, sy = img.naturalHeight / a.height; const tile = cachedFragment(img, [x * sx, y * sy, w * sx, h * sy], W, height); c.drawImage(tile, -W * ((a.anchorX ?? (x + w / 2)) - x) / w, -height * ((a.anchorY ?? (y + h - 2)) - y) / h, W, height); c.restore(); }
     fallback(c, p, color) { c.fillStyle = color; c.fillRect(p.x - 4, p.y - 17, 8, 15); c.fillStyle = '#e8c5a0'; c.beginPath(); c.arc(p.x, p.y - 20, 5, 0, Math.PI * 2); c.fill(); }
-    detach() { this.actors.clear(); this.pacer.reset(); document.removeEventListener('mega-art-ready', this.onArt); document.removeEventListener('visibilitychange', this.onVisibility); this.staticKey = ''; this.staticObjects = []; this.observer?.disconnect(); this.observer = null; if (this.room) {
+    detach() { this.actors.clear(); this.pacer.reset(); document.removeEventListener('mega-art-ready', this.onArt); document.removeEventListener('cafe-manager-focus', this.onManagerFocus); document.removeEventListener('visibilitychange', this.onVisibility); this.staticKey = ''; this.staticObjects = []; this.observer?.disconnect(); this.observer = null; if (this.room) {
         delete this.room.dataset.mega;
         this.room.classList.remove('mega-room');
     } this.host?.remove(); this.host = null; this.canvas = null; this.room = null; this.level = 0; this.floorKey = ''; }
