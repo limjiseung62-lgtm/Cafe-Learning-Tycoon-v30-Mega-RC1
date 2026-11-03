@@ -1722,8 +1722,8 @@
     },
     {
       "file": "FURNITURE-COMMERCE-GUIDE.html",
-      "bytes": 1683,
-      "sha256": "c573f2aaf35c9cdcdae53f168c38c76a1b885a33fa433c0c472ff0574249b774"
+      "bytes": 2007,
+      "sha256": "0949c32834ccc9a5c4cd0ed29851cf2dff66502482086973eb2c5898495ae33a"
     },
     {
       "file": "furnitureAnchors.js",
@@ -1842,8 +1842,8 @@
     },
     {
       "file": "index.html",
-      "bytes": 1670,
-      "sha256": "0175fda2de44e65eae3c7078046bd623ba2c8e5dc541672ab5ad39ff911df190"
+      "bytes": 1576,
+      "sha256": "a9c34ef0a106f962f65f9a81cf70ff6251cbc450e8dff09a87de4b2393dcd6f7"
     },
     {
       "file": "INTEGRATED-GUIDE.html",
@@ -2566,5 +2566,5 @@
       "sha256": "eef997c8d243ebaaec666a156794ae3a99e1414815971356cd1d66c02f44a5a9"
     }
   ],
-  "totalBytes": 78531266
+  "totalBytes": 78531496
 }
