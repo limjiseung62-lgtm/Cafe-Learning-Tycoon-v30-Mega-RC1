@@ -1,8 +1,8 @@
-import { growthMenuDefinitions } from './menuResearch.js?v=integrated-3bf575d7c25f';
-import { branchManagers, configureBranch, branchOperatingReport } from './enterpriseState.js?v=integrated-3bf575d7c25f';
-import { branchBaseYield, branchYield, foundFranchise, upgradeFranchise, branchUpgradeCost, investmentCatalog, progressiveEconomyConfig } from './progressiveEconomy.js?v=integrated-3bf575d7c25f';
-import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=integrated-3bf575d7c25f';
-import { escapeText as esc } from './questionRenderer.js?v=integrated-3bf575d7c25f';
+import { growthMenuDefinitions } from './menuResearch.js?v=commerce-6afe2d573839';
+import { branchManagers, configureBranch, branchOperatingReport } from './enterpriseState.js?v=commerce-6afe2d573839';
+import { branchBaseYield, branchYield, foundFranchise, upgradeFranchise, branchUpgradeCost, investmentCatalog, progressiveEconomyConfig } from './progressiveEconomy.js?v=commerce-6afe2d573839';
+import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=commerce-6afe2d573839';
+import { escapeText as esc } from './questionRenderer.js?v=commerce-6afe2d573839';
 export function paintEnterpriseOperations(host, s, edit, repo, onExit = () => { }) {
     ensureVillageSceneStyle();
     const v = s.v26, e = v.enterprise;
@@ -15,5 +15,5 @@ export function paintEnterpriseOperations(host, s, edit, repo, onExit = () => { 
     } edit(s => configureBranch(s, id, manager, menu, employees)); });
     host.querySelectorAll('[data-found]').forEach(b => b.onclick = () => { const id = Number(b.dataset.found), region = host.querySelector(`[data-region="${id}"]`).value; edit(s => foundFranchise(s, id, region)); });
     host.querySelectorAll('[data-upgrade]').forEach(b => b.onclick = () => edit(s => upgradeFranchise(s, Number(b.dataset.upgrade))));
-    host.querySelector('[data-city]').addEventListener('click', () => { void import('./enterpriseCityUi.js?v=integrated-3bf575d7c25f').then(m => m.openEnterpriseCity(repo, () => { host.closest('.enterprise-dialog')?.remove(); onExit(); })); });
+    host.querySelector('[data-city]').addEventListener('click', () => { void import('./enterpriseCityUi.js?v=commerce-6afe2d573839').then(m => m.openEnterpriseCity(repo, () => { host.closest('.enterprise-dialog')?.remove(); onExit(); })); });
 }

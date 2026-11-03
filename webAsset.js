@@ -1,3 +1,3 @@
-import { webAssets } from './webAssetCatalog.js?v=integrated-3bf575d7c25f';
+import { webAssets } from './webAssetCatalog.js?v=commerce-6afe2d573839';
 export function webAsset(file) { return webAssets[file]?.file ?? file; }
 export { webAssets };

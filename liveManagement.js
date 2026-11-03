@@ -1,5 +1,6 @@
-import { guestPose } from './spatial.js?v=integrated-3bf575d7c25f';
-import { createMegaSpace, ensureMegaPlan, megaPointClear, megaRoute } from './megaSpace.js?v=integrated-3bf575d7c25f';
+import { validInteriorSale } from './interiorCommerce.js?v=commerce-6afe2d573839';
+import { guestPose } from './spatial.js?v=commerce-6afe2d573839';
+import { createMegaSpace, ensureMegaPlan, megaPointClear, megaRoute } from './megaSpace.js?v=commerce-6afe2d573839';
 export let liveManagementOpen = false;
 const projection = (s) => { const p = structuredClone(s); delete p.campaign; return p; };
 export function liveManagementRepository(g, c) {
@@ -12,7 +13,7 @@ export function liveManagementRepository(g, c) {
                 return fail('영업 종료 시각이 되었어요. 먼저 결과를 확인해 주세요.');
             if (!expected || JSON.stringify([current.money, current.mega, current.cafeLevel]) !== JSON.stringify([expected.money, expected.mega, expected.cafeLevel]))
                 return fail('카페가 변경됐어요. 관리 화면을 다시 열어 주세요.');
-            if (!next.mega || next.cafeLevel !== g.cafeLevel || next.money > g.money || next.money < 0)
+            if (!next.mega || next.cafeLevel !== g.cafeLevel || next.money > g.money && !validInteriorSale(current, next) || next.money < 0)
                 return fail('구매 정보를 확인해 주세요.');
             const proposed = structuredClone(next.mega), plan = ensureMegaPlan(proposed, g.cafeLevel, g.branchId), space = createMegaSpace(plan), oldSpace = g.serviceSpace;
             const indices = [];

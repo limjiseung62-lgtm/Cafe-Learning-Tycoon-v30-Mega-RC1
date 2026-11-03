@@ -1,7 +1,7 @@
-import { installCommonArchiveMenu } from './commonCafeResults.js?v=integrated-3bf575d7c25f';
-import { configureQuestionCatalog, QuestionPackCatalog } from './questionPack.js?v=integrated-3bf575d7c25f';
-import { CommonLearningCatalog } from './commonLearningCatalog.js?v=integrated-3bf575d7c25f';
-import { commonCatalogSHA256 } from './commonCatalogPin.js?v=integrated-3bf575d7c25f';
+import { installCommonArchiveMenu } from './commonCafeResults.js?v=commerce-6afe2d573839';
+import { configureQuestionCatalog, QuestionPackCatalog } from './questionPack.js?v=commerce-6afe2d573839';
+import { CommonLearningCatalog } from './commonLearningCatalog.js?v=commerce-6afe2d573839';
+import { commonCatalogSHA256 } from './commonCatalogPin.js?v=commerce-6afe2d573839';
 try {
     const response = await fetch('assets/common-learning/catalog.json');
     if (!response.ok)
@@ -12,7 +12,7 @@ try {
     const catalog = JSON.parse(new TextDecoder().decode(bytes));
     configureQuestionCatalog(new CommonLearningCatalog(catalog.subjects, new QuestionPackCatalog()));
     installCommonArchiveMenu();
-    await import('./main.js?v=integrated-3bf575d7c25f');
+    await import('./main.js?v=commerce-6afe2d573839');
 }
 catch (error) {
     const box = document.createElement('section');

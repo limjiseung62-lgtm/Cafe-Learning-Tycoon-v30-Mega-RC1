@@ -1,10 +1,10 @@
-import { validManager } from './managerState.js?v=integrated-3bf575d7c25f';
-import { megaZones } from './megaZones.js?v=integrated-3bf575d7c25f';
-import { validInterior, tableSeatCount } from './megaInventory.js?v=integrated-3bf575d7c25f';
-import { allDecorationCatalog } from './longGrowthConfig.js?v=integrated-3bf575d7c25f';
-import { cafeGrowthBalance } from './modeBalance.js?v=integrated-3bf575d7c25f';
-import { tableKinds, turn } from './freeLayoutModel.js?v=integrated-3bf575d7c25f';
-import { furnitureFor } from './furnitureCatalog.js?v=integrated-3bf575d7c25f';
+import { validManager } from './managerState.js?v=commerce-6afe2d573839';
+import { megaZones } from './megaZones.js?v=commerce-6afe2d573839';
+import { validInterior, tableSeatCount } from './megaInventory.js?v=commerce-6afe2d573839';
+import { allDecorationCatalog } from './longGrowthConfig.js?v=commerce-6afe2d573839';
+import { cafeGrowthBalance } from './modeBalance.js?v=commerce-6afe2d573839';
+import { tableKinds, turn } from './freeLayoutModel.js?v=commerce-6afe2d573839';
+import { furnitureFor } from './furnitureCatalog.js?v=commerce-6afe2d573839';
 export const megaDimensions = [[8, 6], [10, 7], [12, 8], [12, 10], [14, 10], [14, 12], [16, 12], [16, 14], [18, 14], [20, 16]].concat(Array.from({ length: 20 }, (_, i) => { const l = i + 11; return l < 20 ? [20, 16] : l < 30 ? [40, 30] : [64, 48]; }));
 export const megaBudget = [4, 6, 6, 8, 8, 10, 12, 12, 14, 14, ...Array(9).fill(14), ...Array(10).fill(48), 96];
 export const megaKey = (level, branch) => (branch ?? 'base') + ':' + level;
@@ -32,10 +32,10 @@ export function ensureMegaPlan(state, level, branch) { if (state.paid)
 export function tableParts(t) { const size = t.kind === 'long' ? 2.3 : t.kind === 'four' ? 1.7 : 1, half = size / 2, parts = []; const rect = (cx, cy, w, h) => { const p = turn(cx, cy, t.rotation), vertical = t.rotation % 180 !== 0; parts.push({ left: t.x + p.x - (vertical ? h : w) / 2, right: t.x + p.x + (vertical ? h : w) / 2, top: t.y + p.y - (vertical ? w : h) / 2, bottom: t.y + p.y + (vertical ? w : h) / 2 }); }; rect(0, 0, size, .65); const n = tableKinds[t.kind].seats / 2; for (const side of [-1, 1])
     for (let i = 0; i < n; i++) {
         const slot = (side === -1 ? 0 : n) + i;
-        if (!t.chairs || t.chairs.some(c => c.slot === slot))
+        if (t.integratedSeats || !t.chairs || t.chairs.some(c => c.slot === slot))
             rect((i - (n - 1) / 2) * .7, side * .9, .45, .45);
     } return parts; }
-export function megaChairs(t) { const n = tableKinds[t.kind].seats / 2; return [-1, 1].flatMap(side => Array.from({ length: n }, (_, i) => { const a = turn((i - (n - 1) / 2) * .7, side * .9, t.rotation), b = turn((i - (n - 1) / 2) * .7, side * 1.55, t.rotation); return { slot: (side === -1 ? 0 : n) + i, chair: { x: t.x + a.x, y: t.y + a.y }, access: { x: t.x + b.x, y: t.y + b.y }, rear: a.x - a.y > 0 }; })).filter(c => !t.chairs || t.chairs.some(q => q.slot === c.slot)); }
+export function megaChairs(t) { const n = tableKinds[t.kind].seats / 2; return [-1, 1].flatMap(side => Array.from({ length: n }, (_, i) => { const a = turn((i - (n - 1) / 2) * .7, side * .9, t.rotation), b = turn((i - (n - 1) / 2) * .7, side * 1.55, t.rotation); return { slot: (side === -1 ? 0 : n) + i, chair: { x: t.x + a.x, y: t.y + a.y }, access: { x: t.x + b.x, y: t.y + b.y }, rear: a.x - a.y > 0 }; })).filter(c => t.integratedSeats || !t.chairs || t.chairs.some(q => q.slot === c.slot)); }
 export function fixedMega(level, anchorWidth, prepIsland = false, starterOnly = false) { const [originalW, h] = megaDimensions[level - 1], w = anchorWidth ?? originalW; const boxes = [{ left: 0, right: 1.8, top: 0, bottom: 5 }]; if (level >= 4 && !starterOnly)
     boxes.push({ left: w - 5, right: w - 1, top: 0, bottom: 1.4 }); if (prepIsland && level === 10 && !starterOnly)
     boxes.push({ left: 14, right: 18, top: 6.5, bottom: 8 }); return boxes; }
@@ -193,6 +193,8 @@ function validateMegaUncached(p) {
             boxes.push({ id: f.id, parts: fixtureParts(f) });
         }
         for (const t of p.tables) {
+            if (t.integratedSeats !== undefined && t.integratedSeats !== true)
+                return ['좌석 세트 정보를 확인해 주세요.'];
             if (t.chairs !== undefined && (!p.shopLayout || !Array.isArray(t.chairs) || new Set(t.chairs.map(c => c.slot)).size !== t.chairs.length || t.chairs.some(c => !Number.isInteger(c.slot) || c.slot < 0 || c.slot >= (tableKinds[t.kind]?.seats ?? 0) || !/^[-a-zA-Z0-9_]{1,60}$/.test(c.id))))
                 return ['의자 배치 정보를 확인해 주세요.'];
             if (!Object.hasOwn(tableKinds, t.kind) || !furnitureFor(t.kind, t.furnitureId) || !/^[-a-zA-Z0-9_]{1,60}$/.test(t.id) || ![0, 90, 180, 270].includes(t.rotation) || ![t.x, t.y].every(Number.isFinite))

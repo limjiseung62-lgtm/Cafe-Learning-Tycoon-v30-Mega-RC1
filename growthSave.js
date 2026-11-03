@@ -1,27 +1,27 @@
-import { adoptInterior, isShopDeployment } from './megaInventory.js?v=integrated-3bf575d7c25f';
-import { validMega, newMegaState, isMegaDeployment } from './megaSpace.js?v=integrated-3bf575d7c25f';
-import { newProgressiveState, validProgressive } from './progressiveFeatures.js?v=integrated-3bf575d7c25f';
-import { growthMenuDefinitions } from './menuResearch.js?v=integrated-3bf575d7c25f';
-import { validManagement, validCafeAlbum } from './managementState.js?v=integrated-3bf575d7c25f';
-import { validPortfolio, portfolioMatches } from './cafePortfolio.js?v=integrated-3bf575d7c25f';
-import { validVillage } from './village.js?v=integrated-3bf575d7c25f';
-import { validMiniCollection } from './miniGames.js?v=integrated-3bf575d7c25f';
-import { validSpecialization } from './specialization.js?v=integrated-3bf575d7c25f';
-import { belongsToBranch } from './specializationConfig.js?v=integrated-3bf575d7c25f';
-import { furnitureUnlocked } from './furnitureUnlocks.js?v=integrated-3bf575d7c25f';
-import { furnitureFor } from './furnitureCatalog.js?v=integrated-3bf575d7c25f';
-import { validFreeLayouts } from './freeLayout.js?v=integrated-3bf575d7c25f';
-import { validLayouts } from './cafeLayout.js?v=integrated-3bf575d7c25f';
-import { validGrowthEconomy } from './growthEconomy.js?v=integrated-3bf575d7c25f';
-import { validLongGrowth } from './longGrowth.js?v=integrated-3bf575d7c25f';
-import { validCampaign } from './growthCampaign.js?v=integrated-3bf575d7c25f';
-import { validEventCheckpoint } from './cafeEvents.js?v=integrated-3bf575d7c25f';
-import { menuDefinitions } from './data.js?v=integrated-3bf575d7c25f';
-import { staffDefinitions } from './staff.js?v=integrated-3bf575d7c25f';
-import { cafeGrowthBalance } from './modeBalance.js?v=integrated-3bf575d7c25f';
-import { specialTypes } from './phase4Config.js?v=integrated-3bf575d7c25f';
-import { validBranch } from "./growthBranch.js?v=integrated-3bf575d7c25f";
-import { validRoster, rosterMirror, crewLimit } from "./staffRecruitment.js?v=integrated-3bf575d7c25f";
+import { adoptInterior, isShopDeployment, repairInteriorSeats } from './megaInventory.js?v=commerce-6afe2d573839';
+import { validMega, newMegaState, isMegaDeployment } from './megaSpace.js?v=commerce-6afe2d573839';
+import { newProgressiveState, validProgressive } from './progressiveFeatures.js?v=commerce-6afe2d573839';
+import { growthMenuDefinitions } from './menuResearch.js?v=commerce-6afe2d573839';
+import { validManagement, validCafeAlbum } from './managementState.js?v=commerce-6afe2d573839';
+import { validPortfolio, portfolioMatches } from './cafePortfolio.js?v=commerce-6afe2d573839';
+import { validVillage } from './village.js?v=commerce-6afe2d573839';
+import { validMiniCollection } from './miniGames.js?v=commerce-6afe2d573839';
+import { validSpecialization } from './specialization.js?v=commerce-6afe2d573839';
+import { belongsToBranch } from './specializationConfig.js?v=commerce-6afe2d573839';
+import { furnitureUnlocked } from './furnitureUnlocks.js?v=commerce-6afe2d573839';
+import { furnitureFor } from './furnitureCatalog.js?v=commerce-6afe2d573839';
+import { validFreeLayouts } from './freeLayout.js?v=commerce-6afe2d573839';
+import { validLayouts } from './cafeLayout.js?v=commerce-6afe2d573839';
+import { validGrowthEconomy } from './growthEconomy.js?v=commerce-6afe2d573839';
+import { validLongGrowth } from './longGrowth.js?v=commerce-6afe2d573839';
+import { validCampaign } from './growthCampaign.js?v=commerce-6afe2d573839';
+import { validEventCheckpoint } from './cafeEvents.js?v=commerce-6afe2d573839';
+import { menuDefinitions } from './data.js?v=commerce-6afe2d573839';
+import { staffDefinitions } from './staff.js?v=commerce-6afe2d573839';
+import { cafeGrowthBalance } from './modeBalance.js?v=commerce-6afe2d573839';
+import { specialTypes } from './phase4Config.js?v=commerce-6afe2d573839';
+import { validBranch } from "./growthBranch.js?v=commerce-6afe2d573839";
+import { validRoster, rosterMirror, crewLimit } from "./staffRecruitment.js?v=commerce-6afe2d573839";
 const integer = (v, min = 0, max = Number.MAX_SAFE_INTEGER) => typeof v === 'number' && Number.isSafeInteger(v) && v >= min && v <= max;
 const object = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const date = (v) => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(v) && Number.isFinite(Date.parse(v));
@@ -48,7 +48,7 @@ export function migrateGrowthSave(value) { let v = value; for (let i = 0; i < 10
     if (!fn)
         return null;
     v = fn(v);
-} return validateGrowthSave(v) ? structuredClone(v) : null; }
+} return validateGrowthSave(v) ? repairInteriorSeats(v) : null; }
 export function createProgressiveGrowthSave(now = new Date().toISOString()) { const s = createGrowthSave(now); s.v26 = newProgressiveState(); if (isMegaDeployment())
     s.mega = newMegaState(typeof document !== 'undefined' && /^v30[cde]-/.test(document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content') ?? '')); if (typeof document !== 'undefined' && document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-') && s.mega)
     s.mega.extended = true; return isShopDeployment() ? adoptInterior(s, true) : s; }

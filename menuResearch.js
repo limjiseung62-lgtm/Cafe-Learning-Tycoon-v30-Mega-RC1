@@ -1,4 +1,4 @@
-import { menuDefinitions } from './data.js?v=integrated-3bf575d7c25f';
+import { menuDefinitions } from './data.js?v=commerce-6afe2d573839';
 export const researchRecipes = [
     { id: 'research-fruit', name: '햇살 과일 소다', visual: 'ade', base: 'coffee', level: 1, ingredients: ['fruit', 'milk'], heat: 1, description: '과일과 우유를 차갑게 섞어 산뜻하게 만들어요.' },
     { id: 'research-latte', name: '구름 밀크 라테', visual: 'strawberry-latte', base: 'strawberry-latte', level: 2, ingredients: ['milk', 'flower'], heat: 2, description: '우유와 꽃향기를 미지근하게 데워요.' },

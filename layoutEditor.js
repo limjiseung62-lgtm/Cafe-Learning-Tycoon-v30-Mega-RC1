@@ -1,14 +1,14 @@
-import { openMegaEditor } from './megaEditor.js?v=integrated-3bf575d7c25f';
-import { isMegaDeployment } from './megaSpace.js?v=integrated-3bf575d7c25f';
-import { openFreeEditor } from './freeLayoutEditor.js?v=integrated-3bf575d7c25f';
-import { planFor, defaultPlan, validatePlan, commitPlan } from './cafeLayout.js?v=integrated-3bf575d7c25f';
-import { layoutFacilities, tableRect, decorRect } from './layoutModel.js?v=integrated-3bf575d7c25f';
-import { createSpace, floorPath, hallGrowthSpecs } from './spatial.js?v=integrated-3bf575d7c25f';
-import { branchRoom, branchCatalog } from './growthBranch.js?v=integrated-3bf575d7c25f';
-import { sprite } from './art.js?v=integrated-3bf575d7c25f';
-import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=integrated-3bf575d7c25f';
-import { escapeText as esc } from './questionRenderer.js?v=integrated-3bf575d7c25f';
-import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=integrated-3bf575d7c25f';
+import { openMegaEditor } from './megaEditor.js?v=commerce-6afe2d573839';
+import { isMegaDeployment } from './megaSpace.js?v=commerce-6afe2d573839';
+import { openFreeEditor } from './freeLayoutEditor.js?v=commerce-6afe2d573839';
+import { planFor, defaultPlan, validatePlan, commitPlan } from './cafeLayout.js?v=commerce-6afe2d573839';
+import { layoutFacilities, tableRect, decorRect } from './layoutModel.js?v=commerce-6afe2d573839';
+import { createSpace, floorPath, hallGrowthSpecs } from './spatial.js?v=commerce-6afe2d573839';
+import { branchRoom, branchCatalog } from './growthBranch.js?v=commerce-6afe2d573839';
+import { sprite } from './art.js?v=commerce-6afe2d573839';
+import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=commerce-6afe2d573839';
+import { escapeText as esc } from './questionRenderer.js?v=commerce-6afe2d573839';
+import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=commerce-6afe2d573839';
 export async function openLegacyLayoutEditor(repo, initial, onClose) {
     document.getElementById('layout-editor')?.remove();
     const dialog = document.createElement('section');

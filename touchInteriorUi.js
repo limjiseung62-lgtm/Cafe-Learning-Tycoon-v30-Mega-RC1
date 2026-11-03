@@ -1,12 +1,13 @@
-import { iso, uniso, megaDimensions, megaChairs } from './megaSpace.js?v=integrated-3bf575d7c25f';
-import { adoptInterior, interiorCatalog, inventorySku, tableSeatCount } from './megaInventory.js?v=integrated-3bf575d7c25f';
-import { buyInterior, saveInteriorLayout } from './megaShop.js?v=integrated-3bf575d7c25f';
-import { InteriorHistory, installedIds, interiorCandidate, removeInterior } from './interiorPlacement.js?v=integrated-3bf575d7c25f';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=integrated-3bf575d7c25f';
-import { paintMegaDecor, environmentPlacements, paintEnvironment, megaImage } from './megaArt.js?v=integrated-3bf575d7c25f';
-import { furnitureFor } from './furnitureCatalog.js?v=integrated-3bf575d7c25f';
-import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=integrated-3bf575d7c25f';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=integrated-3bf575d7c25f';
+import { buyInteriorBatch, sellInteriorBatch, purchaseLimit, saleCandidates, saleQuote } from './interiorCommerce.js?v=commerce-6afe2d573839';
+import { iso, uniso, megaDimensions, megaChairs } from './megaSpace.js?v=commerce-6afe2d573839';
+import { adoptInterior, interiorCatalog, inventorySku, tableSeatCount, includedSeats } from './megaInventory.js?v=commerce-6afe2d573839';
+import { saveInteriorLayout } from './megaShop.js?v=commerce-6afe2d573839';
+import { InteriorHistory, installedIds, interiorCandidate, removeInterior } from './interiorPlacement.js?v=commerce-6afe2d573839';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=commerce-6afe2d573839';
+import { paintMegaDecor, environmentPlacements, paintEnvironment, megaImage } from './megaArt.js?v=commerce-6afe2d573839';
+import { furnitureFor } from './furnitureCatalog.js?v=commerce-6afe2d573839';
+import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=commerce-6afe2d573839';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=commerce-6afe2d573839';
 export async function openTouchInterior(repo, refresh, initial, tab = 'inventory') {
     if (!await ensureGrowthWriteLock())
         return;
@@ -24,7 +25,7 @@ export async function openTouchInterior(repo, refresh, initial, tab = 'inventory
     box.setAttribute('aria-label', '카페 꾸미기');
     document.body.append(box);
     const abort = new AbortController();
-    let selected = '', placing = false, continuous = false, rotation = 0, message = '가구 그림을 누르고, 초록 칸이나 원하는 빈 바닥을 눌러요.', confirm = '', zoom = 1, pan = { x: 0, y: 0 }, ghost = null, generation = 0, closed = false, scanTimer = 0;
+    let selected = '', placing = false, continuous = false, rotation = 0, message = '가구 그림을 누르고, 초록 칸이나 원하는 빈 바닥을 눌러요.', confirm = '', tradeMode = 'buy', quantity = 1, zoom = 1, pan = { x: 0, y: 0 }, ghost = null, generation = 0, closed = false, scanTimer = 0;
     let zones = [], paint = () => { };
     const exit = () => { closed = true; generation++; clearTimeout(scanTimer); abort.abort(); box.remove(); refresh(); };
     const inv = () => history.state.mega.inventory;
@@ -60,19 +61,28 @@ export async function openTouchInterior(repo, refresh, initial, tab = 'inventory
     function render() {
         generation++;
         const p = plan(), used = installedIds(p), [w, h] = megaDimensions[p.level - 1];
-        box.innerHTML = `<div class="touch-shell"><header><h2>카페 꾸미기</h2><strong>내 돈 ${history.state.money.toLocaleString()}원</strong><button data-close>완료 · 카페로</button></header><div class="touch-toolbar"><button data-undo ${!history.undo.length ? 'disabled' : ''}>↶ 되돌리기</button><button data-redo ${!history.redo.length ? 'disabled' : ''}>↷ 다시 실행</button><button data-zoom="in">＋ 확대</button><button data-zoom="out">− 축소</button><button data-fit>전체 보기</button><button data-inspect>가구 선택 · 이동</button></div><div class="touch-layout"><div class="touch-world"><canvas width="1000" height="700" tabindex="0" aria-label="카페 가구 배치 지도. 가구 선택 후 위치를 누르세요"></canvas><p role="status">${message}</p><p class="touch-legend">초록: 배치 가능 · 빨강: 불가 · 끌기: 카메라 이동<br>${w}×${h} · 좌석 ${p.tables.reduce((a, t) => a + tableSeatCount(t), 0)} · 선택 ${item() ? inventorySku(item().sku)?.name : '없음'}</p><div class="touch-context" ${!selected || !used.has(selected) ? 'hidden' : ''}><button data-move>선택 가구 이동</button><button data-rotate>90° 회전</button><button data-store>보관하기</button></div></div><aside><nav><button data-tab="inventory" aria-pressed="${tab === 'inventory'}">내 보관함</button><button data-tab="shop" aria-pressed="${tab === 'shop'}">가구 상점</button></nav><p>${tab === 'inventory' ? '가구 그림 → 바닥 터치, 바로 배치!' : '구매한 가구는 보관함에 바로 들어가요.'}</p><div class="touch-cards">${interiorCatalog.map(d => { const owned = inv().items.filter(i => i.sku === d.sku), placed = owned.filter(i => used.has(i.id)).length, allowed = history.state.cafeLevel >= d.level && (d.type !== 'table' || furnitureUnlocked(history.state.longTerm, d.sku)); if (tab === 'inventory' && !owned.length)
-            return ''; return `<button class="touch-card" data-sku="${d.sku}" ${tab === 'inventory' ? '' : !allowed || history.state.money < d.cost ? 'disabled' : ''} aria-pressed="${item()?.sku === d.sku}"><canvas width="130" height="110" data-thumb="${d.sku}" aria-hidden="true"></canvas><b>${d.name}</b><span>보유 ${owned.length} · 배치 ${placed} · 보관 ${owned.length - placed}</span>${tab === 'shop' ? `<span>${d.cost.toLocaleString()}원 · ${allowed ? '구매 가능' : 'Lv.' + d.level + ' 해금 필요'}</span>` : ''}</button>`; }).join('')}</div><div class="touch-buy" ${!confirm ? 'hidden' : ''}>${confirm ? inventorySku(confirm).name + ' · ' + inventorySku(confirm).cost.toLocaleString() + '원' : ''}<button data-buy>확인 · 구매</button><button data-buy-cancel>취소</button></div></aside></div></div>`;
+        box.innerHTML = `<div class="touch-shell"><header><h2>카페 꾸미기</h2><strong>내 돈 ${history.state.money.toLocaleString()}원</strong><button data-close>완료 · 카페로</button></header><div class="touch-toolbar"><button data-undo ${!history.undo.length ? 'disabled' : ''}>↶ 되돌리기</button><button data-redo ${!history.redo.length ? 'disabled' : ''}>↷ 다시 실행</button><button data-zoom="in">＋ 확대</button><button data-zoom="out">− 축소</button><button data-fit>전체 보기</button><button data-inspect>가구 선택 · 이동</button><button data-preview-rotate ${!selected ? 'disabled' : ''}>↻ 90° 회전 배치</button></div><div class="touch-layout"><div class="touch-world"><canvas width="1000" height="700" tabindex="0" aria-label="카페 가구 배치 지도. 가구 선택 후 위치를 누르세요"></canvas><p role="status">${message}</p><p class="touch-legend">초록: 배치 가능 · 빨강: 불가 · 끌기: 카메라 이동<br>${w}×${h} · 좌석 ${p.tables.reduce((a, t) => a + tableSeatCount(t), 0)} · 미리보기 방향 ${rotation}° · 선택 ${item() ? inventorySku(item().sku)?.name : '없음'}</p><div class="touch-context" ${!selected || !used.has(selected) ? 'hidden' : ''}><button data-move>선택 가구 이동</button><button data-rotate>90° 회전</button><button data-store>보관하기</button></div></div><aside><nav><button data-tab="inventory" aria-pressed="${tab === 'inventory'}">내 보관함</button><button data-tab="shop" aria-pressed="${tab === 'shop'}">가구 상점</button></nav><p>${tab === 'inventory' ? '가구 그림 → 바닥 터치, 바로 배치!' : '테이블은 의자 포함 완성 세트예요. 구매한 가구는 보관함에 바로 들어가요.'}</p><details class="touch-seat-policy"><summary>좌석·별도 의자 안내</summary><p>2인·4인 테이블은 각각 2석·4석 포함. 별도 의자·쿠션은 기존 빈 자리나 세트 의자 꾸미기용이며 추가 좌석은 늘리지 않아요. 예전 미완성 배치가 안전 검사를 통과하지 못하면 테이블을 이동해 통로를 확보해 주세요.</p></details><button data-sell ${!item() || !saleCandidates(history.state, item().sku).length ? 'disabled' : ''}>선택 가구 중고 판매</button><small>보관 중인 유료 가구만 구매 당시 가격의 50%에 판매해요. 무료·이력 불명·설치 중 가구는 판매하지 않아요.</small><div class="touch-cards">${interiorCatalog.map(d => { const owned = inv().items.filter(i => i.sku === d.sku), placed = owned.filter(i => used.has(i.id)).length, allowed = history.state.cafeLevel >= d.level && (d.type !== 'table' || furnitureUnlocked(history.state.longTerm, d.sku)); if (tab === 'inventory' && !owned.length)
+            return ''; return `<button class="touch-card" data-sku="${d.sku}" ${tab === 'inventory' ? '' : !allowed || history.state.money < d.cost ? 'disabled' : ''} aria-pressed="${item()?.sku === d.sku}"><canvas width="130" height="110" data-thumb="${d.sku}" aria-hidden="true"></canvas><b>${d.name}</b>${d.type === 'table' ? '<span>의자 ' + includedSeats(d.sku) + '개 포함 세트 · ' + (d.seatCost ? '테이블 ' + d.baseCost.toLocaleString() + ' + 의자 ' + d.seatCost.toLocaleString() + '원' : '기존 의자 포함 가격 유지') + '</span>' : ''}<span>보유 ${owned.length} · 배치 ${placed} · 보관 ${owned.length - placed}</span>${tab === 'shop' ? `<span>${d.cost.toLocaleString()}원 · ${allowed ? '구매 가능' : 'Lv.' + d.level + ' 해금 필요'}</span>` : ''}</button>`; }).join('')}</div><div class="touch-buy" ${!confirm ? 'hidden' : ''}>${confirm ? '<canvas width="130" height="110" data-thumb="' + confirm + '" aria-hidden="true"></canvas><h3>' + inventorySku(confirm).name + (tradeMode === 'buy' ? ' 일괄 구매' : ' 중고 판매') + '</h3><p>개당 현재 구매가 ' + inventorySku(confirm).cost.toLocaleString() + '원 · 보유 ' + inv().items.filter(i => i.sku === confirm).length + '개</p>' : ''}<label>${tradeMode === 'buy' ? '구매' : '판매'} 수량 <button data-qty-minus aria-label="수량 줄이기">−</button><input data-quantity aria-label="가구 거래 수량" type="number" inputmode="numeric" min="1" step="1" value="${Number.isFinite(quantity) ? quantity : ''}"><button data-qty-plus aria-label="수량 늘리기">＋</button></label><p data-trade-summary></p><button data-trade-commit>${tradeMode === 'buy' ? '확인 · 일괄 구매' : '확인 · 중고 판매'}</button><button data-buy-cancel>취소</button></div></aside></div></div>`;
         box.querySelector('[data-close]').addEventListener('click', exit);
         box.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { tab = b.dataset.tab; confirm = ''; render(); });
         box.querySelectorAll('[data-sku]').forEach(b => b.onclick = () => { if (tab === 'inventory')
             choose(b.dataset.sku);
         else {
             confirm = b.dataset.sku;
+            tradeMode = 'buy';
+            quantity = 1;
             render();
         } });
         box.querySelector('[data-buy-cancel]').addEventListener('click', () => { confirm = ''; render(); });
-        box.querySelector('[data-buy]').addEventListener('click', () => { if (!confirm)
-            return; const sku = confirm, r = buyInterior(history.state, sku, inv().next); if (!r.ok) {
+        box.querySelector('[data-sell]').addEventListener('click', () => { if (!item())
+            return; confirm = item().sku; tradeMode = 'sell'; quantity = 1; placing = false; render(); });
+        const max = () => confirm ? (tradeMode === 'buy' ? purchaseLimit(history.state, confirm) : saleCandidates(history.state, confirm).length) : 0;
+        const updateTrade = () => { const input = box.querySelector('[data-quantity]'), output = box.querySelector('[data-trade-summary]'), button = box.querySelector('[data-trade-commit]'), limit = max(), ok = !!confirm && Number.isSafeInteger(quantity) && quantity >= 1 && quantity <= limit; input.max = String(limit); button.disabled = !ok; const total = ok ? (tradeMode === 'buy' ? inventorySku(confirm).cost * quantity : saleQuote(history.state, confirm, quantity).refund) : 0, owned = inv().items.filter(i => i.sku === confirm).length; output.textContent = '최대 ' + limit + '개 · 현재 보유금 ' + history.state.money.toLocaleString() + '원 · ' + (ok ? (tradeMode === 'buy' ? '총 구매액 ' : '총 판매액 ') + total.toLocaleString() + '원 · 거래 후 잔액 ' + (history.state.money + (tradeMode === 'buy' ? -total : total)).toLocaleString() + '원 · 남는 보유 수량 ' + (owned + (tradeMode === 'buy' ? quantity : -quantity)) + '개' : '1개 이상 최대 수량 이하의 정수를 입력해요.'); };
+        box.querySelector('[data-quantity]').oninput = e => { quantity = Number(e.target.value); updateTrade(); };
+        for (const [selector, delta] of [['[data-qty-minus]', -1], ['[data-qty-plus]', 1]])
+            box.querySelector(selector).addEventListener('click', () => { quantity = Math.max(1, Math.min(max(), (Number.isSafeInteger(quantity) ? quantity : 1) + delta)); box.querySelector('[data-quantity]').value = String(quantity); updateTrade(); });
+        box.querySelector('[data-trade-commit]').addEventListener('click', () => { if (!confirm || !Number.isSafeInteger(quantity) || quantity < 1 || quantity > max())
+            return; const sku = confirm, isSale = tradeMode === 'sell', r = isSale ? sellInteriorBatch(history.state, sku, quantity, inv().next, inv().sales?.length ?? 0) : buyInteriorBatch(history.state, sku, quantity, inv().next); if (!r.ok) {
             message = r.reason;
             render();
             return;
@@ -81,19 +91,44 @@ export async function openTouchInterior(repo, refresh, initial, tab = 'inventory
             history.expected = r.save;
             tab = 'inventory';
             confirm = '';
-            choose(sku);
+            if (isSale) {
+                history.undo = [];
+                history.redo = [];
+                selected = '';
+                placing = false;
+                message = '중고 판매하고 저장했어요. 판매 거래는 배치 되돌리기로 취소되지 않아요.';
+                render();
+            }
+            else
+                choose(sku);
         }
         else {
             message = saved.message;
             render();
         } });
+        updateTrade();
         const bind = (selector, fn) => box.querySelector(selector).addEventListener('click', fn);
         bind('[data-undo]', () => { message = history.back().message; ghost = null; render(); scan(); });
         bind('[data-redo]', () => { message = history.forward().message; ghost = null; render(); scan(); });
         bind('[data-fit]', () => { zoom = 1; pan = { x: 0, y: 0 }; render(); scan(); });
         box.querySelectorAll('[data-zoom]').forEach(b => b.onclick = () => { zoom = Math.max(1, Math.min(12, zoom * (b.dataset.zoom === 'in' ? 1.4 : 1 / 1.4))); render(); scan(); });
         bind('[data-inspect]', () => { placing = false; zones = []; ghost = null; message = '매장에 놓인 가구를 눌러 선택해요.'; render(); });
-        bind('[data-move]', () => { placing = true; continuous = false; ghost = null; message = '새 위치를 누르세요. 손님 자리와 통로는 보호해요.'; render(); scan(); });
+        bind('[data-move]', () => { rotation = [...plan().tables, ...plan().decor, ...(plan().fixtures ?? [])].find(x => x.id === selected)?.rotation ?? 0; placing = true; continuous = false; ghost = null; message = '새 위치를 누르세요. 손님 자리와 통로는 보호해요.'; render(); scan(); });
+        bind('[data-preview-rotate]', () => { if (!selected)
+            return; if (placing) {
+            rotation = (rotation + 90) % 360;
+            message = '회전한 미리보기를 확인하고 원하는 바닥을 누르세요.';
+            render();
+            scan();
+        }
+        else {
+            const q = structuredClone(plan()), t = [...q.tables, ...q.decor, ...(q.fixtures ?? [])].find(x => x.id === selected);
+            if (t) {
+                t.rotation = ((t.rotation + 90) % 360);
+                rotation = t.rotation;
+                edit(q);
+            }
+        } });
         bind('[data-store]', () => edit(removeInterior(plan(), selected)));
         bind('[data-rotate]', () => { if (!selected)
             return; const q = structuredClone(plan()), t = [...q.tables, ...q.decor, ...(q.fixtures ?? [])].find(x => x.id === selected) ?? q.tables.find(t => t.chairs?.some(c => c.id === selected)); if (t) {
@@ -186,6 +221,7 @@ export async function openTouchInterior(repo, refresh, initial, tab = 'inventory
             const points = [...plan().tables, ...plan().decor, ...(plan().fixtures ?? []), ...plan().tables.flatMap(t => megaChairs(t).map(c => ({ ...c.chair, id: t.chairs?.find(v => v.slot === c.slot)?.id ?? '' })).filter(c => c.id))], closest = points.map(t => ({ t, d: Math.hypot(t.x - p.x, t.y - p.y) })).sort((a, b) => a.d - b.d)[0];
             if (closest && closest.d < 2) {
                 selected = closest.t.id;
+                rotation = closest.t.rotation ?? 0;
                 message = '선택했어요. 이동·회전·보관을 선택하세요.';
                 render();
             }

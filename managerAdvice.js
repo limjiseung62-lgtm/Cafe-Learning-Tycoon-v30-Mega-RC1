@@ -1,4 +1,4 @@
-import { expansionQuote } from './megaExpansion.js?v=integrated-3bf575d7c25f';
+import { expansionQuote } from './megaExpansion.js?v=commerce-6afe2d573839';
 export function managerAdvice(g, save, now = Date.now()) {
     const id = g.mega?.manager?.selected;
     if (!id)

@@ -1,8 +1,8 @@
-import { lakeEconomyConfig } from './lakeDistrictConfig.js?v=integrated-3bf575d7c25f';
-import { createGrowthSave, validateGrowthSave } from './growthSave.js?v=integrated-3bf575d7c25f';
-import { rosterFor, syncRosterSave } from './staffRecruitment.js?v=integrated-3bf575d7c25f';
-import { createLongGrowth } from './longGrowth.js?v=integrated-3bf575d7c25f';
-import { createDistrict, validDistrict } from './lakeDistrict.js?v=integrated-3bf575d7c25f';
+import { lakeEconomyConfig } from './lakeDistrictConfig.js?v=commerce-6afe2d573839';
+import { createGrowthSave, validateGrowthSave } from './growthSave.js?v=commerce-6afe2d573839';
+import { rosterFor, syncRosterSave } from './staffRecruitment.js?v=commerce-6afe2d573839';
+import { createLongGrowth } from './longGrowth.js?v=commerce-6afe2d573839';
+import { createDistrict, validDistrict } from './lakeDistrict.js?v=commerce-6afe2d573839';
 export const cafeNames = { 'cafe-1': '1호점 · 마을 카페', 'cafe-2': '2호점 · 호숫가 카페' };
 export const canSwitchCafe = (s) => !s.campaign?.run || s.campaign.run.closed;
 export function ensurePortfolio(s) { return s.portfolio ?? (s.portfolio = { version: 1, activeCafeId: 'cafe-1', district: createDistrict(), furnitureUnlocks: [], decorUnlocks: [] }); }

@@ -1,5 +1,5 @@
-import { hasGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=integrated-3bf575d7c25f';
-import { validateGrowthSave, migrateGrowthSave } from './growthSave.js?v=integrated-3bf575d7c25f';
+import { hasGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=commerce-6afe2d573839';
+import { validateGrowthSave, migrateGrowthSave } from './growthSave.js?v=commerce-6afe2d573839';
 export const growthStorageKey = 'cafe-learning-tycoon.growth.v1';
 /** A local candidate reads a legacy cafe until its first write, then uses its own copy. */
 export class CandidateSaveRepository {
@@ -57,7 +57,7 @@ export class LocalSaveRepository {
             catch {
                 return { ok: false, message: '저장 데이터가 바뀌어 덮어쓰지 않았습니다. 다시 열어 주세요.' };
             }
-            if (JSON.stringify(value) !== JSON.stringify(expected))
+            if (JSON.stringify(value) !== JSON.stringify(expected) && JSON.stringify(migrateGrowthSave(value)) !== JSON.stringify(expected))
                 return { ok: false, message: '다른 창에서 카페가 변경됐어요. 다시 열어 주세요.' };
         }
         if (current !== null) {
@@ -69,6 +69,8 @@ export class LocalSaveRepository {
             if (prior?.campaign?.run?.cafe && !this.storage.getItem(this.key + '.before-growth-guests-v1'))
                 this.storage.setItem(this.key + '.before-growth-guests-v1', current);
         }
+        if (save.mega?.inventory && current !== null && !this.storage.getItem(this.key + '.before-furniture-commerce-v1'))
+            this.storage.setItem(this.key + '.before-furniture-commerce-v1', current);
         if (save.v26?.enterprise && current !== null && !(() => { try {
             return JSON.parse(current)?.v26?.enterprise;
         }

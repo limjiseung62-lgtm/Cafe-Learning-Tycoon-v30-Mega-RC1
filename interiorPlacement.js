@@ -1,10 +1,10 @@
-import { megaChairs, ensureMegaPlan } from './megaSpace.js?v=integrated-3bf575d7c25f';
-import { inventorySku } from './megaInventory.js?v=integrated-3bf575d7c25f';
-import { furnitureFor } from './furnitureCatalog.js?v=integrated-3bf575d7c25f';
-import { allDecorationCatalog } from './longGrowthConfig.js?v=integrated-3bf575d7c25f';
-import { saveInteriorLayout } from './megaShop.js?v=integrated-3bf575d7c25f';
+import { megaChairs, ensureMegaPlan } from './megaSpace.js?v=commerce-6afe2d573839';
+import { inventorySku } from './megaInventory.js?v=commerce-6afe2d573839';
+import { furnitureFor } from './furnitureCatalog.js?v=commerce-6afe2d573839';
+import { allDecorationCatalog } from './longGrowthConfig.js?v=commerce-6afe2d573839';
+import { saveInteriorLayout } from './megaShop.js?v=commerce-6afe2d573839';
 export const installedIds = (p) => new Set([...p.tables.flatMap(t => [t.id, ...(t.chairs ?? []).map(c => c.id)]), ...p.decor.map(d => d.id), ...(p.fixtures ?? []).map(f => f.id)]);
-export function interiorCandidate(s, p, id, x, y, rotation = 0) {
+export function interiorCandidate(s, p, id, x, y, rotation) {
     const item = s.mega?.inventory?.items.find(i => i.id === id), d = item && inventorySku(item.sku);
     if (!item || !d || ![x, y].every(Number.isFinite))
         return null;
@@ -23,24 +23,29 @@ export function interiorCandidate(s, p, id, x, y, rotation = 0) {
             const f = furnitureFor(item.sku.includes('long') || item.sku.includes('workbench') ? 'long' : item.sku.includes('four') || ['garden-outdoor', 'bakery-bench'].includes(item.sku) ? 'four' : 'two', item.sku);
             if (!f)
                 return null;
-            t = { id, kind: f.kind, furnitureId: item.sku, x, y, rotation: rotation, chairs: [] };
+            t = { id, kind: f.kind, furnitureId: item.sku, x, y, rotation: (rotation ?? 0), integratedSeats: true, chairs: [] };
             const used = installedIds(q);
             for (const c of s.mega.inventory.items.filter(c => c.sku === 'chair' && item.receipt && c.receipt === item.receipt && !used.has(c.id)).slice(0, d.bundle))
                 t.chairs.push({ id: c.id, slot: t.chairs.length });
             q.tables.push(t);
         }
+        t.integratedSeats = true;
         t.x = x;
         t.y = y;
+        if (rotation !== undefined)
+            t.rotation = rotation;
     }
     else if (d.type === 'fixture') {
         q.fixtures ??= [];
         let f = q.fixtures.find(f => f.id === id);
         if (!f) {
-            f = { id, sku: 'service-prep', x, y, rotation: rotation };
+            f = { id, sku: 'service-prep', x, y, rotation: (rotation ?? 0) };
             q.fixtures.push(f);
         }
         f.x = x;
         f.y = y;
+        if (rotation !== undefined)
+            f.rotation = rotation;
     }
     else {
         let a = q.decor.find(v => v.id === id);
@@ -48,11 +53,13 @@ export function interiorCandidate(s, p, id, x, y, rotation = 0) {
         if (!def)
             return null;
         if (!a) {
-            a = { id, decorId: def.id, x, y, wall: def.slot === 'wall', rotation: rotation };
+            a = { id, decorId: def.id, x, y, wall: def.slot === 'wall', rotation: (rotation ?? 0) };
             q.decor.push(a);
         }
         a.x = x;
         a.y = a.wall ? 0 : y;
+        if (rotation !== undefined)
+            a.rotation = rotation;
     }
     return q;
 }
