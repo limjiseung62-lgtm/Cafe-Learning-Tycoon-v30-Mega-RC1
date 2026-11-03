@@ -1,4 +1,4 @@
-import { imageReady, imageState } from './imageLoading.js?v=commerce-6afe2d573839';
+import { imageReady, imageState } from './imageLoading.js?v=kitchen-707cb8cb607b';
 let installed = false;
 export function installAssetFallbacks() {
     if (installed)

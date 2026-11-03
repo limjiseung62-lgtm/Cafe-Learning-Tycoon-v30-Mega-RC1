@@ -1,14 +1,14 @@
-import { finishManagerConstructionInRepository } from './managerUi.js?v=commerce-6afe2d573839';
-import { megaLateForecast } from './megaLateForecast.js?v=commerce-6afe2d573839';
-import { adoptInterior, isShopDeployment } from './megaInventory.js?v=commerce-6afe2d573839';
-import { environmentPlacements, paintEnvironment } from './megaArt.js?v=commerce-6afe2d573839';
-import { expansionForecast } from './megaExpansionForecast.js?v=commerce-6afe2d573839';
-import { AudioManager } from './audioManager.js?v=commerce-6afe2d573839';
-import { deploymentLocalStorage } from './deploymentStorage.js?v=commerce-6afe2d573839';
-import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js?v=commerce-6afe2d573839';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=commerce-6afe2d573839';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=commerce-6afe2d573839';
-import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js?v=commerce-6afe2d573839';
+import { finishManagerConstructionInRepository } from './managerUi.js?v=kitchen-707cb8cb607b';
+import { megaLateForecast } from './megaLateForecast.js?v=kitchen-707cb8cb607b';
+import { adoptInterior, isShopDeployment } from './megaInventory.js?v=kitchen-707cb8cb607b';
+import { environmentPlacements, paintEnvironment } from './megaArt.js?v=kitchen-707cb8cb607b';
+import { expansionForecast } from './megaExpansionForecast.js?v=kitchen-707cb8cb607b';
+import { AudioManager } from './audioManager.js?v=kitchen-707cb8cb607b';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=kitchen-707cb8cb607b';
+import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js?v=kitchen-707cb8cb607b';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=kitchen-707cb8cb607b';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=kitchen-707cb8cb607b';
+import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js?v=kitchen-707cb8cb607b';
 export function expansionAction(container, repo, source, refresh) {
     if (!source.mega || !document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.match(/^v30[cde]-/))
         return;

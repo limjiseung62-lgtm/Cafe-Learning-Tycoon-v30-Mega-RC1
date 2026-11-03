@@ -1,6 +1,6 @@
-import { questionCatalog, validatePack } from './questionPack.js?v=commerce-6afe2d573839';
-import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=commerce-6afe2d573839';
-import { passageHtml } from './reading.js?v=commerce-6afe2d573839';
+import { questionCatalog, validatePack } from './questionPack.js?v=kitchen-707cb8cb607b';
+import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=kitchen-707cb8cb607b';
+import { passageHtml } from './reading.js?v=kitchen-707cb8cb607b';
 const shareable = (q) => { const flags = q; return !q.material && flags.publicExportAllowed !== false && flags.sourceType !== 'publisher-copyright'; };
 const fingerprint = (question, diagram = '', choices = []) => JSON.stringify([question.trim(), diagram, [...choices].sort()]);
 /** Select already validated alternatives; never invent a question or export a restricted original. */

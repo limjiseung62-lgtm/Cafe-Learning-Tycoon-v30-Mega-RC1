@@ -1,10 +1,10 @@
-import { enterpriseCity, cityDistricts, citySafePoint } from './enterpriseCity.js?v=commerce-6afe2d573839';
-import { sceneEnvironment } from './villageSceneArt.js?v=commerce-6afe2d573839';
-import { VillageExplorer } from './villageExplorer.js?v=commerce-6afe2d573839';
-import { scenePath } from './villageNavigation.js?v=commerce-6afe2d573839';
-import { investVillage, progressiveEconomyConfig } from './progressiveEconomy.js?v=commerce-6afe2d573839';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=commerce-6afe2d573839';
-import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=commerce-6afe2d573839';
+import { enterpriseCity, cityDistricts, citySafePoint } from './enterpriseCity.js?v=kitchen-707cb8cb607b';
+import { sceneEnvironment } from './villageSceneArt.js?v=kitchen-707cb8cb607b';
+import { VillageExplorer } from './villageExplorer.js?v=kitchen-707cb8cb607b';
+import { scenePath } from './villageNavigation.js?v=kitchen-707cb8cb607b';
+import { investVillage, progressiveEconomyConfig } from './progressiveEconomy.js?v=kitchen-707cb8cb607b';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=kitchen-707cb8cb607b';
+import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=kitchen-707cb8cb607b';
 export async function openEnterpriseCity(repo, onClose, readOnly = false) {
     if (!readOnly && !await ensureGrowthWriteLock())
         return;

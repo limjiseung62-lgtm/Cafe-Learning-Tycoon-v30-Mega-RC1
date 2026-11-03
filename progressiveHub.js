@@ -1,12 +1,12 @@
-import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=commerce-6afe2d573839';
-import { goalsHtml } from './progressiveGoals.js?v=commerce-6afe2d573839';
-import { landmarkNames, districtVisitors } from './progressiveFinance.js?v=commerce-6afe2d573839';
-import { openManagementAlbum } from './managementAlbumUi.js?v=commerce-6afe2d573839';
-import { syncManagementAlbum } from './managementAlbum.js?v=commerce-6afe2d573839';
-import { investmentReason, franchiseQuote } from './progressiveGuidance.js?v=commerce-6afe2d573839';
-import { investmentTierLimit, investmentCatalog, progressiveEconomyConfig as config, investVillage, foundFranchise, upgradeFranchise, branchYield, branchUpgradeCost, branchRequirement, buildLandmark, progressiveTownName } from './progressiveEconomy.js?v=commerce-6afe2d573839';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=commerce-6afe2d573839';
-import { unlocked } from './progressiveFeatures.js?v=commerce-6afe2d573839';
+import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=kitchen-707cb8cb607b';
+import { goalsHtml } from './progressiveGoals.js?v=kitchen-707cb8cb607b';
+import { landmarkNames, districtVisitors } from './progressiveFinance.js?v=kitchen-707cb8cb607b';
+import { openManagementAlbum } from './managementAlbumUi.js?v=kitchen-707cb8cb607b';
+import { syncManagementAlbum } from './managementAlbum.js?v=kitchen-707cb8cb607b';
+import { investmentReason, franchiseQuote } from './progressiveGuidance.js?v=kitchen-707cb8cb607b';
+import { investmentTierLimit, investmentCatalog, progressiveEconomyConfig as config, investVillage, foundFranchise, upgradeFranchise, branchYield, branchUpgradeCost, branchRequirement, buildLandmark, progressiveTownName } from './progressiveEconomy.js?v=kitchen-707cb8cb607b';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=kitchen-707cb8cb607b';
+import { unlocked } from './progressiveFeatures.js?v=kitchen-707cb8cb607b';
 export async function openProgressiveHub(repo, onClose) {
     if (!await ensureGrowthWriteLock())
         return;

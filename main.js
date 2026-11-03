@@ -1,71 +1,72 @@
-import { pollManagerSession } from './managerUi.js?v=commerce-6afe2d573839';
-import { liveManagementOpen } from './liveManagement.js?v=commerce-6afe2d573839';
-import { mountCommonCafeResults, restoreCommonArchive } from './commonCafeResults.js?v=commerce-6afe2d573839';
-import { CommonCafeFlow } from './commonCafeFlow.js?v=commerce-6afe2d573839';
-import { loadCommonRuntime } from './commonBankLoader.js?v=commerce-6afe2d573839';
-import { commonQuestion } from './commonLearningCatalog.js?v=commerce-6afe2d573839';
-import { setCommonTransaction } from './commonLearningTransaction.js?v=commerce-6afe2d573839';
-import { megaQualificationNotice } from './megaQualificationUi.js?v=commerce-6afe2d573839';
-import { megaView } from './megaView.js?v=commerce-6afe2d573839';
-import { classRuntime, captureClass } from './classRuntime.js?v=commerce-6afe2d573839';
-import { pollClassUi } from './classRandomUi.js?v=commerce-6afe2d573839';
-import { renderProgressiveGuidance } from './progressiveGuidance.js?v=commerce-6afe2d573839';
-import { unlocked } from './progressiveFeatures.js?v=commerce-6afe2d573839';
-import { applyProgressiveVisibility } from './progressiveVisibility.js?v=commerce-6afe2d573839';
-import { prepareCompletedShowcase } from './cafeShowcase.js?v=commerce-6afe2d573839';
-import { beginManagementUi, pollManagementUi } from './managementLive.js?v=commerce-6afe2d573839';
-import { setArcadeSound } from './arcadeUi.js?v=commerce-6afe2d573839';
-import { setCraftSound } from './craftUi.js?v=commerce-6afe2d573839';
-import { setRushSound } from './cakeRushUi.js?v=commerce-6afe2d573839';
-import { beginMiniUi, pollMiniUi } from './miniGameUi.js?v=commerce-6afe2d573839';
-import { miniAnswer, activeMini } from './miniGames.js?v=commerce-6afe2d573839';
-import { beginSpecializationUi, pollSpecializationUi, specializationArt } from './specializationUi.js?v=commerce-6afe2d573839';
-import { specializationById } from './specializationConfig.js?v=commerce-6afe2d573839';
-import { freeMealAnchor } from './furnitureAnchors.js?v=commerce-6afe2d573839';
-import { freeFurniture, freeHallLayers, furnitureVisualVersion } from './freeFurniture.js?v=commerce-6afe2d573839';
-import { growthStaffPanel } from './recruitUi.js?v=commerce-6afe2d573839';
-import { workerBaseArt } from "./recruitArt.js?v=commerce-6afe2d573839";
-import { branchCatalog, branchRoom } from "./growthBranch.js?v=commerce-6afe2d573839";
-import { beginBranchUi, pollBranchUi } from "./growthBranchUi.js?v=commerce-6afe2d573839";
-import { createGrowthSave } from './growthSave.js?v=commerce-6afe2d573839';
-import { beginLongGrowth, pollLongGrowth } from './longGrowthUi.js?v=commerce-6afe2d573839';
-import { growthRuntime } from './growthRuntime.js?v=commerce-6afe2d573839';
-import { webAsset } from './webAsset.js?v=commerce-6afe2d573839';
-import { imageReady } from './imageLoading.js?v=commerce-6afe2d573839';
-import { motionFrame, bubbleCorrection } from './animationPresentation.js?v=commerce-6afe2d573839';
-import { workerPoseArt, preloadMotionSheets, workerTrayPlacement } from './motionSprites.js?v=commerce-6afe2d573839';
-import { EventRecovery } from './eventRecovery.js?v=commerce-6afe2d573839';
-import { renderEventPanel } from './eventUi.js?v=commerce-6afe2d573839';
-import { guestMotion, workerMotion, motionArt } from './characterMotion.js?v=commerce-6afe2d573839';
-import { restoreClassroomCafe } from './classroomCheckpoint.js?v=commerce-6afe2d573839';
-import { LearningAnalyticsV1 } from './learningAnalytics.js?v=commerce-6afe2d573839';
-import { mountCafeResults } from './cafeResults.js?v=commerce-6afe2d573839';
-import { questionCatalog } from './questionPack.js?v=commerce-6afe2d573839';
-import { ClassroomUi } from './classroomUi.js?v=commerce-6afe2d573839';
-import { passageHtml, materialHtml } from './reading.js?v=commerce-6afe2d573839';
-import { CafeRunUi } from './cafeRunUi.js?v=commerce-6afe2d573839';
-import { specialQuestions } from './hospitalityConfig.js?v=commerce-6afe2d573839';
-import { productionReceipt, stockStatus } from './playLoop.js?v=commerce-6afe2d573839';
-import { FinalUx } from './finalUx.js?v=commerce-6afe2d573839';
-import { SessionClock, ActionGate } from './uxState.js?v=commerce-6afe2d573839';
-import { installAssetFallbacks } from './assetFallback.js?v=commerce-6afe2d573839';
-import { createLearning } from './learningIntegration.js?v=commerce-6afe2d573839';
-import { renderQuestionText, escapeText, renderDiagram } from './questionRenderer.js?v=commerce-6afe2d573839';
-import { GameFeel } from './gameFeel.js?v=commerce-6afe2d573839';
-import { ModeFlow } from './modeUi.js?v=commerce-6afe2d573839';
-import { itemCatalog, specialNames, specialIcons } from './phase4Config.js?v=commerce-6afe2d573839';
-import { showOrderBubble, syncOrderBubble, assetSignature } from './presentation.js?v=commerce-6afe2d573839';
-import { personalityLabels } from './customerRules.js?v=commerce-6afe2d573839';
-import { selectCustomerPose, customerPoseArt, poseGeometry, preloadCustomerPoses, selectedPoseAsset } from './customerPoses.js?v=commerce-6afe2d573839';
-import { SpatialScene, hallGrowthSpecs, createSpace } from './spatial.js?v=commerce-6afe2d573839';
-import { DepartureDialogue } from './departureDialogue.js?v=commerce-6afe2d573839';
-import { icon } from './uiIcons.js?v=commerce-6afe2d573839';
-import { sprite } from './art.js?v=commerce-6afe2d573839';
-import { staffBalance } from './config.js?v=commerce-6afe2d573839';
-import { staffDefinitions } from './staff.js?v=commerce-6afe2d573839';
-import { foodVisual } from './foodVisual.js?v=commerce-6afe2d573839';
-import { CafeGame } from './game.js?v=commerce-6afe2d573839';
-import { customers, menuDefinitions } from './data.js?v=commerce-6afe2d573839';
+import { kitchenStages, kitchenFloorLabel } from './productionKitchen.js?v=kitchen-707cb8cb607b';
+import { pollManagerSession } from './managerUi.js?v=kitchen-707cb8cb607b';
+import { liveManagementOpen } from './liveManagement.js?v=kitchen-707cb8cb607b';
+import { mountCommonCafeResults, restoreCommonArchive } from './commonCafeResults.js?v=kitchen-707cb8cb607b';
+import { CommonCafeFlow } from './commonCafeFlow.js?v=kitchen-707cb8cb607b';
+import { loadCommonRuntime } from './commonBankLoader.js?v=kitchen-707cb8cb607b';
+import { commonQuestion } from './commonLearningCatalog.js?v=kitchen-707cb8cb607b';
+import { setCommonTransaction } from './commonLearningTransaction.js?v=kitchen-707cb8cb607b';
+import { megaQualificationNotice } from './megaQualificationUi.js?v=kitchen-707cb8cb607b';
+import { megaView } from './megaView.js?v=kitchen-707cb8cb607b';
+import { classRuntime, captureClass } from './classRuntime.js?v=kitchen-707cb8cb607b';
+import { pollClassUi } from './classRandomUi.js?v=kitchen-707cb8cb607b';
+import { renderProgressiveGuidance } from './progressiveGuidance.js?v=kitchen-707cb8cb607b';
+import { unlocked } from './progressiveFeatures.js?v=kitchen-707cb8cb607b';
+import { applyProgressiveVisibility } from './progressiveVisibility.js?v=kitchen-707cb8cb607b';
+import { prepareCompletedShowcase } from './cafeShowcase.js?v=kitchen-707cb8cb607b';
+import { beginManagementUi, pollManagementUi } from './managementLive.js?v=kitchen-707cb8cb607b';
+import { setArcadeSound } from './arcadeUi.js?v=kitchen-707cb8cb607b';
+import { setCraftSound } from './craftUi.js?v=kitchen-707cb8cb607b';
+import { setRushSound } from './cakeRushUi.js?v=kitchen-707cb8cb607b';
+import { beginMiniUi, pollMiniUi } from './miniGameUi.js?v=kitchen-707cb8cb607b';
+import { miniAnswer, activeMini } from './miniGames.js?v=kitchen-707cb8cb607b';
+import { beginSpecializationUi, pollSpecializationUi, specializationArt } from './specializationUi.js?v=kitchen-707cb8cb607b';
+import { specializationById } from './specializationConfig.js?v=kitchen-707cb8cb607b';
+import { freeMealAnchor } from './furnitureAnchors.js?v=kitchen-707cb8cb607b';
+import { freeFurniture, freeHallLayers, furnitureVisualVersion } from './freeFurniture.js?v=kitchen-707cb8cb607b';
+import { growthStaffPanel } from './recruitUi.js?v=kitchen-707cb8cb607b';
+import { workerBaseArt } from "./recruitArt.js?v=kitchen-707cb8cb607b";
+import { branchCatalog, branchRoom } from "./growthBranch.js?v=kitchen-707cb8cb607b";
+import { beginBranchUi, pollBranchUi } from "./growthBranchUi.js?v=kitchen-707cb8cb607b";
+import { createGrowthSave } from './growthSave.js?v=kitchen-707cb8cb607b';
+import { beginLongGrowth, pollLongGrowth } from './longGrowthUi.js?v=kitchen-707cb8cb607b';
+import { growthRuntime } from './growthRuntime.js?v=kitchen-707cb8cb607b';
+import { webAsset } from './webAsset.js?v=kitchen-707cb8cb607b';
+import { imageReady } from './imageLoading.js?v=kitchen-707cb8cb607b';
+import { motionFrame, bubbleCorrection } from './animationPresentation.js?v=kitchen-707cb8cb607b';
+import { workerPoseArt, preloadMotionSheets, workerTrayPlacement } from './motionSprites.js?v=kitchen-707cb8cb607b';
+import { EventRecovery } from './eventRecovery.js?v=kitchen-707cb8cb607b';
+import { renderEventPanel } from './eventUi.js?v=kitchen-707cb8cb607b';
+import { guestMotion, workerMotion, motionArt } from './characterMotion.js?v=kitchen-707cb8cb607b';
+import { restoreClassroomCafe } from './classroomCheckpoint.js?v=kitchen-707cb8cb607b';
+import { LearningAnalyticsV1 } from './learningAnalytics.js?v=kitchen-707cb8cb607b';
+import { mountCafeResults } from './cafeResults.js?v=kitchen-707cb8cb607b';
+import { questionCatalog } from './questionPack.js?v=kitchen-707cb8cb607b';
+import { ClassroomUi } from './classroomUi.js?v=kitchen-707cb8cb607b';
+import { passageHtml, materialHtml } from './reading.js?v=kitchen-707cb8cb607b';
+import { CafeRunUi } from './cafeRunUi.js?v=kitchen-707cb8cb607b';
+import { specialQuestions } from './hospitalityConfig.js?v=kitchen-707cb8cb607b';
+import { productionReceipt, stockStatus } from './playLoop.js?v=kitchen-707cb8cb607b';
+import { FinalUx } from './finalUx.js?v=kitchen-707cb8cb607b';
+import { SessionClock, ActionGate } from './uxState.js?v=kitchen-707cb8cb607b';
+import { installAssetFallbacks } from './assetFallback.js?v=kitchen-707cb8cb607b';
+import { createLearning } from './learningIntegration.js?v=kitchen-707cb8cb607b';
+import { renderQuestionText, escapeText, renderDiagram } from './questionRenderer.js?v=kitchen-707cb8cb607b';
+import { GameFeel } from './gameFeel.js?v=kitchen-707cb8cb607b';
+import { ModeFlow } from './modeUi.js?v=kitchen-707cb8cb607b';
+import { itemCatalog, specialNames, specialIcons } from './phase4Config.js?v=kitchen-707cb8cb607b';
+import { showOrderBubble, syncOrderBubble, assetSignature } from './presentation.js?v=kitchen-707cb8cb607b';
+import { personalityLabels } from './customerRules.js?v=kitchen-707cb8cb607b';
+import { selectCustomerPose, customerPoseArt, poseGeometry, preloadCustomerPoses, selectedPoseAsset } from './customerPoses.js?v=kitchen-707cb8cb607b';
+import { SpatialScene, hallGrowthSpecs, createSpace } from './spatial.js?v=kitchen-707cb8cb607b';
+import { DepartureDialogue } from './departureDialogue.js?v=kitchen-707cb8cb607b';
+import { icon } from './uiIcons.js?v=kitchen-707cb8cb607b';
+import { sprite } from './art.js?v=kitchen-707cb8cb607b';
+import { staffBalance } from './config.js?v=kitchen-707cb8cb607b';
+import { staffDefinitions } from './staff.js?v=kitchen-707cb8cb607b';
+import { foodVisual } from './foodVisual.js?v=kitchen-707cb8cb607b';
+import { CafeGame } from './game.js?v=kitchen-707cb8cb607b';
+import { customers, menuDefinitions } from './data.js?v=kitchen-707cb8cb607b';
 let classroomElapsed = null;
 const developerMode = new URLSearchParams(location.search).has('dev');
 const clock = new SessionClock(), purchaseGate = new ActionGate();
@@ -197,7 +198,7 @@ function renderProblem() {
     if (!panelOpen || !active)
         return;
     p.dataset.spacedReview = String(!!active.spacedReview);
-    p.innerHTML = `<div class="problem-head"><span>${specialAttempt !== null ? '특별 주문 · 시그니처 도전' : '✦ 음식을 만드는 작은 도전'}</span><button id="close-problem" aria-label="문제 패널 닫기">✕</button></div><p class="eyebrow">${escapeText(active.subject)}${active.learningPhase === 'review' ? ' · 개념 복습' : active.learningPhase === 'mastery' ? ' · 숙달 확인' : ''} · ${active.grade}학년 · ${active.type === 'ox' ? 'OX' : active.type === 'short_answer' ? '단답형' : '객관식'}${game?.mode === 'CAFE_GROWTH' ? ' · ' + (game.elapsedTime < 180 ? '준비' : game.elapsedTime < 660 ? '연습' : '도전·복습') + ' · 난이도 ' + active.difficulty : ''}</p>${feedback?.correct ? '<h2 class="production-result-title">' + (feedback.productionAllowed === false ? '복습을 확인했어요!' : '음식이 완성됐어요!') + '</h2>' : '<h2>' + renderQuestionText(active.question) + '</h2>' + renderDiagram(active.diagram, active.spacedReview ? '과학 그림' : '도형', !!commonFlow)}${feedback ? '<div class="feedback ' + (feedback.correct ? 'correct' : 'incorrect') + '"><strong>' + (feedback.correct ? (feedback.productionAllowed === false ? '이번에는 정확히 알았어요! 다음 문제에서도 확인해 볼까요?' : '정답! 음식이 만들어졌어요.') : (engine.progress.spaced ? '아쉽지만 이번에는 음식이 만들어지지 않았어요. 설명을 확인하고 다시 도전해요!' : '괜찮아요, 함께 확인해요')) + '</strong>' + (feedback.correct ? '<p class="production-summary">' + receipt.filter(r => r.quantity > 0).length + '종 · ' + receipt.reduce((n, r) => n + r.quantity, 0) + '개 추가 보관 · MAX ' + receipt.filter(r => r.quantity === 0).length + '종</p><details class="answer-review"><summary>정답·풀이 보기</summary><p>정답: ' + renderQuestionText(feedback.answer) + '</p><p>' + renderQuestionText(feedback.explanation) + '</p></details>' : '<p>정답: ' + renderQuestionText(feedback.answer) + '</p><p>' + renderQuestionText(feedback.explanation) + '</p>') + '</div><button class="primary" id="return-cafe">카페로 돌아가기 →</button>' : active.type === 'short_answer' ? '<form id="answer-form"><label>답<input id="answer-input" maxlength="500" autocomplete="off" inputmode="text" required></label><button class="primary">정답 확인</button></form>' : '<div class="choices">' + active.choices.map(c => '<button data-answer="' + escapeText(c) + '">' + renderQuestionText(c) + '</button>').join('') + '</div>'}<p class="hint">문제를 푸는 동안에도 영업 시간과 손님 대기시간은 흘러요.</p>`;
+    p.innerHTML = `<div class="problem-head"><span>${specialAttempt !== null ? '특별 주문 · 시그니처 도전' : '✦ 음식을 만드는 작은 도전'}</span><button id="close-problem" aria-label="문제 패널 닫기">✕</button></div><p class="eyebrow">${escapeText(active.subject)}${active.learningPhase === 'review' ? ' · 개념 복습' : active.learningPhase === 'mastery' ? ' · 숙달 확인' : ''} · ${active.grade}학년 · ${active.type === 'ox' ? 'OX' : active.type === 'short_answer' ? '단답형' : '객관식'}${game?.mode === 'CAFE_GROWTH' ? ' · ' + (game.elapsedTime < 180 ? '준비' : game.elapsedTime < 660 ? '연습' : '도전·복습') + ' · 난이도 ' + active.difficulty : ''}</p>${feedback?.correct ? '<h2 class="production-result-title">' + (feedback.productionAllowed === false ? '복습을 확인했어요!' : '음식이 완성됐어요!') + '</h2>' : '<h2>' + renderQuestionText(active.question) + '</h2>' + renderDiagram(active.diagram, active.spacedReview ? '과학 그림' : '도형', !!commonFlow)}${feedback ? '<div class="feedback ' + (feedback.correct ? 'correct' : 'incorrect') + '"><strong>' + (feedback.correct ? (feedback.productionAllowed === false ? '이번에는 정확히 알았어요! 다음 문제에서도 확인해 볼까요?' : '정답! 음식이 만들어졌어요.') : (engine.progress.spaced ? '아쉽지만 이번에는 음식이 만들어지지 않았어요. 설명을 확인하고 다시 도전해요!' : '괜찮아요, 함께 확인해요')) + '</strong>' + (feedback.correct ? '<p class="production-summary">' + receipt.filter(r => r.quantity > 0).length + '종 · ' + receipt.reduce((n, r) => n + r.quantity, 0) + '개 추가 보관 · MAX ' + receipt.filter(r => r.quantity === 0).length + '종' + (game?.mode === 'CAFE_GROWTH' && game.mega?.paid && receipt.length ? ' · 창고 초과 ' + Math.max(0, receipt.length * game.productionAmount - receipt.reduce((n, r) => n + r.quantity, 0)) + '개' : '') + '</p><details class="answer-review"><summary>정답·풀이 보기</summary><p>정답: ' + renderQuestionText(feedback.answer) + '</p><p>' + renderQuestionText(feedback.explanation) + '</p></details>' : '<p>정답: ' + renderQuestionText(feedback.answer) + '</p><p>' + renderQuestionText(feedback.explanation) + '</p>') + '</div><button class="primary" id="return-cafe">카페로 돌아가기 →</button>' : active.type === 'short_answer' ? '<form id="answer-form"><label>답<input id="answer-input" maxlength="500" autocomplete="off" inputmode="text" required></label><button class="primary">정답 확인</button></form>' : '<div class="choices">' + active.choices.map(c => '<button data-answer="' + escapeText(c) + '">' + renderQuestionText(c) + '</button>').join('') + '</div>'}<p class="hint">문제를 푸는 동안에도 영업 시간과 손님 대기시간은 흘러요.</p>`;
     if (context) {
         const meta = document.createElement('div');
         meta.className = 'reading-progress';
@@ -320,7 +321,7 @@ export function render() {
     el('cafe-level').textContent = game.cafeLevel + '단계';
     el('cafe-level').title = cafeDisplayName(game.cafeLevel);
     el('cafe-name').textContent = game.specialization ? specializationById(game.specialization.selected).name : game.branchId ? branchCatalog.find(b => b.id === game.branchId).name : cafeDisplayName(game.cafeLevel);
-    el('warehouse-caption').textContent = '창고 ' + (game.warehouseLevel === 6 ? 'MAX' : game.warehouseLevel + '단계') + ' · 최대 ' + game.warehouse.capacity + '개';
+    el('warehouse-caption').textContent = '창고 ' + (!game.nextWarehouse ? 'MAX' : (game.warehouseLevel + (game.mega?.production?.storage ?? 0)) + '단계') + ' · 최대 ' + game.warehouse.capacity + '개';
     el('stock-count').textContent = game.menus.length + '종';
     scene.sync(game);
     renderRoom();
@@ -638,7 +639,7 @@ function renderInvestment(force = false) {
     panel.hidden = !investmentOpen || !game || game.status !== 'RUNNING';
     if (panel.hidden || !game)
         return;
-    const key = JSON.stringify([investmentTab, game.money, game.cafeLevel, game.warehouseLevel, game.menus.map(m => [m.stock, m.currentLevel]), game.service.paid.map(w => w.level), game.itemPurchases, game.goldenRemaining, game.boosterRemaining, game.vipPending, investmentMessage, purchaseGate.blocked, performance.now() < celebrationUntil]);
+    const key = JSON.stringify([investmentTab, game.money, game.cafeLevel, game.warehouseLevel, game.mega?.production, game.menus.map(m => [m.stock, m.currentLevel]), game.service.paid.map(w => w.level), game.itemPurchases, game.goldenRemaining, game.boosterRemaining, game.vipPending, investmentMessage, purchaseGate.blocked, performance.now() < celebrationUntil]);
     if (!force && key === renderedInvestmentKey)
         return;
     renderedInvestmentKey = key;
@@ -650,7 +651,7 @@ function renderInvestment(force = false) {
         content = '<div class="investment-card"><p>현재 카페 ' + game.cafeLevel + '단계' + ' · ' + cafeDisplayName(game.cafeLevel) + '</p>' + (next ? '<h2><small>카페 ' + next.level + '단계</small><span class="cafe-upgrade-name">' + cafeDisplayName(next.level) + '</span></h2>' + (game.mega?.extended ? '<p>' + megaQualificationNotice(game).label + '</p>' : '<p>홀 확장 · 테이블 ' + scene.space.tables.length + ' → ' + createSpace(next.level, true).tables.length + '개</p><p>이용 좌석 ' + game.cafe.maxCustomers + ' → ' + next.maxCustomers + '석</p>') + '<div class="unlock-preview">' + menuDefinitions.filter(m => m.unlockCafeLevel === next.level).map(m => '<span>' + sprite(m.menuId) + ' ' + m.name + '</span>').join('') + '</div>' + affordability(next.expansionCost) + '<button class="primary" data-buy="cafe">' + (game.mega?.extended ? '성장 자격 올리기' : '카페 확장') + ' · ' + next.expansionCost.toLocaleString() + '원</button>' : '<h2>✦ 드림 카페 완성!</h2><p>최고 단계에 도달했어요. 영업은 남은 시간 동안 계속됩니다.</p>') + '</div>';
     }
     else if (investmentTab === 'warehouse') {
-        content = '<div class="investment-card"><p>현재 창고 ' + (game.warehouseLevel === 6 ? 'MAX' : game.warehouseLevel + '단계') + '</p><h2>메뉴마다 ' + game.warehouse.capacity + '개 보관</h2>' + (warehouse ? '<p>최대 재고 ' + game.warehouse.capacity + ' → ' + warehouse.capacity + '개</p>' + affordability(warehouse.cost) + '<button class="primary" data-buy="warehouse">창고 확장 · ' + warehouse.cost.toLocaleString() + '원</button>' : '<p>최대 크기의 창고예요.</p>') + '</div>';
+        content = '<div class="investment-card"><p>현재 창고 ' + (!game.nextWarehouse ? 'MAX' : (game.warehouseLevel + (game.mega?.production?.storage ?? 0)) + '단계') + '</p><h2>메뉴마다 ' + game.warehouse.capacity + '개 보관</h2>' + (warehouse ? '<p>최대 재고 ' + game.warehouse.capacity + ' → ' + warehouse.capacity + '개</p>' + affordability(warehouse.cost) + '<button class="primary" data-buy="warehouse">창고 확장 · ' + warehouse.cost.toLocaleString() + '원</button>' : '<p>최대 크기의 창고예요.</p>') + '</div>';
     }
     else if (investmentTab === 'staff') {
         content = '<p>사장님 1명 + 직원 ' + game.service.paid.length + '명 / 현재 최대 ' + game.staffLimit + '명</p><div class="menu-investments">' + staffDefinitions.map((d, i) => {
@@ -676,6 +677,10 @@ function renderInvestment(force = false) {
         content = growthStaffPanel(game);
     if (game.mega?.paid && investmentTab === 'cafe')
         content = content.replace(/<p>홀 확장[\s\S]*?이용 좌석[\s\S]*?<\/p>/, '<p>레벨을 올리면 새 메뉴와 증축 자격이 열려요. 현재 매장 면적은 그대로예요. 실제 매장 증축은 영업을 마친 뒤 선택할 수 있어요.</p>').replace('카페 확장 ·', '카페 레벨 올리기 ·');
+    if (investmentTab === 'warehouse' && game.mode === 'CAFE_GROWTH' && game.mega?.paid) {
+        const tier = game.mega.production?.tier ?? 0, n = kitchenStages[tier + 1];
+        content += '<article class="investment-card"><h2>' + kitchenStages[tier].name + ' · 정답 생산 1회당 메뉴별 +' + game.productionAmount + '</h2><p>기본형 또는 즉시 쌍둥이 정답에 한 번 생산해요. 독립 오답노트는 생산하지 않아요. 창고 상한까지 반영돼요.</p>' + (n ? '<h3>다음: ' + n.name + ' · +' + n.amount + '</h3><p>Lv.' + n.level + ' · ' + kitchenFloorLabel(n.space) + '칸 유료 매장 필요 · 기존 주방 공간을 재사용해요.</p>' + affordability(n.cost) + '<button class="primary" data-buy="production" data-tier="' + tier + '" ' + (game.money < n.cost || game.cafeLevel < n.level || game.mega.paid.spaceLevel < n.space ? 'disabled' : '') + '>설비 구매 · ' + n.cost.toLocaleString() + '원</button>' : '<p>최고 생산 설비예요.</p>') + (n && game.warehouse.capacity < n.amount ? '<p>창고를 먼저 늘리면 생산 손실을 줄일 수 있어요.</p>' : '') + '</article>';
+    }
     const scroll = panel.querySelector('.investment-content')?.scrollTop ?? 0;
     let body = panel.querySelector('.investment-body');
     if (!body) {
@@ -698,7 +703,8 @@ function renderInvestment(force = false) {
     panel.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { investmentTab = b.dataset.tab; investmentMessage = ''; renderInvestment(true); panel.querySelector('.investment-content').scrollTop = 0; });
     panel.querySelectorAll('[data-buy]').forEach(b => b.onclick = () => { advanceTime(); if (!game || game.status !== 'RUNNING' || !purchaseGate.run(() => { }))
         return; const kind = b.dataset.buy; if (kind === 'cafe' && performance.now() < celebrationUntil)
-        return; const result = kind === 'cafe' ? game.expandCafe() : kind === 'warehouse' ? game.upgradeWarehouse() : kind === 'staff-hire' ? game.hireStaff() : kind === 'staff-upgrade' ? game.upgradeStaff(b.dataset.staff) : game.upgradeMenu(b.dataset.menu); investmentMessage = result.reason; if (result.ok && kind === 'cafe') {
+        return; const result = kind === 'cafe' ? game.expandCafe() : kind === 'warehouse' ? game.upgradeWarehouse() : kind === 'production' ? game.upgradeProduction(Number(b.dataset.tier)) : kind === 'staff-hire' ? game.hireStaff() : kind === 'staff-upgrade' ? game.upgradeStaff(b.dataset.staff) : game.upgradeMenu(b.dataset.menu); investmentMessage = result.reason; if (result.ok && game.mode === 'CAFE_GROWTH' && (kind === 'production' || kind === 'warehouse'))
+        modeFlow.flush(); if (result.ok && kind === 'cafe') {
         celebrationLevel = game.cafeLevel;
         celebrationUntil = performance.now() + 2700;
         el('celebration').dataset.level = '';
@@ -872,7 +878,7 @@ async function submitCommon(answer) { if (!commonFlow || commonBusy || classRunt
         next.onclick = () => { void openCommonQuestion(); };
         el('problem-panel').append(next);
     }
-    feel.answer(correct, game.successfulProduction - before, 1, game.menus.length);
+    feel.answer(correct, game.successfulProduction - before, game.productionAmount, game.menus.length);
     render();
     if (correct) {
         const session = game, graded = feedback;

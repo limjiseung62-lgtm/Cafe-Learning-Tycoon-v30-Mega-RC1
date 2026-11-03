@@ -1,5 +1,5 @@
-import { deploymentLocalStorage } from './deploymentStorage.js?v=commerce-6afe2d573839';
-import { AudioManager } from './audioManager.js?v=commerce-6afe2d573839';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=kitchen-707cb8cb607b';
+import { AudioManager } from './audioManager.js?v=kitchen-707cb8cb607b';
 export class FeelTracker {
     guests = new Map();
     workers = new Map();
@@ -39,8 +39,8 @@ export class FeelTracker {
             events.push({ type: 'coin', guest: p.guestId, amount: p.total, label: '+' + p.total.toLocaleString() + (p.type === 'spender' ? ' ✦' : '') });
         this.payments = g.telemetry.phase4.payments.length;
         for (const p of g.telemetry.upgradePurchases.slice(this.purchases)) {
-            const type = { cafe: 'levelup', warehouse: 'warehouse', menu: 'menu-upgrade', 'staff-hire': 'staff-hire', 'staff-upgrade': 'staff-upgrade', item: 'purchase' }[p.kind];
-            let label = type === 'warehouse' ? '재고 최대 ' + g.economy.warehouses[Math.max(0, p.level - 2)].capacity + ' → ' + g.warehouse.capacity : type === 'staff-hire' ? '새 직원이 함께합니다!' : type === 'staff-upgrade' ? 'Lv.' + p.level + '!' + ([3, 5].includes(p.level) ? ' 운반량 UP' : '') : type === 'menu-upgrade' ? '★' + p.level : undefined;
+            const type = { production: 'purchase', cafe: 'levelup', warehouse: 'warehouse', menu: 'menu-upgrade', 'staff-hire': 'staff-hire', 'staff-upgrade': 'staff-upgrade', item: 'purchase' }[p.kind];
+            let label = p.kind === 'production' ? p.target + ' · 메뉴별 +' + g.productionAmount : type === 'warehouse' ? '재고 최대 ' + g.economy.warehouses[Math.max(0, p.level - 2)].capacity + ' → ' + g.warehouse.capacity : type === 'staff-hire' ? '새 직원이 함께합니다!' : type === 'staff-upgrade' ? 'Lv.' + p.level + '!' + ([3, 5].includes(p.level) ? ' 운반량 UP' : '') : type === 'menu-upgrade' ? '★' + p.level : undefined;
             events.push({ type, label, target: p.target });
             if (p.kind === 'item') {
                 const event = { 'stock-five': 'item-stock', delivery: 'item-delivery', golden: 'item-golden', invite: 'item-invite', booster: 'item-booster' }[p.target];

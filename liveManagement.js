@@ -1,6 +1,6 @@
-import { validInteriorSale } from './interiorCommerce.js?v=commerce-6afe2d573839';
-import { guestPose } from './spatial.js?v=commerce-6afe2d573839';
-import { createMegaSpace, ensureMegaPlan, megaPointClear, megaRoute } from './megaSpace.js?v=commerce-6afe2d573839';
+import { validInteriorSale } from './interiorCommerce.js?v=kitchen-707cb8cb607b';
+import { guestPose } from './spatial.js?v=kitchen-707cb8cb607b';
+import { createMegaSpace, ensureMegaPlan, megaPointClear, megaRoute } from './megaSpace.js?v=kitchen-707cb8cb607b';
 export let liveManagementOpen = false;
 const projection = (s) => { const p = structuredClone(s); delete p.campaign; return p; };
 export function liveManagementRepository(g, c) {

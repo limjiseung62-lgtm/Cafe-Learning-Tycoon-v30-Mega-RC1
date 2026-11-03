@@ -1,8 +1,8 @@
-import { createMegaSpace, megaRoute, megaTravelSeconds, megaKey } from './megaSpace.js?v=commerce-6afe2d573839';
-import { freeFloorRoute } from './freeNavigation.js?v=commerce-6afe2d573839';
-import { createFreeSpace, freeBody, freeKey } from './freeLayoutModel.js?v=commerce-6afe2d573839';
-import { applyPlan, layoutKey } from './layoutModel.js?v=commerce-6afe2d573839';
-import { balance } from './config.js?v=commerce-6afe2d573839';
+import { createMegaSpace, megaRoute, megaTravelSeconds, megaKey } from './megaSpace.js?v=kitchen-707cb8cb607b';
+import { freeFloorRoute } from './freeNavigation.js?v=kitchen-707cb8cb607b';
+import { createFreeSpace, freeBody, freeKey } from './freeLayoutModel.js?v=kitchen-707cb8cb607b';
+import { applyPlan, layoutKey } from './layoutModel.js?v=kitchen-707cb8cb607b';
+import { balance } from './config.js?v=kitchen-707cb8cb607b';
 // Coordinates are floor contact points, in percent of the full 3:2 room image.
 // All six rooms deliberately retain a clear floor; furniture uses the existing atlas.
 const centers = [

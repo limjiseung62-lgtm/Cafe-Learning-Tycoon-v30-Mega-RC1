@@ -1,10 +1,11 @@
-import { validManager } from './managerState.js?v=commerce-6afe2d573839';
-import { megaZones } from './megaZones.js?v=commerce-6afe2d573839';
-import { validInterior, tableSeatCount } from './megaInventory.js?v=commerce-6afe2d573839';
-import { allDecorationCatalog } from './longGrowthConfig.js?v=commerce-6afe2d573839';
-import { cafeGrowthBalance } from './modeBalance.js?v=commerce-6afe2d573839';
-import { tableKinds, turn } from './freeLayoutModel.js?v=commerce-6afe2d573839';
-import { furnitureFor } from './furnitureCatalog.js?v=commerce-6afe2d573839';
+import { validProductionKitchen } from './productionKitchen.js?v=kitchen-707cb8cb607b';
+import { validManager } from './managerState.js?v=kitchen-707cb8cb607b';
+import { megaZones } from './megaZones.js?v=kitchen-707cb8cb607b';
+import { validInterior, tableSeatCount } from './megaInventory.js?v=kitchen-707cb8cb607b';
+import { allDecorationCatalog } from './longGrowthConfig.js?v=kitchen-707cb8cb607b';
+import { cafeGrowthBalance } from './modeBalance.js?v=kitchen-707cb8cb607b';
+import { tableKinds, turn } from './freeLayoutModel.js?v=kitchen-707cb8cb607b';
+import { furnitureFor } from './furnitureCatalog.js?v=kitchen-707cb8cb607b';
 export const megaDimensions = [[8, 6], [10, 7], [12, 8], [12, 10], [14, 10], [14, 12], [16, 12], [16, 14], [18, 14], [20, 16]].concat(Array.from({ length: 20 }, (_, i) => { const l = i + 11; return l < 20 ? [20, 16] : l < 30 ? [40, 30] : [64, 48]; }));
 export const megaBudget = [4, 6, 6, 8, 8, 10, 12, 12, 14, 14, ...Array(9).fill(14), ...Array(10).fill(48), 96];
 export const megaKey = (level, branch) => (branch ?? 'base') + ':' + level;
@@ -16,8 +17,12 @@ export const uniso = (p) => ({ x: (p.x / 24 + p.y / 12) / 2, y: (p.y / 12 - p.x 
 export function defaultMegaPlan(level, branch = null) { const centers = [[3.5, 2.5], [6.5, 2.5], [8.5, 4.5], [4.5, 7.5], [10.5, 9.5], [13.5, 4.5], [15.5, 11.5]]; return { version: 1, level, branch, tables: centers.slice(0, megaBudget[level - 1] / 2).map(([x, y], i) => ({ id: 'mega-' + (i + 1), kind: 'two', x, y, rotation: 0 })), decor: [] }; }
 export function newMegaState(paid = false) { return { ...(paid ? { paid: { spaceLevel: 1, receipts: [] } } : {}), version: 1, source: 'new', plans: { [megaKey(1)]: { ...defaultMegaPlan(1), ...(paid ? { entry: { x: .5, y: 5.5 } } : {}) } } }; }
 export function ensureMegaPlan(state, level, branch) { if (state.paid)
-    level = state.paid.spaceLevel; const key = megaKey(level, branch); if (state.plans[key])
-    return state.plans[key]; const previous = Object.values(state.plans).filter(p => p.level <= level).sort((a, b) => b.level - a.level)[0]; const p = previous ? { ...structuredClone(previous), level, branch: branch ?? null } : defaultMegaPlan(level, branch ?? null); const seats = p.tables.reduce((a, t) => a + tableKinds[t.kind].seats, 0); if (previous && !state.inventory && seats < megaBudget[level - 1]) {
+    level = state.paid.spaceLevel; const key = megaKey(level, branch); if (state.plans[key]) {
+    const p = state.plans[key];
+    if (state.production)
+        p.productionTier = state.production.tier;
+    return p;
+} const previous = Object.values(state.plans).filter(p => p.level <= level).sort((a, b) => b.level - a.level)[0]; const p = previous ? { ...structuredClone(previous), level, branch: branch ?? null } : defaultMegaPlan(level, branch ?? null); const seats = p.tables.reduce((a, t) => a + tableKinds[t.kind].seats, 0); if (previous && !state.inventory && seats < megaBudget[level - 1]) {
     for (const t of defaultMegaPlan(level, branch ?? null).tables) {
         if (p.tables.some(a => a.id === t.id))
             continue;
@@ -28,7 +33,8 @@ export function ensureMegaPlan(state, level, branch) { if (state.paid)
             break;
     }
 } if (validateMegaPlan(p).length)
-    throw Error('확장 전 배치를 확인해 주세요. 기존 배치는 보존됩니다.'); return state.plans[key] = p; }
+    throw Error('확장 전 배치를 확인해 주세요. 기존 배치는 보존됩니다.'); if (state.production)
+    p.productionTier = state.production.tier; return state.plans[key] = p; }
 export function tableParts(t) { const size = t.kind === 'long' ? 2.3 : t.kind === 'four' ? 1.7 : 1, half = size / 2, parts = []; const rect = (cx, cy, w, h) => { const p = turn(cx, cy, t.rotation), vertical = t.rotation % 180 !== 0; parts.push({ left: t.x + p.x - (vertical ? h : w) / 2, right: t.x + p.x + (vertical ? h : w) / 2, top: t.y + p.y - (vertical ? w : h) / 2, bottom: t.y + p.y + (vertical ? w : h) / 2 }); }; rect(0, 0, size, .65); const n = tableKinds[t.kind].seats / 2; for (const side of [-1, 1])
     for (let i = 0; i < n; i++) {
         const slot = (side === -1 ? 0 : n) + i;
@@ -56,7 +62,8 @@ export function megaRoute(p, from, to, avoid = []) {
             return base;
     }
     megaMetrics.searches++;
-    const stamp = JSON.stringify(p), [w, h] = megaDimensions[p.level - 1], W = w * 4, H = h * 4, size = W * (H + 1);
+    const { productionTier: visualTier, ...geometry } = p;
+    const stamp = JSON.stringify(geometry), [w, h] = megaDimensions[p.level - 1], W = w * 4, H = h * 4, size = W * (H + 1);
     let graph = graphCache.get(p);
     if (!graph || graph.stamp !== stamp) {
         const blocked = megaObstacles(p), mask = new Uint8Array(size);
@@ -249,7 +256,7 @@ export function megaPickups(level, anchorWidth, prepIsland = false, starterOnly 
 export function megaHomes(level) { const [w, h] = megaDimensions[level - 1]; return Array.from({ length: level >= 30 ? 13 : level >= 20 ? 9 : 6 }, (_, i) => toEngine({ x: Math.round((w - 1.5 - i * 1.2) * 4) / 4, y: h - .5 })); }
 export function validMega(v) { try {
     const s = v;
-    return !!s && (s.manager === undefined || validManager(s.manager) && !!s.paid && s.paid.spaceLevel > 1) && validPaid(s.paid) && validInterior(s) && (s.extended === undefined || s.extended === true) && s.version === 1 && ['new', 'confirmed-copy'].includes(s.source) && !!s.plans && Object.keys(s.plans).length > 0 && Object.keys(s.plans).length <= 100 && Object.entries(s.plans).every(([key, p]) => key === megaKey(p.level, p.branch) && (p.level <= 10 || s.extended === true) && !validateMegaPlan(p).length && p.tables.reduce((a, t) => a + tableSeatCount(t), 0) >= (s.inventory ? 1 : cafeGrowthBalance.cafes[Math.min(15, p.level) - 1].maxCustomers));
+    return !!s && (s.production === undefined || !!s.paid && validProductionKitchen(s.production)) && (s.manager === undefined || validManager(s.manager) && !!s.paid && s.paid.spaceLevel > 1) && validPaid(s.paid) && validInterior(s) && (s.extended === undefined || s.extended === true) && s.version === 1 && ['new', 'confirmed-copy'].includes(s.source) && !!s.plans && Object.keys(s.plans).length > 0 && Object.keys(s.plans).length <= 100 && Object.entries(s.plans).every(([key, p]) => key === megaKey(p.level, p.branch) && (p.level <= 10 || s.extended === true) && !validateMegaPlan(p).length && p.tables.reduce((a, t) => a + tableSeatCount(t), 0) >= (s.inventory ? 1 : cafeGrowthBalance.cafes[Math.min(15, p.level) - 1].maxCustomers));
 }
 catch {
     return false;

@@ -1,7 +1,7 @@
-import { megaZones } from './megaZones.js?v=commerce-6afe2d573839';
-import { megaArtFrames } from './megaArtFrames.js?v=commerce-6afe2d573839';
-import { webAsset } from './webAsset.js?v=commerce-6afe2d573839';
-import { iso, megaDimensions, fixedMega } from './megaSpace.js?v=commerce-6afe2d573839';
+import { megaZones } from './megaZones.js?v=kitchen-707cb8cb607b';
+import { megaArtFrames } from './megaArtFrames.js?v=kitchen-707cb8cb607b';
+import { webAsset } from './webAsset.js?v=kitchen-707cb8cb607b';
+import { iso, megaDimensions, fixedMega } from './megaSpace.js?v=kitchen-707cb8cb607b';
 export const environmentIds = ['fridge', 'sink', 'coffee', 'pastry', 'oven', 'prep', 'coffee-sage', 'shelf', 'wall-left', 'wall-right', 'window-left', 'window-right', 'entrance', 'plant', 'wall-shelf', 'wall-lamp'];
 const images = new Map();
 const fragments = new Map();
@@ -37,7 +37,7 @@ export function environmentPlacements(p) { const result = []; for (const [fIndex
     const vertical = f.bottom - f.top > f.right - f.left, n = Math.ceil(vertical ? f.bottom - f.top : f.right - f.left);
     for (let i = 0; i < n; i++) {
         const x = f.left + (vertical ? (f.right - f.left) / 2 : i + .5), y = f.top + (vertical ? i + .5 : (f.bottom - f.top) / 2), width = vertical ? 58 : 56;
-        const ids = fIndex === 0 ? ['fridge', 'sink', 'coffee', 'pastry', 'plant'] : fIndex === 2 ? ['pastry', 'prep', 'pastry', 'coffee-sage'] : ['oven', 'prep', 'coffee-sage', 'shelf'];
+        const ids = p.productionTier === 5 ? ['oven', 'oven', 'prep', 'shelf', 'oven'] : p.productionTier === 4 ? ['oven', 'prep', 'oven', 'shelf', 'pastry'] : p.productionTier === 3 ? ['oven', 'oven', 'prep', 'pastry', 'shelf'] : p.productionTier === 2 ? ['fridge', 'oven', 'pastry', 'prep', 'shelf'] : p.productionTier === 1 ? ['fridge', 'sink', 'oven', 'coffee', 'prep'] : fIndex === 0 ? ['fridge', 'sink', 'coffee', 'pastry', 'plant'] : fIndex === 2 ? ['pastry', 'prep', 'pastry', 'coffee-sage'] : ['oven', 'prep', 'coffee-sage', 'shelf'];
         result.push({ id: ids[i % ids.length], x, y, width, baseRise: width * .17, depth: x + y + .4, fixed: true });
     }
 } for (const [i, f] of (p.fixtures ?? []).entries()) {

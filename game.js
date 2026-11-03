@@ -1,33 +1,34 @@
-import { tickManager } from './managerActor.js?v=commerce-6afe2d573839';
-import { megaSaleFactor } from './megaOperations.js?v=commerce-6afe2d573839';
-import { megaGrowthBalance, megaSpawnSeconds } from './megaGrowthEconomy.js?v=commerce-6afe2d573839';
-import { tableSeatCount } from './megaInventory.js?v=commerce-6afe2d573839';
-import { megaEnabled, ensureMegaPlan, createMegaSpace, megaRoute, megaTravelSeconds, megaPointClear } from './megaSpace.js?v=commerce-6afe2d573839';
-import { randomClassBalance, classRandomConfig, pollClassEvents, classSpecial } from './classRandom.js?v=commerce-6afe2d573839';
-import { investmentRevenue, investmentSpawn, investmentVisitor, pollInvestmentEvents } from './progressiveEconomy.js?v=commerce-6afe2d573839';
-import { classProgressiveConfig } from './classProgressiveBalance.js?v=commerce-6afe2d573839';
-import { unlocked } from './progressiveFeatures.js?v=commerce-6afe2d573839';
-import { protectedSpecialStock, reservedGuestOrder, reservationIndex, takeReservedFood } from './specialInventory.js?v=commerce-6afe2d573839';
-import { pollManagement, strategyGuest, strategyQuantity } from './managementEngine.js?v=commerce-6afe2d573839';
-import { pollMini, miniPaused, activeMini } from './miniGames.js?v=commerce-6afe2d573839';
-import { specializationById } from './specializationConfig.js?v=commerce-6afe2d573839';
-import { chooseFurnitureSeat } from './furnitureSeating.js?v=commerce-6afe2d573839';
-import { layoutEconomyConfig } from './layoutEconomyConfig.js?v=commerce-6afe2d573839';
-import { freeKey } from './freeLayoutModel.js?v=commerce-6afe2d573839';
-import { layoutKey } from './layoutModel.js?v=commerce-6afe2d573839';
-import { CafeEvents } from './cafeEvents.js?v=commerce-6afe2d573839';
-import { CafeRun } from './cafeRun.js?v=commerce-6afe2d573839';
-import { Hospitality } from './hospitality.js?v=commerce-6afe2d573839';
-import { hospitalityDefinition, hospitalityBalance } from './hospitalityConfig.js?v=commerce-6afe2d573839';
-import { chooseSpecial, specialDefinition, itemCatalog } from './phase4Config.js?v=commerce-6afe2d573839';
-import { policyFor } from './sessionModes.js?v=commerce-6afe2d573839';
-import { chooseCustomer, chooseOrderMenu } from './customerRules.js?v=commerce-6afe2d573839';
-import { StaffSystem } from './staff.js?v=commerce-6afe2d573839';
-import { createSpace, floorPath, floorStandable } from './spatial.js?v=commerce-6afe2d573839';
-import { LocalTelemetry } from './telemetry.js?v=commerce-6afe2d573839';
-import { balance } from './config.js?v=commerce-6afe2d573839';
-import { createMenus, customers, menuDefinitions } from './data.js?v=commerce-6afe2d573839';
-import { StaffAbilities } from "./staffAbilities.js?v=commerce-6afe2d573839";
+import { kitchenStages, kitchenAmount, kitchenFloorLabel, bulkWarehouses, newProductionKitchen } from './productionKitchen.js?v=kitchen-707cb8cb607b';
+import { tickManager } from './managerActor.js?v=kitchen-707cb8cb607b';
+import { megaSaleFactor } from './megaOperations.js?v=kitchen-707cb8cb607b';
+import { megaGrowthBalance, megaSpawnSeconds } from './megaGrowthEconomy.js?v=kitchen-707cb8cb607b';
+import { tableSeatCount } from './megaInventory.js?v=kitchen-707cb8cb607b';
+import { megaEnabled, ensureMegaPlan, createMegaSpace, megaRoute, megaTravelSeconds, megaPointClear } from './megaSpace.js?v=kitchen-707cb8cb607b';
+import { randomClassBalance, classRandomConfig, pollClassEvents, classSpecial } from './classRandom.js?v=kitchen-707cb8cb607b';
+import { investmentRevenue, investmentSpawn, investmentVisitor, pollInvestmentEvents } from './progressiveEconomy.js?v=kitchen-707cb8cb607b';
+import { classProgressiveConfig } from './classProgressiveBalance.js?v=kitchen-707cb8cb607b';
+import { unlocked } from './progressiveFeatures.js?v=kitchen-707cb8cb607b';
+import { protectedSpecialStock, reservedGuestOrder, reservationIndex, takeReservedFood } from './specialInventory.js?v=kitchen-707cb8cb607b';
+import { pollManagement, strategyGuest, strategyQuantity } from './managementEngine.js?v=kitchen-707cb8cb607b';
+import { pollMini, miniPaused, activeMini } from './miniGames.js?v=kitchen-707cb8cb607b';
+import { specializationById } from './specializationConfig.js?v=kitchen-707cb8cb607b';
+import { chooseFurnitureSeat } from './furnitureSeating.js?v=kitchen-707cb8cb607b';
+import { layoutEconomyConfig } from './layoutEconomyConfig.js?v=kitchen-707cb8cb607b';
+import { freeKey } from './freeLayoutModel.js?v=kitchen-707cb8cb607b';
+import { layoutKey } from './layoutModel.js?v=kitchen-707cb8cb607b';
+import { CafeEvents } from './cafeEvents.js?v=kitchen-707cb8cb607b';
+import { CafeRun } from './cafeRun.js?v=kitchen-707cb8cb607b';
+import { Hospitality } from './hospitality.js?v=kitchen-707cb8cb607b';
+import { hospitalityDefinition, hospitalityBalance } from './hospitalityConfig.js?v=kitchen-707cb8cb607b';
+import { chooseSpecial, specialDefinition, itemCatalog } from './phase4Config.js?v=kitchen-707cb8cb607b';
+import { policyFor } from './sessionModes.js?v=kitchen-707cb8cb607b';
+import { chooseCustomer, chooseOrderMenu } from './customerRules.js?v=kitchen-707cb8cb607b';
+import { StaffSystem } from './staff.js?v=kitchen-707cb8cb607b';
+import { createSpace, floorPath, floorStandable } from './spatial.js?v=kitchen-707cb8cb607b';
+import { LocalTelemetry } from './telemetry.js?v=kitchen-707cb8cb607b';
+import { balance } from './config.js?v=kitchen-707cb8cb607b';
+import { createMenus, customers, menuDefinitions } from './data.js?v=kitchen-707cb8cb607b';
+import { StaffAbilities } from "./staffAbilities.js?v=kitchen-707cb8cb607b";
 export class CafeGame {
     durationSeconds;
     random;
@@ -199,7 +200,7 @@ export class CafeGame {
         this.telemetry.staffUpgradePurchases.push({ ...this.telemetry.upgradePurchases.at(-1) });
     } return result; }
     get cafe() { const c = this.economy.cafes[this.cafeLevel - 1]; return this.mode === 'CAFE_GROWTH' && this.mega?.paid ? { ...c, maxCustomers: Math.min(c.maxCustomers, this.economy.cafes[this.mega.paid.spaceLevel - 1].maxCustomers, ...(this.mega.inventory ? [Object.values(this.mega.plans).filter(p => p.level === this.mega.paid.spaceLevel && p.branch === (this.branchId ?? null))[0]?.tables.reduce((n, t) => n + tableSeatCount(t), 0) ?? 14] : [])) } : c; }
-    get warehouse() { return this.economy.warehouses[this.warehouseLevel - 1]; }
+    get warehouse() { const base = this.economy.warehouses[this.warehouseLevel - 1], n = this.mode === 'CAFE_GROWTH' ? this.mega?.production?.storage ?? 0 : 0; return n ? { ...base, capacity: Math.max(base.capacity, bulkWarehouses[n - 1].capacity) } : base; }
     earlyElapsed = null;
     get elapsedTime() { return this.earlyElapsed ?? this.durationSeconds - this.remainingSeconds; }
     endBusiness() { if (this.policy.persistence !== 'saved-cafe' || this.status !== 'RUNNING')
@@ -209,7 +210,18 @@ export class CafeGame {
     getPrice(m, level = m.currentLevel) { return Math.round(m.basePrice * this.economy.menuMultipliers[level - 1] * (this.progressive && this.mode === 'CLASS_MATCH' ? (this.classRandom ? classRandomConfig.priceMultiplier * (this.elapsedTime < (this.classRandom.priceUntil ?? 0) ? (this.classRandom.priceFactor ?? 1) : 1) * (this.elapsedTime < this.classRandom.discountUntil ? (this.classRandom.discountFactor ?? .9) : 1) : classProgressiveConfig.priceMultiplier) : investmentRevenue(this))); }
     getMenuUpgradeCost(m) { return m.currentLevel >= m.maxLevel ? null : Math.round(m.basePrice * this.economy.menuUpgradeMultipliers[m.currentLevel - 1]); }
     get nextCafe() { return this.economy.cafes[this.cafeLevel] ?? null; }
-    get nextWarehouse() { return this.economy.warehouses[this.warehouseLevel] ?? null; }
+    get nextWarehouse() { return this.economy.warehouses[this.warehouseLevel] ?? (this.mode === 'CAFE_GROWTH' && this.mega?.paid ? bulkWarehouses[this.mega.production?.storage ?? 0] ?? null : null); }
+    get productionAmount() { return kitchenAmount(this); }
+    upgradeProduction(expectedTier = this.mega?.production?.tier ?? 0) { if (this.mode !== 'CAFE_GROWTH' || !this.mega?.paid)
+        return { ok: false, reason: 'GROWTH 유료 매장에서 사용할 수 있어요.' }; const p = this.mega.production ?? newProductionKitchen(), next = kitchenStages[p.tier + 1]; if (expectedTier !== p.tier || !next)
+        return { ok: false, reason: '이미 처리했거나 최고 설비예요.' }; if (this.cafeLevel < next.level || this.mega.paid.spaceLevel < next.space)
+        return { ok: false, reason: 'Lv.' + next.level + ' 및 ' + kitchenFloorLabel(next.space) + '칸 유료 매장이 필요해요.' }; const r = this.purchase(next.cost, 'production', next.name, p.tier + 1); if (r.ok) {
+        this.mega.production = p;
+        p.tier++;
+        p.receipts.push({ id: 'production-' + (p.receipts.length + 1), kind: 'kitchen', tier: p.tier, cost: next.cost });
+        for (const plan of Object.values(this.mega.plans))
+            plan.productionTier = p.tier;
+    } return r; }
     purchase(cost, kind, target, level) {
         if (this.status !== 'RUNNING')
             return { ok: false, reason: '영업이 종료됐어요.' };
@@ -249,7 +261,13 @@ export class CafeGame {
     } return result; }
     upgradeWarehouse() { const next = this.nextWarehouse; if (!next)
         return { ok: false, reason: '창고가 최대 크기예요.' }; const result = this.purchase(next.cost, 'warehouse', '창고', this.warehouseLevel + 1); if (result.ok) {
-        this.warehouseLevel++;
+        if (this.warehouseLevel < this.economy.warehouses.length)
+            this.warehouseLevel++;
+        else if (this.mode === 'CAFE_GROWTH' && this.mega?.paid) {
+            const p = this.mega.production ??= newProductionKitchen();
+            p.storage++;
+            p.receipts.push({ id: 'production-' + (p.receipts.length + 1), kind: 'storage', tier: p.storage, cost: next.cost });
+        }
         for (const m of this.menus)
             m.maxStock = next.capacity;
     } return result; }
@@ -286,7 +304,7 @@ export class CafeGame {
         return; this.stats.attempted++; if (correct) {
         this.stats.correct++;
         const boosted = this.boosterRemaining > 0;
-        const quantity = quantityOverride ?? (boosted ? 3 : balance.productionPerCorrect);
+        const quantity = quantityOverride === 0 ? 0 : this.mode === 'CAFE_GROWTH' && this.mega?.paid ? Math.max(this.productionAmount, quantityOverride ?? (boosted ? 3 : balance.productionPerCorrect)) : quantityOverride ?? (boosted ? 3 : balance.productionPerCorrect);
         if (boosted && quantityOverride === undefined) {
             this.boosterRemaining--;
             this.telemetry.phase4.boostedCorrectAnswers++;

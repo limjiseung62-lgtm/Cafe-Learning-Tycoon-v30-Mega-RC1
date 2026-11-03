@@ -1,5 +1,5 @@
-import { beginManagerConstruction } from './managerState.js?v=commerce-6afe2d573839';
-import { ensureMegaPlan, megaDimensions, validMega, validateMegaPlan } from './megaSpace.js?v=commerce-6afe2d573839';
+import { beginManagerConstruction } from './managerState.js?v=kitchen-707cb8cb607b';
+import { ensureMegaPlan, megaDimensions, validMega, validateMegaPlan } from './megaSpace.js?v=kitchen-707cb8cb607b';
 export const expansionStages = [{ level: 1, size: [8, 6], cost: 0, requiredLevel: 1 }, { level: 4, size: [12, 10], cost: 100000, requiredLevel: 4 }, { level: 10, size: [20, 16], cost: 500000, requiredLevel: 10 }, { level: 20, size: [40, 30], cost: 3000000, requiredLevel: 20 }, { level: 30, size: [64, 48], cost: 15000000, requiredLevel: 30 }];
 export function adoptPaidSpace(save) { const copy = structuredClone(save); if (copy.mega && typeof document !== 'undefined' && document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-'))
     copy.mega.extended = true; if (copy.mega && !copy.mega.paid) {

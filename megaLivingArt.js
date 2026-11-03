@@ -1,5 +1,5 @@
-import { livingFrames } from './megaLivingFrames.js?v=commerce-6afe2d573839';
-import { livingCatalog } from './megaLivingCatalog.js?v=commerce-6afe2d573839';
+import { livingFrames } from './megaLivingFrames.js?v=kitchen-707cb8cb607b';
+import { livingCatalog } from './megaLivingCatalog.js?v=kitchen-707cb8cb607b';
 export function livingWalkAsset(identity, m) {
     const direction = ['SE', 'SW', 'NW', 'NE'].indexOf(m.direction);
     if (direction < 0)

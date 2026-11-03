@@ -1,5 +1,5 @@
-import { gradeAnswer } from './reading.js?v=commerce-6afe2d573839';
-import { normalizeAnswer } from './questionPack.js?v=commerce-6afe2d573839';
+import { gradeAnswer } from './reading.js?v=kitchen-707cb8cb607b';
+import { normalizeAnswer } from './questionPack.js?v=kitchen-707cb8cb607b';
 export const learningConfig = { remediationGap: 3, recentWindow: 3, maxQueue: 32 };
 export function validSpaced(s) { const x = s, n = (v) => Number.isSafeInteger(v) && Number(v) >= 0, str = (v) => typeof v === "string" && v.length > 0 && v.length <= 256, ids = (v) => Array.isArray(v) && v.length <= 5000 && new Set(v).size === v.length && v.every(str); return !!x && x.version === 1 && str(x.signature) && !!x.uses && !Array.isArray(x.uses) && Object.keys(x.uses).length <= 5000 && Object.entries(x.uses).every(([k, v]) => str(k) && n(v)) && ids(x.encountered) && ids(x.mastered) && !!x.first && !Array.isArray(x.first) && Object.keys(x.first).length <= 5000 && Object.entries(x.first).every(([k, v]) => str(k) && typeof v === "boolean") && [x.review, x.mastery].every(c => !!c && n(c.attempted) && n(c.correct) && c.correct <= c.attempted) && [x.production, x.shortages, x.delayed].every(n) && Array.isArray(x.jobs) && x.jobs.length <= 5000 && new Set(x.jobs.map(j => j.root)).size === x.jobs.length && x.jobs.every(j => str(j.root) && ["review", "mastery"].includes(j.phase) && n(j.count) && n(j.gap) && j.gap <= 10 && ids(j.used) && n(j.failures)); }
 export class LearningSession {
