@@ -1,12 +1,12 @@
-import { unlocked } from './progressiveFeatures.js?v=kitchen-707cb8cb607b';
-import { furnitureFor } from './furnitureCatalog.js?v=kitchen-707cb8cb607b';
-import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=kitchen-707cb8cb607b';
-import { freeConnected } from './freeNavigation.js?v=kitchen-707cb8cb607b';
-import { createSpace } from './spatial.js?v=kitchen-707cb8cb607b';
-import { defaultFreePlan, freeKey, seatBudget, tableKinds, freeParts, freeFloor, freeFixed, wallDecor, freeDecorBox, convertLegacy } from './freeLayoutModel.js?v=kitchen-707cb8cb607b';
-import { overlap } from './layoutModel.js?v=kitchen-707cb8cb607b';
-import { cafeGrowthBalance } from './modeBalance.js?v=kitchen-707cb8cb607b';
-import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=kitchen-707cb8cb607b';
+import { unlocked } from './progressiveFeatures.js?v=placement-ea9474dcb7f1';
+import { furnitureFor } from './furnitureCatalog.js?v=placement-ea9474dcb7f1';
+import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=placement-ea9474dcb7f1';
+import { freeConnected } from './freeNavigation.js?v=placement-ea9474dcb7f1';
+import { createSpace } from './spatial.js?v=placement-ea9474dcb7f1';
+import { defaultFreePlan, freeKey, seatBudget, tableKinds, freeParts, freeFloor, freeFixed, wallDecor, freeDecorBox, convertLegacy } from './freeLayoutModel.js?v=placement-ea9474dcb7f1';
+import { overlap } from './layoutModel.js?v=placement-ea9474dcb7f1';
+import { cafeGrowthBalance } from './modeBalance.js?v=placement-ea9474dcb7f1';
+import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=placement-ea9474dcb7f1';
 const memo = new Map();
 export const freeDiagnostics = { checks: 0, paths: 0, hits: 0 };
 export function basicFree(p) { try {

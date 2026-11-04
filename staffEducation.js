@@ -1,6 +1,6 @@
-import { unlocked } from './progressiveFeatures.js?v=kitchen-707cb8cb607b';
-import { managementFor } from './managementState.js?v=kitchen-707cb8cb607b';
-import { recruitById } from './recruitConfig.js?v=kitchen-707cb8cb607b';
+import { unlocked } from './progressiveFeatures.js?v=placement-ea9474dcb7f1';
+import { managementFor } from './managementState.js?v=placement-ea9474dcb7f1';
+import { recruitById } from './recruitConfig.js?v=placement-ea9474dcb7f1';
 export const educationThresholds = [5, 12, 22];
 export function educationLevel(g, id) { return g.mode === 'CAFE_GROWTH' ? g.management?.training[id]?.level ?? 0 : 0; }
 export function observeEducation(g, guestId) { if (!unlocked(g, 'education'))

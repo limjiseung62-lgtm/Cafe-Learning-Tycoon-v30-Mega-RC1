@@ -1,4 +1,4 @@
-import { customerPoolForLevel } from './customerPools.js?v=kitchen-707cb8cb607b';
+import { customerPoolForLevel } from './customerPools.js?v=placement-ea9474dcb7f1';
 export const cafeLevels = [
     { level: 1, name: '포근한 골목 카페', maxCustomers: 3, expansionCost: 0, theme: 'alley', order: { minQuantity: 1, maxQuantity: 2, maxTypes: 2 }, customerPool: customerPoolForLevel(1) },
     { level: 2, name: '햇살 동네 카페', maxCustomers: 4, expansionCost: 3000, theme: 'sunny', order: { minQuantity: 1, maxQuantity: 3, maxTypes: 2 }, customerPool: customerPoolForLevel(2) },

@@ -1,4 +1,4 @@
-import { validSpecialInventory } from './specialInventory.js?v=kitchen-707cb8cb607b';
+import { validSpecialInventory } from './specialInventory.js?v=placement-ea9474dcb7f1';
 export const createManagement = () => ({ version: 1, strategy: null, reputation: 50, reviews: [], regulars: {}, materials: { fruit: 2, milk: 2, flour: 2, flower: 1 }, research: {}, training: {}, deliveries: [], businessHistory: [] });
 export function managementFor(save) { return save.management ?? (save.management = createManagement()); }
 export function addCafeMemory(list, entry) { if (list.length >= 300 || list.some(x => x.id === entry.id))

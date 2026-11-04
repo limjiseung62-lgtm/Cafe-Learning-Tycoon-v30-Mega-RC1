@@ -1,9 +1,9 @@
-import { managerFrames } from './managerFrames.js?v=kitchen-707cb8cb607b';
-import { managerCatalog, managerById, ensureManager, completeManagerConstruction, selectManager, deferManager } from './managerState.js?v=kitchen-707cb8cb607b';
-import { managerAdvice, nextManagerAdvice } from './managerAdvice.js?v=kitchen-707cb8cb607b';
-import { talkManager } from './managerActor.js?v=kitchen-707cb8cb607b';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=kitchen-707cb8cb607b';
-import { liveManagementOpen } from './liveManagement.js?v=kitchen-707cb8cb607b';
+import { managerFrames } from './managerFrames.js?v=placement-ea9474dcb7f1';
+import { managerCatalog, managerById, ensureManager, completeManagerConstruction, selectManager, deferManager } from './managerState.js?v=placement-ea9474dcb7f1';
+import { managerAdvice, nextManagerAdvice } from './managerAdvice.js?v=placement-ea9474dcb7f1';
+import { talkManager } from './managerActor.js?v=placement-ea9474dcb7f1';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=placement-ea9474dcb7f1';
+import { liveManagementOpen } from './liveManagement.js?v=placement-ea9474dcb7f1';
 function syncManagerRun(save) { const run = save.campaign?.run; if (run && !run.closed && run.cafe.mega && save.mega)
     run.cafe.mega.manager = structuredClone(save.mega.manager); return save; }
 const portrait = (row) => { const frame = managerFrames[row][0], top = frame.box[1], height = frame.box[3]; return '<div class="manager-portrait" style="aspect-ratio:192/' + height + '" aria-hidden="true"><img loading="lazy" src="assets/art/managers/companion-atlas.png" alt="" style="top:-' + top / height * 100 + '%;height:' + 1024 / height * 100 + '%"></div>'; };

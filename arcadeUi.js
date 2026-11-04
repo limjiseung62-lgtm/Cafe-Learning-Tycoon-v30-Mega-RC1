@@ -1,7 +1,7 @@
-import { arcadeStats } from './arcadeGames.js?v=kitchen-707cb8cb607b';
-import { putSort, submitSort, sortFoods } from './sortGame.js?v=kitchen-707cb8cb607b';
-import { rotateMachine, checkMachine, machineFlow } from './machineGame.js?v=kitchen-707cb8cb607b';
-import { moveTray, trayObstacles, trayMotionPeriod } from './trayGame.js?v=kitchen-707cb8cb607b';
+import { arcadeStats } from './arcadeGames.js?v=placement-ea9474dcb7f1';
+import { putSort, submitSort, sortFoods } from './sortGame.js?v=placement-ea9474dcb7f1';
+import { rotateMachine, checkMachine, machineFlow } from './machineGame.js?v=placement-ea9474dcb7f1';
+import { moveTray, trayObstacles, trayMotionPeriod } from './trayGame.js?v=placement-ea9474dcb7f1';
 export const arcadeNames = { sort: '주문 분류 대소동', machine: '커피 머신 수리', tray: '트레이 배달 작전' };
 let sound = () => { };
 export function setArcadeSound(fn) { sound = fn; }

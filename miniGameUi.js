@@ -1,20 +1,20 @@
-import { miniSupported } from './miniGames.js?v=kitchen-707cb8cb607b';
-import { desiredVillageMini } from './village.js?v=kitchen-707cb8cb607b';
-import { newArcade } from './arcadeGames.js?v=kitchen-707cb8cb607b';
-import { renderArcade, animateArcade, arcadeBriefing } from './arcadeUi.js?v=kitchen-707cb8cb607b';
-import { createCraft } from './craftGames.js?v=kitchen-707cb8cb607b';
-import { renderCraft, animateCraft, craftBriefing } from './craftUi.js?v=kitchen-707cb8cb607b';
-import { newCakeRush, rushSeed } from './cakeRush.js?v=kitchen-707cb8cb607b';
-import { renderRush, animateRush, rushBriefing } from './cakeRushUi.js?v=kitchen-707cb8cb607b';
-import { escapeText as esc } from './questionRenderer.js?v=kitchen-707cb8cb607b';
-import { miniInfo, miniTokens } from './miniGameConfig.js?v=kitchen-707cb8cb607b';
-import { cakeTokens } from './miniCake.js?v=kitchen-707cb8cb607b';
-import { flowerTokens } from './miniFlowers.js?v=kitchen-707cb8cb607b';
-import { ovenPosition } from './miniOven.js?v=kitchen-707cb8cb607b';
-import { activeMini, pollMini, startMini, placeMini, finishMini, retryMini, leaveMini, skipMini, canExtraMini, offerMini, miniRewardIds, miniPaused } from './miniGames.js?v=kitchen-707cb8cb607b';
-import { miniArt, refreshMiniArt } from './miniArt.js?v=kitchen-707cb8cb607b';
-import { longStateFor } from './longGrowthUi.js?v=kitchen-707cb8cb607b';
-import { growthRuntime } from './growthRuntime.js?v=kitchen-707cb8cb607b';
+import { miniSupported } from './miniGames.js?v=placement-ea9474dcb7f1';
+import { desiredVillageMini } from './village.js?v=placement-ea9474dcb7f1';
+import { newArcade } from './arcadeGames.js?v=placement-ea9474dcb7f1';
+import { renderArcade, animateArcade, arcadeBriefing } from './arcadeUi.js?v=placement-ea9474dcb7f1';
+import { createCraft } from './craftGames.js?v=placement-ea9474dcb7f1';
+import { renderCraft, animateCraft, craftBriefing } from './craftUi.js?v=placement-ea9474dcb7f1';
+import { newCakeRush, rushSeed } from './cakeRush.js?v=placement-ea9474dcb7f1';
+import { renderRush, animateRush, rushBriefing } from './cakeRushUi.js?v=placement-ea9474dcb7f1';
+import { escapeText as esc } from './questionRenderer.js?v=placement-ea9474dcb7f1';
+import { miniInfo, miniTokens } from './miniGameConfig.js?v=placement-ea9474dcb7f1';
+import { cakeTokens } from './miniCake.js?v=placement-ea9474dcb7f1';
+import { flowerTokens } from './miniFlowers.js?v=placement-ea9474dcb7f1';
+import { ovenPosition } from './miniOven.js?v=placement-ea9474dcb7f1';
+import { activeMini, pollMini, startMini, placeMini, finishMini, retryMini, leaveMini, skipMini, canExtraMini, offerMini, miniRewardIds, miniPaused } from './miniGames.js?v=placement-ea9474dcb7f1';
+import { miniArt, refreshMiniArt } from './miniArt.js?v=placement-ea9474dcb7f1';
+import { longStateFor } from './longGrowthUi.js?v=placement-ea9474dcb7f1';
+import { growthRuntime } from './growthRuntime.js?v=placement-ea9474dcb7f1';
 let current = null, flush = () => false, projection = '', selected = null, raf = 0, error = '';
 export function beginMiniUi(g, onSave) { cancelAnimationFrame(raf); document.getElementById('rush-briefing')?.remove(); document.getElementById('mini-dialog')?.remove(); document.getElementById('mini-banner')?.remove(); document.body.classList.remove('mini-active'); document.getElementById('app')?.removeAttribute('inert'); current = miniSupported(g) ? g : null; flush = onSave; projection = ''; selected = null; error = ''; if (current) {
     if (current.miniCollection)

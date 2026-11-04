@@ -1,5 +1,5 @@
-import { deploymentLocalStorage } from './deploymentStorage.js?v=kitchen-707cb8cb607b';
-import { AudioManager } from './audioManager.js?v=kitchen-707cb8cb607b';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=placement-ea9474dcb7f1';
+import { AudioManager } from './audioManager.js?v=placement-ea9474dcb7f1';
 export class FeelTracker {
     guests = new Map();
     workers = new Map();

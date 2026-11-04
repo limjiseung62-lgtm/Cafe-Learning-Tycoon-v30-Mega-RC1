@@ -1,11 +1,11 @@
-import { validProductionKitchen } from './productionKitchen.js?v=kitchen-707cb8cb607b';
-import { validManager } from './managerState.js?v=kitchen-707cb8cb607b';
-import { megaZones } from './megaZones.js?v=kitchen-707cb8cb607b';
-import { validInterior, tableSeatCount } from './megaInventory.js?v=kitchen-707cb8cb607b';
-import { allDecorationCatalog } from './longGrowthConfig.js?v=kitchen-707cb8cb607b';
-import { cafeGrowthBalance } from './modeBalance.js?v=kitchen-707cb8cb607b';
-import { tableKinds, turn } from './freeLayoutModel.js?v=kitchen-707cb8cb607b';
-import { furnitureFor } from './furnitureCatalog.js?v=kitchen-707cb8cb607b';
+import { validProductionKitchen } from './productionKitchen.js?v=placement-ea9474dcb7f1';
+import { validManager } from './managerState.js?v=placement-ea9474dcb7f1';
+import { megaZones } from './megaZones.js?v=placement-ea9474dcb7f1';
+import { validInterior, tableSeatCount } from './megaInventory.js?v=placement-ea9474dcb7f1';
+import { allDecorationCatalog } from './longGrowthConfig.js?v=placement-ea9474dcb7f1';
+import { cafeGrowthBalance } from './modeBalance.js?v=placement-ea9474dcb7f1';
+import { tableKinds, turn } from './freeLayoutModel.js?v=placement-ea9474dcb7f1';
+import { furnitureFor } from './furnitureCatalog.js?v=placement-ea9474dcb7f1';
 export const megaDimensions = [[8, 6], [10, 7], [12, 8], [12, 10], [14, 10], [14, 12], [16, 12], [16, 14], [18, 14], [20, 16]].concat(Array.from({ length: 20 }, (_, i) => { const l = i + 11; return l < 20 ? [20, 16] : l < 30 ? [40, 30] : [64, 48]; }));
 export const megaBudget = [4, 6, 6, 8, 8, 10, 12, 12, 14, 14, ...Array(9).fill(14), ...Array(10).fill(48), 96];
 export const megaKey = (level, branch) => (branch ?? 'base') + ':' + level;
@@ -188,10 +188,10 @@ export function validateMegaPlan(p) { const stamp = JSON.stringify(p); const cac
 function validateMegaUncached(p) {
     const errors = [];
     try {
-        if (!p || (p.shopLayout !== undefined && typeof p.shopLayout !== 'boolean') || (p.starterKitchenOnly !== undefined && typeof p.starterKitchenOnly !== 'boolean') || (p.prepIsland !== undefined && (typeof p.prepIsland !== 'boolean' || p.prepIsland && p.level !== 10)) || (p.kitchenAnchorWidth !== undefined && (!Number.isInteger(p.kitchenAnchorWidth) || p.level < 4 || p.kitchenAnchorWidth < 12 || p.kitchenAnchorWidth > megaDimensions[p.level - 1][0])) || (p.entry !== undefined && (!Number.isFinite(p.entry.x) || !Number.isFinite(p.entry.y) || p.entry.x !== .5 || p.entry.y !== 5.5)) || (p.serviceHubs !== undefined && typeof p.serviceHubs !== 'boolean') || p.version !== 1 || !Number.isInteger(p.level) || p.level < 1 || p.level > 30 || ![null, 'garden', 'bakery', 'dessert'].includes(p.branch) || !Array.isArray(p.tables) || p.tables.length < 1 || p.tables.length > (p.level >= 30 ? 48 : p.level >= 20 ? 24 : 7) || new Set(p.tables.map(t => t.id)).size !== p.tables.length || !Array.isArray(p.decor) || p.decor.length > (p.level >= 20 ? 96 : 24) || new Set(p.decor.map(d => d.id)).size !== p.decor.length || !p.shopLayout && new Set(p.decor.map(d => d.decorId)).size !== p.decor.length)
+        if (!p || (p.shopLayout !== undefined && typeof p.shopLayout !== 'boolean') || (p.starterKitchenOnly !== undefined && typeof p.starterKitchenOnly !== 'boolean') || (p.prepIsland !== undefined && (typeof p.prepIsland !== 'boolean' || p.prepIsland && p.level !== 10)) || (p.kitchenAnchorWidth !== undefined && (!Number.isInteger(p.kitchenAnchorWidth) || p.level < 4 || p.kitchenAnchorWidth < 12 || p.kitchenAnchorWidth > megaDimensions[p.level - 1][0])) || (p.entry !== undefined && (!Number.isFinite(p.entry.x) || !Number.isFinite(p.entry.y) || p.entry.x !== .5 || p.entry.y !== 5.5)) || (p.serviceHubs !== undefined && typeof p.serviceHubs !== 'boolean') || p.version !== 1 || !Number.isInteger(p.level) || p.level < 1 || p.level > 30 || ![null, 'garden', 'bakery', 'dessert'].includes(p.branch) || !Array.isArray(p.tables) || p.tables.length < 1 || p.tables.length > (p.shopLayout ? 256 : p.level >= 30 ? 48 : p.level >= 20 ? 24 : 7) || new Set(p.tables.map(t => t.id)).size !== p.tables.length || !Array.isArray(p.decor) || p.decor.length > (p.shopLayout ? 256 : p.level >= 20 ? 96 : 24) || new Set(p.decor.map(d => d.id)).size !== p.decor.length || !p.shopLayout && new Set(p.decor.map(d => d.decorId)).size !== p.decor.length)
             return ['배치 정보를 확인해 주세요.'];
         if (p.fixtures !== undefined && (!p.shopLayout || !Array.isArray(p.fixtures) || p.fixtures.length > (p.level >= 20 ? 24 : 6) || new Set(p.fixtures.map(f => f.id)).size !== p.fixtures.length))
-            return ['준비대 정보를 확인해 주세요.'];
+            return ['준비대는 이 매장에 ' + (p.level >= 20 ? 24 : 6) + '개까지 설치할 수 있어요. 보유 수량과 중복 ID도 확인해 주세요.'];
         const [w, h] = megaDimensions[p.level - 1];
         const boxes = [];
         for (const f of p.fixtures ?? []) {
@@ -216,11 +216,11 @@ function validateMegaUncached(p) {
             else if (d.x < 0 || d.x > w || d.y !== 0)
                 errors.push('벽 장식은 뒤쪽 벽에 놓아요.');
         }
-        if (p.tables.reduce((a, t) => a + tableSeatCount(t), 0) > megaBudget[p.level - 1])
+        if (!p.shopLayout && p.tables.reduce((a, t) => a + tableSeatCount(t), 0) > megaBudget[p.level - 1])
             errors.push(p.shopLayout ? '현재 매장에 놓을 수 있는 좌석 수를 초과했어요.' : '보유 좌석 수를 초과했어요.');
         for (const a of boxes) {
             if (a.parts.some(r => r.left < .2 || r.right > w - .2 || r.top < .2 || r.bottom > h - .2 || fixedMega(p.level, p.kitchenAnchorWidth, p.prepIsland, p.starterKitchenOnly).some(f => overlap(r, f))))
-                errors.push('가구가 벽·주방을 벗어나거나 겹쳐요.');
+                errors.push('가구 전체가 바닥 안에 들어가고 벽·주방과 겹치지 않아야 해요.');
             if (boxes.some(b => a.id < b.id && a.parts.some(r => b.parts.some(t => overlap(r, t)))))
                 errors.push('가구끼리 겹쳐요.');
         }

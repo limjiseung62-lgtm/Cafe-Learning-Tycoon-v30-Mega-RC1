@@ -1,13 +1,14 @@
-import { buyInteriorBatch, sellInteriorBatch, purchaseLimit, saleCandidates, saleQuote } from './interiorCommerce.js?v=kitchen-707cb8cb607b';
-import { iso, uniso, megaDimensions, megaChairs } from './megaSpace.js?v=kitchen-707cb8cb607b';
-import { adoptInterior, interiorCatalog, inventorySku, tableSeatCount, includedSeats } from './megaInventory.js?v=kitchen-707cb8cb607b';
-import { saveInteriorLayout } from './megaShop.js?v=kitchen-707cb8cb607b';
-import { InteriorHistory, installedIds, interiorCandidate, removeInterior } from './interiorPlacement.js?v=kitchen-707cb8cb607b';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=kitchen-707cb8cb607b';
-import { paintMegaDecor, environmentPlacements, paintEnvironment, megaImage } from './megaArt.js?v=kitchen-707cb8cb607b';
-import { furnitureFor } from './furnitureCatalog.js?v=kitchen-707cb8cb607b';
-import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=kitchen-707cb8cb607b';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=kitchen-707cb8cb607b';
+import { buyInteriorBatch, sellInteriorBatch, purchaseLimit, saleCandidates, saleQuote } from './interiorCommerce.js?v=placement-ea9474dcb7f1';
+import { iso, uniso, megaDimensions, megaChairs } from './megaSpace.js?v=placement-ea9474dcb7f1';
+import { adoptInterior, interiorCatalog, inventorySku, tableSeatCount, includedSeats } from './megaInventory.js?v=placement-ea9474dcb7f1';
+import { checkInteriorLayout } from './megaShop.js?v=placement-ea9474dcb7f1';
+import { placementSamples } from './interiorPlacementSamples.js?v=placement-ea9474dcb7f1';
+import { InteriorHistory, installedIds, interiorCandidate, removeInterior } from './interiorPlacement.js?v=placement-ea9474dcb7f1';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=placement-ea9474dcb7f1';
+import { paintMegaDecor, environmentPlacements, paintEnvironment, megaImage } from './megaArt.js?v=placement-ea9474dcb7f1';
+import { furnitureFor } from './furnitureCatalog.js?v=placement-ea9474dcb7f1';
+import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=placement-ea9474dcb7f1';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=placement-ea9474dcb7f1';
 export async function openTouchInterior(repo, refresh, initial, tab = 'inventory') {
     if (!await ensureGrowthWriteLock())
         return;
@@ -31,8 +32,8 @@ export async function openTouchInterior(repo, refresh, initial, tab = 'inventory
     const inv = () => history.state.mega.inventory;
     const plan = () => history.plan;
     const item = () => inv().items.find(i => i.id === selected);
-    const result = (p) => p ? saveInteriorLayout(history.state, p) : { ok: false, reason: '의자는 테이블의 빈 의자 자리에 놓아요.' };
-    const choose = (sku) => { const used = installedIds(plan()), all = inv().items.filter(i => i.sku === sku); selected = (all.find(i => !used.has(i.id)) ?? all[0])?.id ?? ''; placing = !!selected && !used.has(selected); continuous = placing; rotation = 0; const d = megaDimensions[plan().level - 1]; ghost = placing ? { x: d[0] / 2, y: d[1] / 2 } : null; message = placing ? '원하는 위치를 누르면 바로 저장돼요.' : '배치한 가구를 눌러 이동·회전·보관해요.'; render(); scan(); };
+    const result = (p) => p ? checkInteriorLayout(history.state, p) : { ok: false, reason: '의자는 테이블의 빈 의자 자리에 놓아요.' };
+    const choose = (sku) => { const used = installedIds(plan()), all = inv().items.filter(i => i.sku === sku); selected = (all.find(i => !used.has(i.id)) ?? all[0])?.id ?? ''; placing = !!selected && !used.has(selected); continuous = placing; rotation = 0; const d = megaDimensions[plan().level - 1]; ghost = placing ? { x: d[0] / 2, y: d[1] / 2 } : null; message = placing ? '원하는 위치를 누르면 바로 저장돼요.' : '보관함에 남은 가구가 없어요. 설치한 가구는 이동·회전·보관할 수 있어요.'; render(); scan(); };
     const edit = (p) => { if (!p) {
         message = '의자는 테이블의 빈 의자 자리에 놓아요.';
         render();
@@ -50,18 +51,24 @@ export async function openTouchInterior(repo, refresh, initial, tab = 'inventory
     const scan = () => { clearTimeout(scanTimer); const version = ++generation; zones = []; if (!placing || !selected) {
         paint();
         return;
-    } paint(); scanTimer = window.setTimeout(async () => { const p = plan(), [w, h] = megaDimensions[p.level - 1], center = ghost ?? { x: w / 2, y: h / 2 }; const points = item()?.sku === 'chair' ? p.tables.flatMap(t => megaChairs({ ...t, chairs: undefined }).map(c => c.chair)) : Array.from({ length: 81 }, (_, i) => ({ x: Math.round(center.x) - 4 + i % 9 + .5, y: Math.round(center.y) - 4 + Math.floor(i / 9) + .5 })).filter(q => q.x >= .5 && q.y >= .5 && q.x <= w - .5 && q.y <= h - .5); for (const q of points) {
+    } paint(); scanTimer = window.setTimeout(async () => { const p = plan(), [w, h] = megaDimensions[p.level - 1], center = ghost ?? { x: w / 2, y: h / 2 }, points = item()?.sku === 'chair' ? p.tables.flatMap(t => megaChairs({ ...t, chairs: undefined }).map(c => c.chair)) : placementSamples(p, center); for (const q of points) {
         if (version !== generation || closed)
             return;
         const candidate = interiorCandidate(history.state, p, selected, q.x, q.y, rotation), r = result(candidate);
-        zones.push({ ...q, ok: r.ok });
+        zones.push({ ...q, ok: r.ok, ...(!r.ok ? { reason: r.reason } : {}) });
         paint();
+        const status = box.querySelector('.touch-scan-status');
+        if (status) {
+            const good = zones.filter(z => z.ok).length, reasons = [...new Set(zones.flatMap(z => z.reason ? [z.reason] : []))];
+            status.textContent = good ? '검사한 ' + zones.length + '곳 중 ' + good + '곳에 배치할 수 있어요. 다른 바닥도 직접 누를 수 있어요.' : zones.length < points.length ? '배치 가능 위치 검사 중… ' + zones.length + '/' + points.length : '검사한 ' + zones.length + '곳은 모두 배치할 수 없어요. ' + reasons.slice(0, 3).join(' ') + ' · 다른 위치도 직접 누르면 같은 기준으로 검사해요.';
+            status.classList.toggle('all-blocked', !good && zones.length === points.length);
+        }
         await new Promise(r => setTimeout(r, 0));
     } }, 0); };
     function render() {
         generation++;
         const p = plan(), used = installedIds(p), [w, h] = megaDimensions[p.level - 1];
-        box.innerHTML = `<div class="touch-shell"><header><h2>카페 꾸미기</h2><strong>내 돈 ${history.state.money.toLocaleString()}원</strong><button data-close>완료 · 카페로</button></header><div class="touch-toolbar"><button data-undo ${!history.undo.length ? 'disabled' : ''}>↶ 되돌리기</button><button data-redo ${!history.redo.length ? 'disabled' : ''}>↷ 다시 실행</button><button data-zoom="in">＋ 확대</button><button data-zoom="out">− 축소</button><button data-fit>전체 보기</button><button data-inspect>가구 선택 · 이동</button><button data-preview-rotate ${!selected ? 'disabled' : ''}>↻ 90° 회전 배치</button></div><div class="touch-layout"><div class="touch-world"><canvas width="1000" height="700" tabindex="0" aria-label="카페 가구 배치 지도. 가구 선택 후 위치를 누르세요"></canvas><p role="status">${message}</p><p class="touch-legend">초록: 배치 가능 · 빨강: 불가 · 끌기: 카메라 이동<br>${w}×${h} · 좌석 ${p.tables.reduce((a, t) => a + tableSeatCount(t), 0)} · 미리보기 방향 ${rotation}° · 선택 ${item() ? inventorySku(item().sku)?.name : '없음'}</p><div class="touch-context" ${!selected || !used.has(selected) ? 'hidden' : ''}><button data-move>선택 가구 이동</button><button data-rotate>90° 회전</button><button data-store>보관하기</button></div></div><aside><nav><button data-tab="inventory" aria-pressed="${tab === 'inventory'}">내 보관함</button><button data-tab="shop" aria-pressed="${tab === 'shop'}">가구 상점</button></nav><p>${tab === 'inventory' ? '가구 그림 → 바닥 터치, 바로 배치!' : '테이블은 의자 포함 완성 세트예요. 구매한 가구는 보관함에 바로 들어가요.'}</p><details class="touch-seat-policy"><summary>좌석·별도 의자 안내</summary><p>2인·4인 테이블은 각각 2석·4석 포함. 별도 의자·쿠션은 기존 빈 자리나 세트 의자 꾸미기용이며 추가 좌석은 늘리지 않아요. 예전 미완성 배치가 안전 검사를 통과하지 못하면 테이블을 이동해 통로를 확보해 주세요.</p></details><button data-sell ${!item() || !saleCandidates(history.state, item().sku).length ? 'disabled' : ''}>선택 가구 중고 판매</button><small>보관 중인 유료 가구만 구매 당시 가격의 50%에 판매해요. 무료·이력 불명·설치 중 가구는 판매하지 않아요.</small><div class="touch-cards">${interiorCatalog.map(d => { const owned = inv().items.filter(i => i.sku === d.sku), placed = owned.filter(i => used.has(i.id)).length, allowed = history.state.cafeLevel >= d.level && (d.type !== 'table' || furnitureUnlocked(history.state.longTerm, d.sku)); if (tab === 'inventory' && !owned.length)
+        box.innerHTML = `<div class="touch-shell"><header><h2>카페 꾸미기</h2><strong>내 돈 ${history.state.money.toLocaleString()}원</strong><button data-close>완료 · 카페로</button></header><div class="touch-toolbar"><button data-undo ${!history.undo.length ? 'disabled' : ''}>↶ 되돌리기</button><button data-redo ${!history.redo.length ? 'disabled' : ''}>↷ 다시 실행</button><button data-zoom="in">＋ 확대</button><button data-zoom="out">− 축소</button><button data-fit>전체 보기</button><button data-inspect>가구 선택 · 이동</button><button data-preview-rotate ${!selected ? 'disabled' : ''}>↻ 90° 회전 배치</button></div><div class="touch-layout"><div class="touch-world"><p role="status">${message}</p><p class="touch-scan-status" role="status" aria-live="polite"></p><canvas width="1000" height="700" tabindex="0" aria-label="카페 가구 배치 지도. 가구 선택 후 위치를 누르세요"></canvas><p class="touch-legend">초록: 배치 가능 · 빨강: 불가 · 끌기: 카메라 이동<br>${w}×${h} · 좌석 ${p.tables.reduce((a, t) => a + tableSeatCount(t), 0)} · 동시 손님 수는 설치 좌석과 별도 관리 · 미리보기 방향 ${rotation}° · 선택 ${item() ? inventorySku(item().sku)?.name : '없음'}</p><div class="touch-context" ${!selected || !used.has(selected) ? 'hidden' : ''}><button data-move>선택 가구 이동</button><button data-rotate>90° 회전</button><button data-store>보관하기</button></div></div><aside><nav><button data-tab="inventory" aria-pressed="${tab === 'inventory'}">내 보관함</button><button data-tab="shop" aria-pressed="${tab === 'shop'}">가구 상점</button></nav><p>${tab === 'inventory' ? '가구 그림 → 바닥 터치, 바로 배치!' : '테이블은 의자 포함 완성 세트예요. 구매한 가구는 보관함에 바로 들어가요.'}</p><details class="touch-seat-policy"><summary>좌석·별도 의자 안내</summary><p>2인·4인 테이블은 각각 2석·4석 포함. 별도 의자·쿠션은 기존 빈 자리나 세트 의자 꾸미기용이며 추가 좌석은 늘리지 않아요. 예전 미완성 배치가 안전 검사를 통과하지 못하면 테이블을 이동해 통로를 확보해 주세요.</p></details><button data-sell ${!item() || !saleCandidates(history.state, item().sku).length ? 'disabled' : ''}>선택 가구 중고 판매</button><small>보관 중인 유료 가구만 구매 당시 가격의 50%에 판매해요. 무료·이력 불명·설치 중 가구는 판매하지 않아요.</small><div class="touch-cards">${interiorCatalog.map(d => { const owned = inv().items.filter(i => i.sku === d.sku), placed = owned.filter(i => used.has(i.id)).length, allowed = history.state.cafeLevel >= d.level && (d.type !== 'table' || furnitureUnlocked(history.state.longTerm, d.sku)); if (tab === 'inventory' && !owned.length)
             return ''; return `<button class="touch-card" data-sku="${d.sku}" ${tab === 'inventory' ? '' : !allowed || history.state.money < d.cost ? 'disabled' : ''} aria-pressed="${item()?.sku === d.sku}"><canvas width="130" height="110" data-thumb="${d.sku}" aria-hidden="true"></canvas><b>${d.name}</b>${d.type === 'table' ? '<span>의자 ' + includedSeats(d.sku) + '개 포함 세트 · ' + (d.seatCost ? '테이블 ' + d.baseCost.toLocaleString() + ' + 의자 ' + d.seatCost.toLocaleString() + '원' : '기존 의자 포함 가격 유지') + '</span>' : ''}<span>보유 ${owned.length} · 배치 ${placed} · 보관 ${owned.length - placed}</span>${tab === 'shop' ? `<span>${d.cost.toLocaleString()}원 · ${allowed ? '구매 가능' : 'Lv.' + d.level + ' 해금 필요'}</span>` : ''}</button>`; }).join('')}</div><div class="touch-buy" ${!confirm ? 'hidden' : ''}>${confirm ? '<canvas width="130" height="110" data-thumb="' + confirm + '" aria-hidden="true"></canvas><h3>' + inventorySku(confirm).name + (tradeMode === 'buy' ? ' 일괄 구매' : ' 중고 판매') + '</h3><p>개당 현재 구매가 ' + inventorySku(confirm).cost.toLocaleString() + '원 · 보유 ' + inv().items.filter(i => i.sku === confirm).length + '개</p>' : ''}<label>${tradeMode === 'buy' ? '구매' : '판매'} 수량 <button data-qty-minus aria-label="수량 줄이기">−</button><input data-quantity aria-label="가구 거래 수량" type="number" inputmode="numeric" min="1" step="1" value="${Number.isFinite(quantity) ? quantity : ''}"><button data-qty-plus aria-label="수량 늘리기">＋</button></label><p data-trade-summary></p><button data-trade-commit>${tradeMode === 'buy' ? '확인 · 일괄 구매' : '확인 · 중고 판매'}</button><button data-buy-cancel>취소</button></div></aside></div></div>`;
         box.querySelector('[data-close]').addEventListener('click', exit);
         box.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { tab = b.dataset.tab; confirm = ''; render(); });

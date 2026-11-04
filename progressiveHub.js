@@ -1,12 +1,12 @@
-import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=kitchen-707cb8cb607b';
-import { goalsHtml } from './progressiveGoals.js?v=kitchen-707cb8cb607b';
-import { landmarkNames, districtVisitors } from './progressiveFinance.js?v=kitchen-707cb8cb607b';
-import { openManagementAlbum } from './managementAlbumUi.js?v=kitchen-707cb8cb607b';
-import { syncManagementAlbum } from './managementAlbum.js?v=kitchen-707cb8cb607b';
-import { investmentReason, franchiseQuote } from './progressiveGuidance.js?v=kitchen-707cb8cb607b';
-import { investmentTierLimit, investmentCatalog, progressiveEconomyConfig as config, investVillage, foundFranchise, upgradeFranchise, branchYield, branchUpgradeCost, branchRequirement, buildLandmark, progressiveTownName } from './progressiveEconomy.js?v=kitchen-707cb8cb607b';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=kitchen-707cb8cb607b';
-import { unlocked } from './progressiveFeatures.js?v=kitchen-707cb8cb607b';
+import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=placement-ea9474dcb7f1';
+import { goalsHtml } from './progressiveGoals.js?v=placement-ea9474dcb7f1';
+import { landmarkNames, districtVisitors } from './progressiveFinance.js?v=placement-ea9474dcb7f1';
+import { openManagementAlbum } from './managementAlbumUi.js?v=placement-ea9474dcb7f1';
+import { syncManagementAlbum } from './managementAlbum.js?v=placement-ea9474dcb7f1';
+import { investmentReason, franchiseQuote } from './progressiveGuidance.js?v=placement-ea9474dcb7f1';
+import { investmentTierLimit, investmentCatalog, progressiveEconomyConfig as config, investVillage, foundFranchise, upgradeFranchise, branchYield, branchUpgradeCost, branchRequirement, buildLandmark, progressiveTownName } from './progressiveEconomy.js?v=placement-ea9474dcb7f1';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=placement-ea9474dcb7f1';
+import { unlocked } from './progressiveFeatures.js?v=placement-ea9474dcb7f1';
 export async function openProgressiveHub(repo, onClose) {
     if (!await ensureGrowthWriteLock())
         return;

@@ -1,4 +1,4 @@
-import { turn } from './freeLayoutModel.js?v=kitchen-707cb8cb607b';
+import { turn } from './freeLayoutModel.js?v=placement-ea9474dcb7f1';
 /** One plate per occupied chair; never reuse the two-seat parity offset on a six-seat set. */
 export function freeMealAnchor(space, seat) {
     const t = space.tables.find(t => t.tableId === seat.tableId), siblings = space.seats.filter(s => s.tableId === seat.tableId), index = siblings.findIndex(s => s.seatId === seat.seatId), half = siblings.length / 2;
