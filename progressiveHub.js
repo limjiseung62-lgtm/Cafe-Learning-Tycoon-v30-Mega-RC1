@@ -1,12 +1,12 @@
-import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=placement-ea9474dcb7f1';
-import { goalsHtml } from './progressiveGoals.js?v=placement-ea9474dcb7f1';
-import { landmarkNames, districtVisitors } from './progressiveFinance.js?v=placement-ea9474dcb7f1';
-import { openManagementAlbum } from './managementAlbumUi.js?v=placement-ea9474dcb7f1';
-import { syncManagementAlbum } from './managementAlbum.js?v=placement-ea9474dcb7f1';
-import { investmentReason, franchiseQuote } from './progressiveGuidance.js?v=placement-ea9474dcb7f1';
-import { investmentTierLimit, investmentCatalog, progressiveEconomyConfig as config, investVillage, foundFranchise, upgradeFranchise, branchYield, branchUpgradeCost, branchRequirement, buildLandmark, progressiveTownName } from './progressiveEconomy.js?v=placement-ea9474dcb7f1';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=placement-ea9474dcb7f1';
-import { unlocked } from './progressiveFeatures.js?v=placement-ea9474dcb7f1';
+import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=sq-approved400-20261104';
+import { goalsHtml } from './progressiveGoals.js?v=sq-approved400-20261104';
+import { landmarkNames, districtVisitors } from './progressiveFinance.js?v=sq-approved400-20261104';
+import { openManagementAlbum } from './managementAlbumUi.js?v=sq-approved400-20261104';
+import { syncManagementAlbum } from './managementAlbum.js?v=sq-approved400-20261104';
+import { investmentReason, franchiseQuote } from './progressiveGuidance.js?v=sq-approved400-20261104';
+import { investmentTierLimit, investmentCatalog, progressiveEconomyConfig as config, investVillage, foundFranchise, upgradeFranchise, branchYield, branchUpgradeCost, branchRequirement, buildLandmark, progressiveTownName } from './progressiveEconomy.js?v=sq-approved400-20261104';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=sq-approved400-20261104';
+import { unlocked } from './progressiveFeatures.js?v=sq-approved400-20261104';
 export async function openProgressiveHub(repo, onClose) {
     if (!await ensureGrowthWriteLock())
         return;

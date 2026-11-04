@@ -1,4 +1,4 @@
-import { imageReady, imageState } from './imageLoading.js?v=placement-ea9474dcb7f1';
+import { imageReady, imageState } from './imageLoading.js?v=sq-approved400-20261104';
 let installed = false;
 export function installAssetFallbacks() {
     if (installed)

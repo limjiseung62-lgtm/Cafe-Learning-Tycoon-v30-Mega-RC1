@@ -1,0 +1,295 @@
+{
+  "schemaVersion": "school-quest-approved-registry/1",
+  "providers": {
+    "korean-literacy": {
+      "releaseRef": "qb-korean-g4-s2-u3-opinions@0.1.0-approved",
+      "manifestSHA256": "25059ab9eb951734dac5f8f5356ce84ca41a68da493b2baf0ad01bcb6afc27ec",
+      "base": "./korean/",
+      "questionCount": 200,
+      "runtimeVersion": "approved-static-same-type/1",
+      "dataVersion": "0.1.0-approved",
+      "teacherApproval": true
+    },
+    "social-studies": {
+      "releaseRef": "qb-social-g4-s2-u2-t1-local-problems@0.1.0-approved-supply",
+      "manifestSHA256": "0e6c26455736525bd51ac4ea7c632121fc308c0028a5bbff199eb19fe46fc0f6",
+      "base": "./social/",
+      "questionCount": 200,
+      "runtimeVersion": "approved-static-same-type/1",
+      "dataVersion": "0.1.0-approved-supply",
+      "teacherApproval": true
+    }
+  },
+  "units": [
+    {
+      "subject": "korean-literacy",
+      "sourceId": "korean-literacy:g4s2",
+      "grade": 4,
+      "semester": 2,
+      "id": "korean-literacy:g4:s2:u3",
+      "title": "3. 의견을 모아서",
+      "label": "3. 의견을 모아서",
+      "areaId": "korean-literacy-g4s2",
+      "areaLabel": "국어 · 의견 나누기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "KO-G4S2U3-topic",
+          "label": "주제·목적 파악",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-opinion",
+          "label": "의견·제안 찾기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-question",
+          "label": "질문의 기능·필요 정보",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-criteria",
+          "label": "조건·기준 적용",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-summary",
+          "label": "요약·제목",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-respect",
+          "label": "참여·관점 존중 · 공감·질문 표현",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-situation",
+          "label": "상황의 문제 찾기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-compare-evidence",
+          "label": "내용·자료 비교 · 근거·추론 범위",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-combine",
+          "label": "의견 통합",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-opinion-reason",
+          "label": "의견과 이유 연결",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-record",
+          "label": "기록의 정확성",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-proposal-writing",
+          "label": "제안·표현 고치기 · 제안 글의 구성",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-audience",
+          "label": "대상·전달 방법",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-evaluate",
+          "label": "실천·점검·재조정",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-process",
+          "label": "토의 절차",
+          "levels": [
+            1,
+            2
+          ]
+        }
+      ],
+      "practicePolicy": "same-type-diverse/1",
+      "difficultyFilter": false,
+      "questionCount": 200
+    },
+    {
+      "subject": "social-studies",
+      "sourceId": "social-studies:g4s2",
+      "grade": 4,
+      "semester": 2,
+      "id": "social-studies:g4:s2:u2:t1",
+      "title": "2단원 · 1주제 지역문제의 해결",
+      "label": "2단원 · 1주제 지역문제의 해결",
+      "areaId": "social-studies-g4s2",
+      "areaLabel": "사회 · 지역문제 해결",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "SO-G4S2U2T1-concept",
+          "label": "지역문제의 의미·필요성",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-investigate",
+          "label": "조사 방법·자료 수집",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-solution",
+          "label": "원인에 맞는 해결 방안",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-cooperate",
+          "label": "협력·갈등 조정",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-safety",
+          "label": "안전·권리·조사 윤리",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-reason",
+          "label": "원인·근거와 판단 한계",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-evaluate",
+          "label": "실천 평가·지속 개선",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-plan",
+          "label": "제안·계획·기록",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-criteria",
+          "label": "대안 비교·실천 가능성",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-participate",
+          "label": "주민 참여·기관 역할",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-data",
+          "label": "표·그래프·자료 읽기",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-map",
+          "label": "위치도 해석·활용",
+          "levels": [
+            1,
+            2
+          ]
+        }
+      ],
+      "practicePolicy": "same-type-diverse/1",
+      "difficultyFilter": false,
+      "questionCount": 200
+    }
+  ]
+}

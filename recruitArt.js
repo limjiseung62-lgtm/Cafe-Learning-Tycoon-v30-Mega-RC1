@@ -1,5 +1,5 @@
-import { sprite } from './art.js?v=placement-ea9474dcb7f1';
-import { imageReady } from './imageLoading.js?v=placement-ea9474dcb7f1';
+import { sprite } from './art.js?v=sq-approved400-20261104';
+import { imageReady } from './imageLoading.js?v=sq-approved400-20261104';
 export const isNewStaff = (id) => /^staff-(6|7|8|9|10|11|12)$/.test(id);
 export function recruitFrame(id, motion, facing = 'right') {
     if (!isNewStaff(id))

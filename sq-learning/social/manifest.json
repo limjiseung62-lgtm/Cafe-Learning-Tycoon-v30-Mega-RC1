@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "common-approved-static-manifest/1",
+  "packId": "qb-social-g4-s2-u2-t1-local-problems",
+  "version": "0.1.0-approved-supply",
+  "sourceVersion": "0.1.0-review",
+  "subjectId": "social-studies",
+  "grade": 4,
+  "semester": 2,
+  "unitId": "social-studies:g4:s2:u2:t1",
+  "unitTitle": "지역문제의 해결",
+  "questions": 200,
+  "passages": 40,
+  "teacherApproval": true,
+  "rightsStatus": "independent-authoring-evidence-and-user-standing-permission",
+  "operationalApproval": true,
+  "authorization": "Existing exact-scope user batch approval, standing independent-text/SVG supply permission, and current user instruction to register and deploy approved social content; original flags unchanged.",
+  "publicDeploymentPerformed": false,
+  "legacyProductionReadyChanged": false,
+  "formats": [
+    "single-choice"
+  ],
+  "files": [
+    {
+      "path": "social-pack.json",
+      "bytes": 972090,
+      "sha256": "7113e6e1f4baa74a9f3fb1c1c8cd98004a19dba6f2efb560c7c95c34609f05c6"
+    },
+    {
+      "path": "approved-scope.json",
+      "bytes": 33753,
+      "sha256": "bf634a8ec07137256bc6a56e6b7838b2d7589835d0f075280a93e792da0c1a21"
+    }
+  ]
+}

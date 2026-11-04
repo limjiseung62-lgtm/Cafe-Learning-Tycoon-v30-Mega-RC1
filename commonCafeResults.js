@@ -1,10 +1,10 @@
-import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js?v=placement-ea9474dcb7f1';
-import { CommonCafeFlow } from './commonCafeFlow.js?v=placement-ea9474dcb7f1';
-import { commonQuestion, commonAnswerText } from './commonLearningCatalog.js?v=placement-ea9474dcb7f1';
-import { loadCommonRuntime } from './commonBankLoader.js?v=placement-ea9474dcb7f1';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=placement-ea9474dcb7f1';
-import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=placement-ea9474dcb7f1';
-import { worksheetHtml } from './twinWorksheet.js?v=placement-ea9474dcb7f1';
+import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js?v=sq-approved400-20261104';
+import { CommonCafeFlow } from './commonCafeFlow.js?v=sq-approved400-20261104';
+import { commonQuestion, commonAnswerText } from './commonLearningCatalog.js?v=sq-approved400-20261104';
+import { loadCommonRuntime } from './commonBankLoader.js?v=sq-approved400-20261104';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=sq-approved400-20261104';
+import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=sq-approved400-20261104';
+import { worksheetHtml } from './twinWorksheet.js?v=sq-approved400-20261104';
 const mounted = new WeakMap();
 const archiveExpected = new WeakMap();
 export async function restoreCommonArchive(flow, saved) { const raw = deploymentLocalStorage.getItem(archiveKey(saved.learningRecordId)); const cp = raw ? await flow.loaded.module.decode(raw) : saved; await flow.restore(cp); archiveExpected.set(flow, raw); }

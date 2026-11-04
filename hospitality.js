@@ -1,5 +1,5 @@
-import { unlocked } from './progressiveFeatures.js?v=placement-ea9474dcb7f1';
-import { helperCatalog, hospitalityBalance as b } from './hospitalityConfig.js?v=placement-ea9474dcb7f1';
+import { unlocked } from './progressiveFeatures.js?v=sq-approved400-20261104';
+import { helperCatalog, hospitalityBalance as b } from './hospitalityConfig.js?v=sq-approved400-20261104';
 export class Hospitality {
     enabled = false;
     questions = [];

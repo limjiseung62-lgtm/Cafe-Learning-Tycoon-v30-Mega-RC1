@@ -1,5 +1,5 @@
-import { safeDiagram } from './questionRenderer.js?v=placement-ea9474dcb7f1';
-import { readingErrors } from './reading.js?v=placement-ea9474dcb7f1';
+import { safeDiagram } from './questionRenderer.js?v=sq-approved400-20261104';
+import { readingErrors } from './reading.js?v=sq-approved400-20261104';
 export function normalizeAnswer(text) { return text.trim().normalize('NFKC').replace(/\s+/g, ' ').toUpperCase(); }
 export function validateQuestion(q) { const errors = []; if (!q || typeof q !== 'object' || ![q.questionId, q.sourceId, q.packId, q.skillId, q.prompt, q.question, q.answer, q.explanation].every(x => typeof x === 'string') || !Array.isArray(q.choices) || !q.choices.every(x => typeof x === 'string') || !Array.isArray(q.tags) || !q.tags.every(x => typeof x === 'string'))
     return ['schema']; if (!q.questionId || !q.sourceId || !q.packId || !q.skillId)
@@ -88,7 +88,7 @@ export class QuestionPackCatalog {
     async load(id) { if (!this.packs.has(id))
         this.packs.set(id, (async () => { const descriptor = (await this.list()).find(x => x.packId === id); if (!descriptor)
             throw Error('없는 문제팩이에요.'); if (descriptor.publication) {
-            const { loadStaticQuestionPack, publicationSHA256 } = await import('./staticQuestionPublication.js?v=placement-ea9474dcb7f1');
+            const { loadStaticQuestionPack, publicationSHA256 } = await import('./staticQuestionPublication.js?v=sq-approved400-20261104');
             const loaded = await loadStaticQuestionPack(descriptor.publication, 'production', this.request);
             if (loaded.pack.packId !== id)
                 throw Error('문제팩 ID 불일치');

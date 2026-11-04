@@ -1,0 +1,317 @@
+{
+  "schemaVersion": "school-quest-korean-catalog/1",
+  "provider": {
+    "releaseRef": "qb-korean-g4-s2-u3-opinions@0.1.0-approved",
+    "manifestSHA256": "25059ab9eb951734dac5f8f5356ce84ca41a68da493b2baf0ad01bcb6afc27ec",
+    "packSHA256": "8fbc8ad69c028fe75c15810e713cb92346f6860d7aa04cc80731049435261c1c"
+  },
+  "unit": {
+    "subject": "korean-literacy",
+    "sourceId": "korean-literacy:g4s2",
+    "grade": 4,
+    "semester": 2,
+    "id": "korean-literacy:g4:s2:u3",
+    "label": "의견을 모아서",
+    "order": 3,
+    "levels": [
+      1,
+      2,
+      3
+    ],
+    "objectives": [
+      {
+        "id": "KO-G4S2U3-audience",
+        "label": "KO-G4S2U3-audience",
+        "levels": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "KO-G4S2U3-combine",
+        "label": "KO-G4S2U3-combine",
+        "levels": [
+          2,
+          3
+        ]
+      },
+      {
+        "id": "KO-G4S2U3-compare-evidence",
+        "label": "KO-G4S2U3-compare-evidence",
+        "levels": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "KO-G4S2U3-criteria",
+        "label": "KO-G4S2U3-criteria",
+        "levels": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "KO-G4S2U3-evaluate",
+        "label": "KO-G4S2U3-evaluate",
+        "levels": [
+          2,
+          3
+        ]
+      },
+      {
+        "id": "KO-G4S2U3-opinion",
+        "label": "KO-G4S2U3-opinion",
+        "levels": [
+          1
+        ]
+      },
+      {
+        "id": "KO-G4S2U3-opinion-reason",
+        "label": "KO-G4S2U3-opinion-reason",
+        "levels": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "KO-G4S2U3-process",
+        "label": "KO-G4S2U3-process",
+        "levels": [
+          1,
+          2
+        ]
+      },
+      {
+        "id": "KO-G4S2U3-proposal-writing",
+        "label": "KO-G4S2U3-proposal-writing",
+        "levels": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "KO-G4S2U3-question",
+        "label": "KO-G4S2U3-question",
+        "levels": [
+          2,
+          3
+        ]
+      },
+      {
+        "id": "KO-G4S2U3-record",
+        "label": "KO-G4S2U3-record",
+        "levels": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "KO-G4S2U3-respect",
+        "label": "KO-G4S2U3-respect",
+        "levels": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "KO-G4S2U3-situation",
+        "label": "KO-G4S2U3-situation",
+        "levels": [
+          1
+        ]
+      },
+      {
+        "id": "KO-G4S2U3-summary",
+        "label": "KO-G4S2U3-summary",
+        "levels": [
+          2
+        ]
+      },
+      {
+        "id": "KO-G4S2U3-topic",
+        "label": "KO-G4S2U3-topic",
+        "levels": [
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  "groups": [
+    {
+      "objectiveId": "KO-G4S2U3-topic",
+      "familyId": "KO-G4S2U3-F-topic-purpose",
+      "count": 12,
+      "levels": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-opinion",
+      "familyId": "KO-G4S2U3-F-opinion",
+      "count": 8,
+      "levels": [
+        1
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-question",
+      "familyId": "KO-G4S2U3-F-question",
+      "count": 9,
+      "levels": [
+        2,
+        3
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-criteria",
+      "familyId": "KO-G4S2U3-F-constraint",
+      "count": 22,
+      "levels": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-summary",
+      "familyId": "KO-G4S2U3-F-summary",
+      "count": 3,
+      "levels": [
+        2
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-respect",
+      "familyId": "KO-G4S2U3-F-attitude",
+      "count": 14,
+      "levels": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-situation",
+      "familyId": "KO-G4S2U3-F-problem",
+      "count": 10,
+      "levels": [
+        1
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-compare-evidence",
+      "familyId": "KO-G4S2U3-F-compare",
+      "count": 17,
+      "levels": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-combine",
+      "familyId": "KO-G4S2U3-F-integrate",
+      "count": 10,
+      "levels": [
+        2,
+        3
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-opinion-reason",
+      "familyId": "KO-G4S2U3-F-reason",
+      "count": 15,
+      "levels": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-record",
+      "familyId": "KO-G4S2U3-F-record",
+      "count": 6,
+      "levels": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-compare-evidence",
+      "familyId": "KO-G4S2U3-F-evidence",
+      "count": 13,
+      "levels": [
+        2,
+        3
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-proposal-writing",
+      "familyId": "KO-G4S2U3-F-revision",
+      "count": 14,
+      "levels": [
+        2,
+        3
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-audience",
+      "familyId": "KO-G4S2U3-F-audience",
+      "count": 9,
+      "levels": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-evaluate",
+      "familyId": "KO-G4S2U3-F-evaluate",
+      "count": 18,
+      "levels": [
+        2,
+        3
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-process",
+      "familyId": "KO-G4S2U3-F-process",
+      "count": 5,
+      "levels": [
+        1,
+        2
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-respect",
+      "familyId": "KO-G4S2U3-F-politeness",
+      "count": 5,
+      "levels": [
+        2
+      ]
+    },
+    {
+      "objectiveId": "KO-G4S2U3-proposal-writing",
+      "familyId": "KO-G4S2U3-F-writing-role",
+      "count": 10,
+      "levels": [
+        1,
+        2,
+        3
+      ]
+    }
+  ]
+}

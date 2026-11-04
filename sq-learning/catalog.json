@@ -1,0 +1,4755 @@
+{
+  "schemaVersion": "school-quest-cafe-catalog/1",
+  "mode": "pilot-approved-manifest",
+  "gameId": "multi-game",
+  "gameVersion": "approved-static-launch/1",
+  "gameBuild": "korean-social-20261104",
+  "providers": {
+    "math": {
+      "releaseRef": "common-learning/1.1.1-math-operational",
+      "manifestSHA256": "ed9cf61da4f544a2c7b5521fbe72fa208790407f29e7e26f3c1073a0bb392215",
+      "catalogDigest": "dd63bef22564afc18b3c899c2cfbacb4151870b3051baa16987fb642a4e2511a",
+      "questionCount": 49233,
+      "runtimeVersion": "common-public-runtime/1.1.1-operational",
+      "dataVersion": "2.0.0-public-data-candidate",
+      "games": {
+        "survival": {
+          "releaseRef": "common-learning/1.1.2-math-science-operational",
+          "manifestSHA256": "3e7f549d329d6edd520a8ee8298749511f6143490a1b9d3b5185909014b0310a"
+        },
+        "math-defense": {
+          "releaseRef": "e3eb191238510fc7d57b7c8d51cda6b726ae7f773a23b9a704c5bb5025014d86",
+          "manifestSHA256": "e3eb191238510fc7d57b7c8d51cda6b726ae7f773a23b9a704c5bb5025014d86"
+        },
+        "magic-library": {
+          "releaseRef": "common-learning/1.1.1-math-operational",
+          "manifestSHA256": "ed9cf61da4f544a2c7b5521fbe72fa208790407f29e7e26f3c1073a0bb392215"
+        }
+      }
+    },
+    "science": {
+      "releaseRef": "common-public-runtime/1.1.0-unified-candidate",
+      "manifestSHA256": "ddc0eecaac515e5d2879ededfe95fb0e603fa497de8b84dedc9e8938b0d4703f",
+      "catalogDigest": "94d7d1bb201114509f67d6800650141f152be420f078abc501b0a102465c26a8",
+      "questionCount": 104,
+      "runtimeVersion": "common-public-runtime/1.1.0-unified-candidate",
+      "dataVersion": "science-unified/0.1.3-1.0.0-candidate",
+      "games": {
+        "math-defense": {
+          "releaseRef": "93bbdda4c4585b54cb8e8f275b73fc2fe46d31febb76f4d4d420c4d173b1d650",
+          "manifestSHA256": "93bbdda4c4585b54cb8e8f275b73fc2fe46d31febb76f4d4d420c4d173b1d650"
+        },
+        "survival": {
+          "releaseRef": "common-learning/1.1.2-math-science-operational",
+          "manifestSHA256": "6adfd9434e8b23e17ad37e5cab32b8c7255862a4f053e90c06043c96d6327f1f"
+        },
+        "magic-library": {
+          "releaseRef": "common-learning/1.1.2-math-science-operational",
+          "manifestSHA256": "6adfd9434e8b23e17ad37e5cab32b8c7255862a4f053e90c06043c96d6327f1f"
+        }
+      }
+    },
+    "korean-literacy": {
+      "releaseRef": "qb-korean-g4-s2-u3-opinions@0.1.0-approved",
+      "manifestSHA256": "25059ab9eb951734dac5f8f5356ce84ca41a68da493b2baf0ad01bcb6afc27ec",
+      "base": "./korean/",
+      "questionCount": 200,
+      "runtimeVersion": "approved-static-same-type/1",
+      "dataVersion": "0.1.0-approved",
+      "teacherApproval": true
+    },
+    "social-studies": {
+      "releaseRef": "qb-social-g4-s2-u2-t1-local-problems@0.1.0-approved-supply",
+      "manifestSHA256": "0e6c26455736525bd51ac4ea7c632121fc308c0028a5bbff199eb19fe46fc0f6",
+      "base": "./social/",
+      "questionCount": 200,
+      "runtimeVersion": "approved-static-same-type/1",
+      "dataVersion": "0.1.0-approved-supply",
+      "teacherApproval": true
+    }
+  },
+  "units": [
+    {
+      "subject": "math",
+      "sourceId": "g3s1",
+      "semesterKey": "g3s1",
+      "grade": 3,
+      "semester": 1,
+      "id": "sem1_unit1",
+      "title": "세 자리 수의 덧셈·뺄셈",
+      "areaId": "g3s1",
+      "areaLabel": "수학 3학년 1학기",
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "objectives": [
+        {
+          "id": "math:g3:s1:u1:add",
+          "label": "세 자리 수의 덧셈과 뺄셈",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s1:u1:subtract",
+          "label": "세 자리 수의 덧셈과 뺄셈",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s1:u1:inverse",
+          "label": "세 자리 수의 덧셈과 뺄셈",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s1:u1:context",
+          "label": "세 자리 수의 덧셈과 뺄셈",
+          "levels": [
+            3,
+            4
+          ]
+        },
+        {
+          "id": "math:g3:s1:u1:error",
+          "label": "세 자리 수의 덧셈과 뺄셈",
+          "levels": [
+            3,
+            4
+          ]
+        },
+        {
+          "id": "math:g3:s1:u1:carry-principle",
+          "label": "받아올림과 받아내림 원리",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g3:s1:u1:estimate",
+          "label": "합과 차 어림하기",
+          "levels": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g3s1",
+      "semesterKey": "g3s1",
+      "grade": 3,
+      "semester": 1,
+      "id": "sem1_unit2",
+      "title": "선과 각",
+      "areaId": "g3s1",
+      "areaLabel": "수학 3학년 1학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g3:s1:u2:line-types",
+          "label": "선분·반직선·직선",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s1:u2:angle-parts",
+          "label": "각의 꼭짓점과 변",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s1:u2:right-angle",
+          "label": "직각 알아보기",
+          "levels": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s1:u2:right-triangle",
+          "label": "직각삼각형 알아보기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s1:u2:rectangle",
+          "label": "직사각형 성질",
+          "levels": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s1:u2:square",
+          "label": "정사각형 성질",
+          "levels": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g3s1",
+      "semesterKey": "g3s1",
+      "grade": 3,
+      "semester": 1,
+      "id": "sem1_unit3",
+      "title": "나눗셈의 뜻과 한 자리 제수",
+      "areaId": "g3s1",
+      "areaLabel": "수학 3학년 1학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g3:s1:u3:equal-sharing",
+          "label": "똑같이 나누기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g3:s1:u3:grouping",
+          "label": "같은 수씩 묶기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g3:s1:u3:division-fact",
+          "label": "나눗셈구구로 몫 구하기",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s1:u3:multiply-relation",
+          "label": "곱셈과 나눗셈 관계",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s1:u3:division-context",
+          "label": "나눗셈 상황 해석",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g3s1",
+      "semesterKey": "g3s1",
+      "grade": 3,
+      "semester": 1,
+      "id": "sem1_unit4",
+      "title": "곱셈의 원리",
+      "areaId": "g3s1",
+      "areaLabel": "수학 3학년 1학기",
+      "levels": [
+        2,
+        3,
+        4
+      ],
+      "objectives": [
+        {
+          "id": "math:g3:s1:u4:product",
+          "label": "곱셈의 원리",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s1:u4:inverse-product",
+          "label": "곱셈의 원리",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s1:u4:partials",
+          "label": "곱셈의 원리",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s1:u4:product-context",
+          "label": "곱셈의 원리",
+          "levels": [
+            3,
+            4
+          ]
+        },
+        {
+          "id": "math:g3:s1:u4:product-error",
+          "label": "곱셈의 원리",
+          "levels": [
+            3,
+            4
+          ]
+        },
+        {
+          "id": "math:g3:s1:u4:carry-product",
+          "label": "곱셈의 올림",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s1:u4:estimate-product",
+          "label": "곱 어림하기",
+          "levels": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g3s1",
+      "semesterKey": "g3s1",
+      "grade": 3,
+      "semester": 1,
+      "id": "sem1_unit5",
+      "title": "길이와 시각·시간",
+      "areaId": "g3s1",
+      "areaLabel": "수학 3학년 1학기",
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "objectives": [
+        {
+          "id": "math:g3:s1:u5:elapsed",
+          "label": "시각과 시간",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s1:u5:time-sub",
+          "label": "시각과 시간",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s1:u5:time-add",
+          "label": "시각과 시간",
+          "levels": [
+            2,
+            4
+          ]
+        },
+        {
+          "id": "math:g3:s1:u5:mm",
+          "label": "mm와 cm의 관계",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s1:u5:km",
+          "label": "km와 m의 관계",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s1:u5:length-expression",
+          "label": "복합 길이 표현과 측정",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s1:u5:length-compare",
+          "label": "단위를 맞추어 길이 비교",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s1:u5:second-clock",
+          "label": "초 단위 시각 읽기",
+          "levels": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g3s1",
+      "semesterKey": "g3s1",
+      "grade": 3,
+      "semester": 1,
+      "id": "sem1_unit6",
+      "title": "등분과 분수·소수 첫째 자리",
+      "areaId": "g3s1",
+      "areaLabel": "수학 3학년 1학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g3:s1:u6:equal-parts",
+          "label": "똑같이 나누기",
+          "levels": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s1:u6:fraction-representation",
+          "label": "전체와 부분을 분수로 나타내기",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s1:u6:unit-fraction",
+          "label": "단위분수와 그 크기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s1:u6:fraction-compare",
+          "label": "분모가 같은 분수 비교",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s1:u6:decimal-representation",
+          "label": "소수 한 자리 수의 의미와 표현",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s1:u6:decimal-compare",
+          "label": "소수 한 자리 수 비교",
+          "levels": [
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g3s2",
+      "semesterKey": "g3s2",
+      "grade": 3,
+      "semester": 2,
+      "id": "sem2_unit1",
+      "title": "곱셈의 확장",
+      "areaId": "g3s2",
+      "areaLabel": "수학 3학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g3:s2:u1:product",
+          "label": "곱셈 적용",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s2:u1:product-context",
+          "label": "묶음과 낱개 연결",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u1:two-digit-product",
+          "label": "두 자리 수끼리의 곱셈",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s2:u1:partial-product",
+          "label": "부분 곱과 자리값",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u1:product-error",
+          "label": "곱셈 과정 오류",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u1:product-estimate",
+          "label": "곱 어림과 타당성",
+          "levels": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g3s2",
+      "semesterKey": "g3s2",
+      "grade": 3,
+      "semester": 2,
+      "id": "sem2_unit2",
+      "title": "한 자리 제수의 나눗셈 확장",
+      "areaId": "g3s2",
+      "areaLabel": "수학 3학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g3:s2:u2:quotient",
+          "label": "몫 계산",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s2:u2:remainder",
+          "label": "나머지 계산",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s2:u2:division-context",
+          "label": "몫에 더하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u2:division-principle",
+          "label": "나누는 계산 과정",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s2:u2:division-check",
+          "label": "계산 결과 확인",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u2:division-inverse",
+          "label": "몫·나머지와 처음 수의 관계",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u2:division-error",
+          "label": "나눗셈 오류 판단",
+          "levels": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g3s2",
+      "semesterKey": "g3s2",
+      "grade": 3,
+      "semester": 2,
+      "id": "sem2_unit3",
+      "title": "원의 구성",
+      "areaId": "g3s2",
+      "areaLabel": "수학 3학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g3:s2:u3:radius-diameter",
+          "label": "원의 중심·반지름·지름의 관계",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s2:u3:circle-condition",
+          "label": "반지름 비교와 지름의 관계",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u3:radius",
+          "label": "끝점과 중심 통과 여부로 선분 분류",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s2:u3:center",
+          "label": "원의 중심",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s2:u3:diameter",
+          "label": "지름 판별과 성질",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u3:compass",
+          "label": "컴퍼스의 바늘 위치와 벌린 길이",
+          "levels": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g3s2",
+      "semesterKey": "g3s2",
+      "grade": 3,
+      "semester": 2,
+      "id": "sem2_unit4",
+      "title": "분수의 종류와 비교",
+      "areaId": "g3s2",
+      "areaLabel": "수학 3학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g3:s2:u4:part-whole",
+          "label": "전체와 부분을 분수로 나타내기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g3:s2:u4:fraction-amount-set",
+          "label": "분수만큼의 개수",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u4:fraction-amount-measure",
+          "label": "분수만큼의 길이와 시간",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s2:u4:fraction-kinds",
+          "label": "진분수·가분수·대분수",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g3:s2:u4:fraction-model",
+          "label": "같은 크기의 전체와 분수 모형",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s2:u4:mixed-improper",
+          "label": "대분수와 가분수의 관계",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s2:u4:fraction-compare",
+          "label": "같은 분모 분수의 크기 비교",
+          "levels": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g3s2",
+      "semesterKey": "g3s2",
+      "grade": 3,
+      "semester": 2,
+      "id": "sem2_unit5",
+      "title": "들이와 무게",
+      "areaId": "g3s2",
+      "areaLabel": "수학 3학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g3:s2:u5:capacity-units",
+          "label": "L에서 mL로 단위 변환",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u5:capacity-calc",
+          "label": "복합 단위 덧셈",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u5:capacity-compare",
+          "label": "단위를 맞추어 차 구하기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u5:mass-units",
+          "label": "kg에서 g로 단위 변환",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s2:u5:capacity-meaning",
+          "label": "들이의 뜻과 알맞은 단위",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g3:s2:u5:capacity-measure",
+          "label": "들이 어림과 눈금 읽기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u5:mass-meaning",
+          "label": "무게의 뜻과 알맞은 단위",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g3:s2:u5:mass-compare",
+          "label": "단위를 맞춘 무게 비교",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s2:u5:mass-measure",
+          "label": "무게 어림과 저울 자료",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u5:mass-calc",
+          "label": "무게의 덧셈·뺄셈",
+          "levels": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g3s2",
+      "semesterKey": "g3s2",
+      "grade": 3,
+      "semester": 2,
+      "id": "sem2_unit6",
+      "title": "그림그래프와 자료",
+      "areaId": "g3s2",
+      "areaLabel": "수학 3학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g3:s2:u6:graph-read",
+          "label": "책 대출의 값 읽기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g3:s2:u6:graph-compare",
+          "label": "책 대출의 전체 합",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u6:graph-meaning",
+          "label": "책 대출의 범례 해석",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u6:graph-express",
+          "label": "표를 그림그래프로 나타내기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u6:graph-error",
+          "label": "기호·범례·자료 오류 찾기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g3:s2:u6:data-classify",
+          "label": "자료를 모으고 분류하는 방법",
+          "levels": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g4s1",
+      "semesterKey": "g4s1",
+      "grade": 4,
+      "semester": 1,
+      "id": "sem1_unit1",
+      "title": "큰 수와 자릿값",
+      "areaId": "g4s1",
+      "areaLabel": "수학 4학년 1학기",
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "objectives": [
+        {
+          "id": "EL-G4-sem1_unit1-c9204d19f2cd",
+          "label": "십만 자리 숫자가 나타내는 값 구하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-f0f004d8f447",
+          "label": "자리 수가 같은 큰 수 비교하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-983551d7d511",
+          "label": "큰 수의 일정한 간격에서 다음 수 찾기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-24be89642133",
+          "label": "만 단위와 남은 수로 큰 수 나타내기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-67e73e103f95",
+          "label": "큰 수를 만 단위 묶음으로 나타내기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-6a165cd1e84f",
+          "label": "뛰어 센 큰 수의 이전 항 찾기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-86f4a8cb9d28",
+          "label": "만의 자리 큰 수 읽기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-d3cad57ed0a3",
+          "label": "큰 수의 한국어 표현을 숫자로 쓰기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-72ccff3233fe",
+          "label": "0을 지웠을 때 자릿값 변화 판단하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-7b2dca807e67",
+          "label": "큰 수 비교 조건에서 가능한 숫자 찾기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-e97649310338",
+          "label": "같은 숫자가 서로 다른 자리에서 나타내는 값 비교",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-6e0d439a0ecf",
+          "label": "큰 수 비교 방법 설명",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-2005c790342b",
+          "label": "큰 수를 같은 단위의 묶음으로 바꾸기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-f110191b8a52",
+          "label": "범위에 맞는 여러 수 중 가장 큰 수 선택",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-34ecea51f0ad",
+          "label": "두 경계 사이에 올 수 있는 모든 숫자 찾기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-cfcdfdf33db3",
+          "label": "숫자 카드로 첫 자리 조건에 맞는 가장 큰 수 만들기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-ad14cac678ac",
+          "label": "범위와 숫자 카드 조건을 함께 사용하기",
+          "levels": [
+            4
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit1-fceb510eb14f",
+          "label": "두 방향의 뛰어 세기 적용",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g4s1",
+      "semesterKey": "g4s1",
+      "grade": 4,
+      "semester": 1,
+      "id": "sem1_unit2",
+      "title": "각도와 내각의 합",
+      "areaId": "g4s1",
+      "areaLabel": "수학 4학년 1학기",
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "objectives": [
+        {
+          "id": "EL-G4-sem1_unit2-348ca7b6cc1c",
+          "label": "겹치지 않는 두 각의 합 구하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit2-5f0c8bad14d2",
+          "label": "전체 각과 일부 각으로 나머지 각 구하기",
+          "levels": [
+            4
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit2-0eb9a3700697",
+          "label": "삼각형 내각의 합으로 나머지 각 구하기",
+          "levels": [
+            4
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit2-ac6e6548be18",
+          "label": "사각형 내각의 합으로 나머지 각 구하기",
+          "levels": [
+            4
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit2-3a9904942395",
+          "label": "같은 크기 각을 이어 만든 각 구하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit2-cd3e51756f59",
+          "label": "주어진 각을 같은 크기로 나누기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit2-8fafe29718dc",
+          "label": "각도기 눈금으로 각의 크기 측정하기",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit2-109d6a9820b3",
+          "label": "각의 크기로 예각·직각·둔각 구별하기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit2-b43805480cc8",
+          "label": "변의 길이가 각의 크기를 바꾸지 않음 이해하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit2-f0b3d9247862",
+          "label": "각도기 양쪽 눈금에서 시작점 확인하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit2-0922f217f2b7",
+          "label": "각의 크기 단위 이해",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit2-a59b39776fc3",
+          "label": "직각을 같은 크기로 나눈 각을 주어진 네 각에서 찾기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit2-be60740dde54",
+          "label": "한 직선 위 이웃한 각 구하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit2-9f2b9b08e710",
+          "label": "겹치는 각을 두 번 세지 않기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit2-87276028e5ca",
+          "label": "삼각형의 각 조건 가능성 판단",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit2-d8d7a8f6849d",
+          "label": "같은 두 각 조건으로 삼각형의 각 구하기",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g4s1",
+      "semesterKey": "g4s1",
+      "grade": 4,
+      "semester": 1,
+      "id": "sem1_unit3",
+      "title": "곱셈과 두 자리 제수 나눗셈",
+      "areaId": "g4s1",
+      "areaLabel": "수학 4학년 1학기",
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "objectives": [
+        {
+          "id": "EL-G4-sem1_unit3-a0cf69ca18d9",
+          "label": "상자 수와 상자당 수를 곱하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-7fd0c0a91add",
+          "label": "두 자리 수로 똑같이 나누기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-2873a2ab513c",
+          "label": "나머지가 있을 때 필요한 묶음 수 판단하기",
+          "levels": [
+            4
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-cc926d18f99c",
+          "label": "나눗셈 상황에서 나머지 구하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-86ca5dcb33e3",
+          "label": "몫과 나머지에서 나누어지는 수 복원하기",
+          "levels": [
+            4
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-8fb08dfc2239",
+          "label": "서로 다른 두 묶음의 전체 수량 구하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-d327156f4192",
+          "label": "완성 묶음 이후 남은 수량 구하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-3e989ea47163",
+          "label": "곱셈 결과를 분배하여 확인하기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-42c369072cdc",
+          "label": "몫·나머지와 전체 수의 일치 확인하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-3ca5d6a0bd66",
+          "label": "곱셈 어림으로 결과 범위 확인하기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-5bad54fd1fdd",
+          "label": "나누어떨어짐의 의미 이해",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-7c5108970233",
+          "label": "곱셈식의 빈칸 역으로 구하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-9298880b6877",
+          "label": "묶음 수와 한 묶음 수를 바꾼 곱 비교",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-336916d06d66",
+          "label": "최소 포장 수와 마지막 포장량 함께 구하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-3c9e526bd270",
+          "label": "사용 후 남은 물건의 최소 포장 수와 마지막 포장량 구하기",
+          "levels": [
+            4
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-dc5d4bd5f8cf",
+          "label": "어림으로 곱의 자릿값 오류 찾기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit3-ad1159d55f9f",
+          "label": "일부를 사용한 뒤 같은 수씩 나누기",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g4s1",
+      "semesterKey": "g4s1",
+      "grade": 4,
+      "semester": 1,
+      "id": "sem1_unit4",
+      "title": "도형 이동과 점의 위치",
+      "areaId": "g4s1",
+      "areaLabel": "수학 4학년 1학기",
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "objectives": [
+        {
+          "id": "EL-G4-sem1_unit4-a13a20f80ee2",
+          "label": "격자 이동의 좌우 위치 연결하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit4-675b9f30ae9d",
+          "label": "도착 위치에서 필요한 이동 찾기",
+          "levels": [
+            4
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit4-19fabaa00966",
+          "label": "세 번의 이동을 합쳐 위치 찾기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit4-b6b90367402d",
+          "label": "이동 순서와 도착 위치로 필요한 이동 찾기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit4-3e48a2e250a8",
+          "label": "도형을 밀거나 뒤집거나 돌린 결과 비교하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit4-aa91bb9b942f",
+          "label": "서로 다른 두 변환의 순서 사용하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit4-7717bebf223d",
+          "label": "밀기에서 바뀌는 것과 유지되는 것",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit4-991dc24c7eec",
+          "label": "뒤집기에서 유지되는 변 길이와 각의 크기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit4-439ea32b1b64",
+          "label": "같은 축으로 두 번 뒤집기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit4-68a5de204cac",
+          "label": "90도씩 네 번 돌리기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit4-823e548a7acb",
+          "label": "180도씩 두 번 돌리기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit4-764eb2429e8c",
+          "label": "두 변환을 거꾸로 되짚어 처음 모양 찾기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit4-6e7607debf1f",
+          "label": "변환 순서를 바꾼 두 결과 비교",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit4-4dc9aaf1c1e3",
+          "label": "두 방향 이동에서 가로 이동만 합하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit4-624789dda3a5",
+          "label": "방향 제한과 도착 위치를 함께 만족하는 경로 찾기",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g4s1",
+      "semesterKey": "g4s1",
+      "grade": 4,
+      "semester": 1,
+      "id": "sem1_unit5",
+      "title": "막대그래프와 탐구",
+      "areaId": "g4s1",
+      "areaLabel": "수학 4학년 1학기",
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "objectives": [
+        {
+          "id": "EL-G4-sem1_unit5-312e3325138f",
+          "label": "자료의 두 항목 합 구하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-331c25ddc2c3",
+          "label": "자료의 두 항목 차 구하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-d2109267d664",
+          "label": "빠짐없이 조사한 자료의 전체 인원 구하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-17f06bbb0579",
+          "label": "가장 큰 자료 항목 찾기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-68c35142387f",
+          "label": "전체 인원과 기록된 자료로 누락 인원 구하기",
+          "levels": [
+            3,
+            4
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-ca2459d6ee52",
+          "label": "자료의 가장 작은 항목 찾기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-47148244f44a",
+          "label": "자료에서 조건을 만족하는 항목 수 세기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-33bf049f2040",
+          "label": "그래프 눈금 간격에 따른 값 읽기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-650cb0a63154",
+          "label": "막대그래프 자료 해석",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-a6711fe49036",
+          "label": "막대그래프 축의 역할 구별하기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-c1b7cff56741",
+          "label": "조사 누락으로 생기는 결론의 한계 이해하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-07d837ccb1a6",
+          "label": "조사 목적에 맞게 한 학생의 한 가지 응답을 수집하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-4d624b84dfd3",
+          "label": "한 가지 조사 주제에 맞는 항목 구성하기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-77e24d8b7efa",
+          "label": "같은 눈금에서 같은 높이의 막대 해석",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-e828187381bd",
+          "label": "자료에서 준비 수량을 넘는 모든 항목 찾기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-ac739d974611",
+          "label": "두 집단의 같은 항목 자료 합하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit5-4e26613a3d92",
+          "label": "중복과 누락을 함께 확인하여 조사 기록 고치기",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g4s1",
+      "semesterKey": "g4s1",
+      "grade": 4,
+      "semester": 1,
+      "id": "sem1_unit6",
+      "title": "변화 규칙과 등호",
+      "areaId": "g4s1",
+      "areaLabel": "수학 4학년 1학기",
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "objectives": [
+        {
+          "id": "EL-G4-sem1_unit6-30daf2fd126d",
+          "label": "일정하게 증가하는 수의 규칙 사용하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-1ddf3a2f4577",
+          "label": "일정하게 감소하는 수의 규칙 사용하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-13dd752eff94",
+          "label": "한 수를 두 배씩 늘리는 규칙을 직접 적용하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-19e04384d6cc",
+          "label": "곱셈식 배열에서 결과의 증가량 찾기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-4d80183600b7",
+          "label": "등식 양쪽의 양을 같게 만드는 수 찾기",
+          "levels": [
+            4
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-41b121006afd",
+          "label": "등식의 두 연산을 연결하여 빈칸 찾기",
+          "levels": [
+            4
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-62a19e14f9dd",
+          "label": "두 규칙이 번갈아 적용되는 수 배열 이해하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-b770c8e6d04d",
+          "label": "같은 양을 만드는 곱셈식의 빈칸 찾기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-a46ee6373c62",
+          "label": "여러 식에 모두 맞는 설명 찾기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-48bb3f981971",
+          "label": "규칙에서 벗어난 한 항 찾기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-c5f5503b2f6b",
+          "label": "반복 무늬의 자리로 항목 찾기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-0fd7a431448f",
+          "label": "식의 배열에서 다음 결과 구하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-368dd5656340",
+          "label": "등호의 양쪽 값 비교",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-8f2edc935551",
+          "label": "등식의 양쪽에 같은 수 더하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-46b8f72e0a89",
+          "label": "등식의 양쪽에서 같은 수 빼기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-e0dc9f4291c2",
+          "label": "뛰어 세기 규칙을 거꾸로 적용",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-b78d9d71cd99",
+          "label": "곱으로 주어진 양쪽을 같게 하는 빈칸",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "EL-G4-sem1_unit6-41dd3c16eaa0",
+          "label": "두 연산 규칙을 거꾸로 적용하고 중간값 확인",
+          "levels": [
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g4s2",
+      "semesterKey": "g4s2",
+      "grade": 4,
+      "semester": 2,
+      "id": "sem2_unit1",
+      "title": "동분모 분수 덧셈·뺄셈",
+      "areaId": "g4s2",
+      "areaLabel": "수학 4학년 2학기",
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "objectives": [
+        {
+          "id": "fraction/equal-parts-+",
+          "label": "동분모 분수 덧셈·뺄셈 유형 1",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "fraction/equal-parts--",
+          "label": "동분모 분수 덧셈·뺄셈 유형 2",
+          "levels": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "math:g4:fractions:sum",
+          "label": "분수의 덧셈과 뺄셈",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g4:fractions:difference",
+          "label": "분수의 덧셈과 뺄셈",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g4:fractions:missing",
+          "label": "분수의 덧셈과 뺄셈",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g4:fractions:compare-sum-difference",
+          "label": "분수의 덧셈과 뺄셈",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g4:fractions:wrong-sub-restoration",
+          "label": "분수의 덧셈과 뺄셈",
+          "levels": [
+            4
+          ]
+        },
+        {
+          "id": "math:g4:fractions:two-stage",
+          "label": "분수의 덧셈과 뺄셈",
+          "levels": [
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g4s2",
+      "semesterKey": "g4s2",
+      "grade": 4,
+      "semester": 2,
+      "id": "sem2_unit2",
+      "title": "삼각형의 분류와 성질",
+      "areaId": "g4s2",
+      "areaLabel": "수학 4학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "triangle/side-classification",
+          "label": "삼각형의 분류와 성질 유형 1",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "triangle/angle-classification",
+          "label": "삼각형의 분류와 성질 유형 2",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "triangle/angle-criterion",
+          "label": "삼각형의 분류와 성질 유형 3",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "triangle/two-classifications",
+          "label": "삼각형의 분류와 성질 유형 4",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g4:s2:u2:shared-kind-0",
+          "label": "삼각형의 분류와 성질 유형 5",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g4:s2:u2:shared-kind-1",
+          "label": "삼각형의 분류와 성질 유형 6",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g4:s2:u2:shared-kind-2",
+          "label": "삼각형의 분류와 성질 유형 7",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g4:s2:u2:shared-kind-3",
+          "label": "삼각형의 분류와 성질 유형 8",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g4:s2:u2:shared-kind-4",
+          "label": "삼각형의 분류와 성질 유형 9",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g4:s2:u2:shared-kind-5",
+          "label": "삼각형의 분류와 성질 유형 10",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "triangle/partial-condition",
+          "label": "삼각형의 분류와 성질 유형 11",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g4s2",
+      "semesterKey": "g4s2",
+      "grade": 4,
+      "semester": 2,
+      "id": "sem2_unit3",
+      "title": "소수의 의미와 덧셈·뺄셈",
+      "areaId": "g4s2",
+      "areaLabel": "수학 4학년 2학기",
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "objectives": [
+        {
+          "id": "decimal/error-place-alignment",
+          "label": "소수의 의미와 덧셈·뺄셈 유형 1",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "decimal/place-value",
+          "label": "소수 세 자리의 끝 숫자가 나타내는 값 찾기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "decimal/carry-reason",
+          "label": "소수의 의미와 덧셈·뺄셈 유형 3",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "decimal/two-step-context",
+          "label": "소수의 의미와 덧셈·뺄셈 유형 4",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "decimal/comparison",
+          "label": "자릿값을 맞추어 소수 비교하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "decimal/comparison-condition",
+          "label": "소수의 의미와 덧셈·뺄셈 유형 6",
+          "levels": [
+            4
+          ]
+        },
+        {
+          "id": "math:g4:s2:u3:shared-kind-0",
+          "label": "소수의 의미와 덧셈·뺄셈 유형 7",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g4:s2:u3:shared-kind-1",
+          "label": "소수의 의미와 덧셈·뺄셈 유형 8",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g4:s2:u3:shared-kind-2",
+          "label": "소수의 의미와 덧셈·뺄셈 유형 9",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g4:s2:u3:shared-kind-3",
+          "label": "소수의 의미와 덧셈·뺄셈 유형 10",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "받아내림이 있는 소수 뺄셈 적용하기",
+          "label": "받아내림이 있는 소수 뺄셈 적용하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g4:s2:u3:shared-kind-4",
+          "label": "소수의 의미와 덧셈·뺄셈 유형 12",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g4:s2:u3:shared-kind-5",
+          "label": "소수의 의미와 덧셈·뺄셈 유형 13",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "소수의 0이 나타내는 자리 확인하기",
+          "label": "소수의 0이 나타내는 자리 확인하기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "소수점 위치를 맞추어 더하기",
+          "label": "소수점 위치를 맞추어 더하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "소수 뺄셈 결과에서 처음 양 복원하기",
+          "label": "소수 뺄셈 결과에서 처음 양 복원하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "소수 셋째 자리와 0.001의 개수 연결하기",
+          "label": "소수 셋째 자리와 0.001의 개수 연결하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "동일한 합을 만드는 소수 찾기",
+          "label": "동일한 합을 만드는 소수 찾기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "소수 뺄셈",
+          "label": "소수 뺄셈",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "decimal/allowed-digit-count",
+          "label": "소수의 의미와 덧셈·뺄셈 유형 20",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "decimal/error-trace",
+          "label": "소수의 의미와 덧셈·뺄셈 유형 21",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g4s2",
+      "semesterKey": "g4s2",
+      "grade": 4,
+      "semester": 2,
+      "id": "sem2_unit4",
+      "title": "수직·평행과 사각형",
+      "areaId": "g4s2",
+      "areaLabel": "수학 4학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "quadrilateral/평행선 사이 거리",
+          "label": "quadrilateral/평행선 사이 거리",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "quadrilateral/수직·수선",
+          "label": "quadrilateral/수직·수선",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "quadrilateral/평행",
+          "label": "quadrilateral/평행",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "quadrilateral/사다리꼴",
+          "label": "quadrilateral/사다리꼴",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "quadrilateral/평행사변형",
+          "label": "quadrilateral/평행사변형",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "quadrilateral/마름모",
+          "label": "quadrilateral/마름모",
+          "levels": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "math:g4:s2:u4:shared-kind-0",
+          "label": "수직·평행과 사각형 유형 7",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g4:s2:u4:shared-kind-1",
+          "label": "수직·평행과 사각형 유형 8",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g4:s2:u4:shared-kind-5",
+          "label": "수직·평행과 사각형 유형 9",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "quadrilateral/직사각형·정사각형",
+          "label": "quadrilateral/직사각형·정사각형",
+          "levels": [
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g4s2",
+      "semesterKey": "g4s2",
+      "grade": 4,
+      "semester": 2,
+      "id": "sem2_unit5",
+      "title": "꺾은선그래프와 탐구",
+      "areaId": "g4s2",
+      "areaLabel": "수학 4학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "graph/scale-reading",
+          "label": "꺾은선그래프와 탐구 유형 1",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "graph/adjacent-comparison",
+          "label": "꺾은선그래프와 탐구 유형 2",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "graph/condition-interpretation",
+          "label": "꺾은선그래프와 탐구 유형 3",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "graph/data-collection",
+          "label": "꺾은선그래프와 탐구 유형 4",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g4:s2:u5:shared-kind-0",
+          "label": "꺾은선그래프와 탐구 유형 5",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g4:s2:u5:shared-kind-1",
+          "label": "꺾은선그래프와 탐구 유형 6",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g4:s2:u5:shared-kind-2",
+          "label": "꺾은선그래프와 탐구 유형 7",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g4:s2:u5:shared-kind-3",
+          "label": "꺾은선그래프와 탐구 유형 8",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g4:s2:u5:shared-kind-4",
+          "label": "꺾은선그래프와 탐구 유형 9",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g4:s2:u5:shared-kind-5",
+          "label": "꺾은선그래프와 탐구 유형 10",
+          "levels": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g4s2",
+      "semesterKey": "g4s2",
+      "grade": 4,
+      "semester": 2,
+      "id": "sem2_unit6",
+      "title": "다각형과 도형 구성",
+      "areaId": "g4s2",
+      "areaLabel": "수학 4학년 2학기",
+      "levels": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "objectives": [
+        {
+          "id": "polygon/regular-both-conditions",
+          "label": "다각형과 도형 구성 유형 1",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "polygon/boundary-definition",
+          "label": "다각형과 도형 구성 유형 2",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "polygon/name-and-sides",
+          "label": "다각형과 도형 구성 유형 3",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "polygon/diagonal-meaning",
+          "label": "다각형과 도형 구성 유형 4",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "polygon/tile-rectangle",
+          "label": "다각형과 도형 구성 유형 5",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "polygon/no-gap",
+          "label": "다각형과 도형 구성 유형 6",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "polygon/compose-shapes",
+          "label": "다각형과 도형 구성 유형 7",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g4:s2:u6:shared-kind-0",
+          "label": "다각형과 도형 구성 유형 8",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g4:s2:u6:shared-kind-1",
+          "label": "다각형과 도형 구성 유형 9",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g4:s2:u6:shared-kind-4",
+          "label": "다각형과 도형 구성 유형 10",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g4:s2:u6:shared-kind-5",
+          "label": "다각형과 도형 구성 유형 11",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "서로 다른 두 부분의 조각 수 합하기",
+          "label": "서로 다른 두 부분의 조각 수 합하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "같은 전체 조각 수를 만드는 다른 배치 비교하기",
+          "label": "같은 전체 조각 수를 만드는 다른 배치 비교하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "전체 수·한 줄 제한·나머지 조건으로 배치 판단하기",
+          "label": "전체 수·한 줄 제한·나머지 조건으로 배치 판단하기",
+          "levels": [
+            5
+          ]
+        },
+        {
+          "id": "polygon/diagonal-partition",
+          "label": "다각형과 도형 구성 유형 15",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g5s1",
+      "semesterKey": "g5s1",
+      "grade": 5,
+      "semester": 1,
+      "id": "g5s1:natural-mixed",
+      "title": "자연수 혼합 계산",
+      "areaId": "g5s1",
+      "areaLabel": "수학 5학년 1학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g5:s1:natural-mixed:brackets",
+          "label": "괄호가 있는 혼합 계산 순서 적용하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:natural-mixed:mixed",
+          "label": "덧셈과 곱셈의 계산 순서 적용하기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:natural-mixed:model",
+          "label": "두 묶음 상황을 하나의 식으로 연결하기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:natural-mixed:inverse",
+          "label": "혼합 계산 결과에서 빈칸 복원하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:natural-mixed:add-sub",
+          "label": "덧셈·뺄셈의 순서",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:natural-mixed:mul-div",
+          "label": "곱셈·나눗셈의 순서",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:natural-mixed:order",
+          "label": "먼저 계산할 부분",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:natural-mixed:error",
+          "label": "계산 순서 오류",
+          "levels": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g5s1",
+      "semesterKey": "g5s1",
+      "grade": 5,
+      "semester": 1,
+      "id": "g5s1:factors-multiples",
+      "title": "약수와 배수",
+      "areaId": "g5s1",
+      "areaLabel": "수학 5학년 1학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g5:s1:factors-multiples:divisor",
+          "label": "양의 약수 나열하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:factors-multiples:context",
+          "label": "두 수를 같은 최대 묶음 크기로 나누기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:factors-multiples:relation",
+          "label": "한 약수로 대응하는 약수 찾기",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:factors-multiples:multiple",
+          "label": "배수의 뜻과 찾기",
+          "levels": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:factors-multiples:gcd",
+          "label": "공약수·최대공약수",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:factors-multiples:lcm",
+          "label": "공배수·최소공배수",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:factors-multiples:condition",
+          "label": "범위·조건에 맞는 수",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g5s1",
+      "semesterKey": "g5s1",
+      "grade": 5,
+      "semester": 1,
+      "id": "g5s1:correspondence",
+      "title": "두 양의 대응 관계",
+      "areaId": "g5s1",
+      "areaLabel": "수학 5학년 1학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g5:s1:correspondence:direct",
+          "label": "배수 관계의 대응표에서 값 구하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:correspondence:inverse",
+          "label": "대응 관계에서 입력값 찾기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:correspondence:offset",
+          "label": "일정한 차가 포함된 대응 관계 적용하기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:correspondence:table",
+          "label": "대응표 읽기",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:correspondence:equation",
+          "label": "관계를 식으로 나타내기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:correspondence:error",
+          "label": "잘못된 대응 관계",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g5s1",
+      "semesterKey": "g5s1",
+      "grade": 5,
+      "semester": 1,
+      "id": "g5s1:equivalent-fractions",
+      "title": "약분·통분과 분수 비교",
+      "areaId": "g5s1",
+      "areaLabel": "수학 5학년 1학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g5:s1:equivalent-fractions:lowest",
+          "label": "공약수로 약분하여 같은 분수 나타내기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:equivalent-fractions:decimal",
+          "label": "분모가 100인 분수를 소수로 나타내기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:equivalent-fractions:equivalent",
+          "label": "동치 분수의 빠진 분모 찾기",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:equivalent-fractions:simplify",
+          "label": "약분의 원리",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:equivalent-fractions:common",
+          "label": "통분과 공통분모",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:equivalent-fractions:compare",
+          "label": "다른 분모 분수 비교",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:equivalent-fractions:error",
+          "label": "약분·통분 오류",
+          "levels": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g5s1",
+      "semesterKey": "g5s1",
+      "grade": 5,
+      "semester": 1,
+      "id": "g5s1:fraction-add-sub",
+      "title": "이분모 분수 덧셈·뺄셈",
+      "areaId": "g5s1",
+      "areaLabel": "수학 5학년 1학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g5:s1:fraction-add-sub:context",
+          "label": "분수 양의 감소와 증가 연결하기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:fraction-add-sub:add",
+          "label": "진분수 덧셈",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:fraction-add-sub:sub",
+          "label": "진분수 뺄셈",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:fraction-add-sub:mixed-add",
+          "label": "대분수 덧셈·받아올림",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:fraction-add-sub:mixed-sub",
+          "label": "대분수 뺄셈·받아내림",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:fraction-add-sub:principle",
+          "label": "통분 계산 원리·모형",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:fraction-add-sub:inverse",
+          "label": "합·차에서 빠진 양",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:fraction-add-sub:error",
+          "label": "분모·분자 계산 오류",
+          "levels": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g5s1",
+      "semesterKey": "g5s1",
+      "grade": 5,
+      "semester": 1,
+      "id": "g5s1:perimeter-area",
+      "title": "평면도형 둘레와 넓이",
+      "areaId": "g5s1",
+      "areaLabel": "수학 5학년 1학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g5:s1:perimeter-area:perimeter",
+          "label": "직사각형 네 변의 합 구하기",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:perimeter-area:rectangle",
+          "label": "넓이와 한 변으로 직사각형 다른 변 구하기",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:perimeter-area:triangle",
+          "label": "밑변에 수직인 높이로 삼각형 넓이 구하기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:perimeter-area:trapezoid",
+          "label": "두 평행한 밑변과 높이로 사다리꼴 넓이 구하기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:perimeter-area:units",
+          "label": "넓이 단위의 배율 이해하기",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s1:perimeter-area:rhombus",
+          "label": "두 대각선으로 마름모 넓이 구하기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:perimeter-area:parallelogram",
+          "label": "평행사변형 넓이",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:perimeter-area:relation",
+          "label": "도형 변형과 넓이 관계",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:perimeter-area:height",
+          "label": "밑변과 수직인 높이",
+          "levels": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s1:perimeter-area:error",
+          "label": "넓이 공식·둘레 오류",
+          "levels": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g5s2",
+      "semesterKey": "g5s2",
+      "grade": 5,
+      "semester": 2,
+      "id": "g5s2:range-round",
+      "title": "수의 범위와 어림",
+      "areaId": "g5s2",
+      "areaLabel": "수학 5학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g5:s2:range-round:nearest",
+          "label": "정한 자리까지 반올림하기",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:range-round:context",
+          "label": "올림이 필요한 물건 포장 수 구하기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:range-round:count",
+          "label": "경계를 포함하는 자연수 개수 세기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:range-round:inclusive",
+          "label": "이상·이하",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g5:s2:range-round:exclusive",
+          "label": "초과·미만",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g5:s2:range-round:interval",
+          "label": "두 조건의 수의 범위",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s2:range-round:up",
+          "label": "올림",
+          "levels": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:range-round:down",
+          "label": "버림",
+          "levels": [
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g5s2",
+      "semesterKey": "g5s2",
+      "grade": 5,
+      "semester": 2,
+      "id": "g5s2:fraction-product",
+      "title": "분수 곱셈",
+      "areaId": "g5s2",
+      "areaLabel": "수학 5학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g5:s2:fraction-product:context",
+          "label": "전체 수량의 분수만큼 구하기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:fraction-product:fraction-natural",
+          "label": "분수 양을 여러 번 사용한 전체 양 구하기",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:fraction-product:natural-fraction",
+          "label": "자연수와 분수의 곱",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:fraction-product:proper",
+          "label": "진분수끼리의 곱",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s2:fraction-product:mixed",
+          "label": "대분수가 포함된 곱",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:fraction-product:principle",
+          "label": "곱셈 원리·모형",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g5:s2:fraction-product:cancel",
+          "label": "약분과 계산 과정",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s2:fraction-product:error",
+          "label": "곱셈 오류 찾기",
+          "levels": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g5s2",
+      "semesterKey": "g5s2",
+      "grade": 5,
+      "semester": 2,
+      "id": "g5s2:congruence-symmetry",
+      "title": "합동과 대칭",
+      "areaId": "g5s2",
+      "areaLabel": "수학 5학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g5:s2:congruence-symmetry:side",
+          "label": "합동 도형의 대응변 길이 연결하기",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:congruence-symmetry:angle",
+          "label": "합동 도형의 대응각 크기 연결하기",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:congruence-symmetry:line-point",
+          "label": "선대칭 대응점의 축까지 거리 연결하기",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:congruence-symmetry:congruent",
+          "label": "합동 판단",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:congruence-symmetry:line",
+          "label": "선대칭도형",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s2:congruence-symmetry:point",
+          "label": "점대칭도형",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s2:congruence-symmetry:axis",
+          "label": "대칭축",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s2:congruence-symmetry:center",
+          "label": "대칭의 중심",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s2:congruence-symmetry:error",
+          "label": "대칭 조건·오류",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g5s2",
+      "semesterKey": "g5s2",
+      "grade": 5,
+      "semester": 2,
+      "id": "g5s2:decimal-product",
+      "title": "소수 곱셈",
+      "areaId": "g5s2",
+      "areaLabel": "수학 5학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g5:s2:decimal-product:proper",
+          "label": "소수 곱셈의 자릿값 적용하기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s2:decimal-product:context",
+          "label": "소수 측정량에 단가를 곱하기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:decimal-product:natural",
+          "label": "소수 길이를 여러 번 이어 붙인 길이 구하기",
+          "levels": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:decimal-product:place",
+          "label": "소수점 위치",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s2:decimal-product:estimate",
+          "label": "곱의 크기 비교·어림",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s2:decimal-product:error",
+          "label": "계산 과정 오류",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:decimal-product:condition",
+          "label": "곱셈 조건 추론",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g5s2",
+      "semesterKey": "g5s2",
+      "grade": 5,
+      "semester": 2,
+      "id": "g5s2:cuboid",
+      "title": "직육면체와 정육면체",
+      "areaId": "g5s2",
+      "areaLabel": "수학 5학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g5:s2:cuboid:edge",
+          "label": "정육면체의 같은 모서리 길이 연결하기",
+          "levels": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:cuboid:kind",
+          "label": "직육면체·정육면체",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g5:s2:cuboid:elements",
+          "label": "면·모서리·꼭짓점",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g5:s2:cuboid:faces",
+          "label": "평행·수직인 면",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s2:cuboid:projection",
+          "label": "겨냥도",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g5:s2:cuboid:net",
+          "label": "전개도 판별",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:cuboid:opposite",
+          "label": "마주 보는 면",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:cuboid:fold",
+          "label": "전개도 접기 추론",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g5s2",
+      "semesterKey": "g5s2",
+      "grade": 5,
+      "semester": 2,
+      "id": "g5s2:mean-chance",
+      "title": "평균과 가능성",
+      "areaId": "g5s2",
+      "areaLabel": "수학 5학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g5:s2:mean-chance:compute",
+          "label": "자료의 평균 구하기",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:mean-chance:missing",
+          "label": "평균과 두 자료로 나머지 자료 구하기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:mean-chance:interpret",
+          "label": "추가 자료를 포함한 새 평균 구하기",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:mean-chance:total",
+          "label": "자료 합과 평균",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:mean-chance:meaning",
+          "label": "평균의 의미",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g5:s2:mean-chance:words",
+          "label": "가능성 말로 표현",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g5:s2:mean-chance:numeric",
+          "label": "가능성 0·1/2·1",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g5:s2:mean-chance:compare",
+          "label": "조건과 가능성 비교",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g5:s2:mean-chance:fair",
+          "label": "공정한 상황 판단",
+          "levels": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g6s1",
+      "semesterKey": "g6s1",
+      "grade": 6,
+      "semester": 1,
+      "id": "g6s1:fraction-division",
+      "title": "분수 나눗셈의 도입",
+      "areaId": "g6s1",
+      "areaLabel": "수학 6학년 1학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g6:s1:fraction-division:natural",
+          "label": "자연수 몫의 분수 표현",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s1:fraction-division:proper",
+          "label": "분수÷자연수",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s1:fraction-division:mixed",
+          "label": "대분수÷자연수",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:fraction-division:principle",
+          "label": "등분 모형과 원리",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s1:fraction-division:process",
+          "label": "계산 과정·약분",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:fraction-division:error",
+          "label": "계산 오류 판단",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:fraction-division:context",
+          "label": "등분 문장제",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s1:fraction-division:inverse",
+          "label": "원래 양·조건 추론",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g6s1",
+      "semesterKey": "g6s1",
+      "grade": 6,
+      "semester": 1,
+      "id": "g6s1:prism-pyramid",
+      "title": "각기둥과 각뿔",
+      "areaId": "g6s1",
+      "areaLabel": "수학 6학년 1학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g6:s1:prism-pyramid:classify",
+          "label": "각기둥·각뿔 분류",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s1:prism-pyramid:faces",
+          "label": "밑면·옆면·면 수",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:prism-pyramid:edges",
+          "label": "모서리 수",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:prism-pyramid:vertices",
+          "label": "꼭짓점 수",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:prism-pyramid:height",
+          "label": "높이의 의미",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s1:prism-pyramid:infer",
+          "label": "구성 조건·오류 추론",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s1:prism-pyramid:net",
+          "label": "각기둥 전개도",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:prism-pyramid:correspond",
+          "label": "대응 면·변",
+          "levels": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g6s1",
+      "semesterKey": "g6s1",
+      "grade": 6,
+      "semester": 1,
+      "id": "g6s1:decimal-division",
+      "title": "소수 나눗셈의 도입",
+      "areaId": "g6s1",
+      "areaLabel": "수학 6학년 1학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g6:s1:decimal-division:natural",
+          "label": "자연수 몫의 소수 표현",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:decimal-division:divide",
+          "label": "소수÷자연수",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:decimal-division:place",
+          "label": "소수점 위치",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:decimal-division:process",
+          "label": "세로셈·계산 원리",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:decimal-division:compare",
+          "label": "몫의 크기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:decimal-division:error",
+          "label": "잘못된 계산 검산",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s1:decimal-division:context",
+          "label": "등분 실생활 상황",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s1:decimal-division:inverse",
+          "label": "원래 양·조건",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g6s1",
+      "semesterKey": "g6s1",
+      "grade": 6,
+      "semester": 1,
+      "id": "g6s1:ratio-rate",
+      "title": "비와 비율",
+      "areaId": "g6s1",
+      "areaLabel": "수학 6학년 1학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g6:s1:ratio-rate:meaning",
+          "label": "비의 의미·두 양",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s1:ratio-rate:base",
+          "label": "비교량·기준량",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s1:ratio-rate:rate",
+          "label": "비율의 분수 표현",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:ratio-rate:decimal",
+          "label": "비율의 소수 표현",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:ratio-rate:percent",
+          "label": "백분율",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s1:ratio-rate:compare",
+          "label": "비율 비교·오개념",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s1:ratio-rate:context",
+          "label": "생활 속 비율",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s1:ratio-rate:inverse",
+          "label": "조건에 맞는 양",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g6s1",
+      "semesterKey": "g6s1",
+      "grade": 6,
+      "semester": 1,
+      "id": "g6s1:graphs",
+      "title": "띠·원그래프와 탐구",
+      "areaId": "g6s1",
+      "areaLabel": "수학 6학년 1학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g6:s1:graphs:band",
+          "label": "띠그래프 읽기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s1:graphs:pie",
+          "label": "원그래프 읽기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s1:graphs:missing",
+          "label": "빠진 비율",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:graphs:quantity",
+          "label": "전체·부분 자료값",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:graphs:compare",
+          "label": "그래프 비교",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s1:graphs:construct",
+          "label": "자료에 맞는 그래프",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:graphs:error",
+          "label": "부적절한 표현",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:graphs:infer",
+          "label": "자료 해석·조건 추론",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g6s1",
+      "semesterKey": "g6s1",
+      "grade": 6,
+      "semester": 1,
+      "id": "g6s1:volume-surface",
+      "title": "직육면체 겉넓이와 부피",
+      "areaId": "g6s1",
+      "areaLabel": "수학 6학년 1학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g6:s1:volume-surface:unit",
+          "label": "부피 단위·단위 정육면체",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s1:volume-surface:convert",
+          "label": "cm³·m³ 환산",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:volume-surface:cuboid",
+          "label": "직육면체 부피",
+          "levels": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s1:volume-surface:cube",
+          "label": "정육면체 부피",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s1:volume-surface:surface",
+          "label": "겉넓이",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s1:volume-surface:inverse",
+          "label": "조건에서 길이 복원",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s1:volume-surface:context",
+          "label": "실생활 부피·넓이",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s1:volume-surface:error",
+          "label": "단위·계산 오류",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s1:volume-surface:net",
+          "label": "전개도·면 넓이 합",
+          "levels": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g6s2",
+      "semesterKey": "g6s2",
+      "grade": 6,
+      "semester": 2,
+      "id": "g6s2:fraction-division",
+      "title": "분수 나눗셈의 확장",
+      "areaId": "g6s2",
+      "areaLabel": "수학 6학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g6:s2:fraction-division:unlike",
+          "label": "다른 분모의 분수 나눗셈",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:fraction-division:context",
+          "label": "분수 나눗셈 상황",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:fraction-division:inverse",
+          "label": "나누는 수·원래 양 조건",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:fraction-division:mixed",
+          "label": "대분수가 포함된 나눗셈",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:fraction-division:same",
+          "label": "같은 분모의 분수 나눗셈",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s2:fraction-division:natural",
+          "label": "자연수÷분수",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s2:fraction-division:relation",
+          "label": "나눗셈·곱셈 관계",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:fraction-division:reciprocal",
+          "label": "역수와 계산 원리",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s2:fraction-division:process",
+          "label": "약분·계산 과정",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:fraction-division:error",
+          "label": "잘못된 풀이",
+          "levels": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g6s2",
+      "semesterKey": "g6s2",
+      "grade": 6,
+      "semester": 2,
+      "id": "g6s2:decimal-division",
+      "title": "소수 나눗셈의 확장",
+      "areaId": "g6s2",
+      "areaLabel": "수학 6학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g6:s2:decimal-division:divide",
+          "label": "소수÷소수",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:decimal-division:context",
+          "label": "소수 나눗셈 상황",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:decimal-division:inverse",
+          "label": "나누는 수·원래 양 조건",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:decimal-division:natural",
+          "label": "자연수÷소수",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s2:decimal-division:shift",
+          "label": "소수점 이동 원리",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s2:decimal-division:place",
+          "label": "몫의 소수 표현",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:decimal-division:process",
+          "label": "자연수 제수로 바꾸기",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:decimal-division:rounded",
+          "label": "몫의 반올림",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:decimal-division:remainder",
+          "label": "몫과 나머지",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:decimal-division:estimate",
+          "label": "몫의 크기 어림",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:decimal-division:error",
+          "label": "나머지·계산 오류",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g6s2",
+      "semesterKey": "g6s2",
+      "grade": 6,
+      "semester": 2,
+      "id": "g6s2:space-solids",
+      "title": "공간과 입체 관찰",
+      "areaId": "g6s2",
+      "areaLabel": "수학 6학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g6:s2:space-solids:count",
+          "label": "쌓기나무 개수",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s2:space-solids:top",
+          "label": "위에서 본 모양",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s2:space-solids:front",
+          "label": "앞에서 본 모양",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:space-solids:side",
+          "label": "옆에서 본 모양",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:space-solids:layers",
+          "label": "층별 구조",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:space-solids:compare",
+          "label": "여러 방향 비교",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:space-solids:hidden",
+          "label": "숨은 블록·유일성",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:space-solids:construct",
+          "label": "관측 조건에 맞는 구성",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:space-solids:same",
+          "label": "같은 입체 구조 판단",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:space-solids:error",
+          "label": "잘못된 구성 찾기",
+          "levels": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g6s2",
+      "semesterKey": "g6s2",
+      "grade": 6,
+      "semester": 2,
+      "id": "g6s2:proportion-allocation",
+      "title": "비례식과 비례배분",
+      "areaId": "g6s2",
+      "areaLabel": "수학 6학년 2학기",
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "objectives": [
+        {
+          "id": "math:g6:s2:proportion-allocation:blank",
+          "label": "비례식 빈칸",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:proportion-allocation:context",
+          "label": "실생활 비례배분",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:proportion-allocation:allocation",
+          "label": "비례배분",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:proportion-allocation:inverse",
+          "label": "배분량·전체 복원",
+          "levels": [
+            3,
+            4
+          ]
+        },
+        {
+          "id": "math:g6:s2:proportion-allocation:property",
+          "label": "비의 성질",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s2:proportion-allocation:simplify",
+          "label": "간단한 자연수의 비",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s2:proportion-allocation:meaning",
+          "label": "비례식의 의미",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s2:proportion-allocation:equal",
+          "label": "같은 비 판단",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:proportion-allocation:error",
+          "label": "잘못된 비례식·배분",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:proportion-allocation:relation",
+          "label": "대응 관계와 같은 비 구별",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g6s2",
+      "semesterKey": "g6s2",
+      "grade": 6,
+      "semester": 2,
+      "id": "g6s2:circle",
+      "title": "원주율·원주·원 넓이",
+      "areaId": "g6s2",
+      "areaLabel": "수학 6학년 2학기",
+      "levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "objectives": [
+        {
+          "id": "math:g6:s2:circle:circumference",
+          "label": "원주 구하기",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:circle:area",
+          "label": "원의 넓이",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:circle:diameter",
+          "label": "반지름·지름·원주",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:circle:compare",
+          "label": "원 크기 변화 비교",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:circle:shaded",
+          "label": "색칠한 부분 넓이",
+          "levels": [
+            3,
+            4
+          ]
+        },
+        {
+          "id": "math:g6:s2:circle:pi",
+          "label": "원주율의 의미",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s2:circle:principle",
+          "label": "넓이 원리",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:circle:inverse",
+          "label": "조건에서 원 크기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:circle:context",
+          "label": "실생활 원주·넓이",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:circle:error",
+          "label": "계산·단위 오류",
+          "levels": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "math",
+      "sourceId": "g6s2",
+      "semesterKey": "g6s2",
+      "grade": 6,
+      "semester": 2,
+      "id": "g6s2:round-solids",
+      "title": "원기둥·원뿔·구",
+      "areaId": "g6s2",
+      "areaLabel": "수학 6학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "math:g6:s2:round-solids:height",
+          "label": "원기둥·원뿔 높이",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:round-solids:net",
+          "label": "원기둥 전개도",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "math:g6:s2:round-solids:cylinder",
+          "label": "원기둥 분류",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s2:round-solids:cone",
+          "label": "원뿔 구성",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s2:round-solids:sphere",
+          "label": "구의 성질",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:round-solids:base",
+          "label": "두 밑면",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s2:round-solids:side",
+          "label": "옆면의 모양",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "math:g6:s2:round-solids:rotation",
+          "label": "회전체 기초",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:round-solids:compare",
+          "label": "입체도형 비교",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "math:g6:s2:round-solids:error",
+          "label": "잘못된 설명",
+          "levels": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "science",
+      "sourceId": "science:g4s2",
+      "semesterKey": "g4s2",
+      "grade": 4,
+      "semester": 2,
+      "id": "science:g4:s2:u2",
+      "title": "생물과 환경",
+      "areaId": "science:g4s2",
+      "areaLabel": "과학 4학년 2학기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "science:g4:s2:u2:components",
+          "label": "생물 요소와 비생물 요소",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "science:g4:s2:u2:ecosystem",
+          "label": "생태계의 구성과 관계",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "science:g4:s2:u2:producer",
+          "label": "생산자의 양분 얻기",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "science:g4:s2:u2:consumer",
+          "label": "소비자의 양분 얻기",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "science:g4:s2:u2:decomposer",
+          "label": "분해자의 역할",
+          "levels": [
+            1,
+            3
+          ]
+        },
+        {
+          "id": "science:g4:s2:u2:chain",
+          "label": "먹이사슬과 화살표",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "science:g4:s2:u2:web",
+          "label": "먹이그물과 여러 먹이 관계",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "science:g4:s2:u2:pollution",
+          "label": "환경오염의 모습",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "science:g4:s2:u2:evidence",
+          "label": "관찰 자료와 판단의 한계",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "science:g4:s2:u2:conservation",
+          "label": "환경 보전의 실천",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "science:g4:s2:u2:feeding-model-comparison",
+          "label": "먹이사슬과 먹이그물 직접 비교",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "science:g4:s2:u2:foodweb-construction",
+          "label": "여러 사슬을 합쳐 먹이그물 만들기",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "science:g4:s2:u2:food-change-reasoning",
+          "label": "먹이 변화의 영향과 예측의 한계",
+          "levels": [
+            3
+          ]
+        },
+        {
+          "id": "science:g4:s2:u2:bird-collision-prevention",
+          "label": "조류 충돌 방지 조치와 과학적 이유",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "science:g4:s2:u2:conservation-action-reason",
+          "label": "실제 보호 행동과 필요한 이유",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "science:g4:s2:u2:conservation-evidence-action",
+          "label": "학교·마을 활동의 근거와 기대 효과",
+          "levels": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "subject": "korean-literacy",
+      "sourceId": "korean-literacy:g4s2",
+      "grade": 4,
+      "semester": 2,
+      "id": "korean-literacy:g4:s2:u3",
+      "title": "3. 의견을 모아서",
+      "label": "3. 의견을 모아서",
+      "areaId": "korean-literacy-g4s2",
+      "areaLabel": "국어 · 의견 나누기",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "KO-G4S2U3-topic",
+          "label": "주제·목적 파악",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-opinion",
+          "label": "의견·제안 찾기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-question",
+          "label": "질문의 기능·필요 정보",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-criteria",
+          "label": "조건·기준 적용",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-summary",
+          "label": "요약·제목",
+          "levels": [
+            2
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-respect",
+          "label": "참여·관점 존중 · 공감·질문 표현",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-situation",
+          "label": "상황의 문제 찾기",
+          "levels": [
+            1
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-compare-evidence",
+          "label": "내용·자료 비교 · 근거·추론 범위",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-combine",
+          "label": "의견 통합",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-opinion-reason",
+          "label": "의견과 이유 연결",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-record",
+          "label": "기록의 정확성",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-proposal-writing",
+          "label": "제안·표현 고치기 · 제안 글의 구성",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-audience",
+          "label": "대상·전달 방법",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-evaluate",
+          "label": "실천·점검·재조정",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "KO-G4S2U3-process",
+          "label": "토의 절차",
+          "levels": [
+            1,
+            2
+          ]
+        }
+      ],
+      "practicePolicy": "same-type-diverse/1",
+      "difficultyFilter": false,
+      "questionCount": 200,
+      "semesterKey": "g4s2"
+    },
+    {
+      "subject": "social-studies",
+      "sourceId": "social-studies:g4s2",
+      "grade": 4,
+      "semester": 2,
+      "id": "social-studies:g4:s2:u2:t1",
+      "title": "2단원 · 1주제 지역문제의 해결",
+      "label": "2단원 · 1주제 지역문제의 해결",
+      "areaId": "social-studies-g4s2",
+      "areaLabel": "사회 · 지역문제 해결",
+      "levels": [
+        1,
+        2,
+        3
+      ],
+      "objectives": [
+        {
+          "id": "SO-G4S2U2T1-concept",
+          "label": "지역문제의 의미·필요성",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-investigate",
+          "label": "조사 방법·자료 수집",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-solution",
+          "label": "원인에 맞는 해결 방안",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-cooperate",
+          "label": "협력·갈등 조정",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-safety",
+          "label": "안전·권리·조사 윤리",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-reason",
+          "label": "원인·근거와 판단 한계",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-evaluate",
+          "label": "실천 평가·지속 개선",
+          "levels": [
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-plan",
+          "label": "제안·계획·기록",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-criteria",
+          "label": "대안 비교·실천 가능성",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-participate",
+          "label": "주민 참여·기관 역할",
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-data",
+          "label": "표·그래프·자료 읽기",
+          "levels": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "SO-G4S2U2T1-map",
+          "label": "위치도 해석·활용",
+          "levels": [
+            1,
+            2
+          ]
+        }
+      ],
+      "practicePolicy": "same-type-diverse/1",
+      "difficultyFilter": false,
+      "questionCount": 200,
+      "semesterKey": "g4s2"
+    }
+  ]
+}

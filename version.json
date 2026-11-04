@@ -1,12 +1,13 @@
 {
   "version": "3.0.0-mega-rc.1",
   "status": "public-student-test",
-  "officialUnchanged": true,
+  "officialUnchanged": false,
   "storagePrefix": "cafe-v30-mega-common-rc1/",
   "subjects": {
     "math": 49233,
     "science": 104,
-    "korean": 0
+    "korean-literacy": 200,
+    "social-studies": 200
   },
   "maxGrowthLevel": 30,
   "maxFloor": [
@@ -16,6 +17,17 @@
   "releaseNotes": "RELEASE-NOTES.html",
   "sourceCandidate": "ea9474dcb7f11a229b46dc892a9500c8441e0bb8",
   "testUrl": "https://limjiseung62-lgtm.github.io/Cafe-Learning-Tycoon-v30-Mega-RC1/",
-  "cacheToken": "placement-ea9474dcb7f1",
-  "build": "interior-placement-unblock-1"
+  "cacheToken": "sq-approved400-20261104",
+  "build": "interior-placement-unblock-1+sq-approved400-20261104",
+  "baselinePublicBuild": "interior-placement-unblock-1",
+  "approvedContentSubjects": [
+    "math",
+    "science",
+    "korean-literacy",
+    "social-studies"
+  ],
+  "approvedKoreanQuestions": 200,
+  "approvedSocialQuestions": 200,
+  "sourceQuestionsModified": false,
+  "baselineSourceUnchanged": true
 }

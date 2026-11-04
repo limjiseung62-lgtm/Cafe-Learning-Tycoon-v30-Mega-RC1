@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "common-approved-static-manifest/1",
+  "packId": "qb-korean-g4-s2-u3-opinions",
+  "version": "0.1.0-approved",
+  "subjectId": "korean-literacy",
+  "grade": 4,
+  "semester": 2,
+  "unitId": "korean-literacy:g4:s2:u3",
+  "questions": 200,
+  "passages": 40,
+  "operationalApproval": true,
+  "teacherApproval": true,
+  "rightsStatus": "user-authorized-independent-text",
+  "files": [
+    {
+      "path": "korean-pack.json",
+      "sha256": "8fbc8ad69c028fe75c15810e713cb92346f6860d7aa04cc80731049435261c1c",
+      "bytes": 419353
+    },
+    {
+      "path": "approval-index.json",
+      "sha256": "7e06cf424924968c95ec335163514d65d9c87bb1867eeab635fc98cc43845e6b",
+      "bytes": 34399
+    }
+  ],
+  "formats": [
+    "single-choice"
+  ],
+  "sharedGrader": "qb-universal-subject-manager/core.bundle.mjs#gradeCommon",
+  "gameE2E": false,
+  "publisherEditionMapping": "pending",
+  "legacyProductionReadyChanged": false
+}

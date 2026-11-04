@@ -1,46 +1,47 @@
-import { mountLiveManagement } from './liveManagementUi.js?v=placement-ea9474dcb7f1';
-import { wrapCommonBackup, unpackCommonBackup, commonDeployment } from './commonBackup.js?v=placement-ea9474dcb7f1';
-import { commonTransactionOpen } from './commonLearningTransaction.js?v=placement-ea9474dcb7f1';
-import { mountCafeStudyPicker } from './cafeStudyPicker.js?v=placement-ea9474dcb7f1';
-import { megaSetupActions } from './megaEditor.js?v=placement-ea9474dcb7f1';
-import { v27Deployment } from './classRandom.js?v=placement-ea9474dcb7f1';
-import { classRuntime } from './classRuntime.js?v=placement-ea9474dcb7f1';
-import { createRandomClassMatch } from './sessionFactory.js?v=placement-ea9474dcb7f1';
+import{applyExternalPicker,preflightExternal,runExternalStart}from'./externalLaunch.js';
+import { mountLiveManagement } from './liveManagementUi.js?v=sq-approved400-20261104';
+import { wrapCommonBackup, unpackCommonBackup, commonDeployment } from './commonBackup.js?v=sq-approved400-20261104';
+import { commonTransactionOpen } from './commonLearningTransaction.js?v=sq-approved400-20261104';
+import { mountCafeStudyPicker } from './cafeStudyPicker.js?v=sq-approved400-20261104';
+import { megaSetupActions } from './megaEditor.js?v=sq-approved400-20261104';
+import { v27Deployment } from './classRandom.js?v=sq-approved400-20261104';
+import { classRuntime } from './classRuntime.js?v=sq-approved400-20261104';
+import { createRandomClassMatch } from './sessionFactory.js?v=sq-approved400-20261104';
 let preparedBackupUrl;
 if (typeof addEventListener === 'function')
     addEventListener('pagehide', () => { if (preparedBackupUrl)
         URL.revokeObjectURL(preparedBackupUrl); });
-import { goalsHtml } from './progressiveGoals.js?v=placement-ea9474dcb7f1';
-import { openProgressiveHub } from './progressiveHub.js?v=placement-ea9474dcb7f1';
-import { alignMissionBusiness, unlocked, featureLevels } from './progressiveFeatures.js?v=placement-ea9474dcb7f1';
-import { openProgressiveBusiness } from './progressiveEconomy.js?v=placement-ea9474dcb7f1';
-import { createProgressiveGrowthSave } from './growthSave.js?v=placement-ea9474dcb7f1';
-import { v26Deployment } from './progressiveFeatures.js?v=placement-ea9474dcb7f1';
-import { createProgressiveClassMatch } from './sessionFactory.js?v=placement-ea9474dcb7f1';
-import { organizeGrowthMenu } from './studentNavigation.js?v=placement-ea9474dcb7f1';
-import { openManagementHub } from './managementHub.js?v=placement-ea9474dcb7f1';
-import { chooseManagementStrategy } from './managementUi.js?v=placement-ea9474dcb7f1';
-import { managementFor } from './managementState.js?v=placement-ea9474dcb7f1';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=placement-ea9474dcb7f1';
-import { openCafePicker } from './cafePicker.js?v=placement-ea9474dcb7f1';
-import { cafeNames } from './cafePortfolio.js?v=placement-ea9474dcb7f1';
-import { openVillage } from './villageUi.js?v=placement-ea9474dcb7f1';
-import { openLayoutEditor } from './layoutEditor.js?v=placement-ea9474dcb7f1';
-import { rosterFor, syncRosterSave } from './staffRecruitment.js?v=placement-ea9474dcb7f1';
-import { openCrewDialog } from './recruitUi.js?v=placement-ea9474dcb7f1';
-import { ensureGrowthWriteLock, releaseGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=placement-ea9474dcb7f1';
-import { chooseLongMission, prepareLongState } from './longGrowthUi.js?v=placement-ea9474dcb7f1';
-import { exportGrowth, parseGrowthBackup, checkBackupRun } from './growthBackup.js?v=placement-ea9474dcb7f1';
-import { growthRuntime } from './growthRuntime.js?v=placement-ea9474dcb7f1';
-import { concepts, seededRandom } from './cafeRun.js?v=placement-ea9474dcb7f1';
-import { createClassMatch } from './sessionFactory.js?v=placement-ea9474dcb7f1';
-import { createGrowthSave } from './growthSave.js?v=placement-ea9474dcb7f1';
-import { GrowthSessionController } from './growthSession.js?v=placement-ea9474dcb7f1';
-import { LocalSaveRepository, BrowserGrowthRepository, CandidateSaveRepository, growthStorageKey } from './saveRepository.js?v=placement-ea9474dcb7f1';
-import { policyFor } from './sessionModes.js?v=placement-ea9474dcb7f1';
-import { balance } from './config.js?v=placement-ea9474dcb7f1';
-import { questionCatalog } from './questionPack.js?v=placement-ea9474dcb7f1';
-import { escapeText } from './questionRenderer.js?v=placement-ea9474dcb7f1';
+import { goalsHtml } from './progressiveGoals.js?v=sq-approved400-20261104';
+import { openProgressiveHub } from './progressiveHub.js?v=sq-approved400-20261104';
+import { alignMissionBusiness, unlocked, featureLevels } from './progressiveFeatures.js?v=sq-approved400-20261104';
+import { openProgressiveBusiness } from './progressiveEconomy.js?v=sq-approved400-20261104';
+import { createProgressiveGrowthSave } from './growthSave.js?v=sq-approved400-20261104';
+import { v26Deployment } from './progressiveFeatures.js?v=sq-approved400-20261104';
+import { createProgressiveClassMatch } from './sessionFactory.js?v=sq-approved400-20261104';
+import { organizeGrowthMenu } from './studentNavigation.js?v=sq-approved400-20261104';
+import { openManagementHub } from './managementHub.js?v=sq-approved400-20261104';
+import { chooseManagementStrategy } from './managementUi.js?v=sq-approved400-20261104';
+import { managementFor } from './managementState.js?v=sq-approved400-20261104';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=sq-approved400-20261104';
+import { openCafePicker } from './cafePicker.js?v=sq-approved400-20261104';
+import { cafeNames } from './cafePortfolio.js?v=sq-approved400-20261104';
+import { openVillage } from './villageUi.js?v=sq-approved400-20261104';
+import { openLayoutEditor } from './layoutEditor.js?v=sq-approved400-20261104';
+import { rosterFor, syncRosterSave } from './staffRecruitment.js?v=sq-approved400-20261104';
+import { openCrewDialog } from './recruitUi.js?v=sq-approved400-20261104';
+import { ensureGrowthWriteLock, releaseGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=sq-approved400-20261104';
+import { chooseLongMission, prepareLongState } from './longGrowthUi.js?v=sq-approved400-20261104';
+import { exportGrowth, parseGrowthBackup, checkBackupRun } from './growthBackup.js?v=sq-approved400-20261104';
+import { growthRuntime } from './growthRuntime.js?v=sq-approved400-20261104';
+import { concepts, seededRandom } from './cafeRun.js?v=sq-approved400-20261104';
+import { createClassMatch } from './sessionFactory.js?v=sq-approved400-20261104';
+import { createGrowthSave } from './growthSave.js?v=sq-approved400-20261104';
+import { GrowthSessionController } from './growthSession.js?v=sq-approved400-20261104';
+import { LocalSaveRepository, BrowserGrowthRepository, CandidateSaveRepository, growthStorageKey } from './saveRepository.js?v=sq-approved400-20261104';
+import { policyFor } from './sessionModes.js?v=sq-approved400-20261104';
+import { balance } from './config.js?v=sq-approved400-20261104';
+import { questionCatalog } from './questionPack.js?v=sq-approved400-20261104';
+import { escapeText } from './questionRenderer.js?v=sq-approved400-20261104';
 const e = (id) => document.getElementById(id);
 const study = () => '<div id="study-content" class="study-content"><span>학습 내용</span><strong id="study-title">문제를 준비하고 있어요…</strong><select id="study-pack" aria-label="학습 내용" hidden></select></div><p id="pack-error" class="save-error" aria-live="polite"></p><button type="button" id="pack-retry" class="text-button pack-retry" hidden>다시 시도</button>';
 export function browserSaveRepository() { try {
@@ -119,7 +120,7 @@ export class ModeFlow {
         const resumeRead = this.repository.read();
         questionCatalog.prepareResume(growth && !this.freshGrowth && resumeRead.status === 'ready' ? resumeRead.save.campaign?.run : undefined);
         const available = await questionCatalog.selectable(growth || v26Deployment() ? 'growth' : undefined), savedChoice = this.repository.read(), resumePack = growth && !this.freshGrowth && savedChoice.status === 'ready' ? savedChoice.save.campaign?.run?.packId : undefined;
-        const list = available.filter(p => !document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-') || p.subject !== '국어' || p.packId === resumePack);
+        const list = available.filter(p => !document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-') || p.subject !== '국어' || p.approvedCommonSupply===true || p.packId === resumePack);
         if (view !== this.view)
             return;
         const select = e('study-pack');
@@ -140,7 +141,7 @@ export class ModeFlow {
         if (!growth)
             e('study-title').textContent = list.length === 1 ? (list[0].selectionLabel ?? list[0].title) : '오늘 배울 내용을 골라요';
         if (document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-'))
-            mountCafeStudyPicker(select, list);
+            mountCafeStudyPicker(select,list);applyExternalPicker(select);
         this.controls(false);
     }
     catch {
@@ -151,11 +152,9 @@ export class ModeFlow {
     } if (view === this.view)
         e('pack-retry').onclick = () => { void this.populatePacks(true); }; }
     packError(error) { this.loadFailed = true; this.controls(true); const message = error instanceof Error ? error.message : ''; e('pack-error').textContent = /직원|손님|카페 상태|학습 기록 복원|공통 학습 백업/.test(message) ? '이어하기 정보를 복원하지 못했어요. 카페를 초기화하지 말고 JSON 백업을 보관해 주세요. · ' + message : '문제를 불러오지 못했어요. 기존 저장은 유지돼요. 연결을 확인하고 다시 시도해 주세요.'; e('pack-retry').hidden = false; }
-    async problems(resume) { questionCatalog.prepareResume(resume); const id = e('study-pack').value; if (!id || !(await questionCatalog.selectable(this.card().querySelector('#continue-growth,#new-growth,#reset-growth') || v26Deployment() ? 'growth' : undefined)).some(p => p.packId === id))
+    async problems(resume) { await preflightExternal(resume);questionCatalog.prepareResume(resume); const id = e('study-pack').value; if (!id || !(await questionCatalog.selectable(this.card().querySelector('#continue-growth,#new-growth,#reset-growth') || v26Deployment() ? 'growth' : undefined)).some(p => p.packId === id))
         throw Error('inactive pack'); return (await questionCatalog.load(id)).questions; }
-    async begin(factory, pool, view, resuming = false) { if (!resuming)
-        await this.beforeStart(); if (view !== this.view)
-        return; await this.start(factory(), pool); }
+    async begin(factory,pool,view,resuming=false){return runExternalStart(resuming,async()=>{if(!resuming)await this.beforeStart();if(view!==this.view)return;await this.start(factory(),pool);});}
     classSetup() { if (v26Deployment()) {
         this.progressiveClassSetup();
         return;
@@ -196,7 +195,7 @@ export class ModeFlow {
         if (!await classRuntime.claim())
             throw Error(classRuntime.message);
         const cp = value;
-        questionCatalog.prepareResume(value);
+        await preflightExternal(value);questionCatalog.prepareResume(value);
         const pool = cp?.packId ? (await questionCatalog.load(cp.packId)).questions : await this.problems();
         await this.begin(() => value ? classRuntime.prepare(value, pool) : createRandomClassMatch(Number(e('class-duration').value)), pool, view, !!value);
     }

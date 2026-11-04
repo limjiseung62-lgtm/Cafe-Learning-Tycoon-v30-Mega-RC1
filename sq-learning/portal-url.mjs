@@ -1,0 +1,2 @@
+export function safePortalURL(value){try{const u=new URL(value);if(u.username||u.password)return null;if(u.protocol==='https:'&&u.hostname==='math-hero-defense-3-test.pages.dev'&&u.pathname.startsWith('/school-quest/'))return u.href;if(u.protocol==='http:'&&['localhost','127.0.0.1'].includes(u.hostname)&&u.port==='5217')return u.href;}catch{}return null;}
+export const portalURL=()=>safePortalURL(new URLSearchParams(location.search).get('sqPortal'))??'https://math-hero-defense-3-test.pages.dev/school-quest/';

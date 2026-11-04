@@ -1,8 +1,9 @@
-import { commonBankPins } from './commonBankPins.js?v=placement-ea9474dcb7f1';
-const cache = new Map();
+import { commonBankPins } from './commonBankPins.js?v=sq-approved400-20261104';
+import{loadApprovedSubject}from'./sq-learning/approved-runtime.mjs';import*as ApprovedModule from'./sq-learning/approved-runtime.mjs';
+const cache=new Map();
 async function digest(b) { return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new Uint8Array(b).buffer)), x => x.toString(16).padStart(2, '0')).join(''); }
 /** Transport compression is lossless. Supplier manifest/data/reference hashes remain unchanged. */
-export function loadCommonRuntime(subject) {
+export function loadCommonRuntime(subject) {if(['korean-literacy','social-studies'].includes(subject))return(async()=>{const runtime=await loadApprovedSubject(subject,'cafe-learning-tycoon'),[reports,reportPort,png]=await Promise.all(['report.mjs','report-port.mjs','png.mjs'].map(f=>import('./assets/common-learning/math/'+f)));return{subject,module:ApprovedModule,runtime,reports,reportPort,png,manifestSHA256:runtime.info.manifestSHA256};})();
     if (!cache.has(subject))
         cache.set(subject, (async () => {
             const p = commonBankPins.find(p => p.subject === subject);

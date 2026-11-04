@@ -1,0 +1,158 @@
+[
+  {
+    "familyId": "SO-G4S2U2T1-F-concept",
+    "title": "지역문제의 의미·필요성",
+    "definition": "지역문제의 의미·필요성에 해당하는 자료·조건을 확인하고 판단하기",
+    "subskills": [
+      "concept",
+      "problem",
+      "impact"
+    ],
+    "questions": 12
+  },
+  {
+    "familyId": "SO-G4S2U2T1-F-investigate",
+    "title": "조사 방법·자료 수집",
+    "definition": "조사 방법·자료 수집에 해당하는 자료·조건을 확인하고 판단하기",
+    "subskills": [
+      "investigate",
+      "method",
+      "sources",
+      "check-source",
+      "additional-data",
+      "fair-compare"
+    ],
+    "questions": 18
+  },
+  {
+    "familyId": "SO-G4S2U2T1-F-data",
+    "title": "표·그래프·자료 읽기",
+    "definition": "표·그래프·자료 읽기에 해당하는 자료·조건을 확인하고 판단하기",
+    "subskills": [
+      "data-read",
+      "data-type",
+      "source-type",
+      "change",
+      "unit"
+    ],
+    "questions": 14
+  },
+  {
+    "familyId": "SO-G4S2U2T1-F-map",
+    "title": "위치도 해석·활용",
+    "definition": "위치도 해석·활용에 해당하는 자료·조건을 확인하고 판단하기",
+    "subskills": [
+      "map-read",
+      "map-purpose"
+    ],
+    "questions": 5
+  },
+  {
+    "familyId": "SO-G4S2U2T1-F-reason",
+    "title": "원인·근거와 판단 한계",
+    "definition": "원인·근거와 판단 한계에 해당하는 자료·조건을 확인하고 판단하기",
+    "subskills": [
+      "cause",
+      "cause-effect",
+      "cause-limit",
+      "evidence-limit",
+      "sample-limit",
+      "evidence",
+      "limit",
+      "legal-limit",
+      "avoid-assumption"
+    ],
+    "questions": 29
+  },
+  {
+    "familyId": "SO-G4S2U2T1-F-solution",
+    "title": "원인에 맞는 해결 방안",
+    "definition": "원인에 맞는 해결 방안에 해당하는 자료·조건을 확인하고 판단하기",
+    "subskills": [
+      "solution",
+      "cause-solution"
+    ],
+    "questions": 8
+  },
+  {
+    "familyId": "SO-G4S2U2T1-F-criteria",
+    "title": "대안 비교·실천 가능성",
+    "definition": "대안 비교·실천 가능성에 해당하는 자료·조건을 확인하고 판단하기",
+    "subskills": [
+      "criteria",
+      "feasibility",
+      "priority",
+      "trial",
+      "check-before"
+    ],
+    "questions": 21
+  },
+  {
+    "familyId": "SO-G4S2U2T1-F-cooperate",
+    "title": "협력·갈등 조정",
+    "definition": "협력·갈등 조정에 해당하는 자료·조건을 확인하고 판단하기",
+    "subskills": [
+      "cooperate",
+      "conflict",
+      "compromise",
+      "fairness",
+      "perspective",
+      "compare"
+    ],
+    "questions": 29
+  },
+  {
+    "familyId": "SO-G4S2U2T1-F-participate",
+    "title": "주민 참여·기관 역할",
+    "definition": "주민 참여·기관 역할에 해당하는 자료·조건을 확인하고 판단하기",
+    "subskills": [
+      "participation",
+      "participation-type",
+      "role",
+      "institution",
+      "informed"
+    ],
+    "questions": 11
+  },
+  {
+    "familyId": "SO-G4S2U2T1-F-safety",
+    "title": "안전·권리·조사 윤리",
+    "definition": "안전·권리·조사 윤리에 해당하는 자료·조건을 확인하고 판단하기",
+    "subskills": [
+      "safety",
+      "rights",
+      "privacy",
+      "ethics"
+    ],
+    "questions": 16
+  },
+  {
+    "familyId": "SO-G4S2U2T1-F-plan",
+    "title": "제안·계획·기록",
+    "definition": "제안·계획·기록에 해당하는 자료·조건을 확인하고 판단하기",
+    "subskills": [
+      "proposal",
+      "plan",
+      "missing-plan",
+      "record",
+      "reporting",
+      "message",
+      "process",
+      "status",
+      "transfer"
+    ],
+    "questions": 16
+  },
+  {
+    "familyId": "SO-G4S2U2T1-F-evaluate",
+    "title": "실천 평가·지속 개선",
+    "definition": "실천 평가·지속 개선에 해당하는 자료·조건을 확인하고 판단하기",
+    "subskills": [
+      "evaluation",
+      "follow-up",
+      "sustain",
+      "reason"
+    ],
+    "questions": 21
+  }
+]

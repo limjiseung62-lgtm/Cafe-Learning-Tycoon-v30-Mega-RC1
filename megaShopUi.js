@@ -1,15 +1,15 @@
-import { openTouchInterior } from './touchInteriorUi.js?v=placement-ea9474dcb7f1';
-import { megaOperatingGrade } from './megaOperations.js?v=placement-ea9474dcb7f1';
-import { megaZones } from './megaZones.js?v=placement-ea9474dcb7f1';
-import { adoptInterior, interiorCatalog, inventorySku, tableSeatCount, isShopDeployment } from './megaInventory.js?v=placement-ea9474dcb7f1';
-import { buyInterior, saveInteriorLayout } from './megaShop.js?v=placement-ea9474dcb7f1';
-import { ensureMegaPlan, megaKey, megaDimensions, megaChairs, validateMegaPlan, megaBudget, iso, uniso } from './megaSpace.js?v=placement-ea9474dcb7f1';
-import { furnitureFor } from './furnitureCatalog.js?v=placement-ea9474dcb7f1';
-import { furnitureUnlocked, prepareFurniture } from './furnitureUnlocks.js?v=placement-ea9474dcb7f1';
-import { allDecorationCatalog } from './longGrowthConfig.js?v=placement-ea9474dcb7f1';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=placement-ea9474dcb7f1';
-import { paintMegaDecor, environmentPlacements, paintEnvironment, megaImage } from './megaArt.js?v=placement-ea9474dcb7f1';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=placement-ea9474dcb7f1';
+import { openTouchInterior } from './touchInteriorUi.js?v=sq-approved400-20261104';
+import { megaOperatingGrade } from './megaOperations.js?v=sq-approved400-20261104';
+import { megaZones } from './megaZones.js?v=sq-approved400-20261104';
+import { adoptInterior, interiorCatalog, inventorySku, tableSeatCount, isShopDeployment } from './megaInventory.js?v=sq-approved400-20261104';
+import { buyInterior, saveInteriorLayout } from './megaShop.js?v=sq-approved400-20261104';
+import { ensureMegaPlan, megaKey, megaDimensions, megaChairs, validateMegaPlan, megaBudget, iso, uniso } from './megaSpace.js?v=sq-approved400-20261104';
+import { furnitureFor } from './furnitureCatalog.js?v=sq-approved400-20261104';
+import { furnitureUnlocked, prepareFurniture } from './furnitureUnlocks.js?v=sq-approved400-20261104';
+import { allDecorationCatalog } from './longGrowthConfig.js?v=sq-approved400-20261104';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=sq-approved400-20261104';
+import { paintMegaDecor, environmentPlacements, paintEnvironment, megaImage } from './megaArt.js?v=sq-approved400-20261104';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=sq-approved400-20261104';
 const name = (sku) => inventorySku(sku)?.name ?? allDecorationCatalog.find(d => 'decor-' + d.id === sku)?.name ?? sku;
 const assigned = (p) => new Set([...p.tables.flatMap(t => [t.id, ...(t.chairs ?? []).map(c => c.id)]), ...p.decor.map(d => d.id), ...(p.fixtures ?? []).map(d => d.id)]);
 function shell(title, exit) { const el = document.createElement('section'); el.className = 'mega-edit-dialog interior-dialog'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', title); document.body.append(el); el.onkeydown = e => { if (e.key === 'Escape')

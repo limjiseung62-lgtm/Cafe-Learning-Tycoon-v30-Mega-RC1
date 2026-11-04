@@ -1,14 +1,14 @@
-import { buyInteriorBatch, sellInteriorBatch, purchaseLimit, saleCandidates, saleQuote } from './interiorCommerce.js?v=placement-ea9474dcb7f1';
-import { iso, uniso, megaDimensions, megaChairs } from './megaSpace.js?v=placement-ea9474dcb7f1';
-import { adoptInterior, interiorCatalog, inventorySku, tableSeatCount, includedSeats } from './megaInventory.js?v=placement-ea9474dcb7f1';
-import { checkInteriorLayout } from './megaShop.js?v=placement-ea9474dcb7f1';
-import { placementSamples } from './interiorPlacementSamples.js?v=placement-ea9474dcb7f1';
-import { InteriorHistory, installedIds, interiorCandidate, removeInterior } from './interiorPlacement.js?v=placement-ea9474dcb7f1';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=placement-ea9474dcb7f1';
-import { paintMegaDecor, environmentPlacements, paintEnvironment, megaImage } from './megaArt.js?v=placement-ea9474dcb7f1';
-import { furnitureFor } from './furnitureCatalog.js?v=placement-ea9474dcb7f1';
-import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=placement-ea9474dcb7f1';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=placement-ea9474dcb7f1';
+import { buyInteriorBatch, sellInteriorBatch, purchaseLimit, saleCandidates, saleQuote } from './interiorCommerce.js?v=sq-approved400-20261104';
+import { iso, uniso, megaDimensions, megaChairs } from './megaSpace.js?v=sq-approved400-20261104';
+import { adoptInterior, interiorCatalog, inventorySku, tableSeatCount, includedSeats } from './megaInventory.js?v=sq-approved400-20261104';
+import { checkInteriorLayout } from './megaShop.js?v=sq-approved400-20261104';
+import { placementSamples } from './interiorPlacementSamples.js?v=sq-approved400-20261104';
+import { InteriorHistory, installedIds, interiorCandidate, removeInterior } from './interiorPlacement.js?v=sq-approved400-20261104';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=sq-approved400-20261104';
+import { paintMegaDecor, environmentPlacements, paintEnvironment, megaImage } from './megaArt.js?v=sq-approved400-20261104';
+import { furnitureFor } from './furnitureCatalog.js?v=sq-approved400-20261104';
+import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=sq-approved400-20261104';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=sq-approved400-20261104';
 export async function openTouchInterior(repo, refresh, initial, tab = 'inventory') {
     if (!await ensureGrowthWriteLock())
         return;

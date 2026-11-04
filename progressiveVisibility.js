@@ -1,4 +1,4 @@
-import { consumeUnlocks, featureLevels, unlocked } from './progressiveFeatures.js?v=placement-ea9474dcb7f1';
+import { consumeUnlocks, featureLevels, unlocked } from './progressiveFeatures.js?v=sq-approved400-20261104';
 /** Presentation mirrors reducer gates; it never grants a capability. */
 export function applyProgressiveVisibility(g) {
     if (!g.progressive && !g.progressiveState)

@@ -1,9 +1,9 @@
-import { landmarkNames } from './progressiveFinance.js?v=placement-ea9474dcb7f1';
-import { createLongGrowth } from './longGrowth.js?v=placement-ea9474dcb7f1';
-import { growthAlbum } from './villageGrowthVisual.js?v=placement-ea9474dcb7f1';
-import { addCafeMemory, createManagement } from './managementState.js?v=placement-ea9474dcb7f1';
-import { recruitById } from './recruitConfig.js?v=placement-ea9474dcb7f1';
-import { researchRecipes } from './menuResearch.js?v=placement-ea9474dcb7f1';
+import { landmarkNames } from './progressiveFinance.js?v=sq-approved400-20261104';
+import { createLongGrowth } from './longGrowth.js?v=sq-approved400-20261104';
+import { growthAlbum } from './villageGrowthVisual.js?v=sq-approved400-20261104';
+import { addCafeMemory, createManagement } from './managementState.js?v=sq-approved400-20261104';
+import { recruitById } from './recruitConfig.js?v=sq-approved400-20261104';
+import { researchRecipes } from './menuResearch.js?v=sq-approved400-20261104';
 export function syncManagementAlbum(save) { if (!save.management) {
     if (!save.v26 || save.cafeLevel < 8)
         return;

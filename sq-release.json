@@ -1,0 +1,12 @@
+{
+  "release": "sq-approved400-20261104",
+  "game": "cafe",
+  "subjectsAdded": [
+    "korean-literacy",
+    "social-studies"
+  ],
+  "questionCount": 400,
+  "questionContentChanged": false,
+  "publicReady": false,
+  "generatedFrom": "isolated local copy; existing source untouched"
+}

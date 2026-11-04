@@ -1,0 +1,1012 @@
+{
+  "schemaVersion": "approved-content-scope/1",
+  "packId": "qb-social-g4-s2-u2-t1-local-problems",
+  "sourceVersion": "0.1.0-review",
+  "sourcePackSHA256": "7113e6e1f4baa74a9f3fb1c1c8cd98004a19dba6f2efb560c7c95c34609f05c6",
+  "teacherApproved": 200,
+  "approvalSHA256": "ca4da0d167a3b88e85d86745f3e7a3898d1ddfd25be7d33e23f5f7d6890c1068",
+  "rightsStatus": "independent-authoring-evidence-and-user-standing-permission",
+  "targets": [
+    {
+      "questionId": "SO-G4S2U2T1-Q001",
+      "version": 1,
+      "contentHash": "08809cb797ecae90844828f2072227432f65d0995947d3eb3a3582314a729387"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q002",
+      "version": 1,
+      "contentHash": "0847136a717dfd368e6e9920860c535a37ed4599f278c659a26b561329bc2f8f"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q003",
+      "version": 1,
+      "contentHash": "5595c829b8a3f99c3716ab627e39cfb7c5404bf7f7c4d670bac5cf52113ddde5"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q004",
+      "version": 1,
+      "contentHash": "257815f28c6775f54392bffaf26ba212b5fe2a467eebcb56c0e3c9c76828dec1"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q005",
+      "version": 1,
+      "contentHash": "0390e98019f86fc9ccf74b92dc9938c1ac54dbe0d0eec3a36a4ed2d0e56803b3"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q006",
+      "version": 1,
+      "contentHash": "e817ebc340dd4110f1c14e2f4cbf6a459370b4cf1931b919c99b803be8c12308"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q007",
+      "version": 1,
+      "contentHash": "23d36def5ace083663b87c670c11ff059a6d08f125cc80bdd8766584e6bebbd8"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q008",
+      "version": 1,
+      "contentHash": "d6b6911c212c92d32a70321c663f730e94fdbc5cd521d3de7665ba819057de35"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q009",
+      "version": 1,
+      "contentHash": "2ec672e55175b461ef470d7de9988b3c2d59d86015d3fcd86200f4b9c346e35e"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q010",
+      "version": 1,
+      "contentHash": "bcf7cadda246b2d4aed89bb53c8e68ae963ca10ed14a4ab595ce8870cff9ace7"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q011",
+      "version": 1,
+      "contentHash": "b03a912084733d302575b8a2530e44e0eb4ff76f0182d88bfcfb46c67e3f02af"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q012",
+      "version": 1,
+      "contentHash": "b7e9d6dc5c045968cb6050e41f6af1968fd4419f818c49ae222873e23f5b6517"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q013",
+      "version": 1,
+      "contentHash": "72d9416e1318cd2a96feba14a8f6eb07c8e5092b2f25bf7d616afb509b0b712e"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q014",
+      "version": 1,
+      "contentHash": "e28db0ccb27ee49733c842a565a27f27dc5098b1c1584f80570abd903c5047c2"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q015",
+      "version": 1,
+      "contentHash": "0810ef5bce210f749b6fd77ac9ec7c596aa5a6822deae28563c8e23625a92c19"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q016",
+      "version": 1,
+      "contentHash": "d524a9417abb7888035ad19619a0a4e60c3cb8014b56283c20a76c7ce8b7f865"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q017",
+      "version": 1,
+      "contentHash": "ff398da6d2d96cb771f5ab5c3579d3c70078abcf2566e986e4453a86805c1100"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q018",
+      "version": 1,
+      "contentHash": "f891d426ce62d7a29ed8dec61a69051d3361547f5b5f1654efbb8ed55aaf3b89"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q019",
+      "version": 1,
+      "contentHash": "3ddfdf93b5874c4d98537f37a25d68c61dce144f2a2fbf4bf10c1aaff840f9f2"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q020",
+      "version": 1,
+      "contentHash": "9e6af754faa795d87dc430793529cdf98fc58fdcc5ee2583fa294e9f84acc901"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q021",
+      "version": 1,
+      "contentHash": "eafdf4e16de4f131422bc6f2172ed9c3cbb3b5bf980798e64a991dec632501ab"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q022",
+      "version": 1,
+      "contentHash": "199a820cb4b63b5aebbba014e9d9cbe532f9631b8b6af31b5f3c7837bde30162"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q023",
+      "version": 1,
+      "contentHash": "394d70b3e0006ae7cb9483722d4dcd3908fcbed9f74b2998bc2db2a1d2e7fcf1"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q024",
+      "version": 1,
+      "contentHash": "9d8fce44f90d0847867fb651cf684b0587b14f40573ac93c80251e265d14aafc"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q025",
+      "version": 1,
+      "contentHash": "1a6bb6b295c325855d80954c6fdbcdb08d2e7dd89648bea0311b77b0f9e7ea89"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q026",
+      "version": 1,
+      "contentHash": "9eb5c135dcdbcc6ee9fa8426228530e35d592bd0815ab249694166ae4ab6d08c"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q027",
+      "version": 1,
+      "contentHash": "d96a3fc2fd9865bf5dcaaec1a64d00139bb3058028a57399dd3318da14f4c197"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q028",
+      "version": 1,
+      "contentHash": "ebea91be8afb7d32b119abe1caf1d08f3b0f303b80dd37c1eb1c819af3328f75"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q029",
+      "version": 1,
+      "contentHash": "751439a76d2b8fa6fc4dcb705760b3eae7d2ee00703a8ff4f6aeadc8b824ceb2"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q030",
+      "version": 1,
+      "contentHash": "7a921f6328aeb7afecfe015fd20bd7a35f192a229a1b55a2f4b85bcd765fa5a8"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q031",
+      "version": 1,
+      "contentHash": "c4184450aa33f2269b67918f9dd6b17527cbb1cccfaa8b193526477c0b7e71a0"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q032",
+      "version": 1,
+      "contentHash": "edc5a433046e29c403851f58748454a87b541d2c5ef2a5237b5b38bba72551c7"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q033",
+      "version": 1,
+      "contentHash": "f13096885cd66dca8c511be279968ac3c5cc113fbdf326cb4ef39289a61ad1a9"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q034",
+      "version": 1,
+      "contentHash": "7e0a12c2861a21cbdb943bbd23fe678c3afd8bf6b4b9fb6ea9a076a26c6dc129"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q035",
+      "version": 1,
+      "contentHash": "866809aefc324f366876c4d566551592d80df8602e282a6e37c3465cac933eeb"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q036",
+      "version": 1,
+      "contentHash": "b999d97b35006553ab4cf0882797837131236a650d7aaffc81a334aed12d91e1"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q037",
+      "version": 1,
+      "contentHash": "8b550101098b44663cfd62aa3b2d2855737432ae28b772e3cb301165dd3a284b"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q038",
+      "version": 1,
+      "contentHash": "668a3a028ad8103556cc1e2f3610ec2bb507d02e871f71ca71a95ac30b3420ff"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q039",
+      "version": 1,
+      "contentHash": "292c1d77a4e274ad1052e9f833e3974aa11a5bf7f99eee56a01a2283b6a52fae"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q040",
+      "version": 1,
+      "contentHash": "d21109c64739e76839389995ae644bac795ead622a9eb0c6b5dfaa41f24c1679"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q041",
+      "version": 1,
+      "contentHash": "2ffd18a4fef36583989bcaaaa1dce05fba31061656d048e849e207d5c5738092"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q042",
+      "version": 1,
+      "contentHash": "9886c9ee23b86fcb73fddabab2335bb1e27bfcaedff97e24d54ab0572eab9479"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q043",
+      "version": 1,
+      "contentHash": "496abaada6ee6a870a94aeb9b4230ff1013831ba1115f631782f4fd0a6c8fefd"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q044",
+      "version": 1,
+      "contentHash": "af7d51afdeb333174aa1cef4957b702d5e912a241f58e5184ab150265218a510"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q045",
+      "version": 1,
+      "contentHash": "dbff4da306d921d05bee7a1e32a2579399b612511f8cd3486ea675c673b7da13"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q046",
+      "version": 1,
+      "contentHash": "ca1f17415a86ff95d54d03efb00e5bfaaf7e23562961bd8f42eb5dfa10d7e41c"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q047",
+      "version": 1,
+      "contentHash": "5350ab15a82f70b1210ac25cb7634e589a15acd394361195e2d072d4982e990c"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q048",
+      "version": 1,
+      "contentHash": "3e9b6027eb65346458f5c612ebbb4280d7eea550a39d327258e10464e0767e44"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q049",
+      "version": 1,
+      "contentHash": "fd9b9f0dcac61391923346ba82fd0f640438bd7e58dfe5e5ac30012aa02ac253"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q050",
+      "version": 1,
+      "contentHash": "78bfbee3af9f56b7d438e9dbc2c8a1cd53d9473161095dc989f5dbc5b09c41f3"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q051",
+      "version": 1,
+      "contentHash": "5e6794a579998e86c24b264118798df3ac5c57d5d28d989309510d772fef6fdb"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q052",
+      "version": 1,
+      "contentHash": "898576ad1230338f69f3cb2ec9ef0b51b37badc4105493c05b6ef9249072186b"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q053",
+      "version": 1,
+      "contentHash": "5c9570c7b2dce03adbe086a79ede13ca6496cc9527f6d662e4f47228f6ab4455"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q054",
+      "version": 1,
+      "contentHash": "2a31dc280309d5ee7e5e4497ede37e92f9ea635bb2b6465590ee677c87d2c4e9"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q055",
+      "version": 1,
+      "contentHash": "0ba2918ba238032966c2efcb6f67254ad4830e41d74deeb8c793f69987379d02"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q056",
+      "version": 1,
+      "contentHash": "832db3cf42adc39bcb75e24f8c317627c691304a8107bf0901f1ba3029945150"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q057",
+      "version": 1,
+      "contentHash": "e90a9da72f7d337a96b0cbd44dea2cd12960eeac73a8615fe9f6a23bfdcf2732"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q058",
+      "version": 1,
+      "contentHash": "694395729e6f71e5a328e5efac9616278559e98f39e978f440c896da36d2e11f"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q059",
+      "version": 1,
+      "contentHash": "494dc51d4bed827a4c86ceb6da095d6bf855d1a217712f27319fa9d2fff47650"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q060",
+      "version": 1,
+      "contentHash": "be84e89f8619c7a6749256654fee1dbb5b57df26027e8b2bca011660b105b364"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q061",
+      "version": 1,
+      "contentHash": "006073cef2f6ca26b7a6f5acdc568ab779ffe2e62e57a5d8715d391e8c84f96d"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q062",
+      "version": 1,
+      "contentHash": "7e4d9efc729df71b3628f55a17e5a9d6cf2eced70085069374999438246b9a85"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q063",
+      "version": 1,
+      "contentHash": "6d636785c4e584f362cc64fcc0790d501d230fb1a1ae944e1c5ac264ee07cbad"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q064",
+      "version": 1,
+      "contentHash": "4129284e928ef8a4f18dd3f219d769af8c98bf64b0ffe7c73a37c60680b0dd28"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q065",
+      "version": 1,
+      "contentHash": "315179baeeaa63bc9bc83f75862a1487b71751944b17820fd3642cf3440d8297"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q066",
+      "version": 1,
+      "contentHash": "8daf62e629be6778eda6b9606b42f43a586ff148eeaaa6daacb380390aa6a9d5"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q067",
+      "version": 1,
+      "contentHash": "399814a34ff27ac87e1807613af9af17fc8c5f2df229913d04e147e822a9dbd3"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q068",
+      "version": 1,
+      "contentHash": "ce0a32d6384dfb5ca1d9da357265e70661a4992fd0de7ab24263c131f1bb6744"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q069",
+      "version": 1,
+      "contentHash": "1cda0a04c2cd3fb94a4c2ad5453b43b3dcb76c469fa64c2c5ca014c9449b5445"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q070",
+      "version": 1,
+      "contentHash": "5caa7583840f38c2ff2706c73f9298c05f52a368de49678b1f4af6ddd05719c7"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q071",
+      "version": 1,
+      "contentHash": "4ceec2c4b4a9dbf29e23e4b3cd739321385331aaf4c2a0c4dd3d82ad6da57a13"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q072",
+      "version": 1,
+      "contentHash": "c9671567612dc87cd053b0bbcf32a81b919fbb2fb2f25bf217e976f561f7f3e1"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q073",
+      "version": 1,
+      "contentHash": "5d062ebb51dd893206b1bf50f54c9c9e8ea9519546d3486374f26d6e6c142eed"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q074",
+      "version": 1,
+      "contentHash": "1abb5421400ab69677c47f2992f73118d917678d8241d4613db4581b6b27a107"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q075",
+      "version": 1,
+      "contentHash": "5c8015eb4b042afddffedcae8f82df432857fdb46deccd026e20fa453aebc4f3"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q076",
+      "version": 1,
+      "contentHash": "e3b95b87fcf11edc4554c03a08d18026a36b520122ca9bb35fa0c523dd5c2aca"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q077",
+      "version": 1,
+      "contentHash": "e3d316ab7bce93d83514ba5d998e4a6dd8742d6d0ffa97c702b0069d78dd32c1"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q078",
+      "version": 1,
+      "contentHash": "3d718ac25b993d057d7e5c8594c1942894a9c0804e98ec0fd09328576d127765"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q079",
+      "version": 1,
+      "contentHash": "1f5b193ae476cf4a7e002a177408503662f49f12b37bcb71c1133d4ac31bc5e0"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q080",
+      "version": 1,
+      "contentHash": "51d76f95608886842be5ae46ad6f77084c1fa294528b9512e1e9e793a0df8d69"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q081",
+      "version": 1,
+      "contentHash": "c13c68548d118b39b72402437c2068018e3d82589363ca7975e52834745de6b6"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q082",
+      "version": 1,
+      "contentHash": "a0d8cc25af75bfcf35661e550836bd33db22453c4f43dea721f7c12049477bb1"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q083",
+      "version": 1,
+      "contentHash": "122b3ae2e43e5d505a579efdff0c333449aaa73cdd7d17fcd5ff5ba4a1297bdc"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q084",
+      "version": 1,
+      "contentHash": "8f64af4cd59c0a80098ef1fb2e5473eb79338d22cf2d87f35fb7b6484ca6115b"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q085",
+      "version": 1,
+      "contentHash": "cd19b12f66781134add67ba28ad50dcc77b44f502e005ea10f570c83c0a2b55b"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q086",
+      "version": 1,
+      "contentHash": "07052aa9f582f40202952e3e321f231fa70f58666f8d55877179a784af006380"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q087",
+      "version": 1,
+      "contentHash": "d85d6e851215acf1223d6c35f5f3f66ae2023b4c40f1146391af1fd4ec7b290a"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q088",
+      "version": 1,
+      "contentHash": "20ec616d781e98e693a4bb1b97047718bf6b68743fd824aeac61f97d817f6a6b"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q089",
+      "version": 1,
+      "contentHash": "5a33de3293d6ffe3a26d0224741df681b74fb0ba76abaad5b8e14b1a29e0e787"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q090",
+      "version": 1,
+      "contentHash": "487ed4e74df1851bae6587603bec1adecf485d05508b0c7ab9d673cb37737469"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q091",
+      "version": 1,
+      "contentHash": "70326d5091e62eaf94e70ca2736c68dd7ea13047e3f0efc8ee992dbf21404ffe"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q092",
+      "version": 1,
+      "contentHash": "9873c80dbbd681a1e3452d5a80c34760d9198c9541c68584e9c7581211887986"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q093",
+      "version": 1,
+      "contentHash": "81086321a6b3a7e6e9ca2a2e10809193974425fb5966a9190c5c850c9171c0a4"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q094",
+      "version": 1,
+      "contentHash": "ecfd71c3c48306c0571b8bf0051fd43543e205fca24b2e23fade7c0259898c37"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q095",
+      "version": 1,
+      "contentHash": "f6d7e1b0450c944f938b783db5b5f7d342e2804a3e30031a0b9129e73c6b4412"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q096",
+      "version": 1,
+      "contentHash": "14f6640017b486c866e812fd3af8c7a15d2e2e81d7c6454cc020fae8dcef4bf3"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q097",
+      "version": 1,
+      "contentHash": "dc3de56eeb7eb7e165bb7e5ea13cb0d095f99c32e11a95f9b96d942a59c681da"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q098",
+      "version": 1,
+      "contentHash": "3b087a3a4eca355cdb39486e63a54289822dd665d4e8c17ac6c0af8371635250"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q099",
+      "version": 1,
+      "contentHash": "3da6357321a657b66ea90e1c85fa4f598f916d912bb54f507eb305b4bce70fd0"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q100",
+      "version": 1,
+      "contentHash": "9a4207b5ec0a3231e1cf4a66f900e6c2ed24bff1ab732139e4dfb1c5ec2cb531"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q101",
+      "version": 1,
+      "contentHash": "399fdeaa1e901ad1ccde6c67d82097418ca994315d2db890065bc970d18794eb"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q102",
+      "version": 1,
+      "contentHash": "9fb09cd69276fe46adf0205dfb684f26d9440423e128baa9db93bef811f5ad99"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q103",
+      "version": 1,
+      "contentHash": "893900b70ee7b93a4e31fff344476572ef456ae4ce9a7ae67b7bdc4005d6df7f"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q104",
+      "version": 1,
+      "contentHash": "04756b0724c584aa6a0a563a8112c1f296fe0194f267653edcc4d49832528b79"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q105",
+      "version": 1,
+      "contentHash": "3ca8bd47e4675964374cea69e0c5270df2a0ab0edf7d5b7b64d8a0bed19eb40b"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q106",
+      "version": 1,
+      "contentHash": "b3a6aa562080571377910a7bad0d4061e8ac0f35e377364461f0703942095cf3"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q107",
+      "version": 1,
+      "contentHash": "dbad925eb748f619bbba40cb3d0a4eba77ad26397f425d3fc71039f5efb0b45e"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q108",
+      "version": 1,
+      "contentHash": "cc8af228228687e49e2641b78d10786e5056860217755c17116a237c2ac93875"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q109",
+      "version": 1,
+      "contentHash": "d361804d411bc3a623aea658bf747641e50328b73567ccfb36cba09ed09dcc80"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q110",
+      "version": 1,
+      "contentHash": "0726a865dc2df8e2063d761f937ad9ed3c62238ad462a8dda330bcf9755951ec"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q111",
+      "version": 1,
+      "contentHash": "016056df83844e33256957589097739763567e9367964d8710bbfbb6e43f4747"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q112",
+      "version": 1,
+      "contentHash": "97d0ec7848bd9348cbda988503f8555f482fe02a58cb5c0ed93616de4a719d79"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q113",
+      "version": 1,
+      "contentHash": "0c9878f52a06a0e96912db7a7ffbfd257a03010dd9c3db49c8458ef1e56cfdff"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q114",
+      "version": 1,
+      "contentHash": "4792e81f4ec49ee208cc1a94d8a54e976dfe333179c7beaa2ff2fcc22e3b6d93"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q115",
+      "version": 1,
+      "contentHash": "0b2edd67f9a094e2303aba6a2492ce652f11ad1fbbb5a62c3eee335f62aaa1bc"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q116",
+      "version": 1,
+      "contentHash": "07ea93e3436a556579b442ee825c75aab651b9054038c9cf5427c3f6383edc5b"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q117",
+      "version": 1,
+      "contentHash": "f7cf7de472953810349ad0cf63a80a39abe79562bff29a4c0dc5e78e6f77d37c"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q118",
+      "version": 1,
+      "contentHash": "834eaeee2fa91bf944d490165097f98480932fde1dfb3e9164678a0e590db5e7"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q119",
+      "version": 1,
+      "contentHash": "5c91243bb39fde7bd688494ca990c5c74dcb7300c7aa1e0491314a7abf2c8b6e"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q120",
+      "version": 1,
+      "contentHash": "9efd5953c56de6a9be6818a08724722f56e83cbbeb2cc65b9b25b639b998bc60"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q121",
+      "version": 1,
+      "contentHash": "8f8d75bcf354a1640f68a1c1ebb346b81edd17b011a5cee6abd2b35d75e61b6e"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q122",
+      "version": 1,
+      "contentHash": "f5fefc807c8baa8a0e2dc5986e6a2017b98e1aedead91e5a564f9c7cdc911eb5"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q123",
+      "version": 1,
+      "contentHash": "0cb42abb4e4f2c8acef3690345a619a02f8665d150715dcd3914d43272245f12"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q124",
+      "version": 1,
+      "contentHash": "0a35cb51a4fdc38100c73fcf3fb2df574d54ef5582e85368b99a0a45b4bca735"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q125",
+      "version": 1,
+      "contentHash": "02d42de77eb19f6a2f0d3f0e26c1827d160abc2717c64be8794d47389fad7c6e"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q126",
+      "version": 1,
+      "contentHash": "d7b1a00f0c087c4ff1a985b8e521653f0a226b9b1834f792fb4706586d047834"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q127",
+      "version": 1,
+      "contentHash": "f5b9a52a5d4098fd16117326d5eade58c58e0caf07efe48693ef20a6e68c06b5"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q128",
+      "version": 1,
+      "contentHash": "afe97748594933523fe89f6b0a94cdc3e0d9371e7064806bf1673b4799093603"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q129",
+      "version": 1,
+      "contentHash": "0bfba5b58a3d0f81a17e2388196d4e712630fc0381a81dd784be00bc0adddc5e"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q130",
+      "version": 1,
+      "contentHash": "d9cf921cdb59b5ab2dd81efc2329d78a3771e12dabeb37afae350d772b8dd283"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q131",
+      "version": 1,
+      "contentHash": "95c4cf518a151b7a0875fc5a7bea7e28c34a8d9335282745c327ea1d9061dabe"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q132",
+      "version": 1,
+      "contentHash": "8c60eb1fa5a6004f03a9638dd28643dc899651246c926e2c10caa92e79005b1f"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q133",
+      "version": 1,
+      "contentHash": "e40b557f0a0e81c16122cd28d3abe625aafbd2ec23e3db4bba58c916ab255d1e"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q134",
+      "version": 1,
+      "contentHash": "06444b5997708a9b8007ff921d8dd35bc75952c9576049c2712c55281ae7b80e"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q135",
+      "version": 1,
+      "contentHash": "0405942273a3bd284e82516d6455bbcee17d70a2844c1cdcef04da24008768a7"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q136",
+      "version": 1,
+      "contentHash": "3cdabd59bbdc58b468c3b5debdf0fa179deb7f1ed3e26a83a3dd04f9d23fa7a0"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q137",
+      "version": 1,
+      "contentHash": "e5ae0b0ec8259edc53eb5ebb95ec13c6309c827a25d39aa7d02a893cc0bdc637"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q138",
+      "version": 1,
+      "contentHash": "899c9445d68b20b540e152479cd7c34d1768e2578a75f1102769d43615823ee4"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q139",
+      "version": 1,
+      "contentHash": "ecf68b6269ad53d3848f21416e11775a0595bfcbf597c3c890d377025ae4dc4c"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q140",
+      "version": 1,
+      "contentHash": "be81205641c10c9487843e091f8863c1549d8b8037d5308b7d5bce7a4a0fb57d"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q141",
+      "version": 1,
+      "contentHash": "ae30099ac2acc9a2a2da8c53b768747876064ac0ba3b2783183379000b295c9e"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q142",
+      "version": 1,
+      "contentHash": "b76be8f19821e9556e9bc5d7ddafd28f0f6dbc7505269f637234fca0e972f062"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q143",
+      "version": 1,
+      "contentHash": "90f7f74e2fa594da5ad8c67814cd6cff26639dea3949baf0969c9155a07104d9"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q144",
+      "version": 1,
+      "contentHash": "1c0cd5fbf2178c2613fe0d2f4dddcea712021602fe2b1b38be7bdbab061e2a09"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q145",
+      "version": 1,
+      "contentHash": "8c2686de9a380cb46ea2094b47547eee43382ce8c434aac33e58d4490b0ac106"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q146",
+      "version": 1,
+      "contentHash": "dc17bb3b2dbba4414353b742f7948d7f169b52adba851dabc34dfa6b8f9fe438"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q147",
+      "version": 1,
+      "contentHash": "79ec7742c3001975018b57a16cf4010a8c98a53126bb4e1e40965b06df2bda82"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q148",
+      "version": 1,
+      "contentHash": "f6b2106aa6f5764af1030e83e29dcd708b62dfbd4d2330a35c9c8d8131a308e7"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q149",
+      "version": 1,
+      "contentHash": "d6ad6d7d947774386b8c166ac5bf5fa90bfee9a22250501c79d47ae5ed5c2f9b"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q150",
+      "version": 1,
+      "contentHash": "0d04b2264418a3bbf0e7d7806b0c3e7153cfe12266fc85736b536d398f1e0b1d"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q151",
+      "version": 1,
+      "contentHash": "0a9a564ea0fd84c6997a0ac10e3ba3618adb2c23271c63b949601f2b4c69ca69"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q152",
+      "version": 1,
+      "contentHash": "3f1080bb46a6a75afccff6e55f587cd54cba75960a99b0a61a7820b2ca1945ee"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q153",
+      "version": 1,
+      "contentHash": "10de06dfa533a56d763805916780e88ce8852f0290b3d088febad6bb6fa9f57c"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q154",
+      "version": 1,
+      "contentHash": "81bc7322555d017d8b99605eb57b8478598193c22dde44b05d57d938998051ff"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q155",
+      "version": 1,
+      "contentHash": "d28ff56594684c217bdbe1aaf872c1b59e5697542290259adb6c89b2fd0f0c8f"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q156",
+      "version": 1,
+      "contentHash": "434f2a729904c905d28201ead4b236e2fc225ebe0f4192ceaf1f8e2975e2949a"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q157",
+      "version": 1,
+      "contentHash": "eae61a4de1676d4fc1d28a9b21bdeec1a27c8e8beca005254764060c2b6aeeb3"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q158",
+      "version": 1,
+      "contentHash": "ad2b39b248ebe187ee22d7955ddc8e0624ad947f48eb4b15278ccff4d2dac43f"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q159",
+      "version": 1,
+      "contentHash": "74bf3e535c08bea24719155df842619ca31007f09513cc6061e41f867f7435c7"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q160",
+      "version": 1,
+      "contentHash": "787c70971c30caaab17ad7185783b97ae0f97ff23f6c18a7de67c6412cd7185a"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q161",
+      "version": 1,
+      "contentHash": "783b74d9e2cc8cb1806bad349e5992685d97a47c978e2186de76141e25f4471c"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q162",
+      "version": 1,
+      "contentHash": "8fe22007b58559ae3219ef9c01ded330fde8389261396bdbf8bb0063f38f7681"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q163",
+      "version": 1,
+      "contentHash": "1d0b3ddd5a9a0e9d38d53a38e917ca89f758253e2d2dc7cd5072190168e43423"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q164",
+      "version": 1,
+      "contentHash": "190747523e1f723c67518eafde79eb916496f8404bfa748bd55a1a6141054c0f"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q165",
+      "version": 1,
+      "contentHash": "735653e01e16e35b94375fafc93de74b2624dd0244d8bd669a4ffcdafb237d17"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q166",
+      "version": 1,
+      "contentHash": "f96088401f680cede6b96c7a10d0e8031d7fbd96b2296f7a844a86e6c46eb193"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q167",
+      "version": 1,
+      "contentHash": "abead8df9a5dd74fb0e89126a7484ad20696aaacf108a4af278f965f78cfaffa"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q168",
+      "version": 1,
+      "contentHash": "aa446c2f7d176fd236d6c1106641baa91e281019e01dec4587648292caed5650"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q169",
+      "version": 1,
+      "contentHash": "9daa8ca18c6250575f75d0d6217f3455de14b1330fdcffadd7acbb3fe5c9bea5"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q170",
+      "version": 1,
+      "contentHash": "38e99d8ab0fca2eaadca8efee5bdbd95aa0b84e00b17513cce0faa75830b0ae0"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q171",
+      "version": 1,
+      "contentHash": "674fd852c3cadf1ee04c39aab0985da803c64f87d5b6a078472ea4664f40dc46"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q172",
+      "version": 1,
+      "contentHash": "f578e7c55d1fffcfbafde5f7682b535329395320d1b063058480a52cd849995e"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q173",
+      "version": 1,
+      "contentHash": "9a9c0a8a37ed639ddd0146acb8dca3ecaf3d02f5e2a6a7c7581d28843defc698"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q174",
+      "version": 1,
+      "contentHash": "8ad85261f5ef6b606dc0c752770dd50d28e6596e38b182cde7d3d32c19f7a2d6"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q175",
+      "version": 1,
+      "contentHash": "c0bb84a52f3bcabf955b3aed4f37b5bcfcf244b7bc72c96cd319d3e08539aedd"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q176",
+      "version": 1,
+      "contentHash": "5beae507a0fc446ef59c1f88b6c03d1f749643f253e8399768bc100aa126eff3"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q177",
+      "version": 1,
+      "contentHash": "580822fab103c8aae36a3a9f8a69854c1d491e5435097383304c6d5243614800"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q178",
+      "version": 1,
+      "contentHash": "7c25f1778e0f0d3ca1e346411a0079ea021be17df82cfab8713e37ae11d2e76e"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q179",
+      "version": 1,
+      "contentHash": "2332cb6d6a4531b1f72f014eb449d76807f874e15f1eecec8fff066394a69e5f"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q180",
+      "version": 1,
+      "contentHash": "7998f7628e07386c8dfee47da900dcad1745eb9913c18d3152aa6aeb89fe0fd7"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q181",
+      "version": 1,
+      "contentHash": "5a9c12de9a94aea4587d4114c5a6113b8cb45ca82e18fb97a869fcdef323ad15"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q182",
+      "version": 1,
+      "contentHash": "3d8eb4d9b23de04ba7beff0d4eb3cff4ee4e7d80c7bd13435698eb148477351d"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q183",
+      "version": 1,
+      "contentHash": "74630ec817c4b6d68bf2b6405928423dae2db9284959fae64d88ee5b1399365b"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q184",
+      "version": 1,
+      "contentHash": "8fbc81343951746c13f25d6c40607460363a3ea5066711f6dcde7ee9cfa6c308"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q185",
+      "version": 1,
+      "contentHash": "33ce511ed92fc9e9107a715a2ccab642f3cec17d9277a226f275e67c788289ae"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q186",
+      "version": 1,
+      "contentHash": "3a4b6af7029616b7fc06eb283819d2503871aed9e85a093d150662ed6e7d3b66"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q187",
+      "version": 1,
+      "contentHash": "26ecc82073efd2b385d5c1123564d4c42674ef30f134ec9b7dcba924aaf059d5"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q188",
+      "version": 1,
+      "contentHash": "42631891aa5141a5481efa5a7197f9999d33336d6634edf0e7224472400f1da6"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q189",
+      "version": 1,
+      "contentHash": "08f37dd61a393439a4e3c38455f82a8bf20d0b1b8ace24e22d4be645da22b031"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q190",
+      "version": 1,
+      "contentHash": "7ce34a4e2c18d78fba2407a1817e7a2e818ea197a5a3df1a9a16c7ec510b00a4"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q191",
+      "version": 1,
+      "contentHash": "41dc6c204b0b614729fbb70a32e58f39ae8c2b1268e255abcfcdc41912ac8402"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q192",
+      "version": 1,
+      "contentHash": "6a84344e7e0a9db31623883e1060927995e4880ef922f0d2d17199a02c1010c3"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q193",
+      "version": 1,
+      "contentHash": "1ae63f5e419720f702e0a13a8a29621a7a7b8692b99a7e932aa511bee80069c3"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q194",
+      "version": 1,
+      "contentHash": "2fd944789b6cfac98cd14b0256db7a21744bc40f866b9dca14009ee7918aeaed"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q195",
+      "version": 1,
+      "contentHash": "e7b958167c100a6e1c57048eee6de973b5b1593cc3a1c0244fdccd429d2792d3"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q196",
+      "version": 1,
+      "contentHash": "943e155918a1ab238349cc06c6a99f56f88b11e37d78adaebc7a65c44e726e33"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q197",
+      "version": 1,
+      "contentHash": "58f22969d8edb963dfc2bc671daca67fc4b00bc7368eb82918aa492c3d7439fc"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q198",
+      "version": 1,
+      "contentHash": "71c13073992377e0ad2b0bc04dc6cb2fb2df5a1363da8f17d16b98f8a0b0cc7e"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q199",
+      "version": 1,
+      "contentHash": "852e1f3f4e59f79e2ccdd6b0bcbfa819a5acbdbddaceba2aa1496ef60052afeb"
+    },
+    {
+      "questionId": "SO-G4S2U2T1-Q200",
+      "version": 1,
+      "contentHash": "ee57f7b5b8d5995eb36a1fbd46b0a3723306849094a84caeb653a6dd5de734f8"
+    }
+  ],
+  "standingSupplyPolicySHA256": "7dc67ae9c3f2e14be5e18101e5cb8af08451c1caa1e1a4feaf288e84c73ae4a3"
+}
