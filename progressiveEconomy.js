@@ -1,7 +1,8 @@
-import { branchOperatingReport } from './enterpriseState.js?v=sq-approved400-20261104';
-import { customers } from './data.js?v=sq-approved400-20261104';
-import { newProgressiveState, unlocked } from './progressiveFeatures.js?v=sq-approved400-20261104';
-import { initializeFinance, branchReport } from './progressiveFinance.js?v=sq-approved400-20261104';
+import { cityPower } from './modernCity.js?v=stability-97670d28ea8d';
+import { branchOperatingReport } from './enterpriseState.js?v=stability-97670d28ea8d';
+import { customers } from './data.js?v=stability-97670d28ea8d';
+import { newProgressiveState, unlocked } from './progressiveFeatures.js?v=stability-97670d28ea8d';
+import { initializeFinance, branchReport } from './progressiveFinance.js?v=stability-97670d28ea8d';
 export const investmentCatalog = [{ id: 'commerce', name: '상업', city: '상업도시', visual: '시장 가판대와 상점 간판', effect: '일반·단체 손님', tile: 6 }, { id: 'tourism', name: '관광', city: '관광마을', visual: '전망 벤치·산책 화단', effect: '관광객·특별 손님', tile: 3 }, { id: 'culture', name: '문화', city: '예술도시', visual: '광장 공연 무대·장식', effect: '예술가·행사 손님', tile: 7 }, { id: 'housing', name: '주거', city: '전원마을', visual: '주택 골목·생활 쉼터', effect: '이웃·단골 손님', tile: 4 }];
 export const progressiveEconomyConfig = { investmentCosts: [1500, 7000, 25000, 70000, 160000], branchCosts: [108000, 306000, 720000], branchIncome: [9000, 18000, 30000], upgradeFactors: [.2, .21, .22, .24], maxBranchLevel: 5, landmarkCosts: [250000, 750000, 1800000, 8000000, 24000000, 60000000], revenueCap: .12 };
 export function initializeProgressive(s) { s.v26 ??= newProgressiveState(); return s.v26; }
@@ -57,17 +58,17 @@ export function settleFranchises(g, id, eligible) { const v = g.progressiveState
             o.reputation = Math.min(100, o.reputation + (o.employees > 0 ? 1 : 0));
     }
 } v.lastPayout = { id, amount, details }; g.money += amount; return amount; }
-export function investmentRevenue(g) { const v = g.progressiveState; return v && g.mode === 'CAFE_GROWTH' ? 1 + Math.min(progressiveEconomyConfig.revenueCap, investmentTotal(v) * .006) : 1; }
-export function investmentSpawn(g) { return g.progressiveState && g.mode === 'CAFE_GROWTH' ? Math.max(.9, 1 - investmentTotal(g.progressiveState) * .005) : 1; }
-export function investmentVisitor(g, guest) { const v = g.progressiveState; if (!v || !unlocked(g, 'investment') || !investmentTotal(v))
-    return; const fields = Array.from({ length: 5 }, (_, tier) => investmentCatalog.filter(c => v.investments[c.id] > tier)).flat(), pick = fields[(Math.floor(guest.id / 4) * 7) % fields.length]; if (guest.id % 4 === 0) {
+export function investmentRevenue(g) { const v = g.progressiveState; return v && g.mode === 'CAFE_GROWTH' ? 1 + Math.min(progressiveEconomyConfig.revenueCap, investmentTotal(v) * .006) + cityPower(v, 'commerce') * .004 : 1; }
+export function investmentSpawn(g) { return g.progressiveState && g.mode === 'CAFE_GROWTH' ? Math.max(.84, 1 - investmentTotal(g.progressiveState) * .005 - cityPower(g.progressiveState, 'tourism') * .004 - cityPower(g.progressiveState, 'housing') * .002) : 1; }
+export function investmentVisitor(g, guest) { const v = g.progressiveState; if (!v || !unlocked(g, 'investment') || !investmentTotal(v) && !investmentCatalog.some(c => cityPower(v, c.id) > 0))
+    return; const fields = Array.from({ length: 10 }, (_, tier) => investmentCatalog.filter(c => v.investments[c.id] + Math.ceil(cityPower(v, c.id) / 2) > tier)).flat(), pick = fields[(Math.floor(guest.id / 4) * 7) % fields.length]; if (guest.id % 4 === 0) {
     const archetype = customers.find(c => c.customerId === ({ commerce: 'reader', tourism: 'walker', culture: 'student', housing: 'grandma' }[pick.id])) ?? guest.definition;
     guest.definition = { ...guest.definition, ...(!guest.specialType && !guest.helperType ? { customerId: archetype.customerId, visualKey: archetype.visualKey, personality: archetype.personality, orderPreference: archetype.orderPreference } : {}), name: ({ commerce: '상점 거리 손님', tourism: '호숫가 여행객', culture: '마을 예술가', housing: '골목 이웃' }[pick.id]) + ' · ' + guest.definition.name, characterTrait: pick.effect, patienceSeconds: guest.definition.patienceSeconds + v.investments[pick.id] * (pick.id === 'housing' ? 4 : 2) };
-    guest.patienceRemaining += v.investments[pick.id] * (pick.id === 'housing' ? 4 : 2);
+    guest.patienceRemaining += cityPower(v, 'housing') * 2 + v.investments[pick.id] * (pick.id === 'housing' ? 4 : 2);
 } }
 /** A district can invite one existing themed situation per business; existing event budgets/receipts still own rewards. */
 export function pollInvestmentEvents(g) { const v = g.progressiveState; if (!v || g.mode !== 'CAFE_GROWTH' || g.status !== 'RUNNING' || !unlocked(g, 'investment') || !g.events.enabled || g.events.active || g.elapsedTime < 240)
-    return; const fields = investmentCatalog.filter(c => v.investments[c.id] >= 2); if (!fields.length)
+    return; const fields = investmentCatalog.filter(c => v.investments[c.id] + cityPower(v, c.id) >= 2); if (!fields.length)
     return; const slot = Math.min(2, Math.floor(g.elapsedTime / 240) - 1), field = fields[(slot + v.serial) % fields.length].id; const type = { commerce: 'rush', tourism: 'influencer', culture: 'birthday', housing: 'grandma' }[field]; if (g.events.records.some(r => r.type === type) || field === 'culture' && !unlocked(g, 'festival'))
     return; if (field === 'commerce')
     g.events.beginMission('rush', g);

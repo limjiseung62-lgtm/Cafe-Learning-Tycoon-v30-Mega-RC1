@@ -1,4 +1,4 @@
-import { iso, toTile } from './megaSpace.js?v=sq-approved400-20261104';
+import { iso, toTile } from './megaSpace.js?v=stability-97670d28ea8d';
 // Distance-driven presentation only. Never changes simulation position, timing or facing assets.
 export class MegaActorMotion {
     tracks = new Map();

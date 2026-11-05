@@ -1,8 +1,8 @@
-import { installCommonArchiveMenu } from './commonCafeResults.js?v=sq-approved400-20261104';
-import { configureQuestionCatalog, QuestionPackCatalog } from './questionPack.js?v=sq-approved400-20261104';
-import { CommonLearningCatalog } from './commonLearningCatalog.js?v=sq-approved400-20261104';
-import { commonCatalogSHA256 } from './commonCatalogPin.js?v=sq-approved400-20261104';
-import{attachExternal,manualReturn}from'./externalLaunch.js';
+import { attachExternal, manualReturn } from './externalLaunch.js?v=stability-97670d28ea8d';
+import { installCommonArchiveMenu } from './commonCafeResults.js?v=stability-97670d28ea8d';
+import { configureQuestionCatalog, QuestionPackCatalog } from './questionPack.js?v=stability-97670d28ea8d';
+import { CommonLearningCatalog } from './commonLearningCatalog.js?v=stability-97670d28ea8d';
+import { commonCatalogSHA256 } from './commonCatalogPin.js?v=stability-97670d28ea8d';
 try {
     const response = await fetch('assets/common-learning/catalog.json');
     if (!response.ok)
@@ -11,10 +11,14 @@ try {
     if (actual !== commonCatalogSHA256)
         throw Error('학습 범위 목록의 해시가 달라요.');
     const catalog = JSON.parse(new TextDecoder().decode(bytes));
-    const additions=await(await fetch('./sq-learning/approved-registry.json')).json();for(const u of additions.units)catalog.subjects.push({subject:u.subject,label:u.subject==='korean-literacy'?'국어':'사회',packId:additions.providers[u.subject].releaseRef.split('@')[0],units:[{grade:u.grade,semester:u.semester,semesterKey:'g4s2',unitId:u.id,unitLabel:u.title.replace(/^\d+\. /,''),order:u.subject==='korean-literacy'?3:2,skills:u.objectives.map(o=>({id:o.id,label:o.label}))}]});
-    const instance=new CommonLearningCatalog(catalog.subjects,new QuestionPackCatalog());await attachExternal(instance);configureQuestionCatalog(instance);
+    const additions = await (await fetch('./sq-learning/approved-registry.json')).json();
+    for (const u of additions.units)
+        catalog.subjects.push({ subject: u.subject, label: u.subject === 'korean-literacy' ? '국어' : '사회', packId: additions.providers[u.subject].releaseRef.split('@')[0], units: [{ grade: u.grade, semester: u.semester, semesterKey: 'g4s2', unitId: u.id, unitLabel: u.title.replace(/^\d+\. /, ''), order: u.subject === 'korean-literacy' ? 3 : 2, skills: u.objectives.map((o) => ({ id: o.id, label: o.label })) }] });
+    const instance = new CommonLearningCatalog(catalog.subjects, new QuestionPackCatalog());
+    await attachExternal(instance);
+    configureQuestionCatalog(instance);
     installCommonArchiveMenu();
-    await import('./main.js?v=sq-approved400-20261104');
+    await import('./main.js?v=stability-97670d28ea8d');
 }
 catch (error) {
     const box = document.createElement('section');
@@ -26,6 +30,12 @@ catch (error) {
     const b = document.createElement('button');
     b.textContent = '다시 연결하기';
     b.onclick = () => location.reload();
-    box.append(h,note,b);if(location.hash.startsWith('#sq')){const manual=document.createElement('button');manual.textContent='기존 수동 선택으로 돌아가기';manual.onclick=manualReturn;box.append(manual);}
+    box.append(h, note, b);
+    if (location.hash.startsWith('#sq')) {
+        const manual = document.createElement('button');
+        manual.textContent = '기존 수동 선택으로 돌아가기';
+        manual.onclick = manualReturn;
+        box.append(manual);
+    }
     document.getElementById('app').replaceChildren(box);
 }

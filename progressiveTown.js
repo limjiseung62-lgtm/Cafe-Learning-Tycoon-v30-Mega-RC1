@@ -1,5 +1,5 @@
-import { townAtStage } from './villageGrowthVisual.js?v=sq-approved400-20261104';
-import { investmentCatalog, progressiveTownName } from './progressiveEconomy.js?v=sq-approved400-20261104';
+import { townAtStage } from './villageGrowthVisual.js?v=stability-97670d28ea8d';
+import { investmentCatalog, progressiveTownName } from './progressiveEconomy.js?v=stability-97670d28ea8d';
 /** Reuse approved object layers, including their real solid footprints. */
 export function progressiveTown(s) {
     const scene = structuredClone(townAtStage(s.village?.progression?.stage ?? 1));

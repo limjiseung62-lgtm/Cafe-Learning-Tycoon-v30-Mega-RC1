@@ -24,8 +24,8 @@ export class CommonCafeFlow {
         this.learningRecordId = ids?.learningRecordId ?? 'LR-' + crypto.randomUUID();
         this.gameSessionId = ids?.gameSessionId ?? 'CAFE-' + crypto.randomUUID();
         for (const semesterKey of new Set(choices.map(c => c.semesterKey))) {
-            const groupIds=['korean-literacy','social-studies'].includes(loaded.subject)?loaded.runtime.groups.filter(g=>g.semesterKey===semesterKey&&choices.some(c=>c.semesterKey===semesterKey&&c.unitId===g.unitId&&(!c.skillIds||c.skillIds.includes(g.skillId)))).map(g=>g.groupId):undefined;
-            const bank=loaded.runtime.createBank({semesterKey,learningRecordId:this.learningRecordId,...groupIds?{groupIds}:{}});
+            const groupIds = ['korean-literacy', 'social-studies'].includes(loaded.subject) ? loaded.runtime.groups.filter((g) => g.semesterKey === semesterKey && choices.some(c => c.semesterKey === semesterKey && c.unitId === g.unitId && (!c.skillIds || c.skillIds.includes(g.skillId)))).map((g) => g.groupId) : undefined;
+            const bank = loaded.runtime.createBank({ semesterKey, learningRecordId: this.learningRecordId, ...groupIds ? { groupIds } : {} });
             this.sources.set(semesterKey, { bank, engine: bank.createReviewEngine(loaded.module.memoryStorage()), sessionIds: [] });
         }
         for (const c of choices) {
@@ -37,7 +37,8 @@ export class CommonCafeFlow {
     difficulty;
     setDifficulty(get) { this.difficulty = get; }
     levelCache = new Map();
-    target(c) {if(['korean-literacy','social-studies'].includes(this.loaded.subject))return undefined;if (!this.levelCache.has(c)) {
+    target(c) { if (['korean-literacy', 'social-studies'].includes(this.loaded.subject))
+        return undefined; if (!this.levelCache.has(c)) {
         const bank = this.sources.get(c.semesterKey).bank;
         this.levelCache.set(c, [...new Set(bank.getCandidates(this.selectedScope(c)).map((r) => bank.getQuestion(r.questionRef).metadata.difficulty))].sort((a, b) => a - b));
     } const levels = this.levelCache.get(c); return this.difficulty ? levels.reduce((best, n) => Math.abs(n - this.difficulty()) < Math.abs(best - this.difficulty()) ? n : best, levels[0]) : undefined; }
@@ -154,6 +155,9 @@ export class CommonCafeFlow {
         return { ...r, question: this.question() };
     } return r; }
     async report() {
+        for (const [sourceId, s] of this.sources)
+            if (!s.sessionIds.length)
+                await this.newSession(this.choices.findIndex(c => c.semesterKey === sourceId));
         const sources = [];
         const selectedScopes = [];
         for (const [sourceId, s] of this.sources)
@@ -162,7 +166,7 @@ export class CommonCafeFlow {
             const s = this.selectedScope(c);
             selectedScopes.push({ sourceId: c.semesterKey, subject: s.subject, grade: s.grade, semester: s.semester, unitId: s.unitId, unitLabel: c.unitLabel, packId: s.packId, packVersion: s.packVersion, contentVersion: s.contentVersion, skills: s.skillIds.map((id) => ({ id, label: c.skillLabels?.[id] ?? c.unitLabel })), levels: s.levels });
         }
-        const context = { learningRecordId: this.learningRecordId, gameSessionId: this.gameSessionId, gameName: '카페 학습 타이쿤', subject: this.loaded.subject, subjectLabel: ({'math':'수학','science':'과학','korean-literacy':'국어','social-studies':'사회'}[this.loaded.subject]), selectedScopes: this.firstReport?.selectedScopes ?? selectedScopes, generatedAt: new Date().toISOString(), ...this.gameSpecific ? { gameSpecific: this.gameSpecific } : {} };
+        const context = { learningRecordId: this.learningRecordId, gameSessionId: this.gameSessionId, gameName: '카페 학습 타이쿤', subject: this.loaded.subject, subjectLabel: ({ 'math': '수학', 'science': '과학', 'korean-literacy': '국어', 'social-studies': '사회' }[this.loaded.subject]), selectedScopes: this.firstReport?.selectedScopes ?? selectedScopes, generatedAt: new Date().toISOString(), ...this.gameSpecific ? { gameSpecific: this.gameSpecific } : {} };
         const first = this.choices[0], scope = this.scope(first);
         const r = await this.loaded.reports.fromEquivalentTwo(this.loaded.reports.fromMixedEquivalentTwo ? { sources, context, baseline: this.firstReport } : { bank: sources[0].bank, backup: sources[0].backup, sessionIds: sources[0].sessionIds, context: { ...context, grade: scope.grade, semester: scope.semester, unitId: scope.unitId, unitLabel: first.unitLabel, selectedSkills: this.firstReport?.selectedSkills ?? scope.skillIds.map((id) => ({ id, label: first.skillLabels?.[id] ?? first.unitLabel })) }, baseline: this.firstReport });
         return r;

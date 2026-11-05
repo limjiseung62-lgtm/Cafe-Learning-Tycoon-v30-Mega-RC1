@@ -1,4 +1,4 @@
-import { webAsset, webAssets } from './webAsset.js?v=sq-approved400-20261104';
+import { webAsset, webAssets } from './webAsset.js?v=stability-97670d28ea8d';
 // One request per logical file; shared by base poses, motion and rooms. Browser HTTP/decoded caches remain browser-managed.
 const entries = new Map(), retained = new Map();
 let active = 0;

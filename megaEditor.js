@@ -1,19 +1,19 @@
-import { enterpriseAction } from './enterpriseUi.js?v=sq-approved400-20261104';
-import { managerPreparationAction } from './managerUi.js?v=sq-approved400-20261104';
-import { megaGrowthBalance } from './megaGrowthEconomy.js?v=sq-approved400-20261104';
-import { expansionQuote } from './megaExpansion.js?v=sq-approved400-20261104';
-import { interiorActions, openInteriorEditor } from './megaShopUi.js?v=sq-approved400-20261104';
-import { isShopDeployment } from './megaInventory.js?v=sq-approved400-20261104';
-import { expansionAction } from './megaExpansionUi.js?v=sq-approved400-20261104';
-import { environmentPlacements, paintEnvironment } from './megaArt.js?v=sq-approved400-20261104';
-import { megaDimensions, megaKey, validateMegaPlan, defaultMegaPlan, iso, uniso, validMega, isMegaDeployment } from './megaSpace.js?v=sq-approved400-20261104';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=sq-approved400-20261104';
-import { megaChairs } from './megaSpace.js?v=sq-approved400-20261104';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=sq-approved400-20261104';
-import { allDecorationCatalog } from './longGrowthConfig.js?v=sq-approved400-20261104';
-import { freeKey } from './freeLayoutModel.js?v=sq-approved400-20261104';
-import { furnitureCatalog } from './furnitureCatalog.js?v=sq-approved400-20261104';
-import { furnitureUnlocked } from './furnitureUnlocks.js?v=sq-approved400-20261104';
+import { enterpriseAction } from './enterpriseUi.js?v=stability-97670d28ea8d';
+import { managerPreparationAction } from './managerUi.js?v=stability-97670d28ea8d';
+import { megaGrowthBalance } from './megaGrowthEconomy.js?v=stability-97670d28ea8d';
+import { expansionQuote } from './megaExpansion.js?v=stability-97670d28ea8d';
+import { interiorActions, openInteriorEditor } from './megaShopUi.js?v=stability-97670d28ea8d';
+import { isShopDeployment } from './megaInventory.js?v=stability-97670d28ea8d';
+import { expansionAction } from './megaExpansionUi.js?v=stability-97670d28ea8d';
+import { environmentPlacements, paintEnvironment } from './megaArt.js?v=stability-97670d28ea8d';
+import { megaDimensions, megaKey, validateMegaPlan, defaultMegaPlan, iso, uniso, validMega, isMegaDeployment } from './megaSpace.js?v=stability-97670d28ea8d';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=stability-97670d28ea8d';
+import { megaChairs } from './megaSpace.js?v=stability-97670d28ea8d';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=stability-97670d28ea8d';
+import { allDecorationCatalog } from './longGrowthConfig.js?v=stability-97670d28ea8d';
+import { freeKey } from './freeLayoutModel.js?v=stability-97670d28ea8d';
+import { furnitureCatalog } from './furnitureCatalog.js?v=stability-97670d28ea8d';
+import { furnitureUnlocked } from './furnitureUnlocks.js?v=stability-97670d28ea8d';
 const mega30Deployment = () => typeof document !== 'undefined' && document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-') === true;
 export function proposeMega(save, extended = false) { const level = extended ? Math.min(10, save.cafeLevel) : save.cafeLevel, branch = save.growthBranch?.active ?? null; if (level > 10)
     throw Error('Phase 1은 Lv.1~10만 지원해요. 기존 높은 레벨은 기존 화면에서 계속 운영해요.'); const source = save.freeLayouts?.plans[freeKey(save.cafeLevel, branch)] ?? save.layouts?.plans[megaKey(save.cafeLevel, branch)]; const [w, h] = megaDimensions[level - 1], snap = (x) => Math.round(x * 2) / 2; const p = source ? { version: 1, level, branch, tables: source.tables.map((t, i) => ({ id: t.id, kind: 'kind' in t ? t.kind : 'two', ...'furnitureId' in t ? { furnitureId: t.furnitureId } : {}, x: snap(2.75 + (t.x - 4) / 92 * (w - 4)), y: snap(1.75 + (t.y - 42) / 54 * (h - 3.5)), rotation: t.rotation })), decor: source.decor.map(d => ({ id: d.id, decorId: d.decorId, x: snap(2.5 + (d.x - 4) / 92 * (w - 3)), y: allDecorationCatalog.find(x => x.id === d.decorId)?.slot === 'wall' ? 0 : snap(2 + (d.y - 42) / 54 * (h - 3)), rotation: d.rotation, wall: allDecorationCatalog.find(x => x.id === d.decorId)?.slot === 'wall' })) } : defaultMegaPlan(level, branch); return { ...(extended ? { extended: true, paid: { spaceLevel: level, receipts: [] } } : {}), version: 1, source: 'confirmed-copy', plans: { [megaKey(level, branch)]: p } }; }
@@ -158,7 +158,7 @@ export function megaSetupActions(container, repo, save, refresh) { if (!isMegaDe
         if (p.textContent?.startsWith('다음 돈 목표:'))
             p.textContent = qualification ? '다음 돈 목표: ' + qualification.expansionCost.toLocaleString() + '원 · Lv.' + qualification.level + ' 자격 성장(매장 면적 유지)' : quote.next ? '다음 돈 목표: ' + quote.next.cost.toLocaleString() + '원 · ' + quote.next.size.join('×') + ' 선택 증축' : '다음 돈 목표: 원하는 가구 구입·배치와 카페 앨범 완성';
         if (p.textContent?.startsWith('다음:'))
-            p.textContent = quote.next ? '다음: Lv.' + quote.next.requiredLevel + ' 자격 · ' + quote.next.size.join('×') + ' 유료 증축 · 자동 가구 지급 없음' : '다음: Lv.30 공간 완성 · 자유 인테리어와 기존 마을 성장';
+            p.textContent = quote.next ? '다음: Lv.' + quote.next.requiredLevel + ' 자격 · ' + quote.next.size.join('×') + ' 유료 증축 · 자동 가구 지급 없음' : '다음: Lv.30 공간 완성 · 자유 인테리어와 프랜차이즈·도시 경영';
     }
 } enterpriseAction(container, repo, save, refresh); managerPreparationAction(container, repo, save, refresh); expansionAction(container, repo, save, refresh); if (interiorActions(container, repo, save, refresh))
     return; const b = document.createElement('button'); b.textContent = save.mega ? '메가 카페 배치 · 타일 보기' : '기존 카페 → 메가 공간 복사 확인'; b.disabled = (save.cafeLevel > 10 && !save.mega?.paid && !mega30Deployment()) || !!save.campaign?.run && !save.campaign.run.closed; b.onclick = () => { void openMegaEditor(repo, save, refresh); }; container.append(b); const note = document.createElement('p'); note.textContent = mega30Deployment() ? 'v3.0 메가 카페 로컬 후보 · 기존 배치는 복사 확인 후 보존하며, 증축은 선택 결제예요.' : 'v3.0 로컬 후보 · Lv.1~10 실제 확장 · 기존 버전과 별도 저장. Lv.20·30과 새 매니저는 미구현입니다.'; container.append(note); }

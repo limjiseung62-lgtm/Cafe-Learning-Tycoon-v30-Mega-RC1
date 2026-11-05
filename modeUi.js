@@ -1,47 +1,48 @@
-import{applyExternalPicker,preflightExternal,runExternalStart}from'./externalLaunch.js';
-import { mountLiveManagement } from './liveManagementUi.js?v=sq-approved400-20261104';
-import { wrapCommonBackup, unpackCommonBackup, commonDeployment } from './commonBackup.js?v=sq-approved400-20261104';
-import { commonTransactionOpen } from './commonLearningTransaction.js?v=sq-approved400-20261104';
-import { mountCafeStudyPicker } from './cafeStudyPicker.js?v=sq-approved400-20261104';
-import { megaSetupActions } from './megaEditor.js?v=sq-approved400-20261104';
-import { v27Deployment } from './classRandom.js?v=sq-approved400-20261104';
-import { classRuntime } from './classRuntime.js?v=sq-approved400-20261104';
-import { createRandomClassMatch } from './sessionFactory.js?v=sq-approved400-20261104';
+import { applyExternalPicker, preflightExternal, runExternalStart } from './externalLaunch.js?v=stability-97670d28ea8d';
+import { modernCityNavigation } from './growthNavigationPolicy.js?v=stability-97670d28ea8d';
+import { mountLiveManagement } from './liveManagementUi.js?v=stability-97670d28ea8d';
+import { wrapCommonBackup, unpackCommonBackup, commonDeployment } from './commonBackup.js?v=stability-97670d28ea8d';
+import { commonTransactionOpen } from './commonLearningTransaction.js?v=stability-97670d28ea8d';
+import { mountCafeStudyPicker } from './cafeStudyPicker.js?v=stability-97670d28ea8d';
+import { megaSetupActions } from './megaEditor.js?v=stability-97670d28ea8d';
+import { v27Deployment } from './classRandom.js?v=stability-97670d28ea8d';
+import { classRuntime } from './classRuntime.js?v=stability-97670d28ea8d';
+import { createRandomClassMatch } from './sessionFactory.js?v=stability-97670d28ea8d';
 let preparedBackupUrl;
 if (typeof addEventListener === 'function')
     addEventListener('pagehide', () => { if (preparedBackupUrl)
         URL.revokeObjectURL(preparedBackupUrl); });
-import { goalsHtml } from './progressiveGoals.js?v=sq-approved400-20261104';
-import { openProgressiveHub } from './progressiveHub.js?v=sq-approved400-20261104';
-import { alignMissionBusiness, unlocked, featureLevels } from './progressiveFeatures.js?v=sq-approved400-20261104';
-import { openProgressiveBusiness } from './progressiveEconomy.js?v=sq-approved400-20261104';
-import { createProgressiveGrowthSave } from './growthSave.js?v=sq-approved400-20261104';
-import { v26Deployment } from './progressiveFeatures.js?v=sq-approved400-20261104';
-import { createProgressiveClassMatch } from './sessionFactory.js?v=sq-approved400-20261104';
-import { organizeGrowthMenu } from './studentNavigation.js?v=sq-approved400-20261104';
-import { openManagementHub } from './managementHub.js?v=sq-approved400-20261104';
-import { chooseManagementStrategy } from './managementUi.js?v=sq-approved400-20261104';
-import { managementFor } from './managementState.js?v=sq-approved400-20261104';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=sq-approved400-20261104';
-import { openCafePicker } from './cafePicker.js?v=sq-approved400-20261104';
-import { cafeNames } from './cafePortfolio.js?v=sq-approved400-20261104';
-import { openVillage } from './villageUi.js?v=sq-approved400-20261104';
-import { openLayoutEditor } from './layoutEditor.js?v=sq-approved400-20261104';
-import { rosterFor, syncRosterSave } from './staffRecruitment.js?v=sq-approved400-20261104';
-import { openCrewDialog } from './recruitUi.js?v=sq-approved400-20261104';
-import { ensureGrowthWriteLock, releaseGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=sq-approved400-20261104';
-import { chooseLongMission, prepareLongState } from './longGrowthUi.js?v=sq-approved400-20261104';
-import { exportGrowth, parseGrowthBackup, checkBackupRun } from './growthBackup.js?v=sq-approved400-20261104';
-import { growthRuntime } from './growthRuntime.js?v=sq-approved400-20261104';
-import { concepts, seededRandom } from './cafeRun.js?v=sq-approved400-20261104';
-import { createClassMatch } from './sessionFactory.js?v=sq-approved400-20261104';
-import { createGrowthSave } from './growthSave.js?v=sq-approved400-20261104';
-import { GrowthSessionController } from './growthSession.js?v=sq-approved400-20261104';
-import { LocalSaveRepository, BrowserGrowthRepository, CandidateSaveRepository, growthStorageKey } from './saveRepository.js?v=sq-approved400-20261104';
-import { policyFor } from './sessionModes.js?v=sq-approved400-20261104';
-import { balance } from './config.js?v=sq-approved400-20261104';
-import { questionCatalog } from './questionPack.js?v=sq-approved400-20261104';
-import { escapeText } from './questionRenderer.js?v=sq-approved400-20261104';
+import { goalsHtml } from './progressiveGoals.js?v=stability-97670d28ea8d';
+import { openProgressiveHub } from './progressiveHub.js?v=stability-97670d28ea8d';
+import { alignMissionBusiness, unlocked, featureLevels } from './progressiveFeatures.js?v=stability-97670d28ea8d';
+import { openProgressiveBusiness } from './progressiveEconomy.js?v=stability-97670d28ea8d';
+import { createProgressiveGrowthSave } from './growthSave.js?v=stability-97670d28ea8d';
+import { v26Deployment } from './progressiveFeatures.js?v=stability-97670d28ea8d';
+import { createProgressiveClassMatch } from './sessionFactory.js?v=stability-97670d28ea8d';
+import { organizeGrowthMenu } from './studentNavigation.js?v=stability-97670d28ea8d';
+import { openManagementHub } from './managementHub.js?v=stability-97670d28ea8d';
+import { chooseManagementStrategy } from './managementUi.js?v=stability-97670d28ea8d';
+import { managementFor } from './managementState.js?v=stability-97670d28ea8d';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=stability-97670d28ea8d';
+import { openCafePicker } from './cafePicker.js?v=stability-97670d28ea8d';
+import { cafeNames } from './cafePortfolio.js?v=stability-97670d28ea8d';
+import { openVillage } from './villageUi.js?v=stability-97670d28ea8d';
+import { openLayoutEditor } from './layoutEditor.js?v=stability-97670d28ea8d';
+import { rosterFor, syncRosterSave } from './staffRecruitment.js?v=stability-97670d28ea8d';
+import { openCrewDialog } from './recruitUi.js?v=stability-97670d28ea8d';
+import { ensureGrowthWriteLock, releaseGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=stability-97670d28ea8d';
+import { chooseLongMission, prepareLongState } from './longGrowthUi.js?v=stability-97670d28ea8d';
+import { exportGrowth, parseGrowthBackup, checkBackupRun } from './growthBackup.js?v=stability-97670d28ea8d';
+import { growthRuntime } from './growthRuntime.js?v=stability-97670d28ea8d';
+import { concepts, seededRandom } from './cafeRun.js?v=stability-97670d28ea8d';
+import { createClassMatch } from './sessionFactory.js?v=stability-97670d28ea8d';
+import { createGrowthSave } from './growthSave.js?v=stability-97670d28ea8d';
+import { GrowthSessionController } from './growthSession.js?v=stability-97670d28ea8d';
+import { LocalSaveRepository, BrowserGrowthRepository, CandidateSaveRepository, growthStorageKey } from './saveRepository.js?v=stability-97670d28ea8d';
+import { policyFor } from './sessionModes.js?v=stability-97670d28ea8d';
+import { balance } from './config.js?v=stability-97670d28ea8d';
+import { questionCatalog } from './questionPack.js?v=stability-97670d28ea8d';
+import { escapeText } from './questionRenderer.js?v=stability-97670d28ea8d';
 const e = (id) => document.getElementById(id);
 const study = () => '<div id="study-content" class="study-content"><span>학습 내용</span><strong id="study-title">문제를 준비하고 있어요…</strong><select id="study-pack" aria-label="학습 내용" hidden></select></div><p id="pack-error" class="save-error" aria-live="polite"></p><button type="button" id="pack-retry" class="text-button pack-retry" hidden>다시 시도</button>';
 export function browserSaveRepository() { try {
@@ -98,7 +99,10 @@ export class ModeFlow {
     card() { return document.querySelector('.welcome-card'); }
     showModes() { releaseGrowthWriteLock(); this.view++; this.busy = false; this.controller = null; this.endedGame = null; this.card().innerHTML = '<p class="eyebrow">오늘은 어떻게 놀까요?</p><h2>배움이 쌓이는<br>나만의 카페</h2><div class="mode-cards"><button id="choose-class" class="mode-card"><strong>수업 게임</strong><span>' + (v27Deployment() ? '15분·30분, 매판 다른 카페 사건을 만나요!' : '15분 동안 문제를 풀며 작은 카페를 빠르게 키워요!') + '</span></button><button id="choose-growth" class="mode-card"><strong>내 카페 키우기</strong><span>내 카페를 저장하고 Lv.' + (document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-') ? '30' : '15') + '까지 키워요!</span></button></div><div class="classroom-entry" hidden><button id="teacher-host" class="secondary">교사용 방 만들기</button><button id="student-join" class="secondary">학생 방 입장</button></div><p class="hint">처음이라면 메뉴에서 게임 방법을 눌러 보세요.</p>'; if (v26Deployment())
         this.card().querySelector('.classroom-entry').hidden = true; e('choose-class').onclick = () => this.classSetup(); e('choose-growth').onclick = () => v26Deployment() ? this.growthSetup() : this.villageSetup(); e('teacher-host').onclick = () => document.dispatchEvent(new CustomEvent('classroom-open', { detail: 'teacher' })); e('student-join').onclick = () => document.dispatchEvent(new CustomEvent('classroom-open', { detail: 'student' })); document.dispatchEvent(new Event('cafe-mode-view')); }
-    villageSetup() { if (v26Deployment()) {
+    villageSetup() { if (modernCityNavigation()) {
+        this.growthSetup(true);
+        return;
+    } if (v26Deployment()) {
         this.controller = null;
         this.endedGame = null;
         const read = this.repository.read();
@@ -120,7 +124,7 @@ export class ModeFlow {
         const resumeRead = this.repository.read();
         questionCatalog.prepareResume(growth && !this.freshGrowth && resumeRead.status === 'ready' ? resumeRead.save.campaign?.run : undefined);
         const available = await questionCatalog.selectable(growth || v26Deployment() ? 'growth' : undefined), savedChoice = this.repository.read(), resumePack = growth && !this.freshGrowth && savedChoice.status === 'ready' ? savedChoice.save.campaign?.run?.packId : undefined;
-        const list = available.filter(p => !document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-') || p.subject !== '국어' || p.approvedCommonSupply===true || p.packId === resumePack);
+        const list = available.filter(p => !document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-') || p.subject !== '국어' || p.approvedCommonSupply === true || p.packId === resumePack);
         if (view !== this.view)
             return;
         const select = e('study-pack');
@@ -141,7 +145,8 @@ export class ModeFlow {
         if (!growth)
             e('study-title').textContent = list.length === 1 ? (list[0].selectionLabel ?? list[0].title) : '오늘 배울 내용을 골라요';
         if (document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-'))
-            mountCafeStudyPicker(select,list);applyExternalPicker(select);
+            mountCafeStudyPicker(select, list);
+        applyExternalPicker(select);
         this.controls(false);
     }
     catch {
@@ -152,9 +157,11 @@ export class ModeFlow {
     } if (view === this.view)
         e('pack-retry').onclick = () => { void this.populatePacks(true); }; }
     packError(error) { this.loadFailed = true; this.controls(true); const message = error instanceof Error ? error.message : ''; e('pack-error').textContent = /직원|손님|카페 상태|학습 기록 복원|공통 학습 백업/.test(message) ? '이어하기 정보를 복원하지 못했어요. 카페를 초기화하지 말고 JSON 백업을 보관해 주세요. · ' + message : '문제를 불러오지 못했어요. 기존 저장은 유지돼요. 연결을 확인하고 다시 시도해 주세요.'; e('pack-retry').hidden = false; }
-    async problems(resume) { await preflightExternal(resume);questionCatalog.prepareResume(resume); const id = e('study-pack').value; if (!id || !(await questionCatalog.selectable(this.card().querySelector('#continue-growth,#new-growth,#reset-growth') || v26Deployment() ? 'growth' : undefined)).some(p => p.packId === id))
+    async problems(resume) { await preflightExternal(resume); questionCatalog.prepareResume(resume); const id = e('study-pack').value; if (!id || !(await questionCatalog.selectable(this.card().querySelector('#continue-growth,#new-growth,#reset-growth') || v26Deployment() ? 'growth' : undefined)).some(p => p.packId === id))
         throw Error('inactive pack'); return (await questionCatalog.load(id)).questions; }
-    async begin(factory,pool,view,resuming=false){return runExternalStart(resuming,async()=>{if(!resuming)await this.beforeStart();if(view!==this.view)return;await this.start(factory(),pool);});}
+    async begin(factory, pool, view, resuming = false) { return runExternalStart(resuming, async () => { if (!resuming)
+        await this.beforeStart(); if (view !== this.view)
+        return; await this.start(factory(), pool); }); }
     classSetup() { if (v26Deployment()) {
         this.progressiveClassSetup();
         return;
@@ -195,7 +202,8 @@ export class ModeFlow {
         if (!await classRuntime.claim())
             throw Error(classRuntime.message);
         const cp = value;
-        await preflightExternal(value);questionCatalog.prepareResume(value);
+        await preflightExternal(value);
+        questionCatalog.prepareResume(value);
         const pool = cp?.packId ? (await questionCatalog.load(cp.packId)).questions : await this.problems();
         await this.begin(() => value ? classRuntime.prepare(value, pool) : createRandomClassMatch(Number(e('class-duration').value)), pool, view, !!value);
     }
@@ -306,11 +314,11 @@ export class ModeFlow {
                 else
                     this.growthSetup(true);
             } })(); });
-        if (unlocked(save, 'village'))
+        if (!modernCityNavigation() && unlocked(save, 'village'))
             action('return-village', '마을 탐험', () => { void openVillage(this.repository, () => this.growthSetup(true), () => this.growthSetup(true)); });
-        if (unlocked(save, 'investment'))
+        if (!modernCityNavigation() && unlocked(save, 'investment'))
             action('invest-village', '마을 투자·자동 지점', () => { void openProgressiveHub(this.repository, () => this.growthSetup(true)); });
-        if (save.v26 && unlocked(save, 'investment'))
+        if (!modernCityNavigation() && save.v26 && unlocked(save, 'investment'))
             this.card().insertAdjacentHTML('beforeend', goalsHtml(save));
         const records = document.createElement('details');
         records.innerHTML = '<summary>기록과 백업</summary>';
@@ -550,6 +558,6 @@ export class ModeFlow {
         e('results').append(crew); const layout = document.createElement('button'); layout.className = 'secondary'; layout.textContent = '다음 영업 카페 꾸미기'; layout.disabled = !this.controller.lastResult.ok; layout.onclick = () => { if (!this.flush())
         return; this.home(); this.growthSetup(true); document.getElementById('decorate-cafe')?.click(); }; if (unlocked(game, 'decor'))
         e('results').append(layout); const village = document.createElement('button'); village.id = 'results-village'; village.className = 'secondary'; village.textContent = '마을로 돌아가기 · 의뢰 보고'; village.disabled = !this.controller.lastResult.ok; village.onclick = () => { if (!this.flush())
-        return; e('results').hidden = true; e('setup').hidden = false; document.getElementById('app').classList.remove('in-session'); this.villageSetup(); }; if (unlocked(game, 'village'))
+        return; e('results').hidden = true; e('setup').hidden = false; document.getElementById('app').classList.remove('in-session'); this.villageSetup(); }; if (!modernCityNavigation() && unlocked(game, 'village'))
         e('results').append(village); this.augmentResults(); }
 }

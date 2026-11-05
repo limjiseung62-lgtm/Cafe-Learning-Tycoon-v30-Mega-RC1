@@ -1,14 +1,14 @@
-import { openMegaEditor } from './megaEditor.js?v=sq-approved400-20261104';
-import { isMegaDeployment } from './megaSpace.js?v=sq-approved400-20261104';
-import { openFreeEditor } from './freeLayoutEditor.js?v=sq-approved400-20261104';
-import { planFor, defaultPlan, validatePlan, commitPlan } from './cafeLayout.js?v=sq-approved400-20261104';
-import { layoutFacilities, tableRect, decorRect } from './layoutModel.js?v=sq-approved400-20261104';
-import { createSpace, floorPath, hallGrowthSpecs } from './spatial.js?v=sq-approved400-20261104';
-import { branchRoom, branchCatalog } from './growthBranch.js?v=sq-approved400-20261104';
-import { sprite } from './art.js?v=sq-approved400-20261104';
-import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=sq-approved400-20261104';
-import { escapeText as esc } from './questionRenderer.js?v=sq-approved400-20261104';
-import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=sq-approved400-20261104';
+import { openMegaEditor } from './megaEditor.js?v=stability-97670d28ea8d';
+import { isMegaDeployment } from './megaSpace.js?v=stability-97670d28ea8d';
+import { openFreeEditor } from './freeLayoutEditor.js?v=stability-97670d28ea8d';
+import { planFor, defaultPlan, validatePlan, commitPlan } from './cafeLayout.js?v=stability-97670d28ea8d';
+import { layoutFacilities, tableRect, decorRect } from './layoutModel.js?v=stability-97670d28ea8d';
+import { createSpace, floorPath, hallGrowthSpecs } from './spatial.js?v=stability-97670d28ea8d';
+import { branchRoom, branchCatalog } from './growthBranch.js?v=stability-97670d28ea8d';
+import { sprite } from './art.js?v=stability-97670d28ea8d';
+import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=stability-97670d28ea8d';
+import { escapeText as esc } from './questionRenderer.js?v=stability-97670d28ea8d';
+import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=stability-97670d28ea8d';
 export async function openLegacyLayoutEditor(repo, initial, onClose) {
     document.getElementById('layout-editor')?.remove();
     const dialog = document.createElement('section');

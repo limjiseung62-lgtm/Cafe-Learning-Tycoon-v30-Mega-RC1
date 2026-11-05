@@ -1,7 +1,7 @@
-import { adoptInterior, inventorySku } from './megaInventory.js?v=sq-approved400-20261104';
-import { buyInterior } from './megaShop.js?v=sq-approved400-20261104';
-import { ensureMegaPlan, validMega } from './megaSpace.js?v=sq-approved400-20261104';
-import { installedIds, removeInterior } from './interiorPlacement.js?v=sq-approved400-20261104';
+import { adoptInterior, inventorySku } from './megaInventory.js?v=stability-97670d28ea8d';
+import { buyInterior } from './megaShop.js?v=stability-97670d28ea8d';
+import { ensureMegaPlan, validMega } from './megaSpace.js?v=stability-97670d28ea8d';
+import { installedIds, removeInterior } from './interiorPlacement.js?v=stability-97670d28ea8d';
 export function purchaseLimit(s, sku) { const d = inventorySku(sku), v = s.mega?.inventory; if (!d || !v)
     return 0; return Math.max(0, Math.min(256, Math.floor(s.money / d.cost), Math.floor((256 - v.items.length) / (1 + d.bundle)), 10000 - v.next)); }
 export function buyInteriorBatch(source, sku, quantity, expectedNext, now = new Date().toISOString()) { if (!Number.isSafeInteger(quantity) || quantity < 1 || quantity > 256)

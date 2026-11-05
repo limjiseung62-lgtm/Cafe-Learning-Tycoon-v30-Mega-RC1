@@ -1,11 +1,11 @@
-import { unlocked } from './progressiveFeatures.js?v=sq-approved400-20261104';
-import { specialPreparationHtml } from './specialPreparationUi.js?v=sq-approved400-20261104';
-import { strategyCatalog } from './managementEngine.js?v=sq-approved400-20261104';
-import { specialBusinessCatalog } from './specialBusiness.js?v=sq-approved400-20261104';
-import { recruitById } from './recruitConfig.js?v=sq-approved400-20261104';
-import { managementStyles } from './managementUi.js?v=sq-approved400-20261104';
-import { dispatchDelivery, prepareSpecialBusiness, specialOperationStatus } from './specialBusiness.js?v=sq-approved400-20261104';
-import { escapeText as esc } from './questionRenderer.js?v=sq-approved400-20261104';
+import { unlocked } from './progressiveFeatures.js?v=stability-97670d28ea8d';
+import { specialPreparationHtml } from './specialPreparationUi.js?v=stability-97670d28ea8d';
+import { strategyCatalog } from './managementEngine.js?v=stability-97670d28ea8d';
+import { specialBusinessCatalog } from './specialBusiness.js?v=stability-97670d28ea8d';
+import { recruitById } from './recruitConfig.js?v=stability-97670d28ea8d';
+import { managementStyles } from './managementUi.js?v=stability-97670d28ea8d';
+import { dispatchDelivery, prepareSpecialBusiness, specialOperationStatus } from './specialBusiness.js?v=stability-97670d28ea8d';
+import { escapeText as esc } from './questionRenderer.js?v=stability-97670d28ea8d';
 let current, flush = () => false, last = '';
 export function beginManagementUi(g, save) { document.getElementById('management-live')?.remove(); document.getElementById('delivery-dialog')?.remove(); current = g.mode === 'CAFE_GROWTH' ? g : undefined; flush = save; last = ''; managementStyles(); }
 export function pollManagementUi(g) { if (current !== g || !g.management?.run)

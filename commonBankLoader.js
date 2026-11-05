@@ -1,11 +1,21 @@
-import { commonBankPins } from './commonBankPins.js?v=sq-approved400-20261104';
-import{loadApprovedSubject}from'./sq-learning/approved-runtime.mjs';import*as ApprovedModule from'./sq-learning/approved-runtime.mjs';
-const cache=new Map();
+import { scopedMathKey, verifyScopedMathCode } from './scopedMathTransport.js?v=stability-97670d28ea8d';
+import { commonBankPins } from './commonBankPins.js?v=stability-97670d28ea8d';
+const cache = new Map();
 async function digest(b) { return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new Uint8Array(b).buffer)), x => x.toString(16).padStart(2, '0')).join(''); }
 /** Transport compression is lossless. Supplier manifest/data/reference hashes remain unchanged. */
-export function loadCommonRuntime(subject) {if(['korean-literacy','social-studies'].includes(subject))return(async()=>{const runtime=await loadApprovedSubject(subject,'cafe-learning-tycoon'),[reports,reportPort,png]=await Promise.all(['report.mjs','report-port.mjs','png.mjs'].map(f=>import('./assets/common-learning/math/'+f)));return{subject,module:ApprovedModule,runtime,reports,reportPort,png,manifestSHA256:runtime.info.manifestSHA256};})();
-    if (!cache.has(subject))
-        cache.set(subject, (async () => {
+export function loadCommonRuntime(subject, choices) {
+    if (subject === 'korean-literacy' || subject === 'social-studies') {
+        for (const old of cache.keys())
+            if (old.startsWith('math:'))
+                cache.delete(old);
+        return (async () => { const code = new URL('sq-learning/approved-runtime.mjs', document.baseURI).href, module = await import(code), runtime = await module.loadApprovedSubject(subject, 'cafe-learning-tycoon'), base = new URL('assets/common-learning/math/', document.baseURI), [reports, reportPort, png] = await Promise.all(['report.mjs', 'report-port.mjs', 'png.mjs'].map(f => import(new URL(f, base).href))); return { subject, module, runtime, reports, reportPort, png, manifestSHA256: runtime.info.manifestSHA256 }; })();
+    }
+    const key = subject === 'math' ? 'math:' + JSON.stringify(scopedMathKey(choices)) : subject;
+    for (const old of cache.keys())
+        if (old.startsWith('math:') && old !== key)
+            cache.delete(old);
+    if (!cache.has(key)) {
+        const promise = (async () => {
             const p = commonBankPins.find(p => p.subject === subject);
             if (!p)
                 throw Error('지원하지 않는 과목이에요.');
@@ -22,10 +32,13 @@ export function loadCommonRuntime(subject) {if(['korean-literacy','social-studie
             // Verify fixed code pins before importing any supplier module. No admin/demo UI or styles are mounted.
             await Promise.all(p.files.filter(f => f.path.endsWith('.mjs')).map(f => readAsset(f.path)));
             const base = new URL(p.base, document.baseURI);
-            const module = await import(new URL(p.runtime, base).href);
-            const runtime = await module.loadCommonBank({ manifestBytes: await readAsset(p.manifest), expectedManifestSHA256: p.manifestSHA256, readAsset, consumer: 'cafe-learning-tycoon', purpose: subject === 'math' ? 'operational-supply' : 'candidate-integration-test' });
+            const module = await import(subject === 'math' ? await verifyScopedMathCode() : new URL(p.runtime, base).href);
+            const runtime = await module.loadCommonBank({ manifestBytes: await readAsset(p.manifest), expectedManifestSHA256: p.manifestSHA256, readAsset, consumer: 'cafe-learning-tycoon', purpose: subject === 'math' ? 'operational-supply' : 'candidate-integration-test', ...(subject === 'math' ? { cafeScope: choices } : {}) });
             const [reports, reportPort, png] = await Promise.all(['report.mjs', 'report-port.mjs', 'png.mjs'].map(f => import(new URL(f, base).href)));
             return { subject, module, runtime, reports, reportPort, png, manifestSHA256: p.manifestSHA256 };
-        })().catch(error => { cache.delete(subject); throw error; }));
-    return cache.get(subject);
+        })().catch(error => { if (cache.get(key) === promise)
+            cache.delete(key); throw error; });
+        cache.set(key, promise);
+    }
+    return cache.get(key);
 }

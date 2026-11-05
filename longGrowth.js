@@ -1,9 +1,9 @@
-import { specializationCatalog } from './specializationConfig.js?v=sq-approved400-20261104';
-import { validFurnitureUnlocks } from './furnitureCatalog.js?v=sq-approved400-20261104';
-import { allBoardCatalog as boardCatalog, allDecorationCatalog as decorationCatalog, decorSlots } from './longGrowthConfig.js?v=sq-approved400-20261104';
-import { customers } from './data.js?v=sq-approved400-20261104';
-import { specialTypes, specialDefinition } from './phase4Config.js?v=sq-approved400-20261104';
-import { helperCatalog, hospitalityDefinition } from './hospitalityConfig.js?v=sq-approved400-20261104';
+import { specializationCatalog } from './specializationConfig.js?v=stability-97670d28ea8d';
+import { validFurnitureUnlocks } from './furnitureCatalog.js?v=stability-97670d28ea8d';
+import { allBoardCatalog as boardCatalog, allDecorationCatalog as decorationCatalog, decorSlots } from './longGrowthConfig.js?v=stability-97670d28ea8d';
+import { customers } from './data.js?v=stability-97670d28ea8d';
+import { specialTypes, specialDefinition } from './phase4Config.js?v=stability-97670d28ea8d';
+import { helperCatalog, hospitalityDefinition } from './hospitalityConfig.js?v=stability-97670d28ea8d';
 export const createLongGrowth = () => ({ version: 1, owned: [], placed: {}, visitors: {}, titles: [], albums: [], boards: [] });
 export const visitorCatalog = [...customers.map(c => ({ id: 'normal:' + c.visualKey, name: c.name, visual: c.visualKey, line: c.characterTrait })), ...specialTypes.map(t => { const c = specialDefinition(t); return { id: 'special:' + t, name: c.name, visual: c.visualKey, line: c.characterTrait }; }), ...helperCatalog.map(h => ({ id: 'helper:' + h.id, name: h.name, visual: hospitalityDefinition(h.id).visualKey, line: h.line })), { id: 'judge', name: '특별 주문 심사위원', visual: hospitalityDefinition('judge').visualKey, line: '오늘의 특별한 한 접시를 기다릴게요.' }];
 export const allVisitorCatalog = [...visitorCatalog, ...specializationCatalog.map(s => ({ id: 'specialization:' + s.id, name: s.guest, visual: s.visual, line: s.line }))];

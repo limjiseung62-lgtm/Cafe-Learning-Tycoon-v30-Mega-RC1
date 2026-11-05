@@ -1,6 +1,6 @@
-import { newSort, sortOrder, tickSort } from './sortGame.js?v=sq-approved400-20261104';
-import { newMachine, machineBlueprint, rotatePipe } from './machineGame.js?v=sq-approved400-20261104';
-import { newTray, trayMap } from './trayGame.js?v=sq-approved400-20261104';
+import { newSort, sortOrder, tickSort } from './sortGame.js?v=stability-97670d28ea8d';
+import { newMachine, machineBlueprint, rotatePipe } from './machineGame.js?v=stability-97670d28ea8d';
+import { newTray, trayMap } from './trayGame.js?v=stability-97670d28ea8d';
 export function newArcade(kind, difficulty, seed, now) { return kind === 'sort' ? newSort(seed, difficulty, now) : kind === 'machine' ? newMachine(seed, difficulty, now) : newTray(seed, difficulty, now); }
 export function tickArcade(s, now) { if (s.endedAt !== undefined)
     return; if (s.kind === 'sort')

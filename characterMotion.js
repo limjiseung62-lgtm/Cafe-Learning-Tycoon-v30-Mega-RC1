@@ -1,5 +1,5 @@
-import { deploymentLocalStorage } from './deploymentStorage.js?v=sq-approved400-20261104';
-import { recentEventReaction } from './animationPresentation.js?v=sq-approved400-20261104';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=stability-97670d28ea8d';
+import { recentEventReaction } from './animationPresentation.js?v=stability-97670d28ea8d';
 export function guestMotion(g, events) { if (g.miniReaction && events && events.now < g.miniReaction.until)
     return g.miniReaction.success ? 'REACT_HAPPY' : 'REACT_SAD'; if (g.state === 'EATING')
     return 'EAT'; if (g.state === 'PAYING')

@@ -1,8 +1,8 @@
-import { deploymentLocalStorage as storage, deploymentPrefix } from './deploymentStorage.js?v=sq-approved400-20261104';
-import { loadCommonRuntime } from './commonBankLoader.js?v=sq-approved400-20261104';
-import { CommonCafeFlow } from './commonCafeFlow.js?v=sq-approved400-20261104';
+import { deploymentLocalStorage as storage, deploymentPrefix } from './deploymentStorage.js?v=stability-97670d28ea8d';
+import { loadCommonRuntime } from './commonBankLoader.js?v=stability-97670d28ea8d';
+import { CommonCafeFlow } from './commonCafeFlow.js?v=stability-97670d28ea8d';
 /** An additive envelope: native café JSON remains byte-for-byte inside cafe. */
-export function commonDeployment() { return ['cafe-v30-mega-common-rc1/', 'cafe-v31-franchise-local/'].includes(deploymentPrefix()); }
+export function commonDeployment() { return ['cafe-v30-city-integrated-local/', 'cafe-v30-mega-common-rc1/', 'cafe-v31-franchise-local/'].includes(deploymentPrefix()); }
 export function commonRecordEntries() { const out = []; for (let i = 0; i < storage.length; i++) {
     const key = storage.key(i);
     if (key?.startsWith('common-record/')) {
@@ -27,7 +27,7 @@ export async function unpackCommonBackup(text) {
         const body = JSON.parse(row.raw)?.body;
         if (!body || !['math', 'science'].includes(body.subject) || row.key !== 'common-record/' + body.learningRecordId || !/^LR-[a-z0-9-]+$/i.test(body.learningRecordId) || rows.some(r => r.key === row.key))
             throw Error('학습 기록 연결이 달라요.');
-        const loaded = await loadCommonRuntime(body.subject), cp = await loaded.module.decode(row.raw), flow = new CommonCafeFlow(loaded, cp.choices, cp);
+        const loaded = await loadCommonRuntime(body.subject, body.choices), cp = await loaded.module.decode(row.raw), flow = new CommonCafeFlow(loaded, cp.choices, cp);
         await flow.restore(cp);
         const old = storage.getItem(row.key);
         if (old && old !== row.raw)

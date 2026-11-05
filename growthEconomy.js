@@ -1,4 +1,4 @@
-import { growthEconomyConfig as c } from './growthEconomyConfig.js?v=sq-approved400-20261104';
+import { growthEconomyConfig as c } from './growthEconomyConfig.js?v=stability-97670d28ea8d';
 export function economyState(save) { if (save.growthEconomy)
     return structuredClone(save.growthEconomy); const run = save.campaign?.run; return { version: 1, milestones: [7, 11].filter(n => n <= save.cafeLevel), reviewRoots: [], receipts: run?.closed ? [{ id: run.id, completion: 0, mission: 0, review: 0, milestone: 0, total: 0, unique: 0, correct: 0, reviewRoots: [], eligible: false, reason: 'legacy' }] : [] }; }
 export function validGrowthEconomy(value) { try {

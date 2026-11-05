@@ -1,8 +1,8 @@
-import { megaChairs, ensureMegaPlan } from './megaSpace.js?v=sq-approved400-20261104';
-import { inventorySku } from './megaInventory.js?v=sq-approved400-20261104';
-import { furnitureFor } from './furnitureCatalog.js?v=sq-approved400-20261104';
-import { allDecorationCatalog } from './longGrowthConfig.js?v=sq-approved400-20261104';
-import { saveInteriorLayout } from './megaShop.js?v=sq-approved400-20261104';
+import { megaChairs, ensureMegaPlan } from './megaSpace.js?v=stability-97670d28ea8d';
+import { inventorySku } from './megaInventory.js?v=stability-97670d28ea8d';
+import { furnitureFor } from './furnitureCatalog.js?v=stability-97670d28ea8d';
+import { allDecorationCatalog } from './longGrowthConfig.js?v=stability-97670d28ea8d';
+import { saveInteriorLayout } from './megaShop.js?v=stability-97670d28ea8d';
 export const installedIds = (p) => new Set([...p.tables.flatMap(t => [t.id, ...(t.chairs ?? []).map(c => c.id)]), ...p.decor.map(d => d.id), ...(p.fixtures ?? []).map(f => f.id)]);
 export function interiorCandidate(s, p, id, x, y, rotation) {
     const item = s.mega?.inventory?.items.find(i => i.id === id), d = item && inventorySku(item.sku);

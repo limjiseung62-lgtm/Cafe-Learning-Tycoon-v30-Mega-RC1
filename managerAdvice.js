@@ -1,5 +1,5 @@
-import { kitchenStages, kitchenFloorLabel } from './productionKitchen.js?v=sq-approved400-20261104';
-import { expansionQuote } from './megaExpansion.js?v=sq-approved400-20261104';
+import { kitchenStages, kitchenFloorLabel } from './productionKitchen.js?v=stability-97670d28ea8d';
+import { expansionQuote } from './megaExpansion.js?v=stability-97670d28ea8d';
 export function managerAdvice(g, save, now = Date.now()) {
     const id = g.mega?.manager?.selected;
     if (!id)
@@ -29,7 +29,7 @@ export function managerAdvice(g, save, now = Date.now()) {
     if (g.cafeLevel >= 14)
         add({ id: 'branches', title: '카페 밖의 다음 꿈', text: '영업을 마친 뒤 준비 화면에서 기존 마을 투자와 자동 분점을 살펴봐요. 분점 수익은 본점의 자격 영업을 정상 완료했을 때만 정산돼요.', action: 'none' });
     if (g.cafeLevel >= 30)
-        add({ id: 'headquarters', title: '메가 카페 다음의 꿈', text: typeof document !== 'undefined' && ['v30e-common-local', 'v30e-v31-local'].includes(document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content') ?? '') ? '64×48 유료 증축을 마치면 영업 준비 화면에서 프랜차이즈 본부를 선택해요. 본점은 보존하고 지역별 지점과 도시 투자를 결정할 수 있어요.' : '본부 설립·도시 경영은 아직 준비 중이에요. 지금은 기존 분점·마을 투자와 카페 앨범 목표를 함께 살펴봐요.', action: 'none' });
+        add({ id: 'headquarters', title: '메가 카페 다음의 꿈', text: typeof document !== 'undefined' && ['v30e-city-integrated-local', 'v30e-common-local', 'v30e-v31-local'].includes(document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content') ?? '') ? '64×48 유료 증축을 마치면 영업 준비 화면에서 프랜차이즈 본부를 선택해요. 본점은 보존하고 지역별 지점과 도시 투자를 결정할 수 있어요.' : '본부 설립·도시 경영은 아직 준비 중이에요. 지금은 기존 분점·마을 투자와 카페 앨범 목표를 함께 살펴봐요.', action: 'none' });
     if (!out.length)
         add({ id: 'steady', title: '좋은 흐름이에요', text: '손님이 앉고 직원이 안전하게 오가는지 살펴봐요. 매출보다 중요한 것은 사장님이 선택하며 성장하는 일이에요.', action: 'none' });
     const priority = { yuna: ['storage', 'production', 'expansion', 'staff', 'stock', 'branches'], hajun: ['bottleneck', 'storage', 'production', 'waiting', 'stock', 'staff', 'furniture'], soi: ['storage', 'production', 'furniture', 'research', 'stock', 'expansion'] };

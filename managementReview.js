@@ -1,7 +1,7 @@
-import { customers } from './data.js?v=sq-approved400-20261104';
-import { specialNames, specialTypes } from './phase4Config.js?v=sq-approved400-20261104';
-import { freeKey } from './freeLayoutModel.js?v=sq-approved400-20261104';
-import { recruitById } from './recruitConfig.js?v=sq-approved400-20261104';
+import { customers } from './data.js?v=stability-97670d28ea8d';
+import { specialNames, specialTypes } from './phase4Config.js?v=stability-97670d28ea8d';
+import { freeKey } from './freeLayoutModel.js?v=stability-97670d28ea8d';
+import { recruitById } from './recruitConfig.js?v=stability-97670d28ea8d';
 export function serviceReview(g, guest, wait) {
     const active = g.freeLayouts?.plans[freeKey(g.cafeLevel, g.branchId)], interior = !!active?.decor.length;
     const special = !!(guest.specialType || guest.signature), courier = g.staffAbilities.run?.couriers[String(guest.id)], staff = courier ? recruitById(courier) : undefined;

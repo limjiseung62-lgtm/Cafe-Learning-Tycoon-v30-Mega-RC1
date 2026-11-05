@@ -1,7 +1,7 @@
-import { managerFrames } from './managerFrames.js?v=sq-approved400-20261104';
-import { megaPointClear, megaRoute, toEngine, megaDimensions, iso, toTile } from './megaSpace.js?v=sq-approved400-20261104';
-import { guestPose } from './spatial.js?v=sq-approved400-20261104';
-import { managerById } from './managerState.js?v=sq-approved400-20261104';
+import { managerFrames } from './managerFrames.js?v=stability-97670d28ea8d';
+import { megaPointClear, megaRoute, toEngine, megaDimensions, iso, toTile } from './megaSpace.js?v=stability-97670d28ea8d';
+import { guestPose } from './spatial.js?v=stability-97670d28ea8d';
+import { managerById } from './managerState.js?v=stability-97670d28ea8d';
 const actors = new WeakMap();
 const dist = (a, b) => Math.hypot(a.x - b.x, (a.y - b.y) * 2 / 3);
 export function managerActor(g) { return actors.get(g); }

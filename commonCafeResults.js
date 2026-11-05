@@ -1,10 +1,11 @@
-import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js?v=sq-approved400-20261104';
-import { CommonCafeFlow } from './commonCafeFlow.js?v=sq-approved400-20261104';
-import { commonQuestion, commonAnswerText } from './commonLearningCatalog.js?v=sq-approved400-20261104';
-import { loadCommonRuntime } from './commonBankLoader.js?v=sq-approved400-20261104';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=sq-approved400-20261104';
-import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=sq-approved400-20261104';
-import { worksheetHtml } from './twinWorksheet.js?v=sq-approved400-20261104';
+import { replaceDownloadGroup } from './commonDownloadGroup.js?v=stability-97670d28ea8d';
+import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js?v=stability-97670d28ea8d';
+import { CommonCafeFlow } from './commonCafeFlow.js?v=stability-97670d28ea8d';
+import { commonQuestion, commonAnswerText } from './commonLearningCatalog.js?v=stability-97670d28ea8d';
+import { loadCommonRuntime } from './commonBankLoader.js?v=stability-97670d28ea8d';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=stability-97670d28ea8d';
+import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=stability-97670d28ea8d';
+import { worksheetHtml } from './twinWorksheet.js?v=stability-97670d28ea8d';
 const mounted = new WeakMap();
 const archiveExpected = new WeakMap();
 export async function restoreCommonArchive(flow, saved) { const raw = deploymentLocalStorage.getItem(archiveKey(saved.learningRecordId)); const cp = raw ? await flow.loaded.module.decode(raw) : saved; await flow.restore(cp); archiveExpected.set(flow, raw); }
@@ -47,8 +48,10 @@ async function render(flow, section, save) {
         let archiveWarning = '';
         try {
             await archive(flow);
+            section.dataset.commonArchiveReady = 'true';
         }
         catch (e) {
+            section.dataset.commonArchiveReady = 'false';
             archiveWarning = e instanceof Error ? e.message : '기록 보관 실패 · JSON으로 백업해 주세요.';
         }
         const s = report.summary;
@@ -57,8 +60,7 @@ async function render(flow, section, save) {
         status.textContent = archiveWarning;
         const files = section.querySelector('[data-common-files]');
         const action = (button, task) => button.addEventListener('click', () => { button.disabled = true; void task().catch(e => status.textContent = e instanceof Error ? e.message : '파일을 준비하지 못했어요.').finally(() => button.disabled = false); });
-        section.querySelectorAll('[data-common-png]').forEach(button => action(button, async () => { const r = button.dataset.commonPng === 'first' ? flow.firstReport : await flow.report(), pages = await flow.loaded.png.renderReportPNG(r); for (const page of pages)
-            download(page.blob, page.filename, files); status.textContent = pages.length + '페이지를 준비했어요. 아래 파일 링크에서도 저장할 수 있어요.'; }));
+        section.querySelectorAll('[data-common-png]').forEach(button => action(button, async () => { const r = button.dataset.commonPng === 'first' ? flow.firstReport : await flow.report(), pages = await flow.loaded.png.renderReportPNG(r); await replaceDownloadGroup(files, 'png-' + button.dataset.commonPng, pages); status.textContent = pages.length + '페이지를 준비했어요. 아래 파일 링크에서도 저장할 수 있어요.'; }));
         action(section.querySelector('[data-common-json]'), async () => { const raw = await flow.loaded.module.encode(await flow.snapshot()); download(new Blob([raw], { type: 'application/json' }), 'cafe-common-learning-backup.json', files); });
         action(section.querySelector('[data-common-sheet]'), () => worksheet(flow, files));
         action(section.querySelector('[data-common-review]'), async () => { await openNotebook(flow, async () => { if (!await save())
@@ -138,9 +140,9 @@ catch {
 } picker.querySelector('[data-export-all]').addEventListener('click', () => download(new Blob([wrapCommonBackup('{}')], { type: 'application/json' }), 'cafe-common-all-records.json', picker.querySelector('[data-files]'))); picker.querySelector('[data-restore-all]').addEventListener('click', () => { const status = picker.querySelector('[data-import-status]'); void unpackCommonBackup(picker.querySelector('[data-import-all]').value).then(p => p.install()).then(() => status.textContent = '학습 기록을 복사했어요. 닫은 뒤 다시 열어 주세요. 기존 기록과 음식 재고는 변경하지 않았어요.').catch(e => status.textContent = e.message); }); for (const item of list.slice().reverse()) {
     const b = document.createElement('button');
     b.className = 'secondary';
-    b.textContent = (item.subject === 'math' ? '수학' : '과학') + ' · ' + item.scope;
-    b.onclick = () => { b.disabled = true; void (async () => { const loaded = await loadCommonRuntime(item.subject), raw = deploymentLocalStorage.getItem(archiveKey(item.id)); if (!raw)
-        throw Error('기록 파일을 찾지 못했어요.'); const cp = await loaded.module.decode(raw), flow = new CommonCafeFlow(loaded, cp.choices, cp); await flow.restore(cp); archiveExpected.set(flow, raw); picker.close(); picker.remove(); const host = document.createElement('dialog'); host.className = 'common-notebook'; host.innerHTML = '<div id="common-past-result"></div><button class="secondary" data-close>닫기</button>'; document.body.append(host); const section = host.querySelector('#common-past-result'); await render(flow, section, async () => { await archive(flow); return true; }); host.querySelector('[data-close]').addEventListener('click', () => { host.close(); host.remove(); }); host.showModal(); })().catch(e => { b.after(document.createTextNode(e.message)); b.disabled = false; }); };
+    b.textContent = ({ 'math': '수학', 'science': '과학', 'korean-literacy': '국어', 'social-studies': '사회' }[item.subject] ?? '학습') + ' · ' + item.scope;
+    b.onclick = () => { b.disabled = true; void (async () => { const raw = deploymentLocalStorage.getItem(archiveKey(item.id)); if (!raw)
+        throw Error('기록 파일을 찾지 못했어요.'); const loaded = await loadCommonRuntime(item.subject, JSON.parse(raw)?.body?.choices), cp = await loaded.module.decode(raw), flow = new CommonCafeFlow(loaded, cp.choices, cp); await flow.restore(cp); archiveExpected.set(flow, raw); picker.close(); picker.remove(); const host = document.createElement('dialog'); host.className = 'common-notebook'; host.innerHTML = '<div id="common-past-result"></div><button class="secondary" data-close>닫기</button>'; document.body.append(host); const section = host.querySelector('#common-past-result'); await render(flow, section, async () => { await archive(flow); return true; }); host.querySelector('[data-close]').addEventListener('click', () => { host.close(); host.remove(); }); host.showModal(); })().catch(e => { b.after(document.createTextNode(e.message)); b.disabled = false; }); };
     picker.querySelector('[data-list]').append(b);
 } if (!list.length)
     picker.querySelector('[data-list]').textContent = '영업이 끝나면 이곳에서 다시 복습할 수 있어요.'; picker.showModal(); }; card.append(button); }); }

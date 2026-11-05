@@ -1,6 +1,9 @@
-import { validInteriorSale } from './interiorCommerce.js?v=sq-approved400-20261104';
-import { guestPose } from './spatial.js?v=sq-approved400-20261104';
-import { createMegaSpace, ensureMegaPlan, megaPointClear, megaRoute } from './megaSpace.js?v=sq-approved400-20261104';
+import { validInteriorSale } from './interiorCommerce.js?v=stability-97670d28ea8d';
+import { longStateFor } from './longGrowthUi.js?v=stability-97670d28ea8d';
+import { createLongGrowth } from './longGrowth.js?v=stability-97670d28ea8d';
+import { inventorySku } from './megaInventory.js?v=stability-97670d28ea8d';
+import { guestPose } from './spatial.js?v=stability-97670d28ea8d';
+import { createMegaSpace, ensureMegaPlan, megaPointClear, megaRoute } from './megaSpace.js?v=stability-97670d28ea8d';
 export let liveManagementOpen = false;
 const projection = (s) => { const p = structuredClone(s); delete p.campaign; return p; };
 export function liveManagementRepository(g, c) {
@@ -44,7 +47,11 @@ export function liveManagementRepository(g, c) {
                     return fail('직원의 주방·좌석 이동 경로를 막는 배치예요.');
                 }
             }
-            const oldMoney = g.money, oldMega = g.mega, oldSeats = g.guests.map(v => v.seat);
+            const oldMoney = g.money, oldMega = g.mega, oldSeats = g.guests.map(v => v.seat), oldBaseLong = c.base.longTerm ? structuredClone(c.base.longTerm) : undefined, liveLong = longStateFor(g), oldOwned = liveLong?.owned.slice();
+            // The runtime's long-growth state enriches every save. Merge only inventory-backed
+            // decoration ownership; replacing the whole snapshot would lose live visitor/mission progress.
+            const target = liveLong ?? (c.base.longTerm ??= createLongGrowth());
+            target.owned = [...new Set([...target.owned, ...(proposed.inventory?.items ?? []).filter(i => inventorySku(i.sku)?.type === 'decor').map(i => i.sku.slice(6))])];
             g.money = next.money;
             g.mega = proposed;
             g.guests.forEach((v, i) => v.seat = indices[i]);
@@ -53,6 +60,9 @@ export function liveManagementRepository(g, c) {
             if (!result.ok) {
                 g.money = oldMoney;
                 g.mega = oldMega;
+                c.base.longTerm = oldBaseLong;
+                if (liveLong && oldOwned)
+                    liveLong.owned = oldOwned;
                 g.guests.forEach((v, i) => v.seat = oldSeats[i]);
                 g.updateServiceLayout();
             }

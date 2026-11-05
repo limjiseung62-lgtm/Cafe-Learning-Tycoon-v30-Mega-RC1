@@ -1,7 +1,7 @@
-import { deploymentLocalStorage } from './deploymentStorage.js?v=sq-approved400-20261104';
-import { JsonQuestionProvider, legacyQuestions } from './questionPack.js?v=sq-approved400-20261104';
-import { LearningSession, LearningProgressRepository } from './learningSession.js?v=sq-approved400-20261104';
-import { LocalProblemRepository } from './problems.js?v=sq-approved400-20261104';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=stability-97670d28ea8d';
+import { JsonQuestionProvider, legacyQuestions } from './questionPack.js?v=stability-97670d28ea8d';
+import { LearningSession, LearningProgressRepository } from './learningSession.js?v=stability-97670d28ea8d';
+import { LocalProblemRepository } from './problems.js?v=stability-97670d28ea8d';
 let storage = null;
 try {
     if (typeof deploymentLocalStorage !== 'undefined')

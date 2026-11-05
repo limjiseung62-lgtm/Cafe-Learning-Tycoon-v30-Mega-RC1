@@ -1,73 +1,74 @@
-import{finalizeExternal,observeExternalGame}from'./externalLaunch.js';
-import { kitchenStages, kitchenFloorLabel } from './productionKitchen.js?v=sq-approved400-20261104';
-import { pollManagerSession } from './managerUi.js?v=sq-approved400-20261104';
-import { liveManagementOpen } from './liveManagement.js?v=sq-approved400-20261104';
-import { mountCommonCafeResults, restoreCommonArchive } from './commonCafeResults.js?v=sq-approved400-20261104';
-import { CommonCafeFlow } from './commonCafeFlow.js?v=sq-approved400-20261104';
-import { loadCommonRuntime } from './commonBankLoader.js?v=sq-approved400-20261104';
-import { commonQuestion } from './commonLearningCatalog.js?v=sq-approved400-20261104';
-import { setCommonTransaction } from './commonLearningTransaction.js?v=sq-approved400-20261104';
-import { megaQualificationNotice } from './megaQualificationUi.js?v=sq-approved400-20261104';
-import { megaView } from './megaView.js?v=sq-approved400-20261104';
-import { classRuntime, captureClass } from './classRuntime.js?v=sq-approved400-20261104';
-import { pollClassUi } from './classRandomUi.js?v=sq-approved400-20261104';
-import { renderProgressiveGuidance } from './progressiveGuidance.js?v=sq-approved400-20261104';
-import { unlocked } from './progressiveFeatures.js?v=sq-approved400-20261104';
-import { applyProgressiveVisibility } from './progressiveVisibility.js?v=sq-approved400-20261104';
-import { prepareCompletedShowcase } from './cafeShowcase.js?v=sq-approved400-20261104';
-import { beginManagementUi, pollManagementUi } from './managementLive.js?v=sq-approved400-20261104';
-import { setArcadeSound } from './arcadeUi.js?v=sq-approved400-20261104';
-import { setCraftSound } from './craftUi.js?v=sq-approved400-20261104';
-import { setRushSound } from './cakeRushUi.js?v=sq-approved400-20261104';
-import { beginMiniUi, pollMiniUi } from './miniGameUi.js?v=sq-approved400-20261104';
-import { miniAnswer, activeMini } from './miniGames.js?v=sq-approved400-20261104';
-import { beginSpecializationUi, pollSpecializationUi, specializationArt } from './specializationUi.js?v=sq-approved400-20261104';
-import { specializationById } from './specializationConfig.js?v=sq-approved400-20261104';
-import { freeMealAnchor } from './furnitureAnchors.js?v=sq-approved400-20261104';
-import { freeFurniture, freeHallLayers, furnitureVisualVersion } from './freeFurniture.js?v=sq-approved400-20261104';
-import { growthStaffPanel } from './recruitUi.js?v=sq-approved400-20261104';
-import { workerBaseArt } from "./recruitArt.js?v=sq-approved400-20261104";
-import { branchCatalog, branchRoom } from "./growthBranch.js?v=sq-approved400-20261104";
-import { beginBranchUi, pollBranchUi } from "./growthBranchUi.js?v=sq-approved400-20261104";
-import { createGrowthSave } from './growthSave.js?v=sq-approved400-20261104';
-import { beginLongGrowth, pollLongGrowth } from './longGrowthUi.js?v=sq-approved400-20261104';
-import { growthRuntime } from './growthRuntime.js?v=sq-approved400-20261104';
-import { webAsset } from './webAsset.js?v=sq-approved400-20261104';
-import { imageReady } from './imageLoading.js?v=sq-approved400-20261104';
-import { motionFrame, bubbleCorrection } from './animationPresentation.js?v=sq-approved400-20261104';
-import { workerPoseArt, preloadMotionSheets, workerTrayPlacement } from './motionSprites.js?v=sq-approved400-20261104';
-import { EventRecovery } from './eventRecovery.js?v=sq-approved400-20261104';
-import { renderEventPanel } from './eventUi.js?v=sq-approved400-20261104';
-import { guestMotion, workerMotion, motionArt } from './characterMotion.js?v=sq-approved400-20261104';
-import { restoreClassroomCafe } from './classroomCheckpoint.js?v=sq-approved400-20261104';
-import { LearningAnalyticsV1 } from './learningAnalytics.js?v=sq-approved400-20261104';
-import { mountCafeResults } from './cafeResults.js?v=sq-approved400-20261104';
-import { questionCatalog } from './questionPack.js?v=sq-approved400-20261104';
-import { ClassroomUi } from './classroomUi.js?v=sq-approved400-20261104';
-import { passageHtml, materialHtml } from './reading.js?v=sq-approved400-20261104';
-import { CafeRunUi } from './cafeRunUi.js?v=sq-approved400-20261104';
-import { specialQuestions } from './hospitalityConfig.js?v=sq-approved400-20261104';
-import { productionReceipt, stockStatus } from './playLoop.js?v=sq-approved400-20261104';
-import { FinalUx } from './finalUx.js?v=sq-approved400-20261104';
-import { SessionClock, ActionGate } from './uxState.js?v=sq-approved400-20261104';
-import { installAssetFallbacks } from './assetFallback.js?v=sq-approved400-20261104';
-import { createLearning } from './learningIntegration.js?v=sq-approved400-20261104';
-import { renderQuestionText, escapeText, renderDiagram } from './questionRenderer.js?v=sq-approved400-20261104';
-import { GameFeel } from './gameFeel.js?v=sq-approved400-20261104';
-import { ModeFlow } from './modeUi.js?v=sq-approved400-20261104';
-import { itemCatalog, specialNames, specialIcons } from './phase4Config.js?v=sq-approved400-20261104';
-import { showOrderBubble, syncOrderBubble, assetSignature } from './presentation.js?v=sq-approved400-20261104';
-import { personalityLabels } from './customerRules.js?v=sq-approved400-20261104';
-import { selectCustomerPose, customerPoseArt, poseGeometry, preloadCustomerPoses, selectedPoseAsset } from './customerPoses.js?v=sq-approved400-20261104';
-import { SpatialScene, hallGrowthSpecs, createSpace } from './spatial.js?v=sq-approved400-20261104';
-import { DepartureDialogue } from './departureDialogue.js?v=sq-approved400-20261104';
-import { icon } from './uiIcons.js?v=sq-approved400-20261104';
-import { sprite } from './art.js?v=sq-approved400-20261104';
-import { staffBalance } from './config.js?v=sq-approved400-20261104';
-import { staffDefinitions } from './staff.js?v=sq-approved400-20261104';
-import { foodVisual } from './foodVisual.js?v=sq-approved400-20261104';
-import { CafeGame } from './game.js?v=sq-approved400-20261104';
-import { customers, menuDefinitions } from './data.js?v=sq-approved400-20261104';
+import { finalizeExternal, observeExternalGame } from './externalLaunch.js?v=stability-97670d28ea8d';
+import { releaseResultView } from './resultViewMemory.js?v=stability-97670d28ea8d';
+import { kitchenStages, kitchenFloorLabel } from './productionKitchen.js?v=stability-97670d28ea8d';
+import { pollManagerSession } from './managerUi.js?v=stability-97670d28ea8d';
+import { liveManagementOpen } from './liveManagement.js?v=stability-97670d28ea8d';
+import { mountCommonCafeResults, restoreCommonArchive } from './commonCafeResults.js?v=stability-97670d28ea8d';
+import { CommonCafeFlow } from './commonCafeFlow.js?v=stability-97670d28ea8d';
+import { loadCommonRuntime } from './commonBankLoader.js?v=stability-97670d28ea8d';
+import { commonQuestion } from './commonLearningCatalog.js?v=stability-97670d28ea8d';
+import { setCommonTransaction } from './commonLearningTransaction.js?v=stability-97670d28ea8d';
+import { megaQualificationNotice } from './megaQualificationUi.js?v=stability-97670d28ea8d';
+import { megaView } from './megaView.js?v=stability-97670d28ea8d';
+import { classRuntime, captureClass } from './classRuntime.js?v=stability-97670d28ea8d';
+import { pollClassUi } from './classRandomUi.js?v=stability-97670d28ea8d';
+import { renderProgressiveGuidance } from './progressiveGuidance.js?v=stability-97670d28ea8d';
+import { unlocked } from './progressiveFeatures.js?v=stability-97670d28ea8d';
+import { applyProgressiveVisibility } from './progressiveVisibility.js?v=stability-97670d28ea8d';
+import { prepareCompletedShowcase } from './cafeShowcase.js?v=stability-97670d28ea8d';
+import { beginManagementUi, pollManagementUi } from './managementLive.js?v=stability-97670d28ea8d';
+import { setArcadeSound } from './arcadeUi.js?v=stability-97670d28ea8d';
+import { setCraftSound } from './craftUi.js?v=stability-97670d28ea8d';
+import { setRushSound } from './cakeRushUi.js?v=stability-97670d28ea8d';
+import { beginMiniUi, pollMiniUi } from './miniGameUi.js?v=stability-97670d28ea8d';
+import { miniAnswer, activeMini } from './miniGames.js?v=stability-97670d28ea8d';
+import { beginSpecializationUi, pollSpecializationUi, specializationArt } from './specializationUi.js?v=stability-97670d28ea8d';
+import { specializationById } from './specializationConfig.js?v=stability-97670d28ea8d';
+import { freeMealAnchor } from './furnitureAnchors.js?v=stability-97670d28ea8d';
+import { freeFurniture, freeHallLayers, furnitureVisualVersion } from './freeFurniture.js?v=stability-97670d28ea8d';
+import { growthStaffPanel } from './recruitUi.js?v=stability-97670d28ea8d';
+import { workerBaseArt } from "./recruitArt.js?v=stability-97670d28ea8d";
+import { branchCatalog, branchRoom } from "./growthBranch.js?v=stability-97670d28ea8d";
+import { beginBranchUi, pollBranchUi } from "./growthBranchUi.js?v=stability-97670d28ea8d";
+import { createGrowthSave } from './growthSave.js?v=stability-97670d28ea8d';
+import { beginLongGrowth, pollLongGrowth } from './longGrowthUi.js?v=stability-97670d28ea8d';
+import { growthRuntime } from './growthRuntime.js?v=stability-97670d28ea8d';
+import { webAsset } from './webAsset.js?v=stability-97670d28ea8d';
+import { imageReady } from './imageLoading.js?v=stability-97670d28ea8d';
+import { motionFrame, bubbleCorrection } from './animationPresentation.js?v=stability-97670d28ea8d';
+import { workerPoseArt, preloadMotionSheets, workerTrayPlacement } from './motionSprites.js?v=stability-97670d28ea8d';
+import { EventRecovery } from './eventRecovery.js?v=stability-97670d28ea8d';
+import { renderEventPanel } from './eventUi.js?v=stability-97670d28ea8d';
+import { guestMotion, workerMotion, motionArt } from './characterMotion.js?v=stability-97670d28ea8d';
+import { restoreClassroomCafe } from './classroomCheckpoint.js?v=stability-97670d28ea8d';
+import { LearningAnalyticsV1 } from './learningAnalytics.js?v=stability-97670d28ea8d';
+import { mountCafeResults } from './cafeResults.js?v=stability-97670d28ea8d';
+import { questionCatalog } from './questionPack.js?v=stability-97670d28ea8d';
+import { ClassroomUi } from './classroomUi.js?v=stability-97670d28ea8d';
+import { passageHtml, materialHtml } from './reading.js?v=stability-97670d28ea8d';
+import { CafeRunUi } from './cafeRunUi.js?v=stability-97670d28ea8d';
+import { specialQuestions } from './hospitalityConfig.js?v=stability-97670d28ea8d';
+import { productionReceipt, stockStatus } from './playLoop.js?v=stability-97670d28ea8d';
+import { FinalUx } from './finalUx.js?v=stability-97670d28ea8d';
+import { SessionClock, ActionGate } from './uxState.js?v=stability-97670d28ea8d';
+import { installAssetFallbacks } from './assetFallback.js?v=stability-97670d28ea8d';
+import { createLearning } from './learningIntegration.js?v=stability-97670d28ea8d';
+import { renderQuestionText, escapeText, renderDiagram } from './questionRenderer.js?v=stability-97670d28ea8d';
+import { GameFeel } from './gameFeel.js?v=stability-97670d28ea8d';
+import { ModeFlow } from './modeUi.js?v=stability-97670d28ea8d';
+import { itemCatalog, specialNames, specialIcons } from './phase4Config.js?v=stability-97670d28ea8d';
+import { showOrderBubble, syncOrderBubble, assetSignature } from './presentation.js?v=stability-97670d28ea8d';
+import { personalityLabels } from './customerRules.js?v=stability-97670d28ea8d';
+import { selectCustomerPose, customerPoseArt, poseGeometry, preloadCustomerPoses, selectedPoseAsset } from './customerPoses.js?v=stability-97670d28ea8d';
+import { SpatialScene, hallGrowthSpecs, createSpace } from './spatial.js?v=stability-97670d28ea8d';
+import { DepartureDialogue } from './departureDialogue.js?v=stability-97670d28ea8d';
+import { icon } from './uiIcons.js?v=stability-97670d28ea8d';
+import { sprite } from './art.js?v=stability-97670d28ea8d';
+import { staffBalance } from './config.js?v=stability-97670d28ea8d';
+import { staffDefinitions } from './staff.js?v=stability-97670d28ea8d';
+import { foodVisual } from './foodVisual.js?v=stability-97670d28ea8d';
+import { CafeGame } from './game.js?v=stability-97670d28ea8d';
+import { customers, menuDefinitions } from './data.js?v=stability-97670d28ea8d';
 let classroomElapsed = null;
 const developerMode = new URLSearchParams(location.search).has('dev');
 const clock = new SessionClock(), purchaseGate = new ActionGate();
@@ -144,7 +145,7 @@ export async function startSession(session, pool, questionRandom, learningOption
     game.events.align(game.elapsedTime, game); if (game.status === 'CLOSED')
     game.events.close(); runUi.start(); clearTimeout(outcomeTimer); game.service.manualOwner = true; game.enableHallGrowth(); departure = new DepartureDialogue(); departureKey = ''; manualTipShown = false; autoTipShown = game.service.paid.length > 0; lastStaffCount = game.service.paid.length; hintUntil = 0; el('service-hint').hidden = true; receipt = []; stockKey = ""; displayedResult = null; clock.start(); ux.start(); feel.start(session); scene = new SpatialScene(game.cafeLevel, game.cafe.maxCustomers, true); scene.sync(game); readVisits.clear(); rereading = false; engine = createLearning(pool, session.policy.persistence === 'saved-cafe', questionRandom, learningOptions); analytics = new LearningAnalyticsV1(engine.provider.packId); const growthState = growthRuntime.begin(session, pool, { engine, analytics, readVisits: [] }, () => ({ engine, analytics, readVisits: [...readVisits], specialAttempt })); const classState = classRuntime.begin(session, growthState.engine, growthState.analytics, growthState.readVisits); engine = classState.engine; analytics = classState.analytics; const commonSetup = pool?.[0]?.commonChoice; if (commonSetup) {
     try {
-        const loaded = await loadCommonRuntime(commonSetup.subject), saved = engine.common;
+        const saved = engine.common, loaded = await loadCommonRuntime(commonSetup.subject, saved?.choices ?? commonSetup.choices);
         commonFlow = new CommonCafeFlow(loaded, saved?.choices ?? commonSetup.choices, saved);
         if (saved) {
             if (session.status === 'CLOSED')
@@ -164,7 +165,7 @@ export async function startSession(session, pool, questionRandom, learningOption
     }
 } commonBusy = false; readVisits.clear(); classState.readVisits.forEach(n => readVisits.add(n)); const sessionAnalytics = analytics; analytics.packName = pool?.[0]?.unit ?? '기본 학습'; void questionCatalog.list().then(list => { if (analytics === sessionAnalytics)
     analytics.packName = list.find(p => p.packId === engine.provider.packId)?.selectionLabel ?? list.find(p => p.packId === engine.provider.packId)?.title ?? analytics.packName; }).catch(() => { }); game.enableHospitality(specialQuestions(engine.provider.list()).map(q => q.questionId)); specialAttempt = growthState.specialAttempt ?? null; active = null; feedback = null; panelOpen = false; investmentOpen = false; investmentMessage = ''; renderedInvestmentKey = ''; celebrationUntil = 0; productionUntil = 0; beginLongGrowth(session, growthRuntime.savedFor(session) ?? createGrowthSave(), growthRuntime.businessId(), () => modeFlow.flush()); modeFlow.attach(session, pool); beginMiniUi(session, () => session.classRandom ? classRuntime.flush() : modeFlow.flush()); beginManagementUi(session, () => modeFlow.flush()); beginSpecializationUi(session, () => modeFlow.flush(), () => growthRuntime.businessId()); beginBranchUi(session, growthRuntime.savedFor(session) ?? createGrowthSave(), () => modeFlow.flush()); if (session.classRandom)
-    classRuntime.bind(session, () => captureClass(session, engine.provider.packId, engine, analytics, [...readVisits])); el('setup').hidden = true; el('results').hidden = true; el('problem-panel').hidden = true; el('playing').hidden = false; el('make').disabled = false; el('investment-panel').hidden = true; last=performance.now();render();await finalizeExternal(commonFlow,session,()=>session.classRandom?classRuntime.flush():modeFlow.flush());}
+    classRuntime.bind(session, () => captureClass(session, engine.provider.packId, engine, analytics, [...readVisits])); el('setup').hidden = true; releaseResultView(el('results')); el('results').hidden = true; el('problem-panel').hidden = true; el('playing').hidden = false; el('make').disabled = false; el('investment-panel').hidden = true; last = performance.now(); render(); await finalizeExternal(commonFlow, session, () => session.classRandom ? classRuntime.flush() : modeFlow.flush()); }
 document.querySelectorAll('[data-focus-tab]').forEach(b => b.onclick = () => { if (game?.status !== 'RUNNING')
     return; investmentTab = b.dataset.focusTab; selectedGuest = null; detailKey = ''; el('guest-detail').hidden = true; investmentOpen = true; panelOpen = false; renderProblem(); renderInvestment(true); });
 el('invest').addEventListener('click', () => { investmentTab = 'cafe'; if (game?.status !== 'RUNNING')
@@ -199,7 +200,7 @@ function renderProblem() {
     if (!panelOpen || !active)
         return;
     p.dataset.spacedReview = String(!!active.spacedReview);
-    p.innerHTML = `<div class="problem-head"><span>${specialAttempt !== null ? '특별 주문 · 시그니처 도전' : '✦ 음식을 만드는 작은 도전'}</span><button id="close-problem" aria-label="문제 패널 닫기">✕</button></div><p class="eyebrow">${escapeText(active.subject)}${active.learningPhase === 'review' ? ' · 개념 복습' : active.learningPhase === 'mastery' ? ' · 숙달 확인' : ''} · ${active.grade}학년 · ${active.type === 'ox' ? 'OX' : active.type === 'short_answer' ? '단답형' : '객관식'}${game?.mode === 'CAFE_GROWTH' ? ' · ' + (game.elapsedTime < 180 ? '준비' : game.elapsedTime < 660 ? '연습' : '도전·복습') + (['국어','사회'].includes(active.subject)?' · 유형 다양하게':' · 난이도 '+active.difficulty) : ''}</p>${feedback?.correct ? '<h2 class="production-result-title">' + (feedback.productionAllowed === false ? '복습을 확인했어요!' : '음식이 완성됐어요!') + '</h2>' : '<h2>' + renderQuestionText(active.question) + '</h2>' + renderDiagram(active.diagram, active.spacedReview ? '과학 그림' : '도형', !!commonFlow)}${feedback ? '<div class="feedback ' + (feedback.correct ? 'correct' : 'incorrect') + '"><strong>' + (feedback.correct ? (feedback.productionAllowed === false ? '이번에는 정확히 알았어요! 다음 문제에서도 확인해 볼까요?' : '정답! 음식이 만들어졌어요.') : (engine.progress.spaced ? '아쉽지만 이번에는 음식이 만들어지지 않았어요. 설명을 확인하고 다시 도전해요!' : '괜찮아요, 함께 확인해요')) + '</strong>' + (feedback.correct ? '<p class="production-summary">' + receipt.filter(r => r.quantity > 0).length + '종 · ' + receipt.reduce((n, r) => n + r.quantity, 0) + '개 추가 보관 · MAX ' + receipt.filter(r => r.quantity === 0).length + '종' + (game?.mode === 'CAFE_GROWTH' && game.mega?.paid && receipt.length ? ' · 창고 초과 ' + Math.max(0, receipt.length * game.productionAmount - receipt.reduce((n, r) => n + r.quantity, 0)) + '개' : '') + '</p><details class="answer-review"><summary>정답·풀이 보기</summary><p>정답: ' + renderQuestionText(feedback.answer) + '</p><p>' + renderQuestionText(feedback.explanation) + '</p></details>' : '<p>정답: ' + renderQuestionText(feedback.answer) + '</p><p>' + renderQuestionText(feedback.explanation) + '</p>') + '</div><button class="primary" id="return-cafe">카페로 돌아가기 →</button>' : active.type === 'short_answer' ? '<form id="answer-form"><label>답<input id="answer-input" maxlength="500" autocomplete="off" inputmode="text" required></label><button class="primary">정답 확인</button></form>' : '<div class="choices">' + active.choices.map(c => '<button data-answer="' + escapeText(c) + '">' + renderQuestionText(c) + '</button>').join('') + '</div>'}<p class="hint">문제를 푸는 동안에도 영업 시간과 손님 대기시간은 흘러요.</p>`;
+    p.innerHTML = `<div class="problem-head"><span>${specialAttempt !== null ? '특별 주문 · 시그니처 도전' : '✦ 음식을 만드는 작은 도전'}</span><button id="close-problem" aria-label="문제 패널 닫기">✕</button></div><p class="eyebrow">${escapeText(active.subject)}${active.learningPhase === 'review' ? ' · 개념 복습' : active.learningPhase === 'mastery' ? ' · 숙달 확인' : ''} · ${active.grade}학년 · ${active.type === 'ox' ? 'OX' : active.type === 'short_answer' ? '단답형' : '객관식'}${game?.mode === 'CAFE_GROWTH' ? ' · ' + (game.elapsedTime < 180 ? '준비' : game.elapsedTime < 660 ? '연습' : '도전·복습') + (['국어', '사회'].includes(active.subject) ? ' · 유형 다양하게' : ' · 난이도 ' + active.difficulty) : ''}</p>${feedback?.correct ? '<h2 class="production-result-title">' + (feedback.productionAllowed === false ? '복습을 확인했어요!' : '음식이 완성됐어요!') + '</h2>' : '<h2>' + renderQuestionText(active.question) + '</h2>' + renderDiagram(active.diagram, active.spacedReview ? '과학 그림' : '도형', !!commonFlow)}${feedback ? '<div class="feedback ' + (feedback.correct ? 'correct' : 'incorrect') + '"><strong>' + (feedback.correct ? (feedback.productionAllowed === false ? '이번에는 정확히 알았어요! 다음 문제에서도 확인해 볼까요?' : '정답! 음식이 만들어졌어요.') : (engine.progress.spaced ? '아쉽지만 이번에는 음식이 만들어지지 않았어요. 설명을 확인하고 다시 도전해요!' : '괜찮아요, 함께 확인해요')) + '</strong>' + (feedback.correct ? '<p class="production-summary">' + receipt.filter(r => r.quantity > 0).length + '종 · ' + receipt.reduce((n, r) => n + r.quantity, 0) + '개 추가 보관 · MAX ' + receipt.filter(r => r.quantity === 0).length + '종' + (game?.mode === 'CAFE_GROWTH' && game.mega?.paid && receipt.length ? ' · 창고 초과 ' + Math.max(0, receipt.length * game.productionAmount - receipt.reduce((n, r) => n + r.quantity, 0)) + '개' : '') + '</p><details class="answer-review"><summary>정답·풀이 보기</summary><p>정답: ' + renderQuestionText(feedback.answer) + '</p><p>' + renderQuestionText(feedback.explanation) + '</p></details>' : '<p>정답: ' + renderQuestionText(feedback.answer) + '</p><p>' + renderQuestionText(feedback.explanation) + '</p>') + '</div><button class="primary" id="return-cafe">카페로 돌아가기 →</button>' : active.type === 'short_answer' ? '<form id="answer-form"><label>답<input id="answer-input" maxlength="500" autocomplete="off" inputmode="text" required></label><button class="primary">정답 확인</button></form>' : '<div class="choices">' + active.choices.map(c => '<button data-answer="' + escapeText(c) + '">' + renderQuestionText(c) + '</button>').join('') + '</div>'}<p class="hint">문제를 푸는 동안에도 영업 시간과 손님 대기시간은 흘러요.</p>`;
     if (context) {
         const meta = document.createElement('div');
         meta.className = 'reading-progress';
@@ -281,7 +282,8 @@ function submit(answer) { if (commonFlow) {
     outcomeTimer = window.setTimeout(() => { if (game === session && game.status === 'RUNNING' && feedback === answer && panelOpen && !document.querySelector('.answer-review[open]'))
         returnToCafe(); }, 2300);
 } }
-export function render() {observeExternalGame(game,commonFlow);
+export function render() {
+    observeExternalGame(game, commonFlow);
     if (commonBusy)
         return;
     if (game?.classRandom) {
@@ -870,7 +872,7 @@ async function submitCommon(answer) { if (!commonFlow || commonBusy || classRunt
     if (!correct) {
         const hint = document.createElement('p');
         hint.className = 'concept-hint';
-        hint.textContent = (r.hint ?? r.question?.assessment?.hint ?? '설명을 확인해 주세요.') + (aq.isTwin ? ' 오답노트에는 원래 기본형 하나만 남아요.' : ' 다음은 같은 유형의 다른 문항이에요.');
+        hint.textContent = (r.hint ?? r.question?.assessment?.hint ?? '설명을 확인해 주세요.') + (aq.isTwin ? ' 오답노트에는 원래 기본형 하나만 남아요.' : ' 다음은 같은 개념의 동등 쌍둥이예요.');
         document.querySelector('.feedback')?.append(hint);
         const next = document.createElement('button');
         next.className = 'primary';

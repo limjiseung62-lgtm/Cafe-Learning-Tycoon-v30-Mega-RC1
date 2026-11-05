@@ -1,22 +1,22 @@
-import { progressiveTown } from './progressiveTown.js?v=sq-approved400-20261104';
-import { progressiveTownName } from './progressiveEconomy.js?v=sq-approved400-20261104';
-import { unlocked } from './progressiveFeatures.js?v=sq-approved400-20261104';
-import { acknowledgeGrowth, growthReaction } from './villageGrowthVisual.js?v=sq-approved400-20261104';
-import { VillageGrowthUi } from './villageGrowthUi.js?v=sq-approved400-20261104';
-import { VillageSocial } from './villageSocial.js?v=sq-approved400-20261104';
-import { VillageDialogue } from './villageDialogue.js?v=sq-approved400-20261104';
-import { residentLine, lifeProfiles } from './villageLife.js?v=sq-approved400-20261104';
-import { ensurePortfolio, syncSharedFurniture } from './cafePortfolio.js?v=sq-approved400-20261104';
-import { syncLake } from './lakeDistrict.js?v=sq-approved400-20261104';
-import { beginVillageProgression, syncVillageProgression, progressionPoints, villageStages, festivalCatalog, villageRecipes, materialLabels, beginFestival, finishFestival, craftVillage, useVillageMarket, claimMarketSouvenir } from './villageProgression.js?v=sq-approved400-20261104';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=sq-approved400-20261104';
-import { createGrowthSave } from './growthSave.js?v=sq-approved400-20261104';
-import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=sq-approved400-20261104';
-import { escapeText as esc } from './questionRenderer.js?v=sq-approved400-20261104';
-import { buildings, residents, materialNodes, createVillage, syncVillage, villageMetrics, questAvailable, acceptQuest, talkVillage, visitVillagePoint, claimQuest, questReady, questCatalog, metricNames } from './village.js?v=sq-approved400-20261104';
-import { restoreSceneLocation, sceneTarget, nearestScenePoint, sceneWalkable } from './villageNavigation.js?v=sq-approved400-20261104';
-import { sceneMarkup, ensureVillageSceneStyle } from './villageSceneArt.js?v=sq-approved400-20261104';
-import { VillageExplorer } from './villageExplorer.js?v=sq-approved400-20261104';
+import { progressiveTown } from './progressiveTown.js?v=stability-97670d28ea8d';
+import { progressiveTownName } from './progressiveEconomy.js?v=stability-97670d28ea8d';
+import { unlocked } from './progressiveFeatures.js?v=stability-97670d28ea8d';
+import { acknowledgeGrowth, growthReaction } from './villageGrowthVisual.js?v=stability-97670d28ea8d';
+import { VillageGrowthUi } from './villageGrowthUi.js?v=stability-97670d28ea8d';
+import { VillageSocial } from './villageSocial.js?v=stability-97670d28ea8d';
+import { VillageDialogue } from './villageDialogue.js?v=stability-97670d28ea8d';
+import { residentLine, lifeProfiles } from './villageLife.js?v=stability-97670d28ea8d';
+import { ensurePortfolio, syncSharedFurniture } from './cafePortfolio.js?v=stability-97670d28ea8d';
+import { syncLake } from './lakeDistrict.js?v=stability-97670d28ea8d';
+import { beginVillageProgression, syncVillageProgression, progressionPoints, villageStages, festivalCatalog, villageRecipes, materialLabels, beginFestival, finishFestival, craftVillage, useVillageMarket, claimMarketSouvenir } from './villageProgression.js?v=stability-97670d28ea8d';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=stability-97670d28ea8d';
+import { createGrowthSave } from './growthSave.js?v=stability-97670d28ea8d';
+import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=stability-97670d28ea8d';
+import { escapeText as esc } from './questionRenderer.js?v=stability-97670d28ea8d';
+import { buildings, residents, materialNodes, createVillage, syncVillage, villageMetrics, questAvailable, acceptQuest, talkVillage, visitVillagePoint, claimQuest, questReady, questCatalog, metricNames } from './village.js?v=stability-97670d28ea8d';
+import { restoreSceneLocation, sceneTarget, nearestScenePoint, sceneWalkable } from './villageNavigation.js?v=stability-97670d28ea8d';
+import { sceneMarkup, ensureVillageSceneStyle } from './villageSceneArt.js?v=stability-97670d28ea8d';
+import { VillageExplorer } from './villageExplorer.js?v=stability-97670d28ea8d';
 let destroy;
 const art = (visual) => customerPoseArt(selectCustomerPose(visual, 'ENTERING', 'right'));
 export async function openVillage(repo, enterCafe, back) {
@@ -88,7 +88,7 @@ export async function openVillage(repo, enterCafe, back) {
     saved = first;
     if (saved.portfolio.district.region === 'lake' && saved.village.progression.stage === 5) {
         cleanup();
-        const { openLake } = await import('./lakeUi.js?v=sq-approved400-20261104');
+        const { openLake } = await import('./lakeUi.js?v=stability-97670d28ea8d');
         void openLake(repo, () => { void openVillage(repo, enterCafe, back); }, enterCafe);
         return;
     }
@@ -169,7 +169,7 @@ export async function openVillage(repo, enterCafe, back) {
         msg.textContent = '마을5단계에서 호숫가 길이 열려요.';
         return;
     } if (!commit((_v, s) => { s.portfolio.district.region = 'lake'; }))
-        return; cleanup(); const { openLake } = await import('./lakeUi.js?v=sq-approved400-20261104'); void openLake(repo, () => { void openVillage(repo, enterCafe, back); }, enterCafe); }
+        return; cleanup(); const { openLake } = await import('./lakeUi.js?v=stability-97670d28ea8d'); void openLake(repo, () => { void openVillage(repo, enterCafe, back); }, enterCafe); }
     function clearIntent() { social?.cancel(); social?.hideSheet(); pendingResident = undefined; pendingCafe = false; pendingLake = false; pendingBuilding = undefined; dialogResident = undefined; root.classList.remove('village-talking'); }
     function target(p) { explorer?.target(p); }
     function approach(id) { root.dataset.lastInteraction = "approach:" + id; if (rpg?.active)
