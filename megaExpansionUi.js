@@ -1,14 +1,14 @@
-import { finishManagerConstructionInRepository } from './managerUi.js?v=stability-97670d28ea8d';
-import { megaLateForecast } from './megaLateForecast.js?v=stability-97670d28ea8d';
-import { adoptInterior, isShopDeployment } from './megaInventory.js?v=stability-97670d28ea8d';
-import { environmentPlacements, paintEnvironment } from './megaArt.js?v=stability-97670d28ea8d';
-import { expansionForecast } from './megaExpansionForecast.js?v=stability-97670d28ea8d';
-import { AudioManager } from './audioManager.js?v=stability-97670d28ea8d';
-import { deploymentLocalStorage } from './deploymentStorage.js?v=stability-97670d28ea8d';
-import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js?v=stability-97670d28ea8d';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=stability-97670d28ea8d';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=stability-97670d28ea8d';
-import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js?v=stability-97670d28ea8d';
+import { finishManagerConstructionInRepository } from './managerUi.js?v=backup-p0-b5b501b25d27';
+import { megaLateForecast } from './megaLateForecast.js?v=backup-p0-b5b501b25d27';
+import { adoptInterior, isShopDeployment } from './megaInventory.js?v=backup-p0-b5b501b25d27';
+import { environmentPlacements, paintEnvironment } from './megaArt.js?v=backup-p0-b5b501b25d27';
+import { expansionForecast } from './megaExpansionForecast.js?v=backup-p0-b5b501b25d27';
+import { AudioManager } from './audioManager.js?v=backup-p0-b5b501b25d27';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=backup-p0-b5b501b25d27';
+import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js?v=backup-p0-b5b501b25d27';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=backup-p0-b5b501b25d27';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=backup-p0-b5b501b25d27';
+import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js?v=backup-p0-b5b501b25d27';
 export function expansionAction(container, repo, source, refresh) {
     if (!source.mega || !document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.match(/^v30[cde]-/))
         return;

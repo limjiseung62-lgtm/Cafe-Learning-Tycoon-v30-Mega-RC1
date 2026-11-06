@@ -1,9 +1,9 @@
-import { unlocked } from './progressiveFeatures.js?v=stability-97670d28ea8d';
-import { specializationCatalog, specializationById, specializationRoom } from './specializationConfig.js?v=stability-97670d28ea8d';
-import { canSpecialize, chooseSpecialization, syncSpecialization } from './specialization.js?v=stability-97670d28ea8d';
-import { longStateFor } from './longGrowthUi.js?v=stability-97670d28ea8d';
-import { settleSpecializationCollection } from './longGrowth.js?v=stability-97670d28ea8d';
-import { imageReady } from './imageLoading.js?v=stability-97670d28ea8d';
+import { unlocked } from './progressiveFeatures.js?v=backup-p0-b5b501b25d27';
+import { specializationCatalog, specializationById, specializationRoom } from './specializationConfig.js?v=backup-p0-b5b501b25d27';
+import { canSpecialize, chooseSpecialization, syncSpecialization } from './specialization.js?v=backup-p0-b5b501b25d27';
+import { longStateFor } from './longGrowthUi.js?v=backup-p0-b5b501b25d27';
+import { settleSpecializationCollection } from './longGrowth.js?v=backup-p0-b5b501b25d27';
+import { imageReady } from './imageLoading.js?v=backup-p0-b5b501b25d27';
 const sessions = new WeakMap(), shown = new WeakSet();
 export function beginSpecializationUi(g, flush, business) { document.getElementById('specialization-choice')?.remove(); sessions.set(g, { flush, business }); }
 export function specializationCards(branch) { return specializationCatalog.filter(s => s.branch === branch).map(s => '<article class="specialization-card"><img loading="lazy" src="' + specializationRoom(s.id) + '" alt="' + s.name + ' 건물과 빈 홀"><h3>' + s.name + '</h3><p>' + s.feature + '</p><dl><dt>고유 이벤트</dt><dd>' + s.events.join(' · ') + '</dd><dt>만나는 손님</dt><dd>' + s.guest + '</dd><dt>오늘의 목표</dt><dd>' + s.operation + '</dd><dt>수집 보상</dt><dd>' + s.reward + ' · ' + s.book + ' · 기념 칭호</dd></dl><button class="primary" data-specialization="' + s.id + '">' + s.name + ' 선택</button></article>').join(''); }

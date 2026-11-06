@@ -1,16 +1,16 @@
-import { commonTransactionOpen } from './commonLearningTransaction.js?v=stability-97670d28ea8d';
-import { validImpactState } from './classImpact.js?v=stability-97670d28ea8d';
-import { createRandomClassMatch } from './sessionFactory.js?v=stability-97670d28ea8d';
-import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=stability-97670d28ea8d';
-import { decodeGuestCheckpoint } from './guestCheckpoint.js?v=stability-97670d28ea8d';
-import { LearningSession } from './learningSession.js?v=stability-97670d28ea8d';
-import { LearningAnalyticsV1 } from './learningAnalytics.js?v=stability-97670d28ea8d';
-import { providerForPool } from './learningIntegration.js?v=stability-97670d28ea8d';
-import { validBranch } from './growthBranch.js?v=stability-97670d28ea8d';
-import { validSpecialization } from './specialization.js?v=stability-97670d28ea8d';
-import { beginMiniSession, offerMini, validMiniSession, validMiniCollection } from './miniGames.js?v=stability-97670d28ea8d';
-import { ordinaryKinds, majorKinds } from './classRandom.js?v=stability-97670d28ea8d';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=stability-97670d28ea8d';
+import { commonTransactionOpen } from './commonLearningTransaction.js?v=backup-p0-b5b501b25d27';
+import { validImpactState } from './classImpact.js?v=backup-p0-b5b501b25d27';
+import { createRandomClassMatch } from './sessionFactory.js?v=backup-p0-b5b501b25d27';
+import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=backup-p0-b5b501b25d27';
+import { decodeGuestCheckpoint } from './guestCheckpoint.js?v=backup-p0-b5b501b25d27';
+import { LearningSession } from './learningSession.js?v=backup-p0-b5b501b25d27';
+import { LearningAnalyticsV1 } from './learningAnalytics.js?v=backup-p0-b5b501b25d27';
+import { providerForPool } from './learningIntegration.js?v=backup-p0-b5b501b25d27';
+import { validBranch } from './growthBranch.js?v=backup-p0-b5b501b25d27';
+import { validSpecialization } from './specialization.js?v=backup-p0-b5b501b25d27';
+import { beginMiniSession, offerMini, validMiniSession, validMiniCollection } from './miniGames.js?v=backup-p0-b5b501b25d27';
+import { ordinaryKinds, majorKinds } from './classRandom.js?v=backup-p0-b5b501b25d27';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=backup-p0-b5b501b25d27';
 export const classSaveKey = 'class-random-v1', classLockKey = 'class-random-lock';
 export function captureClass(g, packId, engine, analytics, readVisits) { if (!g.classRandom)
     throw Error('Not random CLASS'); return { version: 1, clock: g.classClock(), duration: g.durationSeconds, packId, elapsed: g.elapsedTime, closed: g.status === 'CLOSED', state: structuredClone(g.classRandom), cafe: classroomCafeCheckpoint(g), guests: structuredClone(g.guests), workers: structuredClone(g.service.workers), purchases: structuredClone(g.telemetry.upgradePurchases), phase4: structuredClone(g.telemetry.phase4), branch: structuredClone(g.growthBranch), specialization: structuredClone(g.specialization), miniGames: structuredClone(g.miniGames), miniCollection: structuredClone(g.miniCollection), learning: { session: engine.checkpoint(), analytics: analytics.checkpoint(), readVisits } }; }

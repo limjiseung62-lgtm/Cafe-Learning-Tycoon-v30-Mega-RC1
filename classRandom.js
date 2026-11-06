@@ -1,5 +1,5 @@
-import { planImpact, impactChoice } from './classImpact.js?v=stability-97670d28ea8d';
-import { progressiveClassBalance } from './classProgressiveBalance.js?v=stability-97670d28ea8d';
+import { planImpact, impactChoice } from './classImpact.js?v=backup-p0-b5b501b25d27';
+import { progressiveClassBalance } from './classProgressiveBalance.js?v=backup-p0-b5b501b25d27';
 export const classRandomConfig = { version: 1, priceMultiplier: 1.65, spawnSeconds: 7, expansion: [0, 1000, 2200, 4500, 8000, 12000, 20000, 30000, 35000, 42000, 50000, 65000, 90000, 130000, 180000], lossFraction: .2, lossMaximum: 8, firstDamageAt: 180 };
 export const randomClassBalance = { ...structuredClone(progressiveClassBalance), cafes: progressiveClassBalance.cafes.map((c, i) => ({ ...structuredClone(c), expansionCost: classRandomConfig.expansion[i], theme: i >= 6 ? 'classic' : c.theme })), staff: { ...structuredClone(progressiveClassBalance.staff), hireCosts: [1700, 4500, 9000, 16000, 24000] } };
 export const ordinaryKinds = ['gift', 'group', 'popular', 'discount', 'helper', 'regular', 'small-mistake', 'stock-loss'];

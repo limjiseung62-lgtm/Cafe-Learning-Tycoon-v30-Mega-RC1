@@ -1,6 +1,6 @@
 // @ts-nocheck
-import { byId, iso, uniso, artRect } from './cityBuildingCatalog.js?v=stability-97670d28ea8d';
-import { districts } from './cityDistrictModel.js?v=stability-97670d28ea8d';
+import { byId, iso, uniso, artRect } from './cityBuildingCatalog.js?v=backup-p0-b5b501b25d27';
+import { districts } from './cityDistrictModel.js?v=backup-p0-b5b501b25d27';
 export const intersects = (a, b, pad = 0) => a.x < b.x + b.w + pad && a.x + a.w + pad > b.x && a.y < b.y + b.h + pad && a.y + a.h + pad > b.y;
 export function layoutLabels(items, width, height) { const placed = []; for (const item of items) {
     let best = null;

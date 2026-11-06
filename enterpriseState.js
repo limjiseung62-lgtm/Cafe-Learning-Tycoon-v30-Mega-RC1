@@ -1,5 +1,5 @@
-import { urbanBranchFactor } from './cityUrbanEconomy.js?v=stability-97670d28ea8d';
-import { validModernCity, cityBranchBonus } from './modernCity.js?v=stability-97670d28ea8d';
+import { urbanBranchFactor } from './cityUrbanEconomy.js?v=backup-p0-b5b501b25d27';
+import { validModernCity, cityBranchBonus } from './modernCity.js?v=backup-p0-b5b501b25d27';
 const brands = ['neighborhood', 'destination', 'creative'];
 export const enterpriseReady = (s) => s.mode === 'CAFE_GROWTH' && s.cafeLevel >= 30 && (s.mega?.paid?.spaceLevel ?? 0) >= 30 && !!s.mega?.manager?.selected;
 export const enterpriseEditable = (s) => !s.campaign?.run || s.campaign.run.closed;

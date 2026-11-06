@@ -1,5 +1,5 @@
-import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=stability-97670d28ea8d';
-import { escapeText as esc } from './questionRenderer.js?v=stability-97670d28ea8d';
+import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=backup-p0-b5b501b25d27';
+import { escapeText as esc } from './questionRenderer.js?v=backup-p0-b5b501b25d27';
 /** Compact RPG conversation. Numeric objectives only appear after opening a quest. */
 export class VillageDialogue {
     root;

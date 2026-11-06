@@ -1,9 +1,9 @@
-import { waitForImages } from './imageLoading.js?v=stability-97670d28ea8d';
-import { webAsset } from './webAsset.js?v=stability-97670d28ea8d';
-import { guestMotionAsset } from './motionSprites.js?v=stability-97670d28ea8d';
-import { hospitalityPoseCatalog } from './hospitalityPoseCatalog.js?v=stability-97670d28ea8d';
-import { specialPoseCatalog } from './specialPoseCatalog.js?v=stability-97670d28ea8d';
-import { customerPoseCatalog } from './customerPoseCatalog.js?v=stability-97670d28ea8d';
+import { waitForImages } from './imageLoading.js?v=backup-p0-b5b501b25d27';
+import { webAsset } from './webAsset.js?v=backup-p0-b5b501b25d27';
+import { guestMotionAsset } from './motionSprites.js?v=backup-p0-b5b501b25d27';
+import { hospitalityPoseCatalog } from './hospitalityPoseCatalog.js?v=backup-p0-b5b501b25d27';
+import { specialPoseCatalog } from './specialPoseCatalog.js?v=backup-p0-b5b501b25d27';
+import { customerPoseCatalog } from './customerPoseCatalog.js?v=backup-p0-b5b501b25d27';
 export const customerPoses = customerPoseCatalog;
 export function selectCustomerPose(visualKey, action, facing, motion = '', phase = 0) { const p = customerPoses[visualKey] ?? hospitalityPoseCatalog[visualKey] ?? specialPoseCatalog[visualKey]; if (!p)
     throw new Error('Missing customer pose: ' + visualKey); const walking = ['ENTERING', 'WALKING_TO_SEAT', 'STANDING_UP', 'WALKING_TO_EXIT'].includes(action); const motionAsset = !walking || motion === 'WAVE' ? guestMotionAsset(visualKey, motion, phase) : undefined; return { key: visualKey + (motion ? '/' + motion + '/' + (motionAsset ? motionAsset.file + ':' + motionAsset.box.join(',') : 'base') : '') + (walking ? '/walk-' + facing : '/sit-' + facing), kind: walking ? 'walk' : 'sit', walk: p.walk, facing, asset: motionAsset ?? (walking ? null : facing === 'left' ? p.sitLeft : p.sitRight) }; }

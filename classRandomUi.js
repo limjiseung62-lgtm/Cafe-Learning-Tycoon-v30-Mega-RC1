@@ -1,14 +1,14 @@
-import { impactTitle, impactOptions } from './classImpact.js?v=stability-97670d28ea8d';
-import { sprite } from './art.js?v=stability-97670d28ea8d';
-import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=stability-97670d28ea8d';
-import { classChoice, classProgress, eventNames, classReport } from './classRandom.js?v=stability-97670d28ea8d';
-import { classRuntime } from './classRuntime.js?v=stability-97670d28ea8d';
-import { branchCatalog, branchPreview } from './growthBranch.js?v=stability-97670d28ea8d';
-import { specializationCatalog } from './specializationConfig.js?v=stability-97670d28ea8d';
-import { chooseSpecialization } from './specialization.js?v=stability-97670d28ea8d';
-import { pollMiniUi } from './miniGameUi.js?v=stability-97670d28ea8d';
-import { activeMini } from './miniGames.js?v=stability-97670d28ea8d';
-import { escapeText as esc } from './questionRenderer.js?v=stability-97670d28ea8d';
+import { impactTitle, impactOptions } from './classImpact.js?v=backup-p0-b5b501b25d27';
+import { sprite } from './art.js?v=backup-p0-b5b501b25d27';
+import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=backup-p0-b5b501b25d27';
+import { classChoice, classProgress, eventNames, classReport } from './classRandom.js?v=backup-p0-b5b501b25d27';
+import { classRuntime } from './classRuntime.js?v=backup-p0-b5b501b25d27';
+import { branchCatalog, branchPreview } from './growthBranch.js?v=backup-p0-b5b501b25d27';
+import { specializationCatalog } from './specializationConfig.js?v=backup-p0-b5b501b25d27';
+import { chooseSpecialization } from './specialization.js?v=backup-p0-b5b501b25d27';
+import { pollMiniUi } from './miniGameUi.js?v=backup-p0-b5b501b25d27';
+import { activeMini } from './miniGames.js?v=backup-p0-b5b501b25d27';
+import { escapeText as esc } from './questionRenderer.js?v=backup-p0-b5b501b25d27';
 export const eventArt = (kind) => 'assets/class-events/' + kind + '.svg?v=27.2';
 export const cinematicArt = (k) => 'assets/class-scenes/' + ({ vip: 'vip', critics: 'vip', thief: 'thief', 'stock-loss': 'thief', 'small-mistake': 'mistake', 'big-mistake': 'mistake', festival: 'festival', birthday: 'festival', gift: 'gift', helper: 'gift', supply: 'gift', group: 'group', urgent: 'group', popular: 'group', discount: 'group', regular: 'vip' }[k] ?? 'gift') + '.webp?v=271';
 function eventScene(k, title) { let cast = ''; if (k === 'vip' || k === 'critics')

@@ -1,4 +1,4 @@
-import { sceneWalkable, scenePath } from './villageNavigation.js?v=stability-97670d28ea8d';
+import { sceneWalkable, scenePath } from './villageNavigation.js?v=backup-p0-b5b501b25d27';
 export const cityDistricts = [{ id: 'commerce', name: '햇살 상업 거리', tile: 2, x: 350, y: 450, activity: '장터 물건 보기' }, { id: 'tourism', name: '바람결 관광 지구', tile: 7, x: 1250, y: 450, activity: '전망 산책' }, { id: 'culture', name: '별빛 문화 지구', tile: 4, x: 350, y: 1020, activity: '공방·거리 공연' }, { id: 'housing', name: '온기 주거 골목', tile: 6, x: 1250, y: 1020, activity: '이웃 대화' }];
 /** Reserved public avenues never run through future plots; plot doors share their actual collision geometry. */
 export function enterpriseCity(v) {

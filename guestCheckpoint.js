@@ -1,8 +1,8 @@
-import { growthMenuDefinitions } from './menuResearch.js?v=stability-97670d28ea8d';
-import { specializationById } from './specializationConfig.js?v=stability-97670d28ea8d';
-import { customers } from './data.js?v=stability-97670d28ea8d';
-import { specialDefinition, specialTypes } from './phase4Config.js?v=stability-97670d28ea8d';
-import { hospitalityDefinition, helperCatalog } from './hospitalityConfig.js?v=stability-97670d28ea8d';
+import { growthMenuDefinitions } from './menuResearch.js?v=backup-p0-b5b501b25d27';
+import { specializationById } from './specializationConfig.js?v=backup-p0-b5b501b25d27';
+import { customers } from './data.js?v=backup-p0-b5b501b25d27';
+import { specialDefinition, specialTypes } from './phase4Config.js?v=backup-p0-b5b501b25d27';
+import { hospitalityDefinition, helperCatalog } from './hospitalityConfig.js?v=backup-p0-b5b501b25d27';
 export function decodeGuestCheckpoint(value, g, level, limits) {
     try {
         const items = value;

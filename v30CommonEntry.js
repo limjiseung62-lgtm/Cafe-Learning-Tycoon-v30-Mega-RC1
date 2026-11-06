@@ -1,8 +1,8 @@
-import { attachExternal, manualReturn } from './externalLaunch.js?v=stability-97670d28ea8d';
-import { installCommonArchiveMenu } from './commonCafeResults.js?v=stability-97670d28ea8d';
-import { configureQuestionCatalog, QuestionPackCatalog } from './questionPack.js?v=stability-97670d28ea8d';
-import { CommonLearningCatalog } from './commonLearningCatalog.js?v=stability-97670d28ea8d';
-import { commonCatalogSHA256 } from './commonCatalogPin.js?v=stability-97670d28ea8d';
+import { attachExternal, manualReturn } from './externalLaunch.js?v=backup-p0-b5b501b25d27';
+import { installCommonArchiveMenu } from './commonCafeResults.js?v=backup-p0-b5b501b25d27';
+import { configureQuestionCatalog, QuestionPackCatalog } from './questionPack.js?v=backup-p0-b5b501b25d27';
+import { CommonLearningCatalog } from './commonLearningCatalog.js?v=backup-p0-b5b501b25d27';
+import { commonCatalogSHA256 } from './commonCatalogPin.js?v=backup-p0-b5b501b25d27';
 try {
     const response = await fetch('assets/common-learning/catalog.json');
     if (!response.ok)
@@ -18,7 +18,7 @@ try {
     await attachExternal(instance);
     configureQuestionCatalog(instance);
     installCommonArchiveMenu();
-    await import('./main.js?v=stability-97670d28ea8d');
+    await import('./main.js?v=backup-p0-b5b501b25d27');
 }
 catch (error) {
     const box = document.createElement('section');

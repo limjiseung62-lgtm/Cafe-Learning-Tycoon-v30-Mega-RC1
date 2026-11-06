@@ -1,4 +1,4 @@
-import { customers } from './data.js?v=stability-97670d28ea8d';
+import { customers } from './data.js?v=backup-p0-b5b501b25d27';
 export const personalityDefaults = { KIND: 150, RELAXED: 120, NORMAL: 100, BUSY: 70 };
 export const personalityLabels = { KIND: '매우 다정함', RELAXED: '느긋함', NORMAL: '보통', BUSY: '급함' };
 export const preferenceBoost = 1.025;

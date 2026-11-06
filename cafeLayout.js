@@ -1,7 +1,7 @@
-import { createSpace, floorPath } from './spatial.js?v=stability-97670d28ea8d';
-import { applyPlan, layoutKey, layoutFacilities, tableRect, decorRect, decorPlane, overlap } from './layoutModel.js?v=stability-97670d28ea8d';
-import { allDecorationCatalog as decorationCatalog, decorSlots } from './longGrowthConfig.js?v=stability-97670d28ea8d';
-import { isBranch } from './growthBranch.js?v=stability-97670d28ea8d';
+import { createSpace, floorPath } from './spatial.js?v=backup-p0-b5b501b25d27';
+import { applyPlan, layoutKey, layoutFacilities, tableRect, decorRect, decorPlane, overlap } from './layoutModel.js?v=backup-p0-b5b501b25d27';
+import { allDecorationCatalog as decorationCatalog, decorSlots } from './longGrowthConfig.js?v=backup-p0-b5b501b25d27';
+import { isBranch } from './growthBranch.js?v=backup-p0-b5b501b25d27';
 const memo = new Map();
 export const layoutDiagnostics = { validations: 0, cacheHits: 0, pathChecks: 0 };
 export function basicPlan(p) { try {

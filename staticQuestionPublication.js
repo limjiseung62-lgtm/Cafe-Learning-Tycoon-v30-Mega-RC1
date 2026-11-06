@@ -1,4 +1,4 @@
-import { QuestionPackCatalog, JsonQuestionProvider, validatePack } from './questionPack.js?v=stability-97670d28ea8d';
+import { QuestionPackCatalog, JsonQuestionProvider, validatePack } from './questionPack.js?v=backup-p0-b5b501b25d27';
 const digestPattern = /^[a-f0-9]{64}$/;
 export async function publicationSHA256(bytes) { return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', Uint8Array.from(bytes).buffer)), b => b.toString(16).padStart(2, '0')).join(''); }
 function requireThat(value, code) { if (!value)

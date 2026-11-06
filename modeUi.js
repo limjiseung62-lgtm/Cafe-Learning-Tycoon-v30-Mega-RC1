@@ -1,48 +1,48 @@
-import { applyExternalPicker, preflightExternal, runExternalStart } from './externalLaunch.js?v=stability-97670d28ea8d';
-import { modernCityNavigation } from './growthNavigationPolicy.js?v=stability-97670d28ea8d';
-import { mountLiveManagement } from './liveManagementUi.js?v=stability-97670d28ea8d';
-import { wrapCommonBackup, unpackCommonBackup, commonDeployment } from './commonBackup.js?v=stability-97670d28ea8d';
-import { commonTransactionOpen } from './commonLearningTransaction.js?v=stability-97670d28ea8d';
-import { mountCafeStudyPicker } from './cafeStudyPicker.js?v=stability-97670d28ea8d';
-import { megaSetupActions } from './megaEditor.js?v=stability-97670d28ea8d';
-import { v27Deployment } from './classRandom.js?v=stability-97670d28ea8d';
-import { classRuntime } from './classRuntime.js?v=stability-97670d28ea8d';
-import { createRandomClassMatch } from './sessionFactory.js?v=stability-97670d28ea8d';
+import { mountRecoveryStart, mountBackupControls, mountPlayingBackup, mountEndBackup } from './backupRecoveryUi.js?v=backup-p0-b5b501b25d27';
+import { applyExternalPicker, preflightExternal, runExternalStart } from './externalLaunch.js?v=backup-p0-b5b501b25d27';
+import { modernCityNavigation } from './growthNavigationPolicy.js?v=backup-p0-b5b501b25d27';
+import { mountLiveManagement } from './liveManagementUi.js?v=backup-p0-b5b501b25d27';
+import { wrapCommonBackup, unpackCommonBackup, commonDeployment } from './commonBackup.js?v=backup-p0-b5b501b25d27';
+import { commonTransactionOpen } from './commonLearningTransaction.js?v=backup-p0-b5b501b25d27';
+import { mountCafeStudyPicker } from './cafeStudyPicker.js?v=backup-p0-b5b501b25d27';
+import { megaSetupActions } from './megaEditor.js?v=backup-p0-b5b501b25d27';
+import { v27Deployment } from './classRandom.js?v=backup-p0-b5b501b25d27';
+import { classRuntime } from './classRuntime.js?v=backup-p0-b5b501b25d27';
+import { createRandomClassMatch } from './sessionFactory.js?v=backup-p0-b5b501b25d27';
 let preparedBackupUrl;
 if (typeof addEventListener === 'function')
     addEventListener('pagehide', () => { if (preparedBackupUrl)
         URL.revokeObjectURL(preparedBackupUrl); });
-import { goalsHtml } from './progressiveGoals.js?v=stability-97670d28ea8d';
-import { openProgressiveHub } from './progressiveHub.js?v=stability-97670d28ea8d';
-import { alignMissionBusiness, unlocked, featureLevels } from './progressiveFeatures.js?v=stability-97670d28ea8d';
-import { openProgressiveBusiness } from './progressiveEconomy.js?v=stability-97670d28ea8d';
-import { createProgressiveGrowthSave } from './growthSave.js?v=stability-97670d28ea8d';
-import { v26Deployment } from './progressiveFeatures.js?v=stability-97670d28ea8d';
-import { createProgressiveClassMatch } from './sessionFactory.js?v=stability-97670d28ea8d';
-import { organizeGrowthMenu } from './studentNavigation.js?v=stability-97670d28ea8d';
-import { openManagementHub } from './managementHub.js?v=stability-97670d28ea8d';
-import { chooseManagementStrategy } from './managementUi.js?v=stability-97670d28ea8d';
-import { managementFor } from './managementState.js?v=stability-97670d28ea8d';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=stability-97670d28ea8d';
-import { openCafePicker } from './cafePicker.js?v=stability-97670d28ea8d';
-import { cafeNames } from './cafePortfolio.js?v=stability-97670d28ea8d';
-import { openVillage } from './villageUi.js?v=stability-97670d28ea8d';
-import { openLayoutEditor } from './layoutEditor.js?v=stability-97670d28ea8d';
-import { rosterFor, syncRosterSave } from './staffRecruitment.js?v=stability-97670d28ea8d';
-import { openCrewDialog } from './recruitUi.js?v=stability-97670d28ea8d';
-import { ensureGrowthWriteLock, releaseGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=stability-97670d28ea8d';
-import { chooseLongMission, prepareLongState } from './longGrowthUi.js?v=stability-97670d28ea8d';
-import { exportGrowth, parseGrowthBackup, checkBackupRun } from './growthBackup.js?v=stability-97670d28ea8d';
-import { growthRuntime } from './growthRuntime.js?v=stability-97670d28ea8d';
-import { concepts, seededRandom } from './cafeRun.js?v=stability-97670d28ea8d';
-import { createClassMatch } from './sessionFactory.js?v=stability-97670d28ea8d';
-import { createGrowthSave } from './growthSave.js?v=stability-97670d28ea8d';
-import { GrowthSessionController } from './growthSession.js?v=stability-97670d28ea8d';
-import { LocalSaveRepository, BrowserGrowthRepository, CandidateSaveRepository, growthStorageKey } from './saveRepository.js?v=stability-97670d28ea8d';
-import { policyFor } from './sessionModes.js?v=stability-97670d28ea8d';
-import { balance } from './config.js?v=stability-97670d28ea8d';
-import { questionCatalog } from './questionPack.js?v=stability-97670d28ea8d';
-import { escapeText } from './questionRenderer.js?v=stability-97670d28ea8d';
+import { goalsHtml } from './progressiveGoals.js?v=backup-p0-b5b501b25d27';
+import { openProgressiveHub } from './progressiveHub.js?v=backup-p0-b5b501b25d27';
+import { alignMissionBusiness, unlocked, featureLevels } from './progressiveFeatures.js?v=backup-p0-b5b501b25d27';
+import { openProgressiveBusiness } from './progressiveEconomy.js?v=backup-p0-b5b501b25d27';
+import { createProgressiveGrowthSave } from './growthSave.js?v=backup-p0-b5b501b25d27';
+import { v26Deployment } from './progressiveFeatures.js?v=backup-p0-b5b501b25d27';
+import { createProgressiveClassMatch } from './sessionFactory.js?v=backup-p0-b5b501b25d27';
+import { organizeGrowthMenu } from './studentNavigation.js?v=backup-p0-b5b501b25d27';
+import { openManagementHub } from './managementHub.js?v=backup-p0-b5b501b25d27';
+import { chooseManagementStrategy } from './managementUi.js?v=backup-p0-b5b501b25d27';
+import { managementFor } from './managementState.js?v=backup-p0-b5b501b25d27';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=backup-p0-b5b501b25d27';
+import { openCafePicker } from './cafePicker.js?v=backup-p0-b5b501b25d27';
+import { cafeNames } from './cafePortfolio.js?v=backup-p0-b5b501b25d27';
+import { openVillage } from './villageUi.js?v=backup-p0-b5b501b25d27';
+import { openLayoutEditor } from './layoutEditor.js?v=backup-p0-b5b501b25d27';
+import { rosterFor, syncRosterSave } from './staffRecruitment.js?v=backup-p0-b5b501b25d27';
+import { openCrewDialog } from './recruitUi.js?v=backup-p0-b5b501b25d27';
+import { ensureGrowthWriteLock, releaseGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=backup-p0-b5b501b25d27';
+import { chooseLongMission, prepareLongState } from './longGrowthUi.js?v=backup-p0-b5b501b25d27';
+import { growthRuntime } from './growthRuntime.js?v=backup-p0-b5b501b25d27';
+import { concepts, seededRandom } from './cafeRun.js?v=backup-p0-b5b501b25d27';
+import { createClassMatch } from './sessionFactory.js?v=backup-p0-b5b501b25d27';
+import { createGrowthSave } from './growthSave.js?v=backup-p0-b5b501b25d27';
+import { GrowthSessionController } from './growthSession.js?v=backup-p0-b5b501b25d27';
+import { LocalSaveRepository, BrowserGrowthRepository, CandidateSaveRepository, growthStorageKey } from './saveRepository.js?v=backup-p0-b5b501b25d27';
+import { policyFor } from './sessionModes.js?v=backup-p0-b5b501b25d27';
+import { balance } from './config.js?v=backup-p0-b5b501b25d27';
+import { questionCatalog } from './questionPack.js?v=backup-p0-b5b501b25d27';
+import { escapeText } from './questionRenderer.js?v=backup-p0-b5b501b25d27';
 const e = (id) => document.getElementById(id);
 const study = () => '<div id="study-content" class="study-content"><span>학습 내용</span><strong id="study-title">문제를 준비하고 있어요…</strong><select id="study-pack" aria-label="학습 내용" hidden></select></div><p id="pack-error" class="save-error" aria-live="polite"></p><button type="button" id="pack-retry" class="text-button pack-retry" hidden>다시 시도</button>';
 export function browserSaveRepository() { try {
@@ -97,8 +97,9 @@ export class ModeFlow {
     setRepository(repo) { if (this.current()?.status === 'RUNNING')
         throw Error('Cannot change repository during a session'); this.repository = repo; this.showModes(); }
     card() { return document.querySelector('.welcome-card'); }
-    showModes() { releaseGrowthWriteLock(); this.view++; this.busy = false; this.controller = null; this.endedGame = null; this.card().innerHTML = '<p class="eyebrow">오늘은 어떻게 놀까요?</p><h2>배움이 쌓이는<br>나만의 카페</h2><div class="mode-cards"><button id="choose-class" class="mode-card"><strong>수업 게임</strong><span>' + (v27Deployment() ? '15분·30분, 매판 다른 카페 사건을 만나요!' : '15분 동안 문제를 풀며 작은 카페를 빠르게 키워요!') + '</span></button><button id="choose-growth" class="mode-card"><strong>내 카페 키우기</strong><span>내 카페를 저장하고 Lv.' + (document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-') ? '30' : '15') + '까지 키워요!</span></button></div><div class="classroom-entry" hidden><button id="teacher-host" class="secondary">교사용 방 만들기</button><button id="student-join" class="secondary">학생 방 입장</button></div><p class="hint">처음이라면 메뉴에서 게임 방법을 눌러 보세요.</p>'; if (v26Deployment())
-        this.card().querySelector('.classroom-entry').hidden = true; e('choose-class').onclick = () => this.classSetup(); e('choose-growth').onclick = () => v26Deployment() ? this.growthSetup() : this.villageSetup(); e('teacher-host').onclick = () => document.dispatchEvent(new CustomEvent('classroom-open', { detail: 'teacher' })); e('student-join').onclick = () => document.dispatchEvent(new CustomEvent('classroom-open', { detail: 'student' })); document.dispatchEvent(new Event('cafe-mode-view')); }
+    showModes() { releaseGrowthWriteLock(); this.view++; this.busy = false; this.controller = null; this.endedGame = null; this.card().innerHTML = '<p class="eyebrow">오늘은 어떻게 놀까요?</p><h2>배움이 쌓이는<br>나만의 카페</h2><div class="mode-cards"><button id="choose-class" class="mode-card"><strong>수업 게임</strong><span>' + (v27Deployment() ? '15분·30분, 매판 다른 카페 사건을 만나요!' : '15분 동안 문제를 풀며 작은 카페를 빠르게 키워요!') + '</span></button><button id="choose-growth" class="mode-card"><strong>내 카페 키우기</strong><span>내 카페를 저장하고 Lv.' + (document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-') ? '30' : '15') + '까지 키워요!</span></button></div><div class="classroom-entry"><button id="teacher-host" class="secondary">교사용 방 만들기</button><button id="student-join" class="secondary">학생 방 입장</button></div><p class="hint">처음이라면 메뉴에서 게임 방법을 눌러 보세요.</p>'; if (v26Deployment())
+        this.card().querySelector('.classroom-entry').hidden = true; if (v26Deployment())
+        mountRecoveryStart(this.card(), this.repository, () => this.growthSetup()); e('choose-class').onclick = () => this.classSetup(); e('choose-growth').onclick = () => v26Deployment() ? this.growthSetup() : this.villageSetup(); e('teacher-host').onclick = () => document.dispatchEvent(new CustomEvent('classroom-open', { detail: 'teacher' })); e('student-join').onclick = () => document.dispatchEvent(new CustomEvent('classroom-open', { detail: 'student' })); document.dispatchEvent(new Event('cafe-mode-view')); }
     villageSetup() { if (modernCityNavigation()) {
         this.growthSetup(true);
         return;
@@ -408,73 +409,14 @@ export class ModeFlow {
         if (view === this.view)
             this.controls(false);
     } }
-    backupControls() { const wrap = document.createElement('section'); wrap.className = 'growth-backup'; wrap.innerHTML = '<p class="hint">카페별 자산·배치와 공통 학습·마을은 이 브라우저에 저장돼요. 저장 삭제·기기 교체 전 JSON 백업을 받아 주세요. 중단해도 원래 종료 시각은 유지되며, 종료된 회차는 결과로 복구돼요. 15분 완주·서로 다른 문제 8개·정답 5개부터 성장 지원금을 받아요.</p><button id="export-growth" class="secondary">카페 JSON 백업</button><label class="secondary">백업 복원<input id="import-growth" type="file" accept="application/json,.json"></label><p id="backup-message" role="status"></p>'; this.card().append(wrap); if (deploymentPrefix() && !v26Deployment()) {
-        const bring = document.createElement('button');
-        bring.id = 'import-public-cafe';
-        bring.className = 'secondary';
-        bring.textContent = '기존 공개 카페 가져오기';
-        wrap.prepend(bring);
-        bring.onclick = () => { const source = new LocalSaveRepository(globalThis.localStorage).read(); if (source.status !== 'ready') {
-            e('backup-message').textContent = '이 브라우저에 기존 공개 카페가 없어요. 기존 카페를 키웠던 같은 기기·브라우저에서 공개판에 접속한 뒤 다시 시도해 주세요. 다른 기기의 저장은 자동 이전되지 않습니다.';
-            return;
-        } const copy = structuredClone(source.save); this.confirm('기존 공개 카페 ' + copy.cafeLevel + '단계 · ' + copy.money.toLocaleString() + '원을 테스트판으로 복사할까요? 원본은 그대로 유지됩니다. 현재 테스트 카페는 별도 보관됩니다.', () => { void (async () => { if (supportsGrowthLock() && !await ensureGrowthWriteLock()) {
-            e('backup-message').textContent = '다른 테스트 카페 창을 닫아 주세요.';
-            return;
-        } const result = this.repository.replace(copy, true); if (result.ok)
-            this.growthSetup();
-        else
-            e('backup-message').textContent = result.message; })(); }); };
-    } e('export-growth').onclick = () => { const r = this.repository.read(); if (r.status !== 'ready') {
-        e('backup-message').textContent = '저장된 카페가 없어요.';
-        return;
-    } try {
-        if (preparedBackupUrl)
-            URL.revokeObjectURL(preparedBackupUrl);
-        const url = commonDeployment() ? 'data:application/json;charset=utf-8,' + encodeURIComponent(wrapCommonBackup(exportGrowth(r.save))) : URL.createObjectURL(new Blob([exportGrowth(r.save)], { type: 'application/json' }));
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = r.save.v26 ? 'cafe-v26-backup.json' : r.save.portfolio ? 'cafe-all-cafes-v19c-backup.json' : 'cafe-growth-backup.json';
-        link.textContent = '백업 JSON 파일 저장';
-        preparedBackupUrl = url;
-        link.id = 'prepared-backup-file';
-        link.className = 'secondary';
-        wrap.querySelector('#prepared-backup-file')?.remove();
-        wrap.append(link);
-        link.click();
-        e('backup-message').textContent = '백업 파일을 준비했어요. 다운로드가 시작되지 않으면 파일 저장 링크를 눌러 주세요.';
-    }
-    catch {
-        e('backup-message').textContent = '백업을 만들지 못했어요.';
-    } }; const restoreText = async (text) => { try {
-        const bundle = await unpackCommonBackup(text), save = parseGrowthBackup(bundle.native);
-        questionCatalog.prepareResume(save.campaign?.run);
-        if (v26Deployment() && !save.v26)
-            throw Error('이전 버전 백업은 원본 그대로 보관해 주세요. v2.6 전용 백업만 복원할 수 있어요.');
-        await checkBackupRun(save);
-        this.confirm('현재 카페를 별도 보관한 뒤 백업으로 복원할까요?', () => { void (async () => { if (supportsGrowthLock() && !await ensureGrowthWriteLock()) {
-            e('backup-message').textContent = '다른 카페 창을 먼저 닫아 주세요.';
-            return;
-        } await bundle.install(); const result = this.repository.replace(save, true); if (result.ok)
-            this.growthSetup();
-        else
-            e('backup-message').textContent = result.message; })(); });
-    }
-    catch (error) {
-        e('backup-message').textContent = error instanceof Error ? error.message : '복원 실패 · 기존 저장 보존';
-    } }; e('import-growth').onchange = async () => { const file = e('import-growth').files?.[0]; if (!file)
-        return; if (file.size > (commonDeployment() ? 32000000 : 4000000)) {
-        e('backup-message').textContent = '백업 파일이 너무 커요. 기존 저장은 유지됩니다.';
-        return;
-    } await restoreText(await file.text()); }; if (deploymentPrefix()) {
-        const alternative = document.createElement('details');
-        alternative.innerHTML = '<summary>파일 선택이 안 되나요? JSON 텍스트로 복원</summary><label>카페 백업 JSON<textarea id="backup-json-text" maxlength="32000000" style="width:100%;box-sizing:border-box;min-height:100px" placeholder="카페 백업 JSON 내용을 붙여넣으세요"></textarea></label><button id="restore-backup-text" class="secondary">JSON 확인 후 복원</button><p class="hint">기기에서만 처리하며 서버에 전송하지 않아요. 복원 전 현재 테스트 카페를 별도 보관해요.</p>';
-        wrap.append(alternative);
-        e('restore-backup-text').onclick = () => { void restoreText(e('backup-json-text').value); };
-    } }
+    backupControls() { mountBackupControls(this.card(), this.repository, () => this.growthSetup()); }
     confirm(message, action) { if (document.getElementById('mode-confirm'))
         return; const dialog = document.createElement('section'); dialog.id = 'mode-confirm'; dialog.className = 'mode-confirm'; dialog.setAttribute('role', 'dialog'); dialog.setAttribute('aria-modal', 'true'); dialog.setAttribute('aria-label', '카페 확인'); dialog.innerHTML = '<div><h2>한 번 더 확인해요</h2><p>' + message + '</p><button id="confirm-cancel" class="secondary">취소</button><button id="confirm-yes" class="primary">확인하고 진행</button></div>'; document.body.append(dialog); e('confirm-cancel').onclick = () => dialog.remove(); e('confirm-yes').onclick = () => { if (!dialog.isConnected)
         return; dialog.remove(); action(); }; e('confirm-cancel').focus(); }
     attach(game, pool) { this.pool = pool; this.endedGame = null; this.controller = game.policy.persistence === 'saved-cafe' ? new GrowthSessionController(game, this.repository, undefined, (save, base) => growthRuntime.enrich(save, base)) : null; mountLiveManagement(game, this.controller); if (this.controller)
+        mountPlayingBackup(this.repository, () => commonTransactionOpen ? { ok: false, message: '학습 응답 저장을 마친 뒤 백업해 주세요.' } : this.controller.save());
+    else
+        document.querySelectorAll('[data-playing-backup]').forEach(n => n.remove()); if (this.controller)
         this.feedback(this.controller.save());
     else
         e('save-status').textContent = ''; const cafeRead = this.repository.read(); e('mode-label').textContent = game.policy.label + (game.mode === 'CAFE_GROWTH' && cafeRead.status === 'ready' && cafeRead.save.portfolio ? ' · ' + cafeNames[cafeRead.save.portfolio.activeCafeId] : ''); const resumeClass = !!game.classRandom && game.durationSeconds === 1800; e('end-business').hidden = !this.controller && !resumeClass; e('end-business').textContent = resumeClass ? '이번 CLASS 마치기' : '영업 마치기'; e('end-business').onclick = () => this.confirm(resumeClass ? '이번 CLASS를 지금 끝내고 결과표를 볼까요? 이어하기는 끝나요.' : '지금 영업을 마치고 카페를 저장할까요?', () => { if (resumeClass)
@@ -559,5 +501,5 @@ export class ModeFlow {
         return; this.home(); this.growthSetup(true); document.getElementById('decorate-cafe')?.click(); }; if (unlocked(game, 'decor'))
         e('results').append(layout); const village = document.createElement('button'); village.id = 'results-village'; village.className = 'secondary'; village.textContent = '마을로 돌아가기 · 의뢰 보고'; village.disabled = !this.controller.lastResult.ok; village.onclick = () => { if (!this.flush())
         return; e('results').hidden = true; e('setup').hidden = false; document.getElementById('app').classList.remove('in-session'); this.villageSetup(); }; if (!modernCityNavigation() && unlocked(game, 'village'))
-        e('results').append(village); this.augmentResults(); }
+        e('results').append(village); mountEndBackup(e('results'), this.repository, () => commonTransactionOpen ? { ok: false, message: '학습 기록 저장이 끝난 뒤 다시 눌러 주세요.' } : this.controller.save()); this.augmentResults(); }
 }

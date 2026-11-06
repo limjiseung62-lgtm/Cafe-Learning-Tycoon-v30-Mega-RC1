@@ -1,10 +1,10 @@
 // @ts-nocheck
-import { cityInvestmentServices, cityFactorBounds, cityPriceBands, cityTrafficPrices } from './cityInvestmentBalance.js?v=stability-97670d28ea8d';
-import { byId } from './cityBuildingCatalog.js?v=stability-97670d28ea8d';
-import { makeCity, districts } from './cityDistrictModel.js?v=stability-97670d28ea8d';
-import { analyze, branchEffect, clamp } from './cityIndicatorModel.js?v=stability-97670d28ea8d';
-import { modernCityFor, mainSite, hqSite, publicSites, cityRegions } from './modernCity.js?v=stability-97670d28ea8d';
-import { foundFranchise, branchYield } from './progressiveEconomy.js?v=stability-97670d28ea8d';
+import { cityInvestmentServices, cityFactorBounds, cityPriceBands, cityTrafficPrices } from './cityInvestmentBalance.js?v=backup-p0-b5b501b25d27';
+import { byId } from './cityBuildingCatalog.js?v=backup-p0-b5b501b25d27';
+import { makeCity, districts } from './cityDistrictModel.js?v=backup-p0-b5b501b25d27';
+import { analyze, branchEffect, clamp } from './cityIndicatorModel.js?v=backup-p0-b5b501b25d27';
+import { modernCityFor, mainSite, hqSite, publicSites, cityRegions } from './modernCity.js?v=backup-p0-b5b501b25d27';
+import { foundFranchise, branchYield } from './progressiveEconomy.js?v=backup-p0-b5b501b25d27';
 export { analyze, districts };
 const cityField = a => a.group === 'public' || a.group === 'leisure' ? 'housing' : a.group;
 const legacyVariants = { commerce: ['small-retail-a', 'large-retail-a', 'shopping-mall-a'], housing: ['detached-a', 'low-apartment-a', 'high-apartment-a'], tourism: ['garden-a', 'hotel-a', 'tourist-complex-a'], culture: ['library-a', 'theater-a', 'culture-center-a'], enterprise: ['logistics-a', 'mid-office-a', 'corporate-a'] };

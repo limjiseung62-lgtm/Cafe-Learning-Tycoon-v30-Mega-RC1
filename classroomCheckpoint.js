@@ -1,12 +1,12 @@
-import { ensureManager } from './managerState.js?v=stability-97670d28ea8d';
-import { validMega, createMegaSpace } from './megaSpace.js?v=stability-97670d28ea8d';
-import { growthMenuDefinitions } from './menuResearch.js?v=stability-97670d28ea8d';
-import { validFreeLayouts } from './freeLayout.js?v=stability-97670d28ea8d';
-import { validLayouts } from './cafeLayout.js?v=stability-97670d28ea8d';
-import { validRoster, captureRoster } from "./staffRecruitment.js?v=stability-97670d28ea8d";
-import { recruitById } from "./recruitConfig.js?v=stability-97670d28ea8d";
-import { decodeGuestCheckpoint } from './guestCheckpoint.js?v=stability-97670d28ea8d';
-import { validEventCheckpoint } from './cafeEvents.js?v=stability-97670d28ea8d';
+import { ensureManager } from './managerState.js?v=backup-p0-b5b501b25d27';
+import { validMega, createMegaSpace } from './megaSpace.js?v=backup-p0-b5b501b25d27';
+import { growthMenuDefinitions } from './menuResearch.js?v=backup-p0-b5b501b25d27';
+import { validFreeLayouts } from './freeLayout.js?v=backup-p0-b5b501b25d27';
+import { validLayouts } from './cafeLayout.js?v=backup-p0-b5b501b25d27';
+import { validRoster, captureRoster } from "./staffRecruitment.js?v=backup-p0-b5b501b25d27";
+import { recruitById } from "./recruitConfig.js?v=backup-p0-b5b501b25d27";
+import { decodeGuestCheckpoint } from './guestCheckpoint.js?v=backup-p0-b5b501b25d27';
+import { validEventCheckpoint } from './cafeEvents.js?v=backup-p0-b5b501b25d27';
 export const incompleteRunHistory = new WeakSet();
 export function classroomCafeCheckpoint(g) { return { version: 1, ...g.mega && g.mode === 'CAFE_GROWTH' ? { mega: structuredClone(g.mega) } : {}, ...g.freeLayouts && g.mode === 'CAFE_GROWTH' ? { freeLayouts: structuredClone(g.freeLayouts) } : {}, ...g.layouts && g.mode === 'CAFE_GROWTH' ? { layouts: structuredClone(g.layouts) } : {}, ...g.roster && g.mode === 'CAFE_GROWTH' ? { roster: captureRoster(g.roster, g.service.paid) } : {}, ...g.events.enabled ? { eventState: g.events.checkpoint() } : {}, ...g.events.enabled || g.mode === 'CAFE_GROWTH' ? { guests: structuredClone(g.guests) } : {}, cafeLevel: g.cafeLevel, money: g.money, warehouseLevel: g.warehouseLevel, menus: g.menus.map(m => ({ id: m.menuId, level: m.currentLevel, stock: m.stock })), staff: g.service.paid.map(w => ({ ...g.roster ? { id: w.staffId } : {}, level: w.level })), stats: { ...g.stats }, production: g.successfulProduction, regularMemory: { ...g.regularMemory }, itemPurchases: { ...g.itemPurchases }, golden: g.goldenRemaining, booster: g.boosterRemaining, vip: g.vipPending, run: g.run ? { selected: [...g.run.selected], finalPaid: g.run.finalPaid, finalAssigned: incompleteRunHistory.has(g) ? null : g.run.finalAssigned, finalRewarded: g.run.finalRewarded, bonusRevenue: g.run.bonusRevenue } : null }; }
 export function restoreClassroomCafe(g, value) { if (g.mode !== 'CLASS_MATCH')

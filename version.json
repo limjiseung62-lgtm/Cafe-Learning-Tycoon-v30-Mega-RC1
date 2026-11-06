@@ -15,10 +15,10 @@
     48
   ],
   "releaseNotes": "RELEASE-NOTES.html",
-  "sourceCandidate": "97670d28ea8d22713bdaa62f687873de10bf37a7",
+  "sourceCandidate": "b5b501b25d278feed0d7f4e8f02ab7ea5246120f",
   "testUrl": "https://limjiseung62-lgtm.github.io/Cafe-Learning-Tycoon-v30-Mega-RC1/",
-  "cacheToken": "stability-97670d28ea8d",
-  "build": "scoped-math-empty-results-modern-city-stability-1",
+  "cacheToken": "backup-p0-b5b501b25d27",
+  "build": "scoped-math-empty-results-modern-city-stability-1+backup-file-p0",
   "baselinePublicBuild": "interior-placement-unblock-1",
   "approvedContentSubjects": [
     "math",
@@ -29,5 +29,6 @@
   "approvedKoreanQuestions": 200,
   "approvedSocialQuestions": 200,
   "sourceQuestionsModified": false,
-  "baselineSourceUnchanged": true
+  "baselineSourceUnchanged": true,
+  "backupPatch": "file-restore-p0-1"
 }

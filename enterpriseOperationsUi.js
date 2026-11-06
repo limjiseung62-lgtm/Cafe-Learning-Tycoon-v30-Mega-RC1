@@ -1,8 +1,8 @@
-import { growthMenuDefinitions } from './menuResearch.js?v=stability-97670d28ea8d';
-import { branchManagers, configureBranch, branchOperatingReport } from './enterpriseState.js?v=stability-97670d28ea8d';
-import { branchBaseYield, branchYield, foundFranchise, upgradeFranchise, branchUpgradeCost, investmentCatalog, progressiveEconomyConfig } from './progressiveEconomy.js?v=stability-97670d28ea8d';
-import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=stability-97670d28ea8d';
-import { escapeText as esc } from './questionRenderer.js?v=stability-97670d28ea8d';
+import { growthMenuDefinitions } from './menuResearch.js?v=backup-p0-b5b501b25d27';
+import { branchManagers, configureBranch, branchOperatingReport } from './enterpriseState.js?v=backup-p0-b5b501b25d27';
+import { branchBaseYield, branchYield, foundFranchise, upgradeFranchise, branchUpgradeCost, investmentCatalog, progressiveEconomyConfig } from './progressiveEconomy.js?v=backup-p0-b5b501b25d27';
+import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=backup-p0-b5b501b25d27';
+import { escapeText as esc } from './questionRenderer.js?v=backup-p0-b5b501b25d27';
 export function paintEnterpriseOperations(host, s, edit, repo, onExit = () => { }) {
     ensureVillageSceneStyle();
     const v = s.v26, e = v.enterprise;
@@ -15,5 +15,5 @@ export function paintEnterpriseOperations(host, s, edit, repo, onExit = () => { 
     } edit(s => configureBranch(s, id, manager, menu, employees)); });
     host.querySelectorAll('[data-found]').forEach(b => b.onclick = () => { const id = Number(b.dataset.found), region = host.querySelector(`[data-region="${id}"]`).value; edit(s => foundFranchise(s, id, region)); });
     host.querySelectorAll('[data-upgrade]').forEach(b => b.onclick = () => edit(s => upgradeFranchise(s, Number(b.dataset.upgrade))));
-    host.querySelector('[data-city]').addEventListener('click', () => { void import('./enterpriseCityUi.js?v=stability-97670d28ea8d').then(m => m.openEnterpriseCity(repo, () => { host.closest('.enterprise-dialog')?.remove(); onExit(); })); });
+    host.querySelector('[data-city]').addEventListener('click', () => { void import('./enterpriseCityUi.js?v=backup-p0-b5b501b25d27').then(m => m.openEnterpriseCity(repo, () => { host.closest('.enterprise-dialog')?.remove(); onExit(); })); });
 }
