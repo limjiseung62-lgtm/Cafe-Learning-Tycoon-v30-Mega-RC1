@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { assets, byId } from './cityBuildingCatalog.js?v=backup-p0-b5b501b25d27';
+import { assets, byId } from './cityBuildingCatalog.js?v=level-seats-83d02b666a1c';
 export const stageDefs = [{ id: 'early', name: '초기 · 작은 현대 도시', cols: 7, rows: 5 }, { id: 'middle', name: '중기 · 자라는 상업도시', cols: 8, rows: 7 }, { id: 'late', name: '후기 · 다채로운 대도시', cols: 10, rows: 9 }];
 const widths = [9, 8, 11, 9, 10, 8, 11, 9, 10, 9], heights = [9, 10, 8, 11, 9, 10, 8, 11, 9];
 const vertical = [3, 3, 4.5, 3, 3, 4, 3, 3.5, 3, 3, 3], horizontal = [3, 3, 4, 3, 4.5, 3, 3, 4, 3, 3];

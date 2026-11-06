@@ -1,4 +1,4 @@
-import { consumeUnlocks, featureLevels, unlocked } from './progressiveFeatures.js?v=backup-p0-b5b501b25d27';
+import { consumeUnlocks, featureLevels, unlocked } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
 /** Presentation mirrors reducer gates; it never grants a capability. */
 export function applyProgressiveVisibility(g) {
     if (!g.progressive && !g.progressiveState)

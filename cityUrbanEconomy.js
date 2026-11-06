@@ -1,10 +1,10 @@
 // @ts-nocheck
-import { cityInvestmentServices, cityFactorBounds, cityPriceBands, cityTrafficPrices } from './cityInvestmentBalance.js?v=backup-p0-b5b501b25d27';
-import { byId } from './cityBuildingCatalog.js?v=backup-p0-b5b501b25d27';
-import { makeCity, districts } from './cityDistrictModel.js?v=backup-p0-b5b501b25d27';
-import { analyze, branchEffect, clamp } from './cityIndicatorModel.js?v=backup-p0-b5b501b25d27';
-import { modernCityFor, mainSite, hqSite, publicSites, cityRegions } from './modernCity.js?v=backup-p0-b5b501b25d27';
-import { foundFranchise, branchYield } from './progressiveEconomy.js?v=backup-p0-b5b501b25d27';
+import { cityInvestmentServices, cityFactorBounds, cityPriceBands, cityTrafficPrices } from './cityInvestmentBalance.js?v=level-seats-83d02b666a1c';
+import { byId } from './cityBuildingCatalog.js?v=level-seats-83d02b666a1c';
+import { makeCity, districts } from './cityDistrictModel.js?v=level-seats-83d02b666a1c';
+import { analyze, branchEffect, clamp } from './cityIndicatorModel.js?v=level-seats-83d02b666a1c';
+import { modernCityFor, mainSite, hqSite, publicSites, cityRegions } from './modernCity.js?v=level-seats-83d02b666a1c';
+import { foundFranchise, branchYield } from './progressiveEconomy.js?v=level-seats-83d02b666a1c';
 export { analyze, districts };
 const cityField = a => a.group === 'public' || a.group === 'leisure' ? 'housing' : a.group;
 const legacyVariants = { commerce: ['small-retail-a', 'large-retail-a', 'shopping-mall-a'], housing: ['detached-a', 'low-apartment-a', 'high-apartment-a'], tourism: ['garden-a', 'hotel-a', 'tourist-complex-a'], culture: ['library-a', 'theater-a', 'culture-center-a'], enterprise: ['logistics-a', 'mid-office-a', 'corporate-a'] };

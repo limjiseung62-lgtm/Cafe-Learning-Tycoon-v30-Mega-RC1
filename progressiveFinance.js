@@ -1,4 +1,4 @@
-import { branchYield, progressiveEconomyConfig as config } from './progressiveEconomy.js?v=backup-p0-b5b501b25d27';
+import { branchYield, progressiveEconomyConfig as config } from './progressiveEconomy.js?v=level-seats-83d02b666a1c';
 const legacyCosts = [300000, 900000, 2400000], legacyFactors = [.4, .65, 1, 1.5];
 /** Existing saves lack capital receipts. Preserve an explicit legacy estimate, never fabricate past earnings. */
 export function initializeFinance(v) { if (v.finance) {

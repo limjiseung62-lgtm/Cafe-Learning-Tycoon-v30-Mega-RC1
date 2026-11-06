@@ -1,12 +1,13 @@
-import { ensureManager } from './managerState.js?v=backup-p0-b5b501b25d27';
-import { validMega, createMegaSpace } from './megaSpace.js?v=backup-p0-b5b501b25d27';
-import { growthMenuDefinitions } from './menuResearch.js?v=backup-p0-b5b501b25d27';
-import { validFreeLayouts } from './freeLayout.js?v=backup-p0-b5b501b25d27';
-import { validLayouts } from './cafeLayout.js?v=backup-p0-b5b501b25d27';
-import { validRoster, captureRoster } from "./staffRecruitment.js?v=backup-p0-b5b501b25d27";
-import { recruitById } from "./recruitConfig.js?v=backup-p0-b5b501b25d27";
-import { decodeGuestCheckpoint } from './guestCheckpoint.js?v=backup-p0-b5b501b25d27';
-import { validEventCheckpoint } from './cafeEvents.js?v=backup-p0-b5b501b25d27';
+import { growthSeats } from './levelSeats.js?v=level-seats-83d02b666a1c';
+import { ensureManager } from './managerState.js?v=level-seats-83d02b666a1c';
+import { validMega, createMegaSpace } from './megaSpace.js?v=level-seats-83d02b666a1c';
+import { growthMenuDefinitions } from './menuResearch.js?v=level-seats-83d02b666a1c';
+import { validFreeLayouts } from './freeLayout.js?v=level-seats-83d02b666a1c';
+import { validLayouts } from './cafeLayout.js?v=level-seats-83d02b666a1c';
+import { validRoster, captureRoster } from "./staffRecruitment.js?v=level-seats-83d02b666a1c";
+import { recruitById } from "./recruitConfig.js?v=level-seats-83d02b666a1c";
+import { decodeGuestCheckpoint } from './guestCheckpoint.js?v=level-seats-83d02b666a1c';
+import { validEventCheckpoint } from './cafeEvents.js?v=level-seats-83d02b666a1c';
 export const incompleteRunHistory = new WeakSet();
 export function classroomCafeCheckpoint(g) { return { version: 1, ...g.mega && g.mode === 'CAFE_GROWTH' ? { mega: structuredClone(g.mega) } : {}, ...g.freeLayouts && g.mode === 'CAFE_GROWTH' ? { freeLayouts: structuredClone(g.freeLayouts) } : {}, ...g.layouts && g.mode === 'CAFE_GROWTH' ? { layouts: structuredClone(g.layouts) } : {}, ...g.roster && g.mode === 'CAFE_GROWTH' ? { roster: captureRoster(g.roster, g.service.paid) } : {}, ...g.events.enabled ? { eventState: g.events.checkpoint() } : {}, ...g.events.enabled || g.mode === 'CAFE_GROWTH' ? { guests: structuredClone(g.guests) } : {}, cafeLevel: g.cafeLevel, money: g.money, warehouseLevel: g.warehouseLevel, menus: g.menus.map(m => ({ id: m.menuId, level: m.currentLevel, stock: m.stock })), staff: g.service.paid.map(w => ({ ...g.roster ? { id: w.staffId } : {}, level: w.level })), stats: { ...g.stats }, production: g.successfulProduction, regularMemory: { ...g.regularMemory }, itemPurchases: { ...g.itemPurchases }, golden: g.goldenRemaining, booster: g.boosterRemaining, vip: g.vipPending, run: g.run ? { selected: [...g.run.selected], finalPaid: g.run.finalPaid, finalAssigned: incompleteRunHistory.has(g) ? null : g.run.finalAssigned, finalRewarded: g.run.finalRewarded, bonusRevenue: g.run.bonusRevenue } : null }; }
 export function restoreClassroomCafe(g, value) { if (g.mode !== 'CLASS_MATCH')
@@ -21,7 +22,7 @@ export function restoreCafeCheckpoint(g, value) {
         if (s.menus.length !== definitions.length || new Set(s.menus.map(m => m.id)).size !== definitions.length || !definitions.every(d => s.menus.some(m => m.id === d.menuId && int(m.level, 1, 5) && int(m.stock, 0, g.mode === 'CAFE_GROWTH' && s.mega?.production ? 320 : 50))))
             return false;
         const physical = g.mode === 'CAFE_GROWTH' && s.mega?.paid ? Object.values(s.mega.plans).find(p => p.level === s.mega.paid.spaceLevel && (p.branch ?? undefined) === g.branchId) ?? Object.values(s.mega.plans).find(p => p.level === s.mega.paid.spaceLevel) : undefined;
-        const limits = physical ? { seats: createMegaSpace(physical).seats.length, customers: Math.min(g.economy.cafes[s.cafeLevel - 1].maxCustomers, g.economy.cafes[physical.level - 1].maxCustomers) } : undefined;
+        const limits = physical ? { seats: createMegaSpace(physical).seats.length, customers: growthSeats(s.cafeLevel, s.mega, g.branchId)?.operating ?? Math.min(g.economy.cafes[s.cafeLevel - 1].maxCustomers, g.economy.cafes[physical.level - 1].maxCustomers) } : undefined;
         const restoredGuests = s.guests === undefined ? undefined : decodeGuestCheckpoint(s.guests, g, s.cafeLevel, limits);
         if (restoredGuests === null)
             return false;

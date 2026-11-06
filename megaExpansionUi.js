@@ -1,14 +1,14 @@
-import { finishManagerConstructionInRepository } from './managerUi.js?v=backup-p0-b5b501b25d27';
-import { megaLateForecast } from './megaLateForecast.js?v=backup-p0-b5b501b25d27';
-import { adoptInterior, isShopDeployment } from './megaInventory.js?v=backup-p0-b5b501b25d27';
-import { environmentPlacements, paintEnvironment } from './megaArt.js?v=backup-p0-b5b501b25d27';
-import { expansionForecast } from './megaExpansionForecast.js?v=backup-p0-b5b501b25d27';
-import { AudioManager } from './audioManager.js?v=backup-p0-b5b501b25d27';
-import { deploymentLocalStorage } from './deploymentStorage.js?v=backup-p0-b5b501b25d27';
-import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js?v=backup-p0-b5b501b25d27';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=backup-p0-b5b501b25d27';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=backup-p0-b5b501b25d27';
-import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js?v=backup-p0-b5b501b25d27';
+import { finishManagerConstructionInRepository } from './managerUi.js?v=level-seats-83d02b666a1c';
+import { megaLateForecast } from './megaLateForecast.js?v=level-seats-83d02b666a1c';
+import { adoptInterior, isShopDeployment } from './megaInventory.js?v=level-seats-83d02b666a1c';
+import { environmentPlacements, paintEnvironment } from './megaArt.js?v=level-seats-83d02b666a1c';
+import { expansionForecast } from './megaExpansionForecast.js?v=level-seats-83d02b666a1c';
+import { AudioManager } from './audioManager.js?v=level-seats-83d02b666a1c';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=level-seats-83d02b666a1c';
+import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js?v=level-seats-83d02b666a1c';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=level-seats-83d02b666a1c';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=level-seats-83d02b666a1c';
+import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js?v=level-seats-83d02b666a1c';
 export function expansionAction(container, repo, source, refresh) {
     if (!source.mega || !document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.match(/^v30[cde]-/))
         return;

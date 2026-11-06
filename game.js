@@ -1,34 +1,35 @@
-import { kitchenStages, kitchenAmount, kitchenFloorLabel, bulkWarehouses, newProductionKitchen } from './productionKitchen.js?v=backup-p0-b5b501b25d27';
-import { tickManager } from './managerActor.js?v=backup-p0-b5b501b25d27';
-import { megaSaleFactor } from './megaOperations.js?v=backup-p0-b5b501b25d27';
-import { megaGrowthBalance, megaSpawnSeconds } from './megaGrowthEconomy.js?v=backup-p0-b5b501b25d27';
-import { tableSeatCount } from './megaInventory.js?v=backup-p0-b5b501b25d27';
-import { megaEnabled, ensureMegaPlan, createMegaSpace, megaRoute, megaTravelSeconds, megaPointClear } from './megaSpace.js?v=backup-p0-b5b501b25d27';
-import { randomClassBalance, classRandomConfig, pollClassEvents, classSpecial } from './classRandom.js?v=backup-p0-b5b501b25d27';
-import { investmentRevenue, investmentSpawn, investmentVisitor, pollInvestmentEvents } from './progressiveEconomy.js?v=backup-p0-b5b501b25d27';
-import { classProgressiveConfig } from './classProgressiveBalance.js?v=backup-p0-b5b501b25d27';
-import { unlocked } from './progressiveFeatures.js?v=backup-p0-b5b501b25d27';
-import { protectedSpecialStock, reservedGuestOrder, reservationIndex, takeReservedFood } from './specialInventory.js?v=backup-p0-b5b501b25d27';
-import { pollManagement, strategyGuest, strategyQuantity } from './managementEngine.js?v=backup-p0-b5b501b25d27';
-import { pollMini, miniPaused, activeMini } from './miniGames.js?v=backup-p0-b5b501b25d27';
-import { specializationById } from './specializationConfig.js?v=backup-p0-b5b501b25d27';
-import { chooseFurnitureSeat } from './furnitureSeating.js?v=backup-p0-b5b501b25d27';
-import { layoutEconomyConfig } from './layoutEconomyConfig.js?v=backup-p0-b5b501b25d27';
-import { freeKey } from './freeLayoutModel.js?v=backup-p0-b5b501b25d27';
-import { layoutKey } from './layoutModel.js?v=backup-p0-b5b501b25d27';
-import { CafeEvents } from './cafeEvents.js?v=backup-p0-b5b501b25d27';
-import { CafeRun } from './cafeRun.js?v=backup-p0-b5b501b25d27';
-import { Hospitality } from './hospitality.js?v=backup-p0-b5b501b25d27';
-import { hospitalityDefinition, hospitalityBalance } from './hospitalityConfig.js?v=backup-p0-b5b501b25d27';
-import { chooseSpecial, specialDefinition, itemCatalog } from './phase4Config.js?v=backup-p0-b5b501b25d27';
-import { policyFor } from './sessionModes.js?v=backup-p0-b5b501b25d27';
-import { chooseCustomer, chooseOrderMenu } from './customerRules.js?v=backup-p0-b5b501b25d27';
-import { StaffSystem } from './staff.js?v=backup-p0-b5b501b25d27';
-import { createSpace, floorPath, floorStandable } from './spatial.js?v=backup-p0-b5b501b25d27';
-import { LocalTelemetry } from './telemetry.js?v=backup-p0-b5b501b25d27';
-import { balance } from './config.js?v=backup-p0-b5b501b25d27';
-import { createMenus, customers, menuDefinitions } from './data.js?v=backup-p0-b5b501b25d27';
-import { StaffAbilities } from "./staffAbilities.js?v=backup-p0-b5b501b25d27";
+import { growthSeats } from './levelSeats.js?v=level-seats-83d02b666a1c';
+import { kitchenStages, kitchenAmount, kitchenFloorLabel, bulkWarehouses, newProductionKitchen } from './productionKitchen.js?v=level-seats-83d02b666a1c';
+import { tickManager } from './managerActor.js?v=level-seats-83d02b666a1c';
+import { megaSaleFactor } from './megaOperations.js?v=level-seats-83d02b666a1c';
+import { megaGrowthBalance, megaSpawnSeconds } from './megaGrowthEconomy.js?v=level-seats-83d02b666a1c';
+import { tableSeatCount } from './megaInventory.js?v=level-seats-83d02b666a1c';
+import { megaEnabled, ensureMegaPlan, createMegaSpace, megaRoute, megaTravelSeconds, megaPointClear } from './megaSpace.js?v=level-seats-83d02b666a1c';
+import { randomClassBalance, classRandomConfig, pollClassEvents, classSpecial } from './classRandom.js?v=level-seats-83d02b666a1c';
+import { investmentRevenue, investmentSpawn, investmentVisitor, pollInvestmentEvents } from './progressiveEconomy.js?v=level-seats-83d02b666a1c';
+import { classProgressiveConfig } from './classProgressiveBalance.js?v=level-seats-83d02b666a1c';
+import { unlocked } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
+import { protectedSpecialStock, reservedGuestOrder, reservationIndex, takeReservedFood } from './specialInventory.js?v=level-seats-83d02b666a1c';
+import { pollManagement, strategyGuest, strategyQuantity } from './managementEngine.js?v=level-seats-83d02b666a1c';
+import { pollMini, miniPaused, activeMini } from './miniGames.js?v=level-seats-83d02b666a1c';
+import { specializationById } from './specializationConfig.js?v=level-seats-83d02b666a1c';
+import { chooseFurnitureSeat } from './furnitureSeating.js?v=level-seats-83d02b666a1c';
+import { layoutEconomyConfig } from './layoutEconomyConfig.js?v=level-seats-83d02b666a1c';
+import { freeKey } from './freeLayoutModel.js?v=level-seats-83d02b666a1c';
+import { layoutKey } from './layoutModel.js?v=level-seats-83d02b666a1c';
+import { CafeEvents } from './cafeEvents.js?v=level-seats-83d02b666a1c';
+import { CafeRun } from './cafeRun.js?v=level-seats-83d02b666a1c';
+import { Hospitality } from './hospitality.js?v=level-seats-83d02b666a1c';
+import { hospitalityDefinition, hospitalityBalance } from './hospitalityConfig.js?v=level-seats-83d02b666a1c';
+import { chooseSpecial, specialDefinition, itemCatalog } from './phase4Config.js?v=level-seats-83d02b666a1c';
+import { policyFor } from './sessionModes.js?v=level-seats-83d02b666a1c';
+import { chooseCustomer, chooseOrderMenu } from './customerRules.js?v=level-seats-83d02b666a1c';
+import { StaffSystem } from './staff.js?v=level-seats-83d02b666a1c';
+import { createSpace, floorPath, floorStandable } from './spatial.js?v=level-seats-83d02b666a1c';
+import { LocalTelemetry } from './telemetry.js?v=level-seats-83d02b666a1c';
+import { balance } from './config.js?v=level-seats-83d02b666a1c';
+import { createMenus, customers, menuDefinitions } from './data.js?v=level-seats-83d02b666a1c';
+import { StaffAbilities } from "./staffAbilities.js?v=level-seats-83d02b666a1c";
 export class CafeGame {
     durationSeconds;
     random;
@@ -199,7 +200,8 @@ export class CafeGame {
         this.service.upgrade(w, this.elapsedTime);
         this.telemetry.staffUpgradePurchases.push({ ...this.telemetry.upgradePurchases.at(-1) });
     } return result; }
-    get cafe() { const c = this.economy.cafes[this.cafeLevel - 1]; return this.mode === 'CAFE_GROWTH' && this.mega?.paid ? { ...c, maxCustomers: Math.min(c.maxCustomers, this.economy.cafes[this.mega.paid.spaceLevel - 1].maxCustomers, ...(this.mega.inventory ? [Object.values(this.mega.plans).filter(p => p.level === this.mega.paid.spaceLevel && p.branch === (this.branchId ?? null))[0]?.tables.reduce((n, t) => n + tableSeatCount(t), 0) ?? 14] : [])) } : c; }
+    get cafe() { const c = this.economy.cafes[this.cafeLevel - 1], seats = this.mode === 'CAFE_GROWTH' ? growthSeats(this.cafeLevel, this.mega, this.branchId) : null; if (seats)
+        return { ...c, maxCustomers: seats.operating }; return this.mode === 'CAFE_GROWTH' && this.mega?.paid ? { ...c, maxCustomers: Math.min(c.maxCustomers, this.economy.cafes[this.mega.paid.spaceLevel - 1].maxCustomers, ...(this.mega.inventory ? [Object.values(this.mega.plans).filter(p => p.level === this.mega.paid.spaceLevel && p.branch === (this.branchId ?? null))[0]?.tables.reduce((n, t) => n + tableSeatCount(t), 0) ?? 14] : [])) } : c; }
     get warehouse() { const base = this.economy.warehouses[this.warehouseLevel - 1], n = this.mode === 'CAFE_GROWTH' ? this.mega?.production?.storage ?? 0 : 0; return n ? { ...base, capacity: Math.max(base.capacity, bulkWarehouses[n - 1].capacity) } : base; }
     earlyElapsed = null;
     get elapsedTime() { return this.earlyElapsed ?? this.durationSeconds - this.remainingSeconds; }

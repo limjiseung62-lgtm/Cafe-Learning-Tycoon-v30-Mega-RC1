@@ -1,5 +1,5 @@
-import { unlocked } from './progressiveFeatures.js?v=backup-p0-b5b501b25d27';
-import { recruitCatalog, recruitById, recruitConfig } from './recruitConfig.js?v=backup-p0-b5b501b25d27';
+import { unlocked } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
+import { recruitCatalog, recruitById, recruitConfig } from './recruitConfig.js?v=level-seats-83d02b666a1c';
 export function rosterFor(s) { return structuredClone(s.roster ?? { version: 2, cafeId: 'cafe-' + hash(s.createdAt), owned: s.staffOwned.map(id => ({ id, level: s.staffLevels[id] })), active: [...s.staffOwned], windows: [], receipts: [], collections: { visitors: Object.keys(s.longTerm?.visitors ?? {}) }, titles: [], settlements: [] }); }
 export function hash(s) { let n = 2166136261; for (const c of s)
     n = Math.imul(n ^ c.charCodeAt(0), 16777619); n = Math.imul(n ^ (n >>> 16), 0x85ebca6b); n = Math.imul(n ^ (n >>> 13), 0xc2b2ae35); return (n ^ (n >>> 16)) >>> 0; }

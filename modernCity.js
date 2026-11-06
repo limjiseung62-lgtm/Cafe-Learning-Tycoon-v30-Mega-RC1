@@ -1,4 +1,4 @@
-import { validUrbanMeta } from './cityUrbanSchema.js?v=backup-p0-b5b501b25d27';
+import { validUrbanMeta } from './cityUrbanSchema.js?v=level-seats-83d02b666a1c';
 export const cityRegions = [{ cols: 7, rows: 5, cost: 0 }, { cols: 8, rows: 7, cost: 1000000 }, { cols: 10, rows: 9, cost: 4000000 }];
 export const cityFacilities = {
     commerce: { names: ['소형 상가', '중형 상업시설', '대형 쇼핑몰'], assets: ['shop', 'arcade', 'mall'], costs: [100000, 250000, 700000], effect: '지역 소비 수요·본점 매출' },

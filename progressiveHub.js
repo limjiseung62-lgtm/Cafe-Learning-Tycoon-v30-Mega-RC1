@@ -1,12 +1,12 @@
-import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=backup-p0-b5b501b25d27';
-import { goalsHtml } from './progressiveGoals.js?v=backup-p0-b5b501b25d27';
-import { landmarkNames, districtVisitors } from './progressiveFinance.js?v=backup-p0-b5b501b25d27';
-import { openManagementAlbum } from './managementAlbumUi.js?v=backup-p0-b5b501b25d27';
-import { syncManagementAlbum } from './managementAlbum.js?v=backup-p0-b5b501b25d27';
-import { investmentReason, franchiseQuote } from './progressiveGuidance.js?v=backup-p0-b5b501b25d27';
-import { investmentTierLimit, investmentCatalog, progressiveEconomyConfig as config, investVillage, foundFranchise, upgradeFranchise, branchYield, branchUpgradeCost, branchRequirement, buildLandmark, progressiveTownName } from './progressiveEconomy.js?v=backup-p0-b5b501b25d27';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=backup-p0-b5b501b25d27';
-import { unlocked } from './progressiveFeatures.js?v=backup-p0-b5b501b25d27';
+import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=level-seats-83d02b666a1c';
+import { goalsHtml } from './progressiveGoals.js?v=level-seats-83d02b666a1c';
+import { landmarkNames, districtVisitors } from './progressiveFinance.js?v=level-seats-83d02b666a1c';
+import { openManagementAlbum } from './managementAlbumUi.js?v=level-seats-83d02b666a1c';
+import { syncManagementAlbum } from './managementAlbum.js?v=level-seats-83d02b666a1c';
+import { investmentReason, franchiseQuote } from './progressiveGuidance.js?v=level-seats-83d02b666a1c';
+import { investmentTierLimit, investmentCatalog, progressiveEconomyConfig as config, investVillage, foundFranchise, upgradeFranchise, branchYield, branchUpgradeCost, branchRequirement, buildLandmark, progressiveTownName } from './progressiveEconomy.js?v=level-seats-83d02b666a1c';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=level-seats-83d02b666a1c';
+import { unlocked } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
 export async function openProgressiveHub(repo, onClose) {
     if (!await ensureGrowthWriteLock())
         return;
