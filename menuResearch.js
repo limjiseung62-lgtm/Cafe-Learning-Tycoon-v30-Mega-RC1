@@ -1,4 +1,5 @@
-import { menuDefinitions } from './data.js?v=level-seats-83d02b666a1c';
+import { signatureMenusFor } from './finalSpecializationState.js?v=mega-5d509fb5dbfc';
+import { menuDefinitions } from './data.js?v=mega-5d509fb5dbfc';
 export const researchRecipes = [
     { id: 'research-fruit', name: '햇살 과일 소다', visual: 'ade', base: 'coffee', level: 1, ingredients: ['fruit', 'milk'], heat: 1, description: '과일과 우유를 차갑게 섞어 산뜻하게 만들어요.' },
     { id: 'research-latte', name: '구름 밀크 라테', visual: 'strawberry-latte', base: 'strawberry-latte', level: 2, ingredients: ['milk', 'flower'], heat: 2, description: '우유와 꽃향기를 미지근하게 데워요.' },
@@ -8,25 +9,31 @@ export const researchRecipes = [
     { id: 'research-dessert', name: '우리 카페 시그니처', visual: 'parfait', base: 'pudding', level: 5, ingredients: ['fruit', 'flower'], heat: 1, description: '꽃과 과일을 차갑게 층층이 쌓아요.' }
 ];
 export const materialNames = { fruit: '과일', milk: '우유', flour: '밀가루', flower: '꽃향 재료' };
-export function selectRecipe(m, id, level) { if (m.progressiveLevel !== undefined && m.progressiveLevel < 9)
+export function selectRecipe(m, id, level) { if (m.legacyArchiveOnly)
+    return false; if (m.progressiveLevel !== undefined && m.progressiveLevel < 9)
     return false; const recipe = researchRecipes.find(r => r.id === id); if (!recipe || recipe.level > level || m.research[id])
     return false; m.research[id] = { stage: 'selected', ingredients: [], rating: 0 }; return true; }
-export function combineRecipe(m, id, ingredients) { if (m.progressiveLevel !== undefined && m.progressiveLevel < 9)
+export function combineRecipe(m, id, ingredients) { if (m.legacyArchiveOnly)
+    return false; if (m.progressiveLevel !== undefined && m.progressiveLevel < 9)
     return false; const recipe = researchRecipes.find(r => r.id === id), r = m.research[id]; if (!recipe || !r || r.stage !== 'selected' || ingredients.length !== 2 || [...ingredients].sort().join() !== [...recipe.ingredients].sort().join() || ingredients.some(i => !Object.hasOwn(m.materials, i) || m.materials[i] < 1))
     return false; for (const i of ingredients)
     m.materials[i]--; r.ingredients = [...ingredients]; r.stage = 'combined'; return true; }
-export function prototypeRecipe(m, id, heat) { if (m.progressiveLevel !== undefined && m.progressiveLevel < 9)
+export function prototypeRecipe(m, id, heat) { if (m.legacyArchiveOnly)
+    return false; if (m.progressiveLevel !== undefined && m.progressiveLevel < 9)
     return false; const recipe = researchRecipes.find(r => r.id === id), r = m.research[id]; if (!recipe || !r || !['combined', 'prototype', 'tasted'].includes(r.stage) || ![1, 2, 3].includes(heat))
     return false; r.rating = heat === recipe.heat ? 5 : 3; r.attempts = [...(r.attempts ?? []), { heat, rating: r.rating }].slice(-3); r.stage = 'prototype'; return true; }
-export function tasteRecipe(m, id) { if (m.progressiveLevel !== undefined && m.progressiveLevel < 9)
+export function tasteRecipe(m, id) { if (m.legacyArchiveOnly)
+    return false; if (m.progressiveLevel !== undefined && m.progressiveLevel < 9)
     return false; const r = m.research[id]; if (!r || r.stage !== 'prototype')
     return false; r.stage = 'tasted'; return true; }
-export function registerRecipe(m, id) { if (m.progressiveLevel !== undefined && m.progressiveLevel < 9)
+export function registerRecipe(m, id) { if (m.legacyArchiveOnly)
+    return false; if (m.progressiveLevel !== undefined && m.progressiveLevel < 9)
     return false; const r = m.research[id]; if (!r || r.stage !== 'tasted' || r.rating < 4)
     return false; r.stage = 'registered'; return true; }
 export function researchMenuDefinitions(m) { return researchRecipes.filter(r => m?.research[r.id]?.stage === 'registered').map(r => ({ menuId: r.id, name: r.name, visualKey: r.visual, basePrice: menuDefinitions.find(m => m.menuId === r.base).basePrice, unlockCafeLevel: r.level, currentLevel: 1, maxLevel: 5 })); }
-export function growthMenuDefinitions(level, m) { return [...menuDefinitions, ...researchMenuDefinitions(m)].filter(d => d.unlockCafeLevel <= level); }
-export function syncResearchMenus(s) { for (const m of researchMenuDefinitions(s.management)) {
+export function growthMenuDefinitions(level, m, final) { return [...menuDefinitions, ...researchMenuDefinitions(m), ...signatureMenusFor(level, final?.specialization)].filter(d => d.unlockCafeLevel <= level); }
+export function syncResearchMenus(s) { if (s.mega?.finalGrowth || s.management?.legacyArchiveOnly)
+    return; for (const m of researchMenuDefinitions(s.management)) {
     if (m.unlockCafeLevel > s.cafeLevel)
         continue;
     if (!s.unlockedMenuIds.includes(m.menuId))

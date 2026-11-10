@@ -1,16 +1,16 @@
-import { guestPose } from './spatial.js?v=level-seats-83d02b666a1c';
-import { megaPointClear } from './megaSpace.js?v=level-seats-83d02b666a1c';
-import { validManagement } from './managementState.js?v=level-seats-83d02b666a1c';
-import { validMiniSession, validMiniCollection, pauseCredit, expireMini } from './miniGames.js?v=level-seats-83d02b666a1c';
-import { validSpecialization } from './specialization.js?v=level-seats-83d02b666a1c';
-import { validBranch } from "./growthBranch.js?v=level-seats-83d02b666a1c";
-import { validateGrowthSave } from './growthSave.js?v=level-seats-83d02b666a1c';
-import { createGrowthSession } from './sessionFactory.js?v=level-seats-83d02b666a1c';
-import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=level-seats-83d02b666a1c';
-import { LearningSession, LearningProgressRepository } from './learningSession.js?v=level-seats-83d02b666a1c';
-import { LearningAnalyticsV1 } from './learningAnalytics.js?v=level-seats-83d02b666a1c';
-import { providerForPool } from './learningIntegration.js?v=level-seats-83d02b666a1c';
-import { validAbilityRun } from "./staffAbilities.js?v=level-seats-83d02b666a1c";
+import { guestPose } from './spatial.js?v=mega-5d509fb5dbfc';
+import { megaPointClear } from './megaSpace.js?v=mega-5d509fb5dbfc';
+import { validManagement } from './managementState.js?v=mega-5d509fb5dbfc';
+import { validMiniSession, validMiniCollection, pauseCredit, expireMini } from './miniGames.js?v=mega-5d509fb5dbfc';
+import { validSpecialization } from './specialization.js?v=mega-5d509fb5dbfc';
+import { validBranch } from "./growthBranch.js?v=mega-5d509fb5dbfc";
+import { validateGrowthSave } from './growthSave.js?v=mega-5d509fb5dbfc';
+import { createGrowthSession } from './sessionFactory.js?v=mega-5d509fb5dbfc';
+import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=mega-5d509fb5dbfc';
+import { LearningSession, LearningProgressRepository } from './learningSession.js?v=mega-5d509fb5dbfc';
+import { LearningAnalyticsV1 } from './learningAnalytics.js?v=mega-5d509fb5dbfc';
+import { providerForPool } from './learningIntegration.js?v=mega-5d509fb5dbfc';
+import { validAbilityRun } from "./staffAbilities.js?v=mega-5d509fb5dbfc";
 export const withoutCampaign = (save) => { const copy = structuredClone(save); delete copy.campaign; delete copy.eventState; delete copy.portfolio; return copy; };
 const goodInt = (n) => Number.isSafeInteger(n) && Number(n) >= 0;
 export function validCampaign(value) { try {
@@ -53,7 +53,7 @@ export function restoreGrowthRun(run, pool, now = Date.now()) { const g = create
             Object.assign(g.service.workers[i], { state: 'IDLE', cargo: [], remaining: [], orderId: null, elapsed: 0 });
         }
         else
-            Object.assign(g.service.workers[i], { position: { ...w.position }, state: w.state, cargo: [...w.cargo], remaining: [...w.remaining], orderId: w.orderId, elapsed: w.elapsed });
+            Object.assign(g.service.workers[i], { position: { ...w.position }, state: w.state, cargo: [...w.cargo], remaining: [...w.remaining], orderId: w.orderId, elapsed: w.elapsed, walkDistance: w.walkDistance ?? 0, supplyTrips: w.supplyTrips ?? 0 });
     }
     for (const guest of g.guests)
         if (run.cafe.guests?.find(x => x.id === guest.id)?.state === 'SERVING')

@@ -1,14 +1,14 @@
-import { finishManagerConstructionInRepository } from './managerUi.js?v=level-seats-83d02b666a1c';
-import { megaLateForecast } from './megaLateForecast.js?v=level-seats-83d02b666a1c';
-import { adoptInterior, isShopDeployment } from './megaInventory.js?v=level-seats-83d02b666a1c';
-import { environmentPlacements, paintEnvironment } from './megaArt.js?v=level-seats-83d02b666a1c';
-import { expansionForecast } from './megaExpansionForecast.js?v=level-seats-83d02b666a1c';
-import { AudioManager } from './audioManager.js?v=level-seats-83d02b666a1c';
-import { deploymentLocalStorage } from './deploymentStorage.js?v=level-seats-83d02b666a1c';
-import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js?v=level-seats-83d02b666a1c';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=level-seats-83d02b666a1c';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=level-seats-83d02b666a1c';
-import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js?v=level-seats-83d02b666a1c';
+import { finishManagerConstructionInRepository } from './managerUi.js?v=mega-5d509fb5dbfc';
+import { megaLateForecast } from './megaLateForecast.js?v=mega-5d509fb5dbfc';
+import { adoptInterior, isShopDeployment } from './megaInventory.js?v=mega-5d509fb5dbfc';
+import { environmentPlacements, paintEnvironment } from './megaArt.js?v=mega-5d509fb5dbfc';
+import { expansionForecast } from './megaExpansionForecast.js?v=mega-5d509fb5dbfc';
+import { AudioManager } from './audioManager.js?v=mega-5d509fb5dbfc';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=mega-5d509fb5dbfc';
+import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js?v=mega-5d509fb5dbfc';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=mega-5d509fb5dbfc';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=mega-5d509fb5dbfc';
+import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js?v=mega-5d509fb5dbfc';
 export function expansionAction(container, repo, source, refresh) {
     if (!source.mega || !document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.match(/^v30[cde]-/))
         return;

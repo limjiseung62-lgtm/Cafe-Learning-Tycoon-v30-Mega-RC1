@@ -1,8 +1,10 @@
-import { growthMenuDefinitions } from './menuResearch.js?v=level-seats-83d02b666a1c';
-import { specializationById } from './specializationConfig.js?v=level-seats-83d02b666a1c';
-import { customers } from './data.js?v=level-seats-83d02b666a1c';
-import { specialDefinition, specialTypes } from './phase4Config.js?v=level-seats-83d02b666a1c';
-import { hospitalityDefinition, helperCatalog } from './hospitalityConfig.js?v=level-seats-83d02b666a1c';
+import { finalGuestByVisual } from './finalGuests.js?v=mega-5d509fb5dbfc';
+import { validGuestSupply } from './finalSupply.js?v=mega-5d509fb5dbfc';
+import { growthMenuDefinitions } from './menuResearch.js?v=mega-5d509fb5dbfc';
+import { specializationById } from './specializationConfig.js?v=mega-5d509fb5dbfc';
+import { customers } from './data.js?v=mega-5d509fb5dbfc';
+import { specialDefinition, specialTypes } from './phase4Config.js?v=mega-5d509fb5dbfc';
+import { hospitalityDefinition, helperCatalog } from './hospitalityConfig.js?v=mega-5d509fb5dbfc';
 export function decodeGuestCheckpoint(value, g, level, limits) {
     try {
         const items = value;
@@ -12,7 +14,7 @@ export function decodeGuestCheckpoint(value, g, level, limits) {
             return null;
         const result = [], reservationKeys = new Set();
         for (const item of items) {
-            if (!item || !Number.isSafeInteger(item.id) || item.id < 1 || !Number.isSafeInteger(item.seat) || item.seat < 0 || item.seat >= addresses || !['ENTERING', 'MOVING_TO_SEAT', 'ORDERING', 'WAITING_FOR_FOOD', 'PREPARING', 'SERVING', 'EATING', 'PAYING', 'LEAVING'].includes(item.state) || !['paid', 'abandoned', 'stockoutRecorded'].every(k => typeof item[k] === 'boolean') || !['elapsed', 'patienceRemaining', 'quotedRevenue', 'orderedAt', 'foodWaitTime', 'staffWaitTime'].every(k => finite(item[k])) || !Array.isArray(item.order) || item.order.length > 18 || item.order.some(o => !o || !Number.isSafeInteger(o.quantity) || o.quantity < 1 || o.quantity > 30 || !growthMenuDefinitions(level, g.mode === 'CAFE_GROWTH' ? g.management : undefined).some(m => m.menuId === o.menuId) && o.menuId !== 'event-signature'))
+            if (!item || !Number.isSafeInteger(item.id) || item.id < 1 || !Number.isSafeInteger(item.seat) || item.seat < 0 || item.seat >= addresses || !['ENTERING', 'MOVING_TO_SEAT', 'ORDERING', 'WAITING_FOR_FOOD', 'PREPARING', 'SERVING', 'EATING', 'PAYING', 'LEAVING'].includes(item.state) || !['paid', 'abandoned', 'stockoutRecorded'].every(k => typeof item[k] === 'boolean') || !['elapsed', 'patienceRemaining', 'quotedRevenue', 'orderedAt', 'foodWaitTime', 'staffWaitTime'].every(k => finite(item[k])) || !Array.isArray(item.order) || item.order.length > 18 || item.order.some(o => !o || !Number.isSafeInteger(o.quantity) || o.quantity < 1 || o.quantity > 30 || !growthMenuDefinitions(level, g.mode === 'CAFE_GROWTH' ? g.management : undefined, g.mode === 'CAFE_GROWTH' ? (limits?.finalGrowth ?? g.mega?.finalGrowth) : undefined).some(m => m.menuId === o.menuId) && o.menuId !== 'event-signature'))
                 return null;
             if (item.eventArrival?.reservationIndex !== undefined && (!Number.isInteger(item.eventArrival.reservationIndex) || item.eventArrival.reservationIndex < 0 || item.eventArrival.reservationIndex > 1))
                 return null;
@@ -32,7 +34,7 @@ export function decodeGuestCheckpoint(value, g, level, limits) {
                 return null;
             if (item.miniReaction && (g.mode !== 'CAFE_GROWTH' && !g.classRandom || typeof item.miniReaction.success !== 'boolean' || !finite(item.miniReaction.until)))
                 return null;
-            let definition = customers.find(c => c.visualKey === item.definition?.visualKey);
+            let definition = customers.find(c => c.visualKey === item.definition?.visualKey) ?? ((limits?.finalGrowth ?? g.mega?.finalGrowth) ? finalGuestByVisual(item.definition?.visualKey) : undefined);
             if (item.specialType && specialTypes.includes(item.specialType))
                 definition = specialDefinition(item.specialType, g.phase4Profile);
             else if (item.signature)
@@ -42,6 +44,8 @@ export function decodeGuestCheckpoint(value, g, level, limits) {
             if (!definition || definition.visualKey !== item.definition?.visualKey || !finite(item.definition.patienceSeconds, 1, 900) || item.eventArrival && (!Number.isSafeInteger(item.eventArrival.eventId) || item.eventArrival.eventId < 1))
                 return null;
             if (item.specializationId && (!specializationById(item.specializationId) || g.mode !== 'CAFE_GROWTH' || g.specialization?.selected !== item.specializationId))
+                return null;
+            if (item.supplies && (!(limits?.finalSupply ?? !!g.mega?.finalGrowth) || !validGuestSupply(item, limits?.supplyPlan ?? { fixtures: Object.values(g.mega?.plans ?? {}).flatMap(p => p.fixtures ?? []) })))
                 return null;
             const guest = structuredClone(item);
             guest.definition = { ...definition, patienceSeconds: item.definition.patienceSeconds };

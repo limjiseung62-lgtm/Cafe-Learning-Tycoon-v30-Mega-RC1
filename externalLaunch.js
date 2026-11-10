@@ -3,7 +3,7 @@ import { portalURL } from './sq-learning/portal-url.mjs';
 import { decodeLaunch, validateLaunch } from './sq-learning/launch.mjs';
 import { nativeChoices, checkResume, checkStart } from './sq-learning/cafe-policy.mjs';
 import pin from './sq-learning/catalog-pin.json' with { type: 'json' };
-import { loadCommonRuntime } from './commonBankLoader.js?v=level-seats-83d02b666a1c';
+import { loadCommonRuntime } from './commonBankLoader.js?v=mega-5d509fb5dbfc';
 let launch = null, catalog = null, choices = null, nativeCatalog = null, unit = null, lease = false, releaseLease = null, lastError = '', preflight = null, lastProbe = 0, lastProbeState = '';
 // Fragment edits must revalidate. Page teardown uses v3's native checkpoint handlers.
 addEventListener('hashchange', () => { if (launch || location.hash.startsWith('#sq'))

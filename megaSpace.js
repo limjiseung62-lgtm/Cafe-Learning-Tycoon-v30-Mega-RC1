@@ -1,11 +1,12 @@
-import { validProductionKitchen } from './productionKitchen.js?v=level-seats-83d02b666a1c';
-import { validManager } from './managerState.js?v=level-seats-83d02b666a1c';
-import { megaZones } from './megaZones.js?v=level-seats-83d02b666a1c';
-import { validInterior, tableSeatCount } from './megaInventory.js?v=level-seats-83d02b666a1c';
-import { allDecorationCatalog } from './longGrowthConfig.js?v=level-seats-83d02b666a1c';
-import { cafeGrowthBalance } from './modeBalance.js?v=level-seats-83d02b666a1c';
-import { tableKinds, turn } from './freeLayoutModel.js?v=level-seats-83d02b666a1c';
-import { furnitureFor } from './furnitureCatalog.js?v=level-seats-83d02b666a1c';
+import { validFinalGrowth } from './finalGrowth.js?v=mega-5d509fb5dbfc';
+import { validProductionKitchen } from './productionKitchen.js?v=mega-5d509fb5dbfc';
+import { validManager } from './managerState.js?v=mega-5d509fb5dbfc';
+import { megaZones } from './megaZones.js?v=mega-5d509fb5dbfc';
+import { validInterior, tableSeatCount } from './megaInventory.js?v=mega-5d509fb5dbfc';
+import { allDecorationCatalog } from './longGrowthConfig.js?v=mega-5d509fb5dbfc';
+import { cafeGrowthBalance } from './modeBalance.js?v=mega-5d509fb5dbfc';
+import { tableKinds, turn } from './freeLayoutModel.js?v=mega-5d509fb5dbfc';
+import { furnitureFor } from './furnitureCatalog.js?v=mega-5d509fb5dbfc';
 export const megaDimensions = [[8, 6], [10, 7], [12, 8], [12, 10], [14, 10], [14, 12], [16, 12], [16, 14], [18, 14], [20, 16]].concat(Array.from({ length: 20 }, (_, i) => { const l = i + 11; return l < 20 ? [20, 16] : l < 30 ? [40, 30] : [64, 48]; }));
 export const megaBudget = [4, 6, 6, 8, 8, 10, 12, 12, 14, 14, ...Array(9).fill(14), ...Array(10).fill(48), 96];
 export const megaKey = (level, branch) => (branch ?? 'base') + ':' + level;
@@ -47,17 +48,25 @@ export function fixedMega(level, anchorWidth, prepIsland = false, starterOnly = 
     boxes.push({ left: 14, right: 18, top: 6.5, bottom: 8 }); return boxes; }
 const overlap = (a, b) => a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
 const pointIn = (p, r, pad = .16) => p.x > r.left - pad && p.x < r.right + pad && p.y > r.top - pad && p.y < r.bottom + pad;
-export const megaMetrics = { searches: 0, failures: 0, cacheHits: 0, expanded: 0 };
+export const megaMetrics = { searches: 0, failures: 0, cacheHits: 0, expanded: 0, maxRouteMs: 0, totalRouteMs: 0 };
 const graphCache = new WeakMap();
 export function fixtureParts(f) { const W = f.rotation % 180 === 0 ? 2 : 1.2, H = f.rotation % 180 === 0 ? 1.2 : 2; return [{ left: f.x - W / 2, right: f.x + W / 2, top: f.y - H / 2, bottom: f.y + H / 2 }]; }
 export function megaAllPickups(p) { return [...megaPickups(p.level, p.kitchenAnchorWidth, p.prepIsland, p.starterKitchenOnly), ...(p.fixtures ?? []).flatMap(f => [-.55, .55].map(x => { const a = turn(x, 1, f.rotation); return toEngine({ x: f.x + a.x, y: f.y + a.y }); }))]; }
 export function megaObstacles(p) { return [...(p.fixtures ?? []).flatMap(fixtureParts), ...fixedMega(p.level, p.kitchenAnchorWidth, p.prepIsland, p.starterKitchenOnly), ...p.tables.flatMap(tableParts), ...p.decor.filter(d => !d.wall).map(d => ({ left: d.x - .35, right: d.x + .35, top: d.y - .35, bottom: d.y + .35 }))]; }
 export const megaPointClear = (p, engine) => { const q = toTile(engine), d = megaDimensions[p.level - 1]; return !!d && q.x >= .25 && q.y >= .25 && q.x <= d[0] - .25 && q.y <= d[1] - .25 && !megaObstacles(p).some(r => pointIn(q, r)); };
 /** Occupancy is built once per layout. Reverse BFS fields are shared by all workers heading to a fixed pickup/seat. Dynamic avoidance is temporary and never cached. */
-export function megaRoute(p, from, to, avoid = []) {
+export function megaRoute(p, from, to, avoid = []) { const start = performance.now(); try {
+    return calculateMegaRoute(p, from, to, avoid);
+}
+finally {
+    const ms = performance.now() - start;
+    megaMetrics.maxRouteMs = Math.max(megaMetrics.maxRouteMs, ms);
+    megaMetrics.totalRouteMs += ms;
+} }
+function calculateMegaRoute(p, from, to, avoid = []) {
     if (avoid.length) {
         const base = megaRoute(p, from, to), points = base.map(toTile), obstacles = avoid.map(toTile);
-        const blocked = obstacles.some(q => points.slice(1).some((b, i) => { const a = points[i], dx = b.x - a.x, dy = b.y - a.y, den = dx * dx + dy * dy, t = den ? Math.max(0, Math.min(1, ((q.x - a.x) * dx + (q.y - a.y) * dy) / den)) : 0, d = Math.hypot(q.x - a.x - t * dx, q.y - a.y - t * dy), initial = Math.hypot(q.x - points[0].x, q.y - points[0].y); return d < .42 && !(i === 0 && initial < .42 && d >= initial - .001); }));
+        const blocked = obstacles.some(q => points.slice(1).some((b, i) => { const a = points[i], dx = b.x - a.x, dy = b.y - a.y, den = dx * dx + dy * dy, t = den ? Math.max(0, Math.min(1, ((q.x - a.x) * dx + (q.y - a.y) * dy) / den)) : 0, d = Math.hypot(q.x - a.x - t * dx, q.y - a.y - t * dy), initial = Math.hypot(q.x - points[0].x, q.y - points[0].y); return d < .375 && !(i === 0 && initial < .375 && d >= initial - .001); }));
         if (!blocked)
             return base;
     }
@@ -79,9 +88,18 @@ export function megaRoute(p, from, to, avoid = []) {
         megaMetrics.cacheHits++;
         return structuredClone(graph.routes.get(key));
     }
-    const ix = (q) => Math.round(q.y * 4) * W + Math.round(q.x * 4), start = ix(a), end = ix(b), avoids = avoid.map(toTile), allowed = (id) => { if (!graph.mask[id])
-        return false; const x = id % W / 4, y = Math.floor(id / W) / 4; return !avoids.some(c => { const d = Math.hypot(c.x - x, c.y - y), initial = Math.hypot(c.x - a.x, c.y - a.y); return d < .42 && !(initial < .42 && d >= initial - .001); }); };
-    if (!allowed(start) || !allowed(end))
+    const ix = (q) => Math.round(q.y * 4) * W + Math.round(q.x * 4), start = ix(a), end = ix(b), avoids = avoid.map(toTile), dynamic = avoid.length ? new Uint8Array(size) : undefined;
+    for (const c of avoids) {
+        const initial = Math.hypot(c.x - a.x, c.y - a.y);
+        for (let Y = Math.max(1, Math.ceil((c.y - .375) * 4)); Y <= Math.min(H - 1, Math.floor((c.y + .375) * 4)); Y++)
+            for (let X = Math.max(1, Math.ceil((c.x - .375) * 4)); X <= Math.min(W - 1, Math.floor((c.x + .375) * 4)); X++) {
+                const d = Math.hypot(c.x - X / 4, c.y - Y / 4);
+                if (d < .375 && !(initial < .375 && d >= initial - .001))
+                    dynamic[Y * W + X] = 1;
+            }
+    }
+    const allowed = (id) => !!graph.mask[id] && !dynamic?.[id];
+    if ((avoid.length ? !graph.mask[start] : !allowed(start)) || !allowed(end))
         throw Error('이동 시작점 또는 도착점이 가구와 겹쳐요.');
     let parent = !avoid.length ? graph.fields.get(end) : undefined;
     const reverse = !avoid.length;
@@ -97,8 +115,8 @@ export function megaRoute(p, from, to, avoid = []) {
             for (let i = 0; i < count; i++) {
                 const n = queue[i], x = n % W, y = Math.floor(n / W);
                 megaMetrics.expanded++;
-                for (const [dx, dy] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
-                    const X = x + dx, Y = y + dy, id = Y * W + X;
+                for (let direction = 0; direction < 4; direction++) {
+                    const X = x + (direction === 0 ? -1 : direction === 1 ? 1 : 0), Y = y + (direction === 2 ? -1 : direction === 3 ? 1 : 0), id = Y * W + X;
                     if (X < 1 || X >= W || Y < 1 || Y >= H || parent[id] !== -1 || !allowed(id))
                         continue;
                     parent[id] = n;
@@ -110,6 +128,7 @@ export function megaRoute(p, from, to, avoid = []) {
             graph.fields.set(end, parent);
         }
         else {
+            const firstStepClear = (q) => avoids.every(o => { const dx = q.x - a.x, dy = q.y - a.y, px = o.x - a.x, py = o.y - a.y, initial = Math.hypot(px, py), den = dx * dx + dy * dy, t = den ? Math.max(0, Math.min(1, (px * dx + py * dy) / den)) : 0; return initial < .375 ? Math.hypot(q.x - o.x, q.y - o.y) >= initial - 1e-8 && px * dx + py * dy <= 1e-8 : Math.hypot(px - dx * t, py - dy * t) >= .375 - 1e-8; });
             const score = new Float64Array(size).fill(Infinity), heap = [], heuristic = (id) => Math.abs(id % W - end % W) + Math.abs(Math.floor(id / W) - Math.floor(end / W));
             const push = (id, priority) => { const v = { id, priority }; let i = heap.length; heap.push(v); while (i) {
                 const j = (i - 1) >> 1;
@@ -141,9 +160,9 @@ export function megaRoute(p, from, to, avoid = []) {
                 if (n === end)
                     break;
                 const x = n % W, y = Math.floor(n / W);
-                for (const [dx, dy] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
-                    const X = x + dx, Y = y + dy, id = Y * W + X, cost = score[n] + 1;
-                    if (X < 1 || X >= W || Y < 1 || Y >= H || cost >= score[id] || !allowed(id))
+                for (let direction = 0; direction < 4; direction++) {
+                    const X = x + (direction === 0 ? -1 : direction === 1 ? 1 : 0), Y = y + (direction === 2 ? -1 : direction === 3 ? 1 : 0), id = Y * W + X, cost = score[n] + 1;
+                    if (X < 1 || X >= W || Y < 1 || Y >= H || cost >= score[id] || !allowed(id) || n === start && !firstStepClear({ x: X / 4, y: Y / 4 }))
                         continue;
                     score[id] = cost;
                     parent[id] = n;
@@ -182,7 +201,7 @@ export function megaRoute(p, from, to, avoid = []) {
     return result;
 }
 const validations = new Map();
-export function validateMegaPlan(p) { const stamp = JSON.stringify(p); const cached = validations.get(stamp); if (cached)
+export function validateMegaPlan(p) { const { productionTier: _visual, ...geometry } = p ?? {}; const stamp = JSON.stringify(geometry); const cached = validations.get(stamp); if (cached)
     return [...cached]; const result = validateMegaUncached(p); if (validations.size >= 256)
     validations.clear(); validations.set(stamp, result); return [...result]; }
 function validateMegaUncached(p) {
@@ -193,6 +212,8 @@ function validateMegaUncached(p) {
         if (p.fixtures !== undefined && (!p.shopLayout || !Array.isArray(p.fixtures) || p.fixtures.length > (p.level >= 20 ? 24 : 6) || new Set(p.fixtures.map(f => f.id)).size !== p.fixtures.length))
             return ['준비대는 이 매장에 ' + (p.level >= 20 ? 24 : 6) + '개까지 설치할 수 있어요. 보유 수량과 중복 ID도 확인해 주세요.'];
         const [w, h] = megaDimensions[p.level - 1];
+        if (p.doors !== undefined && (!Array.isArray(p.doors) || p.doors.length < 1 || p.doors.length > 4 || new Set(p.doors.map(d => d.id)).size !== p.doors.length || p.doors.some(d => !/^door-[a-z0-9-]{1,50}$/.test(d.id) || !['west', 'east', 'north', 'south'].includes(d.wall) || !Number.isFinite(d.offset) || d.offset < .5 || d.offset > (['west', 'east'].includes(d.wall) ? h : w) - .5 || d.offset * 2 % 1 !== 0) || new Set(p.doors.map(d => d.wall + ':' + d.offset)).size !== p.doors.length))
+            return ['외벽의 유효한 출입구를 1~4곳 남겨 주세요.'];
         const boxes = [];
         for (const f of p.fixtures ?? []) {
             if (f.sku !== 'service-prep' || !/^[-a-zA-Z0-9_]{1,60}$/.test(f.id) || ![f.x, f.y].every(Number.isFinite) || ![0, 90, 180, 270].includes(f.rotation))
@@ -256,13 +277,14 @@ export function megaPickups(level, anchorWidth, prepIsland = false, starterOnly 
 export function megaHomes(level) { const [w, h] = megaDimensions[level - 1]; return Array.from({ length: level >= 30 ? 13 : level >= 20 ? 9 : 6 }, (_, i) => toEngine({ x: Math.round((w - 1.5 - i * 1.2) * 4) / 4, y: h - .5 })); }
 export function validMega(v) { try {
     const s = v;
-    return !!s && (s.production === undefined || !!s.paid && validProductionKitchen(s.production)) && (s.manager === undefined || validManager(s.manager) && !!s.paid && s.paid.spaceLevel > 1) && validPaid(s.paid) && validInterior(s) && (s.extended === undefined || s.extended === true) && s.version === 1 && ['new', 'confirmed-copy'].includes(s.source) && !!s.plans && Object.keys(s.plans).length > 0 && Object.keys(s.plans).length <= 100 && Object.entries(s.plans).every(([key, p]) => key === megaKey(p.level, p.branch) && (p.level <= 10 || s.extended === true) && !validateMegaPlan(p).length && p.tables.reduce((a, t) => a + tableSeatCount(t), 0) >= (s.inventory ? 1 : cafeGrowthBalance.cafes[Math.min(15, p.level) - 1].maxCustomers));
+    return !!s && (s.finalGrowth === undefined || !!s.paid && s.extended === true && validFinalGrowth(s.finalGrowth)) && (s.production === undefined || !!s.paid && validProductionKitchen(s.production)) && (s.manager === undefined || validManager(s.manager) && !!s.paid && s.paid.spaceLevel > 1) && validPaid(s.paid) && validInterior(s) && (s.extended === undefined || s.extended === true) && s.version === 1 && ['new', 'confirmed-copy'].includes(s.source) && !!s.plans && Object.keys(s.plans).length > 0 && Object.keys(s.plans).length <= 100 && Object.entries(s.plans).every(([key, p]) => key === megaKey(p.level, p.branch) && (p.level <= 10 || s.extended === true) && !validateMegaPlan(p).length && p.tables.reduce((a, t) => a + tableSeatCount(t), 0) >= (s.inventory ? 1 : cafeGrowthBalance.cafes[Math.min(15, p.level) - 1].maxCustomers));
 }
 catch {
     return false;
 } }
-export function megaEntrances(p) { const [w, h] = megaDimensions[p.level - 1], a = p.entry ?? { x: w - .5, y: h - .5 }; return [{ inside: toEngine(a), outside: toEngine(p.entry ? { x: -.5, y: a.y } : { x: w + .5, y: h - .5 }) }, ...(p.level >= 20 ? [{ inside: toEngine({ x: w - .5, y: h / 2 }), outside: toEngine({ x: w + .5, y: h / 2 }) }, { inside: toEngine({ x: w / 2, y: h - .5 }), outside: toEngine({ x: w / 2, y: h + .5 }) }] : [])]; }
-export function createMegaSpace(plan) { const [w, h] = megaDimensions[plan.level - 1], entrance = plan.entry ?? { x: w - .5, y: h - .5 }; const tables = plan.tables.map(t => ({ ...toEngine(t), tableId: t.id, tableKind: t.kind, rotation: t.rotation, furnitureId: t.furnitureId, scale: 1, servicePoints: megaChairs(t).map(c => toEngine(c.access)) })); const seats = plan.tables.flatMap(t => megaChairs(t).map((c, i) => { const p = toEngine(c.chair), access = toEngine(c.access), options = megaEntrances(plan).map(port => ({ ...port, path: megaRoute(plan, port.inside, access) })), best = options.sort((a, b) => a.path.slice(1).reduce((n, q, i) => n + Math.hypot(q.x - a.path[i].x, (q.y - a.path[i].y) * 2 / 3), 0) - b.path.slice(1).reduce((n, q, i) => n + Math.hypot(q.x - b.path[i].x, (q.y - b.path[i].y) * 2 / 3), 0))[0], entry = best.path; return { entrance: best.inside, exit: best.outside, ...p, seatId: t.id + '-seat-' + i, tableId: t.id, facing: c.rear ? 'left' : 'right', occupiedBy: null, cafeLevel: plan.level, scale: 1, servicePoint: access, approach: access, rear: c.rear, entryPath: entry, standPoint: p }; })); const pickups = megaAllPickups(plan); return { megaPlan: plan, level: plan.level, grown: true, worldScale: 1, branch: (plan.branch ?? undefined), entrance: toEngine(entrance), exit: toEngine(plan.entry ? { x: -.5, y: entrance.y } : { x: w + .5, y: h - .5 }), pickup: pickups[0], pickupSlots: pickups, staffWaitingPoints: plan.serviceHubs ? megaHubHomes(plan) : megaHomes(plan.level), staffAccessPoints: [], intermediateWaypoints: [], tables, seats }; }
+export function megaEntrances(p) { const [w, h] = megaDimensions[p.level - 1]; if (p.doors)
+    return p.doors.map(d => { const vertical = d.wall === 'west' || d.wall === 'east', inside = vertical ? { x: d.wall === 'west' ? .5 : w - .5, y: d.offset } : { x: d.offset, y: d.wall === 'north' ? .5 : h - .5 }, outside = vertical ? { x: d.wall === 'west' ? -.5 : w + .5, y: d.offset } : { x: d.offset, y: d.wall === 'north' ? -.5 : h + .5 }; return { inside: toEngine(inside), outside: toEngine(outside) }; }); const a = p.entry ?? { x: w - .5, y: h - .5 }; return [{ inside: toEngine(a), outside: toEngine(p.entry ? { x: -.5, y: a.y } : { x: w + .5, y: h - .5 }) }, ...(p.level >= 20 ? [{ inside: toEngine({ x: w - .5, y: h / 2 }), outside: toEngine({ x: w + .5, y: h / 2 }) }, { inside: toEngine({ x: w / 2, y: h - .5 }), outside: toEngine({ x: w / 2, y: h + .5 }) }] : [])]; }
+export function createMegaSpace(plan, crewSlots) { const [w, h] = megaDimensions[plan.level - 1], entrance = plan.entry ?? { x: w - .5, y: h - .5 }; const tables = plan.tables.map(t => ({ ...toEngine(t), tableId: t.id, tableKind: t.kind, rotation: t.rotation, furnitureId: t.furnitureId, scale: 1, servicePoints: megaChairs(t).map(c => toEngine(c.access)) })); const seats = plan.tables.flatMap(t => megaChairs(t).map((c, i) => { const p = toEngine(c.chair), access = toEngine(c.access), options = megaEntrances(plan).map(port => ({ ...port, path: megaRoute(plan, port.inside, access) })), best = options.sort((a, b) => a.path.slice(1).reduce((n, q, i) => n + Math.hypot(q.x - a.path[i].x, (q.y - a.path[i].y) * 2 / 3), 0) - b.path.slice(1).reduce((n, q, i) => n + Math.hypot(q.x - b.path[i].x, (q.y - b.path[i].y) * 2 / 3), 0))[0], entry = best.path; return { entrance: best.inside, exit: best.outside, ...p, seatId: t.id + '-seat-' + i, tableId: t.id, facing: c.rear ? 'left' : 'right', occupiedBy: null, cafeLevel: plan.level, scale: 1, servicePoint: access, approach: access, rear: c.rear, entryPath: entry, standPoint: p }; })); const pickups = megaAllPickups(plan); return { megaPlan: plan, level: plan.level, grown: true, worldScale: 1, branch: (plan.branch ?? undefined), entrance: megaEntrances(plan)[0].inside, exit: plan.doors ? megaEntrances(plan)[0].outside : toEngine(plan.entry ? { x: -.5, y: entrance.y } : { x: w + .5, y: h - .5 }), pickup: pickups[0], pickupSlots: pickups, staffWaitingPoints: crewSlots ? megaCrewHomes(plan, crewSlots) : plan.serviceHubs ? megaHubHomes(plan) : megaHomes(plan.level), staffAccessPoints: [], intermediateWaypoints: [], tables, seats }; }
 export const megaTravelSeconds = (seat) => Math.max(1, seat.entryPath.slice(1).reduce((a, p, i) => a + Math.hypot((p.x - seat.entryPath[i].x) / 8, (p.y - seat.entryPath[i].y) / 12), 0) / 3);
 function validPaid(p) { return !p || (Number.isInteger(p.spaceLevel) && p.spaceLevel >= 1 && p.spaceLevel <= 30 && Array.isArray(p.receipts) && p.receipts.length <= 10 && new Set(p.receipts.map(r => r.id)).size === p.receipts.length && p.receipts.every(r => [4, 10, 20, 30].includes(r.to) && Number.isInteger(r.from) && r.from >= 1 && r.from < r.to && Number.isSafeInteger(r.cost) && r.cost > 0 && r.to <= p.spaceLevel && r.id === 'space:' + r.from + ':' + r.to && typeof r.id === 'string' && r.id.length < 100 && Number.isFinite(Date.parse(r.at)))); }
 const hubCache = new WeakMap();
@@ -297,3 +319,15 @@ export function megaHubHomes(p) { const stamp = JSON.stringify(p), cached = hubC
 } if (points.length < (p.level >= 30 ? 13 : p.level >= 20 ? 9 : 6))
     return megaHomes(p.level); hubCache.set(p, { stamp, points }); return points.map(q => ({ ...q })); }
 export const isPaidDeployment = () => typeof document !== 'undefined' && /^v30[cde]-/.test(document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content') ?? '');
+const crewHomeCache = new WeakMap();
+/** Final-only safe waiting positions. Never imposes new collision rules on an archived plan. */
+export function megaCrewHomes(plan, count) { const stamp = JSON.stringify(plan), cached = crewHomeCache.get(plan); if (cached?.stamp === stamp && cached.count === count)
+    return cached.points.map(p => ({ ...p })); const [w, h] = megaDimensions[plan.level - 1], points = [], root = megaEntrances(plan)[0].inside, distance = (a, b) => Math.hypot(a.x - b.x, (a.y - b.y) * 2 / 3), accept = (p) => { if (points.length >= count || !megaPointClear(plan, p) || points.some(q => distance(q, p) < 4))
+    return; try {
+    megaRoute(plan, p, root);
+    points.push(p);
+}
+catch { } }; for (const p of (plan.serviceHubs ? megaHubHomes(plan) : megaHomes(plan.level)))
+    accept(p); for (let y = h - .5; y >= .5 && points.length < count; y -= .75)
+    for (let x = w - .5; x >= .5 && points.length < count; x -= .75)
+        accept(toEngine({ x, y })); crewHomeCache.set(plan, { stamp, count, points }); return points.map(p => ({ ...p })); }

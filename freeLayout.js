@@ -1,12 +1,12 @@
-import { unlocked } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
-import { furnitureFor } from './furnitureCatalog.js?v=level-seats-83d02b666a1c';
-import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=level-seats-83d02b666a1c';
-import { freeConnected } from './freeNavigation.js?v=level-seats-83d02b666a1c';
-import { createSpace } from './spatial.js?v=level-seats-83d02b666a1c';
-import { defaultFreePlan, freeKey, seatBudget, tableKinds, freeParts, freeFloor, freeFixed, wallDecor, freeDecorBox, convertLegacy } from './freeLayoutModel.js?v=level-seats-83d02b666a1c';
-import { overlap } from './layoutModel.js?v=level-seats-83d02b666a1c';
-import { cafeGrowthBalance } from './modeBalance.js?v=level-seats-83d02b666a1c';
-import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=level-seats-83d02b666a1c';
+import { unlocked } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
+import { furnitureFor } from './furnitureCatalog.js?v=mega-5d509fb5dbfc';
+import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=mega-5d509fb5dbfc';
+import { freeConnected } from './freeNavigation.js?v=mega-5d509fb5dbfc';
+import { createSpace } from './spatial.js?v=mega-5d509fb5dbfc';
+import { defaultFreePlan, freeKey, seatBudget, tableKinds, freeParts, freeFloor, freeFixed, wallDecor, freeDecorBox, convertLegacy } from './freeLayoutModel.js?v=mega-5d509fb5dbfc';
+import { overlap } from './layoutModel.js?v=mega-5d509fb5dbfc';
+import { cafeGrowthBalance } from './modeBalance.js?v=mega-5d509fb5dbfc';
+import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=mega-5d509fb5dbfc';
 const memo = new Map();
 export const freeDiagnostics = { checks: 0, paths: 0, hits: 0 };
 export function basicFree(p) { try {

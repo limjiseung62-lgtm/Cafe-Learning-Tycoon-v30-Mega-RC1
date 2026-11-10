@@ -1,8 +1,8 @@
-import { attachExternal, manualReturn } from './externalLaunch.js?v=level-seats-83d02b666a1c';
-import { installCommonArchiveMenu } from './commonCafeResults.js?v=level-seats-83d02b666a1c';
-import { configureQuestionCatalog, QuestionPackCatalog } from './questionPack.js?v=level-seats-83d02b666a1c';
-import { CommonLearningCatalog } from './commonLearningCatalog.js?v=level-seats-83d02b666a1c';
-import { commonCatalogSHA256 } from './commonCatalogPin.js?v=level-seats-83d02b666a1c';
+import { attachExternal, manualReturn } from './externalLaunch.js?v=mega-5d509fb5dbfc';
+import { installCommonArchiveMenu } from './commonCafeResults.js?v=mega-5d509fb5dbfc';
+import { configureQuestionCatalog, QuestionPackCatalog } from './questionPack.js?v=mega-5d509fb5dbfc';
+import { CommonLearningCatalog } from './commonLearningCatalog.js?v=mega-5d509fb5dbfc';
+import { commonCatalogSHA256 } from './commonCatalogPin.js?v=mega-5d509fb5dbfc';
 try {
     const response = await fetch('assets/common-learning/catalog.json');
     if (!response.ok)
@@ -18,7 +18,7 @@ try {
     await attachExternal(instance);
     configureQuestionCatalog(instance);
     installCommonArchiveMenu();
-    await import('./main.js?v=level-seats-83d02b666a1c');
+    await import('./main.js?v=mega-5d509fb5dbfc');
 }
 catch (error) {
     const box = document.createElement('section');

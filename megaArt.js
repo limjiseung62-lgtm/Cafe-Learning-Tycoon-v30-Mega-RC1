@@ -1,29 +1,44 @@
-import { megaZones } from './megaZones.js?v=level-seats-83d02b666a1c';
-import { megaArtFrames } from './megaArtFrames.js?v=level-seats-83d02b666a1c';
-import { webAsset } from './webAsset.js?v=level-seats-83d02b666a1c';
-import { iso, megaDimensions, fixedMega } from './megaSpace.js?v=level-seats-83d02b666a1c';
+import { ActorSheetCache } from './finalActorCache.js?v=mega-5d509fb5dbfc';
+import { megaZones } from './megaZones.js?v=mega-5d509fb5dbfc';
+import { megaArtFrames } from './megaArtFrames.js?v=mega-5d509fb5dbfc';
+import { webAsset } from './webAsset.js?v=mega-5d509fb5dbfc';
+import { iso, megaDimensions, fixedMega } from './megaSpace.js?v=mega-5d509fb5dbfc';
 export const environmentIds = ['fridge', 'sink', 'coffee', 'pastry', 'oven', 'prep', 'coffee-sage', 'shelf', 'wall-left', 'wall-right', 'window-left', 'window-right', 'entrance', 'plant', 'wall-shelf', 'wall-lamp'];
 const images = new Map();
+const decodedImages = new WeakSet();
 const fragments = new Map();
-export const megaArtMetrics = { imageRequests: 0, fragmentBuilds: 0, fragmentHits: 0 };
+export const megaArtMetrics = { imageRequests: 0, fragmentBuilds: 0, fragmentHits: 0, fragmentMaxMs: 0, floorMaxMs: 0, staticMaxMs: 0 };
 export function furnitureProjection(kind, chair = false) { const x = chair ? .45 : kind === 'long' ? 2.3 : kind === 'four' ? 1.7 : 1, y = chair ? .45 : .65; return { width: (x + y) * 24, baseRise: (x + y) * 6 }; }
 export function megaImage(file) { const url = webAsset(file); let img = images.get(url); if (!img) {
     img = new Image();
     img.decoding = 'async';
-    img.onload = () => { if (file.includes('mega-v30b') || file.includes('furniture'))
-        document.dispatchEvent(new Event('mega-art-ready')); };
+    img.onload = () => { const ready = () => { decodedImages.add(img); if (file.includes('mega-v30b') || file.includes('furniture'))
+        document.dispatchEvent(new CustomEvent('mega-art-ready', { detail: { file } })); }; if (typeof img.decode === 'function')
+        void img.decode().then(ready).catch(ready);
+    else
+        ready(); };
     img.src = url;
     images.set(url, img);
     megaArtMetrics.imageRequests++;
-} return img.complete && img.naturalWidth ? img : null; }
+} return decodedImages.has(img) && img.naturalWidth ? img : null; }
 export function cachedFragment(img, box, width, height) { const key = [img.src, ...box, Math.round(width * 4), Math.round(height * 4)].join('/'); let tile = fragments.get(key); if (tile) {
     megaArtMetrics.fragmentHits++;
     return tile;
-} tile = document.createElement('canvas'); tile.width = Math.max(1, Math.ceil(width * 4)); tile.height = Math.max(1, Math.ceil(height * 4)); tile.getContext('2d').drawImage(img, box[0], box[1], box[2], box[3], 0, 0, tile.width, tile.height); if (fragments.size >= 256)
-    fragments.delete(fragments.keys().next().value); fragments.set(key, tile); megaArtMetrics.fragmentBuilds++; return tile; }
-export function environmentSprite(id, width) { const img = megaImage('assets/web/mega-v30b/environment.webp'); if (!img)
-    return null; const source = megaArtFrames.boxes[environmentIds.indexOf(id)], box = [source[0] * img.naturalWidth / megaArtFrames.width, source[1] * img.naturalHeight / megaArtFrames.height, source[2] * img.naturalWidth / megaArtFrames.width, source[3] * img.naturalHeight / megaArtFrames.height], height = width * box[3] / box[2]; return { tile: cachedFragment(img, box, width, height), width, height }; }
-export function paintEnvironment(c, id, x, y, width, baseRise = 0, flip = false) { const sprite = environmentSprite(id, width); if (!sprite)
+} const started = performance.now(); tile = document.createElement('canvas'); tile.width = Math.max(1, Math.ceil(width * 4)); tile.height = Math.max(1, Math.ceil(height * 4)); tile.getContext('2d').drawImage(img, box[0], box[1], box[2], box[3], 0, 0, tile.width, tile.height); if (fragments.size >= 256)
+    fragments.delete(fragments.keys().next().value); fragments.set(key, tile); megaArtMetrics.fragmentBuilds++; megaArtMetrics.fragmentMaxMs = Math.max(megaArtMetrics.fragmentMaxMs, performance.now() - started); return tile; }
+const fragmentSources = new Map();
+let bitmapFallback = false, artEpoch = 0;
+/** Preserve exact four-times raster sampling, but prepare the drawable off the paint path. */
+export const artBitmapCache = new ActorSheetCache(async (key) => { const epoch = artEpoch, k = JSON.parse(key); const img = fragmentSources.get(k.source); if (!img)
+    throw Error('Image no longer available'); const tile = cachedFragment(img, k.box, k.width, k.height), bitmap = await createImageBitmap(tile).catch(e => { if (epoch === artEpoch)
+    bitmapFallback = true; throw e; }); if (epoch === artEpoch && (k.source.includes('mega-v30b') || k.source.includes('furniture')))
+    document.dispatchEvent(new CustomEvent('mega-art-ready', { detail: { file: k.source, fragment: true } })); return bitmap; }, 256, 2);
+export function bitmapFragment(img, box, width, height) { if (typeof createImageBitmap !== 'function')
+    return cachedFragment(img, box, width, height); fragmentSources.set(img.src, img); const key = JSON.stringify({ source: img.src, box, width, height }); return bitmapFallback ? cachedFragment(img, box, width, height) : artBitmapCache.get(key, width, height); }
+export function clearArtBitmaps() { artEpoch++; artBitmapCache.clear(); fragmentSources.clear(); bitmapFallback = false; }
+export function environmentSprite(id, width, asynchronous = false) { const img = megaImage('assets/web/mega-v30b/environment.webp'); if (!img)
+    return null; const source = megaArtFrames.boxes[environmentIds.indexOf(id)], box = [source[0] * img.naturalWidth / megaArtFrames.width, source[1] * img.naturalHeight / megaArtFrames.height, source[2] * img.naturalWidth / megaArtFrames.width, source[3] * img.naturalHeight / megaArtFrames.height], height = width * box[3] / box[2]; const tile = asynchronous ? bitmapFragment(img, box, width, height) : cachedFragment(img, box, width, height); return tile ? { tile, width, height } : null; }
+export function paintEnvironment(c, id, x, y, width, baseRise = 0, flip = false, asynchronous = false) { const sprite = environmentSprite(id, width, asynchronous); if (!sprite)
     return false; if (flip) {
     c.save();
     c.translate(x, y);
@@ -44,7 +59,7 @@ export function environmentPlacements(p) { const result = []; for (const [fIndex
     const z = megaZones(p).find(z => f.x >= z.x && f.x < z.x + z.w && f.y >= z.y && f.y < z.y + z.h), id = ['kitchen', 'bakery'].includes(z?.id ?? '') ? ['oven', 'prep', 'pastry', 'coffee-sage'][i % 4] : z?.id === 'dessert' ? 'pastry' : z?.id === 'vip' ? 'coffee' : 'prep';
     result.push({ id, x: f.x, y: f.y, width: 72, baseRise: 12, depth: f.x + f.y + .4, fixed: false, flip: f.rotation % 180 !== 0 });
 } return result; }
-export function paintArtFloor(c, p) {
+export function paintArtFloor(c, p, asynchronous = false) {
     const [w, h] = megaDimensions[p.level - 1];
     const polygon = (points, fill, stroke) => { c.beginPath(); points.forEach((a, i) => { const q = iso(a); i ? c.lineTo(q.x, q.y) : c.moveTo(q.x, q.y); }); c.closePath(); c.fillStyle = fill; c.fill(); if (stroke) {
         c.strokeStyle = stroke;
@@ -93,11 +108,11 @@ export function paintArtFloor(c, p) {
     wall({ x: 0, y: 0 }, { x: 0, y: h });
     for (let x = 1; x < w; x += 2) {
         const q = iso({ x, y: 0 });
-        paintEnvironment(c, x % 4 === 1 ? 'window-right' : 'wall-right', q.x, q.y, 48, 12);
+        paintEnvironment(c, x % 4 === 1 ? 'window-right' : 'wall-right', q.x, q.y, 48, 12, false, asynchronous);
     }
     for (let y = 1; y < h; y += 2) {
         const q = iso({ x: 0, y });
-        paintEnvironment(c, y % 4 === 1 ? 'wall-left' : 'window-left', q.x, q.y, 48, 12);
+        paintEnvironment(c, y % 4 === 1 ? 'wall-left' : 'window-left', q.x, q.y, 48, 12, false, asynchronous);
     }
     // An inset woven runner occupies no collision space, along the actual entrance corridor.
     polygon(p.entry ? [{ x: .2, y: 5.05 }, { x: 2.2, y: 5.05 }, { x: 2.2, y: 5.9 }, { x: .2, y: 5.9 }] : [{ x: w - 2.1, y: h - 2.8 }, { x: w - .2, y: h - 2.8 }, { x: w - .2, y: h - .2 }, { x: w - 2.1, y: h - .2 }], '#89936c', '#e2ce9f');
@@ -110,3 +125,4 @@ export function paintMegaDecor(c, p, d) { const q = iso(d); if (p.level >= 20 &&
         return;
 } const art = megaImage('assets/art/long-growth/' + d.decorId + '.svg'); if (art)
     c.drawImage(art, q.x - 14, q.y - (d.wall ? 38 : 24), 28, 28); }
+export const artResourceDiagnostics = () => ({ bitmaps: artBitmapCache.diagnostics, bitmapFallback, rawFragments: fragments.size, rawCanvasBytes: [...fragments.values()].reduce((n, c) => n + c.width * c.height * 4, 0), loadedImages: images.size });

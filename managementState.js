@@ -1,6 +1,7 @@
-import { validSpecialInventory } from './specialInventory.js?v=level-seats-83d02b666a1c';
+import { validSpecialInventory } from './specialInventory.js?v=mega-5d509fb5dbfc';
 export const createManagement = () => ({ version: 1, strategy: null, reputation: 50, reviews: [], regulars: {}, materials: { fruit: 2, milk: 2, flour: 2, flower: 1 }, research: {}, training: {}, deliveries: [], businessHistory: [] });
-export function managementFor(save) { return save.management ?? (save.management = createManagement()); }
+export function managementFor(save) { const m = save.management ?? (save.management = createManagement()); if (save.mega?.finalGrowth)
+    m.legacyArchiveOnly = true; return m; }
 export function addCafeMemory(list, entry) { if (list.length >= 300 || list.some(x => x.id === entry.id))
     return false; list.push(entry); return true; }
 const str = (v, max = 200) => typeof v === 'string' && v.length > 0 && v.length <= max;
@@ -8,7 +9,7 @@ const int = (n, max = 1e8) => typeof n === 'number' && Number.isSafeInteger(n) &
 const strings = (v, max = 1000) => Array.isArray(v) && v.length <= max && v.every(x => str(x, 400)) && new Set(v).size === v.length;
 export function validManagement(v) { try {
     const m = v;
-    if (!m || m.version !== 1 || m.strategy !== null && !['fast', 'care', 'group'].includes(m.strategy) || !Number.isFinite(m.reputation) || m.reputation < 0 || m.reputation > 100 || !Array.isArray(m.reviews) || m.reviews.length > 32 || new Set(m.reviews.map(x => x.id)).size !== m.reviews.length || m.reviews.some(x => !str(x.id) || !str(x.guest) || !int(x.stars, 5) || x.stars < 1 || !str(x.text) || !str(x.reason)))
+    if (!m || m.legacyArchiveOnly !== undefined && m.legacyArchiveOnly !== true || m.version !== 1 || m.strategy !== null && !['fast', 'care', 'group'].includes(m.strategy) || !Number.isFinite(m.reputation) || m.reputation < 0 || m.reputation > 100 || !Array.isArray(m.reviews) || m.reviews.length > 32 || new Set(m.reviews.map(x => x.id)).size !== m.reviews.length || m.reviews.some(x => !str(x.id) || !str(x.guest) || !int(x.stars, 5) || x.stars < 1 || !str(x.text) || !str(x.reason)))
         return false;
     if (!m.regulars || Object.keys(m.regulars).length > 100 || Object.entries(m.regulars).some(([k, r]) => !str(k) || !int(r.visits) || typeof r.loyal !== 'boolean' || typeof r.giftClaimed !== 'boolean'))
         return false;
@@ -16,7 +17,7 @@ export function validManagement(v) { try {
         return false;
     if (!m.research || Object.keys(m.research).length > 6 || Object.entries(m.research).some(([id, r]) => !/^research-(fruit|latte|cookie|cake|bread|dessert)$/.test(id) || !['selected', 'combined', 'prototype', 'tasted', 'registered'].includes(r.stage) || !Array.isArray(r.ingredients) || r.ingredients.length > 3 || r.ingredients.some(x => !['fruit', 'milk', 'flour', 'flower'].includes(x)) || !int(r.rating, 5) || r.attempts !== undefined && (!Array.isArray(r.attempts) || r.attempts.length > 3 || r.attempts.some(a => ![1, 2, 3].includes(a.heat) || ![3, 5].includes(a.rating)))))
         return false;
-    if (!m.training || Object.keys(m.training).length > 12 || Object.entries(m.training).some(([id, t]) => !/^staff-([1-9]|1[0-2])$/.test(id) || !int(t.level, 3) || !int(t.progress, 1000) || !str(t.lesson) || !strings(t.badges, 3)))
+    if (!m.training || Object.keys(m.training).length > (m.legacyArchiveOnly ? 50 : 12) || Object.entries(m.training).some(([id, t]) => !(m.legacyArchiveOnly ? /^staff-([1-9]|[1-4][0-9]|50)$/ : /^staff-([1-9]|1[0-2])$/).test(id) || !int(t.level, 3) || !int(t.progress, 1000) || !str(t.lesson) || !strings(t.badges, 3)))
         return false;
     if (m.specialPlanManual !== undefined && typeof m.specialPlanManual !== 'boolean')
         return false;

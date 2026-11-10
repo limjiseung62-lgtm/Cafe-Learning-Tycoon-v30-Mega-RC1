@@ -1,4 +1,4 @@
-import { imageReady, imageState } from './imageLoading.js?v=level-seats-83d02b666a1c';
+import { imageReady, imageState } from './imageLoading.js?v=mega-5d509fb5dbfc';
 let installed = false;
 export function installAssetFallbacks() {
     if (installed)

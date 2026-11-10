@@ -1,0 +1,5 @@
+import { customers } from './data.js?v=mega-5d509fb5dbfc';
+import { finalGuestProfiles } from './finalGuestProfiles.js?v=mega-5d509fb5dbfc';
+import { hasFinalActor } from './finalActorArt.js?v=mega-5d509fb5dbfc';
+export function finalGuestDefinitions(level, elapsed = 0) { return [...customers.filter(c => c.unlockCafeLevel <= level), ...finalGuestProfiles.filter(p => p.unlockLevel <= level && hasFinalActor(p.visualKey)).map(p => ({ customerId: p.id, name: p.archetype + ' ' + p.name, visualKey: p.visualKey, patienceSeconds: p.patience, personality: (p.category === 'busy' ? 'BUSY' : p.category === 'regular' ? 'KIND' : p.category === 'tourist' ? 'RELAXED' : 'NORMAL'), orderPreference: p.preference, characterTrait: p.archetype + ' · ' + (p.pattern === 'early' ? '초반 방문을 선호해요' : p.pattern === 'late' ? '후반에 여유롭게 방문해요' : '영업 시간에 고르게 방문해요'), unlockCafeLevel: p.unlockLevel, spawnWeight: p.pattern === 'early' ? (elapsed < 300 ? 1.4 : .7) : p.pattern === 'late' ? (elapsed >= 450 ? 1.4 : .7) : 1, orderProfile: { minQuantity: 1, ...p.order }, category: p.category }))]; }
+export const finalGuestByVisual = (key) => finalGuestDefinitions(30).find(c => c.visualKey === key);

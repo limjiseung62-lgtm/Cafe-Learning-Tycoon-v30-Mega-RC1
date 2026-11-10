@@ -1,12 +1,14 @@
-import { waitForImages } from './imageLoading.js?v=level-seats-83d02b666a1c';
-import { webAsset } from './webAsset.js?v=level-seats-83d02b666a1c';
-import { guestMotionAsset } from './motionSprites.js?v=level-seats-83d02b666a1c';
-import { hospitalityPoseCatalog } from './hospitalityPoseCatalog.js?v=level-seats-83d02b666a1c';
-import { specialPoseCatalog } from './specialPoseCatalog.js?v=level-seats-83d02b666a1c';
-import { customerPoseCatalog } from './customerPoseCatalog.js?v=level-seats-83d02b666a1c';
+import { finalActorFrame } from './finalActorArt.js?v=mega-5d509fb5dbfc';
+import { waitForImages } from './imageLoading.js?v=mega-5d509fb5dbfc';
+import { webAsset } from './webAsset.js?v=mega-5d509fb5dbfc';
+import { guestMotionAsset } from './motionSprites.js?v=mega-5d509fb5dbfc';
+import { hospitalityPoseCatalog } from './hospitalityPoseCatalog.js?v=mega-5d509fb5dbfc';
+import { specialPoseCatalog } from './specialPoseCatalog.js?v=mega-5d509fb5dbfc';
+import { customerPoseCatalog } from './customerPoseCatalog.js?v=mega-5d509fb5dbfc';
 export const customerPoses = customerPoseCatalog;
-export function selectCustomerPose(visualKey, action, facing, motion = '', phase = 0) { const p = customerPoses[visualKey] ?? hospitalityPoseCatalog[visualKey] ?? specialPoseCatalog[visualKey]; if (!p)
-    throw new Error('Missing customer pose: ' + visualKey); const walking = ['ENTERING', 'WALKING_TO_SEAT', 'STANDING_UP', 'WALKING_TO_EXIT'].includes(action); const motionAsset = !walking || motion === 'WAVE' ? guestMotionAsset(visualKey, motion, phase) : undefined; return { key: visualKey + (motion ? '/' + motion + '/' + (motionAsset ? motionAsset.file + ':' + motionAsset.box.join(',') : 'base') : '') + (walking ? '/walk-' + facing : '/sit-' + facing), kind: walking ? 'walk' : 'sit', walk: p.walk, facing, asset: motionAsset ?? (walking ? null : facing === 'left' ? p.sitLeft : p.sitRight) }; }
+export function selectCustomerPose(visualKey, action, facing, motion = '', phase = 0) { const walking = ['ENTERING', 'WALKING_TO_SEAT', 'STANDING_UP', 'WALKING_TO_EXIT'].includes(action), frame = finalActorFrame(visualKey, facing === 'left' ? 'SW' : 'SE', walking ? 'walk' : 'sit', phase); if (frame)
+    return { key: visualKey + '/' + action + '/' + phase, kind: walking ? 'walk' : 'sit', walk: visualKey, facing, asset: { ...frame, box: [...frame.box], displayScale: 1 } }; const p = customerPoses[visualKey] ?? hospitalityPoseCatalog[visualKey] ?? specialPoseCatalog[visualKey]; if (!p)
+    throw new Error('Missing customer pose: ' + visualKey); const motionAsset = !walking || motion === 'WAVE' ? guestMotionAsset(visualKey, motion, phase) : undefined; return { key: visualKey + (motion ? '/' + motion + '/' + (motionAsset ? motionAsset.file + ':' + motionAsset.box.join(',') : 'base') : '') + (walking ? '/walk-' + facing : '/sit-' + facing), kind: walking ? 'walk' : 'sit', walk: p.walk, facing, asset: motionAsset ?? (walking ? null : facing === 'left' ? p.sitLeft : p.sitRight) }; }
 export function selectedPoseAsset(s) { return s.asset ?? (customerPoses[s.walk] ?? hospitalityPoseCatalog[s.walk] ?? specialPoseCatalog[s.walk]).walkAsset; }
 export function customerPoseArt(s) { const a = selectedPoseAsset(s), [x, y, w, h] = a.box; const flip = a.nativeFacing !== undefined && a.nativeFacing !== s.facing ? -1 : 1; return '<span class="guest-art ' + (s.kind === 'sit' ? 'sit-art' : 'walk-art') + ' art-sprite" aria-hidden="true" style="background-image:url(' + webAsset(a.file) + ');background-size:' + (a.width / w * 100) + '% ' + (a.height / h * 100) + '%;background-position:' + (x / (a.width - w) * 100) + '% ' + (y / (a.height - h) * 100) + '%;aspect-ratio:' + w + '/' + h + ';--sprite-flip:' + flip + ';transform:scaleX(' + flip + ')"></span>'; }
 export function poseGeometry(s) { const a = selectedPoseAsset(s), [x, y, w, h] = a.box; let anchorX = (a.anchorX - x) / w * 100; if (a.nativeFacing !== undefined && a.nativeFacing !== s.facing)

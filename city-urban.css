@@ -2,6 +2,3 @@
 @media(max-width:760px){.urban-city header{flex-wrap:nowrap;gap:4px}.urban-city header h2{flex:1 1 75px;min-width:0;margin:0;font-size:14px;line-height:1.25}.urban-city header button{flex:0 0 auto;font-size:12px;padding:7px}.urban-metrics{grid-template-columns:repeat(4,minmax(0,1fr));margin:7px 0}.urban-metrics>div{font-size:11px;padding:6px}.urban-metrics strong{font-size:14px;line-height:1.3;margin-top:3px}.urban-city [data-legend]{font-size:12px;margin:5px 0;line-height:1.35}.urban-toolbar{margin:5px 0}.urban-toolbar select{padding:7px;font-size:13px}.urban-panel{max-height:36dvh}.urban-brands,.urban-options{flex-wrap:nowrap;overflow-x:auto}.urban-brands button,.urban-options button{flex:0 0 auto;font-size:12px}.urban-map-pane>canvas{height:62dvh;min-height:350px}}
 @media(max-width:760px){.urban-map-pane:has(+.urban-panel:not([hidden]))>canvas{height:calc(64dvh - 310px);min-height:180px}}
 .urban-achievement{border:2px solid #aabf8e;background:#f1f7dd;padding:12px;border-radius:12px;margin:10px 0;max-height:240px;overflow:auto}.urban-achievement h3{margin:0}.urban-achievement p{font-size:14px;margin:5px 0}.urban-achievement[hidden]{display:none}
-
-/* Local profiling controls are not student actions. */
-.urban-city [data-measure],.urban-city details:has([data-perf]){display:none!important}

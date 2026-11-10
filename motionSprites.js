@@ -1,7 +1,7 @@
-import { recruitFrame } from "./recruitArt.js?v=level-seats-83d02b666a1c";
-import { imageReady, imageLoadingStatus } from './imageLoading.js?v=level-seats-83d02b666a1c';
-import { webAsset } from './webAsset.js?v=level-seats-83d02b666a1c';
-import { expandedGuestPoses, expandedWorkerPoses } from './motionExpansionCatalog.js?v=level-seats-83d02b666a1c';
+import { recruitFrame } from "./recruitArt.js?v=mega-5d509fb5dbfc";
+import { imageReady, imageLoadingStatus } from './imageLoading.js?v=mega-5d509fb5dbfc';
+import { webAsset } from './webAsset.js?v=mega-5d509fb5dbfc';
+import { expandedGuestPoses, expandedWorkerPoses } from './motionExpansionCatalog.js?v=mega-5d509fb5dbfc';
 export const motionSheets = {
     bookworm: { file: 'assets/art/motion-v151/bookworm-actions.png', width: 1536, height: 1024, columns: 3, rows: 1 },
     owner: { file: 'assets/art/motion-v151/owner-actions.png', width: 2172, height: 724, columns: 3, rows: 1 },

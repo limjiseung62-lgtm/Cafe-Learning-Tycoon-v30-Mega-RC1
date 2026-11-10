@@ -1,34 +1,38 @@
-import { adoptInterior, isShopDeployment, repairInteriorSeats } from './megaInventory.js?v=level-seats-83d02b666a1c';
-import { validMega, newMegaState, isMegaDeployment } from './megaSpace.js?v=level-seats-83d02b666a1c';
-import { newProgressiveState, validProgressive } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
-import { growthMenuDefinitions } from './menuResearch.js?v=level-seats-83d02b666a1c';
-import { validManagement, validCafeAlbum } from './managementState.js?v=level-seats-83d02b666a1c';
-import { validPortfolio, portfolioMatches } from './cafePortfolio.js?v=level-seats-83d02b666a1c';
-import { validVillage } from './village.js?v=level-seats-83d02b666a1c';
-import { validMiniCollection } from './miniGames.js?v=level-seats-83d02b666a1c';
-import { validSpecialization } from './specialization.js?v=level-seats-83d02b666a1c';
-import { belongsToBranch } from './specializationConfig.js?v=level-seats-83d02b666a1c';
-import { furnitureUnlocked } from './furnitureUnlocks.js?v=level-seats-83d02b666a1c';
-import { furnitureFor } from './furnitureCatalog.js?v=level-seats-83d02b666a1c';
-import { validFreeLayouts } from './freeLayout.js?v=level-seats-83d02b666a1c';
-import { validLayouts } from './cafeLayout.js?v=level-seats-83d02b666a1c';
-import { validGrowthEconomy } from './growthEconomy.js?v=level-seats-83d02b666a1c';
-import { validLongGrowth } from './longGrowth.js?v=level-seats-83d02b666a1c';
-import { validCampaign } from './growthCampaign.js?v=level-seats-83d02b666a1c';
-import { validEventCheckpoint } from './cafeEvents.js?v=level-seats-83d02b666a1c';
-import { menuDefinitions } from './data.js?v=level-seats-83d02b666a1c';
-import { staffDefinitions } from './staff.js?v=level-seats-83d02b666a1c';
-import { cafeGrowthBalance } from './modeBalance.js?v=level-seats-83d02b666a1c';
-import { specialTypes } from './phase4Config.js?v=level-seats-83d02b666a1c';
-import { validBranch } from "./growthBranch.js?v=level-seats-83d02b666a1c";
-import { validRoster, rosterMirror, crewLimit } from "./staffRecruitment.js?v=level-seats-83d02b666a1c";
+import { validSupplyContext } from './finalSupplyState.js?v=mega-5d509fb5dbfc';
+import { bulkWarehouses } from './productionKitchen.js?v=mega-5d509fb5dbfc';
+import { adoptInterior, isShopDeployment, repairInteriorSeats } from './megaInventory.js?v=mega-5d509fb5dbfc';
+import { validMega, newMegaState, isMegaDeployment } from './megaSpace.js?v=mega-5d509fb5dbfc';
+import { newProgressiveState, validProgressive } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
+import { growthMenuDefinitions } from './menuResearch.js?v=mega-5d509fb5dbfc';
+import { validManagement, validCafeAlbum } from './managementState.js?v=mega-5d509fb5dbfc';
+import { validPortfolio, portfolioMatches } from './cafePortfolio.js?v=mega-5d509fb5dbfc';
+import { validVillage } from './village.js?v=mega-5d509fb5dbfc';
+import { validMiniCollection } from './miniGames.js?v=mega-5d509fb5dbfc';
+import { validSpecialization } from './specialization.js?v=mega-5d509fb5dbfc';
+import { belongsToBranch } from './specializationConfig.js?v=mega-5d509fb5dbfc';
+import { furnitureUnlocked } from './furnitureUnlocks.js?v=mega-5d509fb5dbfc';
+import { furnitureFor } from './furnitureCatalog.js?v=mega-5d509fb5dbfc';
+import { validFreeLayouts } from './freeLayout.js?v=mega-5d509fb5dbfc';
+import { validLayouts } from './cafeLayout.js?v=mega-5d509fb5dbfc';
+import { validGrowthEconomy } from './growthEconomy.js?v=mega-5d509fb5dbfc';
+import { validLongGrowth } from './longGrowth.js?v=mega-5d509fb5dbfc';
+import { validCampaign } from './growthCampaign.js?v=mega-5d509fb5dbfc';
+import { validEventCheckpoint } from './cafeEvents.js?v=mega-5d509fb5dbfc';
+import { menuDefinitions } from './data.js?v=mega-5d509fb5dbfc';
+import { staffDefinitions } from './staff.js?v=mega-5d509fb5dbfc';
+import { cafeGrowthBalance } from './modeBalance.js?v=mega-5d509fb5dbfc';
+import { specialTypes } from './phase4Config.js?v=mega-5d509fb5dbfc';
+import { validBranch } from "./growthBranch.js?v=mega-5d509fb5dbfc";
+import { validRoster, rosterMirror, crewLimit, ownedCrewLimit } from "./staffRecruitment.js?v=mega-5d509fb5dbfc";
 const integer = (v, min = 0, max = Number.MAX_SAFE_INTEGER) => typeof v === 'number' && Number.isSafeInteger(v) && v >= min && v <= max;
 const object = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const date = (v) => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(v) && Number.isFinite(Date.parse(v));
-export function validateGrowthSave(v) { if (!object(v) || v.mega !== undefined && (!validMega(v.mega) || Object.values(v.mega.plans).some(p => p.decor.some(d => !v.longTerm?.owned.includes(d.decorId)) || p.tables.some(t => !furnitureUnlocked(v.longTerm, furnitureFor(t.kind, t.furnitureId).id)))) || v.v26 !== undefined && !validProgressive(v.v26) || v.management !== undefined && !validManagement(v.management) || v.managementAlbum !== undefined && !validCafeAlbum(v.managementAlbum, v.mega?.extended ? 30 : 15) || v.portfolio !== undefined && (!validPortfolio(v.portfolio) || !portfolioMatches(v)) || v.village !== undefined && !validVillage(v.village) || v.miniCollection !== undefined && !validMiniCollection(v.miniCollection) || v.specialization !== undefined && (!validSpecialization(v.specialization) || Number(v.cafeLevel) < 11 || !belongsToBranch(v.specialization.selected, v.growthBranch?.active)) || v.freeLayouts !== undefined && !validFreeLayouts(v.freeLayouts) || v.layouts !== undefined && !validLayouts(v.layouts) || v.roster !== undefined && (!validRoster(v.roster, crewLimit(v)) || !rosterMirror(v.roster, v.staffOwned, v.staffLevels)) || v.growthBranch !== undefined && (!validBranch(v.growthBranch) || Number(v.cafeLevel) < 7) || v.growthEconomy !== undefined && !validGrowthEconomy(v.growthEconomy) || v.longTerm !== undefined && !validLongGrowth(v.longTerm, v.mega?.extended ? 30 : 15) || v.campaign !== undefined && !validCampaign(v.campaign) || v.eventState !== undefined && !validEventCheckpoint(v.eventState) || v.schemaVersion !== 1 || v.mode !== 'CAFE_GROWTH' || !date(v.createdAt) || !date(v.updatedAt) || Date.parse(v.createdAt) > Date.parse(v.updatedAt) || !integer(v.cafeLevel, 1, v.mega?.extended ? 30 : 15) || !integer(v.warehouseLevel, 1, 6) || !integer(v.money))
+export function validateGrowthSave(v) { if (!object(v) || v.mega !== undefined && (!validMega(v.mega) || Object.values(v.mega.plans).some(p => p.decor.some(d => !v.longTerm?.owned.includes(d.decorId)) || p.tables.some(t => !furnitureUnlocked(v.longTerm, furnitureFor(t.kind, t.furnitureId).id)))) || v.v26 !== undefined && !validProgressive(v.v26) || v.management !== undefined && !validManagement(v.management) || v.managementAlbum !== undefined && !validCafeAlbum(v.managementAlbum, v.mega?.extended ? 30 : 15) || v.portfolio !== undefined && (!validPortfolio(v.portfolio) || !portfolioMatches(v)) || v.village !== undefined && !validVillage(v.village) || v.miniCollection !== undefined && !validMiniCollection(v.miniCollection) || v.specialization !== undefined && (!validSpecialization(v.specialization) || Number(v.cafeLevel) < 11 || !belongsToBranch(v.specialization.selected, v.growthBranch?.active)) || v.freeLayouts !== undefined && !validFreeLayouts(v.freeLayouts) || v.layouts !== undefined && !validLayouts(v.layouts) || v.roster !== undefined && (!validRoster(v.roster, crewLimit(v), ownedCrewLimit(v)) || !rosterMirror(v.roster, v.staffOwned, v.staffLevels)) || v.growthBranch !== undefined && (!validBranch(v.growthBranch) || Number(v.cafeLevel) < 7) || v.growthEconomy !== undefined && !validGrowthEconomy(v.growthEconomy) || v.longTerm !== undefined && !validLongGrowth(v.longTerm, v.mega?.extended ? 30 : 15) || v.campaign !== undefined && !validCampaign(v.campaign) || v.eventState !== undefined && !validEventCheckpoint(v.eventState) || v.schemaVersion !== 1 || v.mode !== 'CAFE_GROWTH' || !date(v.createdAt) || !date(v.updatedAt) || Date.parse(v.createdAt) > Date.parse(v.updatedAt) || !integer(v.cafeLevel, 1, v.mega?.extended ? 30 : 15) || !integer(v.warehouseLevel, 1, 6) || !integer(v.money))
     return false; if (v.layouts && Object.values(v.layouts.plans).some(p => p.decor.some(d => !v.longTerm?.owned.includes(d.decorId))))
     return false; if (v.freeLayouts && Object.values(v.freeLayouts.plans).some(p => p.decor.some(d => !v.longTerm?.owned.includes(d.decorId)) || p.tables.some(t => !furnitureUnlocked(v.longTerm, furnitureFor(t.kind, t.furnitureId).id))))
-    return false; const ids = growthMenuDefinitions(v.cafeLevel, v.management).map(m => m.menuId); if (Object.values(v.v26?.enterprise?.branches ?? {}).some(b => !ids.includes(b.menu)))
+    return false; const ids = growthMenuDefinitions(v.cafeLevel, v.management, v.mega?.finalGrowth).map(m => m.menuId); const mega = v.mega, physical = mega?.paid ? Object.values(mega.plans).find(p => p.level === mega.paid.spaceLevel && (p.branch ?? undefined) === v.growthBranch?.active) ?? Object.values(mega.plans).find(p => p.level === mega.paid.spaceLevel) : undefined, capacity = Math.max(cafeGrowthBalance.warehouses[Number(v.warehouseLevel) - 1].capacity, mega?.production?.storage ? bulkWarehouses[mega.production.storage - 1].capacity : 0); if (mega?.finalGrowth?.specialization && (Number(v.cafeLevel) < 11 || !mega.finalGrowth.specialization.legacyChoice && (mega.paid?.spaceLevel ?? 1) < 10))
+    return false; if (!validSupplyContext(mega?.finalGrowth?.supply, physical?.fixtures ?? [], ids.map(id => ({ id, stock: v.v26?.stock?.[id] ?? 0 })), capacity))
+    return false; if (Object.values(v.v26?.enterprise?.branches ?? {}).some(b => !ids.includes(b.menu)))
     return false; if (v.management?.run?.special?.inventory?.orders.some(order => order.some(o => !ids.includes(o.menuId))))
     return false; if (!Array.isArray(v.unlockedMenuIds) || new Set(v.unlockedMenuIds).size !== ids.length || v.unlockedMenuIds.length !== ids.length || !ids.every(id => v.unlockedMenuIds instanceof Array && v.unlockedMenuIds.includes(id)))
     return false; if (!object(v.menuLevels) || Object.keys(v.menuLevels).length !== ids.length || !ids.every(id => object(v.menuLevels) && integer(v.menuLevels[id], 1, 5)))

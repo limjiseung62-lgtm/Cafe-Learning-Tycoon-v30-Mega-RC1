@@ -1,11 +1,11 @@
-import { openModernCity } from './modernCityUi.js?v=level-seats-83d02b666a1c';
-import { enterpriseCity, cityDistricts, citySafePoint } from './enterpriseCity.js?v=level-seats-83d02b666a1c';
-import { sceneEnvironment } from './villageSceneArt.js?v=level-seats-83d02b666a1c';
-import { VillageExplorer } from './villageExplorer.js?v=level-seats-83d02b666a1c';
-import { scenePath } from './villageNavigation.js?v=level-seats-83d02b666a1c';
-import { investVillage, progressiveEconomyConfig } from './progressiveEconomy.js?v=level-seats-83d02b666a1c';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=level-seats-83d02b666a1c';
-import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=level-seats-83d02b666a1c';
+import { openModernCity } from './modernCityUi.js?v=mega-5d509fb5dbfc';
+import { enterpriseCity, cityDistricts, citySafePoint } from './enterpriseCity.js?v=mega-5d509fb5dbfc';
+import { sceneEnvironment } from './villageSceneArt.js?v=mega-5d509fb5dbfc';
+import { VillageExplorer } from './villageExplorer.js?v=mega-5d509fb5dbfc';
+import { scenePath } from './villageNavigation.js?v=mega-5d509fb5dbfc';
+import { investVillage, progressiveEconomyConfig } from './progressiveEconomy.js?v=mega-5d509fb5dbfc';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=mega-5d509fb5dbfc';
+import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=mega-5d509fb5dbfc';
 export async function openEnterpriseCity(repo, onClose, readOnly = false) {
     if (!readOnly)
         return openModernCity(repo, onClose);

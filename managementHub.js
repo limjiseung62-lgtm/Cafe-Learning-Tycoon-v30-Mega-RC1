@@ -1,23 +1,23 @@
-import { unlocked } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
-import { regularGuestName } from './managementReview.js?v=level-seats-83d02b666a1c';
-import { menuDefinitions } from './data.js?v=level-seats-83d02b666a1c';
-import { recruitPortrait } from './recruitArt.js?v=level-seats-83d02b666a1c';
-import { educateStaff, educationThresholds, educationEffect } from './staffEducation.js?v=level-seats-83d02b666a1c';
-import { recruitCatalog } from './recruitConfig.js?v=level-seats-83d02b666a1c';
-import { syncManagementAlbum } from './managementAlbum.js?v=level-seats-83d02b666a1c';
-import { managementAlbumHtml } from './managementAlbumUi.js?v=level-seats-83d02b666a1c';
-import { specialBusinessCatalog, planSpecialBusiness, prepareDeliveryOffers, acceptDelivery, retryDelivery, moveDelivery } from './specialBusiness.js?v=level-seats-83d02b666a1c';
-import { openVillage } from './villageUi.js?v=level-seats-83d02b666a1c';
-import { managementFor } from './managementState.js?v=level-seats-83d02b666a1c';
-import { managementStyles } from './managementUi.js?v=level-seats-83d02b666a1c';
-import { escapeText as esc } from './questionRenderer.js?v=level-seats-83d02b666a1c';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=level-seats-83d02b666a1c';
-import { sprite } from './art.js?v=level-seats-83d02b666a1c';
-import { researchRecipes, researchBrief, researchFeedback, materialNames, selectRecipe, combineRecipe, prototypeRecipe, tasteRecipe, registerRecipe, syncResearchMenus } from './menuResearch.js?v=level-seats-83d02b666a1c';
+import { unlocked } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
+import { regularGuestName } from './managementReview.js?v=mega-5d509fb5dbfc';
+import { menuDefinitions } from './data.js?v=mega-5d509fb5dbfc';
+import { recruitPortrait } from './recruitArt.js?v=mega-5d509fb5dbfc';
+import { educateStaff, educationThresholds, educationEffect } from './staffEducation.js?v=mega-5d509fb5dbfc';
+import { recruitCatalog } from './recruitConfig.js?v=mega-5d509fb5dbfc';
+import { syncManagementAlbum } from './managementAlbum.js?v=mega-5d509fb5dbfc';
+import { managementAlbumHtml } from './managementAlbumUi.js?v=mega-5d509fb5dbfc';
+import { specialBusinessCatalog, planSpecialBusiness, prepareDeliveryOffers, acceptDelivery, retryDelivery, moveDelivery } from './specialBusiness.js?v=mega-5d509fb5dbfc';
+import { openVillage } from './villageUi.js?v=mega-5d509fb5dbfc';
+import { managementFor } from './managementState.js?v=mega-5d509fb5dbfc';
+import { managementStyles } from './managementUi.js?v=mega-5d509fb5dbfc';
+import { escapeText as esc } from './questionRenderer.js?v=mega-5d509fb5dbfc';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=mega-5d509fb5dbfc';
+import { sprite } from './art.js?v=mega-5d509fb5dbfc';
+import { researchRecipes, researchBrief, researchFeedback, materialNames, selectRecipe, combineRecipe, prototypeRecipe, tasteRecipe, registerRecipe, syncResearchMenus } from './menuResearch.js?v=mega-5d509fb5dbfc';
 export async function openManagementHub(repo, fallback, onClose, initialTab = 'reviews') {
     managementStyles();
     const loaded = repo.read();
-    let base = loaded.status === 'ready' ? loaded.save : structuredClone(fallback), tab = initialTab, message = '', editing = false;
+    let base = loaded.status === 'ready' ? loaded.save : structuredClone(fallback), tab = initialTab === 'lab' && base.mega?.finalGrowth ? 'reviews' : initialTab, message = '', editing = false;
     if (!unlocked(base, 'reviews') || base.campaign?.run && !base.campaign.run.closed)
         return;
     if (base.v26)
@@ -68,10 +68,13 @@ export async function openManagementHub(repo, fallback, onClose, initialTab = 'r
             body = '<h3>직원 교육실</h3><p>실제 담당 서빙 5·12·22건을 채우면 교육할 수 있어요. 새 능력 대신 기존 능력만 조금 성장해요. 대기 직원은 경험을 얻지 않아요. 비용은 없고, 기존 팁 상한도 같아요.</p><div class="v25-grid">' + recruitCatalog.filter(x => base.roster?.owned.some(w => w.id === x.staffId)).map(x => { const t = m.training[x.staffId]; return '<article>' + recruitPortrait(x.staffId) + '<h3>' + x.name + ' · ' + x.ability + '</h3><p>' + x.description + '</p><p>교육 ' + (t?.level ?? 0) + '/3 · 담당 서빙 ' + (t?.progress ?? 0) + '건</p><p>' + educationEffect(x.staffId, t?.level ?? 0) + '</p><small>' + ((t?.level ?? 0) >= 3 ? '교육 배지 3개 완성' : educationThresholds[t?.level ?? 0] + '건이 되면 다음 교육') + '</small><button data-train="' + x.staffId + '" ' + (!t || t.level >= 3 || t.progress < educationThresholds[t.level] ? 'disabled' : '') + '>능력 교육 · 기념 배지</button><p>' + esc(t?.badges.length ? '배웠으니 더 정성껏 도와드릴게요!' : '먼저 함께 서빙하며 경험을 쌓아요.') + '</p></article>'; }).join('') + '</div>';
         if (tab === 'album')
             body = managementAlbumHtml(base);
+        if (tab === 'business' && base.mega?.finalGrowth)
+            body = body.split('<h3>주민 배달 게시판</h3>')[0] + '<details><summary>이전 주민 배달 기록 · 보관</summary><p>기존 이력은 유지해요. 새 주민 배달과 마을 탐험은 진행하지 않아요.</p>' + m.deliveries.map(x => '<p>' + esc(x.resident) + ' · ' + esc(x.status) + '</p>').join('') + '</details>';
         d.innerHTML = '<div><div class="collection-head"><h2>카페 경영실</h2><button class="secondary" data-close>닫기 · 카페로</button></div><nav class="v25-actions"><button data-tab="reviews">평판·리뷰</button><button data-tab="lab">신메뉴 연구소</button><button data-tab="business">특별 영업·배달</button><button data-tab="training">직원 교육</button><button data-tab="album">통합 성장 앨범</button></nav>' + body + '<p role="status">' + esc(message) + '</p></div>';
         d.querySelector('[data-close]').addEventListener('click', () => { d.remove(); onClose(); });
         const features = { reviews: 'reviews', lab: 'research', business: 'specialBusiness', training: 'education', album: 'landmark' };
-        d.querySelectorAll('[data-tab]').forEach(b => { b.hidden = !unlocked(base, features[b.dataset.tab]); b.onclick = () => { if (!unlocked(base, features[b.dataset.tab]))
+        d.querySelectorAll('[data-tab]').forEach(b => { b.hidden = !unlocked(base, features[b.dataset.tab]); if (base.mega?.finalGrowth && b.dataset.tab === 'business')
+            b.textContent = '특별 영업'; b.onclick = () => { if (!unlocked(base, features[b.dataset.tab]))
             return; tab = b.dataset.tab; message = ''; render(); }; });
         const bind = (name, fn) => d.querySelectorAll('[data-' + name + ']').forEach(b => b.onclick = () => { void edit(s => fn(s, b.getAttribute('data-' + name))); });
         bind('train', educateStaff);

@@ -1,7 +1,7 @@
-import { unlocked } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
-import { ensureSpecialInventory, specialPreparation, reservedTeamTarget } from './specialInventory.js?v=level-seats-83d02b666a1c';
-import { managementFor } from './managementState.js?v=level-seats-83d02b666a1c';
-import { offerMini } from './miniGames.js?v=level-seats-83d02b666a1c';
+import { unlocked } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
+import { ensureSpecialInventory, specialPreparation, reservedTeamTarget } from './specialInventory.js?v=mega-5d509fb5dbfc';
+import { managementFor } from './managementState.js?v=mega-5d509fb5dbfc';
+import { offerMini } from './miniGames.js?v=mega-5d509fb5dbfc';
 export const specialBusinessCatalog = [{ id: 'birthday', name: '생일 파티', level: 3, target: 2, mission: 'birthday', description: '생일 손님 2팀을 대접하고 문제 2개를 맞혀요.' }, { id: 'reservation', name: '단체 예약', level: 1, target: 1, mission: 'rush', description: '예약 주문을 대접하고 문제 2개를 맞혀요.' }, { id: 'festival', name: '축제 야외 영업', level: 2, target: 2, mission: 'birthday', description: '마을 2단계부터, 축제 손님과 문제 2개에 도전해요.' }, { id: 'vip', name: '특별 VIP 행사', level: 4, target: 1, mission: 'gourmet', description: '특별 주문 도전을 풀고 미식가를 대접해요.' }];
 export function planSpecialBusiness(save, id, manual = false) { if (!unlocked(save, 'specialBusiness'))
     return false; const item = specialBusinessCatalog.find(x => x.id === id); if (!item || save.cafeLevel < item.level || id === 'festival' && (save.village?.progression?.stage ?? 1) < 2)
@@ -19,7 +19,8 @@ export function prepareDeliveryOffers(save) { if (!unlocked(save, 'delivery'))
 export function acceptDelivery(save, id) { if (!unlocked(save, 'delivery'))
     return false; const d = managementFor(save).deliveries.find(d => d.id === id); if (!d || d.status !== 'offered')
     return false; d.status = 'accepted'; return true; }
-export function moveDelivery(save, id, direction) { const list = managementFor(save).deliveries, i = list.findIndex(d => d.id === id), j = i + direction; if (i < 0 || j < 0 || j >= list.length || ![-1, 1].includes(direction))
+export function moveDelivery(save, id, direction) { if (!unlocked(save, 'delivery'))
+    return false; const list = managementFor(save).deliveries, i = list.findIndex(d => d.id === id), j = i + direction; if (i < 0 || j < 0 || j >= list.length || ![-1, 1].includes(direction))
     return false; [list[i], list[j]] = [list[j], list[i]]; return true; }
 export function dispatchDelivery(g, id, courierId) { if (!unlocked(g, 'delivery'))
     return { ok: false, reason: '카페 Lv.13부터 배달할 수 있어요.' }; const m = g.mode === 'CAFE_GROWTH' ? g.management : undefined, r = m?.run, d = m?.deliveries.find(d => d.id === id); if (!m || !r || r.delivery || g.status !== 'RUNNING' || !d || d.status !== 'accepted')
@@ -91,7 +92,8 @@ export function pollSpecialBusiness(g) {
     }
 }
 /** Retry only in a later business: no refund, fresh inventory reservation, one attempt per run. */
-export function retryDelivery(save, id) { if (save.campaign?.run && !save.campaign.run.closed)
+export function retryDelivery(save, id) { if (!unlocked(save, 'delivery'))
+    return false; if (save.campaign?.run && !save.campaign.run.closed)
     return false; const m = managementFor(save), d = m.deliveries.find(x => x.id === id); if (!d || d.status !== 'missed')
     return false; d.status = 'accepted'; return true; }
 export function prepareSpecialBusiness(g) { if (!unlocked(g, 'specialBusiness'))

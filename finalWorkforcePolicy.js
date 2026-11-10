@@ -1,0 +1,2 @@
+export const legacyCrewLimit = (level, space) => space >= 30 ? 12 : space >= 20 ? 8 : Math.min(5, [1, 2, 2, 3, 4, 5][Math.max(0, Math.min(level, 6) - 1)]);
+export function finalCrewLimit(level, space, inherited) { const base = level >= 30 ? 25 : level >= 25 ? 22 : level >= 20 ? 18 : level >= 15 ? 12 : level >= 10 ? 8 : Math.min(5, [1, 2, 2, 3, 4, 5][Math.max(0, Math.min(level, 6) - 1)]), floor = space >= 30 ? 25 : space >= 20 ? 18 : space >= 10 ? 8 : 5; return Math.max(inherited ?? legacyCrewLimit(level, space), Math.min(base, floor)); }

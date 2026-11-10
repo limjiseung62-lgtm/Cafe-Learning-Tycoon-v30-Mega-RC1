@@ -1,5 +1,5 @@
-import { unlocked } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
-import { validVillageProgression, progressionMini, availableStage } from './villageProgression.js?v=level-seats-83d02b666a1c';
+import { unlocked } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
+import { validVillageProgression, progressionMini, availableStage } from './villageProgression.js?v=mega-5d509fb5dbfc';
 export const villageSize = { width: 24, height: 18 };
 export const buildings = [
     { id: 'cafe', name: '내 카페', art: 0, x: 1, y: 1, w: 5, h: 4, door: { x: 3, y: 5 } },
@@ -60,7 +60,8 @@ export const questCatalog = [
 export const metricNames = { correct: '학습 정답', served: '카페 서빙', special: '특별 손님 서빙', flowers: '꽃 장식 성공', sort: '주문 분류 성공', oven: '오븐 성공', machine: '머신 수리 성공', cake: '케이크 성공', talks: '서로 다른 주민 인사', materials: '마을 재료 수집', plaza: '광장 방문' };
 export function createVillage() { return { version: 1, position: { x: 3, y: 6 }, quests: {}, residents: {}, development: 0, facilities: ['flowers', 'market', 'mill', 'workshop'], souvenirs: [], futurePlots: [{ id: 'second-cafe', status: 'reserved' }], visits: 0 }; }
 export function villageMetrics(s) { return { correct: s.cumulativeQuestionsCorrect, served: s.cumulativeCustomersServed + (s.portfolio?.inactive?.save.cumulativeCustomersServed ?? 0), special: s.specialCustomerStats.served + (s.portfolio?.inactive?.save.specialCustomerStats.served ?? 0), receipts: s.miniCollection?.receipts ?? [] }; }
-export function syncVillage(v, m) { for (const [id, r] of Object.entries(v.quests)) {
+export function syncVillage(v, m) { if (v.legacyArchiveOnly)
+    return; for (const [id, r] of Object.entries(v.quests)) {
     if (r.claimed)
         continue;
     const q = questCatalog.find(q => q.id === id);
@@ -77,15 +78,18 @@ export function syncVillage(v, m) { for (const [id, r] of Object.entries(v.quest
         r.progress[metric] = Math.max(r.progress[metric] ?? 0, Math.min(q.goal[metric], n));
     }
 } }
-export const questReady = (v, id) => { const r = v.quests[id], q = questCatalog.find(q => q.id === id); return !!r && !!q && !r.claimed && Object.entries(q.goal).every(([k, n]) => (r.progress[k] ?? 0) >= n); };
+export const questReady = (v, id) => { if (v.legacyArchiveOnly)
+    return false; const r = v.quests[id], q = questCatalog.find(q => q.id === id); return !!r && !!q && !r.claimed && Object.entries(q.goal).every(([k, n]) => (r.progress[k] ?? 0) >= n); };
 export function acceptQuest(v, id, m, now = Date.now()) { if (!questAvailable(v, id))
     return false; const q = questCatalog.find(q => q.id === id); if (!q || v.quests[id] || !v.residents[q.resident]?.met)
     return false; v.quests[id] = { acceptedAt: now, base: { correct: m.correct, served: m.served, special: m.special, miniIds: m.receipts.map(r => r.id) }, progress: {}, talked: [], materials: [], claimed: false }; return true; }
-export function talkVillage(v, id) { if (!residents.some(r => r.id === id))
+export function talkVillage(v, id) { if (v.legacyArchiveOnly)
+    return false; if (!residents.some(r => r.id === id))
     return false; v.residents[id] ??= { met: true, trust: 0 }; for (const q of Object.values(v.quests))
     if (!q.claimed && !q.talked.includes(id))
         q.talked.push(id); return true; }
-export function visitVillagePoint(v, p) { if (!walkable(p, v.progression?.stage))
+export function visitVillagePoint(v, p) { if (v.legacyArchiveOnly)
+    return false; if (!walkable(p, v.progression?.stage))
     return false; v.position = { ...p }; for (const r of Object.values(v.quests)) {
     if (r.claimed)
         continue;
@@ -95,13 +99,15 @@ export function visitVillagePoint(v, p) { if (!walkable(p, v.progression?.stage)
         if (Math.abs(n.x - p.x) + Math.abs(n.y - p.y) <= 1 && !r.materials.includes(n.id))
             r.materials.push(n.id);
 } return true; }
-export function claimQuest(v, id) { if (!questReady(v, id))
+export function claimQuest(v, id) { if (v.legacyArchiveOnly)
+    return false; if (!questReady(v, id))
     return false; const q = questCatalog.find(q => q.id === id); v.quests[id].claimed = true; v.development += q.points; v.souvenirs.push(q.id); v.residents[q.resident].trust++; v.event = { bloom: 'festival', vendor: 'materials', guide: 'lost' }[q.resident] ?? 'festival'; return true; }
-export function desiredVillageMini(v) { return progressionMini(v) ?? questCatalog.find(q => q.mini && v?.quests[q.id] && !v.quests[q.id].claimed && (v.quests[q.id].progress[q.mini] ?? 0) < 1)?.mini; }
+export function desiredVillageMini(v) { if (v?.legacyArchiveOnly)
+    return undefined; return progressionMini(v) ?? questCatalog.find(q => q.mini && v?.quests[q.id] && !v.quests[q.id].claimed && (v.quests[q.id].progress[q.mini] ?? 0) < 1)?.mini; }
 const int = (x, max = 1e12) => typeof x === 'number' && Number.isSafeInteger(x) && x >= 0 && x <= max;
 export function validVillage(value) { try {
     const v = value;
-    if (!v || v.progression !== undefined && !validVillageProgression(v.progression) || v.version !== 1 || !walkable(v.position, v.progression?.stage) || !int(v.visits) || !int(v.development, 120) || !v.quests || Array.isArray(v.quests) || Object.keys(v.quests).length > 8 || !v.residents || Array.isArray(v.residents) || Object.entries(v.residents).some(([id, r]) => !residents.some(n => n.id === id) || !r || r.met !== true || !int(r.trust, 8)) || !Array.isArray(v.facilities) || v.facilities.join(',') !== 'flowers,market,mill,workshop' || !Array.isArray(v.souvenirs) || new Set(v.souvenirs).size !== v.souvenirs.length || JSON.stringify(v.futurePlots) !== JSON.stringify([{ id: 'second-cafe', status: 'reserved' }]) || v.event !== undefined && !['lost', 'materials', 'festival'].includes(v.event))
+    if (!v || v.legacyArchiveOnly !== undefined && v.legacyArchiveOnly !== true || v.progression !== undefined && !validVillageProgression(v.progression) || v.version !== 1 || !walkable(v.position, v.progression?.stage) || !int(v.visits) || !int(v.development, 120) || !v.quests || Array.isArray(v.quests) || Object.keys(v.quests).length > 8 || !v.residents || Array.isArray(v.residents) || Object.entries(v.residents).some(([id, r]) => !residents.some(n => n.id === id) || !r || r.met !== true || !int(r.trust, 8)) || !Array.isArray(v.facilities) || v.facilities.join(',') !== 'flowers,market,mill,workshop' || !Array.isArray(v.souvenirs) || new Set(v.souvenirs).size !== v.souvenirs.length || JSON.stringify(v.futurePlots) !== JSON.stringify([{ id: 'second-cafe', status: 'reserved' }]) || v.event !== undefined && !['lost', 'materials', 'festival'].includes(v.event))
         return false;
     let points = 0;
     const trust = {};
@@ -121,6 +127,7 @@ export function validVillage(value) { try {
 catch {
     return false;
 } }
-export function questAvailable(v, id) { const q = questCatalog.find(q => q.id === id); if (!q)
+export function questAvailable(v, id) { if (v.legacyArchiveOnly)
+    return false; const q = questCatalog.find(q => q.id === id); if (!q)
     return false; if (v.progressiveLevel === undefined)
     return true; const ctx = { cafeLevel: v.progressiveLevel, progressive: true }; return unlocked(ctx, 'village') && (!q.mini || unlocked(ctx, q.mini)) && (id !== 'festival' || unlocked(ctx, 'festival')); }

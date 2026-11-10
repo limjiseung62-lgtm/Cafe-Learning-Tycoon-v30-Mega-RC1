@@ -1,8 +1,8 @@
-import { unlocked } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
-import { ensureSpecialInventory, reservationIndex } from './specialInventory.js?v=level-seats-83d02b666a1c';
-import { serviceReview, abandonedReview } from './managementReview.js?v=level-seats-83d02b666a1c';
-import { observeEducation } from './staffEducation.js?v=level-seats-83d02b666a1c';
-import { pollSpecialBusiness } from './specialBusiness.js?v=level-seats-83d02b666a1c';
+import { unlocked } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
+import { ensureSpecialInventory, reservationIndex } from './specialInventory.js?v=mega-5d509fb5dbfc';
+import { serviceReview, abandonedReview } from './managementReview.js?v=mega-5d509fb5dbfc';
+import { observeEducation } from './staffEducation.js?v=mega-5d509fb5dbfc';
+import { pollSpecialBusiness } from './specialBusiness.js?v=mega-5d509fb5dbfc';
 export const strategyCatalog = [{ id: 'fast', name: '빠른 서비스', visual: 'coffee', detail: '일반 손님과 작은 주문을 차근차근 처리해요.', event: '주방·서빙 미션', crew: '하루의 준비 · 태오의 운반', mission: '주문 8건 서빙' }, { id: 'care', name: '정성 서비스', visual: 'cake', detail: '기다림을 줄이고 단골과 특별 손님을 대접해요.', event: '접객·재고 구조 미션', crew: '봄이의 친절 · 루나의 접객', mission: '기다림 45초 이내로 5건 서빙' }, { id: 'group', name: '단체 주문', visual: 'bread', detail: '예약 손님을 위해 재고와 직원을 준비해요.', event: '단체·생일 주문 미션', crew: '준이의 재고 · 태오의 운반', mission: '음식 18개 서빙' }];
 export function startManagement(g, id) { if (!unlocked(g, 'reviews'))
     return; const m = g.management; if (g.mode !== 'CAFE_GROWTH' || !m?.strategy)
@@ -55,14 +55,15 @@ export function pollManagement(g) {
             if (regular.loyal && !regular.giftClaimed) {
                 regular.giftClaimed = true;
                 const plate = guest.order.find(o => g.menus.some(menu => menu.menuId === o.menuId));
-                if (plate) {
+                if (plate && !m.legacyArchiveOnly) {
                     m.deliveries.push({ id: 'loyal:' + (g.growthCafeId ?? 'cafe-1') + ':' + identity, resident: guest.definition.name, destination: 'plaza', menuId: plate.menuId, quantity: 1, status: 'offered' });
                     m.deliveries = m.deliveries.slice(-30);
                 }
-                m.materials.flower = Math.min(999, m.materials.flower + 1);
+                if (!m.legacyArchiveOnly)
+                    m.materials.flower = Math.min(999, m.materials.flower + 1);
                 g.regularMemory.revisitEligible = true;
             }
-            if (r.paid % 5 === 0) {
+            if (!m.legacyArchiveOnly && r.paid % 5 === 0) {
                 const key = r.strategy === 'group' ? 'flour' : r.strategy === 'care' ? 'milk' : 'fruit';
                 m.materials[key] = Math.min(999, m.materials[key] + 1);
             }
@@ -84,7 +85,8 @@ export function pollManagement(g) {
 export function settleManagement(g) { pollManagement(g); const m = g.mode === 'CAFE_GROWTH' ? g.management : undefined, r = m?.run; if (!m || !r || g.status !== 'CLOSED' || r.settled)
     return false; if (!m.businessHistory.some(h => h.id === r.id)) {
     if (r.missionComplete && g.stats.correct > 0) {
-        m.materials.flower = Math.min(999, m.materials.flower + 1);
+        if (!m.legacyArchiveOnly)
+            m.materials.flower = Math.min(999, m.materials.flower + 1);
         m.reputation = Math.min(100, m.reputation + 1);
     }
     m.businessHistory.push({ id: r.id, strategy: r.strategy, reputation: m.reputation, success: r.missionComplete, served: r.paid });

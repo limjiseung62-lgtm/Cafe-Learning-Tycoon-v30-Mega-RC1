@@ -1,11 +1,11 @@
-import { replaceDownloadGroup } from './commonDownloadGroup.js?v=level-seats-83d02b666a1c';
-import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js?v=level-seats-83d02b666a1c';
-import { CommonCafeFlow } from './commonCafeFlow.js?v=level-seats-83d02b666a1c';
-import { commonQuestion, commonAnswerText } from './commonLearningCatalog.js?v=level-seats-83d02b666a1c';
-import { loadCommonRuntime } from './commonBankLoader.js?v=level-seats-83d02b666a1c';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=level-seats-83d02b666a1c';
-import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=level-seats-83d02b666a1c';
-import { worksheetHtml } from './twinWorksheet.js?v=level-seats-83d02b666a1c';
+import { replaceDownloadGroup } from './commonDownloadGroup.js?v=mega-5d509fb5dbfc';
+import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js?v=mega-5d509fb5dbfc';
+import { CommonCafeFlow } from './commonCafeFlow.js?v=mega-5d509fb5dbfc';
+import { commonQuestion, commonAnswerText } from './commonLearningCatalog.js?v=mega-5d509fb5dbfc';
+import { loadCommonRuntime } from './commonBankLoader.js?v=mega-5d509fb5dbfc';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=mega-5d509fb5dbfc';
+import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=mega-5d509fb5dbfc';
+import { worksheetHtml } from './twinWorksheet.js?v=mega-5d509fb5dbfc';
 const mounted = new WeakMap();
 const archiveExpected = new WeakMap();
 export async function restoreCommonArchive(flow, saved) { const raw = deploymentLocalStorage.getItem(archiveKey(saved.learningRecordId)); const cp = raw ? await flow.loaded.module.decode(raw) : saved; await flow.restore(cp); archiveExpected.set(flow, raw); }

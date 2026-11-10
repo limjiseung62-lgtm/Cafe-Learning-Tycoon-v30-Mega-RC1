@@ -1,7 +1,7 @@
-import { deploymentLocalStorage } from './deploymentStorage.js?v=level-seats-83d02b666a1c';
-import { JsonQuestionProvider, legacyQuestions } from './questionPack.js?v=level-seats-83d02b666a1c';
-import { LearningSession, LearningProgressRepository } from './learningSession.js?v=level-seats-83d02b666a1c';
-import { LocalProblemRepository } from './problems.js?v=level-seats-83d02b666a1c';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=mega-5d509fb5dbfc';
+import { JsonQuestionProvider, legacyQuestions } from './questionPack.js?v=mega-5d509fb5dbfc';
+import { LearningSession, LearningProgressRepository } from './learningSession.js?v=mega-5d509fb5dbfc';
+import { LocalProblemRepository } from './problems.js?v=mega-5d509fb5dbfc';
 let storage = null;
 try {
     if (typeof deploymentLocalStorage !== 'undefined')

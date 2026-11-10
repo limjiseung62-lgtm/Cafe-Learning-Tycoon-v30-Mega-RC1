@@ -1,8 +1,8 @@
-import { backupLimit, backupFilename, checkedGrowthBackup, prepareGrowthRestore } from './backupRecovery.js?v=level-seats-83d02b666a1c';
-import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=level-seats-83d02b666a1c';
-import { escapeText as esc } from './questionRenderer.js?v=level-seats-83d02b666a1c';
-import { createGrowthSave, createProgressiveGrowthSave } from './growthSave.js?v=level-seats-83d02b666a1c';
-import { v26Deployment } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
+import { backupLimit, backupFilename, checkedGrowthBackup, prepareGrowthRestore } from './backupRecovery.js?v=mega-5d509fb5dbfc';
+import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=mega-5d509fb5dbfc';
+import { escapeText as esc } from './questionRenderer.js?v=mega-5d509fb5dbfc';
+import { createGrowthSave, createProgressiveGrowthSave } from './growthSave.js?v=mega-5d509fb5dbfc';
+import { v26Deployment } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
 let url;
 if (typeof addEventListener === 'function')
     addEventListener('pagehide', () => { if (url)

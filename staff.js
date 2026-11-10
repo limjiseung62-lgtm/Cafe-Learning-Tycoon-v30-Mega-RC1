@@ -1,7 +1,82 @@
-import { staffBalance } from './config.js?v=level-seats-83d02b666a1c';
+import { staffBalance } from './config.js?v=mega-5d509fb5dbfc';
 export const staffDefinitions = [{ staffId: 'staff-1', name: '봄이', visualKey: 'spring' }, { staffId: 'staff-2', name: '준이', visualKey: 'jun' }, { staffId: 'staff-3', name: '하루', visualKey: 'haru' }, { staffId: 'staff-4', name: '루나', visualKey: 'luna' }, { staffId: 'staff-5', name: '도담', visualKey: 'dodam' }];
 export const staffVisuals = { owner: { face: '🧑‍🍳', apron: '#795f42', accessory: '☕' }, spring: { face: '👩', apron: '#d4898f', accessory: '🌸' }, jun: { face: '👨‍🦱', apron: '#7d9cc1', accessory: '🎧' }, haru: { face: '👩‍🦰', apron: '#9aaf70', accessory: '🌿' }, luna: { face: '👩‍🦳', apron: '#ac8dbb', accessory: '⭐' }, dodam: { face: '👨‍🦲', apron: '#d8a562', accessory: '🎀' } };
 export class StaffSystem {
+    support;
+    orderSource(w) { const order = w.orderId === null ? undefined : this.currentOrders.get(w.orderId); if (!order?.pickupSources)
+        return undefined; let offset = order.items.length - w.remaining.length; for (const source of order.pickupSources) {
+        if (offset < source.items.length)
+            return { ...source, remaining: source.items.length - offset };
+        offset -= source.items.length;
+    } return undefined; }
+    /** Logistics and customer pickups share the same physical dock lease. */
+    supplyDock(w, job) {
+        const m = this.movement, choices = this.support?.dockCandidates?.(job);
+        if (!m || !choices?.length)
+            return true;
+        const from = job.phase === 'pickup' || job.phase === 'loading', key = from ? 'from' : 'to', occupied = new Set([...this.pickupClaims].filter(([id]) => id !== w.staffId).map(([, i]) => i));
+        const options = choices.map(point => ({ point, index: m.pickups.findIndex(p => Math.hypot(p.x - point.x, p.y - point.y) < .001) })).filter(o => o.index >= 0 && !occupied.has(o.index));
+        const own = this.pickupClaims.get(w.staffId), preferred = options.find(o => o.index === own), stationary = this.now - this.observe(w).movedAt;
+        const chosen = preferred && stationary < 8 ? preferred : [...options].sort((a, b) => Math.hypot(w.position.x - a.point.x, (w.position.y - a.point.y) * 2 / 3) - Math.hypot(w.position.x - b.point.x, (w.position.y - b.point.y) * 2 / 3)).find(o => stationary < 8 || o.index !== own) ?? preferred;
+        if (!chosen) {
+            this.pickupClaims.delete(w.staffId);
+            this.observe(w).path = 'waiting-for-dock';
+            return false;
+        }
+        if (own !== chosen.index && (own !== undefined || Math.hypot(w.position.x - chosen.point.x, (w.position.y - chosen.point.y) * 2 / 3) <= 12)) {
+            this.pickupClaims.set(w.staffId, chosen.index);
+            this.routes.delete(w.staffId);
+            this.retryAt.delete(w.staffId);
+            if (stationary >= 8)
+                this.report(w, 'supply-dock-reassigned');
+        }
+        job[key] = { ...chosen.point };
+        if ((job.phase === 'loading' || job.phase === 'unloading') && Math.hypot(w.position.x - chosen.point.x, (w.position.y - chosen.point.y) * 2 / 3) > .01) {
+            job.phase = from ? 'pickup' : 'delivery';
+            job.elapsed = 0;
+            return false;
+        }
+        return true;
+    }
+    supportTick(w, dt, orders) { const job = this.support?.job(w, orders); if (!job)
+        return false; const wanted = { pickup: 'MOVING_TO_PICKUP', loading: 'PICKING_UP', delivery: 'MOVING_TO_TABLE', unloading: 'SERVING' }[job.phase]; if (w.state !== wanted)
+        this.change(w, wanted); const yielding = this.yielding.get(w.staffId); if (yielding) {
+        if (this.now - yielding.at > 3 && this.now - this.observe(w).movedAt > 2) {
+            this.yielding.delete(w.staffId);
+            this.routes.delete(w.staffId);
+        }
+        else {
+            if (this.move(w, yielding.point, dt))
+                this.yielding.delete(w.staffId);
+            return true;
+        }
+    } if (!this.supplyDock(w, job))
+        return true; w.busyTime += dt; w.elapsed += dt; job.elapsed += dt; if (job.loaded)
+        w.cargo = [...job.items]; const advance = (phase) => { job.phase = phase; job.elapsed = 0; }; if (job.phase === 'pickup') {
+        if (this.move(w, job.from, dt))
+            advance('loading');
+    }
+    else if (job.phase === 'loading' && job.elapsed >= staffBalance.pickupSeconds * (this.support.assignment(w).role === 'kitchen' ? 0.7 : 1) * (this.support?.pickupFactor?.(w) ?? 1)) {
+        if (this.support.load(job)) {
+            w.cargo = [...job.items];
+            advance('delivery');
+        }
+        else {
+            w.cargo = [];
+            this.change(w, 'RETURNING');
+        }
+    }
+    else if (job.phase === 'delivery') {
+        if (this.move(w, job.to, dt))
+            advance('unloading');
+    }
+    else if (job.phase === 'unloading' && job.elapsed >= .4) {
+        if (this.support.deliver(job)) {
+            w.supplyTrips = (w.supplyTrips ?? 0) + 1;
+            w.cargo = [];
+            this.change(w, 'RETURNING');
+        }
+    } return true; }
     maxPaid = 5;
     readySince = new Map();
     movement = null;
@@ -60,7 +135,7 @@ export class StaffSystem {
         return this.pickup; const own = this.pickupClaims.get(w.staffId); if (own !== undefined)
         return this.movement.pickups[own]; const fallback = this.workers.indexOf(w); if (!this.pickupFlow.sharedPickup)
         return this.movement.pickups[fallback % this.movement.pickups.length] ?? null; const occupied = new Set([...this.pickupClaims].filter(([id]) => id !== w.staffId).map(([, i]) => i)), target = w.orderId === null ? this.pickup : this.seats[this.currentOrders.get(w.orderId)?.seat ?? -1] ?? this.pickup; let best = -1, cost = Infinity; for (let i = 0; i < this.movement.pickups.length; i++) {
-        if (occupied.has(i))
+        if (occupied.has(i) || this.orderSource(w) && !this.orderSource(w).indices.includes(i))
             continue;
         const p = this.movement.pickups[i], d = (a, b) => Math.hypot(a.x - b.x, (a.y - b.y) * 2 / 3), c = d(w.position, p) + d(p, { x: target.x, y: target.y + 5 });
         if (c < cost) {
@@ -68,7 +143,8 @@ export class StaffSystem {
             cost = c;
         }
     } if (best < 0)
-        return null; this.pickupClaims.set(w.staffId, best); return this.movement.pickups[best]; }
+        return null; if (!this.support || Math.hypot(w.position.x - this.movement.pickups[best].x, (w.position.y - this.movement.pickups[best].y) * 2 / 3) <= 12)
+        this.pickupClaims.set(w.staffId, best); return this.movement.pickups[best]; }
     currentOrders = new Map();
     routes = new Map();
     configureMovement(movement, orderSeats) { this.movement = movement; this.routes.clear(); this.pickupClaims.clear(); this.yielding.clear(); this.retryAt.clear(); for (const w of this.workers) {
@@ -132,6 +208,7 @@ export class StaffSystem {
     get paid() { return this.workers.filter(w => !w.owner); }
     claimDuration;
     hire(definition) { const d = definition ?? staffDefinitions[this.paid.length]; if (!d || this.paid.some(w => w.staffId === d.staffId) || this.paid.length >= this.maxPaid)
+        return null; if (this.movement && !this.movement.homes[this.workers.length])
         return null; const w = this.create(d.staffId, d.name, d.visualKey); w.position = this.movement ? { ...this.movement.homes[this.workers.length] } : { x: 14 + this.paid.length * 12, y: 22 }; this.workers.push(w); return w; }
     upgrade(w, now) { w.level++; Object.assign(w, staffBalance.levels[w.level - 1]); w.upgradeFeedbackUntil = now + 3; }
     setLayout(pickup, seats) { this.pickup = { ...pickup }; this.seats = seats.map(p => ({ ...p })); }
@@ -164,7 +241,7 @@ export class StaffSystem {
                 this.retryAt.set(w.staffId, this.now + .5);
                 return false;
             }
-            let travel = w.moveSpeed * dt;
+            let travel = w.moveSpeed * (this.support?.moveFactor?.(w) ?? 1) * dt;
             while (route.index < route.points.length) {
                 const p = route.points[route.index], dx = p.x - w.position.x, dy = p.y - w.position.y, distance = Math.hypot(dx, dy * 2 / 3) * this.movement.worldScale, next = distance <= travel + 1e-9 ? p : { x: w.position.x + dx * travel / distance, y: w.position.y + dy * travel / distance }, blockers = blockedBy(next);
                 if (blockers.length) {
@@ -187,6 +264,7 @@ export class StaffSystem {
                     }
                     return false;
                 }
+                w.walkDistance = (w.walkDistance ?? 0) + Math.hypot(next.x - w.position.x, (next.y - w.position.y) * 2 / 3);
                 if (distance <= travel + 1e-9) {
                     w.position = { ...p };
                     travel -= distance;
@@ -203,7 +281,7 @@ export class StaffSystem {
         }
         const dx = to.x - w.position.x, dy = to.y - w.position.y;
         const distance = Math.hypot(dx, dy);
-        const travel = w.moveSpeed * dt;
+        const travel = w.moveSpeed * (this.support?.moveFactor?.(w) ?? 1) * dt;
         if (distance <= travel) {
             w.position = { ...to };
             return true;
@@ -216,7 +294,7 @@ export class StaffSystem {
         this.now = now;
         const active = new Map(orders.filter(o => o.active && !this.completedIds.has(o.id)).map(o => [o.id, o]));
         this.currentOrders = active;
-        if (this.movement?.localDispatch) {
+        if (this.movement?.localDispatch || this.support) {
             for (const id of this.readySince.keys())
                 if (!active.has(id))
                     this.readySince.delete(id);
@@ -239,6 +317,8 @@ export class StaffSystem {
         // Claims are established synchronously; later workers cannot take the same order.
         const claimed = new Set(this.workers.map(w => w.orderId).filter((id) => id !== null));
         for (const w of this.workers) {
+            if (this.support && this.supportTick(w, dt, [...active.values()]))
+                continue;
             if (w.orderId === null && !['IDLE', 'RETURNING'].includes(w.state)) {
                 this.report(w, 'orphan-state-released');
                 this.release(w);
@@ -248,10 +328,14 @@ export class StaffSystem {
                 this.release(w);
             }
             if ((w.state === 'IDLE' || w.state === 'RETURNING' && (this.pickupFlow.chainOrders || this.now - this.observe(w).movedAt >= 8)) && !(w.owner && this.manualOwner && !this.paid.length)) {
-                const order = [...active.values()].filter(o => o.ready && !claimed.has(o.id)).sort((a, b) => { if (!this.movement?.localDispatch)
+                const order = [...active.values()].filter(o => o.ready && !claimed.has(o.id)).sort((a, b) => { if (!this.movement?.localDispatch && !this.support)
                     return a.orderedAt - b.orderedAt || a.id - b.id; const age = (o) => now - (this.readySince.get(o.id) ?? now), A = age(a), B = age(b); if (!!a.vip !== !!b.vip)
                     return a.vip ? -1 : 1; if (A >= 45 || B >= 45)
-                    return B - A || a.id - b.id; const d = (a, b) => Math.hypot(a.x - b.x, (a.y - b.y) * 2 / 3), cost = (o) => Math.min(...this.movement.pickups.map(p => d(w.position, p) + d(p, { x: this.seats[o.seat].x, y: this.seats[o.seat].y + 5 }))) - age(o) * 2; return cost(a) - cost(b) || a.id - b.id; })[0];
+                    return B - A || a.id - b.id; if (this.support) {
+                    const delta = this.support.priority(w, a) - this.support.priority(w, b);
+                    if (delta)
+                        return delta;
+                } const d = (a, b) => Math.hypot(a.x - b.x, (a.y - b.y) * 2 / 3), cost = (o) => Math.min(...this.movement.pickups.map(p => d(w.position, p) + d(p, { x: this.seats[o.seat].x, y: this.seats[o.seat].y + 5 }))) - age(o) * 2; return cost(a) - cost(b) || a.id - b.id; })[0];
                 if (order) {
                     w.orderId = order.id;
                     w.remaining = [...order.items];
@@ -291,8 +375,8 @@ export class StaffSystem {
                     break;
                 }
                 case 'PICKING_UP':
-                    if (w.elapsed >= staffBalance.pickupSeconds) {
-                        w.cargo = w.remaining.splice(0, w.carryCapacity);
+                    if (w.elapsed >= staffBalance.pickupSeconds * (this.support?.assignment(w).role === 'kitchen' ? 0.8 : 1) * (this.support?.pickupFactor?.(w) ?? 1)) {
+                        w.cargo = w.remaining.splice(0, Math.min(this.support?.tripCapacity?.(w) ?? w.carryCapacity, this.orderSource(w)?.remaining ?? (this.support?.tripCapacity?.(w) ?? w.carryCapacity)));
                         this.change(w, 'MOVING_TO_TABLE');
                     }
                     break;
@@ -301,7 +385,7 @@ export class StaffSystem {
                         this.change(w, 'SERVING');
                     break;
                 case 'SERVING':
-                    if (w.elapsed >= 1 / w.serveSpeed) {
+                    if (w.elapsed >= (this.support?.assignment(w).role === 'vip' && order?.vip ? 0.8 : 1) / (w.serveSpeed * (this.support?.serveFactor?.(w) ?? 1))) {
                         w.cargo = [];
                         if (w.remaining.length)
                             this.change(w, 'MOVING_TO_PICKUP');
@@ -321,7 +405,7 @@ export class StaffSystem {
                     }
                     break;
                 case 'RETURNING':
-                    if (this.move(w, this.movement?.homes[this.workers.indexOf(w)] ?? (w.owner ? { x: 78, y: 22 } : { x: 14 + this.paid.indexOf(w) * 12, y: 22 }), dt))
+                    if (this.move(w, this.support?.home(w) ?? this.movement?.homes[this.workers.indexOf(w)] ?? (w.owner ? { x: 78, y: 22 } : { x: 14 + this.paid.indexOf(w) * 12, y: 22 }), dt))
                         this.change(w, 'IDLE');
                     break;
             }

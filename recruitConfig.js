@@ -1,3 +1,7 @@
+import { finalStaffProfiles } from './finalStaffProfiles.js?v=mega-5d509fb5dbfc';
+import { hasFinalActor } from './finalActorArt.js?v=mega-5d509fb5dbfc';
+export const finalProfile = (id) => finalStaffProfiles.find(s => s.id === id);
+export const finalRecruitCatalog = finalStaffProfiles.filter(s => hasFinalActor(s.id)).map(s => ({ staffId: s.id, name: s.name, visualKey: s.id, grade: '전문', ability: s.primaryTrait.name, description: s.primaryTrait.name + ' · ' + s.secondaryTrait.name, feedback: '맡은 구역을 도울게요.' }));
 export const recruitCatalog = [
     ['staff-1', '봄이', 'spring', '일반', '다정한 팁', '정상 서빙 때 팁을 모아요.', '팁 고마워요!'],
     ['staff-2', '준이', 'jun', '일반', '재고 레이더', '부족한 주문 재고를 알려 줘요.', '이 음식이 부족해요!'],
@@ -13,8 +17,9 @@ export const recruitCatalog = [
     ['staff-12', '모아', 'moa', '특별', '주문의 추억', '특별 주문의 추억과 칭호를 모아요.', '특별한 주문을 기억해요!']
 ].map(([staffId, name, visualKey, grade, ability, description, feedback]) => ({ staffId, name, visualKey, grade, ability, description, feedback }));
 export const recruitConfig = { prices: [4000, 14000, 30000, 60000, 100000, 100000, 100000, 100000, 100000, 100000, 100000, 100000], maxOwned: 12, maxWorking: 5, bonusRate: .01, bonusCap: 1500, version: 1 };
-export const recruitById = (id) => recruitCatalog.find(d => d.staffId === id);
-export function staffEffect(id, level) { const l = Math.max(1, Math.min(5, level)), factor = 1 + (l - 1) * .1; switch (id) {
+export const recruitById = (id) => recruitCatalog.find(d => d.staffId === id) ?? finalRecruitCatalog.find(d => d.staffId === id);
+export function staffEffect(id, level) { const p = finalProfile(id); if (p)
+    return p.primaryTrait.name + ' · ' + p.secondaryTrait.name + ' · 15분 급여 ' + p.salary.toLocaleString() + '원 (영업 매출 범위)'; const l = Math.max(1, Math.min(5, level)), factor = 1 + (l - 1) * .1; switch (id) {
     case 'staff-1': return '50% 팁 ' + Math.round(30 * factor) + '원 적립 · 최대10회';
     case 'staff-2': return '부족 재고 안내 · ' + (22 - l * 2) + '초 간격';
     case 'staff-3': return '주문 확인 평균 ' + (.28 - l * .01).toFixed(2) + '초 · 총 절약3초 이내';

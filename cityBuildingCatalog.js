@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { byId as old } from './cityLegacyArt.js?v=level-seats-83d02b666a1c';
+import { byId as old } from './cityLegacyArt.js?v=mega-5d509fb5dbfc';
 // Declared design coefficients, not measured demographic statistics. Tile side is 5 model metres.
 const defs = [
     ['detached', '단독주택', 'housing', [[3, 3, 2], [3, 4, 2]], 1, 0, .35], ['rowhouse', '연립주택', 'housing', [[4, 3, 3], [4, 4, 3]], 1, 0, .20], ['villa', '빌라', 'housing', [[4, 4, 4], [3, 4, 3]], 1, 0, .22], ['low-apartment', '저층 아파트', 'housing', [[4, 4, 5], [4, 5, 6]], 1, 0, .20], ['high-apartment', '고층 아파트', 'housing', [[5, 5, 18], [6, 6, 24]], 1, 0, .16], ['mixed-residence', '주상복합', 'housing', [[6, 6, 16], [5, 6, 20]], .65, .30, .12],

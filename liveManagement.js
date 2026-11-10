@@ -1,10 +1,15 @@
-import { validInteriorSale } from './interiorCommerce.js?v=level-seats-83d02b666a1c';
-import { longStateFor } from './longGrowthUi.js?v=level-seats-83d02b666a1c';
-import { createLongGrowth } from './longGrowth.js?v=level-seats-83d02b666a1c';
-import { inventorySku } from './megaInventory.js?v=level-seats-83d02b666a1c';
-import { guestPose } from './spatial.js?v=level-seats-83d02b666a1c';
-import { createMegaSpace, ensureMegaPlan, megaPointClear, megaRoute } from './megaSpace.js?v=level-seats-83d02b666a1c';
+import { supplyLayoutChangeError } from './finalSupply.js?v=mega-5d509fb5dbfc';
+import { validInteriorSale } from './interiorCommerce.js?v=mega-5d509fb5dbfc';
+import { longStateFor } from './longGrowthUi.js?v=mega-5d509fb5dbfc';
+import { createLongGrowth } from './longGrowth.js?v=mega-5d509fb5dbfc';
+import { inventorySku } from './megaInventory.js?v=mega-5d509fb5dbfc';
+import { guestPose } from './spatial.js?v=mega-5d509fb5dbfc';
+import { createMegaSpace, ensureMegaPlan, megaPointClear, megaRoute } from './megaSpace.js?v=mega-5d509fb5dbfc';
 export let liveManagementOpen = false;
+const managementVersion = (s) => { const m = structuredClone(s.mega); if (m?.finalGrowth) {
+    delete m.finalGrowth.supply;
+    delete m.finalGrowth.payroll;
+} return JSON.stringify([s.money, m, s.cafeLevel]); };
 const projection = (s) => { const p = structuredClone(s); delete p.campaign; return p; };
 export function liveManagementRepository(g, c) {
     return { read: () => ({ status: 'ready', save: projection(c.current()) }), replace: () => ({ ok: false, message: '영업 중에는 카페를 교체할 수 없어요.' }), write: (next, expected) => {
@@ -14,11 +19,20 @@ export function liveManagementRepository(g, c) {
             const run = c.current().campaign?.run;
             if (run && Date.now() >= run.endAt)
                 return fail('영업 종료 시각이 되었어요. 먼저 결과를 확인해 주세요.');
-            if (!expected || JSON.stringify([current.money, current.mega, current.cafeLevel]) !== JSON.stringify([expected.money, expected.mega, expected.cafeLevel]))
+            if (!expected || managementVersion(current) !== managementVersion(expected))
                 return fail('카페가 변경됐어요. 관리 화면을 다시 열어 주세요.');
             if (!next.mega || next.cafeLevel !== g.cafeLevel || next.money > g.money && !validInteriorSale(current, next) || next.money < 0)
                 return fail('구매 정보를 확인해 주세요.');
-            const proposed = structuredClone(next.mega), plan = ensureMegaPlan(proposed, g.cafeLevel, g.branchId), space = createMegaSpace(plan), oldSpace = g.serviceSpace;
+            const proposed = structuredClone(next.mega), plan = ensureMegaPlan(proposed, g.cafeLevel, g.branchId), space = createMegaSpace(plan, proposed.finalGrowth ? g.staffLimit + 1 : undefined), oldSpace = g.serviceSpace;
+            if (proposed.finalGrowth && g.mega?.finalGrowth?.supply)
+                proposed.finalGrowth.supply = structuredClone(g.mega.finalGrowth.supply);
+            if (proposed.finalGrowth && g.mega?.finalGrowth?.payroll)
+                proposed.finalGrowth.payroll = structuredClone(g.mega.finalGrowth.payroll);
+            if (proposed.finalGrowth && space.staffWaitingPoints.length < g.service.workers.length)
+                return fail('직원들이 안전하게 기다릴 통로와 공간을 남겨 주세요.');
+            const supplyError = supplyLayoutChangeError(g, plan);
+            if (supplyError)
+                return fail(supplyError);
             const indices = [];
             for (const guest of g.guests) {
                 const old = oldSpace?.seats[guest.seat], index = space.seats.findIndex(s => s.seatId === old?.seatId), seat = space.seats[index];

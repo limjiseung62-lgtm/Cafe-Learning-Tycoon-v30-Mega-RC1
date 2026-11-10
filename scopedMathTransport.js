@@ -1,4 +1,4 @@
-import { scopedMathIndexSHA256 } from './scopedMathPin.js?v=level-seats-83d02b666a1c';
+import { scopedMathIndexSHA256 } from './scopedMathPin.js?v=mega-5d509fb5dbfc';
 const digest = async (b) => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new Uint8Array(b).buffer)), n => n.toString(16).padStart(2, '0')).join('');
 const base = () => new URL('assets/cafe-scoped-math/', document.baseURI);
 async function bytes(file) { if (!/^(index\.json|runtime\.mjs|scoped-core\.mjs|unit-\d{2}\.json\.gz)$/.test(file))

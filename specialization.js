@@ -1,5 +1,6 @@
-import { unlocked } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
-import { specializationById, belongsToBranch } from './specializationConfig.js?v=level-seats-83d02b666a1c';
+import { finalActive } from './finalGrowth.js?v=mega-5d509fb5dbfc';
+import { unlocked } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
+import { specializationById, belongsToBranch } from './specializationConfig.js?v=mega-5d509fb5dbfc';
 export function validSpecialization(v) { try {
     const s = v;
     return !!s && s.version === 1 && !!specializationById(s.selected) && typeof s.selectedAt === 'string' && Number.isFinite(Date.parse(s.selectedAt)) && Array.isArray(s.receipts) && s.receipts.length <= 300 && new Set(s.receipts.map(r => r.id)).size === s.receipts.length && s.receipts.every(r => typeof r.id === 'string' && r.id.length <= 160 && typeof r.business === 'string' && r.business.length <= 128 && typeof r.event === 'string' && specializationById(s.selected).events.some((_, i) => r.event === 'spec-' + s.selected + '-' + i) && ['success', 'failed', 'cancelled'].includes(r.outcome)) && Array.isArray(s.collections) && s.collections.length <= 3 && new Set(s.collections).size === s.collections.length && s.collections.every(id => ['souvenir', 'recipe', 'title'].includes(id)) && JSON.stringify(s).length < 200000;
@@ -7,12 +8,13 @@ export function validSpecialization(v) { try {
 catch {
     return false;
 } }
-export function canSpecialize(g) { if (!unlocked(g, 'specialization'))
+export function canSpecialize(g) { if (finalActive(g))
+    return false; if (!unlocked(g, 'specialization'))
     return false; return (g.mode === 'CAFE_GROWTH' || !!g.classRandom && g.durationSeconds === 1800) && g.cafeLevel >= 11 && !!g.branchId && !g.specialization; }
 export function chooseSpecialization(g, id, now = new Date().toISOString()) { if (!canSpecialize(g) || !belongsToBranch(id, g.branchId))
     return false; g.specialization = { version: 1, selected: id, selectedAt: now, receipts: [], collections: [], ...g.freeLayouts ? { layoutBackup: structuredClone(g.freeLayouts) } : {} }; return true; }
 // Buildings keep all new facilities outside the existing editable floor. No furniture relocation is needed.
-export function syncSpecialization(g, business) { const s = g.specialization; if (g.mode !== 'CAFE_GROWTH' || !s)
+export function syncSpecialization(g, business) { const s = g.specialization; if (g.mode !== 'CAFE_GROWTH' || !s || finalActive(g))
     return false; let changed = false; for (const r of g.events.records) {
     if (!r.type.startsWith('spec-' + s.selected + '-') || !['success', 'failed', 'cancelled'].includes(r.outcome))
         continue;

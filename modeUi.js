@@ -1,48 +1,48 @@
-import { mountRecoveryStart, mountBackupControls, mountPlayingBackup, mountEndBackup } from './backupRecoveryUi.js?v=level-seats-83d02b666a1c';
-import { applyExternalPicker, preflightExternal, runExternalStart } from './externalLaunch.js?v=level-seats-83d02b666a1c';
-import { modernCityNavigation } from './growthNavigationPolicy.js?v=level-seats-83d02b666a1c';
-import { mountLiveManagement } from './liveManagementUi.js?v=level-seats-83d02b666a1c';
-import { wrapCommonBackup, unpackCommonBackup, commonDeployment } from './commonBackup.js?v=level-seats-83d02b666a1c';
-import { commonTransactionOpen } from './commonLearningTransaction.js?v=level-seats-83d02b666a1c';
-import { mountCafeStudyPicker } from './cafeStudyPicker.js?v=level-seats-83d02b666a1c';
-import { megaSetupActions } from './megaEditor.js?v=level-seats-83d02b666a1c';
-import { v27Deployment } from './classRandom.js?v=level-seats-83d02b666a1c';
-import { classRuntime } from './classRuntime.js?v=level-seats-83d02b666a1c';
-import { createRandomClassMatch } from './sessionFactory.js?v=level-seats-83d02b666a1c';
+import { mountRecoveryStart, mountBackupControls, mountPlayingBackup, mountEndBackup } from './backupRecoveryUi.js?v=mega-5d509fb5dbfc';
+import { applyExternalPicker, preflightExternal, runExternalStart } from './externalLaunch.js?v=mega-5d509fb5dbfc';
+import { modernCityNavigation } from './growthNavigationPolicy.js?v=mega-5d509fb5dbfc';
+import { mountLiveManagement } from './liveManagementUi.js?v=mega-5d509fb5dbfc';
+import { wrapCommonBackup, unpackCommonBackup, commonDeployment } from './commonBackup.js?v=mega-5d509fb5dbfc';
+import { commonTransactionOpen } from './commonLearningTransaction.js?v=mega-5d509fb5dbfc';
+import { mountCafeStudyPicker } from './cafeStudyPicker.js?v=mega-5d509fb5dbfc';
+import { megaSetupActions } from './megaEditor.js?v=mega-5d509fb5dbfc';
+import { v27Deployment } from './classRandom.js?v=mega-5d509fb5dbfc';
+import { classRuntime } from './classRuntime.js?v=mega-5d509fb5dbfc';
+import { createRandomClassMatch } from './sessionFactory.js?v=mega-5d509fb5dbfc';
 let preparedBackupUrl;
 if (typeof addEventListener === 'function')
     addEventListener('pagehide', () => { if (preparedBackupUrl)
         URL.revokeObjectURL(preparedBackupUrl); });
-import { goalsHtml } from './progressiveGoals.js?v=level-seats-83d02b666a1c';
-import { openProgressiveHub } from './progressiveHub.js?v=level-seats-83d02b666a1c';
-import { alignMissionBusiness, unlocked, featureLevels } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
-import { openProgressiveBusiness } from './progressiveEconomy.js?v=level-seats-83d02b666a1c';
-import { createProgressiveGrowthSave } from './growthSave.js?v=level-seats-83d02b666a1c';
-import { v26Deployment } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
-import { createProgressiveClassMatch } from './sessionFactory.js?v=level-seats-83d02b666a1c';
-import { organizeGrowthMenu } from './studentNavigation.js?v=level-seats-83d02b666a1c';
-import { openManagementHub } from './managementHub.js?v=level-seats-83d02b666a1c';
-import { chooseManagementStrategy } from './managementUi.js?v=level-seats-83d02b666a1c';
-import { managementFor } from './managementState.js?v=level-seats-83d02b666a1c';
-import { deploymentLocalStorage } from './deploymentStorage.js?v=level-seats-83d02b666a1c';
-import { openCafePicker } from './cafePicker.js?v=level-seats-83d02b666a1c';
-import { cafeNames } from './cafePortfolio.js?v=level-seats-83d02b666a1c';
-import { openVillage } from './villageUi.js?v=level-seats-83d02b666a1c';
-import { openLayoutEditor } from './layoutEditor.js?v=level-seats-83d02b666a1c';
-import { rosterFor, syncRosterSave } from './staffRecruitment.js?v=level-seats-83d02b666a1c';
-import { openCrewDialog } from './recruitUi.js?v=level-seats-83d02b666a1c';
-import { ensureGrowthWriteLock, releaseGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=level-seats-83d02b666a1c';
-import { chooseLongMission, prepareLongState } from './longGrowthUi.js?v=level-seats-83d02b666a1c';
-import { growthRuntime } from './growthRuntime.js?v=level-seats-83d02b666a1c';
-import { concepts, seededRandom } from './cafeRun.js?v=level-seats-83d02b666a1c';
-import { createClassMatch } from './sessionFactory.js?v=level-seats-83d02b666a1c';
-import { createGrowthSave } from './growthSave.js?v=level-seats-83d02b666a1c';
-import { GrowthSessionController } from './growthSession.js?v=level-seats-83d02b666a1c';
-import { LocalSaveRepository, BrowserGrowthRepository, CandidateSaveRepository, growthStorageKey } from './saveRepository.js?v=level-seats-83d02b666a1c';
-import { policyFor } from './sessionModes.js?v=level-seats-83d02b666a1c';
-import { balance } from './config.js?v=level-seats-83d02b666a1c';
-import { questionCatalog } from './questionPack.js?v=level-seats-83d02b666a1c';
-import { escapeText } from './questionRenderer.js?v=level-seats-83d02b666a1c';
+import { goalsHtml } from './progressiveGoals.js?v=mega-5d509fb5dbfc';
+import { openProgressiveHub } from './progressiveHub.js?v=mega-5d509fb5dbfc';
+import { alignMissionBusiness, unlocked, featureLevels } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
+import { openProgressiveBusiness } from './progressiveEconomy.js?v=mega-5d509fb5dbfc';
+import { createProgressiveGrowthSave } from './growthSave.js?v=mega-5d509fb5dbfc';
+import { v26Deployment } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
+import { createProgressiveClassMatch } from './sessionFactory.js?v=mega-5d509fb5dbfc';
+import { organizeGrowthMenu } from './studentNavigation.js?v=mega-5d509fb5dbfc';
+import { openManagementHub } from './managementHub.js?v=mega-5d509fb5dbfc';
+import { chooseManagementStrategy } from './managementUi.js?v=mega-5d509fb5dbfc';
+import { managementFor } from './managementState.js?v=mega-5d509fb5dbfc';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=mega-5d509fb5dbfc';
+import { openCafePicker } from './cafePicker.js?v=mega-5d509fb5dbfc';
+import { cafeNames } from './cafePortfolio.js?v=mega-5d509fb5dbfc';
+import { openVillage } from './villageUi.js?v=mega-5d509fb5dbfc';
+import { openLayoutEditor } from './layoutEditor.js?v=mega-5d509fb5dbfc';
+import { rosterFor, syncRosterSave } from './staffRecruitment.js?v=mega-5d509fb5dbfc';
+import { openCrewDialog } from './recruitUi.js?v=mega-5d509fb5dbfc';
+import { ensureGrowthWriteLock, releaseGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=mega-5d509fb5dbfc';
+import { chooseLongMission, prepareLongState } from './longGrowthUi.js?v=mega-5d509fb5dbfc';
+import { growthRuntime } from './growthRuntime.js?v=mega-5d509fb5dbfc';
+import { concepts, seededRandom } from './cafeRun.js?v=mega-5d509fb5dbfc';
+import { createClassMatch } from './sessionFactory.js?v=mega-5d509fb5dbfc';
+import { createGrowthSave } from './growthSave.js?v=mega-5d509fb5dbfc';
+import { GrowthSessionController } from './growthSession.js?v=mega-5d509fb5dbfc';
+import { LocalSaveRepository, BrowserGrowthRepository, CandidateSaveRepository, growthStorageKey } from './saveRepository.js?v=mega-5d509fb5dbfc';
+import { policyFor } from './sessionModes.js?v=mega-5d509fb5dbfc';
+import { balance } from './config.js?v=mega-5d509fb5dbfc';
+import { questionCatalog } from './questionPack.js?v=mega-5d509fb5dbfc';
+import { escapeText } from './questionRenderer.js?v=mega-5d509fb5dbfc';
 const e = (id) => document.getElementById(id);
 const study = () => '<div id="study-content" class="study-content"><span>학습 내용</span><strong id="study-title">문제를 준비하고 있어요…</strong><select id="study-pack" aria-label="학습 내용" hidden></select></div><p id="pack-error" class="save-error" aria-live="polite"></p><button type="button" id="pack-retry" class="text-button pack-retry" hidden>다시 시도</button>';
 export function browserSaveRepository() { try {
@@ -97,7 +97,7 @@ export class ModeFlow {
     setRepository(repo) { if (this.current()?.status === 'RUNNING')
         throw Error('Cannot change repository during a session'); this.repository = repo; this.showModes(); }
     card() { return document.querySelector('.welcome-card'); }
-    showModes() { releaseGrowthWriteLock(); this.view++; this.busy = false; this.controller = null; this.endedGame = null; this.card().innerHTML = '<p class="eyebrow">오늘은 어떻게 놀까요?</p><h2>배움이 쌓이는<br>나만의 카페</h2><div class="mode-cards"><button id="choose-class" class="mode-card"><strong>수업 게임</strong><span>' + (v27Deployment() ? '15분·30분, 매판 다른 카페 사건을 만나요!' : '15분 동안 문제를 풀며 작은 카페를 빠르게 키워요!') + '</span></button><button id="choose-growth" class="mode-card"><strong>내 카페 키우기</strong><span>내 카페를 저장하고 Lv.' + (document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-') ? '30' : '15') + '까지 키워요!</span></button></div><div class="classroom-entry"><button id="teacher-host" class="secondary">교사용 방 만들기</button><button id="student-join" class="secondary">학생 방 입장</button></div><p class="hint">처음이라면 메뉴에서 게임 방법을 눌러 보세요.</p>'; if (v26Deployment())
+    showModes() { releaseGrowthWriteLock(); this.view++; this.busy = false; this.controller = null; this.endedGame = null; this.card().innerHTML = '<p class="eyebrow">오늘은 어떻게 놀까요?</p><h2>배움이 쌓이는<br>나만의 카페</h2><div class="mode-cards"><button id="choose-class" class="mode-card"><strong>수업 게임</strong><span>' + (v27Deployment() ? '15분·30분, 매판 다른 카페 사건을 만나요!' : '15분 동안 문제를 풀며 작은 카페를 빠르게 키워요!') + '</span></button><button id="choose-growth" class="mode-card"><strong>내 카페 키우기</strong><span>내 카페를 저장하고 Lv.' + (document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-') ? '30' : '15') + '까지 키워요!</span></button></div><div class="classroom-entry" hidden><button id="teacher-host" class="secondary">교사용 방 만들기</button><button id="student-join" class="secondary">학생 방 입장</button></div><p class="hint">처음이라면 메뉴에서 게임 방법을 눌러 보세요.</p>'; if (v26Deployment())
         this.card().querySelector('.classroom-entry').hidden = true; if (v26Deployment())
         mountRecoveryStart(this.card(), this.repository, () => this.growthSetup()); e('choose-class').onclick = () => this.classSetup(); e('choose-growth').onclick = () => v26Deployment() ? this.growthSetup() : this.villageSetup(); e('teacher-host').onclick = () => document.dispatchEvent(new CustomEvent('classroom-open', { detail: 'teacher' })); e('student-join').onclick = () => document.dispatchEvent(new CustomEvent('classroom-open', { detail: 'student' })); document.dispatchEvent(new Event('cafe-mode-view')); }
     villageSetup() { if (modernCityNavigation()) {
@@ -463,7 +463,8 @@ export class ModeFlow {
         this.endedGame = game;
         this.growthResults(game);
     } }
-    home() { e('results').hidden = true; e('setup').hidden = false; document.getElementById('app').classList.remove('in-session'); this.showModes(); }
+    home() { if (this.current()?.status === 'CLOSED' && this.controller?.lastResult.ok)
+        this.controller = null; e('results').hidden = true; e('setup').hidden = false; document.getElementById('app').classList.remove('in-session'); this.showModes(); }
     growthResults(game) { const result = game.result, save = this.controller.current(); e('playing').hidden = true; e('problem-panel').hidden = true; e('investment-panel').hidden = true; e('results').hidden = false; e('results').innerHTML = '<p class="eyebrow">내 카페</p><h2>오늘의 카페 운영 결과</h2><h3>이번 15분 영업</h3><div class="result-grid">' + [['매출', result.revenue.toLocaleString() + '원'], ['손님', result.servedCustomers + '명'], ['판매 음식', result.soldFood + '개'], ['푼 문제', result.attempted + '개'], ['정답', result.correct + '개'], ['정답률', result.attempted ? result.accuracy + '%' : '미응시']].map(([a, b]) => '<div>' + a + '<strong>' + b + '</strong></div>').join('') + '</div><h3>내 카페</h3><div class="growth-summary">' + [['카페', game.cafeLevel + '단계'], ['보유금', game.money.toLocaleString() + '원'], ['창고', (game.warehouseLevel + (game.mega?.production?.storage ?? 0)) + '단계 · 메뉴별 ' + game.warehouse.capacity + '개'], ['직원', game.service.paid.length + '명'], ['메뉴', game.menus.length + '종'], ['평균 메뉴', '★' + (game.menus.reduce((sum, m) => sum + m.currentLevel, 0) / game.menus.length).toFixed(1)]].map(([a, b]) => '<div>' + a + '<strong>' + b + '</strong></div>').join('') + '</div><p>누적 매출 ' + save.cumulativeRevenue.toLocaleString() + '원 · 푼 문제 ' + save.cumulativeQuestionsAttempted + '개</p><p id="growth-save-result" class="' + (this.controller.lastResult.ok ? 'save-ok' : 'save-error') + '">' + (this.controller.lastResult.ok ? '저장 완료 ✓' : '카페 저장에 문제가 생겼어요. 다시 저장해 주세요.') + '</p><button id="growth-next" class="primary">다시 영업하기</button><button id="growth-home" class="secondary">모드 선택으로</button>'; e('growth-next').disabled = !this.controller.lastResult.ok; e('growth-home').disabled = !this.controller.lastResult.ok; if (!this.controller.lastResult.ok) {
         const retry = document.createElement('button');
         retry.className = 'secondary';

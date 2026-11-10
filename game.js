@@ -1,35 +1,43 @@
-import { growthSeats } from './levelSeats.js?v=level-seats-83d02b666a1c';
-import { kitchenStages, kitchenAmount, kitchenFloorLabel, bulkWarehouses, newProductionKitchen } from './productionKitchen.js?v=level-seats-83d02b666a1c';
-import { tickManager } from './managerActor.js?v=level-seats-83d02b666a1c';
-import { megaSaleFactor } from './megaOperations.js?v=level-seats-83d02b666a1c';
-import { megaGrowthBalance, megaSpawnSeconds } from './megaGrowthEconomy.js?v=level-seats-83d02b666a1c';
-import { tableSeatCount } from './megaInventory.js?v=level-seats-83d02b666a1c';
-import { megaEnabled, ensureMegaPlan, createMegaSpace, megaRoute, megaTravelSeconds, megaPointClear } from './megaSpace.js?v=level-seats-83d02b666a1c';
-import { randomClassBalance, classRandomConfig, pollClassEvents, classSpecial } from './classRandom.js?v=level-seats-83d02b666a1c';
-import { investmentRevenue, investmentSpawn, investmentVisitor, pollInvestmentEvents } from './progressiveEconomy.js?v=level-seats-83d02b666a1c';
-import { classProgressiveConfig } from './classProgressiveBalance.js?v=level-seats-83d02b666a1c';
-import { unlocked } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
-import { protectedSpecialStock, reservedGuestOrder, reservationIndex, takeReservedFood } from './specialInventory.js?v=level-seats-83d02b666a1c';
-import { pollManagement, strategyGuest, strategyQuantity } from './managementEngine.js?v=level-seats-83d02b666a1c';
-import { pollMini, miniPaused, activeMini } from './miniGames.js?v=level-seats-83d02b666a1c';
-import { specializationById } from './specializationConfig.js?v=level-seats-83d02b666a1c';
-import { chooseFurnitureSeat } from './furnitureSeating.js?v=level-seats-83d02b666a1c';
-import { layoutEconomyConfig } from './layoutEconomyConfig.js?v=level-seats-83d02b666a1c';
-import { freeKey } from './freeLayoutModel.js?v=level-seats-83d02b666a1c';
-import { layoutKey } from './layoutModel.js?v=level-seats-83d02b666a1c';
-import { CafeEvents } from './cafeEvents.js?v=level-seats-83d02b666a1c';
-import { CafeRun } from './cafeRun.js?v=level-seats-83d02b666a1c';
-import { Hospitality } from './hospitality.js?v=level-seats-83d02b666a1c';
-import { hospitalityDefinition, hospitalityBalance } from './hospitalityConfig.js?v=level-seats-83d02b666a1c';
-import { chooseSpecial, specialDefinition, itemCatalog } from './phase4Config.js?v=level-seats-83d02b666a1c';
-import { policyFor } from './sessionModes.js?v=level-seats-83d02b666a1c';
-import { chooseCustomer, chooseOrderMenu } from './customerRules.js?v=level-seats-83d02b666a1c';
-import { StaffSystem } from './staff.js?v=level-seats-83d02b666a1c';
-import { createSpace, floorPath, floorStandable } from './spatial.js?v=level-seats-83d02b666a1c';
-import { LocalTelemetry } from './telemetry.js?v=level-seats-83d02b666a1c';
-import { balance } from './config.js?v=level-seats-83d02b666a1c';
-import { createMenus, customers, menuDefinitions } from './data.js?v=level-seats-83d02b666a1c';
-import { StaffAbilities } from "./staffAbilities.js?v=level-seats-83d02b666a1c";
+import { pollCrewChanges } from './finalSupply.js?v=mega-5d509fb5dbfc';
+import { finalSpecializationFor } from './finalSpecialization.js?v=mega-5d509fb5dbfc';
+import { finalProduction, finalPriceFactor, signatureMenusFor } from './finalSpecializationState.js?v=mega-5d509fb5dbfc';
+import { growthSeats } from './levelSeats.js?v=mega-5d509fb5dbfc';
+import { kitchenStages, kitchenAmount, kitchenFloorLabel, bulkWarehouses, newProductionKitchen } from './productionKitchen.js?v=mega-5d509fb5dbfc';
+import { tickManager } from './managerActor.js?v=mega-5d509fb5dbfc';
+import { megaSaleFactor } from './megaOperations.js?v=mega-5d509fb5dbfc';
+import { megaGrowthBalance, megaSpawnSeconds } from './megaGrowthEconomy.js?v=mega-5d509fb5dbfc';
+import { tableSeatCount } from './megaInventory.js?v=mega-5d509fb5dbfc';
+import { megaEnabled, ensureMegaPlan, createMegaSpace, megaRoute, megaTravelSeconds, megaPointClear } from './megaSpace.js?v=mega-5d509fb5dbfc';
+import { randomClassBalance, classRandomConfig, pollClassEvents, classSpecial } from './classRandom.js?v=mega-5d509fb5dbfc';
+import { outsideKitchenStock, supplyAllocations, reserveSupplyOrder, deliverySources, configureFinalSupply } from './finalSupply.js?v=mega-5d509fb5dbfc';
+import { finalActive, operatingSeatContract } from './finalGrowth.js?v=mega-5d509fb5dbfc';
+import { investmentRevenue, investmentSpawn, investmentVisitor, pollInvestmentEvents } from './progressiveEconomy.js?v=mega-5d509fb5dbfc';
+import { classProgressiveConfig } from './classProgressiveBalance.js?v=mega-5d509fb5dbfc';
+import { unlocked } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
+import { protectedSpecialStock, reservedGuestOrder, reservationIndex, takeReservedFood } from './specialInventory.js?v=mega-5d509fb5dbfc';
+import { pollManagement, strategyGuest, strategyQuantity } from './managementEngine.js?v=mega-5d509fb5dbfc';
+import { pollMini, miniPaused, activeMini } from './miniGames.js?v=mega-5d509fb5dbfc';
+import { specializationById } from './specializationConfig.js?v=mega-5d509fb5dbfc';
+import { chooseFurnitureSeat } from './furnitureSeating.js?v=mega-5d509fb5dbfc';
+import { layoutEconomyConfig } from './layoutEconomyConfig.js?v=mega-5d509fb5dbfc';
+import { freeKey } from './freeLayoutModel.js?v=mega-5d509fb5dbfc';
+import { layoutKey } from './layoutModel.js?v=mega-5d509fb5dbfc';
+import { CafeEvents } from './cafeEvents.js?v=mega-5d509fb5dbfc';
+import { CafeRun } from './cafeRun.js?v=mega-5d509fb5dbfc';
+import { Hospitality } from './hospitality.js?v=mega-5d509fb5dbfc';
+import { hospitalityDefinition, hospitalityBalance } from './hospitalityConfig.js?v=mega-5d509fb5dbfc';
+import { chooseSpecial, specialDefinition, itemCatalog } from './phase4Config.js?v=mega-5d509fb5dbfc';
+import { policyFor } from './sessionModes.js?v=mega-5d509fb5dbfc';
+import { crewLimit } from './staffRecruitment.js?v=mega-5d509fb5dbfc';
+import { tickFinalPayroll } from './finalPayroll.js?v=mega-5d509fb5dbfc';
+import { finalGuestDefinitions } from './finalGuests.js?v=mega-5d509fb5dbfc';
+import { chooseCustomer, chooseOrderMenu } from './customerRules.js?v=mega-5d509fb5dbfc';
+import { StaffSystem } from './staff.js?v=mega-5d509fb5dbfc';
+import { createSpace, floorPath, floorStandable } from './spatial.js?v=mega-5d509fb5dbfc';
+import { LocalTelemetry } from './telemetry.js?v=mega-5d509fb5dbfc';
+import { balance } from './config.js?v=mega-5d509fb5dbfc';
+import { createMenus, customers, menuDefinitions } from './data.js?v=mega-5d509fb5dbfc';
+import { StaffAbilities } from "./staffAbilities.js?v=mega-5d509fb5dbfc";
 export class CafeGame {
     durationSeconds;
     random;
@@ -138,12 +146,13 @@ export class CafeGame {
         const previousMega = !!this.serviceSpace?.megaPlan;
         this.serviceSpace = undefined;
         if (megaEnabled(this)) {
-            const plan = ensureMegaPlan(this.mega, this.cafeLevel, this.branchId), space = createMegaSpace(plan);
+            const plan = ensureMegaPlan(this.mega, this.cafeLevel, this.branchId), space = createMegaSpace(plan, finalActive(this) ? this.staffLimit + 1 : undefined);
             this.serviceSpace = space;
             this.freeSeatTables = [];
             this.service.pickupFlow = { sharedPickup: true, chainOrders: !!this.mega?.extended && plan.level >= 20 && plan.tables.length >= 12 };
             this.service.setLayout(space.pickup, space.seats.slice(0, this.mega?.paid ? space.seats.length : this.cafe.maxCustomers).map(s => ({ x: s.servicePoint.x, y: s.servicePoint.y - 5 })));
             this.service.configureMovement({ localDispatch: !!this.mega?.extended && plan.level >= 20 && plan.tables.length >= 12, pickups: space.pickupSlots, homes: space.staffWaitingPoints, worldScale: 1, canStand: p => megaPointClear(plan, p), preservePositions: previousMega, replanSeconds: .25, clearance: 3, route: (a, b, avoid) => megaRoute(plan, a, b, avoid) }, new Map(this.guests.map(g => [g.id, g.seat])));
+            configureFinalSupply(this);
             for (const w of this.service.workers)
                 if (w.state === 'IDLE' && (w.position.x === 78 && w.position.y === 22))
                     w.position = { ...space.staffWaitingPoints[this.service.workers.indexOf(w)] };
@@ -185,7 +194,8 @@ export class CafeGame {
         const count = this.cafe.maxCustomers;
         this.service.setLayout({ x: 78, y: 27 }, Array.from({ length: count }, (_, i) => ({ x: 14 + (i % columns) * 72 / Math.max(1, columns - 1), y: 52 + Math.floor(i / columns) * 38 / Math.max(1, Math.ceil(count / columns) - 1) })));
     }
-    get staffLimit() { return this.mega?.extended ? (this.mega.paid?.spaceLevel === 30 ? 12 : this.mega.paid?.spaceLevel === 20 ? 8 : this.economy.staff.limits[Math.min(15, this.cafeLevel) - 1]) : this.economy.staff.limits[this.cafeLevel - 1]; }
+    get staffLimit() { if (finalActive(this))
+        return crewLimit({ mega: this.mega, cafeLevel: this.cafeLevel }); return this.mega?.extended ? (this.mega.paid?.spaceLevel === 30 ? 12 : this.mega.paid?.spaceLevel === 20 ? 8 : this.economy.staff.limits[Math.min(15, this.cafeLevel) - 1]) : this.economy.staff.limits[this.cafeLevel - 1]; }
     get nextHireCost() { return this.economy.staff.hireCosts[this.service.paid.length] ?? null; }
     getStaffUpgradeCost(id) { const w = this.service.paid.find(w => w.staffId === id); return !w || w.level >= 5 ? null : this.economy.staff.upgradeCosts[w.level - 1]; }
     hireStaff() { if (this.roster)
@@ -200,8 +210,9 @@ export class CafeGame {
         this.service.upgrade(w, this.elapsedTime);
         this.telemetry.staffUpgradePurchases.push({ ...this.telemetry.upgradePurchases.at(-1) });
     } return result; }
-    get cafe() { const c = this.economy.cafes[this.cafeLevel - 1], seats = this.mode === 'CAFE_GROWTH' ? growthSeats(this.cafeLevel, this.mega, this.branchId) : null; if (seats)
-        return { ...c, maxCustomers: seats.operating }; return this.mode === 'CAFE_GROWTH' && this.mega?.paid ? { ...c, maxCustomers: Math.min(c.maxCustomers, this.economy.cafes[this.mega.paid.spaceLevel - 1].maxCustomers, ...(this.mega.inventory ? [Object.values(this.mega.plans).filter(p => p.level === this.mega.paid.spaceLevel && p.branch === (this.branchId ?? null))[0]?.tables.reduce((n, t) => n + tableSeatCount(t), 0) ?? 14] : [])) } : c; }
+    get cafe() { const c = this.economy.cafes[this.cafeLevel - 1], seats = this.mode === 'CAFE_GROWTH' ? growthSeats(this.cafeLevel, this.mega, this.branchId) : null; if (finalActive(this))
+        return { ...c, maxCustomers: operatingSeatContract(this).concurrentGuestLimit }; if (seats)
+        return { ...c, maxCustomers: seats.concurrent }; return this.mode === 'CAFE_GROWTH' && this.mega?.paid ? { ...c, maxCustomers: Math.min(c.maxCustomers, this.economy.cafes[this.mega.paid.spaceLevel - 1].maxCustomers, ...(this.mega.inventory ? [Object.values(this.mega.plans).filter(p => p.level === this.mega.paid.spaceLevel && p.branch === (this.branchId ?? null))[0]?.tables.reduce((n, t) => n + tableSeatCount(t), 0) ?? 14] : [])) } : c; }
     get warehouse() { const base = this.economy.warehouses[this.warehouseLevel - 1], n = this.mode === 'CAFE_GROWTH' ? this.mega?.production?.storage ?? 0 : 0; return n ? { ...base, capacity: Math.max(base.capacity, bulkWarehouses[n - 1].capacity) } : base; }
     earlyElapsed = null;
     get elapsedTime() { return this.earlyElapsed ?? this.durationSeconds - this.remainingSeconds; }
@@ -209,11 +220,11 @@ export class CafeGame {
         return false; this.earlyElapsed = this.elapsedTime; this.remainingSeconds = 0; this.status = 'CLOSED'; this.events.close(); pollClassEvents(this); pollMini(this); this.telemetry.record(this.snapshot); return true; }
     leaveClassMatch() { if (this.policy.persistence !== 'none' || this.status !== 'RUNNING')
         return false; this.earlyElapsed = this.elapsedTime; this.remainingSeconds = 0; this.status = 'CLOSED'; this.events.close(); pollClassEvents(this); pollMini(this); this.telemetry.record(this.snapshot); return true; }
-    getPrice(m, level = m.currentLevel) { return Math.round(m.basePrice * this.economy.menuMultipliers[level - 1] * (this.progressive && this.mode === 'CLASS_MATCH' ? (this.classRandom ? classRandomConfig.priceMultiplier * (this.elapsedTime < (this.classRandom.priceUntil ?? 0) ? (this.classRandom.priceFactor ?? 1) : 1) * (this.elapsedTime < this.classRandom.discountUntil ? (this.classRandom.discountFactor ?? .9) : 1) : classProgressiveConfig.priceMultiplier) : investmentRevenue(this))); }
+    getPrice(m, level = m.currentLevel) { return Math.round(m.basePrice * this.economy.menuMultipliers[level - 1] * (this.progressive && this.mode === 'CLASS_MATCH' ? (this.classRandom ? classRandomConfig.priceMultiplier * (this.elapsedTime < (this.classRandom.priceUntil ?? 0) ? (this.classRandom.priceFactor ?? 1) : 1) * (this.elapsedTime < this.classRandom.discountUntil ? (this.classRandom.discountFactor ?? .9) : 1) : classProgressiveConfig.priceMultiplier) : investmentRevenue(this)) * finalPriceFactor(finalSpecializationFor(this))); }
     getMenuUpgradeCost(m) { return m.currentLevel >= m.maxLevel ? null : Math.round(m.basePrice * this.economy.menuUpgradeMultipliers[m.currentLevel - 1]); }
     get nextCafe() { return this.economy.cafes[this.cafeLevel] ?? null; }
     get nextWarehouse() { return this.economy.warehouses[this.warehouseLevel] ?? (this.mode === 'CAFE_GROWTH' && this.mega?.paid ? bulkWarehouses[this.mega.production?.storage ?? 0] ?? null : null); }
-    get productionAmount() { return kitchenAmount(this); }
+    get productionAmount() { return finalProduction(kitchenAmount(this), finalSpecializationFor(this)); }
     upgradeProduction(expectedTier = this.mega?.production?.tier ?? 0) { if (this.mode !== 'CAFE_GROWTH' || !this.mega?.paid)
         return { ok: false, reason: 'GROWTH 유료 매장에서 사용할 수 있어요.' }; const p = this.mega.production ?? newProductionKitchen(), next = kitchenStages[p.tier + 1]; if (expectedTier !== p.tier || !next)
         return { ok: false, reason: '이미 처리했거나 최고 설비예요.' }; if (this.cafeLevel < next.level || this.mega.paid.spaceLevel < next.space)
@@ -258,7 +269,7 @@ export class CafeGame {
             this.growthBranch = { version: 1, selected: next.level >= 11 ? 'bakery' : 'garden', active: next.level >= 11 ? 'bakery' : 'garden' };
         this.updateServiceLayout();
         this.telemetry.cafeUpgradeTimes.push({ elapsedTime: this.elapsedTime, level: next.level });
-        for (const definition of menuDefinitions.filter(m => m.unlockCafeLevel === next.level))
+        for (const definition of [...menuDefinitions, ...signatureMenusFor(next.level, finalSpecializationFor(this))].filter(m => m.unlockCafeLevel === next.level))
             this.menus.push({ ...definition, stock: Math.min(this.warehouse.capacity, balance.stock.newMenuInitial), maxStock: this.warehouse.capacity });
     } return result; }
     upgradeWarehouse() { const next = this.nextWarehouse; if (!next)
@@ -313,23 +324,26 @@ export class CafeGame {
             this.telemetry.phase4.itemUsage.push({ elapsedTime: this.elapsedTime, item: 'booster', amount: 1 });
         }
         for (const m of this.menus.filter(m => m.unlockCafeLevel <= this.cafeLevel)) {
-            const produced = Math.min(m.maxStock - m.stock, quantity);
+            const produced = Math.min(Math.max(0, m.maxStock - m.stock - outsideKitchenStock(this, m.menuId)), quantity);
             m.stock += produced;
             this.successfulProduction += produced;
             this.wastedProduction += quantity - produced;
         }
     } this.events.answer(correct, this, difficulty); }
     canServe(g) { if (g.signature)
-        return g.signatureReady === true; return g.order.length > 0 && g.order.every(o => (this.menus.find(m => m.menuId === o.menuId)?.stock ?? 0) - (reservationIndex(this, g) === undefined ? protectedSpecialStock(this, o.menuId) : 0) >= o.quantity); }
+        return g.signatureReady === true; if (finalActive(this) && reservationIndex(this, g) === undefined)
+        return !!supplyAllocations(this, g, id => protectedSpecialStock(this, id)); return g.order.length > 0 && g.order.every(o => (this.menus.find(m => m.menuId === o.menuId)?.stock ?? 0) - (reservationIndex(this, g) === undefined ? protectedSpecialStock(this, o.menuId) : 0) >= o.quantity); }
     get readyToServe() { const special = this.mode === 'CAFE_GROWTH' ? this.management?.run?.special : undefined; const priority = special?.ownerAssist && !special.complete && !['failed', 'cancelled'].includes(this.events.records.find(r => r.id === special.eventId)?.outcome ?? '') ? special.eventId : undefined; return this.guests.filter(g => g.state === 'SERVING' && !this.service.workers.some(w => w.orderId === g.id)).sort((a, b) => (priority === undefined ? 0 : Number(b.eventArrival?.eventId === priority) - Number(a.eventArrival?.eventId === priority)) || a.orderedAt - b.orderedAt || a.id - b.id); }
     serveReadyOrder() { if (this.status !== 'RUNNING')
-        return false; const g = this.readyToServe[0]; return !!g && this.service.claimOwner({ id: g.id, seat: g.seat, ready: true, active: true, orderedAt: g.orderedAt, vip: g.specialType === 'vip', items: g.order.flatMap(o => Array(o.quantity).fill(o.menuId)) }); }
-    transition(g, state) { g.state = state; g.elapsed = 0; }
+        return false; const g = this.readyToServe[0]; return !!g && this.service.claimOwner({ id: g.id, seat: g.seat, ready: true, active: true, orderedAt: g.orderedAt, vip: g.specialType === 'vip', pickupSources: deliverySources(this, g), items: g.supplies ? g.supplies.flatMap(a => a.items) : g.order.flatMap(o => Array(o.quantity).fill(o.menuId)) }); }
+    transition(g, state) { g.state = state; g.elapsed = 0; if (['EATING', 'PAYING', 'LEAVING', 'DONE'].includes(state))
+        delete g.supplies; }
     generateOrder(customer, type, party = false, random = this.random) { const d = { orderProfile: party ? { minQuantity: 3, maxQuantity: 3, maxTypes: 2 } : this.cafe.order }; const available = this.menus.filter(m => m.unlockCafeLevel <= this.cafeLevel); const base = d.orderProfile.minQuantity + Math.floor(random() * (d.orderProfile.maxQuantity - d.orderProfile.minQuantity + 1)); const total = type === 'gourmand' ? Math.min(this.phase4Profile.gourmandMaxQuantity, Math.ceil(base * this.phase4Profile.gourmandMultiplier)) : type === 'vip' ? 2 + Math.floor(random() * 3) : type === 'hurried' ? Math.min(2, base) : strategyQuantity(this, base); const lines = []; for (let i = 0; i < total; i++) {
         const choices = lines.length >= d.orderProfile.maxTypes ? available.filter(m => lines.some(l => l.menuId === m.menuId)) : available;
         const repeat = type === 'gourmand' && lines.length > 0 && random() < .65;
         const preferred = repeat ? choices.filter(m => m.menuId === lines[0].menuId) : choices;
-        const m = chooseOrderMenu(preferred.length ? preferred : choices, customer.orderPreference, random);
+        const pool = preferred.length ? preferred : choices, signaturePool = finalSpecializationFor(this)?.path === 'brand' ? pool.filter(m => m.menuId.startsWith('signature-')) : [], selection = signaturePool.length && random() < .4 ? signaturePool : pool;
+        const m = chooseOrderMenu(selection, customer.orderPreference, random);
         const line = lines.find(l => l.menuId === m.menuId);
         if (line)
             line.quantity++;
@@ -340,16 +354,17 @@ export class CafeGame {
     spawn(eventArrival) { if (megaEnabled(this) && this.elapsedTime < this.megaExpansionHoldUntil)
         return; if (this.growthBranch && !this.growthBranch.active)
         return; const rotating = !!this.mega?.paid && !!this.serviceSpace?.megaPlan; if (rotating && this.guests.length >= this.cafe.maxCustomers)
-        return; const seatCount = rotating ? this.serviceSpace.seats.length : this.cafe.maxCustomers, offset = (this.nextId - 1) % seatCount, availableSeats = Array.from({ length: seatCount }, (_, i) => rotating ? (i + offset) % seatCount : i).filter(s => !this.guests.some(g => g.seat === s)), party = this.mode === 'CAFE_GROWTH' && this.freeSeatTables.length > 0 && !!eventArrival && this.events.records.some(r => r.id === eventArrival.eventId && ['rush', 'birthday'].includes(r.type)), seat = party ? chooseFurnitureSeat(availableSeats, this.freeSeatTables, this.guests.filter(g => g.eventArrival?.eventId === eventArrival.eventId).map(g => g.seat)) : availableSeats[0]; if (seat === undefined)
-        return; let spawnRoll = 0; let definition = chooseCustomer(this.content.customerPool ? [...this.content.customerPool] : this.cafe.customerPool, this.guests.map(g => g.definition.visualKey), () => { spawnRoll = this.random(); return spawnRoll; }); if (!definition && this.mega?.extended && (this.mega.paid?.spaceLevel ?? 1) >= 20) {
-        const fallback = chooseCustomer(this.content.customerPool ? [...this.content.customerPool] : this.cafe.customerPool, [], () => this.random());
+        return; const seatCount = finalActive(this) ? operatingSeatContract(this).operating : rotating ? this.serviceSpace.seats.length : this.cafe.maxCustomers, offset = (this.nextId - 1) % seatCount, availableSeats = Array.from({ length: seatCount }, (_, i) => rotating ? (i + offset) % seatCount : i).filter(s => !this.guests.some(g => g.seat === s)), party = this.mode === 'CAFE_GROWTH' && this.freeSeatTables.length > 0 && !!eventArrival && this.events.records.some(r => r.id === eventArrival.eventId && ['rush', 'birthday'].includes(r.type)), seat = party ? chooseFurnitureSeat(availableSeats, this.freeSeatTables, this.guests.filter(g => g.eventArrival?.eventId === eventArrival.eventId).map(g => g.seat)) : availableSeats[0]; if (seat === undefined)
+        return; let spawnRoll = 0; const definitions = finalActive(this) ? finalGuestDefinitions(this.cafeLevel, this.elapsedTime) : customers, pool = this.content.customerPool ? [...this.content.customerPool] : finalActive(this) ? definitions.map(d => d.customerId) : this.cafe.customerPool; let definition = chooseCustomer(pool, this.guests.map(g => g.definition.visualKey), () => { spawnRoll = this.random(); return spawnRoll; }, definitions); if (!definition && this.mega?.extended && (this.mega.paid?.spaceLevel ?? 1) >= 20) {
+        const fallback = chooseCustomer(pool, [], () => this.random(), definitions);
         if (fallback)
             definition = { ...fallback, name: fallback.name + '의 일행', characterTrait: '함께 방문해 자기 주문을 고르는 손님' };
     } if (!definition)
         return; this.telemetry.phase4.customersSpawned++; let roll = this.content.specialRandom?.() ?? ((Math.sin((spawnRoll + this.nextId) * 127.1) * 43758.5453) % 1 + 1) % 1; if (this.hospitality.enabled && this.elapsedTime < this.hospitality.travelerUntil && this.phase4Enabled && !this.vipPending) {
         roll = Math.max(0, roll - .02);
         this.hospitality.travelerUntil = 0;
-    } let type = (!this.progressive || unlocked(this, 'missions')) && this.phase4Enabled && !eventArrival?.helper ? chooseSpecial(this.cafeLevel, this.guests.flatMap(g => g.specialType ? [g.specialType] : []), roll, this.phase4Profile, this.vipPending, this.regularMemory.revisitEligible) : null; type = strategyGuest(this, type, this.nextId); if (this.classRandom)
+    } if (finalSpecializationFor(this)?.path === 'brand')
+        roll = Math.max(0, roll - .03); let type = (!this.progressive || unlocked(this, 'missions')) && this.phase4Enabled && !eventArrival?.helper ? chooseSpecial(this.cafeLevel, this.guests.flatMap(g => g.specialType ? [g.specialType] : []), roll, this.phase4Profile, this.vipPending, this.regularMemory.revisitEligible) : null; type = strategyGuest(this, type, this.nextId); if (this.classRandom)
         type = classSpecial(this); if (type === 'regular' && !this.classRandom && !unlocked(this, 'reviews'))
         type = null; let regularTier = 1; if (type) {
         definition = specialDefinition(type, this.phase4Profile);
@@ -386,6 +401,7 @@ export class CafeGame {
         return; if (this.status === 'CLOSED' || seconds <= 0 || !Number.isFinite(seconds))
         return; let left = Math.min(seconds, this.remainingSeconds); while (left > 0) {
         const dt = Math.min(left, 0.1);
+        tickFinalPayroll(this, dt);
         this.step(dt);
         left -= dt;
         this.remainingSeconds = Math.max(0, this.remainingSeconds - dt);
@@ -406,6 +422,7 @@ export class CafeGame {
         }
     } }
     step(dt) {
+        pollCrewChanges(this);
         tickManager(this, dt);
         pollClassEvents(this);
         if (this.progressive && this.mode === 'CAFE_GROWTH' && !this.events.enabled && unlocked(this, 'missions'))
@@ -466,7 +483,11 @@ export class CafeGame {
                         this.transition(g, 'LEAVING');
                     }
                     else if (this.canServe(g)) {
-                        if (!g.signature)
+                        if (finalActive(this) && !g.signature && reservationIndex(this, g) === undefined) {
+                            if (!reserveSupplyOrder(this, g, id => protectedSpecialStock(this, id)))
+                                break;
+                        }
+                        else if (!g.signature)
                             for (const o of g.order)
                                 this.menus.find(m => m.menuId === o.menuId).stock -= o.quantity;
                         takeReservedFood(this, g);
@@ -541,7 +562,7 @@ export class CafeGame {
                 continue;
             }
         }
-        this.service.tick(dt, this.guests.map(g => ({ id: g.id, seat: g.seat, ready: g.state === 'SERVING', active: g.state === 'SERVING' || g.state === 'PREPARING', orderedAt: g.orderedAt, vip: g.specialType === 'vip', items: g.order.flatMap(o => Array(o.quantity).fill(o.menuId)) })), this.elapsedTime, (id, worker) => { const g = this.guests.find(g => g.id === id); if (g?.state === 'SERVING') {
+        this.service.tick(dt, this.guests.map(g => ({ id: g.id, seat: g.seat, ready: g.state === 'SERVING', active: g.state === 'SERVING' || g.state === 'PREPARING', orderedAt: g.orderedAt, vip: g.specialType === 'vip', pickupSources: deliverySources(this, g), items: g.supplies ? g.supplies.flatMap(a => a.items) : g.order.flatMap(o => Array(o.quantity).fill(o.menuId)) })), this.elapsedTime, (id, worker) => { const g = this.guests.find(g => g.id === id); if (g?.state === 'SERVING') {
             g.servedAt = this.elapsedTime;
             this.staffAbilities.served(g, worker);
             this.transition(g, 'EATING');

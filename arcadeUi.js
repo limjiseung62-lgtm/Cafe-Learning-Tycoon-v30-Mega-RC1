@@ -1,7 +1,7 @@
-import { arcadeStats } from './arcadeGames.js?v=level-seats-83d02b666a1c';
-import { putSort, submitSort, sortFoods } from './sortGame.js?v=level-seats-83d02b666a1c';
-import { rotateMachine, checkMachine, machineFlow } from './machineGame.js?v=level-seats-83d02b666a1c';
-import { moveTray, trayObstacles, trayMotionPeriod } from './trayGame.js?v=level-seats-83d02b666a1c';
+import { arcadeStats } from './arcadeGames.js?v=mega-5d509fb5dbfc';
+import { putSort, submitSort, sortFoods } from './sortGame.js?v=mega-5d509fb5dbfc';
+import { rotateMachine, checkMachine, machineFlow } from './machineGame.js?v=mega-5d509fb5dbfc';
+import { moveTray, trayObstacles, trayMotionPeriod } from './trayGame.js?v=mega-5d509fb5dbfc';
 export const arcadeNames = { sort: '주문 분류 대소동', machine: '커피 머신 수리', tray: '트레이 배달 작전' };
 let sound = () => { };
 export function setArcadeSound(fn) { sound = fn; }

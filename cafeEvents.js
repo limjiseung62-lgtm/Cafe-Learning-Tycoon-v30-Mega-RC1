@@ -1,6 +1,6 @@
-import { unlocked } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
-import { specializationById } from './specializationConfig.js?v=level-seats-83d02b666a1c';
-import { eventBalance as b, eventSchedule, allMissionCatalog, incidentCatalog } from './eventConfig.js?v=level-seats-83d02b666a1c';
+import { unlocked } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
+import { specializationById } from './specializationConfig.js?v=mega-5d509fb5dbfc';
+import { eventBalance as b, eventSchedule, allMissionCatalog, incidentCatalog } from './eventConfig.js?v=mega-5d509fb5dbfc';
 export class CafeEvents {
     enabled = false;
     duration = 0;
@@ -50,13 +50,13 @@ export class CafeEvents {
             this.startIncident(g);
     } if (this.now >= this.duration)
         this.close(); }
-    startMission(g) { const themed = g.mode === 'CAFE_GROWTH' && g.specialization && this.cursor % 4 === 1 ? allMissionCatalog.filter(m => 'specialization' in m && m.specialization === g.specialization.selected) : []; if (themed.length) {
+    startMission(g) { const themed = g.mode === 'CAFE_GROWTH' && !g.mega?.finalGrowth && g.specialization && this.cursor % 4 === 1 ? allMissionCatalog.filter(m => 'specialization' in m && m.specialization === g.specialization.selected) : []; if (themed.length) {
         this.beginMission(themed[Math.floor(this.cursor / 4) % themed.length].id, g);
         return;
     } const available = allMissionCatalog.filter(m => !('specialization' in m) && m.unlock <= g.cafeLevel && (m.id !== 'rescue' || g.menus.some(m => m.stock === 0))); const choices = available.filter(m => m.id !== this.lastMission), m = (choices.length ? choices : available)[Math.floor(this.cursor / 2) % (choices.length || available.length)]; this.beginMission(m.id, g); }
     beginMission(type, g) { if (!unlocked(g, 'missions'))
         return false; if (!this.enabled || this.closed || this.active || g.status !== 'RUNNING')
-        return false; const m = allMissionCatalog.find(m => m.id === type); if (!m || m.unlock > g.cafeLevel || 'specialization' in m && (g.mode !== 'CAFE_GROWTH' || g.specialization?.selected !== m.specialization))
+        return false; const m = allMissionCatalog.find(m => m.id === type); if (!m || m.unlock > g.cafeLevel || 'specialization' in m && (g.mode !== 'CAFE_GROWTH' || !!g.mega?.finalGrowth || g.specialization?.selected !== m.specialization))
         return false; const id = this.records.length + 1; this.records.push({ id, kind: 'mission', type, name: m.name, at: this.now, outcome: 'active', reward: 0, giftValue: 0 }); this.active = { eventId: id, type, deadline: Math.min(this.duration, this.now + m.seconds), correct: 0, served: 0, streak: 0, challengeMet: false, servedIds: [], readingIds: [], ...(type === 'rescue' ? { targetMenu: g.menus.find(m => m.stock === 0)?.menuId ?? g.menus[0].menuId } : {}) }; this.lastMission = type; this.arrival(id, m.arrivals, type === 'gourmet' ? 'judge' : undefined); if ('specialization' in m)
         for (const a of this.arrivals)
             if (a.eventId === id)

@@ -1,9 +1,10 @@
-import { validEnterprise } from './enterpriseState.js?v=level-seats-83d02b666a1c';
+import { validEnterprise } from './enterpriseState.js?v=mega-5d509fb5dbfc';
 export const featureLevels = { missions: 3, recruitment: 4, cake: 5, decor: 6, oven: 6, branch: 7, flowers: 7, reviews: 8, research: 9, strategy: 9, sort: 9, village: 10, investment: 10, specialization: 11, machine: 11, education: 12, specialBusiness: 12, delivery: 13, festival: 13, tray: 13, franchise: 14, landmark: 15 };
 export const newProgressiveState = () => ({ version: 1, maxLevel: 1, seen: [], investments: { commerce: 0, tourism: 0, culture: 0, housing: 0 }, identity: null, branches: [], landmark: 0, serial: 0, settledThrough: 0 });
 export const progressiveState = (x) => x.progressiveState ?? x.v26;
 export const progressive = (x) => x.progressive === true || !!progressiveState(x);
-export function unlocked(x, f) { if (!progressive(x))
+export function unlocked(x, f) { if (x.mode !== 'CLASS_MATCH' && x.mega?.finalGrowth && ['research', 'village', 'delivery'].includes(f))
+    return false; if (!progressive(x))
     return true; if (x.mode === 'CLASS_MATCH')
     return !!x.classRandom && x.durationSeconds === 1800 && ['branch', 'specialization', 'cake', 'oven', 'flowers', 'sort', 'machine', 'tray'].includes(f); return Math.max(x.cafeLevel, progressiveState(x)?.maxLevel ?? 1) >= featureLevels[f]; }
 export function validProgressive(v) { try {

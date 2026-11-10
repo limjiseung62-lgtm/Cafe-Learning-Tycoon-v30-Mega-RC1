@@ -1,5 +1,5 @@
-import { unlocked } from './progressiveFeatures.js?v=level-seats-83d02b666a1c';
-import { createLongGrowth, grantDecoration } from './longGrowth.js?v=level-seats-83d02b666a1c';
+import { unlocked } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
+import { createLongGrowth, grantDecoration } from './longGrowth.js?v=mega-5d509fb5dbfc';
 export const villageStages = [
     { stage: 1, name: '작은 마을', points: 0, sessions: 0, quests: 0, trust: 0, message: '이웃과 첫 인사를 나눠요.' },
     { stage: 2, name: '활기찬 광장', points: 25, sessions: 1, quests: 1, trust: 1, message: '광장이 새롭게 단장됐어요!' },
@@ -21,12 +21,15 @@ export const villageRecipes = [
     { id: 'salon-table', name: '대리석 디저트 테이블 제작', stage: 4, cost: { wood: 4, ribbon: 3 }, furniture: 'dessert-marble' },
     { id: 'village-frame', name: '마을 추억 액자 제작', stage: 3, cost: { wood: 2, ribbon: 1 }, decor: 'frame' }
 ];
-export function beginVillageProgression(s) { const v = s.village; return v.progression ?? (v.progression = { version: 1, stage: 1, seenStage: 1, baselineIds: (s.growthEconomy?.receipts ?? []).map(r => r.id), sessions: [], inventory: { wood: 0, petals: 0, flour: 0, ribbon: 0 }, crafted: [], market: [], questMaterials: [...v.souvenirs], marketSouvenirs: [], festivals: {} }); }
+export function beginVillageProgression(s) { if (s.mega?.finalGrowth || s.village?.legacyArchiveOnly)
+    throw Error('이전 마을 기록은 보관만 해요. 현대 도시에서 경영을 이어가세요.'); const v = s.village; return v.progression ?? (v.progression = { version: 1, stage: 1, seenStage: 1, baselineIds: (s.growthEconomy?.receipts ?? []).map(r => r.id), sessions: [], inventory: { wood: 0, petals: 0, flour: 0, ribbon: 0 }, crafted: [], market: [], questMaterials: [...v.souvenirs], marketSouvenirs: [], festivals: {} }); }
 export function progressionPoints(v) { const p = v.progression; return v.development + (p?.sessions.reduce((n, r) => n + 12 + Math.min(2, r.miniKinds.length) * 2 + (r.mission ? 2 : 0), 0) ?? 0) + Object.values(p?.festivals ?? {}).filter(f => f.status === 'complete').length * 8; }
 export function availableStage(v) { const p = v.progression; if (!p)
     return 1; const trust = Object.values(v.residents).reduce((n, r) => n + r.trust, 0); return [...villageStages].reverse().find(d => progressionPoints(v) >= d.points && p.sessions.length >= d.sessions && v.souvenirs.length >= d.quests && trust >= d.trust).stage; }
 /** Called only between businesses. Existing settlements are baselined, never retroactively rewarded. */
 export function syncVillageProgression(s) {
+    if (s.mega?.finalGrowth || s.village?.legacyArchiveOnly)
+        return s.village?.progression;
     const v = s.village;
     const p = beginVillageProgression(s);
     for (const r of s.growthEconomy?.receipts ?? []) {
@@ -61,10 +64,12 @@ export function syncVillageProgression(s) {
         v.position = { x: 12, y: 10 };
     return p;
 }
-export function beginFestival(s, id) { if (!unlocked(s, 'festival'))
+export function beginFestival(s, id) { if (s.mega?.finalGrowth || s.village?.legacyArchiveOnly)
+    return false; if (!unlocked(s, 'festival'))
     return false; const p = s.village?.progression, f = festivalCatalog.find(f => f.id === id); if (!p || !f || p.stage < f.stage || p.festivals[id])
     return false; p.festivals[id] = { baseIds: (s.miniCollection?.receipts ?? []).map(r => r.id), baseCorrect: s.cumulativeQuestionsCorrect, status: 'preparing' }; return true; }
-export function finishFestival(s, id) { const p = s.village?.progression, f = festivalCatalog.find(f => f.id === id), r = p?.festivals[id]; if (!p || !f || !r || r.status === 'complete' || s.cumulativeQuestionsCorrect - r.baseCorrect < 2)
+export function finishFestival(s, id) { if (s.mega?.finalGrowth || s.village?.legacyArchiveOnly)
+    return false; const p = s.village?.progression, f = festivalCatalog.find(f => f.id === id), r = p?.festivals[id]; if (!p || !f || !r || r.status === 'complete' || s.cumulativeQuestionsCorrect - r.baseCorrect < 2)
     return false; const receipt = s.miniCollection?.receipts.find(m => m.kind === f.kind && m.outcome === 'success' && !r.baseIds.includes(m.id) && p.sessions.some(x => x.id === m.businessId)); if (!receipt)
     return false; r.status = 'complete'; r.receipt = receipt.id; p.inventory.ribbon += 2; grantDecoration(s.longTerm ?? (s.longTerm = createLongGrowth()), f.reward); p.stage = Math.max(p.stage, availableStage(s.village)); return true; }
 export function craftVillage(s, id) { if (!unlocked(s, 'village'))
@@ -81,7 +86,8 @@ export function useVillageMarket(s, material) { if (!unlocked(s, 'village'))
     return false; const p = s.village?.progression; if (!p || p.stage < 4 || !villageMaterials.includes(material) || p.inventory.ribbon < 1)
     return false; const token = p.sessions.find(r => !p.market.includes(r.id)); if (!token || material === 'ribbon')
     return false; p.market.push(token.id); p.inventory.ribbon--; p.inventory[material] += 2; return true; }
-export function claimMarketSouvenir(s) { const p = s.village?.progression; if (!p || p.stage < 4 || p.inventory.ribbon < 3 || p.marketSouvenirs?.includes('market-stamp'))
+export function claimMarketSouvenir(s) { if (s.mega?.finalGrowth || s.village?.legacyArchiveOnly)
+    return false; const p = s.village?.progression; if (!p || p.stage < 4 || p.inventory.ribbon < 3 || p.marketSouvenirs?.includes('market-stamp'))
     return false; p.inventory.ribbon -= 3; (p.marketSouvenirs ??= []).push('market-stamp'); return true; }
 export function progressionMini(v) { const p = v?.progression; return festivalCatalog.find(f => p?.festivals[f.id]?.status === 'preparing')?.kind; }
 export function validVillageProgression(value) { try {

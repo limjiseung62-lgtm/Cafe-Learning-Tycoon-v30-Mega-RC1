@@ -15,10 +15,10 @@
     48
   ],
   "releaseNotes": "RELEASE-NOTES.html",
-  "sourceCandidate": "83d02b666a1c7dffe7961835d9e013792bb74a2a",
+  "sourceCandidate": "5d509fb5dbfc0ddf294cb20680e0e20f117e5013",
   "testUrl": "https://limjiseung62-lgtm.github.io/Cafe-Learning-Tycoon-v30-Mega-RC1/",
-  "cacheToken": "level-seats-83d02b666a1c",
-  "build": "scoped-math-empty-results-modern-city-stability-1+backup-file-p0+level-seats",
+  "cacheToken": "mega-5d509fb5dbfc",
+  "build": "mega-final-action-manager-render-p1-test-20261110",
   "baselinePublicBuild": "interior-placement-unblock-1",
   "approvedContentSubjects": [
     "math",
@@ -31,5 +31,11 @@
   "sourceQuestionsModified": false,
   "baselineSourceUnchanged": true,
   "backupPatch": "file-restore-p0-1",
-  "seatPatch": "level-operating-seats-1"
+  "seatPatch": "level-operating-seats-1",
+  "integratedGuests": 100,
+  "integratedStaff": 50,
+  "maxOperatingSeats": 100,
+  "maxWorkingStaff": 25,
+  "performanceStatus": "P99_MEMORY_LONGRUN_GALAXY_PENDING",
+  "integrationDate": "2026-11-10"
 }

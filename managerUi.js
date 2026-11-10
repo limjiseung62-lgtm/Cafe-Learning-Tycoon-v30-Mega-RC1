@@ -1,9 +1,12 @@
-import { managerFrames } from './managerFrames.js?v=level-seats-83d02b666a1c';
-import { managerCatalog, managerById, ensureManager, completeManagerConstruction, selectManager, deferManager } from './managerState.js?v=level-seats-83d02b666a1c';
-import { managerAdvice, nextManagerAdvice } from './managerAdvice.js?v=level-seats-83d02b666a1c';
-import { talkManager } from './managerActor.js?v=level-seats-83d02b666a1c';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=level-seats-83d02b666a1c';
-import { liveManagementOpen } from './liveManagement.js?v=level-seats-83d02b666a1c';
+import { createGrowthSession } from './sessionFactory.js?v=mega-5d509fb5dbfc';
+import { GrowthSessionController as ManagerController } from './growthSession.js?v=mega-5d509fb5dbfc';
+import { openActionManager } from './managerActionUi.js?v=mega-5d509fb5dbfc';
+import { managerFrames } from './managerFrames.js?v=mega-5d509fb5dbfc';
+import { managerCatalog, managerById, ensureManager, completeManagerConstruction, selectManager, deferManager } from './managerState.js?v=mega-5d509fb5dbfc';
+import { managerAdvice, nextManagerAdvice } from './managerAdvice.js?v=mega-5d509fb5dbfc';
+import { talkManager } from './managerActor.js?v=mega-5d509fb5dbfc';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=mega-5d509fb5dbfc';
+import { liveManagementOpen } from './liveManagement.js?v=mega-5d509fb5dbfc';
 function syncManagerRun(save) { const run = save.campaign?.run; if (run && !run.closed && run.cafe.mega && save.mega)
     run.cafe.mega.manager = structuredClone(save.mega.manager); return save; }
 const portrait = (row) => { const frame = managerFrames[row][0], top = frame.box[1], height = frame.box[3]; return '<div class="manager-portrait" style="aspect-ratio:192/' + height + '" aria-hidden="true"><img loading="lazy" src="assets/art/managers/companion-atlas.png" alt="" style="top:-' + top / height * 100 + '%;height:' + 1024 / height * 100 + '%"></div>'; };
@@ -73,8 +76,12 @@ function sessionPort(g, c) { return { game: g, read: () => c.current(), commit: 
         return { ok: false, message: '매니저 선택 정보가 바뀌었어요. 다시 열어 주세요.' }; const before = structuredClone(g.mega.manager); g.mega.manager = structuredClone(next.mega.manager); const r = c.save(); if (!r.ok)
         g.mega.manager = before; return r; } }; }
 export function attachManagerSession(g, c) { session?.button.remove(); session = null; if (g.mode !== 'CAFE_GROWTH' || !g.mega || !c)
-    return; ensureManager(g.mega); const b = document.createElement('button'); b.id = 'manager-companion'; b.className = 'staff-position-recovery manager-entry'; b.hidden = true; document.getElementById('live-mega-management')?.after(b); b.onclick = () => { const s = g.mega?.manager; if (s?.selected)
-    adviceDialog(sessionPort(g, c));
+    return; ensureManager(g.mega); const b = document.createElement('button'); b.id = 'manager-companion'; b.className = 'staff-position-recovery manager-entry'; b.hidden = true; document.getElementById('live-mega-management')?.after(b); b.onclick = () => { const s = g.mega?.manager; if (s?.selected) {
+    if (g.mega?.finalGrowth)
+        openActionManager(g, c);
+    else
+        adviceDialog(sessionPort(g, c));
+}
 else
     recruitment(sessionPort(g, c)); }; session = { g, c, button: b, lastPoll: 0 }; }
 export function pollManagerSession(g) { const s = session; if (!s || s.g !== g || Date.now() - s.lastPoll < 500)
@@ -107,7 +114,11 @@ export function pollManagerSession(g) { const s = session; if (!s || s.g !== g |
 } }
 export function managerPreparationAction(host, repo, source, refresh) { if (!source.mega)
     return; const draw = (save) => { const m = save.mega?.manager; if (!m || m.status === 'construction')
-    return; const b = document.createElement('button'); b.className = 'mega-expansion-entry'; b.textContent = m.selected ? managerById(m.selected).name + ' 매니저와 함께 영업해요' : '매니저 선택 이어하기'; b.disabled = !!m.selected; b.onclick = () => recruitment({ read: () => { const r = repo.read(); return r.status === 'ready' ? r.save : save; }, commit: (n, e) => repo.write(syncManagerRun(n), e), after: refresh }); host.append(b); if (!m.introduced && !modalOpen())
+    return; const b = document.createElement('button'); b.className = 'mega-expansion-entry'; b.textContent = m.selected ? managerById(m.selected).name + (save.mega?.finalGrowth ? ' 매니저 · 새 공간 세팅·직원 관리' : ' 매니저와 함께 영업해요') : '매니저 선택 이어하기'; b.disabled = !!m.selected && (!save.mega?.finalGrowth || !!save.campaign?.run && !save.campaign.run.closed); b.onclick = () => { if (m.selected && save.mega?.finalGrowth) {
+    const game = createGrowthSession(save), controller = new ManagerController(game, repo);
+    openActionManager(game, controller, refresh);
+    return;
+} void recruitment({ read: () => { const r = repo.read(); return r.status === 'ready' ? r.save : save; }, commit: (n, e) => repo.write(syncManagerRun(n), e), after: refresh }); }; host.append(b); if (!m.introduced && !modalOpen())
     setTimeout(() => { if (b.isConnected)
         b.click(); }, 0); }; const next = structuredClone(source), changed = ensureManager(next.mega) || completeManagerConstruction(next.mega, Date.now()); if (changed) {
     void ensureGrowthWriteLock().then(ok => { if (ok) {
@@ -125,3 +136,6 @@ export function finishManagerConstructionInRepository(repo) { const r = repo.rea
     repo.write(syncManagerRun(next), r.save); }
 if (typeof document !== 'undefined')
     document.addEventListener('cafe-manager-talk', () => session?.button.click());
+if (typeof document !== 'undefined')
+    document.addEventListener('click', e => { if (e.target instanceof Element && e.target.closest('[data-manager-recruit]'))
+        session?.button.click(); });
