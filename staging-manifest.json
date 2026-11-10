@@ -3046,6 +3046,11 @@
       "sha256": "03073261becade3f20385be982c705859036e2f9c15c0f42a2ade7a8b0c9728a"
     },
     {
+      "file": "release-verification.html",
+      "bytes": 1763,
+      "sha256": "1838301ce0dd1e4f3813fb394d199e413b68b60bdcdd6840e25102c4b23c089e"
+    },
+    {
       "file": "renderPhaseTiming.js",
       "bytes": 1007,
       "sha256": "953504e8aa0dd9a4e5ce5b8b5971c90786e74fafe844c1801ad3e4c707cc1133"
@@ -3421,5 +3426,5 @@
       "sha256": "eef997c8d243ebaaec666a156794ae3a99e1414815971356cd1d66c02f44a5a9"
     }
   ],
-  "totalBytes": 199462156
+  "totalBytes": 199463919
 }
