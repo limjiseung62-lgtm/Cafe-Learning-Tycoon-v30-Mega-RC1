@@ -1,4 +1,4 @@
-import { finalSpecializationOffers, signatureMenusFor } from './finalSpecializationState.js?v=mega-5d509fb5dbfc';
+import { finalSpecializationOffers, signatureMenusFor } from './finalSpecializationState.js?v=mega-d152ad969955';
 export function finalSpecializationFor(g) { return g.mode === 'CAFE_GROWTH' ? g.mega?.finalGrowth?.specialization : undefined; }
 export function chooseFinalSpecialization(g, path, now = new Date().toISOString()) { const f = g.mega?.finalGrowth, offer = finalSpecializationOffers[path]; if (g.mode !== 'CAFE_GROWTH' || !f || !offer)
     return { ok: false, reason: 'GROWTH 최종 통합 카페 전용이에요.' }; if (f.specialization)

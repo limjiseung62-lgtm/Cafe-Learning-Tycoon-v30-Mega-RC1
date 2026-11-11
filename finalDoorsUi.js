@@ -1,5 +1,5 @@
-import { ensureMegaPlan, megaDimensions } from './megaSpace.js?v=mega-5d509fb5dbfc';
-import { explicitDoors, prepareDoorMove } from './finalDoors.js?v=mega-5d509fb5dbfc';
+import { ensureMegaPlan, megaDimensions } from './megaSpace.js?v=mega-d152ad969955';
+import { explicitDoors, prepareDoorMove } from './finalDoors.js?v=mega-d152ad969955';
 export function openFinalDoors(repo, done) { const r = repo.read(); if (r.status !== 'ready' || !r.save.mega?.finalGrowth) {
     done();
     return;

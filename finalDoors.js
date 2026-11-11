@@ -1,4 +1,4 @@
-import { ensureMegaPlan, megaDimensions, validateMegaPlan, megaEntrances, toTile } from './megaSpace.js?v=mega-5d509fb5dbfc';
+import { ensureMegaPlan, megaDimensions, validateMegaPlan, megaEntrances, toTile } from './megaSpace.js?v=mega-d152ad969955';
 export function explicitDoors(p) { if (p.doors)
     return structuredClone(p.doors); const [w, h] = megaDimensions[p.level - 1]; return megaEntrances(p).map((port, i) => { const q = toTile(port.inside), o = toTile(port.outside), wall = o.x < 0 ? 'west' : o.x > w ? 'east' : o.y < 0 ? 'north' : 'south'; return { id: 'door-inherited-' + i, wall, offset: wall === 'west' || wall === 'east' ? q.y : q.x }; }); }
 /** First gate supports moving existing owned portals. Additional purchases wait for the logistics/economy gate. */

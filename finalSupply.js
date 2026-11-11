@@ -1,8 +1,9 @@
-import { finalProfile } from './recruitConfig.js?v=mega-5d509fb5dbfc';
-import { finalSpecializationFor } from './finalSpecialization.js?v=mega-5d509fb5dbfc';
-import { ensureMegaPlan, megaPickups, megaRoute, megaPointClear, megaAllPickups, toTile } from './megaSpace.js?v=mega-5d509fb5dbfc';
-import { megaZones } from './megaZones.js?v=mega-5d509fb5dbfc';
-import { newSupplyState } from './finalSupplyState.js?v=mega-5d509fb5dbfc';
+import { educationLevel } from './staffEducation.js?v=mega-d152ad969955';
+import { finalProfile } from './recruitConfig.js?v=mega-d152ad969955';
+import { finalSpecializationFor } from './finalSpecialization.js?v=mega-d152ad969955';
+import { ensureMegaPlan, megaPickups, megaRoute, megaPointClear, megaAllPickups, toTile } from './megaSpace.js?v=mega-d152ad969955';
+import { megaZones } from './megaZones.js?v=mega-d152ad969955';
+import { newSupplyState } from './finalSupplyState.js?v=mega-d152ad969955';
 export const hasFinalSupply = (g) => g.mode === 'CAFE_GROWTH' && !!g.mega?.finalGrowth;
 export function supplyState(g) { return g.mega.finalGrowth.supply ??= newSupplyState(); }
 const sum = (items, id) => items.filter(x => x === id).length;
@@ -66,8 +67,9 @@ export function configureFinalSupply(g) {
             delete state.stations[id];
     for (const f of p.fixtures ?? [])
         state.stations[f.id] ??= { stock: {} };
-    const active = () => g.service.paid.map(w => w.staffId);
-    const port = { dockCandidates: job => { const from = job.phase === 'pickup' || job.phase === 'loading', isCentral = from ? !job.reverse : job.reverse, index = (p.fixtures ?? []).findIndex(f => f.id === job.stationId); return isCentral ? central : index < 0 ? [] : all.slice(central.length + index * 2, central.length + index * 2 + 2); }, moveFactor: w => (finalProfile(w.staffId)?.primaryTrait.moveFactor ?? 1) * (finalProfile(w.staffId)?.secondaryTrait.moveFactor ?? 1), serveFactor: w => (finalProfile(w.staffId)?.primaryTrait.serveFactor ?? 1) * (finalProfile(w.staffId)?.secondaryTrait.serveFactor ?? 1), pickupFactor: w => finalProfile(w.staffId)?.primaryTrait.pickupFactor ?? 1, tripCapacity: w => Math.min(6, w.carryCapacity + (finalSpecializationFor(g)?.path === 'mass' ? 1 : 0) + (finalProfile(w.staffId)?.secondaryTrait.carryBonus ?? 0)), assignment: w => crewAssignment(g, w.staffId), priority: (w, o) => { const a = crewAssignment(g, w.staffId); return (a.zone !== 'all' && a.zone !== tableZone(g, o.seat) ? 80 : 0) + (a.role === 'vip' && o.vip ? -60 : 0); }, home: w => { const h = crewAssignment(g, w.staffId).home; return h && megaPointClear(p, h) ? h : undefined; }, job: (w, orders) => { if (w.owner || w.orderId !== null)
+    const active = () => g.service.paid.map(w => w.staffId), seatZones = g.serviceSpace?.seats.map((_, i) => tableZone(g, i)) ?? [];
+    const batch = p.level >= 30 && g.cafeLevel >= 30;
+    const port = { batchServing: false, enhancedTray: batch, dockCandidates: job => { const from = job.phase === 'pickup' || job.phase === 'loading', isCentral = from ? !job.reverse : job.reverse, index = (p.fixtures ?? []).findIndex(f => f.id === job.stationId); return isCentral ? central : index < 0 ? [] : all.slice(central.length + index * 2, central.length + index * 2 + 2); }, moveFactor: w => (finalProfile(w.staffId)?.primaryTrait.moveFactor ?? 1) * (finalProfile(w.staffId)?.secondaryTrait.moveFactor ?? 1), serveFactor: w => (finalProfile(w.staffId)?.primaryTrait.serveFactor ?? 1) * (finalProfile(w.staffId)?.secondaryTrait.serveFactor ?? 1), pickupFactor: w => finalProfile(w.staffId)?.primaryTrait.pickupFactor ?? 1, tripCapacity: w => Math.min(batch ? (w.level <= 2 ? 2 : w.level <= 4 ? 4 : 5) : 6, (batch ? [1, 2, 3, 4, 5][Math.max(0, Math.min(4, w.level - 1))] + (educationLevel(g, w.staffId) > 0 ? 1 : 0) : w.carryCapacity) + (finalSpecializationFor(g)?.path === 'mass' ? 1 : 0) + (finalProfile(w.staffId)?.secondaryTrait.carryBonus ?? 0)), assignment: w => crewAssignment(g, w.staffId), priority: (w, o) => { const a = crewAssignment(g, w.staffId); return (a.zone !== 'all' && a.zone !== seatZones[o.seat] ? 80 : 0) + (a.role === 'vip' && o.vip ? -60 : 0); }, home: w => { const h = crewAssignment(g, w.staffId).home; return h && megaPointClear(p, h) ? h : undefined; }, job: (w, orders) => { if (w.owner || w.orderId !== null)
             return undefined; let job = state.jobs.find(j => j.workerId === w.staffId); if (job)
             return job; const role = crewAssignment(g, w.staffId).role; if (!['logistics', 'kitchen', 'zone-manager'].includes(role) || !['IDLE', 'RETURNING'].includes(w.state))
             return undefined; if (role !== 'logistics' && orders.some(o => o.ready))
@@ -75,7 +77,7 @@ export function configureFinalSupply(g) {
             orphan.workerId = w.staffId;
             return orphan;
         } const fixtures = (p.fixtures ?? []).map((f, i) => ({ f, point: all[central.length + i * 2], stock: state.stations[f.id] })).filter(a => !state.jobs.some(j => j.stationId === a.f.id)); fixtures.sort((a, b) => Math.hypot(w.position.x - a.point.x, (w.position.y - a.point.y) * 2 / 3) - Math.hypot(w.position.x - b.point.x, (w.position.y - b.point.y) * 2 / 3)); for (const a of fixtures) {
-            const batch = Math.min(20, (finalSpecializationFor(g)?.path === 'mass' ? 12 : g.cafeLevel >= 20 ? 10 : 8) + (finalProfile(w.staffId)?.primaryTrait.logisticsBatch ?? 0)), target = finalSpecializationFor(g)?.path === 'mass' ? 4 : g.cafeLevel >= 20 ? 3 : 2, items = [], reverse = !!a.stock.recall;
+            const late = p.level >= 30 && g.cafeLevel >= 30, mass = finalSpecializationFor(g)?.path === 'mass', batch = Math.min(20, (late ? 20 : mass ? 12 : g.cafeLevel >= 20 ? 10 : 8) + (finalProfile(w.staffId)?.primaryTrait.logisticsBatch ?? 0)), target = late ? (mass ? 10 : 8) : mass ? 4 : g.cafeLevel >= 20 ? 3 : 2, items = [], reverse = !!a.stock.recall;
             const ids = g.menus.map(m => m.menuId), start = state.serial % Math.max(1, ids.length);
             for (let k = 0; k < ids.length && items.length < batch; k++) {
                 const id = ids[(start + k) % ids.length], m = g.menus.find(m => m.menuId === id);

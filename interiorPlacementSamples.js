@@ -1,4 +1,4 @@
-import { megaDimensions } from './megaSpace.js?v=mega-5d509fb5dbfc';
+import { megaDimensions } from './megaSpace.js?v=mega-d152ad969955';
 /** Bounded visual samples span the whole floor plus the current cursor neighborhood. Direct placement is never restricted to this list. */
 export function placementSamples(p, center) { const [w, h] = megaDimensions[p.level - 1], out = [], seen = new Set(), add = (x, y) => { if (x < .5 || y < .5 || x > w - .5 || y > h - .5)
     return; const k = x + ':' + y; if (!seen.has(k)) {

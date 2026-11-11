@@ -1,8 +1,8 @@
-import { growthMenuDefinitions } from './menuResearch.js?v=mega-5d509fb5dbfc';
-import { branchManagers, configureBranch, branchOperatingReport } from './enterpriseState.js?v=mega-5d509fb5dbfc';
-import { branchBaseYield, branchYield, foundFranchise, upgradeFranchise, branchUpgradeCost, investmentCatalog, progressiveEconomyConfig } from './progressiveEconomy.js?v=mega-5d509fb5dbfc';
-import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=mega-5d509fb5dbfc';
-import { escapeText as esc } from './questionRenderer.js?v=mega-5d509fb5dbfc';
+import { growthMenuDefinitions } from './menuResearch.js?v=mega-d152ad969955';
+import { branchManagers, configureBranch, branchOperatingReport } from './enterpriseState.js?v=mega-d152ad969955';
+import { branchBaseYield, branchYield, foundFranchise, upgradeFranchise, branchUpgradeCost, investmentCatalog, progressiveEconomyConfig } from './progressiveEconomy.js?v=mega-d152ad969955';
+import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=mega-d152ad969955';
+import { escapeText as esc } from './questionRenderer.js?v=mega-d152ad969955';
 export function paintEnterpriseOperations(host, s, edit, repo, onExit = () => { }) {
     ensureVillageSceneStyle();
     const v = s.v26, e = v.enterprise;
@@ -15,5 +15,5 @@ export function paintEnterpriseOperations(host, s, edit, repo, onExit = () => { 
     } edit(s => configureBranch(s, id, manager, menu, employees)); });
     host.querySelectorAll('[data-found]').forEach(b => b.onclick = () => { const id = Number(b.dataset.found), region = host.querySelector(`[data-region="${id}"]`).value; edit(s => foundFranchise(s, id, region)); });
     host.querySelectorAll('[data-upgrade]').forEach(b => b.onclick = () => edit(s => upgradeFranchise(s, Number(b.dataset.upgrade))));
-    host.querySelector('[data-city]').addEventListener('click', () => { void import('./enterpriseCityUi.js?v=mega-5d509fb5dbfc').then(m => m.openEnterpriseCity(repo, () => { host.closest('.enterprise-dialog')?.remove(); onExit(); })); });
+    host.querySelector('[data-city]').addEventListener('click', () => { void import('./enterpriseCityUi.js?v=mega-d152ad969955').then(m => m.openEnterpriseCity(repo, () => { host.closest('.enterprise-dialog')?.remove(); onExit(); })); });
 }

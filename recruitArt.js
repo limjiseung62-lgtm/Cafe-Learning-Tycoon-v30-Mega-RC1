@@ -1,6 +1,6 @@
-import { finalActorFrame } from './finalActorArt.js?v=mega-5d509fb5dbfc';
-import { sprite } from './art.js?v=mega-5d509fb5dbfc';
-import { imageReady } from './imageLoading.js?v=mega-5d509fb5dbfc';
+import { finalActorFrame } from './finalActorArt.js?v=mega-d152ad969955';
+import { sprite } from './art.js?v=mega-d152ad969955';
+import { imageReady } from './imageLoading.js?v=mega-d152ad969955';
 export const isNewStaff = (id) => /^staff-(6|7|8|9|10|11|12)$/.test(id);
 export function recruitFrame(id, motion, facing = 'right') {
     const extra = finalActorFrame(id, facing === 'left' ? 'SW' : 'SE', ['WALK', 'RETURN'].includes(motion) ? 'walk' : ['CARRY', 'SERVE', 'PICKUP'].includes(motion) ? 'carry' : 'idle');

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { byId, assumptions } from './cityBuildingCatalog.js?v=mega-5d509fb5dbfc';
+import { byId, assumptions } from './cityBuildingCatalog.js?v=mega-d152ad969955';
 export const indicatorMeta = { population: { name: '도시 인구', unit: '명' }, density: { name: '인구밀도', unit: '명/㎢' }, traffic: { name: '교통 혼잡', unit: '/100' }, economy: { name: '상권 활성', unit: '/100' }, environment: { name: '환경', unit: '/100' }, attraction: { name: '문화·관광', unit: '/100' }, satisfaction: { name: '도시 만족', unit: '/100' }, brand: { name: '브랜드 영향', unit: '/100' } };
 export const clamp = (n, a = 0, b = 100) => Math.max(a, Math.min(b, Number.isFinite(n) ? n : a));
 const area = r => Math.max(0, r.w) * Math.max(0, r.h);

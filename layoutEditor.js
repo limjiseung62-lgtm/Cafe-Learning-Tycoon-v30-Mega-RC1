@@ -1,14 +1,14 @@
-import { openMegaEditor } from './megaEditor.js?v=mega-5d509fb5dbfc';
-import { isMegaDeployment } from './megaSpace.js?v=mega-5d509fb5dbfc';
-import { openFreeEditor } from './freeLayoutEditor.js?v=mega-5d509fb5dbfc';
-import { planFor, defaultPlan, validatePlan, commitPlan } from './cafeLayout.js?v=mega-5d509fb5dbfc';
-import { layoutFacilities, tableRect, decorRect } from './layoutModel.js?v=mega-5d509fb5dbfc';
-import { createSpace, floorPath, hallGrowthSpecs } from './spatial.js?v=mega-5d509fb5dbfc';
-import { branchRoom, branchCatalog } from './growthBranch.js?v=mega-5d509fb5dbfc';
-import { sprite } from './art.js?v=mega-5d509fb5dbfc';
-import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=mega-5d509fb5dbfc';
-import { escapeText as esc } from './questionRenderer.js?v=mega-5d509fb5dbfc';
-import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=mega-5d509fb5dbfc';
+import { openMegaEditor } from './megaEditor.js?v=mega-d152ad969955';
+import { isMegaDeployment } from './megaSpace.js?v=mega-d152ad969955';
+import { openFreeEditor } from './freeLayoutEditor.js?v=mega-d152ad969955';
+import { planFor, defaultPlan, validatePlan, commitPlan } from './cafeLayout.js?v=mega-d152ad969955';
+import { layoutFacilities, tableRect, decorRect } from './layoutModel.js?v=mega-d152ad969955';
+import { createSpace, floorPath, hallGrowthSpecs } from './spatial.js?v=mega-d152ad969955';
+import { branchRoom, branchCatalog } from './growthBranch.js?v=mega-d152ad969955';
+import { sprite } from './art.js?v=mega-d152ad969955';
+import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=mega-d152ad969955';
+import { escapeText as esc } from './questionRenderer.js?v=mega-d152ad969955';
+import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=mega-d152ad969955';
 export async function openLegacyLayoutEditor(repo, initial, onClose) {
     document.getElementById('layout-editor')?.remove();
     const dialog = document.createElement('section');

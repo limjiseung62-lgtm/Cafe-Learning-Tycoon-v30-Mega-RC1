@@ -1,12 +1,12 @@
-import { createGrowthSession } from './sessionFactory.js?v=mega-5d509fb5dbfc';
-import { GrowthSessionController as ManagerController } from './growthSession.js?v=mega-5d509fb5dbfc';
-import { openActionManager } from './managerActionUi.js?v=mega-5d509fb5dbfc';
-import { managerFrames } from './managerFrames.js?v=mega-5d509fb5dbfc';
-import { managerCatalog, managerById, ensureManager, completeManagerConstruction, selectManager, deferManager } from './managerState.js?v=mega-5d509fb5dbfc';
-import { managerAdvice, nextManagerAdvice } from './managerAdvice.js?v=mega-5d509fb5dbfc';
-import { talkManager } from './managerActor.js?v=mega-5d509fb5dbfc';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=mega-5d509fb5dbfc';
-import { liveManagementOpen } from './liveManagement.js?v=mega-5d509fb5dbfc';
+import { createGrowthSession } from './sessionFactory.js?v=mega-d152ad969955';
+import { GrowthSessionController as ManagerController } from './growthSession.js?v=mega-d152ad969955';
+import { openActionManager } from './managerActionUi.js?v=mega-d152ad969955';
+import { managerFrames } from './managerFrames.js?v=mega-d152ad969955';
+import { managerCatalog, managerById, ensureManager, completeManagerConstruction, selectManager, deferManager } from './managerState.js?v=mega-d152ad969955';
+import { managerAdvice, nextManagerAdvice } from './managerAdvice.js?v=mega-d152ad969955';
+import { talkManager } from './managerActor.js?v=mega-d152ad969955';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=mega-d152ad969955';
+import { liveManagementOpen } from './liveManagement.js?v=mega-d152ad969955';
 function syncManagerRun(save) { const run = save.campaign?.run; if (run && !run.closed && run.cafe.mega && save.mega)
     run.cafe.mega.manager = structuredClone(save.mega.manager); return save; }
 const portrait = (row) => { const frame = managerFrames[row][0], top = frame.box[1], height = frame.box[3]; return '<div class="manager-portrait" style="aspect-ratio:192/' + height + '" aria-hidden="true"><img loading="lazy" src="assets/art/managers/companion-atlas.png" alt="" style="top:-' + top / height * 100 + '%;height:' + 1024 / height * 100 + '%"></div>'; };

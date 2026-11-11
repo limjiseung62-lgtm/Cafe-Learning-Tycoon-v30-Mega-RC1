@@ -1,8 +1,8 @@
-import { createMegaSpace, megaRoute, megaTravelSeconds, megaKey } from './megaSpace.js?v=mega-5d509fb5dbfc';
-import { freeFloorRoute } from './freeNavigation.js?v=mega-5d509fb5dbfc';
-import { createFreeSpace, freeBody, freeKey } from './freeLayoutModel.js?v=mega-5d509fb5dbfc';
-import { applyPlan, layoutKey } from './layoutModel.js?v=mega-5d509fb5dbfc';
-import { balance } from './config.js?v=mega-5d509fb5dbfc';
+import { createMegaSpace, megaRoute, megaTravelSeconds, megaKey } from './megaSpace.js?v=mega-d152ad969955';
+import { freeFloorRoute } from './freeNavigation.js?v=mega-d152ad969955';
+import { createFreeSpace, freeBody, freeKey } from './freeLayoutModel.js?v=mega-d152ad969955';
+import { applyPlan, layoutKey } from './layoutModel.js?v=mega-d152ad969955';
+import { balance } from './config.js?v=mega-d152ad969955';
 // Coordinates are floor contact points, in percent of the full 3:2 room image.
 // All six rooms deliberately retain a clear floor; furniture uses the existing atlas.
 const centers = [
@@ -218,7 +218,7 @@ export class SpatialScene {
     }
     sync(game) { const plan = game.mode === 'CAFE_GROWTH' ? game.layouts?.plans[layoutKey(game.cafeLevel, game.branchId)] : undefined, free = game.mode === 'CAFE_GROWTH' ? game.freeLayouts?.plans[freeKey(game.cafeLevel, game.branchId)] : undefined, mega = game.serviceSpace?.megaPlan ?? (game.mode === 'CAFE_GROWTH' && game.cafeLevel <= 10 ? game.mega?.plans[megaKey(game.cafeLevel, game.branchId)] : undefined), stamp = JSON.stringify([plan ?? null, free ?? null, mega ?? null]); if (this.space.level !== game.cafeLevel || this.space.branch !== game.branchId || stamp !== this.layoutStamp) {
         this.layoutStamp = stamp;
-        this.space = createSpace(game.cafeLevel, this.grown, game.branchId, plan, free, mega);
+        this.space = mega && game.serviceSpace?.megaPlan === mega ? { ...game.serviceSpace, seats: game.serviceSpace.seats.map(s => ({ ...s, occupiedBy: null })) } : createSpace(game.cafeLevel, this.grown, game.branchId, plan, free, mega);
         if (mega)
             this.space.level = game.cafeLevel;
         this.reservations = new SeatReservations(this.space.seats, game.mega?.paid && mega ? this.space.seats.length : game.cafe.maxCustomers);

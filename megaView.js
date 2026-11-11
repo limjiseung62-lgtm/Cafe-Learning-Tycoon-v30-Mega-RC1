@@ -1,26 +1,26 @@
-import { renderPhase, renderPhaseStart, renderPhaseEnd } from './renderPhaseTiming.js?v=mega-5d509fb5dbfc';
-import { seatedDirection, eatingPose, paintEatingMotion } from './megaSeatedMotion.js?v=mega-5d509fb5dbfc';
-import { finalRuntimeDiagnostics } from './finalRuntimeDiagnostics.js?v=mega-5d509fb5dbfc';
-import { finalActorFrame } from './finalActorArt.js?v=mega-5d509fb5dbfc';
-import { finalActorCache, finalActorFrameCache, finalActorBitmap } from './finalActorCache.js?v=mega-5d509fb5dbfc';
-import { finalSpecializationFor } from './finalSpecialization.js?v=mega-5d509fb5dbfc';
-import { signatureImage } from './finalSpecializationState.js?v=mega-5d509fb5dbfc';
-import { managerActor, managerSprite } from './managerActor.js?v=mega-5d509fb5dbfc';
-import { managerById } from './managerState.js?v=mega-5d509fb5dbfc';
-import { megaOperatingGrade } from './megaOperations.js?v=mega-5d509fb5dbfc';
-import { megaZones } from './megaZones.js?v=mega-5d509fb5dbfc';
-import { livingWalkAsset } from './megaLivingArt.js?v=mega-5d509fb5dbfc';
-import { MegaActorMotion } from './megaActorMotion.js?v=mega-5d509fb5dbfc';
-import { MegaFramePacer } from './megaFramePacer.js?v=mega-5d509fb5dbfc';
-import { megaEntrances, megaEnabled, megaDimensions, iso, toTile, megaChairs, megaMetrics } from './megaSpace.js?v=mega-5d509fb5dbfc';
-import { selectCustomerPose, selectedPoseAsset } from './customerPoses.js?v=mega-5d509fb5dbfc';
-import { workerFrame } from './motionSprites.js?v=mega-5d509fb5dbfc';
-import { guestMotion, workerMotion } from './characterMotion.js?v=mega-5d509fb5dbfc';
-import { motionFrame } from './animationPresentation.js?v=mega-5d509fb5dbfc';
-import { furnitureFor } from './furnitureCatalog.js?v=mega-5d509fb5dbfc';
-import { megaFurnitureFrames } from './megaFurnitureFrames.js?v=mega-5d509fb5dbfc';
-import { furnitureFrames } from './furnitureFrames.js?v=mega-5d509fb5dbfc';
-import { paintMegaDecor, megaImage as image, cachedFragment, paintArtFloor, environmentPlacements, megaArtMetrics, furnitureProjection, environmentSprite, bitmapFragment, clearArtBitmaps, artBitmapCache } from './megaArt.js?v=mega-5d509fb5dbfc';
+import { renderPhase, renderPhaseStart, renderPhaseEnd } from './renderPhaseTiming.js?v=mega-d152ad969955';
+import { seatedDirection, eatingPose, paintEatingMotion } from './megaSeatedMotion.js?v=mega-d152ad969955';
+import { finalRuntimeDiagnostics } from './finalRuntimeDiagnostics.js?v=mega-d152ad969955';
+import { finalActorFrame } from './finalActorArt.js?v=mega-d152ad969955';
+import { finalActorCache, finalActorFrameCache, finalActorBitmap } from './finalActorCache.js?v=mega-d152ad969955';
+import { finalSpecializationFor } from './finalSpecialization.js?v=mega-d152ad969955';
+import { signatureImage } from './finalSpecializationState.js?v=mega-d152ad969955';
+import { managerActor, managerSprite } from './managerActor.js?v=mega-d152ad969955';
+import { managerById } from './managerState.js?v=mega-d152ad969955';
+import { megaOperatingGrade } from './megaOperations.js?v=mega-d152ad969955';
+import { megaZones } from './megaZones.js?v=mega-d152ad969955';
+import { livingWalkAsset } from './megaLivingArt.js?v=mega-d152ad969955';
+import { MegaActorMotion } from './megaActorMotion.js?v=mega-d152ad969955';
+import { MegaFramePacer } from './megaFramePacer.js?v=mega-d152ad969955';
+import { megaEntrances, megaEnabled, megaDimensions, iso, toTile, megaChairs, megaMetrics } from './megaSpace.js?v=mega-d152ad969955';
+import { selectCustomerPose, selectedPoseAsset } from './customerPoses.js?v=mega-d152ad969955';
+import { workerFrame } from './motionSprites.js?v=mega-d152ad969955';
+import { guestMotion, workerMotion } from './characterMotion.js?v=mega-d152ad969955';
+import { motionFrame } from './animationPresentation.js?v=mega-d152ad969955';
+import { furnitureFor } from './furnitureCatalog.js?v=mega-d152ad969955';
+import { megaFurnitureFrames } from './megaFurnitureFrames.js?v=mega-d152ad969955';
+import { furnitureFrames } from './furnitureFrames.js?v=mega-d152ad969955';
+import { paintMegaDecor, megaImage as image, cachedFragment, paintArtFloor, paintArtWalls, environmentPlacements, megaArtMetrics, furnitureProjection, environmentSprite, bitmapFragment, clearArtBitmaps, artBitmapCache } from './megaArt.js?v=mega-d152ad969955';
 const baseWorkers = { owner: [22, 76, 228, 429], 'staff-1': [274, 100, 234, 407], 'staff-2': [532, 70, 221, 434], 'staff-3': [782, 79, 241, 430], 'staff-4': [1045, 104, 232, 401], 'staff-5': [1310, 98, 203, 406] };
 export const paintMegaFloor = paintArtFloor;
 export function paintMegaBox(c, x, y, w, h, z, color) { const a = iso({ x, y }), b = iso({ x: x + w, y }), d = iso({ x, y: y + h }), e = iso({ x: x + w, y: y + h }); for (const [pts, fill] of [[[a, b, { x: b.x, y: b.y - z }, { x: a.x, y: a.y - z }], '#b38c5d'], [[b, e, { x: e.x, y: e.y - z }, { x: b.x, y: b.y - z }], '#8e6e4b'], [[{ x: a.x, y: a.y - z }, { x: b.x, y: b.y - z }, { x: e.x, y: e.y - z }, { x: d.x, y: d.y - z }], color]]) {
@@ -43,6 +43,8 @@ export function paintMegaChair(c, t, ch, asynchronous = false) { if (!furniture(
 export function paintMegaTable(c, t, asynchronous = false) { if (furniture(c, t, undefined, asynchronous))
     return; const horizontal = t.rotation % 180 === 0, w = t.kind === 'long' ? 2.3 : t.kind === 'four' ? 1.7 : 1, W = horizontal ? w : .65, H = horizontal ? .65 : w; paintMegaBox(c, t.x - W / 2, t.y - H / 2, W, H, 22, t.furnitureId?.includes('marble') ? '#f0e9df' : t.furnitureId?.includes('sofa') ? '#c0accb' : '#d9ad72'); const a = iso(t); c.fillStyle = '#f9edd8'; c.beginPath(); c.ellipse(a.x, a.y - 13, 4, 2, 0, 0, Math.PI * 2); c.fill(); }
 export class MegaView {
+    /** Optional constant-space QA observer, called only for real canvas paints. */
+    paintObserver;
     onManagerFocus = () => { const g = this.game, a = g && managerActor(g); if (!a)
         return; this.center = iso(toTile(a.position)); this.target = Math.max(this.fitScale, 1.25); this.clamp(); this.paint(); };
     actors = new MegaActorMotion();
@@ -63,6 +65,9 @@ export class MegaView {
     drag = null;
     floor = null;
     floorKey = '';
+    walls = null;
+    wallKey = '';
+    wallEpoch = 0;
     last = 0;
     intervals = [];
     lastStats = 0;
@@ -72,8 +77,9 @@ export class MegaView {
     staticKey = '';
     staticObjects = [];
     cpu = [];
-    onArt = (event) => { const file = event.detail?.file; if (!file || file.includes('mega-v30b/environment'))
-        this.floorKey = ''; this.staticKey = ''; };
+    onArt = (event) => { const file = event.detail?.file; if (!file)
+        this.floorKey = ''; if (!file || file.includes('mega-v30b/environment'))
+        this.wallEpoch++; this.staticKey = ''; };
     onVisibility = () => { this.last = 0; this.pacer.reset(); };
     get retainedResources() { return { game: !!this.game, scene: !!this.scene, canvasPixels: this.canvas ? this.canvas.width * this.canvas.height : 0, floorPixels: this.floor ? this.floor.width * this.floor.height : 0, staticObjects: this.staticObjects.length, intervals: this.intervals.length, cpuSamples: this.cpu.length }; }
     setReviewScale(scale) { this.reviewScale = scale; if (scale !== null) {
@@ -196,8 +202,10 @@ export class MegaView {
         const p = s.space.megaPlan;
         const reduce = document.body.classList.contains('motion-low') || matchMedia('(prefers-reduced-motion: reduce)').matches;
         const now = performance.now();
-        if (this.last && now > this.last)
+        if (this.last && now > this.last) {
             this.intervals.push(now - this.last);
+            this.paintObserver?.(now - this.last);
+        }
         this.last = now;
         if (this.intervals.length > 6000)
             this.intervals.shift();
@@ -225,11 +233,24 @@ export class MegaView {
             fc.scale(cacheScale, cacheScale);
             fc.translate(h * 24 + 50, 105);
             const floorStart = performance.now();
-            renderPhase('floor-raster', () => paintMegaFloor(fc, p, true));
+            renderPhase('floor-raster', () => paintMegaFloor(fc, p, true, false));
             megaArtMetrics.floorMaxMs = Math.max(megaArtMetrics.floorMaxMs, performance.now() - floorStart);
             this.floorKey = floorKey;
         }
         renderPhase('floor-blit', () => c.drawImage(this.floor, -h * 24 - 50, -105, floorW, floorH));
+        const wallKey = floorKey + '/' + this.wallEpoch;
+        if (wallKey !== this.wallKey) {
+            this.walls ??= document.createElement('canvas');
+            const cacheScale = Math.min(2, 2048 / floorW);
+            this.walls.width = Math.ceil(floorW * cacheScale);
+            this.walls.height = Math.ceil(floorH * cacheScale);
+            const wc = this.walls.getContext('2d');
+            wc.scale(cacheScale, cacheScale);
+            wc.translate(h * 24 + 50, 105);
+            renderPhase('wall-raster', () => paintArtWalls(wc, p, true));
+            this.wallKey = wallKey;
+        }
+        renderPhase('wall-blit', () => c.drawImage(this.walls, -h * 24 - 50, -105, floorW, floorH));
         if (this.debug) {
             c.strokeStyle = '#267b60';
             c.lineWidth = 1.2;
@@ -320,10 +341,13 @@ export class MegaView {
                     this.sprite(c, { file: 'assets/art/characters.png', width: 1536, height: 1024, box, nativeFacing: 'right' }, q, pose.facing, 35, 1);
                 } if (worker.state === 'SERVING')
                     this.bubble(c, q, '맛있게 드세요'); if (worker.cargo.length) {
+                    const count = Math.min(5, worker.cargo.length), width = 3 + count * 4, left = q.x + (facing === 'left' ? -width - 3 : 4);
                     c.fillStyle = '#ebc286';
-                    c.fillRect(q.x + (facing === 'left' ? -15 : 4), q.y - 12, 11, 3);
-                    c.fillStyle = '#f9f3dd';
-                    c.fillRect(q.x + (facing === 'left' ? -11 : 6), q.y - 16, 5, 4);
+                    c.fillRect(left, q.y - 12, width, 3);
+                    for (let i = 0; i < count; i++) {
+                        c.fillStyle = i % 2 ? '#e8b18c' : '#f9f3dd';
+                        c.fillRect(left + 2 + i * 4, q.y - 16, 3, 4);
+                    }
                 } } });
         }
         const managerTiming = renderPhaseStart();
@@ -406,7 +430,7 @@ export class MegaView {
             this.fallback(c, q, '#8a9d78');
     } c.restore(); renderPhaseEnd(a.file.startsWith('assets/art/final-roster/') ? 'actor-cell-blit' : 'legacy-actor-fragment', spriteTiming); }
     fallback(c, p, color) { c.fillStyle = color; c.fillRect(p.x - 4, p.y - 17, 8, 15); c.fillStyle = '#e8c5a0'; c.beginPath(); c.arc(p.x, p.y - 20, 5, 0, Math.PI * 2); c.fill(); }
-    detach() { if (this.room) {
+    detach() { this.paintObserver = undefined; if (this.room) {
         clearArtBitmaps();
         finalActorFrameCache.clear();
         finalActorCache.clear();
@@ -416,7 +440,10 @@ export class MegaView {
     } if (this.floor) {
         this.floor.width = 0;
         this.floor.height = 0;
-    } this.floor = null; if (this.canvas) {
+    } this.floor = null; if (this.walls) {
+        this.walls.width = 0;
+        this.walls.height = 0;
+    } this.walls = null; this.wallKey = ''; this.wallEpoch = 0; if (this.canvas) {
         this.canvas.width = 0;
         this.canvas.height = 0;
     } this.host?.remove(); this.host = null; this.canvas = null; this.room = null; this.game = null; this.scene = null; this.intervals = []; this.cpu = []; this.last = 0; this.lastStats = 0; this.level = 0; this.floorKey = ''; }

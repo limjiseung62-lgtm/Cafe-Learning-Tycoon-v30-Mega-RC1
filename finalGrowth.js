@@ -1,11 +1,11 @@
-import { validManagerActions } from './managerActionState.js?v=mega-5d509fb5dbfc';
-import { legacyCrewLimit } from './finalWorkforcePolicy.js?v=mega-5d509fb5dbfc';
-import { validPayroll } from './finalPayrollState.js?v=mega-5d509fb5dbfc';
-import { levelOperatingSeats, levelFloorSeats } from './levelSeatPolicy.js?v=mega-5d509fb5dbfc';
-import { validFinalSpecialization, signatureMenusFor } from './finalSpecializationState.js?v=mega-5d509fb5dbfc';
-import { validSupply, validAssignments } from './finalSupplyState.js?v=mega-5d509fb5dbfc';
-import { explicitDoors } from './finalDoors.js?v=mega-5d509fb5dbfc';
-import { cafeGrowthBalance } from './modeBalance.js?v=mega-5d509fb5dbfc';
+import { validManagerActions } from './managerActionState.js?v=mega-d152ad969955';
+import { legacyCrewLimit } from './finalWorkforcePolicy.js?v=mega-d152ad969955';
+import { validPayroll } from './finalPayrollState.js?v=mega-d152ad969955';
+import { levelOperatingSeats, levelFloorSeats } from './levelSeatPolicy.js?v=mega-d152ad969955';
+import { validFinalSpecialization, signatureMenusFor } from './finalSpecializationState.js?v=mega-d152ad969955';
+import { validSupply, validAssignments } from './finalSupplyState.js?v=mega-d152ad969955';
+import { explicitDoors } from './finalDoors.js?v=mega-d152ad969955';
+import { cafeGrowthBalance } from './modeBalance.js?v=mega-d152ad969955';
 export const finalLevelSeats = levelOperatingSeats;
 export const finalFloorSeats = levelFloorSeats;
 export const finalLocalDeployment = () => typeof document !== 'undefined' && ['local-only', 'public-test'].includes(document.querySelector('meta[name="cafe-final-growth"]')?.getAttribute('content') ?? '');
@@ -33,5 +33,5 @@ export function adoptFinalGrowth(save) { const s = structuredClone(save); if (s.
         s.village.legacyArchiveOnly = true;
 } return s; }
 export const finalActive = (g) => g.mode === 'CAFE_GROWTH' && !!g.mega?.finalGrowth;
-export function operatingSeatContract(g) { const m = g.mega, p = m?.plans[(g.branchId ?? 'base') + ':' + m?.paid?.spaceLevel], installed = p?.tables.reduce((n, t) => n + (t.integratedSeats || !t.chairs ? (t.kind === 'four' ? 4 : t.kind === 'long' ? 6 : 2) : t.chairs.length), 0) ?? 0; const level = finalLevelSeats[Math.max(0, Math.min(29, g.cafeLevel - 1))], floor = finalFloorSeats[m?.paid?.spaceLevel ?? 1] ?? 4, limit = Math.max(m?.finalGrowth?.inheritedOperatingSeats ?? 0, Math.min(level, floor)); return { installed, accessible: installed, levelLimit: level, floorLimit: floor, operatingLimit: limit, operating: Math.min(installed, limit), concurrentGuestLimit: Math.min(80, installed, limit) }; }
+export function operatingSeatContract(g) { const m = g.mega, p = m?.plans[(g.branchId ?? 'base') + ':' + m?.paid?.spaceLevel], installed = p?.tables.reduce((n, t) => n + (t.integratedSeats || !t.chairs ? (t.kind === 'four' ? 4 : t.kind === 'long' ? 6 : 2) : t.chairs.length), 0) ?? 0; const level = finalLevelSeats[Math.max(0, Math.min(29, g.cafeLevel - 1))], floor = finalFloorSeats[m?.paid?.spaceLevel ?? 1] ?? 4, limit = Math.max(m?.finalGrowth?.inheritedOperatingSeats ?? 0, Math.min(level, floor)); const accessible = g.serviceSpace && g.serviceSpace.megaPlan === p ? g.serviceSpace.seats.filter(s => s.entryPath.length > 0).length : installed; return { installed, accessible, levelLimit: level, floorLimit: floor, operatingLimit: limit, operating: Math.min(accessible, limit), concurrentGuestLimit: Math.min(80, accessible, limit) }; }
 export const finalLevelRewards = finalLevelSeats.map((seats, i) => ({ level: i + 1, immediate: '운영 좌석 권한 최대 ' + seats + '석 (소유 공간·배치·동선 필요)', purchase: [4, 10, 20, 30].includes(i + 1) ? '다음 매장 증축 구매 자격' : '가구를 구매해 늘어난 운영 권한 활용', automaticFurniture: 0, automaticFloor: 0 }));

@@ -1,10 +1,10 @@
-import { finalActorFrame } from './finalActorArt.js?v=mega-5d509fb5dbfc';
-import { waitForImages } from './imageLoading.js?v=mega-5d509fb5dbfc';
-import { webAsset } from './webAsset.js?v=mega-5d509fb5dbfc';
-import { guestMotionAsset } from './motionSprites.js?v=mega-5d509fb5dbfc';
-import { hospitalityPoseCatalog } from './hospitalityPoseCatalog.js?v=mega-5d509fb5dbfc';
-import { specialPoseCatalog } from './specialPoseCatalog.js?v=mega-5d509fb5dbfc';
-import { customerPoseCatalog } from './customerPoseCatalog.js?v=mega-5d509fb5dbfc';
+import { finalActorFrame } from './finalActorArt.js?v=mega-d152ad969955';
+import { waitForImages } from './imageLoading.js?v=mega-d152ad969955';
+import { webAsset } from './webAsset.js?v=mega-d152ad969955';
+import { guestMotionAsset } from './motionSprites.js?v=mega-d152ad969955';
+import { hospitalityPoseCatalog } from './hospitalityPoseCatalog.js?v=mega-d152ad969955';
+import { specialPoseCatalog } from './specialPoseCatalog.js?v=mega-d152ad969955';
+import { customerPoseCatalog } from './customerPoseCatalog.js?v=mega-d152ad969955';
 export const customerPoses = customerPoseCatalog;
 export function selectCustomerPose(visualKey, action, facing, motion = '', phase = 0) { const walking = ['ENTERING', 'WALKING_TO_SEAT', 'STANDING_UP', 'WALKING_TO_EXIT'].includes(action), frame = finalActorFrame(visualKey, facing === 'left' ? 'SW' : 'SE', walking ? 'walk' : 'sit', phase); if (frame)
     return { key: visualKey + '/' + action + '/' + phase, kind: walking ? 'walk' : 'sit', walk: visualKey, facing, asset: { ...frame, box: [...frame.box], displayScale: 1 } }; const p = customerPoses[visualKey] ?? hospitalityPoseCatalog[visualKey] ?? specialPoseCatalog[visualKey]; if (!p)

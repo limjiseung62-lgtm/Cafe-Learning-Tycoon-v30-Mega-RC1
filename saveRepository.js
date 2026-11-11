@@ -1,5 +1,5 @@
-import { hasGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=mega-5d509fb5dbfc';
-import { validateGrowthSave, migrateGrowthSave } from './growthSave.js?v=mega-5d509fb5dbfc';
+import { hasGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=mega-d152ad969955';
+import { validateGrowthSave, migrateGrowthSave } from './growthSave.js?v=mega-d152ad969955';
 export const growthStorageKey = 'cafe-learning-tycoon.growth.v1';
 /** A local candidate reads a legacy cafe until its first write, then uses its own copy. */
 export class CandidateSaveRepository {

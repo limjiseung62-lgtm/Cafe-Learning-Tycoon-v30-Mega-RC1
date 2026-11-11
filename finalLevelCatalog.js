@@ -1,9 +1,9 @@
-import { finalCrewLimit } from './finalWorkforcePolicy.js?v=mega-5d509fb5dbfc';
-import { menuDefinitions } from './data.js?v=mega-5d509fb5dbfc';
-import { levelOperatingSeats } from './levelSeatPolicy.js?v=mega-5d509fb5dbfc';
-import { expansionStages, megaExpansionCosts } from './megaExpansion.js?v=mega-5d509fb5dbfc';
-import { kitchenStages } from './productionKitchen.js?v=mega-5d509fb5dbfc';
-import { finalSpecializationOffers } from './finalSpecializationState.js?v=mega-5d509fb5dbfc';
+import { finalCrewLimit } from './finalWorkforcePolicy.js?v=mega-d152ad969955';
+import { menuDefinitions } from './data.js?v=mega-d152ad969955';
+import { levelOperatingSeats } from './levelSeatPolicy.js?v=mega-d152ad969955';
+import { expansionStages, megaExpansionCosts } from './megaExpansion.js?v=mega-d152ad969955';
+import { kitchenStages } from './productionKitchen.js?v=mega-d152ad969955';
+import { finalSpecializationOffers } from './finalSpecializationState.js?v=mega-d152ad969955';
 /** Read-only catalog of actual entitlements. Purchase entries are never free grants. */
 export function finalLevelCatalog() {
     return levelOperatingSeats.map((operatingSeats, i) => {

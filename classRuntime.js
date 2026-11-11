@@ -1,16 +1,16 @@
-import { commonTransactionOpen } from './commonLearningTransaction.js?v=mega-5d509fb5dbfc';
-import { validImpactState } from './classImpact.js?v=mega-5d509fb5dbfc';
-import { createRandomClassMatch } from './sessionFactory.js?v=mega-5d509fb5dbfc';
-import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=mega-5d509fb5dbfc';
-import { decodeGuestCheckpoint } from './guestCheckpoint.js?v=mega-5d509fb5dbfc';
-import { LearningSession } from './learningSession.js?v=mega-5d509fb5dbfc';
-import { LearningAnalyticsV1 } from './learningAnalytics.js?v=mega-5d509fb5dbfc';
-import { providerForPool } from './learningIntegration.js?v=mega-5d509fb5dbfc';
-import { validBranch } from './growthBranch.js?v=mega-5d509fb5dbfc';
-import { validSpecialization } from './specialization.js?v=mega-5d509fb5dbfc';
-import { beginMiniSession, offerMini, validMiniSession, validMiniCollection } from './miniGames.js?v=mega-5d509fb5dbfc';
-import { ordinaryKinds, majorKinds } from './classRandom.js?v=mega-5d509fb5dbfc';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=mega-5d509fb5dbfc';
+import { commonTransactionOpen } from './commonLearningTransaction.js?v=mega-d152ad969955';
+import { validImpactState } from './classImpact.js?v=mega-d152ad969955';
+import { createRandomClassMatch } from './sessionFactory.js?v=mega-d152ad969955';
+import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=mega-d152ad969955';
+import { decodeGuestCheckpoint } from './guestCheckpoint.js?v=mega-d152ad969955';
+import { LearningSession } from './learningSession.js?v=mega-d152ad969955';
+import { LearningAnalyticsV1 } from './learningAnalytics.js?v=mega-d152ad969955';
+import { providerForPool } from './learningIntegration.js?v=mega-d152ad969955';
+import { validBranch } from './growthBranch.js?v=mega-d152ad969955';
+import { validSpecialization } from './specialization.js?v=mega-d152ad969955';
+import { beginMiniSession, offerMini, validMiniSession, validMiniCollection } from './miniGames.js?v=mega-d152ad969955';
+import { ordinaryKinds, majorKinds } from './classRandom.js?v=mega-d152ad969955';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=mega-d152ad969955';
 export const classSaveKey = 'class-random-v1', classLockKey = 'class-random-lock';
 export function captureClass(g, packId, engine, analytics, readVisits) { if (!g.classRandom)
     throw Error('Not random CLASS'); return { version: 1, clock: g.classClock(), duration: g.durationSeconds, packId, elapsed: g.elapsedTime, closed: g.status === 'CLOSED', state: structuredClone(g.classRandom), cafe: classroomCafeCheckpoint(g), guests: structuredClone(g.guests), workers: structuredClone(g.service.workers), purchases: structuredClone(g.telemetry.upgradePurchases), phase4: structuredClone(g.telemetry.phase4), branch: structuredClone(g.growthBranch), specialization: structuredClone(g.specialization), miniGames: structuredClone(g.miniGames), miniCollection: structuredClone(g.miniCollection), learning: { session: engine.checkpoint(), analytics: analytics.checkpoint(), readVisits } }; }
@@ -36,6 +36,8 @@ export function restoreClass(value, pool, now = Date.now()) {
         throw Error('직원 데이터 복원 실패');
     for (let i = 0; i < c.workers.length; i++) {
         const w = c.workers[i];
+        if (w.bundle !== undefined)
+            throw Error('CLASS에는 묶음 서빙 저장을 적용하지 않아요.');
         if (w.staffId !== g.service.workers[i].staffId || w.level !== g.service.workers[i].level || !finite(w.position?.x, 0, 10000) || !finite(w.position?.y, 0, 10000) || !finite(w.elapsed) || !['IDLE', 'CLAIMING_ORDER', 'MOVING_TO_PICKUP', 'PICKING_UP', 'MOVING_TO_TABLE', 'SERVING', 'RETURNING'].includes(w.state) || !Array.isArray(w.cargo) || !Array.isArray(w.remaining) || w.orderId !== null && !g.guests.some(x => x.id === w.orderId))
             throw Error('서빙 연결 복원 실패');
         Object.assign(g.service.workers[i], structuredClone(w));

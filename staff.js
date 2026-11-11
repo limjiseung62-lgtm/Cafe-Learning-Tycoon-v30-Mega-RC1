@@ -1,8 +1,20 @@
-import { staffBalance } from './config.js?v=mega-5d509fb5dbfc';
+import { chooseTrayCompanions } from './batchServing.js?v=mega-d152ad969955';
+import { staffBalance } from './config.js?v=mega-d152ad969955';
 export const staffDefinitions = [{ staffId: 'staff-1', name: '봄이', visualKey: 'spring' }, { staffId: 'staff-2', name: '준이', visualKey: 'jun' }, { staffId: 'staff-3', name: '하루', visualKey: 'haru' }, { staffId: 'staff-4', name: '루나', visualKey: 'luna' }, { staffId: 'staff-5', name: '도담', visualKey: 'dodam' }];
 export const staffVisuals = { owner: { face: '🧑‍🍳', apron: '#795f42', accessory: '☕' }, spring: { face: '👩', apron: '#d4898f', accessory: '🌸' }, jun: { face: '👨‍🦱', apron: '#7d9cc1', accessory: '🎧' }, haru: { face: '👩‍🦰', apron: '#9aaf70', accessory: '🌿' }, luna: { face: '👩‍🦳', apron: '#ac8dbb', accessory: '⭐' }, dodam: { face: '👨‍🦲', apron: '#d8a562', accessory: '🎀' } };
 export class StaffSystem {
     support;
+    batchMetrics = { formed: 0, extraOrders: 0, delivered: 0, discardedItems: 0, pickups: 0, peakCargo: 0 };
+    ownsOrder(id) { return this.workers.some(w => w.orderId === id || w.bundle?.some(a => a.id === id)); }
+    nextLoaded(w, active) { const candidates = w.bundle?.filter(a => active.has(a.id)) ?? []; if (!candidates.length) {
+        delete w.bundle;
+        this.release(w);
+        return;
+    } const distance = (id) => { const seat = this.seats[active.get(id).seat]; return Math.hypot(w.position.x - seat.x, (w.position.y - seat.y) * 2 / 3); }; candidates.sort((a, b) => distance(a.id) - distance(b.id) || active.get(a.id).orderedAt - active.get(b.id).orderedAt || a.id - b.id); w.bundle = candidates; w.orderId = candidates[0].id; w.remaining = []; w.cargo = candidates.flatMap(a => a.items); this.change(w, 'MOVING_TO_TABLE'); }
+    pruneBundle(w, active) { if (!w.bundle)
+        return; const previous = w.bundle; if (previous.every(a => active.has(a.id)))
+        return; w.bundle = previous.filter(a => active.has(a.id)); this.batchMetrics.discardedItems += previous.filter(a => !active.has(a.id)).reduce((n, a) => n + a.items.length, 0); w.cargo = w.bundle.flatMap(a => a.items); if (!w.bundle.some(a => a.id === w.orderId))
+        this.nextLoaded(w, active); }
     orderSource(w) { const order = w.orderId === null ? undefined : this.currentOrders.get(w.orderId); if (!order?.pickupSources)
         return undefined; let offset = order.items.length - w.remaining.length; for (const source of order.pickupSources) {
         if (offset < source.items.length)
@@ -101,7 +113,7 @@ export class StaffSystem {
     report(w, reason) { const p = this.observe(w); if (this.now - p.reportedAt < 5)
         return; p.reportedAt = this.now; this.recoveryLog.push({ time: this.now, reason, workerId: w.staffId, queueLength: [...this.currentOrders.values()].filter(o => o.ready).length, workers: this.workers.map(v => { const q = this.observe(v), o = v.orderId === null ? undefined : this.currentOrders.get(v.orderId); return { id: v.staffId, state: v.state, stateSince: q.stateAt, lastMovedAt: q.movedAt, orderId: v.orderId, vip: o?.vip ?? false, orderActive: !!o, position: { ...v.position }, path: q.path, cargo: v.cargo.length, remaining: v.remaining.length }; }), context: this.diagnosticContext?.() ?? null }); if (this.recoveryLog.length > 64)
         this.recoveryLog.shift(); }
-    get diagnostics() { return { time: this.now, queueLength: [...this.currentOrders.values()].filter(o => o.ready).length, workers: this.workers.map(w => { const p = this.observe(w); return { id: w.staffId, state: w.state, orderId: w.orderId, position: { ...w.position }, stateSince: p.stateAt, lastMovedAt: p.movedAt, path: p.path }; }), recoveries: this.recoveryLog }; }
+    get diagnostics() { return { time: this.now, queueLength: [...this.currentOrders.values()].filter(o => o.ready).length, workers: this.workers.map(w => { const p = this.observe(w); return { id: w.staffId, state: w.state, orderId: w.orderId, bundleIds: w.bundle?.map(a => a.id) ?? [], cargo: w.cargo.length, position: { ...w.position }, stateSince: p.stateAt, lastMovedAt: p.movedAt, path: p.path }; }), recoveries: this.recoveryLog }; }
     // A worker blocking a real delivery yields along a checked floor route. Its order/cargo remain owned.
     // This is collision right-of-way, not a periodic reset or a teleport to an arbitrary home.
     requestYield(requester, blocker, to) {
@@ -195,7 +207,7 @@ export class StaffSystem {
     }
     // Headless balance simulations retain their automatic driver. Interactive play opts in.
     manualOwner = false;
-    claimOwner(order) { const w = this.workers[0]; if (!this.manualOwner || this.paid.length || w.state !== 'IDLE' || !order.ready || !order.active || this.workers.some(worker => worker.orderId === order.id))
+    claimOwner(order) { const w = this.workers[0]; if (!this.manualOwner || this.paid.length || w.state !== 'IDLE' || !order.ready || !order.active || this.ownsOrder(order.id))
         return false; w.orderId = order.id; w.remaining = [...order.items]; this.change(w, 'CLAIMING_ORDER'); return true; }
     workers = [this.create('owner', '사장님', 'owner', true)];
     pickup = { x: 78, y: 30 };
@@ -214,7 +226,7 @@ export class StaffSystem {
     setLayout(pickup, seats) { this.pickup = { ...pickup }; this.seats = seats.map(p => ({ ...p })); }
     change(w, state) { if (!['MOVING_TO_PICKUP', 'PICKING_UP'].includes(state))
         this.pickupClaims.delete(w.staffId); w.state = state; w.elapsed = 0; this.routes.delete(w.staffId); this.retryAt.delete(w.staffId); this.observe(w); }
-    release(w) { w.orderId = null; w.cargo = []; w.remaining = []; this.change(w, 'RETURNING'); }
+    release(w) { delete w.bundle; w.orderId = null; w.cargo = []; w.remaining = []; this.change(w, 'RETURNING'); }
     move(w, to, dt) {
         if (this.movement) {
             const status = this.observe(w), gap = this.movement.clearance ?? 4, others = this.workers.filter(other => other !== w), key = to.x + ',' + to.y;
@@ -302,6 +314,8 @@ export class StaffSystem {
                 if (o.ready && !this.readySince.has(o.id))
                     this.readySince.set(o.id, now);
         }
+        for (const w of this.workers)
+            this.pruneBundle(w, active);
         const owners = new Set();
         for (const w of this.workers) {
             this.observe(w);
@@ -310,12 +324,22 @@ export class StaffSystem {
                     this.report(w, 'duplicate-claim-released');
                     this.release(w);
                 }
-                else
+                else {
                     owners.add(w.orderId);
+                    for (const a of w.bundle ?? [])
+                        if (a.id !== w.orderId) {
+                            if (owners.has(a.id)) {
+                                this.report(w, 'duplicate-bundle-claim-released');
+                                this.release(w);
+                                break;
+                            }
+                            owners.add(a.id);
+                        }
+                }
             }
         }
         // Claims are established synchronously; later workers cannot take the same order.
-        const claimed = new Set(this.workers.map(w => w.orderId).filter((id) => id !== null));
+        const claimed = new Set(this.workers.flatMap(w => [w.orderId, ...(w.bundle ?? []).map(a => a.id)]).filter((id) => id !== null));
         for (const w of this.workers) {
             if (this.support && this.supportTick(w, dt, [...active.values()]))
                 continue;
@@ -328,14 +352,19 @@ export class StaffSystem {
                 this.release(w);
             }
             if ((w.state === 'IDLE' || w.state === 'RETURNING' && (this.pickupFlow.chainOrders || this.now - this.observe(w).movedAt >= 8)) && !(w.owner && this.manualOwner && !this.paid.length)) {
-                const order = [...active.values()].filter(o => o.ready && !claimed.has(o.id)).sort((a, b) => { if (!this.movement?.localDispatch && !this.support)
+                const compare = (a, b) => { if (!this.movement?.localDispatch && !this.support)
                     return a.orderedAt - b.orderedAt || a.id - b.id; const age = (o) => now - (this.readySince.get(o.id) ?? now), A = age(a), B = age(b); if (!!a.vip !== !!b.vip)
-                    return a.vip ? -1 : 1; if (A >= 45 || B >= 45)
+                    return a.vip ? -1 : 1; if ((A >= 45 || B >= 45) && !(this.support && this.movement?.localDispatch))
                     return B - A || a.id - b.id; if (this.support) {
                     const delta = this.support.priority(w, a) - this.support.priority(w, b);
                     if (delta)
                         return delta;
-                } const d = (a, b) => Math.hypot(a.x - b.x, (a.y - b.y) * 2 / 3), cost = (o) => Math.min(...this.movement.pickups.map(p => d(w.position, p) + d(p, { x: this.seats[o.seat].x, y: this.seats[o.seat].y + 5 }))) - age(o) * 2; return cost(a) - cost(b) || a.id - b.id; })[0];
+                } const d = (a, b) => Math.hypot(a.x - b.x, (a.y - b.y) * 2 / 3), cost = (o) => { const sources = this.support && this.movement?.localDispatch ? o.pickupSources?.[0]?.indices : undefined; const docks = sources?.length ? sources.map(i => this.movement.pickups[i]).filter((p) => !!p) : this.movement.pickups; if (!docks.length)
+                    return Infinity; return Math.min(...docks.map(p => d(w.position, p) + d(p, { x: this.seats[o.seat].x, y: this.seats[o.seat].y + 5 }))) - age(o) * 2; }; return cost(a) - cost(b) || a.id - b.id; };
+                let order;
+                for (const candidate of active.values())
+                    if (candidate.ready && !claimed.has(candidate.id) && (!order || compare(candidate, order) < 0))
+                        order = candidate;
                 if (order) {
                     w.orderId = order.id;
                     w.remaining = [...order.items];
@@ -377,6 +406,19 @@ export class StaffSystem {
                 case 'PICKING_UP':
                     if (w.elapsed >= staffBalance.pickupSeconds * (this.support?.assignment(w).role === 'kitchen' ? 0.8 : 1) * (this.support?.pickupFactor?.(w) ?? 1)) {
                         w.cargo = w.remaining.splice(0, Math.min(this.support?.tripCapacity?.(w) ?? w.carryCapacity, this.orderSource(w)?.remaining ?? (this.support?.tripCapacity?.(w) ?? w.carryCapacity)));
+                        this.batchMetrics.pickups++;
+                        if (this.support?.batchServing && order && !w.remaining.length && this.movement) {
+                            const dock = this.pickupClaims.get(w.staffId), capacity = this.support.tripCapacity?.(w) ?? w.carryCapacity, companions = dock === undefined ? [] : chooseTrayCompanions(order, dock, capacity - w.cargo.length, active.values(), claimed, this.seats, now);
+                            if (companions.length) {
+                                w.bundle = [{ id: order.id, items: [...w.cargo] }, ...companions.map(o => ({ id: o.id, items: [...o.items] }))];
+                                w.cargo = w.bundle.flatMap(a => a.items);
+                                for (const o of companions)
+                                    claimed.add(o.id);
+                                this.batchMetrics.formed++;
+                                this.batchMetrics.extraOrders += companions.length;
+                            }
+                        }
+                        this.batchMetrics.peakCargo = Math.max(this.batchMetrics.peakCargo, w.cargo.length);
                         this.change(w, 'MOVING_TO_TABLE');
                     }
                     break;
@@ -386,10 +428,9 @@ export class StaffSystem {
                     break;
                 case 'SERVING':
                     if (w.elapsed >= (this.support?.assignment(w).role === 'vip' && order?.vip ? 0.8 : 1) / (w.serveSpeed * (this.support?.serveFactor?.(w) ?? 1))) {
-                        w.cargo = [];
-                        if (w.remaining.length)
-                            this.change(w, 'MOVING_TO_PICKUP');
-                        else if (order) {
+                        if (w.bundle && order) {
+                            w.bundle = w.bundle.filter(a => a.id !== order.id);
+                            this.batchMetrics.delivered++;
                             this.completedIds.add(order.id);
                             this.completedOrders++;
                             this.totalOrderWait += Math.max(0, now - order.orderedAt);
@@ -397,10 +438,30 @@ export class StaffSystem {
                                 this.completedByOwner++;
                             else
                                 this.completedByStaff++;
+                            active.delete(order.id);
+                            claimed.delete(order.id);
+                            this.nextLoaded(w, active);
                             onComplete(order.id, w);
-                            if (!this.manualOwner)
-                                claimed.delete(order.id);
-                            this.release(w);
+                        }
+                        else {
+                            w.cargo = [];
+                            if (w.remaining.length)
+                                this.change(w, 'MOVING_TO_PICKUP');
+                            else if (order) {
+                                this.completedIds.add(order.id);
+                                this.completedOrders++;
+                                this.totalOrderWait += Math.max(0, now - order.orderedAt);
+                                if (w.owner)
+                                    this.completedByOwner++;
+                                else
+                                    this.completedByStaff++;
+                                if (this.support?.enhancedTray)
+                                    active.delete(order.id);
+                                onComplete(order.id, w);
+                                if (!this.manualOwner)
+                                    claimed.delete(order.id);
+                                this.release(w);
+                            }
                         }
                     }
                     break;

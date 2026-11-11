@@ -15,10 +15,10 @@
     48
   ],
   "releaseNotes": "RELEASE-NOTES.html",
-  "sourceCandidate": "5d509fb5dbfc0ddf294cb20680e0e20f117e5013",
+  "sourceCandidate": "d152ad9699557f34ba285d5856e24d74862e0f05",
   "testUrl": "https://limjiseung62-lgtm.github.io/Cafe-Learning-Tycoon-v30-Mega-RC1/",
-  "cacheToken": "mega-5d509fb5dbfc",
-  "build": "mega-final-action-manager-render-p1-test-20261110",
+  "cacheToken": "mega-d152ad969955",
+  "build": "growth-arrival-tray-update-20261112",
   "baselinePublicBuild": "interior-placement-unblock-1",
   "approvedContentSubjects": [
     "math",
@@ -36,6 +36,7 @@
   "integratedStaff": 50,
   "maxOperatingSeats": 100,
   "maxWorkingStaff": 25,
-  "performanceStatus": "P99_MEMORY_LONGRUN_GALAXY_PENDING",
-  "integrationDate": "2026-11-10"
+  "performanceStatus": "GALAXY_AND_ADDITIONAL_PERFORMANCE_FOLLOWUP",
+  "integrationDate": "2026-11-12",
+  "batchServing": false
 }

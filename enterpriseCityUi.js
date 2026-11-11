@@ -1,11 +1,11 @@
-import { openModernCity } from './modernCityUi.js?v=mega-5d509fb5dbfc';
-import { enterpriseCity, cityDistricts, citySafePoint } from './enterpriseCity.js?v=mega-5d509fb5dbfc';
-import { sceneEnvironment } from './villageSceneArt.js?v=mega-5d509fb5dbfc';
-import { VillageExplorer } from './villageExplorer.js?v=mega-5d509fb5dbfc';
-import { scenePath } from './villageNavigation.js?v=mega-5d509fb5dbfc';
-import { investVillage, progressiveEconomyConfig } from './progressiveEconomy.js?v=mega-5d509fb5dbfc';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=mega-5d509fb5dbfc';
-import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=mega-5d509fb5dbfc';
+import { openModernCity } from './modernCityUi.js?v=mega-d152ad969955';
+import { enterpriseCity, cityDistricts, citySafePoint } from './enterpriseCity.js?v=mega-d152ad969955';
+import { sceneEnvironment } from './villageSceneArt.js?v=mega-d152ad969955';
+import { VillageExplorer } from './villageExplorer.js?v=mega-d152ad969955';
+import { scenePath } from './villageNavigation.js?v=mega-d152ad969955';
+import { investVillage, progressiveEconomyConfig } from './progressiveEconomy.js?v=mega-d152ad969955';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=mega-d152ad969955';
+import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=mega-d152ad969955';
 export async function openEnterpriseCity(repo, onClose, readOnly = false) {
     if (!readOnly)
         return openModernCity(repo, onClose);

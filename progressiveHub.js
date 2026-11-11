@@ -1,12 +1,12 @@
-import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=mega-5d509fb5dbfc';
-import { goalsHtml } from './progressiveGoals.js?v=mega-5d509fb5dbfc';
-import { landmarkNames, districtVisitors } from './progressiveFinance.js?v=mega-5d509fb5dbfc';
-import { openManagementAlbum } from './managementAlbumUi.js?v=mega-5d509fb5dbfc';
-import { syncManagementAlbum } from './managementAlbum.js?v=mega-5d509fb5dbfc';
-import { investmentReason, franchiseQuote } from './progressiveGuidance.js?v=mega-5d509fb5dbfc';
-import { investmentTierLimit, investmentCatalog, progressiveEconomyConfig as config, investVillage, foundFranchise, upgradeFranchise, branchYield, branchUpgradeCost, branchRequirement, buildLandmark, progressiveTownName } from './progressiveEconomy.js?v=mega-5d509fb5dbfc';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=mega-5d509fb5dbfc';
-import { unlocked } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
+import { spriteStyle, ensureVillageSceneStyle } from './villageSceneArt.js?v=mega-d152ad969955';
+import { goalsHtml } from './progressiveGoals.js?v=mega-d152ad969955';
+import { landmarkNames, districtVisitors } from './progressiveFinance.js?v=mega-d152ad969955';
+import { openManagementAlbum } from './managementAlbumUi.js?v=mega-d152ad969955';
+import { syncManagementAlbum } from './managementAlbum.js?v=mega-d152ad969955';
+import { investmentReason, franchiseQuote } from './progressiveGuidance.js?v=mega-d152ad969955';
+import { investmentTierLimit, investmentCatalog, progressiveEconomyConfig as config, investVillage, foundFranchise, upgradeFranchise, branchYield, branchUpgradeCost, branchRequirement, buildLandmark, progressiveTownName } from './progressiveEconomy.js?v=mega-d152ad969955';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=mega-d152ad969955';
+import { unlocked } from './progressiveFeatures.js?v=mega-d152ad969955';
 export async function openProgressiveHub(repo, onClose) {
     if (!await ensureGrowthWriteLock())
         return;

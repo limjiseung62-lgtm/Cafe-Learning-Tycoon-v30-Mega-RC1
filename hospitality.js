@@ -1,5 +1,6 @@
-import { unlocked } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
-import { helperCatalog, hospitalityBalance as b } from './hospitalityConfig.js?v=mega-5d509fb5dbfc';
+import { outsideKitchenStock } from './finalSupply.js?v=mega-d152ad969955';
+import { unlocked } from './progressiveFeatures.js?v=mega-d152ad969955';
+import { helperCatalog, hospitalityBalance as b } from './hospitalityConfig.js?v=mega-d152ad969955';
 export class Hospitality {
     enabled = false;
     questions = [];
@@ -43,7 +44,7 @@ export class Hospitality {
     gift(g, cap, maxItems = 3) { if (!unlocked(g, 'missions'))
         return 0; let value = 0, count = 0; for (const m of [...g.menus].sort((a, b) => a.stock - b.stock || a.menuId.localeCompare(b.menuId))) {
         const price = g.getPrice(m);
-        if (count < maxItems && m.stock < m.maxStock && value + price <= cap) {
+        if (count < maxItems && m.stock + outsideKitchenStock(g, m.menuId) < m.maxStock && value + price <= cap) {
             m.stock++;
             value += price;
             count++;

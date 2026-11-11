@@ -1,4 +1,4 @@
-import { nearestScenePoint, sceneWalkable, sceneSegmentOpen, scenePath } from './villageNavigation.js?v=mega-5d509fb5dbfc';
+import { nearestScenePoint, sceneWalkable, sceneSegmentOpen, scenePath } from './villageNavigation.js?v=mega-d152ad969955';
 export const lifeProfiles = {
     bloom: { role: '꽃집 주인', work: '꽃에 물 주기', rest: '꽃향기 맡기', tool: 'flower', speed: 48 },
     vendor: { role: '시장 상인', work: '진열 정리', rest: '손님 기다리기', tool: 'basket', speed: 53 },

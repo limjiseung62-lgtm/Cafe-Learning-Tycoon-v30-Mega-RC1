@@ -1,8 +1,9 @@
-import { ActorSheetCache } from './finalActorCache.js?v=mega-5d509fb5dbfc';
-import { megaZones } from './megaZones.js?v=mega-5d509fb5dbfc';
-import { megaArtFrames } from './megaArtFrames.js?v=mega-5d509fb5dbfc';
-import { webAsset } from './webAsset.js?v=mega-5d509fb5dbfc';
-import { iso, megaDimensions, fixedMega } from './megaSpace.js?v=mega-5d509fb5dbfc';
+import { renderPhase } from './renderPhaseTiming.js?v=mega-d152ad969955';
+import { ActorSheetCache } from './finalActorCache.js?v=mega-d152ad969955';
+import { megaZones } from './megaZones.js?v=mega-d152ad969955';
+import { megaArtFrames } from './megaArtFrames.js?v=mega-d152ad969955';
+import { webAsset } from './webAsset.js?v=mega-d152ad969955';
+import { iso, megaDimensions, fixedMega } from './megaSpace.js?v=mega-d152ad969955';
 export const environmentIds = ['fridge', 'sink', 'coffee', 'pastry', 'oven', 'prep', 'coffee-sage', 'shelf', 'wall-left', 'wall-right', 'window-left', 'window-right', 'entrance', 'plant', 'wall-shelf', 'wall-lamp'];
 const images = new Map();
 const decodedImages = new WeakSet();
@@ -24,7 +25,7 @@ export function megaImage(file) { const url = webAsset(file); let img = images.g
 export function cachedFragment(img, box, width, height) { const key = [img.src, ...box, Math.round(width * 4), Math.round(height * 4)].join('/'); let tile = fragments.get(key); if (tile) {
     megaArtMetrics.fragmentHits++;
     return tile;
-} const started = performance.now(); tile = document.createElement('canvas'); tile.width = Math.max(1, Math.ceil(width * 4)); tile.height = Math.max(1, Math.ceil(height * 4)); tile.getContext('2d').drawImage(img, box[0], box[1], box[2], box[3], 0, 0, tile.width, tile.height); if (fragments.size >= 256)
+} const started = performance.now(); tile = document.createElement('canvas'); tile.width = Math.max(1, Math.ceil(width * 4)); tile.height = Math.max(1, Math.ceil(height * 4)); renderPhase('art/fragment-raster', () => tile.getContext('2d').drawImage(img, box[0], box[1], box[2], box[3], 0, 0, tile.width, tile.height)); if (fragments.size >= 256)
     fragments.delete(fragments.keys().next().value); fragments.set(key, tile); megaArtMetrics.fragmentBuilds++; megaArtMetrics.fragmentMaxMs = Math.max(megaArtMetrics.fragmentMaxMs, performance.now() - started); return tile; }
 const fragmentSources = new Map();
 let bitmapFallback = false, artEpoch = 0;
@@ -59,7 +60,7 @@ export function environmentPlacements(p) { const result = []; for (const [fIndex
     const z = megaZones(p).find(z => f.x >= z.x && f.x < z.x + z.w && f.y >= z.y && f.y < z.y + z.h), id = ['kitchen', 'bakery'].includes(z?.id ?? '') ? ['oven', 'prep', 'pastry', 'coffee-sage'][i % 4] : z?.id === 'dessert' ? 'pastry' : z?.id === 'vip' ? 'coffee' : 'prep';
     result.push({ id, x: f.x, y: f.y, width: 72, baseRise: 12, depth: f.x + f.y + .4, fixed: false, flip: f.rotation % 180 !== 0 });
 } return result; }
-export function paintArtFloor(c, p, asynchronous = false) {
+export function paintArtFloor(c, p, asynchronous = false, includeWalls = true) {
     const [w, h] = megaDimensions[p.level - 1];
     const polygon = (points, fill, stroke) => { c.beginPath(); points.forEach((a, i) => { const q = iso(a); i ? c.lineTo(q.x, q.y) : c.moveTo(q.x, q.y); }); c.closePath(); c.fillStyle = fill; c.fill(); if (stroke) {
         c.strokeStyle = stroke;
@@ -106,14 +107,8 @@ export function paintArtFloor(c, p, asynchronous = false) {
     const wall = (a, b) => { const A = iso(a), B = iso(b); const gradient = c.createLinearGradient(0, A.y - 64, 0, B.y); gradient.addColorStop(0, '#f3e2c8'); gradient.addColorStop(1, '#d6bea0'); c.beginPath(); c.moveTo(A.x, A.y); c.lineTo(B.x, B.y); c.lineTo(B.x, B.y - 65); c.lineTo(A.x, A.y - 65); c.closePath(); c.fillStyle = gradient; c.fill(); c.strokeStyle = '#956c42'; c.lineWidth = 2; c.stroke(); };
     wall({ x: 0, y: 0 }, { x: w, y: 0 });
     wall({ x: 0, y: 0 }, { x: 0, y: h });
-    for (let x = 1; x < w; x += 2) {
-        const q = iso({ x, y: 0 });
-        paintEnvironment(c, x % 4 === 1 ? 'window-right' : 'wall-right', q.x, q.y, 48, 12, false, asynchronous);
-    }
-    for (let y = 1; y < h; y += 2) {
-        const q = iso({ x: 0, y });
-        paintEnvironment(c, y % 4 === 1 ? 'wall-left' : 'window-left', q.x, q.y, 48, 12, false, asynchronous);
-    }
+    if (includeWalls)
+        paintArtWalls(c, p, asynchronous);
     // An inset woven runner occupies no collision space, along the actual entrance corridor.
     polygon(p.entry ? [{ x: .2, y: 5.05 }, { x: 2.2, y: 5.05 }, { x: 2.2, y: 5.9 }, { x: .2, y: 5.9 }] : [{ x: w - 2.1, y: h - 2.8 }, { x: w - .2, y: h - 2.8 }, { x: w - .2, y: h - .2 }, { x: w - 2.1, y: h - .2 }], '#89936c', '#e2ce9f');
 }
@@ -126,3 +121,11 @@ export function paintMegaDecor(c, p, d) { const q = iso(d); if (p.level >= 20 &&
 } const art = megaImage('assets/art/long-growth/' + d.decorId + '.svg'); if (art)
     c.drawImage(art, q.x - 14, q.y - (d.wall ? 38 : 24), 28, 28); }
 export const artResourceDiagnostics = () => ({ bitmaps: artBitmapCache.diagnostics, bitmapFallback, rawFragments: fragments.size, rawCanvasBytes: [...fragments.values()].reduce((n, c) => n + c.width * c.height * 4, 0), loadedImages: images.size });
+/** Same approved wall/window sprites on an independently invalidated layer. */
+export function paintArtWalls(c, p, asynchronous = false) { const [w, h] = megaDimensions[p.level - 1]; for (let x = 1; x < w; x += 2) {
+    const q = iso({ x, y: 0 });
+    paintEnvironment(c, x % 4 === 1 ? 'window-right' : 'wall-right', q.x, q.y, 48, 12, false, asynchronous);
+} for (let y = 1; y < h; y += 2) {
+    const q = iso({ x: 0, y });
+    paintEnvironment(c, y % 4 === 1 ? 'wall-left' : 'window-left', q.x, q.y, 48, 12, false, asynchronous);
+} }

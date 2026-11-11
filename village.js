@@ -1,5 +1,5 @@
-import { unlocked } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
-import { validVillageProgression, progressionMini, availableStage } from './villageProgression.js?v=mega-5d509fb5dbfc';
+import { unlocked } from './progressiveFeatures.js?v=mega-d152ad969955';
+import { validVillageProgression, progressionMini, availableStage } from './villageProgression.js?v=mega-d152ad969955';
 export const villageSize = { width: 24, height: 18 };
 export const buildings = [
     { id: 'cafe', name: '내 카페', art: 0, x: 1, y: 1, w: 5, h: 4, door: { x: 3, y: 5 } },

@@ -1,11 +1,11 @@
-import { finalActive } from './finalGrowth.js?v=mega-5d509fb5dbfc';
-import { openFinalSpecialization } from './finalSpecializationUi.js?v=mega-5d509fb5dbfc';
-import { unlocked } from './progressiveFeatures.js?v=mega-5d509fb5dbfc';
-import { specializationCatalog, specializationById, specializationRoom } from './specializationConfig.js?v=mega-5d509fb5dbfc';
-import { canSpecialize, chooseSpecialization, syncSpecialization } from './specialization.js?v=mega-5d509fb5dbfc';
-import { longStateFor } from './longGrowthUi.js?v=mega-5d509fb5dbfc';
-import { settleSpecializationCollection } from './longGrowth.js?v=mega-5d509fb5dbfc';
-import { imageReady } from './imageLoading.js?v=mega-5d509fb5dbfc';
+import { finalActive } from './finalGrowth.js?v=mega-d152ad969955';
+import { openFinalSpecialization } from './finalSpecializationUi.js?v=mega-d152ad969955';
+import { unlocked } from './progressiveFeatures.js?v=mega-d152ad969955';
+import { specializationCatalog, specializationById, specializationRoom } from './specializationConfig.js?v=mega-d152ad969955';
+import { canSpecialize, chooseSpecialization, syncSpecialization } from './specialization.js?v=mega-d152ad969955';
+import { longStateFor } from './longGrowthUi.js?v=mega-d152ad969955';
+import { settleSpecializationCollection } from './longGrowth.js?v=mega-d152ad969955';
+import { imageReady } from './imageLoading.js?v=mega-d152ad969955';
 const sessions = new WeakMap(), shown = new WeakSet();
 export function beginSpecializationUi(g, flush, business) { document.getElementById('specialization-choice')?.remove(); sessions.set(g, { flush, business }); }
 export function specializationCards(branch) { return specializationCatalog.filter(s => s.branch === branch).map(s => '<article class="specialization-card"><img loading="lazy" src="' + specializationRoom(s.id) + '" alt="' + s.name + ' 건물과 빈 홀"><h3>' + s.name + '</h3><p>' + s.feature + '</p><dl><dt>고유 이벤트</dt><dd>' + s.events.join(' · ') + '</dd><dt>만나는 손님</dt><dd>' + s.guest + '</dd><dt>오늘의 목표</dt><dd>' + s.operation + '</dd><dt>수집 보상</dt><dd>' + s.reward + ' · ' + s.book + ' · 기념 칭호</dd></dl><button class="primary" data-specialization="' + s.id + '">' + s.name + ' 선택</button></article>').join(''); }

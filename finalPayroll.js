@@ -1,4 +1,4 @@
-import { finalProfile } from './recruitConfig.js?v=mega-5d509fb5dbfc';
+import { finalProfile } from './recruitConfig.js?v=mega-d152ad969955';
 export const finalSalary = (id) => finalProfile(id)?.salary ?? ([60, 80, 95, 140, 90, 110, 110, 150, 150, 160, 180, 200][Number(id.split('-')[1]) - 1] ?? 0);
 /** The displayed wage is paid out of this lesson's actual sales, never by retroactive debt or negative cash. */
 export function startFinalPayroll(g, id) { if (g.mode !== 'CAFE_GROWTH' || !g.mega?.finalGrowth || g.status !== 'RUNNING')

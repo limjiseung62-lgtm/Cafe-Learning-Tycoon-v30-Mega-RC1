@@ -1,16 +1,17 @@
-import { guestPose } from './spatial.js?v=mega-5d509fb5dbfc';
-import { megaPointClear } from './megaSpace.js?v=mega-5d509fb5dbfc';
-import { validManagement } from './managementState.js?v=mega-5d509fb5dbfc';
-import { validMiniSession, validMiniCollection, pauseCredit, expireMini } from './miniGames.js?v=mega-5d509fb5dbfc';
-import { validSpecialization } from './specialization.js?v=mega-5d509fb5dbfc';
-import { validBranch } from "./growthBranch.js?v=mega-5d509fb5dbfc";
-import { validateGrowthSave } from './growthSave.js?v=mega-5d509fb5dbfc';
-import { createGrowthSession } from './sessionFactory.js?v=mega-5d509fb5dbfc';
-import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=mega-5d509fb5dbfc';
-import { LearningSession, LearningProgressRepository } from './learningSession.js?v=mega-5d509fb5dbfc';
-import { LearningAnalyticsV1 } from './learningAnalytics.js?v=mega-5d509fb5dbfc';
-import { providerForPool } from './learningIntegration.js?v=mega-5d509fb5dbfc';
-import { validAbilityRun } from "./staffAbilities.js?v=mega-5d509fb5dbfc";
+import { validBatchWorkers } from './batchServing.js?v=mega-d152ad969955';
+import { guestPose } from './spatial.js?v=mega-d152ad969955';
+import { megaPointClear } from './megaSpace.js?v=mega-d152ad969955';
+import { validManagement } from './managementState.js?v=mega-d152ad969955';
+import { validMiniSession, validMiniCollection, pauseCredit, expireMini } from './miniGames.js?v=mega-d152ad969955';
+import { validSpecialization } from './specialization.js?v=mega-d152ad969955';
+import { validBranch } from "./growthBranch.js?v=mega-d152ad969955";
+import { validateGrowthSave } from './growthSave.js?v=mega-d152ad969955';
+import { createGrowthSession } from './sessionFactory.js?v=mega-d152ad969955';
+import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=mega-d152ad969955';
+import { LearningSession, LearningProgressRepository } from './learningSession.js?v=mega-d152ad969955';
+import { LearningAnalyticsV1 } from './learningAnalytics.js?v=mega-d152ad969955';
+import { providerForPool } from './learningIntegration.js?v=mega-d152ad969955';
+import { validAbilityRun } from "./staffAbilities.js?v=mega-d152ad969955";
 export const withoutCampaign = (save) => { const copy = structuredClone(save); delete copy.campaign; delete copy.eventState; delete copy.portfolio; return copy; };
 const goodInt = (n) => Number.isSafeInteger(n) && Number(n) >= 0;
 export function validCampaign(value) { try {
@@ -31,6 +32,8 @@ export function validCampaign(value) { try {
     const r = s.run;
     if (r && (r.management !== undefined && !validManagement(r.management) || r.miniCollection !== undefined && !validMiniCollection(r.miniCollection) || r.miniGames !== undefined && (!validMiniSession(r.miniGames) || r.miniGames.businessId !== r.id || r.miniGames.packId !== r.packId || r.miniGames.offers.some(a => a.lease && (a.lease.startedAt < r.startAt || a.lease.startedAt > r.endAt + 150000))) || r.specialization !== undefined && !validSpecialization(r.specialization) || r.abilityRun !== undefined && (!validAbilityRun(r.abilityRun) || r.abilityRun.id !== r.id) || r.growthBranch !== undefined && !validBranch(r.growthBranch) || typeof r.id !== 'string' || !r.id || typeof r.packId !== 'string' || !r.packId || r.elapsed !== undefined && (!Number.isFinite(r.elapsed) || r.elapsed < 0 || r.elapsed > 900) || typeof r.closed !== 'boolean' || !Number.isFinite(r.startAt) || r.startAt < 0 || r.endAt - r.startAt !== 900000 || !r.base || r.base.campaign || !validateGrowthSave(r.base) || !r.phase4 || !r.hospitality || !r.cafe || !r.learning || r.learning.session.packId !== r.packId || !Array.isArray(r.learning.readVisits)))
         return false;
+    if (r?.workers && !validBatchWorkers(r.workers, r.cafe?.guests))
+        return false;
     return JSON.stringify(s).length < 3000000;
 }
 catch {
@@ -42,7 +45,8 @@ export function adaptiveLevel(elapsed, record) { const recent = record.recent.sl
 else if (recent.length === 5 && rate >= .8)
     level++; const ceiling = elapsed < 180 ? Math.max(1, record.level - 1) : elapsed < 660 ? Math.min(3, record.level + 1) : 3; return Math.max(1, Math.min(ceiling, level, 3)); }
 export function restoreGrowthRun(run, pool, now = Date.now()) { const g = createGrowthSession(run.base, Math.random, 900); g.management = structuredClone(run.management ?? run.base.management); g.miniGames = structuredClone(run.miniGames); g.miniCollection = structuredClone(run.miniCollection ?? run.base.miniCollection); g.specialization = structuredClone(run.specialization ?? run.base.specialization); g.growthBranch = structuredClone(run.growthBranch ?? run.base.growthBranch); g.service.workers.splice(1); g.enableEvents(); if (!restoreCafeCheckpoint(g, run.cafe))
-    throw Error('중단한 카페 상태를 확인해 주세요. 원본은 보존됩니다.'); g.enableHallGrowth(); const legacyMissingGuests = run.cafe.guests === undefined && run.cafe.eventState === undefined; if (run.workers) {
+    throw Error('중단한 카페 상태를 확인해 주세요. 원본은 보존됩니다.'); g.enableHallGrowth(); if (run.workers && !validBatchWorkers(run.workers, g.guests, true))
+    throw Error('묶음 서빙 연결 복원 오류 · 원본은 보존됩니다.'); const legacyMissingGuests = run.cafe.guests === undefined && run.cafe.eventState === undefined; if (run.workers) {
     const ids = g.service.workers.map(w => w.staffId);
     if (!Array.isArray(run.workers) || run.workers.length !== ids.length)
         throw Error('직원 복원 오류');
@@ -53,7 +57,7 @@ export function restoreGrowthRun(run, pool, now = Date.now()) { const g = create
             Object.assign(g.service.workers[i], { state: 'IDLE', cargo: [], remaining: [], orderId: null, elapsed: 0 });
         }
         else
-            Object.assign(g.service.workers[i], { position: { ...w.position }, state: w.state, cargo: [...w.cargo], remaining: [...w.remaining], orderId: w.orderId, elapsed: w.elapsed, walkDistance: w.walkDistance ?? 0, supplyTrips: w.supplyTrips ?? 0 });
+            Object.assign(g.service.workers[i], { position: { ...w.position }, state: w.state, cargo: [...w.cargo], remaining: [...w.remaining], orderId: w.orderId, elapsed: w.elapsed, walkDistance: w.walkDistance ?? 0, supplyTrips: w.supplyTrips ?? 0, ...w.bundle ? { bundle: structuredClone(w.bundle) } : {} });
     }
     for (const guest of g.guests)
         if (run.cafe.guests?.find(x => x.id === guest.id)?.state === 'SERVING')

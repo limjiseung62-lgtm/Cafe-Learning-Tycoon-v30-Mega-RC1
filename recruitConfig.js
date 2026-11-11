@@ -1,5 +1,5 @@
-import { finalStaffProfiles } from './finalStaffProfiles.js?v=mega-5d509fb5dbfc';
-import { hasFinalActor } from './finalActorArt.js?v=mega-5d509fb5dbfc';
+import { finalStaffProfiles } from './finalStaffProfiles.js?v=mega-d152ad969955';
+import { hasFinalActor } from './finalActorArt.js?v=mega-d152ad969955';
 export const finalProfile = (id) => finalStaffProfiles.find(s => s.id === id);
 export const finalRecruitCatalog = finalStaffProfiles.filter(s => hasFinalActor(s.id)).map(s => ({ staffId: s.id, name: s.name, visualKey: s.id, grade: '전문', ability: s.primaryTrait.name, description: s.primaryTrait.name + ' · ' + s.secondaryTrait.name, feedback: '맡은 구역을 도울게요.' }));
 export const recruitCatalog = [

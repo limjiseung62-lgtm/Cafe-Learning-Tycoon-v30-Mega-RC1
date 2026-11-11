@@ -1,17 +1,17 @@
-import { crewLimit, ownedCrewLimit } from './staffRecruitment.js?v=mega-5d509fb5dbfc';
-import { growthSeats } from './levelSeats.js?v=mega-5d509fb5dbfc';
-import { validSupplyContext } from './finalSupplyState.js?v=mega-5d509fb5dbfc';
-import { bulkWarehouses } from './productionKitchen.js?v=mega-5d509fb5dbfc';
-import { operatingSeatContract } from './finalGrowth.js?v=mega-5d509fb5dbfc';
-import { ensureManager } from './managerState.js?v=mega-5d509fb5dbfc';
-import { validMega, createMegaSpace } from './megaSpace.js?v=mega-5d509fb5dbfc';
-import { growthMenuDefinitions } from './menuResearch.js?v=mega-5d509fb5dbfc';
-import { validFreeLayouts } from './freeLayout.js?v=mega-5d509fb5dbfc';
-import { validLayouts } from './cafeLayout.js?v=mega-5d509fb5dbfc';
-import { validRoster, captureRoster } from "./staffRecruitment.js?v=mega-5d509fb5dbfc";
-import { recruitById } from "./recruitConfig.js?v=mega-5d509fb5dbfc";
-import { decodeGuestCheckpoint } from './guestCheckpoint.js?v=mega-5d509fb5dbfc';
-import { validEventCheckpoint } from './cafeEvents.js?v=mega-5d509fb5dbfc';
+import { crewLimit, ownedCrewLimit } from './staffRecruitment.js?v=mega-d152ad969955';
+import { growthSeats } from './levelSeats.js?v=mega-d152ad969955';
+import { validSupplyContext } from './finalSupplyState.js?v=mega-d152ad969955';
+import { bulkWarehouses } from './productionKitchen.js?v=mega-d152ad969955';
+import { operatingSeatContract } from './finalGrowth.js?v=mega-d152ad969955';
+import { ensureManager } from './managerState.js?v=mega-d152ad969955';
+import { validMega, createMegaSpace } from './megaSpace.js?v=mega-d152ad969955';
+import { growthMenuDefinitions } from './menuResearch.js?v=mega-d152ad969955';
+import { validFreeLayouts } from './freeLayout.js?v=mega-d152ad969955';
+import { validLayouts } from './cafeLayout.js?v=mega-d152ad969955';
+import { validRoster, captureRoster } from "./staffRecruitment.js?v=mega-d152ad969955";
+import { recruitById } from "./recruitConfig.js?v=mega-d152ad969955";
+import { decodeGuestCheckpoint } from './guestCheckpoint.js?v=mega-d152ad969955';
+import { validEventCheckpoint } from './cafeEvents.js?v=mega-d152ad969955';
 export const incompleteRunHistory = new WeakSet();
 export function classroomCafeCheckpoint(g) { return { version: 1, ...g.mega && g.mode === 'CAFE_GROWTH' ? { mega: structuredClone(g.mega) } : {}, ...g.freeLayouts && g.mode === 'CAFE_GROWTH' ? { freeLayouts: structuredClone(g.freeLayouts) } : {}, ...g.layouts && g.mode === 'CAFE_GROWTH' ? { layouts: structuredClone(g.layouts) } : {}, ...g.roster && g.mode === 'CAFE_GROWTH' ? { roster: captureRoster(g.roster, g.service.paid) } : {}, ...g.events.enabled ? { eventState: g.events.checkpoint() } : {}, ...g.events.enabled || g.mode === 'CAFE_GROWTH' ? { guests: structuredClone(g.guests) } : {}, cafeLevel: g.cafeLevel, money: g.money, warehouseLevel: g.warehouseLevel, menus: g.menus.map(m => ({ id: m.menuId, level: m.currentLevel, stock: m.stock })), staff: g.service.paid.map(w => ({ ...g.roster ? { id: w.staffId } : {}, level: w.level })), stats: { ...g.stats }, production: g.successfulProduction, regularMemory: { ...g.regularMemory }, itemPurchases: { ...g.itemPurchases }, golden: g.goldenRemaining, booster: g.boosterRemaining, vip: g.vipPending, run: g.run ? { selected: [...g.run.selected], finalPaid: g.run.finalPaid, finalAssigned: incompleteRunHistory.has(g) ? null : g.run.finalAssigned, finalRewarded: g.run.finalRewarded, bonusRevenue: g.run.bonusRevenue } : null }; }
 export function restoreClassroomCafe(g, value) { if (g.mode !== 'CLASS_MATCH')
