@@ -1,5 +1,5 @@
-import { scopedMathKey, verifyScopedMathCode } from './scopedMathTransport.js?v=mega-d152ad969955';
-import { commonBankPins } from './commonBankPins.js?v=mega-d152ad969955';
+import { scopedMathKey, verifyScopedMathCode } from './scopedMathTransport.js?v=v31-5d872fe24674';
+import { commonBankPins } from './commonBankPins.js?v=v31-5d872fe24674';
 const cache = new Map();
 async function digest(b) { return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new Uint8Array(b).buffer)), x => x.toString(16).padStart(2, '0')).join(''); }
 /** Transport compression is lossless. Supplier manifest/data/reference hashes remain unchanged. */

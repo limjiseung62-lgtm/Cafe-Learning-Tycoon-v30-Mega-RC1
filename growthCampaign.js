@@ -1,17 +1,18 @@
-import { validBatchWorkers } from './batchServing.js?v=mega-d152ad969955';
-import { guestPose } from './spatial.js?v=mega-d152ad969955';
-import { megaPointClear } from './megaSpace.js?v=mega-d152ad969955';
-import { validManagement } from './managementState.js?v=mega-d152ad969955';
-import { validMiniSession, validMiniCollection, pauseCredit, expireMini } from './miniGames.js?v=mega-d152ad969955';
-import { validSpecialization } from './specialization.js?v=mega-d152ad969955';
-import { validBranch } from "./growthBranch.js?v=mega-d152ad969955";
-import { validateGrowthSave } from './growthSave.js?v=mega-d152ad969955';
-import { createGrowthSession } from './sessionFactory.js?v=mega-d152ad969955';
-import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=mega-d152ad969955';
-import { LearningSession, LearningProgressRepository } from './learningSession.js?v=mega-d152ad969955';
-import { LearningAnalyticsV1 } from './learningAnalytics.js?v=mega-d152ad969955';
-import { providerForPool } from './learningIntegration.js?v=mega-d152ad969955';
-import { validAbilityRun } from "./staffAbilities.js?v=mega-d152ad969955";
+import { tutorialPauseCredit, validTutorialPause } from './tutorialPause.js?v=v31-5d872fe24674';
+import { validBatchWorkers } from './batchServing.js?v=v31-5d872fe24674';
+import { guestPose } from './spatial.js?v=v31-5d872fe24674';
+import { megaPointClear } from './megaSpace.js?v=v31-5d872fe24674';
+import { validManagement } from './managementState.js?v=v31-5d872fe24674';
+import { validMiniSession, validMiniCollection, pauseCredit, expireMini } from './miniGames.js?v=v31-5d872fe24674';
+import { validSpecialization } from './specialization.js?v=v31-5d872fe24674';
+import { validBranch } from "./growthBranch.js?v=v31-5d872fe24674";
+import { validateGrowthSave } from './growthSave.js?v=v31-5d872fe24674';
+import { createGrowthSession } from './sessionFactory.js?v=v31-5d872fe24674';
+import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=v31-5d872fe24674';
+import { LearningSession, LearningProgressRepository } from './learningSession.js?v=v31-5d872fe24674';
+import { LearningAnalyticsV1 } from './learningAnalytics.js?v=v31-5d872fe24674';
+import { providerForPool } from './learningIntegration.js?v=v31-5d872fe24674';
+import { validAbilityRun } from "./staffAbilities.js?v=v31-5d872fe24674";
 export const withoutCampaign = (save) => { const copy = structuredClone(save); delete copy.campaign; delete copy.eventState; delete copy.portfolio; return copy; };
 const goodInt = (n) => Number.isSafeInteger(n) && Number(n) >= 0;
 export function validCampaign(value) { try {
@@ -30,7 +31,7 @@ export function validCampaign(value) { try {
     if (s.history && (!Array.isArray(s.history) || s.history.length > 100 || new Set(s.history.map(h => h.id)).size !== s.history.length || s.history.some(h => h.cafeId !== undefined && !['cafe-1', 'cafe-2'].includes(h.cafeId) || typeof h.id !== 'string' || typeof h.packId !== 'string' || ![h.endedAt, h.levelBefore, h.levelAfter, h.revenue, h.staff, h.menus, h.warehouse].every(goodInt))))
         return false;
     const r = s.run;
-    if (r && (r.management !== undefined && !validManagement(r.management) || r.miniCollection !== undefined && !validMiniCollection(r.miniCollection) || r.miniGames !== undefined && (!validMiniSession(r.miniGames) || r.miniGames.businessId !== r.id || r.miniGames.packId !== r.packId || r.miniGames.offers.some(a => a.lease && (a.lease.startedAt < r.startAt || a.lease.startedAt > r.endAt + 150000))) || r.specialization !== undefined && !validSpecialization(r.specialization) || r.abilityRun !== undefined && (!validAbilityRun(r.abilityRun) || r.abilityRun.id !== r.id) || r.growthBranch !== undefined && !validBranch(r.growthBranch) || typeof r.id !== 'string' || !r.id || typeof r.packId !== 'string' || !r.packId || r.elapsed !== undefined && (!Number.isFinite(r.elapsed) || r.elapsed < 0 || r.elapsed > 900) || typeof r.closed !== 'boolean' || !Number.isFinite(r.startAt) || r.startAt < 0 || r.endAt - r.startAt !== 900000 || !r.base || r.base.campaign || !validateGrowthSave(r.base) || !r.phase4 || !r.hospitality || !r.cafe || !r.learning || r.learning.session.packId !== r.packId || !Array.isArray(r.learning.readVisits)))
+    if (r && (r.management !== undefined && !validManagement(r.management) || r.miniCollection !== undefined && !validMiniCollection(r.miniCollection) || r.miniGames !== undefined && (!validMiniSession(r.miniGames) || r.miniGames.businessId !== r.id || r.miniGames.packId !== r.packId || r.miniGames.offers.some(a => a.lease && (a.lease.startedAt < r.startAt || a.lease.startedAt > r.endAt + 150000))) || r.specialization !== undefined && !validSpecialization(r.specialization) || r.abilityRun !== undefined && (!validAbilityRun(r.abilityRun) || r.abilityRun.id !== r.id) || r.growthBranch !== undefined && !validBranch(r.growthBranch) || typeof r.id !== 'string' || !r.id || typeof r.packId !== 'string' || !r.packId || r.elapsed !== undefined && (!Number.isFinite(r.elapsed) || r.elapsed < 0 || r.elapsed > 900) || typeof r.closed !== 'boolean' || !Number.isFinite(r.startAt) || r.startAt < 0 || r.endAt - r.startAt !== 900000 || !r.base || r.base.campaign || !validateGrowthSave(r.base) || !r.phase4 || !r.hospitality || !r.cafe || r.cafe.tutorialPause !== undefined && !validTutorialPause(r.cafe.tutorialPause) || !r.learning || r.learning.session.packId !== r.packId || !Array.isArray(r.learning.readVisits)))
         return false;
     if (r?.workers && !validBatchWorkers(r.workers, r.cafe?.guests))
         return false;
@@ -77,7 +78,7 @@ export function restoreGrowthRun(run, pool, now = Date.now()) { const g = create
         g.hospitality.paid = new Set(value);
     else if (Object.hasOwn(g.hospitality, key) && key !== 'questions')
         Object.assign(g.hospitality, { [key]: value });
-} g.remainingSeconds = run.closed ? Math.max(0, 900 - (run.elapsed ?? 900)) : Math.max(0, Math.min(900 - (run.elapsed ?? 0), (run.endAt + pauseCredit(g.miniGames, now) - now) / 1000)); expireMini(g, now); if (!run.closed && g.remainingSeconds > 0)
+} g.remainingSeconds = run.closed ? Math.max(0, 900 - (run.elapsed ?? 900)) : Math.max(0, Math.min(900 - (run.elapsed ?? 0), (run.endAt + pauseCredit(g.miniGames, now) + tutorialPauseCredit(g.tutorialPause, now, g.miniGames) - now) / 1000)); expireMini(g, now); if (!run.closed && g.remainingSeconds > 0)
     g.events.align(g.elapsedTime, g); if (run.closed || g.remainingSeconds === 0)
     g.endBusiness(); const specialAttempt = run.learning.specialAttempt ?? null; if (specialAttempt !== null && !g.guests.some(x => x.id === specialAttempt && x.signature))
     throw Error('특별 주문 연결 오류'); return { game: g, learning, analytics, readVisits: [...run.learning.readVisits], specialAttempt }; }

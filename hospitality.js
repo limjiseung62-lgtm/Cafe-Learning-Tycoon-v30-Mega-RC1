@@ -1,6 +1,7 @@
-import { outsideKitchenStock } from './finalSupply.js?v=mega-d152ad969955';
-import { unlocked } from './progressiveFeatures.js?v=mega-d152ad969955';
-import { helperCatalog, hospitalityBalance as b } from './hospitalityConfig.js?v=mega-d152ad969955';
+import { renewalGuestAllowed } from './renewalRosterPolicy.js?v=v31-5d872fe24674';
+import { outsideKitchenStock } from './finalSupply.js?v=v31-5d872fe24674';
+import { unlocked } from './progressiveFeatures.js?v=v31-5d872fe24674';
+import { helperCatalog, hospitalityBalance as b } from './hospitalityConfig.js?v=v31-5d872fe24674';
 export class Hospitality {
     enabled = false;
     questions = [];
@@ -24,12 +25,12 @@ export class Hospitality {
     criticUntil = 0;
     select(g, roll) { if (!unlocked(g, 'missions'))
         return null; if (!this.enabled)
-        return null; if (g.cafeLevel >= 4 && this.questions.length && this.specialVisits < b.specialLimit && g.elapsedTime - this.lastSpecial >= b.specialCooldown && roll < b.specialChance) {
+        return null; if (g.cafeLevel >= 4 && (!g.mega?.finalGrowth?.renewal || renewalGuestAllowed('helper-judge', g.cafeLevel, g.mega.finalGrowth.renewal)) && this.questions.length && this.specialVisits < b.specialLimit && g.elapsedTime - this.lastSpecial >= b.specialCooldown && roll < b.specialChance) {
         this.specialVisits++;
         this.lastSpecial = g.elapsedTime;
         return 'judge';
     } const livingGrowth = g.mode === 'CAFE_GROWTH' && !!g.mega?.extended, due = livingGrowth && this.helperVisits < 3 && g.elapsedTime >= 120 + this.helperVisits * 240; if (this.helperVisits >= (livingGrowth ? 3 : b.helperLimits[g.mode]) || g.elapsedTime - this.lastHelper < b.helperCooldown || !due && (roll < b.specialChance || roll >= b.specialChance + b.helperChance))
-        return null; const available = helperCatalog.filter(h => h.unlock <= g.cafeLevel && !g.guests.some(x => x.helperType === h.id)); if (!available.length)
+        return null; const available = helperCatalog.filter(h => (g.mega?.finalGrowth?.renewal ? renewalGuestAllowed('helper-' + h.id, g.cafeLevel, g.mega.finalGrowth.renewal) : h.unlock <= g.cafeLevel) && !g.guests.some(x => x.helperType === h.id)); if (!available.length)
         return null; const h = available[due ? this.helperVisits % available.length : Math.min(available.length - 1, Math.floor((roll - b.specialChance) / b.helperChance * available.length))]; this.helperVisits++; this.lastHelper = g.elapsedTime; return h.id; }
     normalBonus(g, x) { if (!unlocked(g, 'missions'))
         return 0; if (!this.enabled || x.specialType || x.helperType || x.signature)

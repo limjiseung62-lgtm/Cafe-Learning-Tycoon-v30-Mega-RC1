@@ -1,26 +1,28 @@
-import { renderPhase, renderPhaseStart, renderPhaseEnd } from './renderPhaseTiming.js?v=mega-d152ad969955';
-import { seatedDirection, eatingPose, paintEatingMotion } from './megaSeatedMotion.js?v=mega-d152ad969955';
-import { finalRuntimeDiagnostics } from './finalRuntimeDiagnostics.js?v=mega-d152ad969955';
-import { finalActorFrame } from './finalActorArt.js?v=mega-d152ad969955';
-import { finalActorCache, finalActorFrameCache, finalActorBitmap } from './finalActorCache.js?v=mega-d152ad969955';
-import { finalSpecializationFor } from './finalSpecialization.js?v=mega-d152ad969955';
-import { signatureImage } from './finalSpecializationState.js?v=mega-d152ad969955';
-import { managerActor, managerSprite } from './managerActor.js?v=mega-d152ad969955';
-import { managerById } from './managerState.js?v=mega-d152ad969955';
-import { megaOperatingGrade } from './megaOperations.js?v=mega-d152ad969955';
-import { megaZones } from './megaZones.js?v=mega-d152ad969955';
-import { livingWalkAsset } from './megaLivingArt.js?v=mega-d152ad969955';
-import { MegaActorMotion } from './megaActorMotion.js?v=mega-d152ad969955';
-import { MegaFramePacer } from './megaFramePacer.js?v=mega-d152ad969955';
-import { megaEntrances, megaEnabled, megaDimensions, iso, toTile, megaChairs, megaMetrics } from './megaSpace.js?v=mega-d152ad969955';
-import { selectCustomerPose, selectedPoseAsset } from './customerPoses.js?v=mega-d152ad969955';
-import { workerFrame } from './motionSprites.js?v=mega-d152ad969955';
-import { guestMotion, workerMotion } from './characterMotion.js?v=mega-d152ad969955';
-import { motionFrame } from './animationPresentation.js?v=mega-d152ad969955';
-import { furnitureFor } from './furnitureCatalog.js?v=mega-d152ad969955';
-import { megaFurnitureFrames } from './megaFurnitureFrames.js?v=mega-d152ad969955';
-import { furnitureFrames } from './furnitureFrames.js?v=mega-d152ad969955';
-import { paintMegaDecor, megaImage as image, cachedFragment, paintArtFloor, paintArtWalls, environmentPlacements, megaArtMetrics, furnitureProjection, environmentSprite, bitmapFragment, clearArtBitmaps, artBitmapCache } from './megaArt.js?v=mega-d152ad969955';
+import { paintRenewalFinishes } from './renewalFacilityArt.js?v=v31-5d872fe24674';
+import { appearanceFor, architectureSprite } from './renewalArchitectureArt.js?v=v31-5d872fe24674';
+import { renderPhase, renderPhaseStart, renderPhaseEnd } from './renderPhaseTiming.js?v=v31-5d872fe24674';
+import { seatedDirection, eatingPose, paintEatingMotion } from './megaSeatedMotion.js?v=v31-5d872fe24674';
+import { finalRuntimeDiagnostics } from './finalRuntimeDiagnostics.js?v=v31-5d872fe24674';
+import { finalActorFrame } from './finalActorArt.js?v=v31-5d872fe24674';
+import { finalActorCache, finalActorFrameCache, finalActorBitmap } from './finalActorCache.js?v=v31-5d872fe24674';
+import { finalSpecializationFor } from './finalSpecialization.js?v=v31-5d872fe24674';
+import { signatureImage } from './finalSpecializationState.js?v=v31-5d872fe24674';
+import { managerActor, managerSprite } from './managerActor.js?v=v31-5d872fe24674';
+import { managerById } from './managerState.js?v=v31-5d872fe24674';
+import { megaOperatingGrade } from './megaOperations.js?v=v31-5d872fe24674';
+import { megaZones } from './megaZones.js?v=v31-5d872fe24674';
+import { livingWalkAsset } from './megaLivingArt.js?v=v31-5d872fe24674';
+import { MegaActorMotion } from './megaActorMotion.js?v=v31-5d872fe24674';
+import { MegaFramePacer } from './megaFramePacer.js?v=v31-5d872fe24674';
+import { megaEntrances, megaEnabled, megaDimensions, iso, toTile, megaChairs, megaMetrics } from './megaSpace.js?v=v31-5d872fe24674';
+import { selectCustomerPose, selectedPoseAsset } from './customerPoses.js?v=v31-5d872fe24674';
+import { workerFrame } from './motionSprites.js?v=v31-5d872fe24674';
+import { guestMotion, workerMotion } from './characterMotion.js?v=v31-5d872fe24674';
+import { motionFrame } from './animationPresentation.js?v=v31-5d872fe24674';
+import { furnitureFor } from './furnitureCatalog.js?v=v31-5d872fe24674';
+import { megaFurnitureFrames } from './megaFurnitureFrames.js?v=v31-5d872fe24674';
+import { furnitureFrames } from './furnitureFrames.js?v=v31-5d872fe24674';
+import { paintMegaDecor, megaImage as image, cachedFragment, paintArtFloor, paintArtWalls, environmentPlacements, megaArtMetrics, furnitureProjection, environmentSprite, bitmapFragment, clearArtBitmaps, artBitmapCache } from './megaArt.js?v=v31-5d872fe24674';
 const baseWorkers = { owner: [22, 76, 228, 429], 'staff-1': [274, 100, 234, 407], 'staff-2': [532, 70, 221, 434], 'staff-3': [782, 79, 241, 430], 'staff-4': [1045, 104, 232, 401], 'staff-5': [1310, 98, 203, 406] };
 export const paintMegaFloor = paintArtFloor;
 export function paintMegaBox(c, x, y, w, h, z, color) { const a = iso({ x, y }), b = iso({ x: x + w, y }), d = iso({ x, y: y + h }), e = iso({ x: x + w, y: y + h }); for (const [pts, fill] of [[[a, b, { x: b.x, y: b.y - z }, { x: a.x, y: a.y - z }], '#b38c5d'], [[b, e, { x: e.x, y: e.y - z }, { x: b.x, y: b.y - z }], '#8e6e4b'], [[{ x: a.x, y: a.y - z }, { x: b.x, y: b.y - z }, { x: e.x, y: e.y - z }, { x: d.x, y: d.y - z }], color]]) {
@@ -78,8 +80,11 @@ export class MegaView {
     staticObjects = [];
     cpu = [];
     onArt = (event) => { const file = event.detail?.file; if (!file)
-        this.floorKey = ''; if (!file || file.includes('mega-v30b/environment'))
-        this.wallEpoch++; this.staticKey = ''; };
+        this.floorKey = ''; if (!file || file.includes('mega-v30b/environment') || file.includes('renewal-v31')) {
+        this.wallEpoch++;
+        if (file?.includes('renewal-v31'))
+            this.floorKey = '';
+    } ; this.staticKey = ''; };
     onVisibility = () => { this.last = 0; this.pacer.reset(); };
     get retainedResources() { return { game: !!this.game, scene: !!this.scene, canvasPixels: this.canvas ? this.canvas.width * this.canvas.height : 0, floorPixels: this.floor ? this.floor.width * this.floor.height : 0, staticObjects: this.staticObjects.length, intervals: this.intervals.length, cpuSamples: this.cpu.length }; }
     setReviewScale(scale) { this.reviewScale = scale; if (scale !== null) {
@@ -222,7 +227,7 @@ export class MegaView {
         c.translate(this.width / 2, this.height / 2);
         c.scale(this.zoom, this.zoom);
         c.translate(-this.center.x, -this.center.y);
-        const floorKey = JSON.stringify(p);
+        const appearance = appearanceFor(g), floorKey = JSON.stringify([p, appearance?.selected, g.mega?.finalGrowth?.renewal?.facilities]);
         const [w, h] = megaDimensions[p.level - 1], floorW = (w + h) * 24 + 100, floorH = (w + h) * 12 + 155;
         if (floorKey !== this.floorKey) {
             this.floor = document.createElement('canvas');
@@ -233,7 +238,7 @@ export class MegaView {
             fc.scale(cacheScale, cacheScale);
             fc.translate(h * 24 + 50, 105);
             const floorStart = performance.now();
-            renderPhase('floor-raster', () => paintMegaFloor(fc, p, true, false));
+            renderPhase('floor-raster', () => { paintMegaFloor(fc, p, true, false, appearance); paintRenewalFinishes(fc, p, g.mega?.finalGrowth?.renewal?.facilities); });
             megaArtMetrics.floorMaxMs = Math.max(megaArtMetrics.floorMaxMs, performance.now() - floorStart);
             this.floorKey = floorKey;
         }
@@ -247,7 +252,7 @@ export class MegaView {
             const wc = this.walls.getContext('2d');
             wc.scale(cacheScale, cacheScale);
             wc.translate(h * 24 + 50, 105);
-            renderPhase('wall-raster', () => paintArtWalls(wc, p, true));
+            renderPhase('wall-raster', () => paintArtWalls(wc, p, true, appearance));
             this.wallKey = wallKey;
         }
         renderPhase('wall-blit', () => c.drawImage(this.walls, -h * 24 - 50, -105, floorW, floorH));
@@ -260,17 +265,21 @@ export class MegaView {
                 c.stroke();
             }
         }
-        const specialization = finalSpecializationFor(g), stamp = floorKey + '/' + (specialization?.path ?? 'none') + '/' + artBitmapCache.metrics.closed;
+        const specialization = finalSpecializationFor(g), stamp = floorKey + '/' + (specialization?.path ?? 'none') + '/' + (specialization?.renewal?.stage ?? 0) + '/' + artBitmapCache.metrics.closed;
         if (stamp !== this.staticKey) {
             const staticStart = performance.now(), staticTiming = renderPhaseStart();
             this.staticKey = stamp;
             this.staticObjects = [];
             for (const baseEnv of environmentPlacements(p)) {
                 const env = { ...baseEnv };
-                if (env.fixed && specialization?.path === 'mass' && ['prep', 'shelf'].includes(env.id))
-                    env.id = 'oven';
-                if (env.fixed && specialization?.path === 'brand' && ['prep', 'shelf', 'coffee'].includes(env.id))
-                    env.id = env.id === 'coffee' ? 'coffee-sage' : 'pastry';
+                if (env.fixed && specialization?.path === 'mass' && ['prep', 'shelf'].includes(env.id)) {
+                    const stage = specialization.renewal?.stage ?? 4;
+                    env.id = (Math.floor(env.x + env.y) % 4 < stage) ? 'oven' : 'prep';
+                }
+                if (env.fixed && specialization?.path === 'brand' && ['prep', 'shelf', 'coffee'].includes(env.id)) {
+                    const stage = specialization.renewal?.stage ?? 4;
+                    env.id = env.id === 'coffee' ? 'coffee-sage' : Math.floor(env.x + env.y) % 4 < stage ? 'pastry' : 'shelf';
+                }
                 const q = iso(env), sprite = environmentSprite(env.id, env.width, true);
                 if (sprite)
                     this.staticObjects.push({ depth: env.depth, draw: ctx => { if (env.flip) {
@@ -290,11 +299,29 @@ export class MegaView {
             }
             for (const d of p.decor)
                 this.staticObjects.push({ depth: d.x + d.y, draw: ctx => paintMegaDecor(ctx, p, d) });
-            const portal = environmentSprite('entrance', 65, true);
+            const portal = appearance ? architectureSprite(appearance.selected.door, 2, 65, true) : environmentSprite('entrance', 65, true), sign = appearance ? architectureSprite(appearance.selected.sign, 2, 65, true) : null;
             if (portal)
                 for (const [index, port] of megaEntrances(p).entries()) {
                     const point = toTile(port.inside), door = iso(p.doors ? { x: point.x + (port.outside.x - port.inside.x) / 16, y: point.y + (port.outside.y - port.inside.y) / 24 } : index === 0 ? (p.entry ? { x: 0, y: p.entry.y } : { x: w - .1, y: h - .5 }) : index === 1 ? { x: w, y: h / 2 } : { x: w / 2, y: h });
-                    this.staticObjects.push({ depth: p.doors ? point.x + point.y + .2 : index === 0 ? (p.entry ? p.entry.x + p.entry.y + .2 : w + h + .2) : point.x + point.y + .2, draw: ctx => ctx.drawImage(portal.tile, door.x - 32.5, door.y - portal.height + 8, 65, portal.height) });
+                    this.staticObjects.push({ depth: p.doors ? point.x + point.y + .2 : index === 0 ? (p.entry ? p.entry.x + p.entry.y + .2 : w + h + .2) : point.x + point.y + .2, draw: ctx => { const top = door.y - portal.height + 8; ctx.drawImage(portal.tile, door.x - 32.5, top, 65, portal.height); if (sign) {
+                            ctx.save();
+                            ctx.beginPath();
+                            ctx.rect(door.x - 32.5, top, 65, portal.height * .45);
+                            ctx.clip();
+                            ctx.drawImage(sign.tile, door.x - 32.5, top, 65, sign.height);
+                            ctx.restore();
+                            ctx.save();
+                            const landmark = g.mega?.finalGrowth?.renewal?.facilities?.receipts.some(r => r.kind === 'landmark');
+                            ctx.font = landmark ? 'bold 9px system-ui' : 'bold 7px system-ui';
+                            if (landmark) {
+                                ctx.shadowColor = '#d5a94e';
+                                ctx.shadowBlur = 5;
+                            }
+                            ctx.fillStyle = '#493b25';
+                            ctx.textAlign = 'center';
+                            ctx.fillText(g.progressiveState?.enterprise?.name || '우리 카페', door.x, top + portal.height * .28, 42);
+                            ctx.restore();
+                        } } });
                 }
             renderPhaseEnd('static-build', staticTiming);
             megaArtMetrics.staticMaxMs = Math.max(megaArtMetrics.staticMaxMs, performance.now() - staticStart);

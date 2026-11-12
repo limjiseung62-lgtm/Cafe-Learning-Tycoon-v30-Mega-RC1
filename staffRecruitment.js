@@ -1,6 +1,8 @@
-import { legacyCrewLimit, finalCrewLimit } from './finalWorkforcePolicy.js?v=mega-d152ad969955';
-import { unlocked } from './progressiveFeatures.js?v=mega-d152ad969955';
-import { recruitCatalog, recruitById, recruitConfig, finalRecruitCatalog, finalProfile } from './recruitConfig.js?v=mega-d152ad969955';
+import { renewalStaffAllowed } from './renewalRosterPolicy.js?v=v31-5d872fe24674';
+import { renewalStaffLimit } from './renewalPolicy.js?v=v31-5d872fe24674';
+import { legacyCrewLimit, finalCrewLimit } from './finalWorkforcePolicy.js?v=v31-5d872fe24674';
+import { unlocked } from './progressiveFeatures.js?v=v31-5d872fe24674';
+import { recruitCatalog, recruitById, recruitConfig, finalRecruitCatalog, finalProfile } from './recruitConfig.js?v=v31-5d872fe24674';
 export function rosterFor(s) { return structuredClone(s.roster ?? { version: 2, cafeId: 'cafe-' + hash(s.createdAt), owned: s.staffOwned.map(id => ({ id, level: s.staffLevels[id] })), active: [...s.staffOwned], windows: [], receipts: [], collections: { visitors: Object.keys(s.longTerm?.visitors ?? {}) }, titles: [], settlements: [] }); }
 export function hash(s) { let n = 2166136261; for (const c of s)
     n = Math.imul(n ^ c.charCodeAt(0), 16777619); n = Math.imul(n ^ (n >>> 16), 0x85ebca6b); n = Math.imul(n ^ (n >>> 13), 0xc2b2ae35); return (n ^ (n >>> 16)) >>> 0; }
@@ -11,10 +13,10 @@ export function captureRoster(r, workers) { const copy = structuredClone(r); for
         owned.level = Math.max(owned.level, w.level);
 } return copy; }
 export const ownedCrewLimit = (s) => s.mega?.finalGrowth ? 50 : 12;
-export const crewLimit = (s) => s.mega?.finalGrowth ? finalCrewLimit(s.cafeLevel, s.mega.paid?.spaceLevel ?? 1, s.mega.finalGrowth.inheritedWorkingStaff) : legacyCrewLimit(s.cafeLevel, s.mega?.extended ? s.mega.paid?.spaceLevel ?? 1 : 1);
+export const crewLimit = (s) => s.mega?.finalGrowth?.renewal ? renewalStaffLimit(s.cafeLevel, s.mega.paid?.spaceLevel ?? 1, s.mega.finalGrowth.renewal) : s.mega?.finalGrowth ? finalCrewLimit(s.cafeLevel, s.mega.paid?.spaceLevel ?? 1, s.mega.finalGrowth.inheritedWorkingStaff) : legacyCrewLimit(s.cafeLevel, s.mega?.extended ? s.mega.paid?.spaceLevel ?? 1 : 1);
 export const latestWindow = (s) => s.growthEconomy?.receipts.filter(r => r.eligible).at(-1)?.id ?? 'first';
 export const canManageCrew = (s) => !s.campaign?.run || s.campaign.run.closed;
-export function candidateWeights(s, r = rosterFor(s)) { const fav = s.growthBranch?.selected === 'garden' ? ['staff-3', 'staff-6', 'staff-11'] : s.growthBranch?.selected === 'bakery' ? ['staff-2', 'staff-5', 'staff-10'] : s.growthBranch?.selected === 'dessert' ? ['staff-4', 'staff-9', 'staff-12'] : []; return [...recruitCatalog, ...s.mega?.finalGrowth ? finalRecruitCatalog.filter(d => s.cafeLevel >= (finalProfile(d.staffId)?.unlockLevel ?? 1)) : []].filter(d => !r.owned.some(o => o.id === d.staffId) && !(s.portfolio?.inactive?.save.roster?.owned.map(o => o.id) ?? s.portfolio?.inactive?.save.staffOwned ?? []).includes(d.staffId)).map(d => ({ id: d.staffId, weight: (d.grade === '일반' ? 10 : d.grade === '숙련' ? 7.5 : 5) * (s.cafeLevel < 7 ? (d.grade === '일반' ? 1.1 : d.grade === '특별' ? .8 : 1) : s.cafeLevel >= 11 ? (d.grade === '일반' ? .9 : d.grade === '특별' ? 1.2 : 1) : 1) * (fav.includes(d.staffId) ? 1.1 : 1) })); }
+export function candidateWeights(s, r = rosterFor(s)) { const fav = s.growthBranch?.selected === 'garden' ? ['staff-3', 'staff-6', 'staff-11'] : s.growthBranch?.selected === 'bakery' ? ['staff-2', 'staff-5', 'staff-10'] : s.growthBranch?.selected === 'dessert' ? ['staff-4', 'staff-9', 'staff-12'] : []; return [...recruitCatalog, ...s.mega?.finalGrowth ? finalRecruitCatalog.filter(d => s.mega?.finalGrowth?.renewal ? renewalStaffAllowed(d.staffId, s.cafeLevel, s.mega.finalGrowth.renewal) : s.cafeLevel >= (finalProfile(d.staffId)?.unlockLevel ?? 1)) : []].filter(d => (!s.mega?.finalGrowth?.renewal || renewalStaffAllowed(d.staffId, s.cafeLevel, s.mega.finalGrowth.renewal)) && !r.owned.some(o => o.id === d.staffId) && !(s.portfolio?.inactive?.save.roster?.owned.map(o => o.id) ?? s.portfolio?.inactive?.save.staffOwned ?? []).includes(d.staffId)).map(d => ({ id: d.staffId, weight: (d.grade === '일반' ? 10 : d.grade === '숙련' ? 7.5 : 5) * (s.cafeLevel < 7 ? (d.grade === '일반' ? 1.1 : d.grade === '특별' ? .8 : 1) : s.cafeLevel >= 11 ? (d.grade === '일반' ? .9 : d.grade === '특별' ? 1.2 : 1) : 1) * (fav.includes(d.staffId) ? 1.1 : 1) })); }
 export function openRecruitment(s) { if (!unlocked(s, 'recruitment'))
     return false; if (!canManageCrew(s))
     return false; const r = s.roster ??= rosterFor(s), window = latestWindow(s); if (r.offer && !r.offer.closed)
@@ -31,7 +33,8 @@ export function recruitCost(s, id) { if (s.mega?.finalGrowth && id && finalProfi
     return finalProfile(id).hireCost; return recruitConfig.prices[(s.roster?.owned.length ?? s.staffOwned.length)] ?? (s.mega?.finalGrowth ? 100000 : null); }
 export function syncRosterSave(s) { if (!s.roster)
     return; s.staffOwned = [...s.roster.active]; s.staffLevels = Object.fromEntries(s.roster.active.map(id => [id, s.roster.owned.find(o => o.id === id).level])); }
-export function hireCandidate(s, id) { const r = s.roster, cost = recruitCost(s, id); if (!canManageCrew(s) || !r?.offer || r.offer.closed || !r.windows.includes(r.offer.window) || !r.offer.ids.includes(id) || !recruitById(id) || finalProfile(id) && (!s.mega?.finalGrowth || s.cafeLevel < finalProfile(id).unlockLevel) || (s.portfolio?.inactive?.save.roster?.owned.map(o => o.id) ?? s.portfolio?.inactive?.save.staffOwned ?? []).includes(id) || r.owned.some(o => o.id === id) || cost === null || s.money < cost)
+export function hireCandidate(s, id) { const r = s.roster, cost = recruitCost(s, id); if (s.mega?.finalGrowth?.renewal && !renewalStaffAllowed(id, s.cafeLevel, s.mega.finalGrowth.renewal))
+    return false; if (!canManageCrew(s) || !r?.offer || r.offer.closed || !r.windows.includes(r.offer.window) || !r.offer.ids.includes(id) || !recruitById(id) || finalProfile(id) && (!s.mega?.finalGrowth || (!s.mega?.finalGrowth?.renewal && s.cafeLevel < finalProfile(id).unlockLevel)) || (s.portfolio?.inactive?.save.roster?.owned.map(o => o.id) ?? s.portfolio?.inactive?.save.staffOwned ?? []).includes(id) || r.owned.some(o => o.id === id) || cost === null || s.money < cost)
     return false; const receipt = r.cafeId + ':' + r.offer.window; if (r.receipts.some(e => e.id === receipt))
     return false; s.money -= cost; r.owned.push({ id, level: 1 }); if (r.active.length < crewLimit(s))
     r.active.push(id); r.receipts.push({ id: receipt, staffId: id, cost }); r.offer.closed = true; syncRosterSave(s); return true; }

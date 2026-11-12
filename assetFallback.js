@@ -1,4 +1,4 @@
-import { imageReady, imageState } from './imageLoading.js?v=mega-d152ad969955';
+import { imageReady, imageState } from './imageLoading.js?v=v31-5d872fe24674';
 let installed = false;
 export function installAssetFallbacks() {
     if (installed)

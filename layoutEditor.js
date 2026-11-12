@@ -1,14 +1,14 @@
-import { openMegaEditor } from './megaEditor.js?v=mega-d152ad969955';
-import { isMegaDeployment } from './megaSpace.js?v=mega-d152ad969955';
-import { openFreeEditor } from './freeLayoutEditor.js?v=mega-d152ad969955';
-import { planFor, defaultPlan, validatePlan, commitPlan } from './cafeLayout.js?v=mega-d152ad969955';
-import { layoutFacilities, tableRect, decorRect } from './layoutModel.js?v=mega-d152ad969955';
-import { createSpace, floorPath, hallGrowthSpecs } from './spatial.js?v=mega-d152ad969955';
-import { branchRoom, branchCatalog } from './growthBranch.js?v=mega-d152ad969955';
-import { sprite } from './art.js?v=mega-d152ad969955';
-import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=mega-d152ad969955';
-import { escapeText as esc } from './questionRenderer.js?v=mega-d152ad969955';
-import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=mega-d152ad969955';
+import { openMegaEditor } from './megaEditor.js?v=v31-5d872fe24674';
+import { isMegaDeployment } from './megaSpace.js?v=v31-5d872fe24674';
+import { openFreeEditor } from './freeLayoutEditor.js?v=v31-5d872fe24674';
+import { planFor, defaultPlan, validatePlan, commitPlan } from './cafeLayout.js?v=v31-5d872fe24674';
+import { layoutFacilities, tableRect, decorRect } from './layoutModel.js?v=v31-5d872fe24674';
+import { createSpace, floorPath, hallGrowthSpecs } from './spatial.js?v=v31-5d872fe24674';
+import { branchRoom, branchCatalog } from './growthBranch.js?v=v31-5d872fe24674';
+import { sprite } from './art.js?v=v31-5d872fe24674';
+import { allDecorationCatalog as decorationCatalog } from './longGrowthConfig.js?v=v31-5d872fe24674';
+import { escapeText as esc } from './questionRenderer.js?v=v31-5d872fe24674';
+import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=v31-5d872fe24674';
 export async function openLegacyLayoutEditor(repo, initial, onClose) {
     document.getElementById('layout-editor')?.remove();
     const dialog = document.createElement('section');

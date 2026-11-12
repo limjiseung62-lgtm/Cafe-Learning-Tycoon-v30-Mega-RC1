@@ -1,4 +1,4 @@
-import { iso } from './megaSpace.js?v=mega-d152ad969955';
+import { iso } from './megaSpace.js?v=v31-5d872fe24674';
 /** Presentation only: face the actual table, never the last walking direction. */
 export function seatedDirection(chair, table) {
     const dx = table.x - chair.x, dy = table.y - chair.y;

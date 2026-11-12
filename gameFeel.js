@@ -1,7 +1,7 @@
-import { finalActive } from './finalGrowth.js?v=mega-d152ad969955';
-import { finalLevelNotice } from './finalLevelCatalog.js?v=mega-d152ad969955';
-import { deploymentLocalStorage } from './deploymentStorage.js?v=mega-d152ad969955';
-import { AudioManager } from './audioManager.js?v=mega-d152ad969955';
+import { finalActive } from './finalGrowth.js?v=v31-5d872fe24674';
+import { finalLevelNotice } from './finalLevelCatalog.js?v=v31-5d872fe24674';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=v31-5d872fe24674';
+import { AudioManager } from './audioManager.js?v=v31-5d872fe24674';
 export class FeelTracker {
     guests = new Map();
     workers = new Map();
@@ -42,7 +42,7 @@ export class FeelTracker {
         this.payments = g.telemetry.phase4.payments.length;
         for (const p of g.telemetry.upgradePurchases.slice(this.purchases)) {
             const type = { production: 'purchase', cafe: 'levelup', warehouse: 'warehouse', menu: 'menu-upgrade', 'staff-hire': 'staff-hire', 'staff-upgrade': 'staff-upgrade', item: 'purchase' }[p.kind];
-            let label = p.kind === 'cafe' && finalActive(g) ? finalLevelNotice(p.level) : p.kind === 'production' ? p.target + ' · 메뉴별 +' + g.productionAmount : type === 'warehouse' ? '재고 최대 ' + g.economy.warehouses[Math.max(0, p.level - 2)].capacity + ' → ' + g.warehouse.capacity : type === 'staff-hire' ? '새 직원이 함께합니다!' : type === 'staff-upgrade' ? 'Lv.' + p.level + '!' + ([3, 5].includes(p.level) ? ' 운반량 UP' : '') : type === 'menu-upgrade' ? '★' + p.level : undefined;
+            let label = p.kind === 'cafe' && finalActive(g) ? finalLevelNotice(p.level, g.mega?.finalGrowth?.renewal) : p.kind === 'production' ? p.target + ' · 메뉴별 +' + g.productionAmount : type === 'warehouse' ? '재고 최대 ' + g.economy.warehouses[Math.max(0, p.level - 2)].capacity + ' → ' + g.warehouse.capacity : type === 'staff-hire' ? '새 직원이 함께합니다!' : type === 'staff-upgrade' ? 'Lv.' + p.level + '!' + ([3, 5].includes(p.level) ? ' 운반량 UP' : '') : type === 'menu-upgrade' ? '★' + p.level : undefined;
             events.push({ type, label, target: p.target });
             if (p.kind === 'item') {
                 const event = { 'stock-five': 'item-stock', delivery: 'item-delivery', golden: 'item-golden', invite: 'item-invite', booster: 'item-booster' }[p.target];

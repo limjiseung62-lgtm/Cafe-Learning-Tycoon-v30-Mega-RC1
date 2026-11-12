@@ -1,6 +1,6 @@
 {
-  "version": "3.0.0-mega-rc.1",
-  "status": "public-student-test",
+  "version": "3.1.0-renewal-rc.1",
+  "status": "public-test",
   "officialUnchanged": false,
   "storagePrefix": "cafe-v30-mega-common-rc1/",
   "subjects": {
@@ -15,10 +15,10 @@
     48
   ],
   "releaseNotes": "RELEASE-NOTES.html",
-  "sourceCandidate": "d152ad9699557f34ba285d5856e24d74862e0f05",
+  "sourceCandidate": "5d872fe246741ab2d4cd76701d34e2dee7b9c02b",
   "testUrl": "https://limjiseung62-lgtm.github.io/Cafe-Learning-Tycoon-v30-Mega-RC1/",
-  "cacheToken": "mega-d152ad969955",
-  "build": "growth-arrival-tray-update-20261112",
+  "cacheToken": "v31-5d872fe24674",
+  "build": "v31-renewal-prepared-5d872fe",
   "baselinePublicBuild": "interior-placement-unblock-1",
   "approvedContentSubjects": [
     "math",
@@ -36,7 +36,14 @@
   "integratedStaff": 50,
   "maxOperatingSeats": 100,
   "maxWorkingStaff": 25,
-  "performanceStatus": "GALAXY_AND_ADDITIONAL_PERFORMANCE_FOLLOWUP",
+  "performanceStatus": "INDEPENDENT_BROWSER_APPROX_1HZ_LONGRUN_NOT_VALIDATED",
   "integrationDate": "2026-11-12",
-  "batchServing": false
+  "batchServing": false,
+  "sourceFunctionalCheckpoint": "0b70a5d",
+  "preparedAt": "2026-11-12T03:45:58.460Z",
+  "deployed": true,
+  "renewalEconomyStatus": "SYNTHETIC_AVERAGE20_75H_TARGET25H_NOT_CONFIRMED",
+  "officialRepositoryModified": false,
+  "releasePreparedAt": "2026-11-12T04:41:21.620Z",
+  "releaseVerificationRecord": "091a67b"
 }

@@ -1,5 +1,5 @@
-import { hasGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=mega-d152ad969955';
-import { validateGrowthSave, migrateGrowthSave } from './growthSave.js?v=mega-d152ad969955';
+import { hasGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=v31-5d872fe24674';
+import { validateGrowthSave, migrateGrowthSave } from './growthSave.js?v=v31-5d872fe24674';
 export const growthStorageKey = 'cafe-learning-tycoon.growth.v1';
 /** A local candidate reads a legacy cafe until its first write, then uses its own copy. */
 export class CandidateSaveRepository {
@@ -80,6 +80,13 @@ export class LocalSaveRepository {
             this.storage.setItem(this.key + '.before-city-analytics-v1', current);
         if (save.v26?.enterprise?.modernCity && current !== null && !this.storage.getItem(this.key + '.before-modern-city-v1'))
             this.storage.setItem(this.key + '.before-modern-city-v1', current);
+        if (save.mega?.finalGrowth?.renewal && current !== null && !(() => { try {
+            return JSON.parse(current)?.mega?.finalGrowth?.renewal;
+        }
+        catch {
+            return false;
+        } })() && !this.storage.getItem(this.key + '.before-renewal-v31'))
+            this.storage.setItem(this.key + '.before-renewal-v31', current);
         if (save.mega?.production && current !== null && !this.storage.getItem(this.key + '.before-production-v1'))
             this.storage.setItem(this.key + '.before-production-v1', current);
         if (save.mega?.inventory && current !== null && !this.storage.getItem(this.key + '.before-furniture-commerce-v1'))

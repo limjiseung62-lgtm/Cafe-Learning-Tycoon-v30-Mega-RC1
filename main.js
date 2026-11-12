@@ -1,74 +1,75 @@
-import { finalizeExternal, observeExternalGame } from './externalLaunch.js?v=mega-d152ad969955';
-import { releaseResultView } from './resultViewMemory.js?v=mega-d152ad969955';
-import { kitchenStages, kitchenFloorLabel } from './productionKitchen.js?v=mega-d152ad969955';
-import { pollManagerSession } from './managerUi.js?v=mega-d152ad969955';
-import { liveManagementOpen } from './liveManagement.js?v=mega-d152ad969955';
-import { mountCommonCafeResults, restoreCommonArchive } from './commonCafeResults.js?v=mega-d152ad969955';
-import { CommonCafeFlow } from './commonCafeFlow.js?v=mega-d152ad969955';
-import { loadCommonRuntime } from './commonBankLoader.js?v=mega-d152ad969955';
-import { commonQuestion } from './commonLearningCatalog.js?v=mega-d152ad969955';
-import { setCommonTransaction } from './commonLearningTransaction.js?v=mega-d152ad969955';
-import { megaQualificationNotice } from './megaQualificationUi.js?v=mega-d152ad969955';
-import { megaView } from './megaView.js?v=mega-d152ad969955';
-import { classRuntime, captureClass } from './classRuntime.js?v=mega-d152ad969955';
-import { pollClassUi } from './classRandomUi.js?v=mega-d152ad969955';
-import { renderProgressiveGuidance } from './progressiveGuidance.js?v=mega-d152ad969955';
-import { unlocked } from './progressiveFeatures.js?v=mega-d152ad969955';
-import { applyProgressiveVisibility } from './progressiveVisibility.js?v=mega-d152ad969955';
-import { prepareCompletedShowcase } from './cafeShowcase.js?v=mega-d152ad969955';
-import { beginManagementUi, pollManagementUi } from './managementLive.js?v=mega-d152ad969955';
-import { setArcadeSound } from './arcadeUi.js?v=mega-d152ad969955';
-import { setCraftSound } from './craftUi.js?v=mega-d152ad969955';
-import { setRushSound } from './cakeRushUi.js?v=mega-d152ad969955';
-import { beginMiniUi, pollMiniUi } from './miniGameUi.js?v=mega-d152ad969955';
-import { miniAnswer, activeMini } from './miniGames.js?v=mega-d152ad969955';
-import { beginSpecializationUi, pollSpecializationUi, specializationArt } from './specializationUi.js?v=mega-d152ad969955';
-import { specializationById } from './specializationConfig.js?v=mega-d152ad969955';
-import { freeMealAnchor } from './furnitureAnchors.js?v=mega-d152ad969955';
-import { freeFurniture, freeHallLayers, furnitureVisualVersion } from './freeFurniture.js?v=mega-d152ad969955';
-import { growthStaffPanel } from './recruitUi.js?v=mega-d152ad969955';
-import { workerBaseArt } from "./recruitArt.js?v=mega-d152ad969955";
-import { branchCatalog, branchRoom } from "./growthBranch.js?v=mega-d152ad969955";
-import { beginBranchUi, pollBranchUi } from "./growthBranchUi.js?v=mega-d152ad969955";
-import { createGrowthSave } from './growthSave.js?v=mega-d152ad969955';
-import { beginLongGrowth, pollLongGrowth } from './longGrowthUi.js?v=mega-d152ad969955';
-import { growthRuntime } from './growthRuntime.js?v=mega-d152ad969955';
-import { webAsset } from './webAsset.js?v=mega-d152ad969955';
-import { imageReady } from './imageLoading.js?v=mega-d152ad969955';
-import { motionFrame, bubbleCorrection } from './animationPresentation.js?v=mega-d152ad969955';
-import { workerPoseArt, preloadMotionSheets, workerTrayPlacement } from './motionSprites.js?v=mega-d152ad969955';
-import { EventRecovery } from './eventRecovery.js?v=mega-d152ad969955';
-import { renderEventPanel } from './eventUi.js?v=mega-d152ad969955';
-import { guestMotion, workerMotion, motionArt } from './characterMotion.js?v=mega-d152ad969955';
-import { restoreClassroomCafe } from './classroomCheckpoint.js?v=mega-d152ad969955';
-import { LearningAnalyticsV1 } from './learningAnalytics.js?v=mega-d152ad969955';
-import { mountCafeResults } from './cafeResults.js?v=mega-d152ad969955';
-import { questionCatalog } from './questionPack.js?v=mega-d152ad969955';
-import { ClassroomUi } from './classroomUi.js?v=mega-d152ad969955';
-import { passageHtml, materialHtml } from './reading.js?v=mega-d152ad969955';
-import { CafeRunUi } from './cafeRunUi.js?v=mega-d152ad969955';
-import { specialQuestions } from './hospitalityConfig.js?v=mega-d152ad969955';
-import { productionReceipt, stockStatus } from './playLoop.js?v=mega-d152ad969955';
-import { FinalUx } from './finalUx.js?v=mega-d152ad969955';
-import { SessionClock, ActionGate } from './uxState.js?v=mega-d152ad969955';
-import { installAssetFallbacks } from './assetFallback.js?v=mega-d152ad969955';
-import { createLearning } from './learningIntegration.js?v=mega-d152ad969955';
-import { renderQuestionText, escapeText, renderDiagram } from './questionRenderer.js?v=mega-d152ad969955';
-import { GameFeel } from './gameFeel.js?v=mega-d152ad969955';
-import { ModeFlow } from './modeUi.js?v=mega-d152ad969955';
-import { itemCatalog, specialNames, specialIcons } from './phase4Config.js?v=mega-d152ad969955';
-import { showOrderBubble, syncOrderBubble, assetSignature } from './presentation.js?v=mega-d152ad969955';
-import { personalityLabels } from './customerRules.js?v=mega-d152ad969955';
-import { selectCustomerPose, customerPoseArt, poseGeometry, preloadCustomerPoses, selectedPoseAsset } from './customerPoses.js?v=mega-d152ad969955';
-import { SpatialScene, hallGrowthSpecs, createSpace } from './spatial.js?v=mega-d152ad969955';
-import { DepartureDialogue } from './departureDialogue.js?v=mega-d152ad969955';
-import { icon } from './uiIcons.js?v=mega-d152ad969955';
-import { sprite } from './art.js?v=mega-d152ad969955';
-import { staffBalance } from './config.js?v=mega-d152ad969955';
-import { staffDefinitions } from './staff.js?v=mega-d152ad969955';
-import { foodVisual } from './foodVisual.js?v=mega-d152ad969955';
-import { CafeGame } from './game.js?v=mega-d152ad969955';
-import { customers, menuDefinitions } from './data.js?v=mega-d152ad969955';
+import { beginRenewalTutorials, pollRenewalTutorials } from './renewalTutorialUi.js?v=v31-5d872fe24674';
+import { finalizeExternal, observeExternalGame } from './externalLaunch.js?v=v31-5d872fe24674';
+import { releaseResultView } from './resultViewMemory.js?v=v31-5d872fe24674';
+import { kitchenStages, kitchenFloorLabel } from './productionKitchen.js?v=v31-5d872fe24674';
+import { pollManagerSession } from './managerUi.js?v=v31-5d872fe24674';
+import { liveManagementOpen } from './liveManagement.js?v=v31-5d872fe24674';
+import { mountCommonCafeResults, restoreCommonArchive } from './commonCafeResults.js?v=v31-5d872fe24674';
+import { CommonCafeFlow } from './commonCafeFlow.js?v=v31-5d872fe24674';
+import { loadCommonRuntime } from './commonBankLoader.js?v=v31-5d872fe24674';
+import { commonQuestion } from './commonLearningCatalog.js?v=v31-5d872fe24674';
+import { setCommonTransaction } from './commonLearningTransaction.js?v=v31-5d872fe24674';
+import { megaQualificationNotice } from './megaQualificationUi.js?v=v31-5d872fe24674';
+import { megaView } from './megaView.js?v=v31-5d872fe24674';
+import { classRuntime, captureClass } from './classRuntime.js?v=v31-5d872fe24674';
+import { pollClassUi } from './classRandomUi.js?v=v31-5d872fe24674';
+import { renderProgressiveGuidance } from './progressiveGuidance.js?v=v31-5d872fe24674';
+import { unlocked } from './progressiveFeatures.js?v=v31-5d872fe24674';
+import { applyProgressiveVisibility } from './progressiveVisibility.js?v=v31-5d872fe24674';
+import { prepareCompletedShowcase } from './cafeShowcase.js?v=v31-5d872fe24674';
+import { beginManagementUi, pollManagementUi } from './managementLive.js?v=v31-5d872fe24674';
+import { setArcadeSound } from './arcadeUi.js?v=v31-5d872fe24674';
+import { setCraftSound } from './craftUi.js?v=v31-5d872fe24674';
+import { setRushSound } from './cakeRushUi.js?v=v31-5d872fe24674';
+import { beginMiniUi, pollMiniUi } from './miniGameUi.js?v=v31-5d872fe24674';
+import { miniAnswer, activeMini } from './miniGames.js?v=v31-5d872fe24674';
+import { beginSpecializationUi, pollSpecializationUi, specializationArt } from './specializationUi.js?v=v31-5d872fe24674';
+import { specializationById } from './specializationConfig.js?v=v31-5d872fe24674';
+import { freeMealAnchor } from './furnitureAnchors.js?v=v31-5d872fe24674';
+import { freeFurniture, freeHallLayers, furnitureVisualVersion } from './freeFurniture.js?v=v31-5d872fe24674';
+import { growthStaffPanel } from './recruitUi.js?v=v31-5d872fe24674';
+import { workerBaseArt } from "./recruitArt.js?v=v31-5d872fe24674";
+import { branchCatalog, branchRoom } from "./growthBranch.js?v=v31-5d872fe24674";
+import { beginBranchUi, pollBranchUi } from "./growthBranchUi.js?v=v31-5d872fe24674";
+import { createGrowthSave } from './growthSave.js?v=v31-5d872fe24674';
+import { beginLongGrowth, pollLongGrowth } from './longGrowthUi.js?v=v31-5d872fe24674';
+import { growthRuntime } from './growthRuntime.js?v=v31-5d872fe24674';
+import { webAsset } from './webAsset.js?v=v31-5d872fe24674';
+import { imageReady } from './imageLoading.js?v=v31-5d872fe24674';
+import { motionFrame, bubbleCorrection } from './animationPresentation.js?v=v31-5d872fe24674';
+import { workerPoseArt, preloadMotionSheets, workerTrayPlacement } from './motionSprites.js?v=v31-5d872fe24674';
+import { EventRecovery } from './eventRecovery.js?v=v31-5d872fe24674';
+import { renderEventPanel } from './eventUi.js?v=v31-5d872fe24674';
+import { guestMotion, workerMotion, motionArt } from './characterMotion.js?v=v31-5d872fe24674';
+import { restoreClassroomCafe } from './classroomCheckpoint.js?v=v31-5d872fe24674';
+import { LearningAnalyticsV1 } from './learningAnalytics.js?v=v31-5d872fe24674';
+import { mountCafeResults } from './cafeResults.js?v=v31-5d872fe24674';
+import { questionCatalog } from './questionPack.js?v=v31-5d872fe24674';
+import { ClassroomUi } from './classroomUi.js?v=v31-5d872fe24674';
+import { passageHtml, materialHtml } from './reading.js?v=v31-5d872fe24674';
+import { CafeRunUi } from './cafeRunUi.js?v=v31-5d872fe24674';
+import { specialQuestions } from './hospitalityConfig.js?v=v31-5d872fe24674';
+import { productionReceipt, stockStatus } from './playLoop.js?v=v31-5d872fe24674';
+import { FinalUx } from './finalUx.js?v=v31-5d872fe24674';
+import { SessionClock, ActionGate } from './uxState.js?v=v31-5d872fe24674';
+import { installAssetFallbacks } from './assetFallback.js?v=v31-5d872fe24674';
+import { createLearning } from './learningIntegration.js?v=v31-5d872fe24674';
+import { renderQuestionText, escapeText, renderDiagram } from './questionRenderer.js?v=v31-5d872fe24674';
+import { GameFeel } from './gameFeel.js?v=v31-5d872fe24674';
+import { ModeFlow } from './modeUi.js?v=v31-5d872fe24674';
+import { itemCatalog, specialNames, specialIcons } from './phase4Config.js?v=v31-5d872fe24674';
+import { showOrderBubble, syncOrderBubble, assetSignature } from './presentation.js?v=v31-5d872fe24674';
+import { personalityLabels } from './customerRules.js?v=v31-5d872fe24674';
+import { selectCustomerPose, customerPoseArt, poseGeometry, preloadCustomerPoses, selectedPoseAsset } from './customerPoses.js?v=v31-5d872fe24674';
+import { SpatialScene, hallGrowthSpecs, createSpace } from './spatial.js?v=v31-5d872fe24674';
+import { DepartureDialogue } from './departureDialogue.js?v=v31-5d872fe24674';
+import { icon } from './uiIcons.js?v=v31-5d872fe24674';
+import { sprite } from './art.js?v=v31-5d872fe24674';
+import { staffBalance } from './config.js?v=v31-5d872fe24674';
+import { staffDefinitions } from './staff.js?v=v31-5d872fe24674';
+import { foodVisual } from './foodVisual.js?v=v31-5d872fe24674';
+import { CafeGame } from './game.js?v=v31-5d872fe24674';
+import { customers, menuDefinitions } from './data.js?v=v31-5d872fe24674';
 let classroomElapsed = null;
 const developerMode = new URLSearchParams(location.search).has('dev');
 const clock = new SessionClock(), purchaseGate = new ActionGate();
@@ -165,7 +166,7 @@ export async function startSession(session, pool, questionRandom, learningOption
     }
 } commonBusy = false; readVisits.clear(); classState.readVisits.forEach(n => readVisits.add(n)); const sessionAnalytics = analytics; analytics.packName = pool?.[0]?.unit ?? '기본 학습'; void questionCatalog.list().then(list => { if (analytics === sessionAnalytics)
     analytics.packName = list.find(p => p.packId === engine.provider.packId)?.selectionLabel ?? list.find(p => p.packId === engine.provider.packId)?.title ?? analytics.packName; }).catch(() => { }); game.enableHospitality(specialQuestions(engine.provider.list()).map(q => q.questionId)); specialAttempt = growthState.specialAttempt ?? null; active = null; feedback = null; panelOpen = false; investmentOpen = false; investmentMessage = ''; renderedInvestmentKey = ''; celebrationUntil = 0; productionUntil = 0; beginLongGrowth(session, growthRuntime.savedFor(session) ?? createGrowthSave(), growthRuntime.businessId(), () => modeFlow.flush()); modeFlow.attach(session, pool); beginMiniUi(session, () => session.classRandom ? classRuntime.flush() : modeFlow.flush()); beginManagementUi(session, () => modeFlow.flush()); beginSpecializationUi(session, () => modeFlow.flush(), () => growthRuntime.businessId()); beginBranchUi(session, growthRuntime.savedFor(session) ?? createGrowthSave(), () => modeFlow.flush()); if (session.classRandom)
-    classRuntime.bind(session, () => captureClass(session, engine.provider.packId, engine, analytics, [...readVisits])); el('setup').hidden = true; releaseResultView(el('results')); el('results').hidden = true; el('problem-panel').hidden = true; el('playing').hidden = false; el('make').disabled = false; el('investment-panel').hidden = true; last = performance.now(); render(); await finalizeExternal(commonFlow, session, () => session.classRandom ? classRuntime.flush() : modeFlow.flush()); }
+    classRuntime.bind(session, () => captureClass(session, engine.provider.packId, engine, analytics, [...readVisits])); el('setup').hidden = true; releaseResultView(el('results')); el('results').hidden = true; el('problem-panel').hidden = true; el('playing').hidden = false; el('make').disabled = false; el('investment-panel').hidden = true; last = performance.now(); render(); await finalizeExternal(commonFlow, session, () => session.classRandom ? classRuntime.flush() : modeFlow.flush()); beginRenewalTutorials(session, () => session.classRandom ? classRuntime.flush() : modeFlow.flush(), commonFlow ? () => new CommonCafeFlow(commonFlow.loaded, structuredClone(commonFlow.choices)) : undefined); }
 document.querySelectorAll('[data-focus-tab]').forEach(b => b.onclick = () => { if (game?.status !== 'RUNNING')
     return; investmentTab = b.dataset.focusTab; selectedGuest = null; detailKey = ''; el('guest-detail').hidden = true; investmentOpen = true; panelOpen = false; renderProblem(); renderInvestment(true); });
 el('invest').addEventListener('click', () => { investmentTab = 'cafe'; if (game?.status !== 'RUNNING')
@@ -283,6 +284,16 @@ function submit(answer) { if (commonFlow) {
         returnToCafe(); }, 2300);
 } }
 export function render() {
+    if (game?.tutorialPause?.active) {
+        el('timer').textContent = format(game.remainingSeconds);
+        el('money').textContent = game.money.toLocaleString('ko-KR') + ' 원';
+        el('cafe-level').textContent = game.cafeLevel + '단계';
+        scene?.sync(game);
+        renderRoom();
+        renderActors(performance.now());
+        renderWorkers();
+        return;
+    }
     observeExternalGame(game, commonFlow);
     if (commonBusy)
         return;
@@ -395,6 +406,10 @@ export function render() {
 }
 let nextRender = 0, nextActors = 0;
 function frame(now) { if (game && !commonBusy && !liveManagementOpen)
+    pollRenewalTutorials(game); if (game?.tutorialPause?.active) {
+    requestAnimationFrame(frame);
+    return;
+} if (game && !commonBusy && !liveManagementOpen)
     pollManagerSession(game); if (commonBusy || liveManagementOpen) {
     requestAnimationFrame(frame);
     return;
@@ -893,7 +908,8 @@ async function submitCommon(answer) { if (!commonFlow || commonBusy || classRunt
 catch (error) {
     commonSaveBlocked(error instanceof Error ? error.message : '응답 저장을 확인해 주세요.', false);
 } }
-function advanceTime() { if (commonBusy || liveManagementOpen)
+function advanceTime() { if (game?.tutorialPause?.active)
+    return; if (commonBusy || liveManagementOpen)
     return; if (game?.status !== 'RUNNING')
     return; game.tick(classRuntime.delta(game) ?? growthRuntime.delta(game) ?? (classroomElapsed ? Math.max(0, classroomElapsed() - game.elapsedTime) : clock.take())); if (game.status === 'CLOSED')
     render(); }

@@ -1,5 +1,6 @@
-import { signatureMenusFor } from './finalSpecializationState.js?v=mega-d152ad969955';
-import { menuDefinitions } from './data.js?v=mega-d152ad969955';
+import { renewalMenus } from './renewalPolicy.js?v=v31-5d872fe24674';
+import { signatureMenusFor } from './finalSpecializationState.js?v=v31-5d872fe24674';
+import { menuDefinitions } from './data.js?v=v31-5d872fe24674';
 export const researchRecipes = [
     { id: 'research-fruit', name: '햇살 과일 소다', visual: 'ade', base: 'coffee', level: 1, ingredients: ['fruit', 'milk'], heat: 1, description: '과일과 우유를 차갑게 섞어 산뜻하게 만들어요.' },
     { id: 'research-latte', name: '구름 밀크 라테', visual: 'strawberry-latte', base: 'strawberry-latte', level: 2, ingredients: ['milk', 'flower'], heat: 2, description: '우유와 꽃향기를 미지근하게 데워요.' },
@@ -31,7 +32,7 @@ export function registerRecipe(m, id) { if (m.legacyArchiveOnly)
     return false; const r = m.research[id]; if (!r || r.stage !== 'tasted' || r.rating < 4)
     return false; r.stage = 'registered'; return true; }
 export function researchMenuDefinitions(m) { return researchRecipes.filter(r => m?.research[r.id]?.stage === 'registered').map(r => ({ menuId: r.id, name: r.name, visualKey: r.visual, basePrice: menuDefinitions.find(m => m.menuId === r.base).basePrice, unlockCafeLevel: r.level, currentLevel: 1, maxLevel: 5 })); }
-export function growthMenuDefinitions(level, m, final) { return [...menuDefinitions, ...researchMenuDefinitions(m), ...signatureMenusFor(level, final?.specialization)].filter(d => d.unlockCafeLevel <= level); }
+export function growthMenuDefinitions(level, m, final) { return [...(final?.renewal ? renewalMenus(level, final.renewal) : menuDefinitions), ...researchMenuDefinitions(m), ...signatureMenusFor(level, final?.specialization)].filter(d => d.unlockCafeLevel <= level); }
 export function syncResearchMenus(s) { if (s.mega?.finalGrowth || s.management?.legacyArchiveOnly)
     return; for (const m of researchMenuDefinitions(s.management)) {
     if (m.unlockCafeLevel > s.cafeLevel)

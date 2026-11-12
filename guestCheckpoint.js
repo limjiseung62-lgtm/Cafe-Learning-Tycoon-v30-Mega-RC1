@@ -1,10 +1,10 @@
-import { finalGuestByVisual } from './finalGuests.js?v=mega-d152ad969955';
-import { validGuestSupply } from './finalSupply.js?v=mega-d152ad969955';
-import { growthMenuDefinitions } from './menuResearch.js?v=mega-d152ad969955';
-import { specializationById } from './specializationConfig.js?v=mega-d152ad969955';
-import { customers } from './data.js?v=mega-d152ad969955';
-import { specialDefinition, specialTypes } from './phase4Config.js?v=mega-d152ad969955';
-import { hospitalityDefinition, helperCatalog } from './hospitalityConfig.js?v=mega-d152ad969955';
+import { finalGuestByVisual } from './finalGuests.js?v=v31-5d872fe24674';
+import { validGuestSupply } from './finalSupply.js?v=v31-5d872fe24674';
+import { growthMenuDefinitions } from './menuResearch.js?v=v31-5d872fe24674';
+import { specializationById } from './specializationConfig.js?v=v31-5d872fe24674';
+import { customers } from './data.js?v=v31-5d872fe24674';
+import { specialDefinition, specialTypes } from './phase4Config.js?v=v31-5d872fe24674';
+import { hospitalityDefinition, helperCatalog } from './hospitalityConfig.js?v=v31-5d872fe24674';
 export function decodeGuestCheckpoint(value, g, level, limits) {
     try {
         const items = value;

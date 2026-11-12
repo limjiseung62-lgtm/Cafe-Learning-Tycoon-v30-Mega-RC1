@@ -1,16 +1,17 @@
-import { commonTransactionOpen } from './commonLearningTransaction.js?v=mega-d152ad969955';
-import { validImpactState } from './classImpact.js?v=mega-d152ad969955';
-import { createRandomClassMatch } from './sessionFactory.js?v=mega-d152ad969955';
-import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=mega-d152ad969955';
-import { decodeGuestCheckpoint } from './guestCheckpoint.js?v=mega-d152ad969955';
-import { LearningSession } from './learningSession.js?v=mega-d152ad969955';
-import { LearningAnalyticsV1 } from './learningAnalytics.js?v=mega-d152ad969955';
-import { providerForPool } from './learningIntegration.js?v=mega-d152ad969955';
-import { validBranch } from './growthBranch.js?v=mega-d152ad969955';
-import { validSpecialization } from './specialization.js?v=mega-d152ad969955';
-import { beginMiniSession, offerMini, validMiniSession, validMiniCollection } from './miniGames.js?v=mega-d152ad969955';
-import { ordinaryKinds, majorKinds } from './classRandom.js?v=mega-d152ad969955';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=mega-d152ad969955';
+import { tutorialPauseCredit } from './tutorialPause.js?v=v31-5d872fe24674';
+import { commonTransactionOpen } from './commonLearningTransaction.js?v=v31-5d872fe24674';
+import { validImpactState } from './classImpact.js?v=v31-5d872fe24674';
+import { createRandomClassMatch } from './sessionFactory.js?v=v31-5d872fe24674';
+import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=v31-5d872fe24674';
+import { decodeGuestCheckpoint } from './guestCheckpoint.js?v=v31-5d872fe24674';
+import { LearningSession } from './learningSession.js?v=v31-5d872fe24674';
+import { LearningAnalyticsV1 } from './learningAnalytics.js?v=v31-5d872fe24674';
+import { providerForPool } from './learningIntegration.js?v=v31-5d872fe24674';
+import { validBranch } from './growthBranch.js?v=v31-5d872fe24674';
+import { validSpecialization } from './specialization.js?v=v31-5d872fe24674';
+import { beginMiniSession, offerMini, validMiniSession, validMiniCollection } from './miniGames.js?v=v31-5d872fe24674';
+import { ordinaryKinds, majorKinds } from './classRandom.js?v=v31-5d872fe24674';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=v31-5d872fe24674';
 export const classSaveKey = 'class-random-v1', classLockKey = 'class-random-lock';
 export function captureClass(g, packId, engine, analytics, readVisits) { if (!g.classRandom)
     throw Error('Not random CLASS'); return { version: 1, clock: g.classClock(), duration: g.durationSeconds, packId, elapsed: g.elapsedTime, closed: g.status === 'CLOSED', state: structuredClone(g.classRandom), cafe: classroomCafeCheckpoint(g), guests: structuredClone(g.guests), workers: structuredClone(g.service.workers), purchases: structuredClone(g.telemetry.upgradePurchases), phase4: structuredClone(g.telemetry.phase4), branch: structuredClone(g.growthBranch), specialization: structuredClone(g.specialization), miniGames: structuredClone(g.miniGames), miniCollection: structuredClone(g.miniCollection), learning: { session: engine.checkpoint(), analytics: analytics.checkpoint(), readVisits } }; }
@@ -61,7 +62,7 @@ export function restoreClass(value, pool, now = Date.now()) {
     if (c.closed)
         g.leaveClassMatch();
     else {
-        const elapsed = Math.min(c.duration, Math.max(c.elapsed, (Math.max(now, c.state.lastNow) - c.state.startAt) / 1000));
+        const elapsed = Math.min(c.duration, Math.max(c.elapsed, (Math.max(now, c.state.lastNow) - c.state.startAt - tutorialPauseCredit(g.tutorialPause, now)) / 1000));
         g.tick(elapsed - c.elapsed);
     }
     return { g, engine, analytics, readVisits: c.learning.readVisits };
@@ -86,6 +87,7 @@ export class ClassRuntime {
     last = '';
     owner = typeof crypto !== 'undefined' ? crypto.randomUUID() : String(Math.random());
     pending = new WeakMap();
+    anchorPause = 0;
     anchorMono = 0;
     anchorElapsed = 0;
     blocked = false;
@@ -129,7 +131,7 @@ export class ClassRuntime {
     begin(g, engine, analytics, readVisits) { this.g = g.classRandom ? g : null; if (!this.g) {
         this.release();
         return { engine, analytics, readVisits };
-    } this.anchorMono = performance.now(); this.anchorElapsed = g.elapsedTime; const pending = this.pending.get(g); this.pending.delete(g); return pending ?? { engine, analytics, readVisits }; }
+    } this.anchorMono = performance.now(); this.anchorElapsed = g.elapsedTime; this.anchorPause = tutorialPauseCredit(g.tutorialPause); const pending = this.pending.get(g); this.pending.delete(g); return pending ?? { engine, analytics, readVisits }; }
     bind(g, capture) { if (!g.classRandom)
         return; this.capture = null; try {
         const old = this.read();
@@ -177,7 +179,7 @@ export class ClassRuntime {
         this.blocked = true;
         return 0;
     } if (this.blocked)
-        return 0; const t = Math.max(Date.now(), g.classRandom.lastNow), wanted = Math.max(g.elapsedTime, this.anchorElapsed + (performance.now() - this.anchorMono) / 1000, (t - g.classRandom.startAt) / 1000); return Math.max(0, wanted - g.elapsedTime); }
+        return 0; const t = Math.max(Date.now(), g.classRandom.lastNow), pause = tutorialPauseCredit(g.tutorialPause, t), wanted = Math.max(g.elapsedTime, this.anchorElapsed + (performance.now() - this.anchorMono - pause + this.anchorPause) / 1000, (t - g.classRandom.startAt - pause) / 1000); return Math.max(0, wanted - g.elapsedTime); }
     poll(g) { if (!g.classRandom)
         return; if (g.durationSeconds === 1800) {
         beginMiniSession(g, g.classRandom.id, (this.capture?.().packId) ?? '');

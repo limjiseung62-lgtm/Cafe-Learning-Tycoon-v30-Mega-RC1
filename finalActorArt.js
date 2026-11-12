@@ -1,4 +1,4 @@
-import { finalCharacterAssets } from './finalCharacterAssets.js?v=mega-d152ad969955';
+import { finalCharacterAssets } from './finalCharacterAssets.js?v=v31-5d872fe24674';
 const registry = new Map(finalCharacterAssets.map(a => [a.kind === 'staff' ? a.id : a.visualKey, a]));
 export const finalActorIds = () => [...registry.keys()];
 export const hasFinalActor = (id) => registry.has(id);

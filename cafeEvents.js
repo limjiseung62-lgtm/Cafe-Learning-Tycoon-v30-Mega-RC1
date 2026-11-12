@@ -1,6 +1,6 @@
-import { unlocked } from './progressiveFeatures.js?v=mega-d152ad969955';
-import { specializationById } from './specializationConfig.js?v=mega-d152ad969955';
-import { eventBalance as b, eventSchedule, allMissionCatalog, incidentCatalog } from './eventConfig.js?v=mega-d152ad969955';
+import { unlocked } from './progressiveFeatures.js?v=v31-5d872fe24674';
+import { specializationById } from './specializationConfig.js?v=v31-5d872fe24674';
+import { eventBalance as b, eventSchedule, allMissionCatalog, incidentCatalog } from './eventConfig.js?v=v31-5d872fe24674';
 export class CafeEvents {
     enabled = false;
     duration = 0;

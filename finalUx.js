@@ -1,5 +1,5 @@
-import { deploymentLocalStorage } from './deploymentStorage.js?v=mega-d152ad969955';
-import { TutorialPreference, TutorialTracker } from './uxState.js?v=mega-d152ad969955';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=v31-5d872fe24674';
+import { TutorialPreference, TutorialTracker } from './uxState.js?v=v31-5d872fe24674';
 export class FinalUx {
     current;
     preference;
@@ -51,13 +51,17 @@ export class FinalUx {
         document.body.append(this.toast);
     }
     configure(storage, key) { this.preference = new TutorialPreference(storage, key); this.tracker = new TutorialTracker(this.preference); this.start(); }
-    async beforeStart() { if (this.preference.completed)
+    async beforeStart() { if (typeof document !== 'undefined' && document.querySelector('meta[name="cafe-renewal"]')?.getAttribute('content') === 'v31-candidate')
+        return; if (this.preference.completed)
         return; await new Promise(resolve => { const box = document.createElement('section'); box.className = 'ux-dialog'; box.id = 'ready-guide'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-label', '첫 카페 안내'); box.innerHTML = '<div><p class="eyebrow">첫 카페에 오신 걸 환영해요</p><h2>음식 만들기로 시작해요</h2><p>문제를 맞히면 모든 음식이 생겨요.<br>서빙을 누르면 사장님이 배달해요.<br>직원을 고용하면 자동으로 서빙해요!</p><p class="hint">아직 게임 시간은 흐르지 않아요.</p><button id="guide-ready" class="primary">알겠어요 · 시작</button><button id="guide-skip" class="secondary">건너뛰고 시작</button></div>'; document.body.append(box); box.querySelector('#guide-ready').onclick = () => { box.remove(); resolve(); }; box.querySelector('#guide-skip').onclick = () => { this.preference.finish(); box.remove(); resolve(); }; box.querySelector('#guide-ready').focus(); }); }
     start() { this.hide(); this.shown = ''; this.wrongShown = false; this.tracker.start(); }
     wrong() { if (this.wrongShown)
         return false; this.wrongShown = true; return true; }
     hide() { this.toast.hidden = true; this.highlight?.classList.remove('guide-highlight'); this.highlight = null; }
-    poll(game) { const shortage = game.guests.some(g => ['WAITING_FOR_FOOD', 'PREPARING'].includes(g.state) && g.order.some(o => (game.menus.find(m => m.menuId === o.menuId)?.stock ?? 0) < o.quantity)); const costs = [game.nextCafe?.expansionCost, game.nextWarehouse?.cost, game.nextHireCost, ...game.menus.map(m => game.getMenuUpgradeCost(m))].filter((x) => typeof x === 'number' && x > 0); const step = this.tracker.poll({ order: game.guests.some(g => g.order.length > 0 && !['ENTERING', 'MOVING_TO_SEAT'].includes(g.state)), shortage, pickup: game.service.workers.some(w => ['PICKING_UP', 'CARRYING_TO_TABLE', 'SERVING'].includes(w.state)), revenue: game.stats.revenue, canGrow: costs.some(c => game.money >= c), closed: game.status === 'CLOSED' }); if (!step) {
+    poll(game) { if (game.mega?.finalGrowth?.renewal || game.mode === 'CLASS_MATCH' && document.querySelector('meta[name="cafe-renewal"]')?.getAttribute('content') === 'v31-candidate') {
+        this.hide();
+        return;
+    } const shortage = game.guests.some(g => ['WAITING_FOR_FOOD', 'PREPARING'].includes(g.state) && g.order.some(o => (game.menus.find(m => m.menuId === o.menuId)?.stock ?? 0) < o.quantity)); const costs = [game.nextCafe?.expansionCost, game.nextWarehouse?.cost, game.nextHireCost, ...game.menus.map(m => game.getMenuUpgradeCost(m))].filter((x) => typeof x === 'number' && x > 0); const step = this.tracker.poll({ order: game.guests.some(g => g.order.length > 0 && !['ENTERING', 'MOVING_TO_SEAT'].includes(g.state)), shortage, pickup: game.service.workers.some(w => ['PICKING_UP', 'CARRYING_TO_TABLE', 'SERVING'].includes(w.state)), revenue: game.stats.revenue, canGrow: costs.some(c => game.money >= c), closed: game.status === 'CLOSED' }); if (!step) {
         this.hide();
         return;
     } if (step.id !== this.shown) {

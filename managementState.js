@@ -1,4 +1,4 @@
-import { validSpecialInventory } from './specialInventory.js?v=mega-d152ad969955';
+import { validSpecialInventory } from './specialInventory.js?v=v31-5d872fe24674';
 export const createManagement = () => ({ version: 1, strategy: null, reputation: 50, reviews: [], regulars: {}, materials: { fruit: 2, milk: 2, flour: 2, flower: 1 }, research: {}, training: {}, deliveries: [], businessHistory: [] });
 export function managementFor(save) { const m = save.management ?? (save.management = createManagement()); if (save.mega?.finalGrowth)
     m.legacyArchiveOnly = true; return m; }

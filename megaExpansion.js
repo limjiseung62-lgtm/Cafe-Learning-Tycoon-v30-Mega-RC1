@@ -1,5 +1,6 @@
-import { beginManagerConstruction } from './managerState.js?v=mega-d152ad969955';
-import { ensureMegaPlan, megaDimensions, validMega, validateMegaPlan } from './megaSpace.js?v=mega-d152ad969955';
+import { renewalExpansionLevel } from './renewalPolicy.js?v=v31-5d872fe24674';
+import { beginManagerConstruction } from './managerState.js?v=v31-5d872fe24674';
+import { ensureMegaPlan, megaDimensions, validMega, validateMegaPlan } from './megaSpace.js?v=v31-5d872fe24674';
 export const expansionStages = [{ level: 1, size: [8, 6], cost: 0, requiredLevel: 1 }, { level: 4, size: [12, 10], cost: 100000, requiredLevel: 4 }, { level: 10, size: [20, 16], cost: 500000, requiredLevel: 10 }, { level: 20, size: [40, 30], cost: 3000000, requiredLevel: 20 }, { level: 30, size: [64, 48], cost: 15000000, requiredLevel: 30 }];
 export function adoptPaidSpace(save) { const copy = structuredClone(save); if (copy.mega && typeof document !== 'undefined' && document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-'))
     copy.mega.extended = true; if (copy.mega && !copy.mega.paid) {
@@ -7,7 +8,7 @@ export function adoptPaidSpace(save) { const copy = structuredClone(save); if (c
     copy.mega.paid = { spaceLevel: level, receipts: [] };
 } return copy; }
 export const megaExpansionCosts = { 20: 900000, 30: 2400000 };
-export function expansionQuote(source) { const save = adoptPaidSpace(source), level = save.mega?.paid?.spaceLevel ?? 1, raw = expansionStages.find(s => s.level > level), next = raw && save.mega?.extended && raw.level >= 20 ? { ...raw, cost: megaExpansionCosts[raw.level] } : raw, active = !!save.campaign?.run && !save.campaign.run.closed; return { level, size: megaDimensions[level - 1], next, shortage: Math.max(0, (next?.cost ?? 0) - save.money), eligible: !!next && next.level <= (save.mega?.extended ? 30 : 10) && save.cafeLevel >= next.requiredLevel && !active, active }; }
+export function expansionQuote(source) { const save = adoptPaidSpace(source), level = save.mega?.paid?.spaceLevel ?? 1, base = expansionStages.find(s => s.level > level), raw = base && save.mega?.finalGrowth?.renewal ? { ...base, requiredLevel: renewalExpansionLevel(base.level, save.mega.finalGrowth.renewal) } : base, next = raw && save.mega?.extended && raw.level >= 20 ? { ...raw, cost: megaExpansionCosts[raw.level] } : raw, active = !!save.campaign?.run && !save.campaign.run.closed; return { level, size: megaDimensions[level - 1], next, shortage: Math.max(0, (next?.cost ?? 0) - save.money), eligible: !!next && next.level <= (save.mega?.extended ? 30 : 10) && save.cafeLevel >= next.requiredLevel && !active, active }; }
 export function prepareExpansion(source, expectedLevel, now = new Date().toISOString()) {
     const save = adoptPaidSpace(source), quote = expansionQuote(save), next = quote.next;
     if (!save.mega || !save.mega.paid || quote.level !== expectedLevel)

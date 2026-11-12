@@ -1,16 +1,16 @@
-import { validateGrowthSave } from './growthSave.js?v=mega-d152ad969955';
-import { operatingSeatContract } from './finalGrowth.js?v=mega-d152ad969955';
-import { ensureMegaPlan, megaKey, megaDimensions, validateMegaPlan, megaObstacles, tableParts, fixtureParts, megaCrewHomes } from './megaSpace.js?v=mega-d152ad969955';
-import { inventorySku, tableSeatCount, includedSeats } from './megaInventory.js?v=mega-d152ad969955';
-import { installedIds, interiorCandidate } from './interiorPlacement.js?v=mega-d152ad969955';
-import { buyInterior } from './megaShop.js?v=mega-d152ad969955';
-import { crewAssignment, configureFinalSupply } from './finalSupply.js?v=mega-d152ad969955';
-import { megaZones } from './megaZones.js?v=mega-d152ad969955';
-import { rosterFor, openRecruitment, candidateWeights, hireCandidate, recruitCost } from './staffRecruitment.js?v=mega-d152ad969955';
-import { finalProfile, recruitById } from './recruitConfig.js?v=mega-d152ad969955';
-import { finalSalary } from './finalPayroll.js?v=mega-d152ad969955';
-import { kitchenStages } from './productionKitchen.js?v=mega-d152ad969955';
-import { liveManagementRepository } from './liveManagement.js?v=mega-d152ad969955';
+import { validateGrowthSave } from './growthSave.js?v=v31-5d872fe24674';
+import { operatingSeatContract } from './finalGrowth.js?v=v31-5d872fe24674';
+import { ensureMegaPlan, megaKey, megaDimensions, validateMegaPlan, megaObstacles, tableParts, fixtureParts, megaCrewHomes } from './megaSpace.js?v=v31-5d872fe24674';
+import { inventorySku, tableSeatCount, includedSeats } from './megaInventory.js?v=v31-5d872fe24674';
+import { installedIds, interiorCandidate } from './interiorPlacement.js?v=v31-5d872fe24674';
+import { buyInterior } from './megaShop.js?v=v31-5d872fe24674';
+import { crewAssignment, configureFinalSupply } from './finalSupply.js?v=v31-5d872fe24674';
+import { megaZones } from './megaZones.js?v=v31-5d872fe24674';
+import { rosterFor, openRecruitment, candidateWeights, hireCandidate, recruitCost } from './staffRecruitment.js?v=v31-5d872fe24674';
+import { finalProfile, recruitById } from './recruitConfig.js?v=v31-5d872fe24674';
+import { finalSalary } from './finalPayroll.js?v=v31-5d872fe24674';
+import { kitchenStages } from './productionKitchen.js?v=v31-5d872fe24674';
+import { liveManagementRepository } from './liveManagement.js?v=v31-5d872fe24674';
 const roleName = { floor: '홀 서빙', kitchen: '주방 지원', logistics: '재고 보급', vip: 'VIP 서비스', 'zone-manager': '구역 관리' };
 const zoneLabel = (g, id) => g.serviceSpace?.megaPlan ? megaZones(g.serviceSpace.megaPlan).find(z => z.id === id)?.name ?? '전체 구역' : '전체 구역';
 const serial = (g) => g.mega?.finalGrowth?.managerActions?.serial ?? 0;
@@ -87,7 +87,14 @@ async function layoutSuggestion(g, source, facility) { let s = uncampaign(source
         break;
 } return { save: s, added }; }
 export async function createManagerProposal(g, c, kind, choice) { if (!managerAvailable(g))
-    throw Error('첫 유료 증축 후 매니저를 선택해 주세요.'); const source = c.current(), base = { serial: serial(g), kind, fingerprint: managerFingerprint(g), cost: 0, wage: 0, changes: [], title: '', reason: '실제 카페 상태를 확인했어요.', effect: '기존 가구와 진행 중인 주문은 그대로 유지해요.' }; if (kind === 'roles') {
+    throw Error('첫 유료 증축 후 매니저를 선택해 주세요.'); if (g.mega?.finalGrowth?.renewal?.origin === 'new') {
+    if (kind === 'roles' && g.cafeLevel < 14)
+        throw Error('직원 구역·역할 지정은 Lv.14부터예요.');
+    if (kind === 'training' && g.cafeLevel < 9)
+        throw Error('직원 교육은 Lv.9부터예요.');
+    if (kind === 'logistics' && g.cafeLevel < 13)
+        throw Error('보조 서빙대는 Lv.13부터 구매해요.');
+} const source = c.current(), base = { serial: serial(g), kind, fingerprint: managerFingerprint(g), cost: 0, wage: 0, changes: [], title: '', reason: '실제 카페 상태를 확인했어요.', effect: '기존 가구와 진행 중인 주문은 그대로 유지해요.' }; if (kind === 'roles') {
     const assignments = suggestAssignments(g);
     return { ...base, title: '직원 역할·구역 자동 배분', reason: '직원 특성과 운반 능력을 비교했어요. 잠긴 직원은 유지해요.', assignments, changes: g.service.paid.filter(w => !crewAssignment(g, w.staffId).locked && !!assignments[w.staffId].pending).map(w => w.name + ' · ' + roleName[crewAssignment(g, w.staffId).role] + ' → ' + roleName[assignments[w.staffId].pending.role] + ' / ' + zoneLabel(g, assignments[w.staffId].pending.zone) + ' · 현재 작업 후 전환'), effect: '홀·주방·물류·VIP·구역 업무를 나눠요. 진행 중 작업은 먼저 마쳐요.' };
 } if (kind === 'setup' || kind === 'logistics') {

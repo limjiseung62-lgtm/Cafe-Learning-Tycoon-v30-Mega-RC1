@@ -1,19 +1,20 @@
-import { startFinalPayroll, settleFinalPayroll } from './finalPayroll.js?v=mega-d152ad969955';
-import { adoptFinalGrowth, finalLocalDeployment } from './finalGrowth.js?v=mega-d152ad969955';
-import { settleFranchises } from './progressiveEconomy.js?v=mega-d152ad969955';
-import { syncManagementAlbum } from './managementAlbum.js?v=mega-d152ad969955';
-import { startManagement, settleManagement } from './managementEngine.js?v=mega-d152ad969955';
-import { syncSharedFurniture } from './cafePortfolio.js?v=mega-d152ad969955';
-import { syncLake, desiredLakeMini } from './lakeDistrict.js?v=mega-d152ad969955';
-import { syncVillage, villageMetrics } from './village.js?v=mega-d152ad969955';
-import { beginMiniSession, pauseCredit, pollMini } from './miniGames.js?v=mega-d152ad969955';
-import { captureRoster } from "./staffRecruitment.js?v=mega-d152ad969955";
-import { economyState, settleGrowthEconomy } from './growthEconomy.js?v=mega-d152ad969955';
-import { longStateFor } from './longGrowthUi.js?v=mega-d152ad969955';
-import { createGrowthSession, setGrowthExpected, growthBaseFor } from './sessionFactory.js?v=mega-d152ad969955';
-import { restoreGrowthRun, captureRun, studyRecord, adaptiveLevel } from './growthCampaign.js?v=mega-d152ad969955';
-import { LearningSession } from './learningSession.js?v=mega-d152ad969955';
-import { providerForPool } from './learningIntegration.js?v=mega-d152ad969955';
+import { tutorialPauseCredit } from './tutorialPause.js?v=v31-5d872fe24674';
+import { startFinalPayroll, settleFinalPayroll } from './finalPayroll.js?v=v31-5d872fe24674';
+import { adoptFinalGrowth, finalLocalDeployment } from './finalGrowth.js?v=v31-5d872fe24674';
+import { settleFranchises } from './progressiveEconomy.js?v=v31-5d872fe24674';
+import { syncManagementAlbum } from './managementAlbum.js?v=v31-5d872fe24674';
+import { startManagement, settleManagement } from './managementEngine.js?v=v31-5d872fe24674';
+import { syncSharedFurniture } from './cafePortfolio.js?v=v31-5d872fe24674';
+import { syncLake, desiredLakeMini } from './lakeDistrict.js?v=v31-5d872fe24674';
+import { syncVillage, villageMetrics } from './village.js?v=v31-5d872fe24674';
+import { beginMiniSession, pauseCredit, pollMini } from './miniGames.js?v=v31-5d872fe24674';
+import { captureRoster } from "./staffRecruitment.js?v=v31-5d872fe24674";
+import { economyState, settleGrowthEconomy } from './growthEconomy.js?v=v31-5d872fe24674';
+import { longStateFor } from './longGrowthUi.js?v=v31-5d872fe24674';
+import { createGrowthSession, setGrowthExpected, growthBaseFor } from './sessionFactory.js?v=v31-5d872fe24674';
+import { restoreGrowthRun, captureRun, studyRecord, adaptiveLevel } from './growthCampaign.js?v=v31-5d872fe24674';
+import { LearningSession } from './learningSession.js?v=v31-5d872fe24674';
+import { providerForPool } from './learningIntegration.js?v=v31-5d872fe24674';
 class GrowthRuntime {
     grants = null;
     anchorPause = 0;
@@ -59,7 +60,7 @@ class GrowthRuntime {
         this.meta = null;
         return fallback;
     } const pending = this.pending.get(g); const save = pending?.save ?? growthBaseFor(g); this.grants = save ? economyState(save) : null; this.current = g; this.anchorMono = performance.now(); this.anchorElapsed = g.elapsedTime; this.initial = structuredClone(save?.campaign ?? { version: 1, studies: {} }); const id = pool?.[0]; const packId = id?.packId ?? fallback.engine.provider.packId; const now = Date.now(); this.meta = save?.campaign?.run ?? { id: pending?.businessId ?? crypto.randomUUID(), packId, startAt: now, endAt: now + 900000 }; startFinalPayroll(g, this.meta.id); startManagement(g, this.meta.id); g.staffAbilities.start(this.meta.id); if (g.status !== 'CLOSED')
-        beginMiniSession(g, this.meta.id, packId); this.anchorPause = pauseCredit(g.miniGames, Date.now()); this.state = getState; let state = pending?.state ?? fallback; if (pending?.state) {
+        beginMiniSession(g, this.meta.id, packId); this.anchorPause = pauseCredit(g.miniGames, Date.now()) + tutorialPauseCredit(g.tutorialPause, Date.now(), g.miniGames); this.state = getState; let state = pending?.state ?? fallback; if (pending?.state) {
         const baseline = save?.campaign?.run?.studyBase;
         if (baseline)
             this.initial.studies[packId] = structuredClone(baseline);
@@ -72,7 +73,7 @@ class GrowthRuntime {
     level() { if (!this.meta || !this.state || !this.current)
         return 1; const previous = this.initial.studies[this.meta.packId]; const recent = [...(previous?.recent ?? []), ...this.state().engine.attempts.map(a => a.correct)].slice(-5); return adaptiveLevel(this.current.elapsedTime, { level: previous?.level ?? 1, recent }); }
     delta(g) { if (g !== this.current || !this.meta)
-        return null; const now = Date.now(); pollMini(g, now); const pause = pauseCredit(g.miniGames, now); return Math.max(0, Math.max(g.elapsedTime, (now - this.meta.startAt - pause) / 1000, this.anchorElapsed + (performance.now() - this.anchorMono) / 1000 - (pause - this.anchorPause) / 1000) - g.elapsedTime); }
+        return null; const now = Date.now(); pollMini(g, now); const pause = pauseCredit(g.miniGames, now) + tutorialPauseCredit(g.tutorialPause, now, g.miniGames); return Math.max(0, Math.max(g.elapsedTime, (now - this.meta.startAt - pause) / 1000, this.anchorElapsed + (performance.now() - this.anchorMono) / 1000 - (pause - this.anchorPause) / 1000) - g.elapsedTime); }
     enrich(save, base) { if (!this.current || !this.meta || !this.state)
         return save; if (!save.portfolio && this.pending.get(this.current)?.save.portfolio)
         save.portfolio = structuredClone(this.pending.get(this.current).save.portfolio); const { engine, analytics, readVisits, specialAttempt } = this.state(), studies = structuredClone(this.initial.studies); studies[this.meta.packId] = studyRecord(engine, this.initial.studies[this.meta.packId]); const history = structuredClone(this.initial.history ?? []).filter(h => h.id !== this.meta.id); if (this.current.status === 'CLOSED')

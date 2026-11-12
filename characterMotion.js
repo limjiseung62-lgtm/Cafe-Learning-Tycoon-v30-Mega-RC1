@@ -1,5 +1,5 @@
-import { deploymentLocalStorage } from './deploymentStorage.js?v=mega-d152ad969955';
-import { recentEventReaction } from './animationPresentation.js?v=mega-d152ad969955';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=v31-5d872fe24674';
+import { recentEventReaction } from './animationPresentation.js?v=v31-5d872fe24674';
 export function guestMotion(g, events) { if (g.miniReaction && events && events.now < g.miniReaction.until)
     return g.miniReaction.success ? 'REACT_HAPPY' : 'REACT_SAD'; if (g.state === 'EATING')
     return 'EAT'; if (g.state === 'PAYING')

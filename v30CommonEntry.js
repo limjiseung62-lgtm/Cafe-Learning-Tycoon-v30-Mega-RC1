@@ -1,8 +1,8 @@
-import { attachExternal, manualReturn } from './externalLaunch.js?v=mega-d152ad969955';
-import { installCommonArchiveMenu } from './commonCafeResults.js?v=mega-d152ad969955';
-import { configureQuestionCatalog, QuestionPackCatalog } from './questionPack.js?v=mega-d152ad969955';
-import { CommonLearningCatalog } from './commonLearningCatalog.js?v=mega-d152ad969955';
-import { commonCatalogSHA256 } from './commonCatalogPin.js?v=mega-d152ad969955';
+import { attachExternal, manualReturn } from './externalLaunch.js?v=v31-5d872fe24674';
+import { installCommonArchiveMenu } from './commonCafeResults.js?v=v31-5d872fe24674';
+import { configureQuestionCatalog, QuestionPackCatalog } from './questionPack.js?v=v31-5d872fe24674';
+import { CommonLearningCatalog } from './commonLearningCatalog.js?v=v31-5d872fe24674';
+import { commonCatalogSHA256 } from './commonCatalogPin.js?v=v31-5d872fe24674';
 try {
     const response = await fetch('assets/common-learning/catalog.json');
     if (!response.ok)
@@ -18,7 +18,7 @@ try {
     await attachExternal(instance);
     configureQuestionCatalog(instance);
     installCommonArchiveMenu();
-    await import('./main.js?v=mega-d152ad969955');
+    await import('./main.js?v=v31-5d872fe24674');
 }
 catch (error) {
     const box = document.createElement('section');

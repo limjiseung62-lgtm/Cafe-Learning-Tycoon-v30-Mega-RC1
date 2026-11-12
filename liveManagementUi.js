@@ -1,12 +1,13 @@
-import { openFinalSpecialization } from './finalSpecializationUi.js?v=mega-d152ad969955';
-import { openFinalSupply } from './finalSupplyUi.js?v=mega-d152ad969955';
-import { openFinalDoors } from './finalDoorsUi.js?v=mega-d152ad969955';
-import { finalActive } from './finalGrowth.js?v=mega-d152ad969955';
-import { finalGrowthSummary } from './finalGrowthUi.js?v=mega-d152ad969955';
-import { attachManagerSession } from './managerUi.js?v=mega-d152ad969955';
-import { expansionAction } from './megaExpansionUi.js?v=mega-d152ad969955';
-import { openInteriorShop, openInteriorEditor } from './megaShopUi.js?v=mega-d152ad969955';
-import { liveManagementRepository, liveManagementOpen, setLiveManagementOpen } from './liveManagement.js?v=mega-d152ad969955';
+import { openAppearance } from './renewalAppearance.js?v=v31-5d872fe24674';
+import { openFinalSpecialization } from './finalSpecializationUi.js?v=v31-5d872fe24674';
+import { openFinalSupply } from './finalSupplyUi.js?v=v31-5d872fe24674';
+import { openFinalDoors } from './finalDoorsUi.js?v=v31-5d872fe24674';
+import { finalActive } from './finalGrowth.js?v=v31-5d872fe24674';
+import { finalGrowthSummary } from './finalGrowthUi.js?v=v31-5d872fe24674';
+import { attachManagerSession } from './managerUi.js?v=v31-5d872fe24674';
+import { expansionAction } from './megaExpansionUi.js?v=v31-5d872fe24674';
+import { openInteriorShop, openInteriorEditor } from './megaShopUi.js?v=v31-5d872fe24674';
+import { liveManagementRepository, liveManagementOpen, setLiveManagementOpen } from './liveManagement.js?v=v31-5d872fe24674';
 export function mountLiveManagement(g, c) { document.getElementById('live-mega-management')?.remove(); if (!c || g.mode !== 'CAFE_GROWTH' || !g.mega) {
     attachManagerSession(g, null);
     return;
@@ -28,6 +29,11 @@ else
     x.onclick = () => { hub.close(); hub.remove(); void open(repo, done).then(() => { if (!document.querySelector('.interior-dialog'))
         done(); }).catch(() => done()); };
     actions.append(x);
+} if (g.mega?.finalGrowth?.renewal) {
+    const exterior = document.createElement('button');
+    exterior.textContent = '건축·외관 꾸미기 · 외벽·창문·간판';
+    exterior.onclick = () => { hub.close(); hub.remove(); openAppearance(repo, done); };
+    actions.append(exterior);
 } if (finalActive(g)) {
     const spec = document.createElement('button');
     spec.textContent = '전문화 · 생산량과 브랜드 비교';

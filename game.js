@@ -1,46 +1,49 @@
-import { renderPhase, renderPhaseMetrics, recordArrival } from './renderPhaseTiming.js?v=mega-d152ad969955';
-import { lateServiceInterval } from './lateServiceDemand.js?v=mega-d152ad969955';
-import { growthArrivalInterval, seatedGuestStates } from './growthArrivals.js?v=mega-d152ad969955';
-import { pollCrewChanges } from './finalSupply.js?v=mega-d152ad969955';
-import { finalSpecializationFor } from './finalSpecialization.js?v=mega-d152ad969955';
-import { finalProduction, finalPriceFactor, signatureMenusFor } from './finalSpecializationState.js?v=mega-d152ad969955';
-import { growthSeats } from './levelSeats.js?v=mega-d152ad969955';
-import { kitchenStages, kitchenAmount, kitchenFloorLabel, bulkWarehouses, newProductionKitchen } from './productionKitchen.js?v=mega-d152ad969955';
-import { tickManager } from './managerActor.js?v=mega-d152ad969955';
-import { megaSaleFactor } from './megaOperations.js?v=mega-d152ad969955';
-import { megaGrowthBalance, megaSpawnSeconds } from './megaGrowthEconomy.js?v=mega-d152ad969955';
-import { tableSeatCount } from './megaInventory.js?v=mega-d152ad969955';
-import { megaEnabled, ensureMegaPlan, createMegaSpace, megaRoute, megaTravelSeconds, megaPointClear } from './megaSpace.js?v=mega-d152ad969955';
-import { randomClassBalance, classRandomConfig, pollClassEvents, classSpecial } from './classRandom.js?v=mega-d152ad969955';
-import { outsideKitchenStock, supplyAllocations, reserveSupplyOrder, deliverySources, configureFinalSupply } from './finalSupply.js?v=mega-d152ad969955';
-import { finalActive, operatingSeatContract } from './finalGrowth.js?v=mega-d152ad969955';
-import { investmentRevenue, investmentSpawn, investmentVisitor, pollInvestmentEvents } from './progressiveEconomy.js?v=mega-d152ad969955';
-import { classProgressiveConfig } from './classProgressiveBalance.js?v=mega-d152ad969955';
-import { unlocked } from './progressiveFeatures.js?v=mega-d152ad969955';
-import { protectedSpecialStock, reservedGuestOrder, reservationIndex, takeReservedFood } from './specialInventory.js?v=mega-d152ad969955';
-import { pollManagement, strategyGuest, strategyQuantity } from './managementEngine.js?v=mega-d152ad969955';
-import { pollMini, miniPaused, activeMini } from './miniGames.js?v=mega-d152ad969955';
-import { specializationById } from './specializationConfig.js?v=mega-d152ad969955';
-import { chooseFurnitureSeat } from './furnitureSeating.js?v=mega-d152ad969955';
-import { layoutEconomyConfig } from './layoutEconomyConfig.js?v=mega-d152ad969955';
-import { freeKey } from './freeLayoutModel.js?v=mega-d152ad969955';
-import { layoutKey } from './layoutModel.js?v=mega-d152ad969955';
-import { CafeEvents } from './cafeEvents.js?v=mega-d152ad969955';
-import { CafeRun } from './cafeRun.js?v=mega-d152ad969955';
-import { Hospitality } from './hospitality.js?v=mega-d152ad969955';
-import { hospitalityDefinition, hospitalityBalance } from './hospitalityConfig.js?v=mega-d152ad969955';
-import { chooseSpecial, specialDefinition, itemCatalog } from './phase4Config.js?v=mega-d152ad969955';
-import { policyFor } from './sessionModes.js?v=mega-d152ad969955';
-import { crewLimit } from './staffRecruitment.js?v=mega-d152ad969955';
-import { tickFinalPayroll } from './finalPayroll.js?v=mega-d152ad969955';
-import { finalGuestDefinitions } from './finalGuests.js?v=mega-d152ad969955';
-import { chooseCustomer, chooseOrderMenu } from './customerRules.js?v=mega-d152ad969955';
-import { StaffSystem } from './staff.js?v=mega-d152ad969955';
-import { createSpace, floorPath, floorStandable } from './spatial.js?v=mega-d152ad969955';
-import { LocalTelemetry } from './telemetry.js?v=mega-d152ad969955';
-import { balance } from './config.js?v=mega-d152ad969955';
-import { createMenus, customers, menuDefinitions } from './data.js?v=mega-d152ad969955';
-import { StaffAbilities } from "./staffAbilities.js?v=mega-d152ad969955";
+import { renewalGuestAllowed } from './renewalRosterPolicy.js?v=v31-5d872fe24674';
+import { renderPhase, renderPhaseMetrics, recordArrival } from './renderPhaseTiming.js?v=v31-5d872fe24674';
+import { lateServiceInterval } from './lateServiceDemand.js?v=v31-5d872fe24674';
+import { growthArrivalInterval, seatedGuestStates } from './growthArrivals.js?v=v31-5d872fe24674';
+import { pollCrewChanges } from './finalSupply.js?v=v31-5d872fe24674';
+import { renewalGrowthCosts } from './renewalPolicy.js?v=v31-5d872fe24674';
+import { growthMenuDefinitions } from './menuResearch.js?v=v31-5d872fe24674';
+import { finalSpecializationFor } from './finalSpecialization.js?v=v31-5d872fe24674';
+import { finalProduction, finalPriceFactor, signatureMenusFor, brandSignatureChance, brandVisitBonus } from './finalSpecializationState.js?v=v31-5d872fe24674';
+import { growthSeats } from './levelSeats.js?v=v31-5d872fe24674';
+import { kitchenStages, kitchenAmount, kitchenFloorLabel, bulkWarehouses, newProductionKitchen } from './productionKitchen.js?v=v31-5d872fe24674';
+import { tickManager } from './managerActor.js?v=v31-5d872fe24674';
+import { megaSaleFactor } from './megaOperations.js?v=v31-5d872fe24674';
+import { megaGrowthBalance, megaSpawnSeconds } from './megaGrowthEconomy.js?v=v31-5d872fe24674';
+import { tableSeatCount } from './megaInventory.js?v=v31-5d872fe24674';
+import { megaEnabled, ensureMegaPlan, createMegaSpace, megaRoute, megaTravelSeconds, megaPointClear } from './megaSpace.js?v=v31-5d872fe24674';
+import { randomClassBalance, classRandomConfig, pollClassEvents, classSpecial } from './classRandom.js?v=v31-5d872fe24674';
+import { outsideKitchenStock, supplyAllocations, reserveSupplyOrder, deliverySources, configureFinalSupply } from './finalSupply.js?v=v31-5d872fe24674';
+import { finalActive, operatingSeatContract } from './finalGrowth.js?v=v31-5d872fe24674';
+import { investmentRevenue, investmentSpawn, investmentVisitor, pollInvestmentEvents } from './progressiveEconomy.js?v=v31-5d872fe24674';
+import { classProgressiveConfig } from './classProgressiveBalance.js?v=v31-5d872fe24674';
+import { unlocked } from './progressiveFeatures.js?v=v31-5d872fe24674';
+import { protectedSpecialStock, reservedGuestOrder, reservationIndex, takeReservedFood } from './specialInventory.js?v=v31-5d872fe24674';
+import { pollManagement, strategyGuest, strategyQuantity } from './managementEngine.js?v=v31-5d872fe24674';
+import { pollMini, miniPaused, activeMini } from './miniGames.js?v=v31-5d872fe24674';
+import { specializationById } from './specializationConfig.js?v=v31-5d872fe24674';
+import { chooseFurnitureSeat } from './furnitureSeating.js?v=v31-5d872fe24674';
+import { layoutEconomyConfig } from './layoutEconomyConfig.js?v=v31-5d872fe24674';
+import { freeKey } from './freeLayoutModel.js?v=v31-5d872fe24674';
+import { layoutKey } from './layoutModel.js?v=v31-5d872fe24674';
+import { CafeEvents } from './cafeEvents.js?v=v31-5d872fe24674';
+import { CafeRun } from './cafeRun.js?v=v31-5d872fe24674';
+import { Hospitality } from './hospitality.js?v=v31-5d872fe24674';
+import { hospitalityDefinition, hospitalityBalance } from './hospitalityConfig.js?v=v31-5d872fe24674';
+import { chooseSpecial, specialDefinition, itemCatalog } from './phase4Config.js?v=v31-5d872fe24674';
+import { policyFor } from './sessionModes.js?v=v31-5d872fe24674';
+import { crewLimit } from './staffRecruitment.js?v=v31-5d872fe24674';
+import { tickFinalPayroll } from './finalPayroll.js?v=v31-5d872fe24674';
+import { finalGuestDefinitions } from './finalGuests.js?v=v31-5d872fe24674';
+import { chooseCustomer, chooseOrderMenu } from './customerRules.js?v=v31-5d872fe24674';
+import { StaffSystem } from './staff.js?v=v31-5d872fe24674';
+import { createSpace, floorPath, floorStandable } from './spatial.js?v=v31-5d872fe24674';
+import { LocalTelemetry } from './telemetry.js?v=v31-5d872fe24674';
+import { balance } from './config.js?v=v31-5d872fe24674';
+import { createMenus, customers, menuDefinitions } from './data.js?v=v31-5d872fe24674';
+import { StaffAbilities } from "./staffAbilities.js?v=v31-5d872fe24674";
 export class CafeGame {
     durationSeconds;
     random;
@@ -208,7 +211,8 @@ export class CafeGame {
         const w = this.service.hire();
         this.telemetry.staffHireTimes.push({ elapsedTime: this.elapsedTime, staffId: w.staffId });
     } return result; }
-    upgradeStaff(id) { const w = this.service.paid.find(w => w.staffId === id); const cost = this.getStaffUpgradeCost(id); if (!w || cost === null)
+    upgradeStaff(id) { if (this.mode === 'CAFE_GROWTH' && this.mega?.finalGrowth?.renewal?.origin === 'new' && this.cafeLevel < 9)
+        return { ok: false, reason: '직원 교육은 Lv.9부터 가능해요.' }; const w = this.service.paid.find(w => w.staffId === id); const cost = this.getStaffUpgradeCost(id); if (!w || cost === null)
         return { ok: false, reason: '고용한 직원만 Lv.5까지 강화할 수 있어요.' }; const result = this.purchase(cost, 'staff-upgrade', id, w.level + 1); if (result.ok) {
         this.service.upgrade(w, this.elapsedTime);
         this.telemetry.staffUpgradePurchases.push({ ...this.telemetry.upgradePurchases.at(-1) });
@@ -223,9 +227,9 @@ export class CafeGame {
         return false; this.earlyElapsed = this.elapsedTime; this.remainingSeconds = 0; this.settleServedOnClose(); this.status = 'CLOSED'; this.events.close(); pollClassEvents(this); pollMini(this); this.telemetry.record(this.snapshot); return true; }
     leaveClassMatch() { if (this.policy.persistence !== 'none' || this.status !== 'RUNNING')
         return false; this.earlyElapsed = this.elapsedTime; this.remainingSeconds = 0; this.status = 'CLOSED'; this.events.close(); pollClassEvents(this); pollMini(this); this.telemetry.record(this.snapshot); return true; }
-    getPrice(m, level = m.currentLevel) { return Math.round(m.basePrice * this.economy.menuMultipliers[level - 1] * (this.progressive && this.mode === 'CLASS_MATCH' ? (this.classRandom ? classRandomConfig.priceMultiplier * (this.elapsedTime < (this.classRandom.priceUntil ?? 0) ? (this.classRandom.priceFactor ?? 1) : 1) * (this.elapsedTime < this.classRandom.discountUntil ? (this.classRandom.discountFactor ?? .9) : 1) : classProgressiveConfig.priceMultiplier) : investmentRevenue(this)) * finalPriceFactor(finalSpecializationFor(this))); }
+    getPrice(m, level = m.currentLevel) { return Math.round(m.basePrice * this.economy.menuMultipliers[level - 1] * (this.progressive && this.mode === 'CLASS_MATCH' ? (this.classRandom ? classRandomConfig.priceMultiplier * (this.elapsedTime < (this.classRandom.priceUntil ?? 0) ? (this.classRandom.priceFactor ?? 1) : 1) * (this.elapsedTime < this.classRandom.discountUntil ? (this.classRandom.discountFactor ?? .9) : 1) : classProgressiveConfig.priceMultiplier) : investmentRevenue(this)) * finalPriceFactor(finalSpecializationFor(this), m.menuId)); }
     getMenuUpgradeCost(m) { return m.currentLevel >= m.maxLevel ? null : Math.round(m.basePrice * this.economy.menuUpgradeMultipliers[m.currentLevel - 1]); }
-    get nextCafe() { return this.economy.cafes[this.cafeLevel] ?? null; }
+    get nextCafe() { const next = this.economy.cafes[this.cafeLevel] ?? null; return next && this.mode === 'CAFE_GROWTH' && this.mega?.finalGrowth?.renewal ? { ...next, expansionCost: renewalGrowthCosts[next.level - 1] } : next; }
     get nextWarehouse() { return this.economy.warehouses[this.warehouseLevel] ?? (this.mode === 'CAFE_GROWTH' && this.mega?.paid ? bulkWarehouses[this.mega.production?.storage ?? 0] ?? null : null); }
     get productionAmount() { return finalProduction(kitchenAmount(this), finalSpecializationFor(this)); }
     upgradeProduction(expectedTier = this.mega?.production?.tier ?? 0) { if (this.mode !== 'CAFE_GROWTH' || !this.mega?.paid)
@@ -272,10 +276,11 @@ export class CafeGame {
             this.growthBranch = { version: 1, selected: next.level >= 11 ? 'bakery' : 'garden', active: next.level >= 11 ? 'bakery' : 'garden' };
         this.updateServiceLayout();
         this.telemetry.cafeUpgradeTimes.push({ elapsedTime: this.elapsedTime, level: next.level });
-        for (const definition of [...menuDefinitions, ...signatureMenusFor(next.level, finalSpecializationFor(this))].filter(m => m.unlockCafeLevel === next.level))
+        for (const definition of (this.mode === 'CAFE_GROWTH' && this.mega?.finalGrowth?.renewal ? growthMenuDefinitions(next.level, this.management, this.mega.finalGrowth) : [...menuDefinitions, ...signatureMenusFor(next.level, finalSpecializationFor(this))]).filter(m => m.unlockCafeLevel === next.level && !this.menus.some(owned => owned.menuId === m.menuId)))
             this.menus.push({ ...definition, stock: Math.min(this.warehouse.capacity, balance.stock.newMenuInitial), maxStock: this.warehouse.capacity });
     } return result; }
-    upgradeWarehouse() { const next = this.nextWarehouse; if (!next)
+    upgradeWarehouse() { if (this.mode === 'CAFE_GROWTH' && this.mega?.finalGrowth?.renewal?.origin === 'new' && this.cafeLevel < 4)
+        return { ok: false, reason: '창고 강화는 Lv.4부터 가능해요.' }; const next = this.nextWarehouse; if (!next)
         return { ok: false, reason: '창고가 최대 크기예요.' }; const result = this.purchase(next.cost, 'warehouse', '창고', this.warehouseLevel + 1); if (result.ok) {
         if (this.warehouseLevel < this.economy.warehouses.length)
             this.warehouseLevel++;
@@ -305,11 +310,12 @@ export class CafeGame {
         return '비활성 분점'; if (this.cafe.maxCustomers <= 0)
         return '운영 가능한 좌석 없음'; if (this.guests.length >= this.cafe.maxCustomers)
         return '동시 손님 상한 (입장·퇴장 중 포함)'; const seats = finalActive(this) ? operatingSeatContract(this).operating : this.serviceSpace?.seats.length ?? this.cafe.maxCustomers; if (!Array.from({ length: seats }, (_, i) => i).some(i => !this.guests.some(g => g.seat === i)))
-        return '빈 운영 좌석 없음'; const definitions = finalActive(this) ? finalGuestDefinitions(this.cafeLevel, this.elapsedTime) : customers, pool = this.content.customerPool ?? (finalActive(this) ? definitions.map(d => d.customerId) : this.cafe.customerPool), candidates = definitions.filter(d => pool.includes(d.customerId)); if (!candidates.length)
+        return '빈 운영 좌석 없음'; const definitions = finalActive(this) ? finalGuestDefinitions(this.cafeLevel, this.elapsedTime, this.mega?.finalGrowth?.renewal) : customers, pool = this.content.customerPool ?? (finalActive(this) ? definitions.map(d => d.customerId) : this.cafe.customerPool), candidates = definitions.filter(d => pool.includes(d.customerId)); if (!candidates.length)
         return '선택 범위에 방문 가능한 손님 없음'; if (!finalActive(this) && !(this.mega?.extended && (this.mega.paid?.spaceLevel ?? 1) >= 20) && candidates.every(d => this.guests.some(g => g.definition.visualKey === d.visualKey)))
         return '동시 외형 중복 방지로 후보 대기'; return this.spawnElapsed < this.customerSpawnInterval ? '다음 손님 생성 간격 대기' : '입장 가능'; }
     spawnElapsed = balance.customer.spawnSeconds;
     nextId = 1;
+    tutorialPause;
     classClock() { return { spawnElapsed: this.spawnElapsed, nextId: this.nextId, nextSnapshot: this.nextSnapshot }; }
     restoreClassClock(v) { if (!this.classRandom || ![v.spawnElapsed, v.nextId, v.nextSnapshot].every(n => Number.isFinite(n) && n >= 0) || !Number.isInteger(v.nextId) || v.nextId <= Math.max(0, ...this.guests.map(g => g.id)))
         return false; this.spawnElapsed = v.spawnElapsed; this.nextId = v.nextId; this.nextSnapshot = v.nextSnapshot; return true; }
@@ -388,7 +394,7 @@ export class CafeGame {
         const choices = lines.length >= d.orderProfile.maxTypes ? available.filter(m => lines.some(l => l.menuId === m.menuId)) : available;
         const repeat = type === 'gourmand' && lines.length > 0 && random() < .65;
         const preferred = repeat ? choices.filter(m => m.menuId === lines[0].menuId) : choices;
-        const pool = preferred.length ? preferred : choices, signaturePool = finalSpecializationFor(this)?.path === 'brand' ? pool.filter(m => m.menuId.startsWith('signature-')) : [], selection = signaturePool.length && random() < .4 ? signaturePool : pool;
+        const pool = preferred.length ? preferred : choices, signaturePool = finalSpecializationFor(this)?.path === 'brand' ? pool.filter(m => m.menuId.startsWith('signature-')) : [], selection = signaturePool.length && random() < brandSignatureChance(finalSpecializationFor(this)) ? signaturePool : pool;
         const m = chooseOrderMenu(selection, customer.orderPreference, random);
         const line = lines.find(l => l.menuId === m.menuId);
         if (line)
@@ -403,7 +409,7 @@ export class CafeGame {
         return; if (this.growthBranch && !this.growthBranch.active)
         return; const rotating = !!this.mega?.paid && !!this.serviceSpace?.megaPlan; if (rotating && this.guests.length >= this.cafe.maxCustomers)
         return; const seatCount = finalActive(this) ? operatingSeatContract(this).operating : rotating ? this.serviceSpace.seats.length : this.cafe.maxCustomers, offset = (this.nextId - 1) % seatCount, availableSeats = Array.from({ length: seatCount }, (_, i) => rotating ? (i + offset) % seatCount : i).filter(s => !this.guests.some(g => g.seat === s)), party = this.mode === 'CAFE_GROWTH' && this.freeSeatTables.length > 0 && !!eventArrival && this.events.records.some(r => r.id === eventArrival.eventId && ['rush', 'birthday'].includes(r.type)), seat = party ? chooseFurnitureSeat(availableSeats, this.freeSeatTables, this.guests.filter(g => g.eventArrival?.eventId === eventArrival.eventId).map(g => g.seat)) : availableSeats[0]; if (seat === undefined)
-        return; let spawnRoll = 0; const definitions = finalActive(this) ? finalGuestDefinitions(this.cafeLevel, this.elapsedTime) : customers, pool = this.content.customerPool ? [...this.content.customerPool] : finalActive(this) ? definitions.map(d => d.customerId) : this.cafe.customerPool; let definition = chooseCustomer(pool, this.guests.map(g => g.definition.visualKey), () => { spawnRoll = this.random(); return spawnRoll; }, definitions); if (!definition && (finalActive(this) || this.mega?.extended && (this.mega.paid?.spaceLevel ?? 1) >= 20)) {
+        return; let spawnRoll = 0; const definitions = finalActive(this) ? finalGuestDefinitions(this.cafeLevel, this.elapsedTime, this.mega?.finalGrowth?.renewal) : customers, pool = this.content.customerPool ? [...this.content.customerPool] : finalActive(this) ? definitions.map(d => d.customerId) : this.cafe.customerPool; let definition = chooseCustomer(pool, this.guests.map(g => g.definition.visualKey), () => { spawnRoll = this.random(); return spawnRoll; }, definitions); if (!definition && (finalActive(this) || this.mega?.extended && (this.mega.paid?.spaceLevel ?? 1) >= 20)) {
         const fallback = chooseCustomer(pool, [], () => this.random(), definitions);
         if (fallback)
             definition = { ...fallback, name: fallback.name + '의 일행', characterTrait: '함께 방문해 자기 주문을 고르는 손님' };
@@ -412,8 +418,9 @@ export class CafeGame {
         roll = Math.max(0, roll - .02);
         this.hospitality.travelerUntil = 0;
     } if (finalSpecializationFor(this)?.path === 'brand')
-        roll = Math.max(0, roll - .03); let type = (!this.progressive || unlocked(this, 'missions')) && this.phase4Enabled && !eventArrival?.helper ? chooseSpecial(this.cafeLevel, this.guests.flatMap(g => g.specialType ? [g.specialType] : []), roll, this.phase4Profile, this.vipPending, this.regularMemory.revisitEligible) : null; type = strategyGuest(this, type, this.nextId); if (this.classRandom)
-        type = classSpecial(this); if (type === 'regular' && !this.classRandom && !unlocked(this, 'reviews'))
+        roll = Math.max(0, roll - brandVisitBonus(finalSpecializationFor(this))); let type = (!this.progressive || unlocked(this, 'missions')) && this.phase4Enabled && !eventArrival?.helper ? chooseSpecial(this.cafeLevel, this.guests.flatMap(g => g.specialType ? [g.specialType] : []), roll, this.phase4Profile, this.vipPending, this.regularMemory.revisitEligible) : null; type = strategyGuest(this, type, this.nextId); if (this.classRandom)
+        type = classSpecial(this); if (type && this.mega?.finalGrowth?.renewal && !renewalGuestAllowed('special-' + type, this.cafeLevel, this.mega.finalGrowth.renewal))
+        type = null; if (type === 'regular' && !this.classRandom && !unlocked(this, 'reviews'))
         type = null; let regularTier = 1; if (type) {
         definition = specialDefinition(type, this.phase4Profile);
         if (type === 'regular') {
@@ -445,7 +452,8 @@ export class CafeGame {
     } const runFinal = !!this.run && !type && !helper && this.run.assignFinal(this.elapsedTime, this.durationSeconds); if (this.run && !type && !helper)
         definition = { ...definition, orderPreference: this.run.preference(definition.orderPreference), patienceSeconds: definition.patienceSeconds + this.run.patience(runFinal) }; const spec = eventArrival?.specialization ? specializationById(eventArrival.specialization) : undefined; if (spec)
         definition = { ...definition, visualKey: customers.find(c => c.customerId === spec.visual)?.visualKey ?? definition.visualKey, name: spec.guest, characterTrait: spec.trait, orderPreference: spec.id === 'artisan' ? 'BAKERY' : spec.id === 'celebration' ? 'DESSERT' : definition.orderPreference }; this.guests.push({ ...spec ? { specializationId: spec.id } : {}, ...eventArrival ? { eventArrival } : {}, ...(runFinal ? { runFinal: true } : {}), ...(helper === 'judge' ? { signature: true, signatureReady: !!eventArrival && this.events.records.some(r => r.id === eventArrival.eventId && r.outcome === 'success') } : helper ? { helperType: helper } : {}), id: this.nextId++, ...(type ? { specialType: type, regularTier } : {}), definition, seat, state: 'ENTERING', elapsed: 0, patienceRemaining: definition.patienceSeconds + (this.classRandom && this.elapsedTime < (this.classRandom.assistUntil ?? 0) ? 40 : 0) + (this.mode === 'CAFE_GROWTH' && this.management?.run?.special?.ownerAssist && eventArrival?.eventId === this.management.run.special.eventId ? 90 : 0), order: [], paid: false, abandoned: false, stockoutRecorded: false, quotedRevenue: 0, orderedAt: 0, foodWaitTime: 0, staffWaitTime: 0 }); investmentVisitor(this, this.guests.at(-1)); this.growthObserver?.(this.guests.at(-1)); }
-    tick(seconds) { pollMini(this); if (miniPaused(this))
+    tick(seconds) { if (this.tutorialPause?.active)
+        return; pollMini(this); if (miniPaused(this))
         return; if (this.status === 'CLOSED' || seconds <= 0 || !Number.isFinite(seconds))
         return; let left = Math.min(seconds, this.remainingSeconds); while (left > 0) {
         const dt = Math.min(left, 0.1);

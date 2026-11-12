@@ -1,1 +1,1 @@
-export { openUrbanCity as openModernCity } from './cityUrbanUi.js?v=mega-d152ad969955';
+export { openUrbanCity as openModernCity } from './cityUrbanUi.js?v=v31-5d872fe24674';

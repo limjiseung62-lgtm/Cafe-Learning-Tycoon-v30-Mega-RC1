@@ -1,4 +1,4 @@
-import { megaZones } from './megaZones.js?v=mega-d152ad969955';
+import { megaZones } from './megaZones.js?v=v31-5d872fe24674';
 /** Paid late floors only. Real staffed-service infrastructure, never an offline grant or a production multiplier. */
 export function megaOperatingGrade(p) { const zones = megaZones(p), seats = p.tables.reduce((n, t) => n + (t.chairs?.length ?? 0), 0), ready = zones.filter(z => p.tables.filter(t => t.x >= z.x && t.x < z.x + z.w && t.y >= z.y && t.y < z.y + z.h).reduce((n, t) => n + (t.chairs?.length ?? 0), 0) >= 4 && (p.fixtures ?? []).some(f => f.x >= z.x && f.x < z.x + z.w && f.y >= z.y && f.y < z.y + z.h)), factor = p.level >= 30 && ready.length >= 4 && seats >= 32 ? 1.18 : p.level >= 20 && ready.length >= 2 && seats >= 12 ? 1.08 : 1; return { ready, all: zones.length, seats, factor }; }
 export function megaSaleFactor(p, tableId) { const grade = megaOperatingGrade(p), t = p.tables.find(t => t.id === tableId); return t && grade.ready.some(z => t.x >= z.x && t.x < z.x + z.w && t.y >= z.y && t.y < z.y + z.h) ? grade.factor : 1; }

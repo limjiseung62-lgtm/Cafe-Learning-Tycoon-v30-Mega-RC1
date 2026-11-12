@@ -1,8 +1,8 @@
-import { furnitureFrames } from './furnitureFrames.js?v=mega-d152ad969955';
-import { imageReady } from './imageLoading.js?v=mega-d152ad969955';
-import { furnitureFor } from './furnitureCatalog.js?v=mega-d152ad969955';
-import { branchRoom } from './growthBranch.js?v=mega-d152ad969955';
-import { tableKinds, freeBody, chairOffsets } from './freeLayoutModel.js?v=mega-d152ad969955';
+import { furnitureFrames } from './furnitureFrames.js?v=v31-5d872fe24674';
+import { imageReady } from './imageLoading.js?v=v31-5d872fe24674';
+import { furnitureFor } from './furnitureCatalog.js?v=v31-5d872fe24674';
+import { branchRoom } from './growthBranch.js?v=v31-5d872fe24674';
+import { tableKinds, freeBody, chairOffsets } from './freeLayoutModel.js?v=v31-5d872fe24674';
 export const freeAtlas = 'assets/web/free-layout/furniture-atlas.webp';
 export function freeSprite(row, rotation, atlas = freeAtlas, fallbackRow = row) {
     const requestedAtlas = atlas, requestedRow = row;

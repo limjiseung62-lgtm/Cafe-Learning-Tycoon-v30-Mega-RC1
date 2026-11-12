@@ -1,29 +1,30 @@
-import { validSupplyContext } from './finalSupplyState.js?v=mega-d152ad969955';
-import { bulkWarehouses } from './productionKitchen.js?v=mega-d152ad969955';
-import { adoptInterior, isShopDeployment, repairInteriorSeats } from './megaInventory.js?v=mega-d152ad969955';
-import { validMega, newMegaState, isMegaDeployment } from './megaSpace.js?v=mega-d152ad969955';
-import { newProgressiveState, validProgressive } from './progressiveFeatures.js?v=mega-d152ad969955';
-import { growthMenuDefinitions } from './menuResearch.js?v=mega-d152ad969955';
-import { validManagement, validCafeAlbum } from './managementState.js?v=mega-d152ad969955';
-import { validPortfolio, portfolioMatches } from './cafePortfolio.js?v=mega-d152ad969955';
-import { validVillage } from './village.js?v=mega-d152ad969955';
-import { validMiniCollection } from './miniGames.js?v=mega-d152ad969955';
-import { validSpecialization } from './specialization.js?v=mega-d152ad969955';
-import { belongsToBranch } from './specializationConfig.js?v=mega-d152ad969955';
-import { furnitureUnlocked } from './furnitureUnlocks.js?v=mega-d152ad969955';
-import { furnitureFor } from './furnitureCatalog.js?v=mega-d152ad969955';
-import { validFreeLayouts } from './freeLayout.js?v=mega-d152ad969955';
-import { validLayouts } from './cafeLayout.js?v=mega-d152ad969955';
-import { validGrowthEconomy } from './growthEconomy.js?v=mega-d152ad969955';
-import { validLongGrowth } from './longGrowth.js?v=mega-d152ad969955';
-import { validCampaign } from './growthCampaign.js?v=mega-d152ad969955';
-import { validEventCheckpoint } from './cafeEvents.js?v=mega-d152ad969955';
-import { menuDefinitions } from './data.js?v=mega-d152ad969955';
-import { staffDefinitions } from './staff.js?v=mega-d152ad969955';
-import { cafeGrowthBalance } from './modeBalance.js?v=mega-d152ad969955';
-import { specialTypes } from './phase4Config.js?v=mega-d152ad969955';
-import { validBranch } from "./growthBranch.js?v=mega-d152ad969955";
-import { validRoster, rosterMirror, crewLimit, ownedCrewLimit } from "./staffRecruitment.js?v=mega-d152ad969955";
+import { createRenewalGrowthSave } from './renewalMigration.js?v=v31-5d872fe24674';
+import { validSupplyContext } from './finalSupplyState.js?v=v31-5d872fe24674';
+import { bulkWarehouses } from './productionKitchen.js?v=v31-5d872fe24674';
+import { adoptInterior, isShopDeployment, repairInteriorSeats } from './megaInventory.js?v=v31-5d872fe24674';
+import { validMega, newMegaState, isMegaDeployment } from './megaSpace.js?v=v31-5d872fe24674';
+import { newProgressiveState, validProgressive } from './progressiveFeatures.js?v=v31-5d872fe24674';
+import { growthMenuDefinitions } from './menuResearch.js?v=v31-5d872fe24674';
+import { validManagement, validCafeAlbum } from './managementState.js?v=v31-5d872fe24674';
+import { validPortfolio, portfolioMatches } from './cafePortfolio.js?v=v31-5d872fe24674';
+import { validVillage } from './village.js?v=v31-5d872fe24674';
+import { validMiniCollection } from './miniGames.js?v=v31-5d872fe24674';
+import { validSpecialization } from './specialization.js?v=v31-5d872fe24674';
+import { belongsToBranch } from './specializationConfig.js?v=v31-5d872fe24674';
+import { furnitureUnlocked } from './furnitureUnlocks.js?v=v31-5d872fe24674';
+import { furnitureFor } from './furnitureCatalog.js?v=v31-5d872fe24674';
+import { validFreeLayouts } from './freeLayout.js?v=v31-5d872fe24674';
+import { validLayouts } from './cafeLayout.js?v=v31-5d872fe24674';
+import { validGrowthEconomy } from './growthEconomy.js?v=v31-5d872fe24674';
+import { validLongGrowth } from './longGrowth.js?v=v31-5d872fe24674';
+import { validCampaign } from './growthCampaign.js?v=v31-5d872fe24674';
+import { validEventCheckpoint } from './cafeEvents.js?v=v31-5d872fe24674';
+import { menuDefinitions } from './data.js?v=v31-5d872fe24674';
+import { staffDefinitions } from './staff.js?v=v31-5d872fe24674';
+import { cafeGrowthBalance } from './modeBalance.js?v=v31-5d872fe24674';
+import { specialTypes } from './phase4Config.js?v=v31-5d872fe24674';
+import { validBranch } from "./growthBranch.js?v=v31-5d872fe24674";
+import { validRoster, rosterMirror, crewLimit, ownedCrewLimit } from "./staffRecruitment.js?v=v31-5d872fe24674";
 const integer = (v, min = 0, max = Number.MAX_SAFE_INTEGER) => typeof v === 'number' && Number.isSafeInteger(v) && v >= min && v <= max;
 const object = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const date = (v) => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(v) && Number.isFinite(Date.parse(v));
@@ -53,6 +54,7 @@ export function migrateGrowthSave(value) { let v = value; for (let i = 0; i < 10
         return null;
     v = fn(v);
 } return validateGrowthSave(v) ? repairInteriorSeats(v) : null; }
-export function createProgressiveGrowthSave(now = new Date().toISOString()) { const s = createGrowthSave(now); s.v26 = newProgressiveState(); if (isMegaDeployment())
+export function createProgressiveGrowthSave(now = new Date().toISOString()) { if (typeof document !== 'undefined' && document.querySelector('meta[name="cafe-renewal"]')?.getAttribute('content') === 'v31-candidate')
+    return createRenewalGrowthSave(now); const s = createGrowthSave(now); s.v26 = newProgressiveState(); if (isMegaDeployment())
     s.mega = newMegaState(typeof document !== 'undefined' && /^v30[cde]-/.test(document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content') ?? '')); if (typeof document !== 'undefined' && document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-') && s.mega)
     s.mega.extended = true; return isShopDeployment() ? adoptInterior(s, true) : s; }

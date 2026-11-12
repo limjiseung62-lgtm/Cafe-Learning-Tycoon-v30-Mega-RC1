@@ -1,15 +1,15 @@
 // @ts-nocheck
-import { FrameHistogram } from './frameHistogram.js?v=mega-d152ad969955';
-import { ArtCache, CityView } from './cityAnalyticsCanvas.js?v=mega-d152ad969955';
-import { assets, byId, setSheets } from './cityBuildingCatalog.js?v=mega-d152ad969955';
-import { indicatorMeta } from './cityIndicatorModel.js?v=mega-d152ad969955';
-import { urbanNextGoal, urbanInvestmentNotes, urbanImpact, urbanCityView, adoptUrbanCity, urbanBuildQuote, urbanTransaction, urbanAdvice, urbanRoadCosts, analyze, districts, urbanBranchFactor } from './cityUrbanEconomy.js?v=mega-d152ad969955';
-import { modernCityFor, cityRegions, publicSites } from './modernCity.js?v=mega-d152ad969955';
-import { branchYield, branchRequirement, progressiveEconomyConfig } from './progressiveEconomy.js?v=mega-d152ad969955';
-import { exportGrowth } from './growthBackup.js?v=mega-d152ad969955';
-import { wrapCommonBackup } from './commonBackup.js?v=mega-d152ad969955';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=mega-d152ad969955';
-import { escapeText as esc } from './questionRenderer.js?v=mega-d152ad969955';
+import { FrameHistogram } from './frameHistogram.js?v=v31-5d872fe24674';
+import { ArtCache, CityView } from './cityAnalyticsCanvas.js?v=v31-5d872fe24674';
+import { assets, byId, setSheets } from './cityBuildingCatalog.js?v=v31-5d872fe24674';
+import { indicatorMeta } from './cityIndicatorModel.js?v=v31-5d872fe24674';
+import { urbanNextGoal, urbanInvestmentNotes, urbanImpact, urbanCityView, adoptUrbanCity, urbanBuildQuote, urbanTransaction, urbanAdvice, urbanRoadCosts, analyze, districts, urbanBranchFactor } from './cityUrbanEconomy.js?v=v31-5d872fe24674';
+import { modernCityFor, cityRegions, publicSites } from './modernCity.js?v=v31-5d872fe24674';
+import { branchYield, branchRequirement, progressiveEconomyConfig } from './progressiveEconomy.js?v=v31-5d872fe24674';
+import { exportGrowth } from './growthBackup.js?v=v31-5d872fe24674';
+import { wrapCommonBackup } from './commonBackup.js?v=v31-5d872fe24674';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v31-5d872fe24674';
+import { escapeText as esc } from './questionRenderer.js?v=v31-5d872fe24674';
 const num = n => Math.round(n).toLocaleString(), keys = Object.keys(indicatorMeta);
 let cachePromise;
 async function art() { if (!cachePromise)
@@ -43,7 +43,7 @@ export async function openUrbanCity(repo, onClose, { readOnly = false } = {}) {
     document.addEventListener('visibilitychange', visibility);
     $('[data-close]').onclick = close;
     $('[data-panel-close]').onclick = () => { selected = null; pending = null; dashboard = false; viewer.preview = null; $('.urban-panel').hidden = true; viewer.selected = null; viewer.draw(); };
-    $('[data-hq]').onclick = () => { close(); void import('./enterpriseUi.js?v=mega-d152ad969955').then(m => m.openEnterprise(repo, onClose)); };
+    $('[data-hq]').onclick = () => { close(); void import('./enterpriseUi.js?v=v31-5d872fe24674').then(m => m.openEnterprise(repo, onClose)); };
     $('[data-backup]').onclick = () => { const a = document.createElement('a'), u = URL.createObjectURL(new Blob([wrapCommonBackup(exportGrowth(base))], { type: 'application/json' })); a.href = u; a.download = 'cafe-urban-city-backup.json'; a.click(); setTimeout(() => URL.revokeObjectURL(u), 1000); };
     try {
         if (!readOnly && !base.campaign?.run?.closed && base.campaign?.run)
@@ -110,7 +110,7 @@ export async function openUrbanCity(repo, onClose, { readOnly = false } = {}) {
         if (brands) {
             host.insertAdjacentHTML('beforeend', '<p>브랜드 건물은 일반 건설로 덮어쓰지 않아요.</p><button data-brand-open>' + (brands.brandLink.kind === 'main' ? '본점으로 이동' : '본부·분점 관리로 이동') + '</button>');
             host.querySelector('[data-brand-open]').onclick = () => { const main = brands.brandLink.kind === 'main'; close(); if (!main)
-                void import('./enterpriseUi.js?v=mega-d152ad969955').then(m => m.openEnterprise(repo, onClose)); };
+                void import('./enterpriseUi.js?v=v31-5d872fe24674').then(m => m.openEnterprise(repo, onClose)); };
             pendingBlock(host);
             return;
         }

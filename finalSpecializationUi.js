@@ -1,9 +1,11 @@
-import { chooseFinalSpecialization, finalSpecializationFor } from './finalSpecialization.js?v=mega-d152ad969955';
-import { finalSpecializationOffers, finalSignatureMenus, signatureImage } from './finalSpecializationState.js?v=mega-d152ad969955';
-import { configureFinalSupply } from './finalSupply.js?v=mega-d152ad969955';
-import { specializationRoom } from './specializationConfig.js?v=mega-d152ad969955';
+import { openRenewalSpecialization } from './renewalSpecializationUi.js?v=v31-5d872fe24674';
+import { chooseFinalSpecialization, finalSpecializationFor } from './finalSpecialization.js?v=v31-5d872fe24674';
+import { finalSpecializationOffers, finalSignatureMenus, signatureImage } from './finalSpecializationState.js?v=v31-5d872fe24674';
+import { configureFinalSupply } from './finalSupply.js?v=v31-5d872fe24674';
+import { specializationRoom } from './specializationConfig.js?v=v31-5d872fe24674';
 export function openFinalSpecialization(g, flush, done = () => { }) { if (document.querySelector('dialog.final-specialization'))
-    return; const dialog = document.createElement('dialog'); dialog.className = 'final-specialization live-mega-hub'; dialog.style.cssText = 'max-width:850px;width:94vw;max-height:85vh;overflow:auto'; document.body.append(dialog); const close = () => { dialog.remove(); done(); }; const render = () => { dialog.replaceChildren(); const h = document.createElement('h2'); h.textContent = '우리 카페의 두 가지 꿈'; dialog.append(h); const current = finalSpecializationFor(g), info = document.createElement('p'); info.textContent = '내 돈 ' + g.money.toLocaleString() + '원 · 현재 정답 생산 ' + g.productionAmount + '개/메뉴 · 창고 ' + g.warehouse.capacity + '개/메뉴. 선택은 한 번만 하며 현재 후보에서는 변경할 수 없어요.'; dialog.append(info); if (current) {
+    return; if (g.mega?.finalGrowth?.renewal)
+    return openRenewalSpecialization(g, flush, done); const dialog = document.createElement('dialog'); dialog.className = 'final-specialization live-mega-hub'; dialog.style.cssText = 'max-width:850px;width:94vw;max-height:85vh;overflow:auto'; document.body.append(dialog); const close = () => { dialog.remove(); done(); }; const render = () => { dialog.replaceChildren(); const h = document.createElement('h2'); h.textContent = '우리 카페의 두 가지 꿈'; dialog.append(h); const current = finalSpecializationFor(g), info = document.createElement('p'); info.textContent = '내 돈 ' + g.money.toLocaleString() + '원 · 현재 정답 생산 ' + g.productionAmount + '개/메뉴 · 창고 ' + g.warehouse.capacity + '개/메뉴. 선택은 한 번만 하며 현재 후보에서는 변경할 수 없어요.'; dialog.append(info); if (current) {
     const p = document.createElement('p');
     p.textContent = finalSpecializationOffers[current.path].name + ' 운영 중 · ' + (current.legacyChoice ? '이전 전문화 선택을 추가 결제 없이 이어받았어요.' : '투자 ' + current.cost.toLocaleString() + '원 완료');
     dialog.append(p);

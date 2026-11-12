@@ -1,15 +1,16 @@
-import { educationLevel } from './staffEducation.js?v=mega-d152ad969955';
-import { finalProfile } from './recruitConfig.js?v=mega-d152ad969955';
-import { finalSpecializationFor } from './finalSpecialization.js?v=mega-d152ad969955';
-import { ensureMegaPlan, megaPickups, megaRoute, megaPointClear, megaAllPickups, toTile } from './megaSpace.js?v=mega-d152ad969955';
-import { megaZones } from './megaZones.js?v=mega-d152ad969955';
-import { newSupplyState } from './finalSupplyState.js?v=mega-d152ad969955';
+import { renewalPreferredRole } from './renewalRosterPolicy.js?v=v31-5d872fe24674';
+import { educationLevel } from './staffEducation.js?v=v31-5d872fe24674';
+import { finalProfile } from './recruitConfig.js?v=v31-5d872fe24674';
+import { finalSpecializationFor } from './finalSpecialization.js?v=v31-5d872fe24674';
+import { ensureMegaPlan, megaPickups, megaRoute, megaPointClear, megaAllPickups, toTile } from './megaSpace.js?v=v31-5d872fe24674';
+import { megaZones } from './megaZones.js?v=v31-5d872fe24674';
+import { newSupplyState } from './finalSupplyState.js?v=v31-5d872fe24674';
 export const hasFinalSupply = (g) => g.mode === 'CAFE_GROWTH' && !!g.mega?.finalGrowth;
 export function supplyState(g) { return g.mega.finalGrowth.supply ??= newSupplyState(); }
 const sum = (items, id) => items.filter(x => x === id).length;
 export function outsideKitchenStock(g, id) { if (!hasFinalSupply(g))
     return 0; const s = g.mega.finalGrowth.supply; return s ? Object.values(s.stations).reduce((n, a) => n + (a.stock[id] ?? 0), 0) + s.jobs.filter(j => j.loaded).reduce((n, j) => n + sum(j.items, id), 0) : 0; }
-export function crewAssignment(g, id) { return g.mega?.finalGrowth?.crew?.[id] ?? { role: finalProfile(id)?.role ?? 'floor', zone: 'all' }; }
+export function crewAssignment(g, id) { return g.mega?.finalGrowth?.crew?.[id] ?? { role: g.mega?.finalGrowth?.renewal?.origin === 'new' ? renewalPreferredRole(id) : finalProfile(id)?.role ?? 'floor', zone: 'all' }; }
 export function tableZone(g, seat) { const p = g.serviceSpace?.megaPlan, t = g.serviceSpace?.tables.find(t => t.tableId === g.serviceSpace?.seats[seat]?.tableId); if (!p || !t)
     return 'main'; const q = toTile(t); return megaZones(p).find(z => q.x >= z.x && q.x < z.x + z.w && q.y >= z.y && q.y < z.y + z.h)?.id ?? 'main'; }
 export function supplyAllocations(g, guest, centralProtected = () => 0) { if (!hasFinalSupply(g) || !guest.order.length)
@@ -69,7 +70,7 @@ export function configureFinalSupply(g) {
         state.stations[f.id] ??= { stock: {} };
     const active = () => g.service.paid.map(w => w.staffId), seatZones = g.serviceSpace?.seats.map((_, i) => tableZone(g, i)) ?? [];
     const batch = p.level >= 30 && g.cafeLevel >= 30;
-    const port = { batchServing: false, enhancedTray: batch, dockCandidates: job => { const from = job.phase === 'pickup' || job.phase === 'loading', isCentral = from ? !job.reverse : job.reverse, index = (p.fixtures ?? []).findIndex(f => f.id === job.stationId); return isCentral ? central : index < 0 ? [] : all.slice(central.length + index * 2, central.length + index * 2 + 2); }, moveFactor: w => (finalProfile(w.staffId)?.primaryTrait.moveFactor ?? 1) * (finalProfile(w.staffId)?.secondaryTrait.moveFactor ?? 1), serveFactor: w => (finalProfile(w.staffId)?.primaryTrait.serveFactor ?? 1) * (finalProfile(w.staffId)?.secondaryTrait.serveFactor ?? 1), pickupFactor: w => finalProfile(w.staffId)?.primaryTrait.pickupFactor ?? 1, tripCapacity: w => Math.min(batch ? (w.level <= 2 ? 2 : w.level <= 4 ? 4 : 5) : 6, (batch ? [1, 2, 3, 4, 5][Math.max(0, Math.min(4, w.level - 1))] + (educationLevel(g, w.staffId) > 0 ? 1 : 0) : w.carryCapacity) + (finalSpecializationFor(g)?.path === 'mass' ? 1 : 0) + (finalProfile(w.staffId)?.secondaryTrait.carryBonus ?? 0)), assignment: w => crewAssignment(g, w.staffId), priority: (w, o) => { const a = crewAssignment(g, w.staffId); return (a.zone !== 'all' && a.zone !== seatZones[o.seat] ? 80 : 0) + (a.role === 'vip' && o.vip ? -60 : 0); }, home: w => { const h = crewAssignment(g, w.staffId).home; return h && megaPointClear(p, h) ? h : undefined; }, job: (w, orders) => { if (w.owner || w.orderId !== null)
+    const port = { batchServing: false, enhancedTray: batch, dockCandidates: job => { const from = job.phase === 'pickup' || job.phase === 'loading', isCentral = from ? !job.reverse : job.reverse, index = (p.fixtures ?? []).findIndex(f => f.id === job.stationId); return isCentral ? central : index < 0 ? [] : all.slice(central.length + index * 2, central.length + index * 2 + 2); }, moveFactor: w => (finalProfile(w.staffId)?.primaryTrait.moveFactor ?? 1) * (finalProfile(w.staffId)?.secondaryTrait.moveFactor ?? 1) * (finalSpecializationFor(g)?.path === 'mass' && ['logistics', 'kitchen'].includes(crewAssignment(g, w.staffId).role) ? 1 + .04 * ((finalSpecializationFor(g)?.renewal?.stage ?? 1) - 1) : 1), serveFactor: w => (finalProfile(w.staffId)?.primaryTrait.serveFactor ?? 1) * (finalProfile(w.staffId)?.secondaryTrait.serveFactor ?? 1), pickupFactor: w => finalProfile(w.staffId)?.primaryTrait.pickupFactor ?? 1, tripCapacity: w => Math.min(batch ? (w.level <= 2 ? 2 : w.level <= 4 ? 4 : 5) : 6, (batch ? [1, 2, 3, 4, 5][Math.max(0, Math.min(4, w.level - 1))] + (educationLevel(g, w.staffId) > 0 ? 1 : 0) : w.carryCapacity) + (finalSpecializationFor(g)?.path === 'mass' ? 1 : 0) + (finalProfile(w.staffId)?.secondaryTrait.carryBonus ?? 0)), assignment: w => crewAssignment(g, w.staffId), priority: (w, o) => { const a = crewAssignment(g, w.staffId); return (a.zone !== 'all' && a.zone !== seatZones[o.seat] ? 80 : 0) + (a.role === 'vip' && o.vip ? -60 : 0); }, home: w => { const h = crewAssignment(g, w.staffId).home; return h && megaPointClear(p, h) ? h : undefined; }, job: (w, orders) => { if (w.owner || w.orderId !== null)
             return undefined; let job = state.jobs.find(j => j.workerId === w.staffId); if (job)
             return job; const role = crewAssignment(g, w.staffId).role; if (!['logistics', 'kitchen', 'zone-manager'].includes(role) || !['IDLE', 'RETURNING'].includes(w.state))
             return undefined; if (role !== 'logistics' && orders.some(o => o.ready))

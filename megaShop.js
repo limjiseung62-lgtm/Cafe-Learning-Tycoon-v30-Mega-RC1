@@ -1,10 +1,11 @@
-import { adoptInterior, inventorySku, interiorPlanOwned } from './megaInventory.js?v=mega-d152ad969955';
-import { validateMegaPlan, megaKey, validMega } from './megaSpace.js?v=mega-d152ad969955';
-import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=mega-d152ad969955';
+import { adoptInterior, inventorySku, interiorPlanOwned } from './megaInventory.js?v=v31-5d872fe24674';
+import { validateMegaPlan, megaKey, validMega } from './megaSpace.js?v=v31-5d872fe24674';
+import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=v31-5d872fe24674';
 export function buyInterior(source, sku, expectedNext, now = new Date().toISOString()) { const s = adoptInterior(source), item = inventorySku(sku), inv = s.mega?.inventory; if (!item || !inv)
     return { ok: false, reason: '가구 정보를 다시 확인해 주세요.' }; if (s.campaign?.run && !s.campaign.run.closed)
     return { ok: false, reason: '영업을 마친 뒤 구매해요.' }; if (inv.next !== expectedNext)
-    return { ok: false, reason: '다른 구매가 먼저 저장됐어요. 다시 확인해 주세요.' }; prepareFurniture(s); if (s.cafeLevel < item.level || item.type === 'table' && !furnitureUnlocked(s.longTerm, item.sku))
+    return { ok: false, reason: '다른 구매가 먼저 저장됐어요. 다시 확인해 주세요.' }; prepareFurniture(s); if (s.mega?.finalGrowth?.renewal && sku === 'service-prep' && s.cafeLevel < 13 && !(s.mega.finalGrowth.renewal.origin === 'legacy' && s.mega.finalGrowth.renewal.legacyLevel >= item.level))
+    return { ok: false, reason: '새 보조 서빙대 구매는 Lv.13부터예요. 이미 보유한 시설은 유지돼요.' }; if (s.cafeLevel < item.level || item.type === 'table' && !furnitureUnlocked(s.longTerm, item.sku))
     return { ok: false, reason: '카페 성장과 가구 해금 조건을 확인해 주세요.' }; if (s.money < item.cost)
     return { ok: false, reason: (item.cost - s.money).toLocaleString() + '원이 부족해요.' }; if (inv.next >= 10000 || inv.items.length + 1 + item.bundle > 256)
     return { ok: false, reason: '가구 보관함이 가득 찼어요.' }; const receipt = 'furniture-' + inv.next, id = 'bought-' + inv.next, items = [id, ...Array.from({ length: item.bundle }, (_, i) => id + '-c' + i)]; inv.items.push({ id, sku, source: 'purchase', cost: item.cost, receipt }, ...items.slice(1).map(id => ({ id, sku: 'chair', source: 'purchase', cost: 0, receipt }))); inv.receipts.push({ id: receipt, sku, cost: item.cost, items, at: now }); inv.next++; s.money -= item.cost; if (item.type === 'decor' && !s.longTerm.owned.includes(sku.slice(6)))
