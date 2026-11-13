@@ -1,9 +1,11 @@
-import { validateMegaPlan } from './megaSpace.js?v=v31-5d872fe24674';
-import { furnitureCatalog, furnitureFor } from './furnitureCatalog.js?v=v31-5d872fe24674';
-import { allDecorationCatalog, decorationCatalog } from './longGrowthConfig.js?v=v31-5d872fe24674';
-import { tableKinds } from './freeLayoutModel.js?v=v31-5d872fe24674';
+import { studioFurniture } from './renewalFurnitureCatalog.js?v=v31-final-636a93f6f215';
+import { validateMegaPlan } from './megaSpace.js?v=v31-final-636a93f6f215';
+import { furnitureCatalog, furnitureFor } from './furnitureCatalog.js?v=v31-final-636a93f6f215';
+import { allDecorationCatalog, decorationCatalog } from './longGrowthConfig.js?v=v31-final-636a93f6f215';
+import { tableKinds } from './freeLayoutModel.js?v=v31-final-636a93f6f215';
 export const isShopDeployment = () => typeof document !== 'undefined' && document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.match(/^v30[de]-/) != null;
-export const interiorCatalog = [...furnitureCatalog.map((f, i) => ({ sku: f.id, name: f.name, type: 'table', baseCost: [8000, 16000, 26000, 12000, 24000, 28000, 34000, 24000, 36000][i], seatCost: ['dessert-sofa', 'bakery-bench'].includes(f.id) ? 0 : tableKinds[f.kind].seats * 1500, cost: [8000, 16000, 26000, 12000, 24000, 28000, 34000, 24000, 36000][i] + (['dessert-sofa', 'bakery-bench'].includes(f.id) ? 0 : tableKinds[f.kind].seats * 1500), bundle: f.id === 'dessert-sofa' ? 2 : f.id === 'bakery-bench' ? 4 : 0, level: [1, 3, 5, 3, 7, 5, 7, 7, 9][i] })), { sku: 'service-prep', name: '서빙 준비대', type: 'fixture', cost: 24000, bundle: 0, level: 4 }, { sku: 'chair', name: '호환 의자·좌석 쿠션', type: 'chair', cost: 1500, bundle: 0, level: 1 }, ...decorationCatalog.map((d, i) => ({ sku: 'decor-' + d.id, name: d.name, type: 'decor', cost: [3000, 5000, 5000, 4000, 6000, 12000, 8000, 4000][i], bundle: 0, level: i < 4 ? 1 : 3 }))];
+const legacyInteriorCatalog = [...furnitureCatalog.filter(f => !f.studio).map((f, i) => ({ sku: f.id, name: f.name, type: 'table', baseCost: [8000, 16000, 26000, 12000, 24000, 28000, 34000, 24000, 36000][i], seatCost: ['dessert-sofa', 'bakery-bench'].includes(f.id) ? 0 : tableKinds[f.kind].seats * 1500, cost: [8000, 16000, 26000, 12000, 24000, 28000, 34000, 24000, 36000][i] + (['dessert-sofa', 'bakery-bench'].includes(f.id) ? 0 : tableKinds[f.kind].seats * 1500), bundle: f.id === 'dessert-sofa' ? 2 : f.id === 'bakery-bench' ? 4 : 0, level: [1, 3, 5, 3, 7, 5, 7, 7, 9][i] })), { sku: 'service-prep', name: '서빙 준비대', type: 'fixture', cost: 24000, bundle: 0, level: 4 }, { sku: 'chair', name: '호환 의자·좌석 쿠션', type: 'chair', cost: 1500, bundle: 0, level: 1 }, ...decorationCatalog.map((d, i) => ({ sku: 'decor-' + d.id, name: d.name, type: 'decor', cost: [3000, 5000, 5000, 4000, 6000, 12000, 8000, 4000][i], bundle: 0, level: i < 4 ? 1 : 3 }))];
+export const interiorCatalog = [...legacyInteriorCatalog, ...studioFurniture.map(x => ({ sku: x.sku, name: x.name, type: x.kind ? 'table' : 'decor', cost: x.cost, baseCost: x.cost, seatCost: 0, bundle: 0, level: x.level }))];
 export function includedSeats(sku) { const f = furnitureCatalog.find(f => f.id === sku); return f ? tableKinds[f.kind].seats : 0; }
 export function inventorySku(sku) { return interiorCatalog.find(d => d.sku === sku); }
 export function tableSeatCount(t) { return t.integratedSeats ? tableKinds[t.kind].seats : t.chairs?.length ?? tableKinds[t.kind].seats; }
@@ -84,7 +86,7 @@ export function validInterior(m) {
         if (new Set(all.map(i => i.id)).size !== all.length || new Set(v.receipts.map(r => r.id)).size !== v.receipts.length)
             return false;
         const skuValid = (sku) => !!inventorySku(sku) || sku.startsWith('decor-') && allDecorationCatalog.some(d => 'decor-' + d.id === sku);
-        if (!all.every(i => /^[-a-zA-Z0-9_]{1,60}$/.test(i.id) && skuValid(i.sku) && ['starter', 'legacy', 'purchase'].includes(i.source) && Number.isSafeInteger(i.cost) && i.cost >= 0 && (i.source === 'purchase' ? v.receipts.some(r => r.id === i.receipt && r.items.includes(i.id)) : i.cost === 0 && !i.receipt)))
+        if (!all.every(i => /^[-a-zA-Z0-9_]{1,60}$/.test(i.id) && skuValid(i.sku) && ['starter', 'legacy', 'purchase', 'event'].includes(i.source) && Number.isSafeInteger(i.cost) && i.cost >= 0 && (i.source === 'purchase' ? v.receipts.some(r => r.id === i.receipt && r.items.includes(i.id)) : i.cost === 0 && !i.receipt)))
             return false;
         if (!sales.every((r, i) => r.id === 'sale-' + (i + 1) && r.items.length > 0 && r.items.length <= 256 && r.items.every(item => item.source === 'purchase' && item.cost > 0) && Number.isSafeInteger(r.refund) && r.refund === r.items.reduce((n, item) => n + Math.floor(item.cost / 2), 0) && Number.isFinite(Date.parse(r.at))))
             return false;

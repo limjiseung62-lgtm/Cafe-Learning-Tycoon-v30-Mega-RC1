@@ -1,75 +1,76 @@
-import { beginRenewalTutorials, pollRenewalTutorials } from './renewalTutorialUi.js?v=v31-5d872fe24674';
-import { finalizeExternal, observeExternalGame } from './externalLaunch.js?v=v31-5d872fe24674';
-import { releaseResultView } from './resultViewMemory.js?v=v31-5d872fe24674';
-import { kitchenStages, kitchenFloorLabel } from './productionKitchen.js?v=v31-5d872fe24674';
-import { pollManagerSession } from './managerUi.js?v=v31-5d872fe24674';
-import { liveManagementOpen } from './liveManagement.js?v=v31-5d872fe24674';
-import { mountCommonCafeResults, restoreCommonArchive } from './commonCafeResults.js?v=v31-5d872fe24674';
-import { CommonCafeFlow } from './commonCafeFlow.js?v=v31-5d872fe24674';
-import { loadCommonRuntime } from './commonBankLoader.js?v=v31-5d872fe24674';
-import { commonQuestion } from './commonLearningCatalog.js?v=v31-5d872fe24674';
-import { setCommonTransaction } from './commonLearningTransaction.js?v=v31-5d872fe24674';
-import { megaQualificationNotice } from './megaQualificationUi.js?v=v31-5d872fe24674';
-import { megaView } from './megaView.js?v=v31-5d872fe24674';
-import { classRuntime, captureClass } from './classRuntime.js?v=v31-5d872fe24674';
-import { pollClassUi } from './classRandomUi.js?v=v31-5d872fe24674';
-import { renderProgressiveGuidance } from './progressiveGuidance.js?v=v31-5d872fe24674';
-import { unlocked } from './progressiveFeatures.js?v=v31-5d872fe24674';
-import { applyProgressiveVisibility } from './progressiveVisibility.js?v=v31-5d872fe24674';
-import { prepareCompletedShowcase } from './cafeShowcase.js?v=v31-5d872fe24674';
-import { beginManagementUi, pollManagementUi } from './managementLive.js?v=v31-5d872fe24674';
-import { setArcadeSound } from './arcadeUi.js?v=v31-5d872fe24674';
-import { setCraftSound } from './craftUi.js?v=v31-5d872fe24674';
-import { setRushSound } from './cakeRushUi.js?v=v31-5d872fe24674';
-import { beginMiniUi, pollMiniUi } from './miniGameUi.js?v=v31-5d872fe24674';
-import { miniAnswer, activeMini } from './miniGames.js?v=v31-5d872fe24674';
-import { beginSpecializationUi, pollSpecializationUi, specializationArt } from './specializationUi.js?v=v31-5d872fe24674';
-import { specializationById } from './specializationConfig.js?v=v31-5d872fe24674';
-import { freeMealAnchor } from './furnitureAnchors.js?v=v31-5d872fe24674';
-import { freeFurniture, freeHallLayers, furnitureVisualVersion } from './freeFurniture.js?v=v31-5d872fe24674';
-import { growthStaffPanel } from './recruitUi.js?v=v31-5d872fe24674';
-import { workerBaseArt } from "./recruitArt.js?v=v31-5d872fe24674";
-import { branchCatalog, branchRoom } from "./growthBranch.js?v=v31-5d872fe24674";
-import { beginBranchUi, pollBranchUi } from "./growthBranchUi.js?v=v31-5d872fe24674";
-import { createGrowthSave } from './growthSave.js?v=v31-5d872fe24674';
-import { beginLongGrowth, pollLongGrowth } from './longGrowthUi.js?v=v31-5d872fe24674';
-import { growthRuntime } from './growthRuntime.js?v=v31-5d872fe24674';
-import { webAsset } from './webAsset.js?v=v31-5d872fe24674';
-import { imageReady } from './imageLoading.js?v=v31-5d872fe24674';
-import { motionFrame, bubbleCorrection } from './animationPresentation.js?v=v31-5d872fe24674';
-import { workerPoseArt, preloadMotionSheets, workerTrayPlacement } from './motionSprites.js?v=v31-5d872fe24674';
-import { EventRecovery } from './eventRecovery.js?v=v31-5d872fe24674';
-import { renderEventPanel } from './eventUi.js?v=v31-5d872fe24674';
-import { guestMotion, workerMotion, motionArt } from './characterMotion.js?v=v31-5d872fe24674';
-import { restoreClassroomCafe } from './classroomCheckpoint.js?v=v31-5d872fe24674';
-import { LearningAnalyticsV1 } from './learningAnalytics.js?v=v31-5d872fe24674';
-import { mountCafeResults } from './cafeResults.js?v=v31-5d872fe24674';
-import { questionCatalog } from './questionPack.js?v=v31-5d872fe24674';
-import { ClassroomUi } from './classroomUi.js?v=v31-5d872fe24674';
-import { passageHtml, materialHtml } from './reading.js?v=v31-5d872fe24674';
-import { CafeRunUi } from './cafeRunUi.js?v=v31-5d872fe24674';
-import { specialQuestions } from './hospitalityConfig.js?v=v31-5d872fe24674';
-import { productionReceipt, stockStatus } from './playLoop.js?v=v31-5d872fe24674';
-import { FinalUx } from './finalUx.js?v=v31-5d872fe24674';
-import { SessionClock, ActionGate } from './uxState.js?v=v31-5d872fe24674';
-import { installAssetFallbacks } from './assetFallback.js?v=v31-5d872fe24674';
-import { createLearning } from './learningIntegration.js?v=v31-5d872fe24674';
-import { renderQuestionText, escapeText, renderDiagram } from './questionRenderer.js?v=v31-5d872fe24674';
-import { GameFeel } from './gameFeel.js?v=v31-5d872fe24674';
-import { ModeFlow } from './modeUi.js?v=v31-5d872fe24674';
-import { itemCatalog, specialNames, specialIcons } from './phase4Config.js?v=v31-5d872fe24674';
-import { showOrderBubble, syncOrderBubble, assetSignature } from './presentation.js?v=v31-5d872fe24674';
-import { personalityLabels } from './customerRules.js?v=v31-5d872fe24674';
-import { selectCustomerPose, customerPoseArt, poseGeometry, preloadCustomerPoses, selectedPoseAsset } from './customerPoses.js?v=v31-5d872fe24674';
-import { SpatialScene, hallGrowthSpecs, createSpace } from './spatial.js?v=v31-5d872fe24674';
-import { DepartureDialogue } from './departureDialogue.js?v=v31-5d872fe24674';
-import { icon } from './uiIcons.js?v=v31-5d872fe24674';
-import { sprite } from './art.js?v=v31-5d872fe24674';
-import { staffBalance } from './config.js?v=v31-5d872fe24674';
-import { staffDefinitions } from './staff.js?v=v31-5d872fe24674';
-import { foodVisual } from './foodVisual.js?v=v31-5d872fe24674';
-import { CafeGame } from './game.js?v=v31-5d872fe24674';
-import { customers, menuDefinitions } from './data.js?v=v31-5d872fe24674';
+import { recoverInteriorEditing } from './interiorPause.js?v=v31-final-636a93f6f215';
+import { beginRenewalTutorials, pollRenewalTutorials } from './renewalTutorialUi.js?v=v31-final-636a93f6f215';
+import { finalizeExternal, observeExternalGame } from './externalLaunch.js?v=v31-final-636a93f6f215';
+import { releaseResultView } from './resultViewMemory.js?v=v31-final-636a93f6f215';
+import { kitchenRequiredSpace, kitchenStages, kitchenFloorLabel } from './productionKitchen.js?v=v31-final-636a93f6f215';
+import { pollManagerSession } from './managerUi.js?v=v31-final-636a93f6f215';
+import { liveManagementOpen } from './liveManagement.js?v=v31-final-636a93f6f215';
+import { mountCommonCafeResults, restoreCommonArchive } from './commonCafeResults.js?v=v31-final-636a93f6f215';
+import { CommonCafeFlow } from './commonCafeFlow.js?v=v31-final-636a93f6f215';
+import { loadCommonRuntime } from './commonBankLoader.js?v=v31-final-636a93f6f215';
+import { commonQuestion } from './commonLearningCatalog.js?v=v31-final-636a93f6f215';
+import { setCommonTransaction } from './commonLearningTransaction.js?v=v31-final-636a93f6f215';
+import { megaQualificationNotice } from './megaQualificationUi.js?v=v31-final-636a93f6f215';
+import { megaView } from './megaView.js?v=v31-final-636a93f6f215';
+import { classRuntime, captureClass } from './classRuntime.js?v=v31-final-636a93f6f215';
+import { pollClassUi } from './classRandomUi.js?v=v31-final-636a93f6f215';
+import { renderProgressiveGuidance } from './progressiveGuidance.js?v=v31-final-636a93f6f215';
+import { unlocked } from './progressiveFeatures.js?v=v31-final-636a93f6f215';
+import { applyProgressiveVisibility } from './progressiveVisibility.js?v=v31-final-636a93f6f215';
+import { prepareCompletedShowcase } from './cafeShowcase.js?v=v31-final-636a93f6f215';
+import { beginManagementUi, pollManagementUi } from './managementLive.js?v=v31-final-636a93f6f215';
+import { setArcadeSound } from './arcadeUi.js?v=v31-final-636a93f6f215';
+import { setCraftSound } from './craftUi.js?v=v31-final-636a93f6f215';
+import { setRushSound } from './cakeRushUi.js?v=v31-final-636a93f6f215';
+import { beginMiniUi, pollMiniUi } from './miniGameUi.js?v=v31-final-636a93f6f215';
+import { miniAnswer, activeMini } from './miniGames.js?v=v31-final-636a93f6f215';
+import { beginSpecializationUi, pollSpecializationUi, specializationArt } from './specializationUi.js?v=v31-final-636a93f6f215';
+import { specializationById } from './specializationConfig.js?v=v31-final-636a93f6f215';
+import { freeMealAnchor } from './furnitureAnchors.js?v=v31-final-636a93f6f215';
+import { freeFurniture, freeHallLayers, furnitureVisualVersion } from './freeFurniture.js?v=v31-final-636a93f6f215';
+import { growthStaffPanel } from './recruitUi.js?v=v31-final-636a93f6f215';
+import { workerBaseArt } from "./recruitArt.js?v=v31-final-636a93f6f215";
+import { branchCatalog, branchRoom } from "./growthBranch.js?v=v31-final-636a93f6f215";
+import { beginBranchUi, pollBranchUi } from "./growthBranchUi.js?v=v31-final-636a93f6f215";
+import { createGrowthSave } from './growthSave.js?v=v31-final-636a93f6f215';
+import { beginLongGrowth, pollLongGrowth } from './longGrowthUi.js?v=v31-final-636a93f6f215';
+import { growthRuntime } from './growthRuntime.js?v=v31-final-636a93f6f215';
+import { webAsset } from './webAsset.js?v=v31-final-636a93f6f215';
+import { imageReady } from './imageLoading.js?v=v31-final-636a93f6f215';
+import { motionFrame, bubbleCorrection } from './animationPresentation.js?v=v31-final-636a93f6f215';
+import { workerPoseArt, preloadMotionSheets, workerTrayPlacement } from './motionSprites.js?v=v31-final-636a93f6f215';
+import { EventRecovery } from './eventRecovery.js?v=v31-final-636a93f6f215';
+import { renderEventPanel } from './eventUi.js?v=v31-final-636a93f6f215';
+import { guestMotion, workerMotion, motionArt } from './characterMotion.js?v=v31-final-636a93f6f215';
+import { restoreClassroomCafe } from './classroomCheckpoint.js?v=v31-final-636a93f6f215';
+import { LearningAnalyticsV1 } from './learningAnalytics.js?v=v31-final-636a93f6f215';
+import { mountCafeResults } from './cafeResults.js?v=v31-final-636a93f6f215';
+import { questionCatalog } from './questionPack.js?v=v31-final-636a93f6f215';
+import { ClassroomUi } from './classroomUi.js?v=v31-final-636a93f6f215';
+import { passageHtml, materialHtml } from './reading.js?v=v31-final-636a93f6f215';
+import { CafeRunUi } from './cafeRunUi.js?v=v31-final-636a93f6f215';
+import { specialQuestions } from './hospitalityConfig.js?v=v31-final-636a93f6f215';
+import { productionReceipt, stockStatus } from './playLoop.js?v=v31-final-636a93f6f215';
+import { FinalUx } from './finalUx.js?v=v31-final-636a93f6f215';
+import { SessionClock, ActionGate } from './uxState.js?v=v31-final-636a93f6f215';
+import { installAssetFallbacks } from './assetFallback.js?v=v31-final-636a93f6f215';
+import { createLearning } from './learningIntegration.js?v=v31-final-636a93f6f215';
+import { renderQuestionText, escapeText, renderDiagram } from './questionRenderer.js?v=v31-final-636a93f6f215';
+import { GameFeel } from './gameFeel.js?v=v31-final-636a93f6f215';
+import { ModeFlow } from './modeUi.js?v=v31-final-636a93f6f215';
+import { itemCatalog, specialNames, specialIcons } from './phase4Config.js?v=v31-final-636a93f6f215';
+import { showOrderBubble, syncOrderBubble, assetSignature } from './presentation.js?v=v31-final-636a93f6f215';
+import { personalityLabels } from './customerRules.js?v=v31-final-636a93f6f215';
+import { selectCustomerPose, customerPoseArt, poseGeometry, preloadCustomerPoses, selectedPoseAsset } from './customerPoses.js?v=v31-final-636a93f6f215';
+import { SpatialScene, hallGrowthSpecs, createSpace } from './spatial.js?v=v31-final-636a93f6f215';
+import { DepartureDialogue } from './departureDialogue.js?v=v31-final-636a93f6f215';
+import { icon } from './uiIcons.js?v=v31-final-636a93f6f215';
+import { sprite } from './art.js?v=v31-final-636a93f6f215';
+import { staffBalance } from './config.js?v=v31-final-636a93f6f215';
+import { staffDefinitions } from './staff.js?v=v31-final-636a93f6f215';
+import { foodVisual } from './foodVisual.js?v=v31-final-636a93f6f215';
+import { CafeGame } from './game.js?v=v31-final-636a93f6f215';
+import { customers, menuDefinitions } from './data.js?v=v31-final-636a93f6f215';
 let classroomElapsed = null;
 const developerMode = new URLSearchParams(location.search).has('dev');
 const clock = new SessionClock(), purchaseGate = new ActionGate();
@@ -142,7 +143,7 @@ staffRecoveryButton.onclick = () => { advanceTime(); if (!game || game.status !=
     render();
 } staffRecoveryButton.disabled = result.ok; if (result.ok)
     setTimeout(() => { staffRecoveryButton.disabled = false; }, 5000); };
-export async function startSession(session, pool, questionRandom, learningOptions = {}) { commonBusy = true; commonFlow = null; classroomElapsed = null; el('workers').innerHTML = ''; el('seats').innerHTML = ''; el('decor').innerHTML = ''; delete el('cafe-room').dataset.artLevel; guestLooks.clear(); preloadMotionSheets(); selectedGuest = null; detailKey = ''; app.classList.add('in-session'); game = session; game.enableEvents(); if (game.mode === 'CLASS_MATCH' && game.status === 'RUNNING')
+export async function startSession(session, pool, questionRandom, learningOptions = {}) { commonBusy = true; commonFlow = null; classroomElapsed = null; el('workers').innerHTML = ''; el('seats').innerHTML = ''; el('decor').innerHTML = ''; delete el('cafe-room').dataset.artLevel; guestLooks.clear(); preloadMotionSheets(); selectedGuest = null; detailKey = ''; app.classList.add('in-session'); game = session; recoverInteriorEditing(game); game.enableEvents(); if (game.mode === 'CLASS_MATCH' && game.status === 'RUNNING')
     game.events.align(game.elapsedTime, game); if (game.status === 'CLOSED')
     game.events.close(); runUi.start(); clearTimeout(outcomeTimer); game.service.manualOwner = true; game.enableHallGrowth(); departure = new DepartureDialogue(); departureKey = ''; manualTipShown = false; autoTipShown = game.service.paid.length > 0; lastStaffCount = game.service.paid.length; hintUntil = 0; el('service-hint').hidden = true; receipt = []; stockKey = ""; displayedResult = null; clock.start(); ux.start(); feel.start(session); scene = new SpatialScene(game.cafeLevel, game.cafe.maxCustomers, true); scene.sync(game); readVisits.clear(); rereading = false; engine = createLearning(pool, session.policy.persistence === 'saved-cafe', questionRandom, learningOptions); analytics = new LearningAnalyticsV1(engine.provider.packId); const growthState = growthRuntime.begin(session, pool, { engine, analytics, readVisits: [] }, () => ({ engine, analytics, readVisits: [...readVisits], specialAttempt })); const classState = classRuntime.begin(session, growthState.engine, growthState.analytics, growthState.readVisits); engine = classState.engine; analytics = classState.analytics; const commonSetup = pool?.[0]?.commonChoice; if (commonSetup) {
     try {
@@ -688,8 +689,8 @@ function renderInvestment(force = false) {
         content = '<p class="item-status">황금시간 ' + game.goldenRemaining + '주문 · 부스터 ' + game.boosterRemaining + '정답' + (game.vipPending ? ' · VIP 방문 예약 중' : '') + '</p><div class="menu-investments">' + itemCatalog.map(item => { const rule = { ...game.phase4Profile.items[item.id], price: game.getItemPrice(item.id) }, remaining = game.itemRemaining(item.id); const blocked = (!!commonFlow && item.id === 'booster') || !remaining || game.money < rule.price || (item.id === 'golden' && game.goldenRemaining > 0) || (item.id === 'booster' && game.boosterRemaining > 0) || (item.id === 'invite' && (game.vipPending || game.cafeLevel < game.phase4Profile.rules.vip.unlock)); return '<article class="investment-card item-card"><h3>' + item.name + '</h3><p>' + ({ 'stock-five': '모든 음식 +5 · 창고가 가득 차면 멈춰요', delivery: '고른 음식을 창고 가득 채워요', golden: '다음 5주문에서 버는 돈 2배', invite: '다음 가능한 손님을 VIP로 초대해요', booster: commonFlow ? '공통 학습은 정답마다 +1로 고정되어 부스터를 구매하지 않아요' : '다음 3번 정답 · 음식마다 +3' }[item.id]) + '</p><p>' + rule.price.toLocaleString() + '원 · 남은 구매 ' + remaining + '/' + rule.limit + '회</p>' + affordability(rule.price) + (item.id === 'delivery' ? '<label>배송 메뉴<select id="delivery-menu">' + game.menus.map(m => '<option value="' + m.menuId + '" ' + (deliveryMenu === m.menuId ? 'selected' : '') + '>' + m.name + '</option>').join('') + '</select></label>' : '') + '<button class="secondary" data-item="' + item.id + '" ' + (blocked ? 'disabled' : '') + '>' + (!remaining ? '구매 완료' : item.id === 'invite' && game.cafeLevel < game.phase4Profile.rules.vip.unlock ? '카페 ' + game.phase4Profile.rules.vip.unlock + '단계에서 열려요' : '구매 · 사용') + '</button></article>'; }).join('') + '</div>';
     }
     else {
-        content = '<div class="menu-investments">' + menuDefinitions.map(def => { const m = game.menus.find(m => m.menuId === def.menuId); if (!m)
-            return '<article class="investment-card locked"><span class="lock">잠김</span><h3>' + def.name + '</h3><p>카페 ' + def.unlockCafeLevel + '단계에서 열려요</p></article>'; const cost = game.getMenuUpgradeCost(m); return '<article class="investment-card menu-row">' + foodVisual(m) + '<div><h3>' + m.name + ' <small>★' + m.currentLevel + '</small></h3><p>재고 ' + m.stock + '/' + m.maxStock + ' · 판매 ' + game.getPrice(m) + (cost !== null ? ' → ' + game.getPrice(m, m.currentLevel + 1) : '') + '원</p>' + (cost !== null ? affordability(cost) : '') + '</div>' + (cost !== null ? '<button class="secondary" data-buy="menu" data-menu="' + m.menuId + '" ' + (game.money < cost ? 'disabled' : '') + ' aria-label="' + m.name + ' 강화">강화 ' + cost.toLocaleString() + '원</button>' : '<span class="max-label">MAX ★5</span>') + '</article>'; }).join('') + '</div>';
+        content = '<div class="menu-investments">' + [...menuDefinitions, ...game.menus.filter(m => !menuDefinitions.some(d => d.menuId === m.menuId))].map(def => { const m = game.menus.find(m => m.menuId === def.menuId); if (!m)
+            return '<article class="investment-card locked"><span class="lock">잠김</span><h3>' + def.name + '</h3><p>카페 ' + def.unlockCafeLevel + '단계에서 열려요</p></article>'; const cost = game.getMenuUpgradeCost(m); return '<article class="investment-card menu-row">' + foodVisual(m) + '<div><h3>' + m.name + ' <small>' + (m.renewalQuality ? '강화 +' + (m.currentLevel - 1) : '★' + m.currentLevel) + '</small></h3><p>재고 ' + m.stock + '/' + m.maxStock + ' · 판매 ' + game.getPrice(m) + (cost !== null ? ' → ' + game.getPrice(m, m.currentLevel + 1) : '') + '원</p>' + (cost !== null ? affordability(cost) : '') + '</div>' + (cost !== null ? '<button class="secondary" data-buy="menu" data-menu="' + m.menuId + '" ' + (game.money < cost ? 'disabled' : '') + ' aria-label="' + m.name + ' 강화">강화 ' + cost.toLocaleString() + '원</button>' : '<span class="max-label">현재 상한 ' + (m.renewalQuality ? '+' + (m.currentLevel - 1) : '★' + m.currentLevel) + '</span>') + '</article>'; }).join('') + '</div>';
     }
     if (investmentTab === 'staff' && game.mode === 'CAFE_GROWTH' && unlocked(game, 'recruitment'))
         content = growthStaffPanel(game);
@@ -697,7 +698,7 @@ function renderInvestment(force = false) {
         content = content.replace(/<p>홀 확장[\s\S]*?이용 좌석[\s\S]*?<\/p>/, '<p>레벨을 올리면 새 메뉴와 증축 자격이 열려요. 현재 매장 면적은 그대로예요. 실제 매장 증축은 영업을 마친 뒤 선택할 수 있어요.</p>').replace('카페 확장 ·', '카페 레벨 올리기 ·');
     if (investmentTab === 'warehouse' && game.mode === 'CAFE_GROWTH' && game.mega?.paid) {
         const tier = game.mega.production?.tier ?? 0, n = kitchenStages[tier + 1];
-        content += '<article class="investment-card"><h2>' + kitchenStages[tier].name + ' · 정답 생산 1회당 메뉴별 +' + game.productionAmount + '</h2><p>기본형 또는 즉시 쌍둥이 정답에 한 번 생산해요. 독립 오답노트는 생산하지 않아요. 창고 상한까지 반영돼요.</p>' + (n ? '<h3>다음: ' + n.name + ' · +' + n.amount + '</h3><p>Lv.' + n.level + ' · ' + kitchenFloorLabel(n.space) + '칸 유료 매장 필요 · 기존 주방 공간을 재사용해요.</p>' + affordability(n.cost) + '<button class="primary" data-buy="production" data-tier="' + tier + '" ' + (game.money < n.cost || game.cafeLevel < n.level || game.mega.paid.spaceLevel < n.space ? 'disabled' : '') + '>설비 구매 · ' + n.cost.toLocaleString() + '원</button>' : '<p>최고 생산 설비예요.</p>') + (n && game.warehouse.capacity < n.amount ? '<p>창고를 먼저 늘리면 생산 손실을 줄일 수 있어요.</p>' : '') + '</article>';
+        content += '<article class="investment-card"><h2>' + kitchenStages[tier].name + ' · 정답 생산 1회당 메뉴별 +' + game.productionAmount + '</h2><p>기본형 또는 즉시 쌍둥이 정답에 한 번 생산해요. 독립 오답노트는 생산하지 않아요. 창고 상한까지 반영돼요.</p>' + (n ? '<h3>다음: ' + n.name + ' · +' + n.amount + '</h3><p>Lv.' + n.level + ' · ' + kitchenFloorLabel(kitchenRequiredSpace(game, tier + 1)) + '칸 유료 매장 필요 · 기존 주방 공간을 재사용해요.</p>' + affordability(n.cost) + '<button class="primary" data-buy="production" data-tier="' + tier + '" ' + (game.money < n.cost || game.cafeLevel < n.level || game.mega.paid.spaceLevel < kitchenRequiredSpace(game, tier + 1) ? 'disabled' : '') + '>설비 구매 · ' + n.cost.toLocaleString() + '원</button>' : '<p>최고 생산 설비예요.</p>') + (n && game.warehouse.capacity < n.amount ? '<p>창고를 먼저 늘리면 생산 손실을 줄일 수 있어요.</p>' : '') + '</article>';
     }
     const scroll = panel.querySelector('.investment-content')?.scrollTop ?? 0;
     let body = panel.querySelector('.investment-body');

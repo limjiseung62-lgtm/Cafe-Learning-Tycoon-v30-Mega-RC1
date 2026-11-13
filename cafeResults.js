@@ -1,10 +1,10 @@
-import { classReport } from './classRandom.js?v=v31-5d872fe24674';
-import { classResultLines } from './classRandomUi.js?v=v31-5d872fe24674';
-import { mountManagementResult } from './managementResults.js?v=v31-5d872fe24674';
-import { mountTwinWorksheet } from './twinWorksheet.js?v=v31-5d872fe24674';
-import { incompleteRunHistory } from './classroomCheckpoint.js?v=v31-5d872fe24674';
-import { percentage } from './learningAnalytics.js?v=v31-5d872fe24674';
-import { renderQuestionText, renderDiagram, escapeText as esc } from './questionRenderer.js?v=v31-5d872fe24674';
+import { classReport } from './classRandom.js?v=v31-final-636a93f6f215';
+import { classResultLines } from './classRandomUi.js?v=v31-final-636a93f6f215';
+import { mountManagementResult } from './managementResults.js?v=v31-final-636a93f6f215';
+import { mountTwinWorksheet } from './twinWorksheet.js?v=v31-final-636a93f6f215';
+import { incompleteRunHistory } from './classroomCheckpoint.js?v=v31-final-636a93f6f215';
+import { percentage } from './learningAnalytics.js?v=v31-final-636a93f6f215';
+import { renderQuestionText, renderDiagram, escapeText as esc } from './questionRenderer.js?v=v31-final-636a93f6f215';
 export function cafeResultData(game) { return { classRandom: classReport(game), producedFoodStored: game.successfulProduction, cafeId: game.mode === 'CAFE_GROWTH' ? (game.growthCafeId ?? 'cafe-1') : null, events: game.events.enabled ? game.events.report() : null, mode: game.run ? '오늘의 카페' : game.mode === 'CAFE_GROWTH' ? '내 카페 키우기 · 이번 영업' : '수업 게임', playSeconds: Math.round(game.result.playSeconds), cafeLevel: game.cafeLevel, cafeName: game.cafe.name, revenue: game.stats.revenue, customers: game.stats.servedCustomers, soldFood: game.stats.soldFood, money: game.money, staff: game.service.paid.map(w => ({ name: w.name, level: w.level })), menus: game.menus.map(m => ({ name: m.name, level: m.currentLevel })), run: game.run ? { ...game.run.report(), finalAssigned: incompleteRunHistory.has(game) ? null : game.run.finalAssigned } : null }; }
 const num = (v) => v.toLocaleString('ko-KR');
 const rateRow = (label, c) => '<div><span>' + esc(label) + '</span><strong>' + percentage(c) + '</strong><small>' + num(c.correct) + ' / ' + num(c.attempted) + '문항</small></div>';

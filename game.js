@@ -1,49 +1,50 @@
-import { renewalGuestAllowed } from './renewalRosterPolicy.js?v=v31-5d872fe24674';
-import { renderPhase, renderPhaseMetrics, recordArrival } from './renderPhaseTiming.js?v=v31-5d872fe24674';
-import { lateServiceInterval } from './lateServiceDemand.js?v=v31-5d872fe24674';
-import { growthArrivalInterval, seatedGuestStates } from './growthArrivals.js?v=v31-5d872fe24674';
-import { pollCrewChanges } from './finalSupply.js?v=v31-5d872fe24674';
-import { renewalGrowthCosts } from './renewalPolicy.js?v=v31-5d872fe24674';
-import { growthMenuDefinitions } from './menuResearch.js?v=v31-5d872fe24674';
-import { finalSpecializationFor } from './finalSpecialization.js?v=v31-5d872fe24674';
-import { finalProduction, finalPriceFactor, signatureMenusFor, brandSignatureChance, brandVisitBonus } from './finalSpecializationState.js?v=v31-5d872fe24674';
-import { growthSeats } from './levelSeats.js?v=v31-5d872fe24674';
-import { kitchenStages, kitchenAmount, kitchenFloorLabel, bulkWarehouses, newProductionKitchen } from './productionKitchen.js?v=v31-5d872fe24674';
-import { tickManager } from './managerActor.js?v=v31-5d872fe24674';
-import { megaSaleFactor } from './megaOperations.js?v=v31-5d872fe24674';
-import { megaGrowthBalance, megaSpawnSeconds } from './megaGrowthEconomy.js?v=v31-5d872fe24674';
-import { tableSeatCount } from './megaInventory.js?v=v31-5d872fe24674';
-import { megaEnabled, ensureMegaPlan, createMegaSpace, megaRoute, megaTravelSeconds, megaPointClear } from './megaSpace.js?v=v31-5d872fe24674';
-import { randomClassBalance, classRandomConfig, pollClassEvents, classSpecial } from './classRandom.js?v=v31-5d872fe24674';
-import { outsideKitchenStock, supplyAllocations, reserveSupplyOrder, deliverySources, configureFinalSupply } from './finalSupply.js?v=v31-5d872fe24674';
-import { finalActive, operatingSeatContract } from './finalGrowth.js?v=v31-5d872fe24674';
-import { investmentRevenue, investmentSpawn, investmentVisitor, pollInvestmentEvents } from './progressiveEconomy.js?v=v31-5d872fe24674';
-import { classProgressiveConfig } from './classProgressiveBalance.js?v=v31-5d872fe24674';
-import { unlocked } from './progressiveFeatures.js?v=v31-5d872fe24674';
-import { protectedSpecialStock, reservedGuestOrder, reservationIndex, takeReservedFood } from './specialInventory.js?v=v31-5d872fe24674';
-import { pollManagement, strategyGuest, strategyQuantity } from './managementEngine.js?v=v31-5d872fe24674';
-import { pollMini, miniPaused, activeMini } from './miniGames.js?v=v31-5d872fe24674';
-import { specializationById } from './specializationConfig.js?v=v31-5d872fe24674';
-import { chooseFurnitureSeat } from './furnitureSeating.js?v=v31-5d872fe24674';
-import { layoutEconomyConfig } from './layoutEconomyConfig.js?v=v31-5d872fe24674';
-import { freeKey } from './freeLayoutModel.js?v=v31-5d872fe24674';
-import { layoutKey } from './layoutModel.js?v=v31-5d872fe24674';
-import { CafeEvents } from './cafeEvents.js?v=v31-5d872fe24674';
-import { CafeRun } from './cafeRun.js?v=v31-5d872fe24674';
-import { Hospitality } from './hospitality.js?v=v31-5d872fe24674';
-import { hospitalityDefinition, hospitalityBalance } from './hospitalityConfig.js?v=v31-5d872fe24674';
-import { chooseSpecial, specialDefinition, itemCatalog } from './phase4Config.js?v=v31-5d872fe24674';
-import { policyFor } from './sessionModes.js?v=v31-5d872fe24674';
-import { crewLimit } from './staffRecruitment.js?v=v31-5d872fe24674';
-import { tickFinalPayroll } from './finalPayroll.js?v=v31-5d872fe24674';
-import { finalGuestDefinitions } from './finalGuests.js?v=v31-5d872fe24674';
-import { chooseCustomer, chooseOrderMenu } from './customerRules.js?v=v31-5d872fe24674';
-import { StaffSystem } from './staff.js?v=v31-5d872fe24674';
-import { createSpace, floorPath, floorStandable } from './spatial.js?v=v31-5d872fe24674';
-import { LocalTelemetry } from './telemetry.js?v=v31-5d872fe24674';
-import { balance } from './config.js?v=v31-5d872fe24674';
-import { createMenus, customers, menuDefinitions } from './data.js?v=v31-5d872fe24674';
-import { StaffAbilities } from "./staffAbilities.js?v=v31-5d872fe24674";
+import { menuQualityEnabled, refreshMenuQuality, qualityPriceMultiplier, qualityUpgradeMultiplier } from './renewalMenuQuality.js?v=v31-final-636a93f6f215';
+import { renewalGuestAllowed } from './renewalRosterPolicy.js?v=v31-final-636a93f6f215';
+import { renderPhase, renderPhaseMetrics, recordArrival } from './renderPhaseTiming.js?v=v31-final-636a93f6f215';
+import { lateServiceInterval } from './lateServiceDemand.js?v=v31-final-636a93f6f215';
+import { growthArrivalInterval, seatedGuestStates } from './growthArrivals.js?v=v31-final-636a93f6f215';
+import { pollCrewChanges } from './finalSupply.js?v=v31-final-636a93f6f215';
+import { renewalGrowthCosts } from './renewalPolicy.js?v=v31-final-636a93f6f215';
+import { growthMenuDefinitions } from './menuResearch.js?v=v31-final-636a93f6f215';
+import { finalSpecializationFor } from './finalSpecialization.js?v=v31-final-636a93f6f215';
+import { finalProduction, finalPriceFactor, signatureMenusFor, brandSignatureChance, brandVisitBonus } from './finalSpecializationState.js?v=v31-final-636a93f6f215';
+import { growthSeats } from './levelSeats.js?v=v31-final-636a93f6f215';
+import { kitchenRequiredSpace, kitchenStages, kitchenAmount, kitchenFloorLabel, bulkWarehouses, newProductionKitchen } from './productionKitchen.js?v=v31-final-636a93f6f215';
+import { tickManager } from './managerActor.js?v=v31-final-636a93f6f215';
+import { megaSaleFactor } from './megaOperations.js?v=v31-final-636a93f6f215';
+import { megaGrowthBalance, megaSpawnSeconds } from './megaGrowthEconomy.js?v=v31-final-636a93f6f215';
+import { tableSeatCount } from './megaInventory.js?v=v31-final-636a93f6f215';
+import { megaEnabled, ensureMegaPlan, createMegaSpace, megaRoute, megaTravelSeconds, megaPointClear } from './megaSpace.js?v=v31-final-636a93f6f215';
+import { randomClassBalance, classRandomConfig, pollClassEvents, classSpecial } from './classRandom.js?v=v31-final-636a93f6f215';
+import { outsideKitchenStock, supplyAllocations, reserveSupplyOrder, deliverySources, configureFinalSupply } from './finalSupply.js?v=v31-final-636a93f6f215';
+import { finalActive, operatingSeatContract } from './finalGrowth.js?v=v31-final-636a93f6f215';
+import { investmentRevenue, investmentSpawn, investmentVisitor, pollInvestmentEvents } from './progressiveEconomy.js?v=v31-final-636a93f6f215';
+import { classProgressiveConfig } from './classProgressiveBalance.js?v=v31-final-636a93f6f215';
+import { unlocked } from './progressiveFeatures.js?v=v31-final-636a93f6f215';
+import { protectedSpecialStock, reservedGuestOrder, reservationIndex, takeReservedFood } from './specialInventory.js?v=v31-final-636a93f6f215';
+import { pollManagement, strategyGuest, strategyQuantity } from './managementEngine.js?v=v31-final-636a93f6f215';
+import { pollMini, miniPaused, activeMini } from './miniGames.js?v=v31-final-636a93f6f215';
+import { specializationById } from './specializationConfig.js?v=v31-final-636a93f6f215';
+import { chooseFurnitureSeat } from './furnitureSeating.js?v=v31-final-636a93f6f215';
+import { layoutEconomyConfig } from './layoutEconomyConfig.js?v=v31-final-636a93f6f215';
+import { freeKey } from './freeLayoutModel.js?v=v31-final-636a93f6f215';
+import { layoutKey } from './layoutModel.js?v=v31-final-636a93f6f215';
+import { CafeEvents } from './cafeEvents.js?v=v31-final-636a93f6f215';
+import { CafeRun } from './cafeRun.js?v=v31-final-636a93f6f215';
+import { Hospitality } from './hospitality.js?v=v31-final-636a93f6f215';
+import { hospitalityDefinition, hospitalityBalance } from './hospitalityConfig.js?v=v31-final-636a93f6f215';
+import { chooseSpecial, specialDefinition, itemCatalog } from './phase4Config.js?v=v31-final-636a93f6f215';
+import { policyFor } from './sessionModes.js?v=v31-final-636a93f6f215';
+import { crewLimit } from './staffRecruitment.js?v=v31-final-636a93f6f215';
+import { tickFinalPayroll } from './finalPayroll.js?v=v31-final-636a93f6f215';
+import { finalGuestDefinitions } from './finalGuests.js?v=v31-final-636a93f6f215';
+import { chooseCustomer, chooseOrderMenu } from './customerRules.js?v=v31-final-636a93f6f215';
+import { StaffSystem } from './staff.js?v=v31-final-636a93f6f215';
+import { createSpace, floorPath, floorStandable } from './spatial.js?v=v31-final-636a93f6f215';
+import { LocalTelemetry } from './telemetry.js?v=v31-final-636a93f6f215';
+import { balance } from './config.js?v=v31-final-636a93f6f215';
+import { createMenus, customers, menuDefinitions } from './data.js?v=v31-final-636a93f6f215';
+import { StaffAbilities } from "./staffAbilities.js?v=v31-final-636a93f6f215";
 export class CafeGame {
     durationSeconds;
     random;
@@ -227,15 +228,15 @@ export class CafeGame {
         return false; this.earlyElapsed = this.elapsedTime; this.remainingSeconds = 0; this.settleServedOnClose(); this.status = 'CLOSED'; this.events.close(); pollClassEvents(this); pollMini(this); this.telemetry.record(this.snapshot); return true; }
     leaveClassMatch() { if (this.policy.persistence !== 'none' || this.status !== 'RUNNING')
         return false; this.earlyElapsed = this.elapsedTime; this.remainingSeconds = 0; this.status = 'CLOSED'; this.events.close(); pollClassEvents(this); pollMini(this); this.telemetry.record(this.snapshot); return true; }
-    getPrice(m, level = m.currentLevel) { return Math.round(m.basePrice * this.economy.menuMultipliers[level - 1] * (this.progressive && this.mode === 'CLASS_MATCH' ? (this.classRandom ? classRandomConfig.priceMultiplier * (this.elapsedTime < (this.classRandom.priceUntil ?? 0) ? (this.classRandom.priceFactor ?? 1) : 1) * (this.elapsedTime < this.classRandom.discountUntil ? (this.classRandom.discountFactor ?? .9) : 1) : classProgressiveConfig.priceMultiplier) : investmentRevenue(this)) * finalPriceFactor(finalSpecializationFor(this), m.menuId)); }
-    getMenuUpgradeCost(m) { return m.currentLevel >= m.maxLevel ? null : Math.round(m.basePrice * this.economy.menuUpgradeMultipliers[m.currentLevel - 1]); }
+    getPrice(m, level = m.currentLevel) { return Math.round(m.basePrice * (menuQualityEnabled(this) ? qualityPriceMultiplier(level, this.economy.menuMultipliers) : this.economy.menuMultipliers[level - 1]) * (this.progressive && this.mode === 'CLASS_MATCH' ? (this.classRandom ? classRandomConfig.priceMultiplier * (this.elapsedTime < (this.classRandom.priceUntil ?? 0) ? (this.classRandom.priceFactor ?? 1) : 1) * (this.elapsedTime < this.classRandom.discountUntil ? (this.classRandom.discountFactor ?? .9) : 1) : classProgressiveConfig.priceMultiplier) : investmentRevenue(this)) * finalPriceFactor(finalSpecializationFor(this), m.menuId)); }
+    getMenuUpgradeCost(m) { refreshMenuQuality(this); return m.currentLevel >= m.maxLevel ? null : Math.round(m.basePrice * (menuQualityEnabled(this) ? qualityUpgradeMultiplier(m.currentLevel, this.economy.menuUpgradeMultipliers) : this.economy.menuUpgradeMultipliers[m.currentLevel - 1])); }
     get nextCafe() { const next = this.economy.cafes[this.cafeLevel] ?? null; return next && this.mode === 'CAFE_GROWTH' && this.mega?.finalGrowth?.renewal ? { ...next, expansionCost: renewalGrowthCosts[next.level - 1] } : next; }
     get nextWarehouse() { return this.economy.warehouses[this.warehouseLevel] ?? (this.mode === 'CAFE_GROWTH' && this.mega?.paid ? bulkWarehouses[this.mega.production?.storage ?? 0] ?? null : null); }
     get productionAmount() { return finalProduction(kitchenAmount(this), finalSpecializationFor(this)); }
     upgradeProduction(expectedTier = this.mega?.production?.tier ?? 0) { if (this.mode !== 'CAFE_GROWTH' || !this.mega?.paid)
         return { ok: false, reason: 'GROWTH 유료 매장에서 사용할 수 있어요.' }; const p = this.mega.production ?? newProductionKitchen(), next = kitchenStages[p.tier + 1]; if (expectedTier !== p.tier || !next)
-        return { ok: false, reason: '이미 처리했거나 최고 설비예요.' }; if (this.cafeLevel < next.level || this.mega.paid.spaceLevel < next.space)
-        return { ok: false, reason: 'Lv.' + next.level + ' 및 ' + kitchenFloorLabel(next.space) + '칸 유료 매장이 필요해요.' }; const r = this.purchase(next.cost, 'production', next.name, p.tier + 1); if (r.ok) {
+        return { ok: false, reason: '이미 처리했거나 최고 설비예요.' }; if (this.cafeLevel < next.level || this.mega.paid.spaceLevel < kitchenRequiredSpace(this, p.tier + 1))
+        return { ok: false, reason: 'Lv.' + next.level + ' 및 ' + kitchenFloorLabel(kitchenRequiredSpace(this, p.tier + 1)) + '칸 유료 매장이 필요해요.' }; const r = this.purchase(next.cost, 'production', next.name, p.tier + 1); if (r.ok) {
         this.mega.production = p;
         p.tier++;
         p.receipts.push({ id: 'production-' + (p.receipts.length + 1), kind: 'kitchen', tier: p.tier, cost: next.cost });
@@ -278,6 +279,7 @@ export class CafeGame {
         this.telemetry.cafeUpgradeTimes.push({ elapsedTime: this.elapsedTime, level: next.level });
         for (const definition of (this.mode === 'CAFE_GROWTH' && this.mega?.finalGrowth?.renewal ? growthMenuDefinitions(next.level, this.management, this.mega.finalGrowth) : [...menuDefinitions, ...signatureMenusFor(next.level, finalSpecializationFor(this))]).filter(m => m.unlockCafeLevel === next.level && !this.menus.some(owned => owned.menuId === m.menuId)))
             this.menus.push({ ...definition, stock: Math.min(this.warehouse.capacity, balance.stock.newMenuInitial), maxStock: this.warehouse.capacity });
+        refreshMenuQuality(this);
     } return result; }
     upgradeWarehouse() { if (this.mode === 'CAFE_GROWTH' && this.mega?.finalGrowth?.renewal?.origin === 'new' && this.cafeLevel < 4)
         return { ok: false, reason: '창고 강화는 Lv.4부터 가능해요.' }; const next = this.nextWarehouse; if (!next)

@@ -1,16 +1,17 @@
-import { unlocked } from './progressiveFeatures.js?v=v31-5d872fe24674';
-import { downloadShowcase } from './cafeShowcase.js?v=v31-5d872fe24674';
-import { openManagementAlbum } from './managementAlbumUi.js?v=v31-5d872fe24674';
-import { growthRuntime } from './growthRuntime.js?v=v31-5d872fe24674';
-import { syncFurniture } from './furnitureUnlocks.js?v=v31-5d872fe24674';
-import { furnitureCatalog } from './furnitureCatalog.js?v=v31-5d872fe24674';
-import { freeKey } from './freeLayoutModel.js?v=v31-5d872fe24674';
-import { layoutKey } from './layoutModel.js?v=v31-5d872fe24674';
-import { branchRoom } from './growthBranch.js?v=v31-5d872fe24674';
-import { createLongGrowth, offerBoard, selectBoard, pollBoard, observeVisitors, allVisitorCatalog as visitorCatalog, guestCollectionId } from './longGrowth.js?v=v31-5d872fe24674';
-import { allBoardCatalog as boardCatalog, allDecorationCatalog as decorationCatalog, decorSlots } from './longGrowthConfig.js?v=v31-5d872fe24674';
-import { escapeText as esc } from './questionRenderer.js?v=v31-5d872fe24674';
-import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=v31-5d872fe24674';
+import { grantRenewalReward } from './renewalRewards.js?v=v31-final-636a93f6f215';
+import { unlocked } from './progressiveFeatures.js?v=v31-final-636a93f6f215';
+import { downloadShowcase } from './cafeShowcase.js?v=v31-final-636a93f6f215';
+import { openManagementAlbum } from './managementAlbumUi.js?v=v31-final-636a93f6f215';
+import { growthRuntime } from './growthRuntime.js?v=v31-final-636a93f6f215';
+import { syncFurniture } from './furnitureUnlocks.js?v=v31-final-636a93f6f215';
+import { furnitureCatalog } from './furnitureCatalog.js?v=v31-final-636a93f6f215';
+import { freeKey } from './freeLayoutModel.js?v=v31-final-636a93f6f215';
+import { layoutKey } from './layoutModel.js?v=v31-final-636a93f6f215';
+import { branchRoom } from './growthBranch.js?v=v31-final-636a93f6f215';
+import { createLongGrowth, offerBoard, selectBoard, pollBoard, observeVisitors, allVisitorCatalog as visitorCatalog, guestCollectionId } from './longGrowth.js?v=v31-final-636a93f6f215';
+import { allBoardCatalog as boardCatalog, allDecorationCatalog as decorationCatalog, decorSlots } from './longGrowthConfig.js?v=v31-final-636a93f6f215';
+import { escapeText as esc } from './questionRenderer.js?v=v31-final-636a93f6f215';
+import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=v31-final-636a93f6f215';
 const prepared = new WeakMap(), states = new WeakMap();
 let active = null, save = () => { }, currentBusiness = '';
 let lastProjection = '', lastLevel = 0, notice = '', noticeStamp = '', noticeUntil = 0;
@@ -60,15 +61,17 @@ export function pollLongGrowth(g, learning) { if (g !== active)
     return; const state = states.get(g); const album = document.getElementById('open-album'); if (album && g.management) {
     album.disabled = g.status !== 'CLOSED';
     album.title = album.disabled ? '영업이 끝나면 성장 앨범을 볼 수 있어요.' : '통합 성장 앨범';
-} const b = state.boards.find(b => b.businessId === currentBusiness); const metrics = { correct: g.stats.correct, skills: new Set(learning.attempts.filter(a => a.correct).map(a => a.skillId)).size, review: learning.attempts.filter(a => a.correct && a.isRemediation).length, served: g.stats.servedCustomers, menus: b?.soldMenus?.length ?? 0, special: b?.specialIds?.length ?? 0, events: g.events.records.filter(r => r.outcome === 'success').length, specialization: Math.min(g.stats.correct, g.stats.servedCustomers), upstairs: b?.upstairs ?? 0 }; if (pollBoard(state, currentBusiness, metrics, g.status === 'CLOSED'))
-    notice = '오늘의 목표 달성! 장식과 기념 칭호를 받았어요.'; if (g.cafeLevel !== lastLevel) {
+} const b = state.boards.find(b => b.businessId === currentBusiness); const metrics = { correct: g.stats.correct, skills: new Set(learning.attempts.filter(a => a.correct).map(a => a.skillId)).size, review: learning.attempts.filter(a => a.correct && a.isRemediation).length, served: g.stats.servedCustomers, menus: b?.soldMenus?.length ?? 0, special: b?.specialIds?.length ?? 0, events: g.events.records.filter(r => r.outcome === 'success').length, specialization: Math.min(g.stats.correct, g.stats.servedCustomers), upstairs: b?.upstairs ?? 0 }; if (pollBoard(state, currentBusiness, metrics, g.status === 'CLOSED')) {
+    const cash = grantRenewalReward(g, 'mission:' + currentBusiness + ':' + b?.selected, 'mission', b && b.target >= 15 ? 3 : b && b.target >= 8 ? 2 : 1);
+    notice = '오늘의 목표 달성! 장식·칭호' + (cash ? ' · ' + cash.toLocaleString() + '원과 보상권' : '') + '을 받았어요.';
+} if (g.cafeLevel !== lastLevel) {
     lastLevel = g.cafeLevel;
     if (!state.albums.includes(g.cafeLevel))
         state.albums.push(g.cafeLevel);
     if ([7, 11].includes(g.cafeLevel)) {
         notice = g.cafeLevel === 7 ? '어떤 가게로 성장할지 골라 보세요!' : g.branchId ? '가게가 한 단계 더 성장했어요!' : '복층 베이커리가 문을 열었어요!';
     }
-} const newFurniture = unlocked(g, 'decor') ? syncFurniture({ state, level: g.cafeLevel, branch: g.branchId, events: metrics.events }) : []; if (newFurniture.length)
+} const newFurniture = unlocked(g, 'decor') ? syncFurniture({ state, renewal: g.mega?.finalGrowth?.renewal?.menuPolicy === 2, level: g.cafeLevel, branch: g.branchId, events: metrics.events }) : []; if (newFurniture.length)
     notice = '새 가구 해금! ' + newFurniture.map(id => furnitureCatalog.find(d => d.id === id).name).join(' · '); if (notice !== noticeStamp) {
     noticeStamp = notice;
     noticeUntil = performance.now() + 6500;

@@ -1,6 +1,6 @@
 # v3.1 architecture sprite atlas
 
-Original project-bound artwork generated with the built-in OpenAI image_gen tool on 2026-11-12. No purchased assets, external paid API, real brand, or copied game imagery. Source remains at C:/Users/사용자/.codex/generated_images/01a10bf8-823a-7751-a361-10500c9d4575/exec-2366087a-ea79-441f-910d-c2301c58d405.png.
+Original project-bound artwork generated with the built-in OpenAI image_gen tool on 2026-11-12. No purchased assets, external paid API, real brand, or copied game imagery. Source remains at project archive: exec-2366087a-ea79-441f-910d-c2301c58d405.png.
 
 architecture.png is the original RGBA1254×1254 image, copied without alteration. SHA256 f3b8ca0d24d0f5cf90c070495badaad456a0b8a4e5f9c9703437f565b9dd6d61. Twelve cells: four columns wood/brick/glass/brand; three rows left window-wall/right window-wall/door with blank sign. Renderer samples fractional equal cells directly. No whole-scene background is used. Collision and actual entrances remain in logical tile data.
 

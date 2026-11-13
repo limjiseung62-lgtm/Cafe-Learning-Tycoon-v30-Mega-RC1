@@ -1,30 +1,31 @@
-import { createRenewalGrowthSave } from './renewalMigration.js?v=v31-5d872fe24674';
-import { validSupplyContext } from './finalSupplyState.js?v=v31-5d872fe24674';
-import { bulkWarehouses } from './productionKitchen.js?v=v31-5d872fe24674';
-import { adoptInterior, isShopDeployment, repairInteriorSeats } from './megaInventory.js?v=v31-5d872fe24674';
-import { validMega, newMegaState, isMegaDeployment } from './megaSpace.js?v=v31-5d872fe24674';
-import { newProgressiveState, validProgressive } from './progressiveFeatures.js?v=v31-5d872fe24674';
-import { growthMenuDefinitions } from './menuResearch.js?v=v31-5d872fe24674';
-import { validManagement, validCafeAlbum } from './managementState.js?v=v31-5d872fe24674';
-import { validPortfolio, portfolioMatches } from './cafePortfolio.js?v=v31-5d872fe24674';
-import { validVillage } from './village.js?v=v31-5d872fe24674';
-import { validMiniCollection } from './miniGames.js?v=v31-5d872fe24674';
-import { validSpecialization } from './specialization.js?v=v31-5d872fe24674';
-import { belongsToBranch } from './specializationConfig.js?v=v31-5d872fe24674';
-import { furnitureUnlocked } from './furnitureUnlocks.js?v=v31-5d872fe24674';
-import { furnitureFor } from './furnitureCatalog.js?v=v31-5d872fe24674';
-import { validFreeLayouts } from './freeLayout.js?v=v31-5d872fe24674';
-import { validLayouts } from './cafeLayout.js?v=v31-5d872fe24674';
-import { validGrowthEconomy } from './growthEconomy.js?v=v31-5d872fe24674';
-import { validLongGrowth } from './longGrowth.js?v=v31-5d872fe24674';
-import { validCampaign } from './growthCampaign.js?v=v31-5d872fe24674';
-import { validEventCheckpoint } from './cafeEvents.js?v=v31-5d872fe24674';
-import { menuDefinitions } from './data.js?v=v31-5d872fe24674';
-import { staffDefinitions } from './staff.js?v=v31-5d872fe24674';
-import { cafeGrowthBalance } from './modeBalance.js?v=v31-5d872fe24674';
-import { specialTypes } from './phase4Config.js?v=v31-5d872fe24674';
-import { validBranch } from "./growthBranch.js?v=v31-5d872fe24674";
-import { validRoster, rosterMirror, crewLimit, ownedCrewLimit } from "./staffRecruitment.js?v=v31-5d872fe24674";
+import { menuStoredLevelLimit } from './renewalMenuQuality.js?v=v31-final-636a93f6f215';
+import { createRenewalGrowthSave } from './renewalMigration.js?v=v31-final-636a93f6f215';
+import { validSupplyContext } from './finalSupplyState.js?v=v31-final-636a93f6f215';
+import { bulkWarehouses } from './productionKitchen.js?v=v31-final-636a93f6f215';
+import { adoptInterior, isShopDeployment, repairInteriorSeats } from './megaInventory.js?v=v31-final-636a93f6f215';
+import { validMega, newMegaState, isMegaDeployment } from './megaSpace.js?v=v31-final-636a93f6f215';
+import { newProgressiveState, validProgressive } from './progressiveFeatures.js?v=v31-final-636a93f6f215';
+import { growthMenuDefinitions } from './menuResearch.js?v=v31-final-636a93f6f215';
+import { validManagement, validCafeAlbum } from './managementState.js?v=v31-final-636a93f6f215';
+import { validPortfolio, portfolioMatches } from './cafePortfolio.js?v=v31-final-636a93f6f215';
+import { validVillage } from './village.js?v=v31-final-636a93f6f215';
+import { validMiniCollection } from './miniGames.js?v=v31-final-636a93f6f215';
+import { validSpecialization } from './specialization.js?v=v31-final-636a93f6f215';
+import { belongsToBranch } from './specializationConfig.js?v=v31-final-636a93f6f215';
+import { furnitureUnlocked } from './furnitureUnlocks.js?v=v31-final-636a93f6f215';
+import { furnitureFor } from './furnitureCatalog.js?v=v31-final-636a93f6f215';
+import { validFreeLayouts } from './freeLayout.js?v=v31-final-636a93f6f215';
+import { validLayouts } from './cafeLayout.js?v=v31-final-636a93f6f215';
+import { validGrowthEconomy } from './growthEconomy.js?v=v31-final-636a93f6f215';
+import { validLongGrowth } from './longGrowth.js?v=v31-final-636a93f6f215';
+import { validCampaign } from './growthCampaign.js?v=v31-final-636a93f6f215';
+import { validEventCheckpoint } from './cafeEvents.js?v=v31-final-636a93f6f215';
+import { menuDefinitions } from './data.js?v=v31-final-636a93f6f215';
+import { staffDefinitions } from './staff.js?v=v31-final-636a93f6f215';
+import { cafeGrowthBalance } from './modeBalance.js?v=v31-final-636a93f6f215';
+import { specialTypes } from './phase4Config.js?v=v31-final-636a93f6f215';
+import { validBranch } from "./growthBranch.js?v=v31-final-636a93f6f215";
+import { validRoster, rosterMirror, crewLimit, ownedCrewLimit } from "./staffRecruitment.js?v=v31-final-636a93f6f215";
 const integer = (v, min = 0, max = Number.MAX_SAFE_INTEGER) => typeof v === 'number' && Number.isSafeInteger(v) && v >= min && v <= max;
 const object = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const date = (v) => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(v) && Number.isFinite(Date.parse(v));
@@ -36,7 +37,7 @@ export function validateGrowthSave(v) { if (!object(v) || v.mega !== undefined &
     return false; if (Object.values(v.v26?.enterprise?.branches ?? {}).some(b => !ids.includes(b.menu)))
     return false; if (v.management?.run?.special?.inventory?.orders.some(order => order.some(o => !ids.includes(o.menuId))))
     return false; if (!Array.isArray(v.unlockedMenuIds) || new Set(v.unlockedMenuIds).size !== ids.length || v.unlockedMenuIds.length !== ids.length || !ids.every(id => v.unlockedMenuIds instanceof Array && v.unlockedMenuIds.includes(id)))
-    return false; if (!object(v.menuLevels) || Object.keys(v.menuLevels).length !== ids.length || !ids.every(id => object(v.menuLevels) && integer(v.menuLevels[id], 1, 5)))
+    return false; if (!object(v.menuLevels) || Object.keys(v.menuLevels).length !== ids.length || !ids.every(id => object(v.menuLevels) && integer(v.menuLevels[id], 1, menuStoredLevelLimit({ mode: 'CAFE_GROWTH', cafeLevel: Number(v.cafeLevel), mega: v.mega }))))
     return false; if (!Array.isArray(v.staffOwned) || v.staffOwned.length > crewLimit(v) || !v.staffOwned.every((id, i) => v.roster ? true : id === staffDefinitions[i]?.staffId) || !object(v.staffLevels) || Object.keys(v.staffLevels).length !== v.staffOwned.length || !v.staffOwned.every(id => object(v.staffLevels) && integer(v.staffLevels[id], 1, 5)))
     return false; for (const k of ['cumulativeRevenue', 'cumulativeCustomersServed', 'cumulativeFoodSold', 'cumulativeQuestionsAttempted', 'cumulativeQuestionsCorrect', 'completedSessions'])
     if (!integer(v[k]))

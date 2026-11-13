@@ -1,7 +1,7 @@
-import { lateServiceObservation } from './lateServiceDemand.js?v=v31-5d872fe24674';
-import { operatingSeatContract } from './finalGrowth.js?v=v31-5d872fe24674';
-import { seatedGuestStates, waitingGuestStates, growthTarget } from './growthArrivals.js?v=v31-5d872fe24674';
-import { finalActorCache } from './finalActorCache.js?v=v31-5d872fe24674';
-import { outsideKitchenStock } from './finalSupply.js?v=v31-5d872fe24674';
+import { lateServiceObservation } from './lateServiceDemand.js?v=v31-final-636a93f6f215';
+import { operatingSeatContract } from './finalGrowth.js?v=v31-final-636a93f6f215';
+import { seatedGuestStates, waitingGuestStates, growthTarget } from './growthArrivals.js?v=v31-final-636a93f6f215';
+import { finalActorCache } from './finalActorCache.js?v=v31-final-636a93f6f215';
+import { outsideKitchenStock } from './finalSupply.js?v=v31-final-636a93f6f215';
 /** Local-only read-only diagnostics. No questions, answers, personal identifiers or persisted probe history. */
 export function finalRuntimeDiagnostics(g) { const supply = g.mega?.finalGrowth?.supply; return { gameSeconds: g.elapsedTime, status: g.status, seats: operatingSeatContract(g), operatingSeats: operatingSeatContract(g).operating, arrivals: { intervalSeconds: g.customerSpawnInterval, serviceCapacity: lateServiceObservation(g), blockReason: g.customerArrivalBlockReason, seated: g.guests.filter(v => seatedGuestStates.has(v.state)).length, waiting: g.guests.filter(v => waitingGuestStates.has(v.state)).length, entering: g.guests.filter(v => ['ENTERING', 'MOVING_TO_SEAT'].includes(v.state)).length, leaving: g.guests.filter(v => v.state === 'LEAVING').length, outsideQueue: 0, queuePolicy: '외부 대기열 없음; 실제 운영 좌석을 예약한 뒤 입장', targetOccupancy: growthTarget(operatingSeatContract(g).operating), targetSeated: operatingSeatContract(g).operating * growthTarget(operatingSeatContract(g).operating) }, concurrentLimit: g.cafe.maxCustomers, actualGuests: g.guests.length, actualWorkingStaff: g.service.paid.length, served: g.stats.servedCustomers, revenue: g.stats.revenue, stock: g.menus.map(m => ({ id: m.menuId, central: m.stock, outside: outsideKitchenStock(g, m.menuId), capacity: m.maxStock })), supply: supply ? { moved: supply.moved, consumed: supply.consumed, inTransit: supply.jobs.length } : null, crew: { ...g.service.diagnostics, recoveries: g.service.recoveryLog.map(r => ({ time: r.time, reason: r.reason, workerId: r.workerId, queueLength: r.queueLength })) }, actorBitmaps: finalActorCache.diagnostics, payroll: g.mega?.finalGrowth?.payroll ?? null }; }

@@ -22,3 +22,5 @@ catch {
 } }
 export const kitchenAmount = (g) => g.mode === 'CAFE_GROWTH' ? kitchenStages[g.mega?.production?.tier ?? 0].amount : 1;
 export const kitchenFloorLabel = (level) => ({ 1: '8×6', 4: '12×10', 10: '20×16', 20: '40×30', 30: '64×48' }[level] ?? '기존');
+/** First paid appliance fits the existing starter counter; later tiers retain their physical requirements. */
+export function kitchenRequiredSpace(g, tier) { return g.mode === 'CAFE_GROWTH' && g.mega?.finalGrowth?.renewal?.menuPolicy === 2 && tier === 1 ? 1 : kitchenStages[tier]?.space ?? 30; }

@@ -11,3 +11,16 @@
 
 .touch-buy:not([hidden]){position:fixed;right:24px;bottom:24px;width:min(400px,calc(100vw - 48px));max-height:76dvh;overflow-y:auto;z-index:11000;box-shadow:0 10px 50px #34250c66;box-sizing:border-box}.touch-buy>canvas{width:78px;height:66px;float:right}.touch-buy h3{font-size:19px;margin:0 0 8px}.touch-buy p{font-size:15px;line-height:1.5;margin:8px 0}.touch-buy [data-trade-commit]{font-weight:800;background:#e0f0d5}.touch-seat-policy{margin:8px 0;font-size:14px}@media(max-width:640px){.touch-buy:not([hidden]){left:12px;right:12px;bottom:12px;width:auto;max-height:72dvh}.touch-buy label{clear:both}.touch-seat-policy p{font-size:13px}}
 .touch-world .touch-scan-status:empty{display:none}.touch-world .touch-scan-status.all-blocked{background:#ffe4da;color:#842f24;border:2px solid #be6551;font-weight:700}
+/* Keep the map and thumbnail dock in separate rows on narrow screens. */
+@media(max-width:760px){
+ .touch-shell{height:100dvh;max-height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+ .touch-shell>header,.touch-toolbar{flex:none}
+ .touch-layout{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(160px,25dvh);gap:4px}
+ .touch-world{min-height:0;overflow:auto}
+ .touch-world>canvas{width:min(100%,42.857dvh);height:auto;max-height:none;margin-inline:auto;object-fit:fill}
+ .touch-world [role=status]{min-height:0;padding:4px;font-size:12px;line-height:1.35}
+ .touch-layout aside{position:static;min-height:0;max-height:none;overflow:auto}
+ .touch-context{flex-wrap:nowrap;overflow:auto}
+ .touch-context button{flex:0 0 auto;font-size:12px;padding:8px}
+}
+@media(max-width:760px){.touch-toolbar button{font-size:12px;padding:6px;min-width:44px}.touch-layout{grid-template-rows:minmax(0,1fr) minmax(175px,27dvh)}.touch-layout aside [data-filter-count],.touch-options>summary{font-size:12px;line-height:1.3}.touch-card{flex-basis:120px}.touch-card canvas{width:84px;height:72px}}

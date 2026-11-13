@@ -1,10 +1,10 @@
 // @ts-nocheck
-import { cityInvestmentServices, cityFactorBounds, cityPriceBands, cityTrafficPrices } from './cityInvestmentBalance.js?v=v31-5d872fe24674';
-import { byId } from './cityBuildingCatalog.js?v=v31-5d872fe24674';
-import { makeCity, districts } from './cityDistrictModel.js?v=v31-5d872fe24674';
-import { analyze, branchEffect, clamp } from './cityIndicatorModel.js?v=v31-5d872fe24674';
-import { modernCityFor, mainSite, hqSite, publicSites, cityRegions } from './modernCity.js?v=v31-5d872fe24674';
-import { foundFranchise, branchYield } from './progressiveEconomy.js?v=v31-5d872fe24674';
+import { cityInvestmentServices, cityFactorBounds, cityPriceBands, cityTrafficPrices } from './cityInvestmentBalance.js?v=v31-final-636a93f6f215';
+import { byId } from './cityBuildingCatalog.js?v=v31-final-636a93f6f215';
+import { makeCity, districts } from './cityDistrictModel.js?v=v31-final-636a93f6f215';
+import { analyze, branchEffect, clamp } from './cityIndicatorModel.js?v=v31-final-636a93f6f215';
+import { modernCityFor, mainSite, hqSite, publicSites, cityRegions } from './modernCity.js?v=v31-final-636a93f6f215';
+import { foundFranchise, branchYield } from './progressiveEconomy.js?v=v31-final-636a93f6f215';
 export { analyze, districts };
 const cityField = a => a.group === 'public' || a.group === 'leisure' ? 'housing' : a.group;
 const legacyVariants = { commerce: ['small-retail-a', 'large-retail-a', 'shopping-mall-a'], housing: ['detached-a', 'low-apartment-a', 'high-apartment-a'], tourism: ['garden-a', 'hotel-a', 'tourist-complex-a'], culture: ['library-a', 'theater-a', 'culture-center-a'], enterprise: ['logistics-a', 'mid-office-a', 'corporate-a'] };

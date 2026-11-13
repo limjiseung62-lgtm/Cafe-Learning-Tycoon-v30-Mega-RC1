@@ -1,20 +1,20 @@
-import { miniSupported } from './miniGames.js?v=v31-5d872fe24674';
-import { desiredVillageMini } from './village.js?v=v31-5d872fe24674';
-import { newArcade } from './arcadeGames.js?v=v31-5d872fe24674';
-import { renderArcade, animateArcade, arcadeBriefing } from './arcadeUi.js?v=v31-5d872fe24674';
-import { createCraft } from './craftGames.js?v=v31-5d872fe24674';
-import { renderCraft, animateCraft, craftBriefing } from './craftUi.js?v=v31-5d872fe24674';
-import { newCakeRush, rushSeed } from './cakeRush.js?v=v31-5d872fe24674';
-import { renderRush, animateRush, rushBriefing } from './cakeRushUi.js?v=v31-5d872fe24674';
-import { escapeText as esc } from './questionRenderer.js?v=v31-5d872fe24674';
-import { miniInfo, miniTokens } from './miniGameConfig.js?v=v31-5d872fe24674';
-import { cakeTokens } from './miniCake.js?v=v31-5d872fe24674';
-import { flowerTokens } from './miniFlowers.js?v=v31-5d872fe24674';
-import { ovenPosition } from './miniOven.js?v=v31-5d872fe24674';
-import { activeMini, pollMini, startMini, placeMini, finishMini, retryMini, leaveMini, skipMini, canExtraMini, offerMini, miniRewardIds, miniPaused } from './miniGames.js?v=v31-5d872fe24674';
-import { miniArt, refreshMiniArt } from './miniArt.js?v=v31-5d872fe24674';
-import { longStateFor } from './longGrowthUi.js?v=v31-5d872fe24674';
-import { growthRuntime } from './growthRuntime.js?v=v31-5d872fe24674';
+import { miniSupported } from './miniGames.js?v=v31-final-636a93f6f215';
+import { desiredVillageMini } from './village.js?v=v31-final-636a93f6f215';
+import { newArcade } from './arcadeGames.js?v=v31-final-636a93f6f215';
+import { renderArcade, animateArcade, arcadeBriefing } from './arcadeUi.js?v=v31-final-636a93f6f215';
+import { createCraft } from './craftGames.js?v=v31-final-636a93f6f215';
+import { renderCraft, animateCraft, craftBriefing } from './craftUi.js?v=v31-final-636a93f6f215';
+import { newCakeRush, rushSeed } from './cakeRush.js?v=v31-final-636a93f6f215';
+import { renderRush, animateRush, rushBriefing } from './cakeRushUi.js?v=v31-final-636a93f6f215';
+import { escapeText as esc } from './questionRenderer.js?v=v31-final-636a93f6f215';
+import { miniInfo, miniTokens } from './miniGameConfig.js?v=v31-final-636a93f6f215';
+import { cakeTokens } from './miniCake.js?v=v31-final-636a93f6f215';
+import { flowerTokens } from './miniFlowers.js?v=v31-final-636a93f6f215';
+import { ovenPosition } from './miniOven.js?v=v31-final-636a93f6f215';
+import { activeMini, pollMini, startMini, placeMini, finishMini, retryMini, leaveMini, skipMini, canExtraMini, offerMini, miniRewardIds, miniPaused } from './miniGames.js?v=v31-final-636a93f6f215';
+import { miniArt, refreshMiniArt } from './miniArt.js?v=v31-final-636a93f6f215';
+import { longStateFor } from './longGrowthUi.js?v=v31-final-636a93f6f215';
+import { growthRuntime } from './growthRuntime.js?v=v31-final-636a93f6f215';
 let current = null, flush = () => false, projection = '', selected = null, raf = 0, error = '';
 export function beginMiniUi(g, onSave) { cancelAnimationFrame(raf); document.getElementById('rush-briefing')?.remove(); document.getElementById('mini-dialog')?.remove(); document.getElementById('mini-banner')?.remove(); document.body.classList.remove('mini-active'); document.getElementById('app')?.removeAttribute('inert'); current = miniSupported(g) ? g : null; flush = onSave; projection = ''; selected = null; error = ''; if (current) {
     if (current.miniCollection)
@@ -38,8 +38,11 @@ function gifts(g) { const state = longStateFor(g); if (!state)
         changed = true;
     } return changed; }
 function transact(action) { const g = current; if (!g)
-    return; g.tick(growthRuntime.delta(g) ?? 0); const before = structuredClone(g.miniGames), bank = structuredClone(g.miniCollection), state = longStateFor(g), owned = state ? [...state.owned] : null; const result = action(); if (result === false && JSON.stringify(g.miniGames) === JSON.stringify(before) && JSON.stringify(g.miniCollection) === JSON.stringify(bank))
+    return; g.tick(growthRuntime.delta(g) ?? 0); const rewardMoney = g.money, rewards = structuredClone(g.mega?.finalGrowth?.renewal?.rewards); const before = structuredClone(g.miniGames), bank = structuredClone(g.miniCollection), state = longStateFor(g), owned = state ? [...state.owned] : null; const result = action(); if (result === false && JSON.stringify(g.miniGames) === JSON.stringify(before) && JSON.stringify(g.miniCollection) === JSON.stringify(bank))
     return; gifts(g); if (!flush()) {
+    g.money = rewardMoney;
+    if (g.mega?.finalGrowth?.renewal)
+        g.mega.finalGrowth.renewal.rewards = rewards;
     g.miniGames = before;
     g.miniCollection = bank;
     if (state && owned)
@@ -135,7 +138,7 @@ function render(a) {
         content = '<div class="mini-goal"><h3>주문 그림</h3>' + board(a, true) + '</div><p class="mini-instruction">' + info.instruction + '</p><div class="mini-palette">' + palette.map(t => '<button data-mini-token="' + t + '" aria-pressed="' + (selected === t) + '">' + cell(t) + '<span>' + miniTokens[t].name + '</span></button>').join('') + '<button data-mini-erase aria-pressed="' + (selected === null) + '">지우개</button></div><p class="mini-selection" role="status">선택: ' + (selected ? tokenName(selected) : '지우개') + '</p><div class="mini-work ' + (a.kind === 'cake' ? 'cake-work' : 'flower-work') + '"><div class="mini-base">' + (a.kind === 'cake' ? miniArt(0, '꾸미기 케이크') : Array.from({ length: 4 }, (_, i) => miniArt(2, (i + 1) + '번 꽃병')).join('')) + '</div>' + board(a, false) + '</div><button id="mini-finish" class="primary">완성하기</button>';
     }
     else
-        content = '<div class="mini-outcome ' + (a.phase === 'success' ? 'success' : 'failed') + '">' + miniArt(a.phase === 'success' ? a.kind === 'oven' ? 3 : 7 : a.kind === 'oven' ? 1 : a.kind === 'cake' ? 0 : 2, a.phase === 'success' ? '완성 기념품' : '다음 도전') + '<h3>' + (a.phase === 'success' ? '멋지게 완성했어요!' : '다시 살펴볼까요?') + '</h3><p>' + esc(a.reason ?? '') + '</p><p>' + (a.phase === 'success' ? info.reward + ' · 처음 성공할 때 장식으로 보관해요.' : '연습 기록을 남겼어요. 카페 자산은 잃지 않아요.') + '</p>' + (retry ? '<button id="mini-retry" class="primary">같은 시간 안에 한 번 더</button>' : '') + '<button id="mini-leave" class="secondary">카페로 돌아가기</button></div>';
+        content = '<div class="mini-outcome ' + (a.phase === 'success' ? 'success' : 'failed') + '">' + miniArt(a.phase === 'success' ? a.kind === 'oven' ? 3 : 7 : a.kind === 'oven' ? 1 : a.kind === 'cake' ? 0 : 2, a.phase === 'success' ? '완성 기념품' : '다음 도전') + '<h3>' + (a.phase === 'success' ? '멋지게 완성했어요!' : '다시 살펴볼까요?') + '</h3><p>' + esc(a.reason ?? '') + '</p><p>' + (a.phase === 'success' ? info.reward + ' · 처음 성공할 때 장식으로 보관해요.' + (g.mega?.finalGrowth?.renewal?.menuPolicy === 2 ? ' 현금과 보상권은 보상함에서 확인해요.' : '') : '연습 기록을 남겼어요. 카페 자산은 잃지 않아요.') + '</p>' + (retry ? '<button id="mini-retry" class="primary">같은 시간 안에 한 번 더</button>' : '') + '<button id="mini-leave" class="secondary">카페로 돌아가기</button></div>';
     d.innerHTML = '<article class="mini-sheet"><header><div><p class="eyebrow">준비한 재료로 만드는 작은 도전</p><h2>' + info.name + '</h2></div><button id="mini-close" class="secondary" aria-label="미니게임 그만하고 카페로">그만하기</button></header><p class="mini-clock" role="status">영업·손님 대기 멈춤 · <b id="mini-seconds">' + remaining + '</b>초 이내</p><p class="mini-error" role="alert">' + esc(error) + '</p>' + content + '<p class="mini-footnote">정답률에는 영향을 주지 않아요. 새로고침해도 제한시간은 같아요.</p></article>';
     d.querySelectorAll('[data-mini-token]').forEach(b => b.onclick = () => { selected = b.dataset.miniToken; projection = ''; pollMiniUi(g); });
     d.querySelector('[data-mini-erase]')?.addEventListener('click', () => { selected = null; projection = ''; pollMiniUi(g); });

@@ -1,8 +1,8 @@
-import { chooseFinalSpecialization } from './finalSpecialization.js?v=v31-5d872fe24674';
-import { specializationUpgradeQuote, upgradeRenewalSpecialization } from './renewalSpecialization.js?v=v31-5d872fe24674';
-import { massRates, brandRates, specializationLevels } from './renewalSpecializationState.js?v=v31-5d872fe24674';
-import { finalSpecializationOffers, renewalSignatureMenus, signatureImage } from './finalSpecializationState.js?v=v31-5d872fe24674';
-import { configureFinalSupply } from './finalSupply.js?v=v31-5d872fe24674';
+import { chooseFinalSpecialization } from './finalSpecialization.js?v=v31-final-636a93f6f215';
+import { specializationUpgradeQuote, upgradeRenewalSpecialization } from './renewalSpecialization.js?v=v31-final-636a93f6f215';
+import { massRates, brandRates, specializationLevels } from './renewalSpecializationState.js?v=v31-final-636a93f6f215';
+import { finalSpecializationOffers, renewalSignatureMenus, signatureImage } from './finalSpecializationState.js?v=v31-final-636a93f6f215';
+import { configureFinalSupply } from './finalSupply.js?v=v31-final-636a93f6f215';
 export function openRenewalSpecialization(g, flush, done) { const d = document.createElement('dialog'); d.className = 'final-specialization'; d.style.cssText = 'width:min(900px,94vw);max-height:88vh;overflow:auto;background:#fff8ed;border-radius:18px'; document.body.append(d); const close = () => { d.remove(); done(); }; let message = ''; const render = () => { d.replaceChildren(); const h = document.createElement('h2'); h.textContent = '우리 카페 전문화 · 4단계 성장'; const info = document.createElement('p'); info.textContent = '보유 ' + g.money.toLocaleString() + '원 · 현재 생산 메뉴별 ' + g.productionAmount + '개 · 창고 ' + g.warehouse.capacity + '개. 강화는 자동 적용되지 않아요.'; d.append(h, info); for (const path of ['mass', 'brand']) {
     const card = document.createElement('article'), title = document.createElement('h3');
     title.textContent = finalSpecializationOffers[path].name;

@@ -1,6 +1,7 @@
-import { eventBalance } from './eventConfig.js?v=v31-5d872fe24674';
-import { escapeText as esc } from './questionRenderer.js?v=v31-5d872fe24674';
-import { missionGoal, noticeTone } from './eventPresentation.js?v=v31-5d872fe24674';
+import { rewardCash } from './renewalRewardState.js?v=v31-final-636a93f6f215';
+import { eventBalance } from './eventConfig.js?v=v31-final-636a93f6f215';
+import { escapeText as esc } from './questionRenderer.js?v=v31-final-636a93f6f215';
+import { missionGoal, noticeTone } from './eventPresentation.js?v=v31-final-636a93f6f215';
 let previous = '', previousGame = null, collapsed = false;
 export function renderEventPanel(game, problemOpen) {
     if (previousGame !== game) {
@@ -44,7 +45,7 @@ export function renderEventPanel(game, problemOpen) {
     panel.dataset.tone = noticeTone(notice);
     panel.classList.toggle('mission-warning', warning);
     panel.dataset.active = String(!!a);
-    panel.innerHTML = a && m ? '<div class="mission-heading"><strong>' + esc(m.name) + '</strong><b class="mission-time" aria-label="남은 ' + seconds + '초">' + seconds + '초' + (warning ? ' · 곧 종료' : '') + '</b><button id="mission-fold" aria-label="미션 보상 안내 ' + (collapsed ? '펼치기' : '접기') + '" aria-expanded="' + !collapsed + '">' + (collapsed ? '+' : '−') + '</button></div><p class="mission-goals">' + esc(goal) + '</p><small' + (collapsed ? ' hidden' : '') + '>성공 시 최대 ' + s.rewardPreview(m.cash) + '원' + (m.id === 'sns' || m.id === 'team' ? ' + 잠시 홍보' : '') + ' · 실패 벌금 없음</small>' : '';
+    panel.innerHTML = a && m ? '<div class="mission-heading"><strong>' + esc(m.name) + '</strong><b class="mission-time" aria-label="남은 ' + seconds + '초">' + seconds + '초' + (warning ? ' · 곧 종료' : '') + '</b><button id="mission-fold" aria-label="미션 보상 안내 ' + (collapsed ? '펼치기' : '접기') + '" aria-expanded="' + !collapsed + '">' + (collapsed ? '+' : '−') + '</button></div><p class="mission-goals">' + esc(goal) + '</p><small' + (collapsed ? ' hidden' : '') + '>성공 시 최대 ' + (game.mode === 'CAFE_GROWTH' && game.mega?.finalGrowth?.renewal?.menuPolicy === 2 ? rewardCash(game.cafeLevel, 'mission', m.correct + m.served >= 6 ? 3 : m.correct + m.served >= 3 ? 2 : 1) : s.rewardPreview(m.cash)) + '원' + (m.id === 'sns' || m.id === 'team' ? ' + 잠시 홍보' : '') + ' · 실패 벌금 없음</small>' : '';
     if (notice)
         panel.insertAdjacentHTML('beforeend', '<p class="event-notice" role="status">' + esc(notice) + '</p>');
     let compact = document.getElementById('mission-compact');

@@ -3,7 +3,7 @@ import { portalURL } from './sq-learning/portal-url.mjs';
 import { decodeLaunch, validateLaunch } from './sq-learning/launch.mjs';
 import { nativeChoices, checkResume, checkStart } from './sq-learning/cafe-policy.mjs';
 import pin from './sq-learning/catalog-pin.json' with { type: 'json' };
-import { loadCommonRuntime } from './commonBankLoader.js?v=v31-5d872fe24674';
+import { loadCommonRuntime } from './commonBankLoader.js?v=v31-final-636a93f6f215';
 let launch = null, catalog = null, choices = null, nativeCatalog = null, unit = null, lease = false, releaseLease = null, lastError = '', preflight = null, lastProbe = 0, lastProbeState = '';
 // Fragment edits must revalidate. Page teardown uses v3's native checkpoint handlers.
 addEventListener('hashchange', () => { if (launch || location.hash.startsWith('#sq'))
@@ -62,7 +62,7 @@ export async function attachExternal(c) {
         if (launch.gameId !== 'cafe')
             throw Error('다른 게임용 학습 링크예요.');
         const version = await (await fetch('version.json', { cache: 'no-store' })).json();
-        if (version.version !== '3.0.0-mega-rc.1')
+        if (!['3.0.0-mega-rc.1', '3.1.0-renewal-rc.1'].includes(version.version))
             throw Error('Cafe v3.0 실행 버전과 Pilot 기준 버전이 달라요.');
         const s = launch.scopes[0];
         unit = catalog.units.find(u => u.subject === launch.subject && u.sourceId === s.sourceId && u.id === s.unitId);

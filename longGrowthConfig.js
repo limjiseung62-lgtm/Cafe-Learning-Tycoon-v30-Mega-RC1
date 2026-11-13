@@ -1,5 +1,6 @@
-import { miniDecor } from './miniGameConfig.js?v=v31-5d872fe24674';
-import { specializationBoards, specializationDecor } from './specializationConfig.js?v=v31-5d872fe24674';
+import { studioDecor } from './renewalFurnitureCatalog.js?v=v31-final-636a93f6f215';
+import { miniDecor } from './miniGameConfig.js?v=v31-final-636a93f6f215';
+import { specializationBoards, specializationDecor } from './specializationConfig.js?v=v31-final-636a93f6f215';
 // Only CAFE_GROWTH consumes these settings. Approved class-match values stay untouched.
 export const longGrowthLevels = [
     { level: 7, name: '햇살 정원 카페', capacity: 9 },
@@ -35,4 +36,4 @@ export const boardCatalog = [
     { id: 'bakery', kind: 'operations', name: '윗층까지 따뜻하게', description: '복층의 위층 좌석에도 서빙해요.', metric: 'upstairs', base: 2, reward: 'bread', unlock: 11 }
 ];
 export const allBoardCatalog = [...boardCatalog, ...specializationBoards];
-export const allDecorationCatalog = [...decorationCatalog, ...specializationDecor, ...miniDecor];
+export const allDecorationCatalog = [...decorationCatalog, ...specializationDecor, ...miniDecor, ...studioDecor];

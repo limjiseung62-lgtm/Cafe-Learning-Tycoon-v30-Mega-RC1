@@ -1,4 +1,4 @@
-import { validSpecializationStages, massRates, brandRates } from './renewalSpecializationState.js?v=v31-5d872fe24674';
+import { validSpecializationStages, massRates, brandRates } from './renewalSpecializationState.js?v=v31-final-636a93f6f215';
 export const finalSpecializationOffers = { mass: { name: '대량생산형', cost: 800000, level: 11, space: 10 }, brand: { name: '개성·브랜드형', cost: 350000, level: 11, space: 10 } };
 export function validFinalSpecialization(v) { try {
     const s = v;

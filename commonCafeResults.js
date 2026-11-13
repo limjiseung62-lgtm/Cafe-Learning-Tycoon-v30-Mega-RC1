@@ -1,11 +1,12 @@
-import { replaceDownloadGroup } from './commonDownloadGroup.js?v=v31-5d872fe24674';
-import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js?v=v31-5d872fe24674';
-import { CommonCafeFlow } from './commonCafeFlow.js?v=v31-5d872fe24674';
-import { commonQuestion, commonAnswerText } from './commonLearningCatalog.js?v=v31-5d872fe24674';
-import { loadCommonRuntime } from './commonBankLoader.js?v=v31-5d872fe24674';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=v31-5d872fe24674';
-import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=v31-5d872fe24674';
-import { worksheetHtml } from './twinWorksheet.js?v=v31-5d872fe24674';
+import { compatibleCommonManifest } from './scienceOperational.js?v=v31-final-636a93f6f215';
+import { replaceDownloadGroup } from './commonDownloadGroup.js?v=v31-final-636a93f6f215';
+import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js?v=v31-final-636a93f6f215';
+import { CommonCafeFlow } from './commonCafeFlow.js?v=v31-final-636a93f6f215';
+import { commonQuestion, commonAnswerText } from './commonLearningCatalog.js?v=v31-final-636a93f6f215';
+import { loadCommonRuntime } from './commonBankLoader.js?v=v31-final-636a93f6f215';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=v31-final-636a93f6f215';
+import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=v31-final-636a93f6f215';
+import { worksheetHtml } from './twinWorksheet.js?v=v31-final-636a93f6f215';
 const mounted = new WeakMap();
 const archiveExpected = new WeakMap();
 export async function restoreCommonArchive(flow, saved) { const raw = deploymentLocalStorage.getItem(archiveKey(saved.learningRecordId)); const cp = raw ? await flow.loaded.module.decode(raw) : saved; await flow.restore(cp); archiveExpected.set(flow, raw); }
@@ -17,7 +18,7 @@ async function archive(flow) { if (!navigator.locks)
     throw Error('학습 기록 보관에는 최신 HTTPS 브라우저가 필요해요. JSON으로 백업해 주세요.'); const cp = await flow.snapshot(), raw = await flow.loaded.module.encode(cp), key = archiveKey(cp.learningRecordId); await navigator.locks.request(deploymentPrefix() + 'common-archive-index', async () => { const previous = deploymentLocalStorage.getItem(key), expected = archiveExpected.get(flow) ?? null; if (previous !== expected && previous !== raw)
     throw Error('다른 창에서 이 학습 기록을 갱신했어요. 현재 기록을 JSON으로 백업하고 다시 열어 주세요.'); if (previous) {
     const old = await flow.loaded.module.decode(previous);
-    if (old.gameSessionId !== cp.gameSessionId || old.manifestSHA256 !== cp.manifestSHA256)
+    if (old.gameSessionId !== cp.gameSessionId || !compatibleCommonManifest(cp.subject, old.manifestSHA256, cp.manifestSHA256, flow.loaded.runtime))
         throw Error('다른 학습 기록과 겹쳐요.');
 } deploymentLocalStorage.setItem(key, raw); archiveExpected.set(flow, raw); const text = deploymentLocalStorage.getItem('common-record-index'), index = text ? JSON.parse(text) : []; if (!Array.isArray(index))
     throw Error('기록 목록을 확인해 주세요. 기존 데이터는 유지돼요.'); if (!index.some((i) => i.id === cp.learningRecordId)) {

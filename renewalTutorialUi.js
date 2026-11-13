@@ -1,15 +1,16 @@
-import { MegaView } from './megaView.js?v=v31-5d872fe24674';
-import { SpatialScene } from './spatial.js?v=v31-5d872fe24674';
-import { newTutorialPause, beginTutorialPause, endTutorialPause } from './tutorialPause.js?v=v31-5d872fe24674';
-import { newRenewalTutorials, pendingTutorials, tutorialLevels, tutorialTitles } from './renewalTutorialState.js?v=v31-5d872fe24674';
-import { RenewalPractice } from './renewalPractice.js?v=v31-5d872fe24674';
-import { commonQuestion } from './commonLearningCatalog.js?v=v31-5d872fe24674';
-import { activeMini } from './miniGames.js?v=v31-5d872fe24674';
+import { mountRewardWallet } from './renewalRewardUi.js?v=v31-final-636a93f6f215';
+import { MegaView } from './megaView.js?v=v31-final-636a93f6f215';
+import { SpatialScene } from './spatial.js?v=v31-final-636a93f6f215';
+import { newTutorialPause, beginTutorialPause, endTutorialPause } from './tutorialPause.js?v=v31-final-636a93f6f215';
+import { newRenewalTutorials, pendingTutorials, tutorialLevels, tutorialTitles } from './renewalTutorialState.js?v=v31-final-636a93f6f215';
+import { RenewalPractice } from './renewalPractice.js?v=v31-final-636a93f6f215';
+import { commonQuestion } from './commonLearningCatalog.js?v=v31-final-636a93f6f215';
+import { activeMini } from './miniGames.js?v=v31-final-636a93f6f215';
 let current, flush = () => false, practiceFlow, dialog, disposePractice;
 function progress(g) { if (g.mega?.finalGrowth?.renewal)
     return g.mega.finalGrowth.renewal.tutorials ??= newRenewalTutorials(); g.tutorialPause ??= newTutorialPause(); return g.tutorialPause.progress ??= newRenewalTutorials(); }
 const enabled = (g) => !!g.mega?.finalGrowth?.renewal || g.mode === 'CLASS_MATCH' && document.querySelector('meta[name="cafe-renewal"]')?.getAttribute('content') === 'v31-candidate';
-export function beginRenewalTutorials(g, save, flow) { disposePractice?.(); disposePractice = undefined; dialog?.remove(); dialog = undefined; current = g; flush = save; practiceFlow = flow; document.getElementById('renewal-help')?.remove(); if (!enabled(g))
+export function beginRenewalTutorials(g, save, flow) { disposePractice?.(); disposePractice = undefined; dialog?.remove(); dialog = undefined; current = g; flush = save; practiceFlow = flow; mountRewardWallet(g, save); document.getElementById('renewal-help')?.remove(); if (!enabled(g))
     return; const b = document.createElement('button'); b.id = 'renewal-help'; b.textContent = '직접 해보는 도움말'; b.style.minHeight = '48px'; b.onclick = () => help(g); document.getElementById('playing')?.append(b); }
 export function pollRenewalTutorials(g) { if (g !== current || !enabled(g) || dialog || g.status !== 'RUNNING' || activeMini(g) || document.querySelector('dialog[open]') || !document.getElementById('problem-panel')?.hidden)
     return; const active = g.tutorialPause?.active?.reasons[0], level = active ? Number(active.slice(9)) : pendingTutorials(progress(g), g.mode === 'CLASS_MATCH' ? 1 : g.cafeLevel)[0]; if (level)

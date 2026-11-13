@@ -1,6 +1,7 @@
-import { unlocked } from './progressiveFeatures.js?v=v31-5d872fe24674';
-import { specializationById } from './specializationConfig.js?v=v31-5d872fe24674';
-import { eventBalance as b, eventSchedule, allMissionCatalog, incidentCatalog } from './eventConfig.js?v=v31-5d872fe24674';
+import { grantRenewalReward } from './renewalRewards.js?v=v31-final-636a93f6f215';
+import { unlocked } from './progressiveFeatures.js?v=v31-final-636a93f6f215';
+import { specializationById } from './specializationConfig.js?v=v31-final-636a93f6f215';
+import { eventBalance as b, eventSchedule, allMissionCatalog, incidentCatalog } from './eventConfig.js?v=v31-final-636a93f6f215';
 export class CafeEvents {
     enabled = false;
     duration = 0;
@@ -104,11 +105,16 @@ export class CafeEvents {
             }
         }
     } if (success) {
-        record.reward = this.grant(m.cash, g);
+        if (g.mode === 'CAFE_GROWTH' && g.mega?.finalGrowth?.renewal?.menuPolicy === 2 && g.miniGames?.businessId) {
+            record.growthReward = grantRenewalReward(g, 'mission:event:' + g.miniGames.businessId + ':' + record.id, 'mission', m.correct + m.served >= 6 ? 3 : m.correct + m.served >= 3 ? 2 : 1);
+            record.reward = 0;
+        }
+        else
+            record.reward = this.grant(m.cash, g);
         if (m.id === 'sns' || m.id === 'team')
             this.promotionUntil = this.now + b.promotionSeconds;
     } if (!success)
-        this.arrivals = this.arrivals.filter(x => x.eventId !== a.eventId); this.active = null; this.announce(success ? m.name + ' 성공! ' + record.reward + '원 · ' + (m.id === 'team' ? '잠시 방문 홍보 UP' : '잘 해냈어요!') : m.name + ' 시간 종료 · 벌금 없이 다음 기회에 다시 도전해요.'); }
+        this.arrivals = this.arrivals.filter(x => x.eventId !== a.eventId); this.active = null; this.announce(success ? m.name + ' 성공! ' + (record.reward + (record.growthReward ?? 0)) + '원 · ' + (m.id === 'team' ? '잠시 방문 홍보 UP' : '잘 해냈어요!') : m.name + ' 시간 종료 · 벌금 없이 다음 기회에 다시 도전해요.'); }
     paid(guest, g) { if (!guest.eventArrival || !guest.paid || guest.abandoned)
         return; const r = this.records.find(r => r.id === guest.eventArrival.eventId); if (!r || r.kind !== 'incident' || r.outcome !== 'waiting')
         return; const m = incidentCatalog.find(x => x.id === r.type); r.outcome = 'success'; r.resolvedAt = this.now; r.reward = this.grant(m.cash, g, 'incident'); if (m.id === 'supplier' || m.id === 'lucky' && r.id % 2 === 0) {
@@ -123,7 +129,7 @@ export class CafeEvents {
             r.outcome = 'cancelled';
             r.resolvedAt = this.now;
         } this.active = null; this.arrivals = []; this.promotionUntil = 0; this.notice = { text: '', until: 0 }; }
-    report() { const missions = this.records.filter(r => r.kind === 'mission'), best = [...this.records].sort((a, b) => b.reward + b.giftValue - a.reward - a.giftValue)[0]; return { occurred: this.records.length, missionSuccess: missions.filter(r => r.outcome === 'success').length, missionFailed: missions.filter(r => r.outcome === 'failed').length, missionCancelled: missions.filter(r => r.outcome === 'cancelled').length, specialReward: this.records.filter(r => r.kind === 'incident').reduce((n, r) => n + r.reward + r.giftValue, 0), cashReward: this.records.reduce((n, r) => n + r.reward, 0), giftValue: this.records.reduce((n, r) => n + r.giftValue, 0), budget: this.budget, budgetSpent: this.budgetSpent, best: best && best.reward + best.giftValue ? { name: best.name, value: best.reward + best.giftValue } : null, missions: missions.length }; }
+    report() { const missions = this.records.filter(r => r.kind === 'mission'), best = [...this.records].sort((a, b) => b.reward + b.giftValue - a.reward - a.giftValue)[0]; return { occurred: this.records.length, missionSuccess: missions.filter(r => r.outcome === 'success').length, missionFailed: missions.filter(r => r.outcome === 'failed').length, missionCancelled: missions.filter(r => r.outcome === 'cancelled').length, specialReward: this.records.filter(r => r.kind === 'incident').reduce((n, r) => n + r.reward + (r.growthReward ?? 0) + r.giftValue, 0), cashReward: this.records.reduce((n, r) => n + r.reward + (r.growthReward ?? 0), 0), giftValue: this.records.reduce((n, r) => n + r.giftValue, 0), budget: this.budget, budgetSpent: this.budgetSpent, best: best && best.reward + best.giftValue ? { name: best.name, value: best.reward + best.giftValue } : null, missions: missions.length }; }
     checkpoint() { return structuredClone({ version: 1, duration: this.duration, now: this.now, cursor: this.cursor, closed: this.closed, records: this.records, active: this.active, arrivals: this.arrivals, lastArrival: this.lastArrival, budgetSpent: this.budgetSpent, promotionUntil: this.promotionUntil, ...this.lastMission ? { lastMission: this.lastMission } : {}, ...this.lastIncident ? { lastIncident: this.lastIncident } : {}, notice: this.notice }); }
     restore(value) { if (!validEventCheckpoint(value))
         return false; const s = structuredClone(value); this.enabled = true; Object.assign(this, s); return true; }
@@ -135,7 +141,7 @@ export function validEventCheckpoint(value) {
             return false;
         const ids = new Set();
         for (const r of s.records) {
-            if (!Number.isSafeInteger(r.id) || ids.has(r.id) || r.id < 1 || !['mission', 'incident'].includes(r.kind) || !['active', 'waiting', 'success', 'failed', 'cancelled'].includes(r.outcome) || !finite(r.at, 0, s.now) || !finite(r.reward) || !finite(r.giftValue) || typeof r.name !== 'string' || !([...allMissionCatalog, ...incidentCatalog].some(x => x.id === r.type)))
+            if (!Number.isSafeInteger(r.id) || ids.has(r.id) || r.id < 1 || !['mission', 'incident'].includes(r.kind) || !['active', 'waiting', 'success', 'failed', 'cancelled'].includes(r.outcome) || !finite(r.at, 0, s.now) || !finite(r.reward) || r.growthReward !== undefined && !finite(r.growthReward) || !finite(r.giftValue) || typeof r.name !== 'string' || !([...allMissionCatalog, ...incidentCatalog].some(x => x.id === r.type)))
                 return false;
             ids.add(r.id);
         }

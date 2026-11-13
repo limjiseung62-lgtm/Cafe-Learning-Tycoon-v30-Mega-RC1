@@ -1,28 +1,30 @@
-import { paintRenewalFinishes } from './renewalFacilityArt.js?v=v31-5d872fe24674';
-import { appearanceFor, architectureSprite } from './renewalArchitectureArt.js?v=v31-5d872fe24674';
-import { renderPhase, renderPhaseStart, renderPhaseEnd } from './renderPhaseTiming.js?v=v31-5d872fe24674';
-import { seatedDirection, eatingPose, paintEatingMotion } from './megaSeatedMotion.js?v=v31-5d872fe24674';
-import { finalRuntimeDiagnostics } from './finalRuntimeDiagnostics.js?v=v31-5d872fe24674';
-import { finalActorFrame } from './finalActorArt.js?v=v31-5d872fe24674';
-import { finalActorCache, finalActorFrameCache, finalActorBitmap } from './finalActorCache.js?v=v31-5d872fe24674';
-import { finalSpecializationFor } from './finalSpecialization.js?v=v31-5d872fe24674';
-import { signatureImage } from './finalSpecializationState.js?v=v31-5d872fe24674';
-import { managerActor, managerSprite } from './managerActor.js?v=v31-5d872fe24674';
-import { managerById } from './managerState.js?v=v31-5d872fe24674';
-import { megaOperatingGrade } from './megaOperations.js?v=v31-5d872fe24674';
-import { megaZones } from './megaZones.js?v=v31-5d872fe24674';
-import { livingWalkAsset } from './megaLivingArt.js?v=v31-5d872fe24674';
-import { MegaActorMotion } from './megaActorMotion.js?v=v31-5d872fe24674';
-import { MegaFramePacer } from './megaFramePacer.js?v=v31-5d872fe24674';
-import { megaEntrances, megaEnabled, megaDimensions, iso, toTile, megaChairs, megaMetrics } from './megaSpace.js?v=v31-5d872fe24674';
-import { selectCustomerPose, selectedPoseAsset } from './customerPoses.js?v=v31-5d872fe24674';
-import { workerFrame } from './motionSprites.js?v=v31-5d872fe24674';
-import { guestMotion, workerMotion } from './characterMotion.js?v=v31-5d872fe24674';
-import { motionFrame } from './animationPresentation.js?v=v31-5d872fe24674';
-import { furnitureFor } from './furnitureCatalog.js?v=v31-5d872fe24674';
-import { megaFurnitureFrames } from './megaFurnitureFrames.js?v=v31-5d872fe24674';
-import { furnitureFrames } from './furnitureFrames.js?v=v31-5d872fe24674';
-import { paintMegaDecor, megaImage as image, cachedFragment, paintArtFloor, paintArtWalls, environmentPlacements, megaArtMetrics, furnitureProjection, environmentSprite, bitmapFragment, clearArtBitmaps, artBitmapCache } from './megaArt.js?v=v31-5d872fe24674';
+import { studioSeatedLift } from './renewalFurnitureGeometry.js?v=v31-final-636a93f6f215';
+import { paintStudioFurniture } from './megaArt.js?v=v31-final-636a93f6f215';
+import { paintRenewalFinishes } from './renewalFacilityArt.js?v=v31-final-636a93f6f215';
+import { appearanceFor, architectureSprite } from './renewalArchitectureArt.js?v=v31-final-636a93f6f215';
+import { renderPhase, renderPhaseStart, renderPhaseEnd } from './renderPhaseTiming.js?v=v31-final-636a93f6f215';
+import { seatedDirection, eatingPose, paintEatingMotion } from './megaSeatedMotion.js?v=v31-final-636a93f6f215';
+import { finalRuntimeDiagnostics } from './finalRuntimeDiagnostics.js?v=v31-final-636a93f6f215';
+import { finalActorFrame } from './finalActorArt.js?v=v31-final-636a93f6f215';
+import { finalActorCache, finalActorFrameCache, finalActorBitmap } from './finalActorCache.js?v=v31-final-636a93f6f215';
+import { finalSpecializationFor } from './finalSpecialization.js?v=v31-final-636a93f6f215';
+import { signatureImage } from './finalSpecializationState.js?v=v31-final-636a93f6f215';
+import { managerActor, managerSprite } from './managerActor.js?v=v31-final-636a93f6f215';
+import { managerById } from './managerState.js?v=v31-final-636a93f6f215';
+import { megaOperatingGrade } from './megaOperations.js?v=v31-final-636a93f6f215';
+import { megaZones } from './megaZones.js?v=v31-final-636a93f6f215';
+import { livingWalkAsset } from './megaLivingArt.js?v=v31-final-636a93f6f215';
+import { MegaActorMotion } from './megaActorMotion.js?v=v31-final-636a93f6f215';
+import { MegaFramePacer } from './megaFramePacer.js?v=v31-final-636a93f6f215';
+import { megaEntrances, megaEnabled, megaDimensions, iso, toTile, megaChairs, megaMetrics } from './megaSpace.js?v=v31-final-636a93f6f215';
+import { selectCustomerPose, selectedPoseAsset } from './customerPoses.js?v=v31-final-636a93f6f215';
+import { workerFrame } from './motionSprites.js?v=v31-final-636a93f6f215';
+import { guestMotion, workerMotion } from './characterMotion.js?v=v31-final-636a93f6f215';
+import { motionFrame } from './animationPresentation.js?v=v31-final-636a93f6f215';
+import { furnitureFor } from './furnitureCatalog.js?v=v31-final-636a93f6f215';
+import { megaFurnitureFrames } from './megaFurnitureFrames.js?v=v31-final-636a93f6f215';
+import { furnitureFrames } from './furnitureFrames.js?v=v31-final-636a93f6f215';
+import { paintMegaDecor, megaImage as image, cachedFragment, paintArtFloor, paintArtWalls, environmentPlacements, megaArtMetrics, furnitureProjection, environmentSprite, bitmapFragment, clearArtBitmaps, artBitmapCache } from './megaArt.js?v=v31-final-636a93f6f215';
 const baseWorkers = { owner: [22, 76, 228, 429], 'staff-1': [274, 100, 234, 407], 'staff-2': [532, 70, 221, 434], 'staff-3': [782, 79, 241, 430], 'staff-4': [1045, 104, 232, 401], 'staff-5': [1310, 98, 203, 406] };
 export const paintMegaFloor = paintArtFloor;
 export function paintMegaBox(c, x, y, w, h, z, color) { const a = iso({ x, y }), b = iso({ x: x + w, y }), d = iso({ x, y: y + h }), e = iso({ x: x + w, y: y + h }); for (const [pts, fill] of [[[a, b, { x: b.x, y: b.y - z }, { x: a.x, y: a.y - z }], '#b38c5d'], [[b, e, { x: e.x, y: e.y - z }, { x: b.x, y: b.y - z }], '#8e6e4b'], [[{ x: a.x, y: a.y - z }, { x: b.x, y: b.y - z }, { x: e.x, y: e.y - z }, { x: d.x, y: d.y - z }], color]]) {
@@ -35,7 +37,8 @@ export function paintMegaBox(c, x, y, w, h, z, color) { const a = iso({ x, y }),
     c.lineWidth = .6;
     c.stroke();
 } }
-function preparedFurniture(t, chair, asynchronous = false) { const f = furnitureFor(t.kind, t.furnitureId), img = f && image(f.atlas); if (!f || !img)
+function preparedFurniture(t, chair, asynchronous = false) { const f = furnitureFor(t.kind, t.furnitureId); if (f?.studio)
+    return chair ? () => { } : (c) => { const p = iso(t); paintStudioFurniture(c, f.id, p.x, p.y, t.rotation, asynchronous); }; const img = f && image(f.atlas); if (!f || !img)
     return null; const theme = f.atlas.match(/theme-furniture\/(garden|bakery|dessert)/)?.[1], sheet = theme ? furnitureFrames[theme] : megaFurnitureFrames, row = chair ? f.chairRow : f.row, column = chair ? (chair.rear ? 0 : 2) : (t.rotation % 180 === 0 ? 0 : 2), source = sheet?.frames[row]?.[column], size = img.naturalWidth / 4; const crop = source ? { x: source.x * img.naturalWidth / sheet.width, y: source.y * img.naturalHeight / sheet.height, w: source.w * img.naturalWidth / sheet.width, h: source.h * img.naturalHeight / sheet.height } : { x: column * size, y: row * size, w: size, h: size }; const point = iso(chair ?? t), projection = furnitureProjection(t.kind, !!chair), width = projection.width, height = width * crop.h / crop.w; const tile = asynchronous ? bitmapFragment(img, [crop.x, crop.y, crop.w, crop.h], width, height) : cachedFragment(img, [crop.x, crop.y, crop.w, crop.h], width, height); if (!tile)
     return null; return (c) => c.drawImage(tile, point.x - width / 2, point.y - height + projection.baseRise, width, height); }
 function furniture(c, t, chair, asynchronous = false) { const draw = preparedFurniture(t, chair, asynchronous); if (!draw)
@@ -329,7 +332,7 @@ export class MegaView {
         const objects = this.staticObjects.map(o => ({ depth: o.depth, draw: () => renderPhase('static-draw', () => o.draw(c)) }));
         const visible = (q) => { const x = (q.x - this.center.x) * this.zoom + this.width / 2, y = (q.y - this.center.y) * this.zoom + this.height / 2; return x > -80 && x < this.width + 80 && y > -80 && y < this.height + 80; };
         for (const guest of g.guests) {
-            const pose = s.guest(guest), seatTable = p.tables.find(t => t.id === s.space.seats[guest.seat]?.tableId), seatDirection = seatTable ? seatedDirection(toTile(pose), seatTable) : 'SE', walk = this.actors.sample('g' + guest.id, pose, g.elapsedTime), facing = pose.seated ? (seatDirection === 'SW' || seatDirection === 'NW' ? 'left' : 'right') : walk.facing, tile = toTile(pose), q = iso(tile, pose.seated ? 7 : 0);
+            const pose = s.guest(guest), seatTable = p.tables.find(t => t.id === s.space.seats[guest.seat]?.tableId), seatDirection = seatTable ? seatedDirection(toTile(pose), seatTable) : 'SE', walk = this.actors.sample('g' + guest.id, pose, g.elapsedTime), facing = pose.seated ? (seatDirection === 'SW' || seatDirection === 'NW' ? 'left' : 'right') : walk.facing, tile = toTile(pose), q = iso(tile, pose.seated ? studioSeatedLift(seatTable?.furnitureId) : 0);
             if (guest.state === 'EATING')
                 q.y += eatingPose(guest.elapsed, guest.id, reduce).lean;
             if (!visible(q))

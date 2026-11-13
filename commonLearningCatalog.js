@@ -1,6 +1,6 @@
-import { QuestionPackCatalog } from './questionPack.js?v=v31-5d872fe24674';
-import { loadCommonRuntime } from './commonBankLoader.js?v=v31-5d872fe24674';
-import { safeCommonDiagram } from './questionRenderer.js?v=v31-5d872fe24674';
+import { QuestionPackCatalog } from './questionPack.js?v=v31-final-636a93f6f215';
+import { loadCommonRuntime } from './commonBankLoader.js?v=v31-final-636a93f6f215';
+import { safeCommonDiagram } from './questionRenderer.js?v=v31-final-636a93f6f215';
 export const commonDeployment = () => typeof document !== 'undefined' && ['v30e-city-integrated-local', 'v30e-common-local', 'v30e-v31-local'].includes(document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content') ?? '');
 export function commonAnswerText(q) { const text = q.render?.choices?.find((c) => c.id === q.assessment?.answer?.choiceId)?.text; if (typeof text !== 'string' || !text)
     throw Error('정답 연결을 확인해 주세요.'); return text; }
@@ -34,9 +34,11 @@ export class CommonLearningCatalog extends QuestionPackCatalog {
             now.push(old);
     } return now; }
     reset() { super.reset(); this.legacy.reset(); }
+    async legacyPack(id) { const pack = await this.legacy.load(id); if (pack.packId === 'qb-science-g4-s2-u2-ecosystems')
+        await loadCommonRuntime('science'); return pack; }
     async load(id) { if (this.resume && !this.resume.learning?.session?.common)
-        return this.legacy.load(id); const subject = this.subjects.find(s => s.packId === id); if (!subject)
-        return this.legacy.load(id); const choices = this.choices(subject.subject), loaded = await loadCommonRuntime(subject.subject, choices), questions = []; const ids = new Set(); for (const choice of choices) {
+        return this.legacyPack(id); const subject = this.subjects.find(s => s.packId === id); if (!subject)
+        return this.legacyPack(id); const choices = this.choices(subject.subject), loaded = await loadCommonRuntime(subject.subject, choices), questions = []; const ids = new Set(); for (const choice of choices) {
         const bank = loaded.runtime.createBank({ semesterKey: choice.semesterKey, learningRecordId: 'CAFE-PREPARATION' }), scope = { ...bank.defaultScope(choice.unitId), ...choice.skillIds ? { skillIds: choice.skillIds } : {}, ...choice.levels ? { levels: choice.levels } : {} };
         for (const candidate of bank.getCandidates(scope)) {
             const q = bank.getQuestion(candidate.questionRef);

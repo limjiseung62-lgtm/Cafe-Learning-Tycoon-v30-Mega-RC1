@@ -1,18 +1,19 @@
-import { openAppearance } from './renewalAppearance.js?v=v31-5d872fe24674';
-import { openFinalSpecialization } from './finalSpecializationUi.js?v=v31-5d872fe24674';
-import { openFinalSupply } from './finalSupplyUi.js?v=v31-5d872fe24674';
-import { openFinalDoors } from './finalDoorsUi.js?v=v31-5d872fe24674';
-import { finalActive } from './finalGrowth.js?v=v31-5d872fe24674';
-import { finalGrowthSummary } from './finalGrowthUi.js?v=v31-5d872fe24674';
-import { attachManagerSession } from './managerUi.js?v=v31-5d872fe24674';
-import { expansionAction } from './megaExpansionUi.js?v=v31-5d872fe24674';
-import { openInteriorShop, openInteriorEditor } from './megaShopUi.js?v=v31-5d872fe24674';
-import { liveManagementRepository, liveManagementOpen, setLiveManagementOpen } from './liveManagement.js?v=v31-5d872fe24674';
+import { beginInteriorEditing, finishInteriorEditing } from './interiorPause.js?v=v31-final-636a93f6f215';
+import { openAppearance } from './renewalAppearance.js?v=v31-final-636a93f6f215';
+import { openFinalSpecialization } from './finalSpecializationUi.js?v=v31-final-636a93f6f215';
+import { openFinalSupply } from './finalSupplyUi.js?v=v31-final-636a93f6f215';
+import { openFinalDoors } from './finalDoorsUi.js?v=v31-final-636a93f6f215';
+import { finalActive } from './finalGrowth.js?v=v31-final-636a93f6f215';
+import { finalGrowthSummary } from './finalGrowthUi.js?v=v31-final-636a93f6f215';
+import { attachManagerSession } from './managerUi.js?v=v31-final-636a93f6f215';
+import { expansionAction } from './megaExpansionUi.js?v=v31-final-636a93f6f215';
+import { openInteriorShop, openInteriorEditor } from './megaShopUi.js?v=v31-final-636a93f6f215';
+import { liveManagementRepository, liveManagementOpen, setLiveManagementOpen } from './liveManagement.js?v=v31-final-636a93f6f215';
 export function mountLiveManagement(g, c) { document.getElementById('live-mega-management')?.remove(); if (!c || g.mode !== 'CAFE_GROWTH' || !g.mega) {
     attachManagerSession(g, null);
     return;
 } const b = document.createElement('button'); b.id = 'live-mega-management'; b.className = 'staff-position-recovery'; b.textContent = '매장 관리 · 증축·가구 배치'; document.getElementById('staff-position-recovery').before(b); attachManagerSession(g, c); b.onclick = () => { if (liveManagementOpen || g.status !== 'RUNNING')
-    return; setLiveManagementOpen(true); const repo = liveManagementRepository(g, c), hub = document.createElement('dialog'); hub.className = 'live-mega-hub'; hub.innerHTML = '<h2>영업 중 매장 관리</h2><p>관리 중에도 영업 시간은 흘러요. 손님이 사용하는 좌석과 직원 통로는 유지해 주세요.</p><div class="live-mega-actions"></div><button data-return>카페로 돌아가기</button>'; document.body.append(hub); hub.showModal(); const done = () => { hub.remove(); setLiveManagementOpen(false); }; hub.querySelector('h2').insertAdjacentHTML('afterend', finalGrowthSummary(g)); const actions = hub.querySelector('.live-mega-actions'); const initial = repo.read(); expansionAction(actions, repo, initial.status === 'ready' ? initial.save : c.current(), () => { setLiveManagementOpen(false); }); const expansion = actions.querySelector('button'); const open = expansion.onclick; expansion.onclick = e => { open.call(expansion, e); const dialog = document.querySelector('dialog.mega-expansion'); if (dialog) {
+    return; setLiveManagementOpen(true); const repo = liveManagementRepository(g, c), hub = document.createElement('dialog'); hub.className = 'live-mega-hub'; hub.innerHTML = '<h2>영업 중 매장 관리</h2><p>이 안내 화면에서는 영업이 계속돼요. 가구 상점·배치 화면에서는 영업 시간이 멈춰요. 사용 중인 좌석과 통로는 유지해 주세요.</p><div class="live-mega-actions"></div><button data-return>카페로 돌아가기</button>'; document.body.append(hub); hub.showModal(); const done = () => { hub.remove(); setLiveManagementOpen(false); }; hub.querySelector('h2').insertAdjacentHTML('afterend', finalGrowthSummary(g)); const actions = hub.querySelector('.live-mega-actions'); const initial = repo.read(); expansionAction(actions, repo, initial.status === 'ready' ? initial.save : c.current(), () => { setLiveManagementOpen(false); }); const expansion = actions.querySelector('button'); const open = expansion.onclick; expansion.onclick = e => { open.call(expansion, e); const dialog = document.querySelector('dialog.mega-expansion'); if (dialog) {
     dialog.addEventListener('close', () => setLiveManagementOpen(false), { once: true });
     const watch = new MutationObserver(() => { if (!dialog.isConnected) {
         watch.disconnect();
@@ -26,8 +27,15 @@ else
     done(); }; for (const [label, open] of [['가구 상점 · 구매·보관함', openInteriorShop], ['가구 배치 · 이동·회전·보관', openInteriorEditor]]) {
     const x = document.createElement('button');
     x.textContent = label;
-    x.onclick = () => { hub.close(); hub.remove(); void open(repo, done).then(() => { if (!document.querySelector('.interior-dialog'))
-        done(); }).catch(() => done()); };
+    x.onclick = () => { const paused = !!g.mega?.finalGrowth?.renewal; if (paused && !beginInteriorEditing(g, () => c.save().ok)) {
+        const warning = document.createElement('p');
+        warning.setAttribute('role', 'status');
+        warning.textContent = '꾸미기 일시정지를 저장하지 못했어요. 기존 카페는 그대로예요. 다시 시도해 주세요.';
+        actions.append(warning);
+        return;
+    } const finish = () => { if (paused)
+        finishInteriorEditing(g, () => c.save().ok); done(); }; hub.close(); hub.remove(); void open(repo, finish).then(() => { if (!document.querySelector('.touch-interior,.interior-dialog'))
+        finish(); }).catch(() => finish()); };
     actions.append(x);
 } if (g.mega?.finalGrowth?.renewal) {
     const exterior = document.createElement('button');

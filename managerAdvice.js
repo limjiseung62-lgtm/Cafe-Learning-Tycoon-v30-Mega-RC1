@@ -1,5 +1,5 @@
-import { kitchenStages, kitchenFloorLabel } from './productionKitchen.js?v=v31-5d872fe24674';
-import { expansionQuote } from './megaExpansion.js?v=v31-5d872fe24674';
+import { kitchenRequiredSpace, kitchenStages, kitchenFloorLabel } from './productionKitchen.js?v=v31-final-636a93f6f215';
+import { expansionQuote } from './megaExpansion.js?v=v31-final-636a93f6f215';
 export function managerAdvice(g, save, now = Date.now()) {
     const id = g.mega?.manager?.selected;
     if (!id)
@@ -12,7 +12,7 @@ export function managerAdvice(g, save, now = Date.now()) {
         if (full >= Math.ceil(g.menus.length / 2))
             add({ id: 'storage', title: '생산보다 보관을 먼저 살펴봐요', text: '메뉴 ' + full + '종의 창고가 90% 이상 찼어요. 현재 보관 한도 ' + g.warehouse.capacity + '개, 초과 생산 ' + g.wastedProduction + '개예요. 창고 관리에서 확장 비용을 비교하고 필요한 경우에만 투자해요.', action: 'none' });
         else if (n && (missing.length || g.foodWaitSeconds > 20))
-            add({ id: 'production', title: '주방 투자와 주문량을 비교해요', text: '현재 생산 +' + g.productionAmount + ' · 재고 부족 대기 ' + Math.round(g.foodWaitSeconds) + '초 · 생산 ' + g.successfulProduction + '개. 다음 ' + n.name + '은 +' + n.amount + ', ' + n.cost.toLocaleString() + '원이에요. ' + (g.money >= n.cost ? '투자금을 마련했어요.' : '아직 ' + (n.cost - g.money).toLocaleString() + '원이 부족해요.') + ' 창고 관리에서 Lv.' + n.level + '·' + kitchenFloorLabel(n.space) + '칸 매장 조건을 확인해요.', action: 'none' });
+            add({ id: 'production', title: '주방 투자와 주문량을 비교해요', text: '현재 생산 +' + g.productionAmount + ' · 재고 부족 대기 ' + Math.round(g.foodWaitSeconds) + '초 · 생산 ' + g.successfulProduction + '개. 다음 ' + n.name + '은 +' + n.amount + ', ' + n.cost.toLocaleString() + '원이에요. ' + (g.money >= n.cost ? '투자금을 마련했어요.' : '아직 ' + (n.cost - g.money).toLocaleString() + '원이 부족해요.') + ' 창고 관리에서 Lv.' + n.level + '·' + kitchenFloorLabel(kitchenRequiredSpace(g, (g.mega.production?.tier ?? 0) + 1)) + '칸 매장 조건을 확인해요.', action: 'none' });
     }
     if (waiting.length >= 3)
         add({ id: 'waiting', title: '기다리는 손님을 살펴봐요', text: '지금 ' + waiting.length + '명이 음식을 기다려요. 재고를 채우고 직원과 테이블 사이 통로를 확인해 봐요.', action: 'shop' });

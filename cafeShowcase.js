@@ -1,10 +1,10 @@
-import { branchRoom } from './growthBranch.js?v=v31-5d872fe24674';
-import { imageReady } from './imageLoading.js?v=v31-5d872fe24674';
-import { specializationRoom } from './specializationConfig.js?v=v31-5d872fe24674';
-import { webAsset } from './webAsset.js?v=v31-5d872fe24674';
-import { branchCatalog } from './growthBranch.js?v=v31-5d872fe24674';
-import { specializationById } from './specializationConfig.js?v=v31-5d872fe24674';
-import { recruitById } from './recruitConfig.js?v=v31-5d872fe24674';
+import { branchRoom } from './growthBranch.js?v=v31-final-636a93f6f215';
+import { imageReady } from './imageLoading.js?v=v31-final-636a93f6f215';
+import { specializationRoom } from './specializationConfig.js?v=v31-final-636a93f6f215';
+import { webAsset } from './webAsset.js?v=v31-final-636a93f6f215';
+import { branchCatalog } from './growthBranch.js?v=v31-final-636a93f6f215';
+import { specializationById } from './specializationConfig.js?v=v31-final-636a93f6f215';
+import { recruitById } from './recruitConfig.js?v=v31-final-636a93f6f215';
 export function showcaseLines(g) { return [(g.specialization ? specializationById(g.specialization.selected)?.name : g.branchId ? branchCatalog.find(b => b.id === g.branchId)?.name : '나의 카페') + ' · Lv.' + g.cafeLevel, '성장 분기: ' + (branchCatalog.find(b => b.id === g.branchId)?.name ?? '첫 카페') + ' · 전문화: ' + (g.specialization ? specializationById(g.specialization.selected)?.name : '성장 중'), '근무 직원: ' + (g.service.paid.map(w => recruitById(w.staffId)?.name ?? '직원').join(' · ') || '사장님'), '인테리어는 실제 카페 화면에 배치한 모습이에요.', '특별 성취: 평판 ' + (g.management?.reputation.toFixed(1) ?? '기록 준비 중') + ' · 연구 메뉴 ' + Object.values(g.management?.research ?? {}).filter(x => x.stage === 'registered').length + '종']; }
 function composeShowcase(source, aspect, lines) { const canvas = document.createElement('canvas'), roomHeight = Math.round(aspect * 1120); canvas.width = 1200; canvas.height = roomHeight + 110 + lines.length * 38; const c = canvas.getContext('2d'); if (!c)
     throw Error('이미지 저장을 지원하지 않아요.'); c.fillStyle = '#fff6e5'; c.fillRect(0, 0, canvas.width, canvas.height); c.drawImage(source, 40, 40, 1120, roomHeight); c.fillStyle = '#493526'; c.font = '24px "Cafe Information",sans-serif'; lines.forEach((line, i) => c.fillText(line, 40, roomHeight + 85 + i * 38, 1120)); return new Promise((resolve, reject) => canvas.toBlob(b => b ? resolve(b) : reject(Error('PNG 변환에 실패했어요.')), 'image/png')); }

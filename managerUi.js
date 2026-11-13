@@ -1,12 +1,12 @@
-import { createGrowthSession } from './sessionFactory.js?v=v31-5d872fe24674';
-import { GrowthSessionController as ManagerController } from './growthSession.js?v=v31-5d872fe24674';
-import { openActionManager } from './managerActionUi.js?v=v31-5d872fe24674';
-import { managerFrames } from './managerFrames.js?v=v31-5d872fe24674';
-import { managerCatalog, managerById, ensureManager, completeManagerConstruction, selectManager, deferManager } from './managerState.js?v=v31-5d872fe24674';
-import { managerAdvice, nextManagerAdvice } from './managerAdvice.js?v=v31-5d872fe24674';
-import { talkManager } from './managerActor.js?v=v31-5d872fe24674';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v31-5d872fe24674';
-import { liveManagementOpen } from './liveManagement.js?v=v31-5d872fe24674';
+import { createGrowthSession } from './sessionFactory.js?v=v31-final-636a93f6f215';
+import { GrowthSessionController as ManagerController } from './growthSession.js?v=v31-final-636a93f6f215';
+import { openActionManager } from './managerActionUi.js?v=v31-final-636a93f6f215';
+import { managerFrames } from './managerFrames.js?v=v31-final-636a93f6f215';
+import { managerCatalog, managerById, ensureManager, completeManagerConstruction, selectManager, deferManager } from './managerState.js?v=v31-final-636a93f6f215';
+import { managerAdvice, nextManagerAdvice } from './managerAdvice.js?v=v31-final-636a93f6f215';
+import { talkManager } from './managerActor.js?v=v31-final-636a93f6f215';
+import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v31-final-636a93f6f215';
+import { liveManagementOpen } from './liveManagement.js?v=v31-final-636a93f6f215';
 function syncManagerRun(save) { const run = save.campaign?.run; if (run && !run.closed && run.cafe.mega && save.mega)
     run.cafe.mega.manager = structuredClone(save.mega.manager); return save; }
 const portrait = (row) => { const frame = managerFrames[row][0], top = frame.box[1], height = frame.box[3]; return '<div class="manager-portrait" style="aspect-ratio:192/' + height + '" aria-hidden="true"><img loading="lazy" src="assets/art/managers/companion-atlas.png" alt="" style="top:-' + top / height * 100 + '%;height:' + 1024 / height * 100 + '%"></div>'; };

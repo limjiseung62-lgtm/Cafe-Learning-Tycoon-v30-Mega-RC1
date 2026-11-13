@@ -1,6 +1,6 @@
-import { prepareRenewalDoor } from './renewalFacilities.js?v=v31-5d872fe24674';
-import { ensureMegaPlan, megaDimensions } from './megaSpace.js?v=v31-5d872fe24674';
-import { explicitDoors, prepareDoorMove } from './finalDoors.js?v=v31-5d872fe24674';
+import { prepareRenewalDoor } from './renewalFacilities.js?v=v31-final-636a93f6f215';
+import { ensureMegaPlan, megaDimensions } from './megaSpace.js?v=v31-final-636a93f6f215';
+import { explicitDoors, prepareDoorMove } from './finalDoors.js?v=v31-final-636a93f6f215';
 export function openFinalDoors(repo, done) { const r = repo.read(); if (r.status !== 'ready' || !r.save.mega?.finalGrowth) {
     done();
     return;

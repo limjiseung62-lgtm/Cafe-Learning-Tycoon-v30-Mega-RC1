@@ -1,17 +1,17 @@
-import { tutorialPauseCredit } from './tutorialPause.js?v=v31-5d872fe24674';
-import { commonTransactionOpen } from './commonLearningTransaction.js?v=v31-5d872fe24674';
-import { validImpactState } from './classImpact.js?v=v31-5d872fe24674';
-import { createRandomClassMatch } from './sessionFactory.js?v=v31-5d872fe24674';
-import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=v31-5d872fe24674';
-import { decodeGuestCheckpoint } from './guestCheckpoint.js?v=v31-5d872fe24674';
-import { LearningSession } from './learningSession.js?v=v31-5d872fe24674';
-import { LearningAnalyticsV1 } from './learningAnalytics.js?v=v31-5d872fe24674';
-import { providerForPool } from './learningIntegration.js?v=v31-5d872fe24674';
-import { validBranch } from './growthBranch.js?v=v31-5d872fe24674';
-import { validSpecialization } from './specialization.js?v=v31-5d872fe24674';
-import { beginMiniSession, offerMini, validMiniSession, validMiniCollection } from './miniGames.js?v=v31-5d872fe24674';
-import { ordinaryKinds, majorKinds } from './classRandom.js?v=v31-5d872fe24674';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=v31-5d872fe24674';
+import { tutorialPauseCredit } from './tutorialPause.js?v=v31-final-636a93f6f215';
+import { commonTransactionOpen } from './commonLearningTransaction.js?v=v31-final-636a93f6f215';
+import { validImpactState } from './classImpact.js?v=v31-final-636a93f6f215';
+import { createRandomClassMatch } from './sessionFactory.js?v=v31-final-636a93f6f215';
+import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=v31-final-636a93f6f215';
+import { decodeGuestCheckpoint } from './guestCheckpoint.js?v=v31-final-636a93f6f215';
+import { LearningSession } from './learningSession.js?v=v31-final-636a93f6f215';
+import { LearningAnalyticsV1 } from './learningAnalytics.js?v=v31-final-636a93f6f215';
+import { providerForPool } from './learningIntegration.js?v=v31-final-636a93f6f215';
+import { validBranch } from './growthBranch.js?v=v31-final-636a93f6f215';
+import { validSpecialization } from './specialization.js?v=v31-final-636a93f6f215';
+import { beginMiniSession, offerMini, validMiniSession, validMiniCollection } from './miniGames.js?v=v31-final-636a93f6f215';
+import { ordinaryKinds, majorKinds } from './classRandom.js?v=v31-final-636a93f6f215';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=v31-final-636a93f6f215';
 export const classSaveKey = 'class-random-v1', classLockKey = 'class-random-lock';
 export function captureClass(g, packId, engine, analytics, readVisits) { if (!g.classRandom)
     throw Error('Not random CLASS'); return { version: 1, clock: g.classClock(), duration: g.durationSeconds, packId, elapsed: g.elapsedTime, closed: g.status === 'CLOSED', state: structuredClone(g.classRandom), cafe: classroomCafeCheckpoint(g), guests: structuredClone(g.guests), workers: structuredClone(g.service.workers), purchases: structuredClone(g.telemetry.upgradePurchases), phase4: structuredClone(g.telemetry.phase4), branch: structuredClone(g.growthBranch), specialization: structuredClone(g.specialization), miniGames: structuredClone(g.miniGames), miniCollection: structuredClone(g.miniCollection), learning: { session: engine.checkpoint(), analytics: analytics.checkpoint(), readVisits } }; }

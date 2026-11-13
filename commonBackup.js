@@ -1,6 +1,6 @@
-import { deploymentLocalStorage as storage, deploymentPrefix } from './deploymentStorage.js?v=v31-5d872fe24674';
-import { loadCommonRuntime } from './commonBankLoader.js?v=v31-5d872fe24674';
-import { CommonCafeFlow } from './commonCafeFlow.js?v=v31-5d872fe24674';
+import { deploymentLocalStorage as storage, deploymentPrefix } from './deploymentStorage.js?v=v31-final-636a93f6f215';
+import { loadCommonRuntime } from './commonBankLoader.js?v=v31-final-636a93f6f215';
+import { CommonCafeFlow } from './commonCafeFlow.js?v=v31-final-636a93f6f215';
 /** An additive envelope: native café JSON remains byte-for-byte inside cafe. */
 export function commonDeployment() { return ['cafe-v30-final-local/', 'cafe-v30-city-integrated-local/', 'cafe-v30-mega-common-rc1/', 'cafe-v31-franchise-local/'].includes(deploymentPrefix()); }
 export function commonRecordEntries() { const out = []; for (let i = 0; i < storage.length; i++) {
@@ -38,7 +38,7 @@ export async function unpackCommonBackup(text) {
 }
 function commonBundle(native, rows) {
     const run = async (commit) => { if (!rows.length)
-        return commit?.() ?? { ok: true, message: '' }; const apply = () => { const prior = new Map(); for (const key of [...rows.map(r => r.key), 'common-record-index'])
+        return commit?.() ?? { ok: true, message: '' }; const apply = async () => { const prior = new Map(); for (const key of [...rows.map(r => r.key), 'common-record-index'])
         prior.set(key, storage.getItem(key)); try {
         for (const r of rows) {
             const old = storage.getItem(r.key);
@@ -58,7 +58,7 @@ function commonBundle(native, rows) {
             }
             storage.setItem('common-record-index', JSON.stringify(index));
         }
-        const result = commit?.() ?? { ok: true, message: '' };
+        const result = await (commit?.() ?? { ok: true, message: '' });
         if (!result.ok)
             throw Error(result.message);
         return result;
@@ -79,5 +79,5 @@ function commonBundle(native, rows) {
     } }; if (!rows.length)
         return apply(); if (typeof navigator === 'undefined' || !navigator.locks)
         throw Error('안전한 학습 기록 복원을 위해 최신 HTTPS 브라우저를 사용해 주세요.'); return navigator.locks.request(deploymentPrefix() + 'common-archive-index', apply); };
-    return { native, install: async () => { await run(); }, restore: (commit) => run(commit) };
+    return { native, install: async () => { await run(); }, restore: (commit) => run(commit), restoreAsync: (commit) => run(commit) };
 }

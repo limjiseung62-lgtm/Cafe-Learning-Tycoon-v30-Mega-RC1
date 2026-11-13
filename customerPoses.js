@@ -1,10 +1,10 @@
-import { finalActorFrame } from './finalActorArt.js?v=v31-5d872fe24674';
-import { waitForImages } from './imageLoading.js?v=v31-5d872fe24674';
-import { webAsset } from './webAsset.js?v=v31-5d872fe24674';
-import { guestMotionAsset } from './motionSprites.js?v=v31-5d872fe24674';
-import { hospitalityPoseCatalog } from './hospitalityPoseCatalog.js?v=v31-5d872fe24674';
-import { specialPoseCatalog } from './specialPoseCatalog.js?v=v31-5d872fe24674';
-import { customerPoseCatalog } from './customerPoseCatalog.js?v=v31-5d872fe24674';
+import { finalActorFrame } from './finalActorArt.js?v=v31-final-636a93f6f215';
+import { waitForImages } from './imageLoading.js?v=v31-final-636a93f6f215';
+import { webAsset } from './webAsset.js?v=v31-final-636a93f6f215';
+import { guestMotionAsset } from './motionSprites.js?v=v31-final-636a93f6f215';
+import { hospitalityPoseCatalog } from './hospitalityPoseCatalog.js?v=v31-final-636a93f6f215';
+import { specialPoseCatalog } from './specialPoseCatalog.js?v=v31-final-636a93f6f215';
+import { customerPoseCatalog } from './customerPoseCatalog.js?v=v31-final-636a93f6f215';
 export const customerPoses = customerPoseCatalog;
 export function selectCustomerPose(visualKey, action, facing, motion = '', phase = 0) { const walking = ['ENTERING', 'WALKING_TO_SEAT', 'STANDING_UP', 'WALKING_TO_EXIT'].includes(action), frame = finalActorFrame(visualKey, facing === 'left' ? 'SW' : 'SE', walking ? 'walk' : 'sit', phase); if (frame)
     return { key: visualKey + '/' + action + '/' + phase, kind: walking ? 'walk' : 'sit', walk: visualKey, facing, asset: { ...frame, box: [...frame.box], displayScale: 1 } }; const p = customerPoses[visualKey] ?? hospitalityPoseCatalog[visualKey] ?? specialPoseCatalog[visualKey]; if (!p)

@@ -1,16 +1,18 @@
-import { adoptFinalGrowth, finalLocalDeployment } from './finalGrowth.js?v=v31-5d872fe24674';
-import { ensureManager } from './managerState.js?v=v31-5d872fe24674';
-import { adoptInterior, isShopDeployment } from './megaInventory.js?v=v31-5d872fe24674';
-import { adoptPaidSpace } from './megaExpansion.js?v=v31-5d872fe24674';
-import { isPaidDeployment } from './megaSpace.js?v=v31-5d872fe24674';
-import { newClassState, seededStep } from './classRandom.js?v=v31-5d872fe24674';
-import { createManagement } from './managementState.js?v=v31-5d872fe24674';
-import { growthMenuDefinitions } from './menuResearch.js?v=v31-5d872fe24674';
-import { desiredLakeMini } from './lakeDistrict.js?v=v31-5d872fe24674';
-import { recruitById } from "./recruitConfig.js?v=v31-5d872fe24674";
-import { CafeGame } from './game.js?v=v31-5d872fe24674';
-import { policyFor } from './sessionModes.js?v=v31-5d872fe24674';
-import { createGrowthSave, validateGrowthSave } from './growthSave.js?v=v31-5d872fe24674';
+import { refreshMenuQuality } from './renewalMenuQuality.js?v=v31-final-636a93f6f215';
+import { adoptMenuStagePolicy } from './renewalMigration.js?v=v31-final-636a93f6f215';
+import { adoptFinalGrowth, finalLocalDeployment } from './finalGrowth.js?v=v31-final-636a93f6f215';
+import { ensureManager } from './managerState.js?v=v31-final-636a93f6f215';
+import { adoptInterior, isShopDeployment } from './megaInventory.js?v=v31-final-636a93f6f215';
+import { adoptPaidSpace } from './megaExpansion.js?v=v31-final-636a93f6f215';
+import { isPaidDeployment } from './megaSpace.js?v=v31-final-636a93f6f215';
+import { newClassState, seededStep } from './classRandom.js?v=v31-final-636a93f6f215';
+import { createManagement } from './managementState.js?v=v31-final-636a93f6f215';
+import { growthMenuDefinitions } from './menuResearch.js?v=v31-final-636a93f6f215';
+import { desiredLakeMini } from './lakeDistrict.js?v=v31-final-636a93f6f215';
+import { recruitById } from "./recruitConfig.js?v=v31-final-636a93f6f215";
+import { CafeGame } from './game.js?v=v31-final-636a93f6f215';
+import { policyFor } from './sessionModes.js?v=v31-final-636a93f6f215';
+import { createGrowthSave, validateGrowthSave } from './growthSave.js?v=v31-final-636a93f6f215';
 const growthExpected = new WeakMap();
 export const setGrowthExpected = (g, s) => growthExpected.set(g, structuredClone(s));
 export const growthExpectedFor = (g) => growthExpected.get(g);
@@ -25,13 +27,13 @@ export function createGrowthSession(save = createGrowthSave(), random = Math.ran
     save = structuredClone(save);
     save.mega.extended = true;
 } if (finalLocalDeployment() || save.mega?.finalGrowth)
-    save = adoptFinalGrowth(save); const g = new CafeGame(seconds, random, 300, { mode: 'CAFE_GROWTH', phase4: true, progressive: !!save.v26 }); g.progressiveState = structuredClone(save.v26); g.management = structuredClone(save.management); if (save.v26 && save.cafeLevel >= 8) {
+    save = adoptFinalGrowth(save); save = adoptMenuStagePolicy(save); const g = new CafeGame(seconds, random, 300, { mode: 'CAFE_GROWTH', phase4: true, progressive: !!save.v26 }); g.progressiveState = structuredClone(save.v26); g.management = structuredClone(save.management); if (save.v26 && save.cafeLevel >= 8) {
     g.management ??= createManagement();
     g.management.strategy ??= 'care';
 } if (g.management && save.mega?.finalGrowth)
     g.management.legacyArchiveOnly = true; if (g.management && save.v26)
     g.management.progressiveLevel = save.cafeLevel; g.growthCafeId = save.portfolio?.activeCafeId ?? 'cafe-1'; g.lakeMini = desiredLakeMini(save); g.village = structuredClone(save.village); if (g.village && save.v26)
-    g.village.progressiveLevel = save.cafeLevel; g.miniCollection = structuredClone(save.miniCollection); g.specialization = structuredClone(save.specialization); g.mega = structuredClone(save.mega); ensureManager(g.mega); g.freeLayouts = structuredClone(save.freeLayouts); g.layouts = structuredClone(save.layouts); g.roster = structuredClone(save.roster); g.cafeLevel = save.cafeLevel; g.growthBranch = structuredClone(save.growthBranch); g.money = save.money; g.warehouseLevel = save.warehouseLevel; g.menus = growthMenuDefinitions(save.cafeLevel, save.management, save.mega?.finalGrowth).filter(m => save.unlockedMenuIds.includes(m.menuId)).map(m => ({ ...m, currentLevel: save.menuLevels[m.menuId], stock: Math.min(g.warehouse.capacity, save.v26?.stock?.[m.menuId] ?? 0), maxStock: g.warehouse.capacity })); g.service.maxPaid = g.staffLimit; for (const id of save.staffOwned) {
+    g.village.progressiveLevel = save.cafeLevel; g.miniCollection = structuredClone(save.miniCollection); g.specialization = structuredClone(save.specialization); g.mega = structuredClone(save.mega); ensureManager(g.mega); g.freeLayouts = structuredClone(save.freeLayouts); g.layouts = structuredClone(save.layouts); g.roster = structuredClone(save.roster); g.cafeLevel = save.cafeLevel; g.growthBranch = structuredClone(save.growthBranch); g.money = save.money; g.warehouseLevel = save.warehouseLevel; g.menus = growthMenuDefinitions(save.cafeLevel, save.management, save.mega?.finalGrowth).filter(m => save.unlockedMenuIds.includes(m.menuId)).map(m => ({ ...m, currentLevel: save.menuLevels[m.menuId], stock: Math.min(g.warehouse.capacity, save.v26?.stock?.[m.menuId] ?? 0), maxStock: g.warehouse.capacity })); refreshMenuQuality(g); g.service.maxPaid = g.staffLimit; for (const id of save.staffOwned) {
     const w = g.service.hire(save.roster ? recruitById(id) : undefined);
     if (w.staffId !== id)
         throw Error('Invalid staff order');

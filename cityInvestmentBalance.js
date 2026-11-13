@@ -1,4 +1,4 @@
-import { byId } from './cityBuildingCatalog.js?v=v31-5d872fe24674';
+import { byId } from './cityBuildingCatalog.js?v=v31-final-636a93f6f215';
 export const cityFactorBounds = { min: .90, max: 1.32 };
 export const cityPriceBands = { housing: [20000, 90000, 280000], commerce: [30000, 120000, 360000], enterprise: [45000, 150000, 480000], tourism: [50000, 160000, 440000], culture: [100000, 320000, 900000], public: [70000, 200000, 550000], leisure: [35000, 100000, 300000] };
 export const cityTrafficPrices = [60000, 180000, 480000];

@@ -1,4 +1,4 @@
-import { safeDiagram } from './questionRenderer.js?v=v31-5d872fe24674';
+import { safeDiagram } from './questionRenderer.js?v=v31-final-636a93f6f215';
 export const analyticsConfig = { minimumObjectiveAttempts: 5, strongAccuracy: 80, practiceAccuracy: 60, maxDetailedAttempts: 10000, maxAnswersPerWrong: 20 };
 export const emptyCounts = () => ({ attempted: 0, correct: 0 });
 export const accuracy = (c) => c.attempted ? Math.round(c.correct / c.attempted * 1000) / 10 : null;

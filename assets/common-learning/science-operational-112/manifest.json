@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "common-public-runtime-manifest/1",
+  "packId": "QB-SCIENCE-G4-S2-U2-UNIFIED",
+  "dataVersion": "science-unified/0.1.3-1.0.0-candidate",
+  "runtimeVersion": "common-public-runtime/1.1.2-operational",
+  "catalogDigest": "94d7d1bb201114509f67d6800650141f152be420f078abc501b0a102465c26a8",
+  "policyImplementationDigest": "a424092487b43f94b46d655143758790af406b5279e49c66b1c97924b04128a5",
+  "rendererDigest": "57911fbea84670b8b83025e56ae308b678a13f23494b866e0eb81a26a90b48e0",
+  "files": [
+    {
+      "path": "approval-gate.mjs",
+      "bytes": 2936,
+      "sha256": "2179836e4673dbb65d0f5a46ad0d2d6272643a2019dc1c07aede0469be93e946",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "approved-core.mjs",
+      "bytes": 57724,
+      "sha256": "45fed2224e185d27f40571c36ccd1f60a244eda7ab2be01abdb4d23b77cc9be3",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "CODE-NOTICE-KO.txt",
+      "bytes": 805,
+      "sha256": "58eb672819faad84cc09f8642a444956923ea5255eaccfc1c1e7d0591bc00fb6",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "legacy/png.mjs",
+      "bytes": 12374,
+      "sha256": "9b90d1af5af4ee1a3abc80b788bf171da0ccffe023d9b4f6941f26a348f01c29",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "legacy/report-port.mjs",
+      "bytes": 660,
+      "sha256": "b47523e53663aeb43e32d6d88a587e97bd76127c1180226c5253b3569e9c16cc",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "legacy/report.mjs",
+      "bytes": 21416,
+      "sha256": "1e65c792a26793910376d0cbc50402ac02472b40a23ba38523e572fa00b94f8a",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "legacy/runtime.mjs",
+      "bytes": 48238,
+      "sha256": "a424092487b43f94b46d655143758790af406b5279e49c66b1c97924b04128a5",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "MATH-NOTICE-KO.txt",
+      "bytes": 1177,
+      "sha256": "60c36f8a2a6be9b8e7265b8c24f8e0aba87807fa7d7fc132cad55654c3e0cf0a",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "OPERATIONAL-NOTICE-KO.txt",
+      "bytes": 826,
+      "sha256": "100db72b5cf4fecc9bd56b8278d29a84c5143c497236c4dfdb6b7986a4ec220e",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "png.mjs",
+      "bytes": 12017,
+      "sha256": "a125a647b4e976254132c01a6bac5fc145a8d368933de79cf6c810b22983c934",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "question-renderer.mjs",
+      "bytes": 2768,
+      "sha256": "ca6b74a67bffbc85b50dcdfbcaf137103f7da781bc7040589b675364d6413026",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "record-store.mjs",
+      "bytes": 7590,
+      "sha256": "b6d8fd6ad9f338619f42cf8e978507e3c5cdaeab84fa9c3ccf1b3e4c6fd3401a",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "renderer-extension.mjs",
+      "bytes": 3675,
+      "sha256": "57911fbea84670b8b83025e56ae308b678a13f23494b866e0eb81a26a90b48e0",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "report-port.mjs",
+      "bytes": 711,
+      "sha256": "be5e82bb5dd4e7544ab0df569cac3c09a18d131a0ff94b3e2399e505a5510f8c",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "report.mjs",
+      "bytes": 16063,
+      "sha256": "1c3237b06aae1cf7712025b6afafabe98deb9d80e8216a814ce0efc55dc660ee",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "runtime.mjs",
+      "bytes": 2667,
+      "sha256": "90e3cdb00f1d42d664a4c51d884c6f2aafc05e276b6ba3aac6fc67567345a051",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "SCIENCE-NOTICE-KO.txt",
+      "bytes": 640,
+      "sha256": "011a08cad0640c5d1193f5d54afb20fab0091e1362347cd42f47b0d9205894fc",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "scopes.mjs",
+      "bytes": 2721,
+      "sha256": "afced0e7c3b3b735dd1c0d886b826896e6ab54f6f4b6c9f45a96cf8260746128",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "ui.css",
+      "bytes": 8593,
+      "sha256": "5a693333cc5e0e67ab4cb3ce75f536ca97e68088845deb669333ff18ba0e6df6",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "util.mjs",
+      "bytes": 1231,
+      "sha256": "c286b763abb0c152809a16bd048bb146c05317b72db04189d30b4f4ebef5f5db",
+      "role": "runtime-code-or-notice"
+    },
+    {
+      "path": "science-data.json",
+      "bytes": 542507,
+      "sha256": "13c2576de939208a09515754916c809068abe5ae71d07c14e1a2e52b46c8852e",
+      "role": "approved-data"
+    },
+    {
+      "path": "science-native-reference-map.json",
+      "bytes": 223,
+      "sha256": "08f4cbdda8f4aba712e05dc89b6bb895213e9038d05e4172ce8324bc022a9e82",
+      "role": "native-reference-map"
+    },
+    {
+      "path": "science-operational-approval.json",
+      "bytes": 5911,
+      "sha256": "85e8e90fb559c4b9092d4c7496d7cc78f1eff7f4e3910ee332fd82a6a61f679e",
+      "role": "operational-approval"
+    }
+  ],
+  "subjectId": "science",
+  "subjectLabel": "과학",
+  "operationalApproval": true,
+  "teacherApprovalReused": true,
+  "counts": {
+    "objects": 104,
+    "groups": 26,
+    "minimumReviewGroups": 26,
+    "recent12ReserveGroups": 0
+  },
+  "reviewPolicy": "SCHOOL-QUEST-UNIFIED-LEARNING-v1.0",
+  "originalApprovalsAndNativePackagesUnchanged": true,
+  "commonLearningVersion": "common-learning/1.1.2-math-science-operational",
+  "reportContractVersion": "common-learning-mixed-report/1.1.0",
+  "productionReadyChanged": false,
+  "operationalApprovalRecord": {
+    "path": "science-operational-approval.json",
+    "sha256": "85e8e90fb559c4b9092d4c7496d7cc78f1eff7f4e3910ee332fd82a6a61f679e"
+  },
+  "operationalApprovalId": "OP-SCIENCE-EXISTING-104-20261031",
+  "engineABIFile": "legacy/runtime.mjs",
+  "engineABIDataSHA256": "94d7d1bb201114509f67d6800650141f152be420f078abc501b0a102465c26a8",
+  "scienceIncluded": true
+}

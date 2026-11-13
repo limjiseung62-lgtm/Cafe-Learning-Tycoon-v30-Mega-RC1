@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "common-learning-operational-approval/1",
+  "approvalId": "OP-SCIENCE-EXISTING-104-20261031",
+  "status": "APPROVED_EXACT_SCOPE",
+  "recordedAt": "2026-10-31T02:34:09.986Z",
+  "packagingRecordedAt": "2026-11-01T15:50:48.501Z",
+  "basis": "existing user-authorized exact104 independent content; not new content approval",
+  "authoritySHA256": "55fbfbe03e917dc5599fc3172d7bceba7a2c17e3a1fca3a0db09e0e74365efa5",
+  "allowedConsumers": [
+    "math-hero-survival",
+    "random-defense",
+    "cafe-learning-tycoon",
+    "school-quest",
+    "common-bank"
+  ],
+  "scope": {
+    "subject": "science",
+    "packId": "QB-SCIENCE-G4-S2-U2-UNIFIED",
+    "dataVersion": "science-unified/0.1.3-1.0.0-candidate",
+    "stableContentVersion": "94d7d1bb201114509f67d6800650141f152be420f078abc501b0a102465c26a8",
+    "sourceContentArtifactSHA256": "94d7d1bb201114509f67d6800650141f152be420f078abc501b0a102465c26a8",
+    "educationalContentDigest": "6a8a10426c9d2884be48d9ad6ea26791a5955e0245f55d0d17c0b1d2635169eb",
+    "transportDataSHA256": "13c2576de939208a09515754916c809068abe5ae71d07c14e1a2e52b46c8852e",
+    "transportBytes": 542507,
+    "objects": 104,
+    "groups": 26,
+    "units": 1,
+    "sourcePackId": "qb-science-g4-s2-u2-ecosystems",
+    "sourceVersion": "0.1.3",
+    "sourcePackSHA256": "edc88815e37327e5740bcb1f75a6a67674b6d8e98af4f8e6d557f6c235f4c9fb",
+    "scopeMemberIndexSHA256": "8a811172cff5b72cb7a789e8f178053262a326648bccb0ae66b27b6eab98a246"
+  },
+  "teacherReview": {
+    "status": "verified-existing-exact-scope",
+    "sourceBatchId": "SCIENCE-U2-USER-ALL-PASS-85275a5c-7991-4e2f-a2bd-c8404b76f0d5",
+    "evidenceSHA256": "493dcc0e9dcc6ea126cccdf6e3bbb7877e87de1f1ab4e4bb3513cb1754b23997",
+    "newTeacherReview": false
+  },
+  "rights": {
+    "status": "cleared-project-original-exact-assets",
+    "objects": 104,
+    "evidenceSHA256": "55fbfbe03e917dc5599fc3172d7bceba7a2c17e3a1fca3a0db09e0e74365efa5",
+    "approvalIndexSHA256": "c8f501990cf0433b86c851958bff4499a550dccdc42df5478c88b3f0c9d8776e",
+    "newExternalAssets": 0
+  },
+  "exclusions": {
+    "unknownRightsAssetsAllowed": 0,
+    "openEndedGenerationAllowed": false
+  },
+  "engineABI": {
+    "implementationHash": "a424092487b43f94b46d655143758790af406b5279e49c66b1c97924b04128a5",
+    "policy": "equivalent-two/1.0.0",
+    "packSha256": "94d7d1bb201114509f67d6800650141f152be420f078abc501b0a102465c26a8",
+    "unchanged": true
+  },
+  "runtimeFiles": [
+    {
+      "path": "approval-gate.mjs",
+      "bytes": 2936,
+      "sha256": "2179836e4673dbb65d0f5a46ad0d2d6272643a2019dc1c07aede0469be93e946"
+    },
+    {
+      "path": "approved-core.mjs",
+      "bytes": 57724,
+      "sha256": "45fed2224e185d27f40571c36ccd1f60a244eda7ab2be01abdb4d23b77cc9be3"
+    },
+    {
+      "path": "CODE-NOTICE-KO.txt",
+      "bytes": 805,
+      "sha256": "58eb672819faad84cc09f8642a444956923ea5255eaccfc1c1e7d0591bc00fb6"
+    },
+    {
+      "path": "legacy/png.mjs",
+      "bytes": 12374,
+      "sha256": "9b90d1af5af4ee1a3abc80b788bf171da0ccffe023d9b4f6941f26a348f01c29"
+    },
+    {
+      "path": "legacy/report-port.mjs",
+      "bytes": 660,
+      "sha256": "b47523e53663aeb43e32d6d88a587e97bd76127c1180226c5253b3569e9c16cc"
+    },
+    {
+      "path": "legacy/report.mjs",
+      "bytes": 21416,
+      "sha256": "1e65c792a26793910376d0cbc50402ac02472b40a23ba38523e572fa00b94f8a"
+    },
+    {
+      "path": "legacy/runtime.mjs",
+      "bytes": 48238,
+      "sha256": "a424092487b43f94b46d655143758790af406b5279e49c66b1c97924b04128a5"
+    },
+    {
+      "path": "MATH-NOTICE-KO.txt",
+      "bytes": 1177,
+      "sha256": "60c36f8a2a6be9b8e7265b8c24f8e0aba87807fa7d7fc132cad55654c3e0cf0a"
+    },
+    {
+      "path": "OPERATIONAL-NOTICE-KO.txt",
+      "bytes": 826,
+      "sha256": "100db72b5cf4fecc9bd56b8278d29a84c5143c497236c4dfdb6b7986a4ec220e"
+    },
+    {
+      "path": "png.mjs",
+      "bytes": 12017,
+      "sha256": "a125a647b4e976254132c01a6bac5fc145a8d368933de79cf6c810b22983c934"
+    },
+    {
+      "path": "question-renderer.mjs",
+      "bytes": 2768,
+      "sha256": "ca6b74a67bffbc85b50dcdfbcaf137103f7da781bc7040589b675364d6413026"
+    },
+    {
+      "path": "record-store.mjs",
+      "bytes": 7590,
+      "sha256": "b6d8fd6ad9f338619f42cf8e978507e3c5cdaeab84fa9c3ccf1b3e4c6fd3401a"
+    },
+    {
+      "path": "renderer-extension.mjs",
+      "bytes": 3675,
+      "sha256": "57911fbea84670b8b83025e56ae308b678a13f23494b866e0eb81a26a90b48e0"
+    },
+    {
+      "path": "report-port.mjs",
+      "bytes": 711,
+      "sha256": "be5e82bb5dd4e7544ab0df569cac3c09a18d131a0ff94b3e2399e505a5510f8c"
+    },
+    {
+      "path": "report.mjs",
+      "bytes": 16063,
+      "sha256": "1c3237b06aae1cf7712025b6afafabe98deb9d80e8216a814ce0efc55dc660ee"
+    },
+    {
+      "path": "runtime.mjs",
+      "bytes": 2667,
+      "sha256": "90e3cdb00f1d42d664a4c51d884c6f2aafc05e276b6ba3aac6fc67567345a051"
+    },
+    {
+      "path": "SCIENCE-NOTICE-KO.txt",
+      "bytes": 640,
+      "sha256": "011a08cad0640c5d1193f5d54afb20fab0091e1362347cd42f47b0d9205894fc"
+    },
+    {
+      "path": "scopes.mjs",
+      "bytes": 2721,
+      "sha256": "afced0e7c3b3b735dd1c0d886b826896e6ab54f6f4b6c9f45a96cf8260746128"
+    },
+    {
+      "path": "ui.css",
+      "bytes": 8593,
+      "sha256": "5a693333cc5e0e67ab4cb3ce75f536ca97e68088845deb669333ff18ba0e6df6"
+    },
+    {
+      "path": "util.mjs",
+      "bytes": 1231,
+      "sha256": "c286b763abb0c152809a16bd048bb146c05317b72db04189d30b4f4ebef5f5db"
+    }
+  ],
+  "limits": {
+    "minimumGroups": 26,
+    "recent12Reserve": 0,
+    "longTermLimited": 26,
+    "recent12PolicyRelaxed": false
+  },
+  "scienceSupplement": {
+    "normalGap": [
+      3,
+      5
+    ],
+    "masteryGap": [
+      6,
+      10
+    ],
+    "replacesInstant": false,
+    "schedulerAndRewardOwner": "consumer-game"
+  },
+  "officialGameDeploymentAuthorized": false,
+  "publicDeploymentPerformed": false,
+  "legacyProductionReadyChanged": false
+}

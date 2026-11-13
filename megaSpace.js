@@ -1,14 +1,16 @@
-import { MegaRouteScratch } from './megaRouteScratch.js?v=v31-5d872fe24674';
-import { renderPhaseEnd, renderPhaseMetrics } from './renderPhaseTiming.js?v=v31-5d872fe24674';
-import { validFinalGrowth } from './finalGrowth.js?v=v31-5d872fe24674';
-import { validProductionKitchen } from './productionKitchen.js?v=v31-5d872fe24674';
-import { validManager } from './managerState.js?v=v31-5d872fe24674';
-import { megaZones } from './megaZones.js?v=v31-5d872fe24674';
-import { validInterior, tableSeatCount } from './megaInventory.js?v=v31-5d872fe24674';
-import { allDecorationCatalog } from './longGrowthConfig.js?v=v31-5d872fe24674';
-import { cafeGrowthBalance } from './modeBalance.js?v=v31-5d872fe24674';
-import { tableKinds, turn } from './freeLayoutModel.js?v=v31-5d872fe24674';
-import { furnitureFor } from './furnitureCatalog.js?v=v31-5d872fe24674';
+import { studioDecorBox, studioChairOffsets, studioTableSize } from './renewalFurnitureGeometry.js?v=v31-final-636a93f6f215';
+import { studioItem } from './renewalFurnitureCatalog.js?v=v31-final-636a93f6f215';
+import { MegaRouteScratch } from './megaRouteScratch.js?v=v31-final-636a93f6f215';
+import { renderPhaseEnd, renderPhaseMetrics } from './renderPhaseTiming.js?v=v31-final-636a93f6f215';
+import { validFinalGrowth } from './finalGrowth.js?v=v31-final-636a93f6f215';
+import { validProductionKitchen } from './productionKitchen.js?v=v31-final-636a93f6f215';
+import { validManager } from './managerState.js?v=v31-final-636a93f6f215';
+import { megaZones } from './megaZones.js?v=v31-final-636a93f6f215';
+import { validInterior, tableSeatCount } from './megaInventory.js?v=v31-final-636a93f6f215';
+import { allDecorationCatalog } from './longGrowthConfig.js?v=v31-final-636a93f6f215';
+import { cafeGrowthBalance } from './modeBalance.js?v=v31-final-636a93f6f215';
+import { tableKinds, turn } from './freeLayoutModel.js?v=v31-final-636a93f6f215';
+import { furnitureFor } from './furnitureCatalog.js?v=v31-final-636a93f6f215';
 export const megaDimensions = [[8, 6], [10, 7], [12, 8], [12, 10], [14, 10], [14, 12], [16, 12], [16, 14], [18, 14], [20, 16]].concat(Array.from({ length: 20 }, (_, i) => { const l = i + 11; return l < 20 ? [20, 16] : l < 30 ? [40, 30] : [64, 48]; }));
 export const megaBudget = [4, 6, 6, 8, 8, 10, 12, 12, 14, 14, ...Array(9).fill(14), ...Array(10).fill(48), 96];
 export const megaKey = (level, branch) => (branch ?? 'base') + ':' + level;
@@ -38,13 +40,18 @@ export function ensureMegaPlan(state, level, branch) { if (state.paid)
 } if (validateMegaPlan(p).length)
     throw Error('확장 전 배치를 확인해 주세요. 기존 배치는 보존됩니다.'); if (state.production)
     p.productionTier = state.production.tier; return state.plans[key] = p; }
-export function tableParts(t) { const size = t.kind === 'long' ? 2.3 : t.kind === 'four' ? 1.7 : 1, half = size / 2, parts = []; const rect = (cx, cy, w, h) => { const p = turn(cx, cy, t.rotation), vertical = t.rotation % 180 !== 0; parts.push({ left: t.x + p.x - (vertical ? h : w) / 2, right: t.x + p.x + (vertical ? h : w) / 2, top: t.y + p.y - (vertical ? w : h) / 2, bottom: t.y + p.y + (vertical ? w : h) / 2 }); }; rect(0, 0, size, .65); const n = tableKinds[t.kind].seats / 2; for (const side of [-1, 1])
+export function tableParts(t) { const size = t.kind === 'long' ? 2.3 : t.kind === 'four' ? 1.7 : 1, half = size / 2, parts = []; const rect = (cx, cy, w, h) => { const p = turn(cx, cy, t.rotation), vertical = t.rotation % 180 !== 0; parts.push({ left: t.x + p.x - (vertical ? h : w) / 2, right: t.x + p.x + (vertical ? h : w) / 2, top: t.y + p.y - (vertical ? w : h) / 2, bottom: t.y + p.y + (vertical ? w : h) / 2 }); }; const shape = studioTableSize(t.furnitureId); rect(0, 0, shape?.[0] ?? size, shape?.[1] ?? .65); const custom = studioChairOffsets(t.furnitureId); if (custom) {
+    for (const p of custom)
+        rect(p.x, p.y, .45, .45);
+    return parts;
+} const n = tableKinds[t.kind].seats / 2; for (const side of [-1, 1])
     for (let i = 0; i < n; i++) {
         const slot = (side === -1 ? 0 : n) + i;
         if (t.integratedSeats || !t.chairs || t.chairs.some(c => c.slot === slot))
             rect((i - (n - 1) / 2) * .7, side * .9, .45, .45);
     } return parts; }
-export function megaChairs(t) { const n = tableKinds[t.kind].seats / 2; return [-1, 1].flatMap(side => Array.from({ length: n }, (_, i) => { const a = turn((i - (n - 1) / 2) * .7, side * .9, t.rotation), b = turn((i - (n - 1) / 2) * .7, side * 1.55, t.rotation); return { slot: (side === -1 ? 0 : n) + i, chair: { x: t.x + a.x, y: t.y + a.y }, access: { x: t.x + b.x, y: t.y + b.y }, rear: a.x - a.y > 0 }; })).filter(c => t.integratedSeats || !t.chairs || t.chairs.some(q => q.slot === c.slot)); }
+export function megaChairs(t) { const custom = studioChairOffsets(t.furnitureId); if (custom)
+    return custom.map((p, slot) => { const a = turn(p.x, p.y, t.rotation), b = turn(p.accessX, p.accessY, t.rotation); return { slot, chair: { x: t.x + a.x, y: t.y + a.y }, access: { x: t.x + b.x, y: t.y + b.y }, rear: a.x - a.y > 0 }; }); const n = tableKinds[t.kind].seats / 2; return [-1, 1].flatMap(side => Array.from({ length: n }, (_, i) => { const a = turn((i - (n - 1) / 2) * .7, side * .9, t.rotation), b = turn((i - (n - 1) / 2) * .7, side * 1.55, t.rotation); return { slot: (side === -1 ? 0 : n) + i, chair: { x: t.x + a.x, y: t.y + a.y }, access: { x: t.x + b.x, y: t.y + b.y }, rear: a.x - a.y > 0 }; })).filter(c => t.integratedSeats || !t.chairs || t.chairs.some(q => q.slot === c.slot)); }
 export function fixedMega(level, anchorWidth, prepIsland = false, starterOnly = false) { const [originalW, h] = megaDimensions[level - 1], w = anchorWidth ?? originalW; const boxes = [{ left: 0, right: 1.8, top: 0, bottom: 5 }]; if (level >= 4 && !starterOnly)
     boxes.push({ left: w - 5, right: w - 1, top: 0, bottom: 1.4 }); if (prepIsland && level === 10 && !starterOnly)
     boxes.push({ left: 14, right: 18, top: 6.5, bottom: 8 }); return boxes; }
@@ -55,7 +62,7 @@ const dynamicScratch = new WeakMap();
 const graphCache = new WeakMap();
 export function fixtureParts(f) { const W = f.rotation % 180 === 0 ? 2 : 1.2, H = f.rotation % 180 === 0 ? 1.2 : 2; return [{ left: f.x - W / 2, right: f.x + W / 2, top: f.y - H / 2, bottom: f.y + H / 2 }]; }
 export function megaAllPickups(p) { return [...megaPickups(p.level, p.kitchenAnchorWidth, p.prepIsland, p.starterKitchenOnly), ...(p.fixtures ?? []).flatMap(f => [-.55, .55].map(x => { const a = turn(x, 1, f.rotation); return toEngine({ x: f.x + a.x, y: f.y + a.y }); }))]; }
-export function megaObstacles(p) { return [...(p.fixtures ?? []).flatMap(fixtureParts), ...fixedMega(p.level, p.kitchenAnchorWidth, p.prepIsland, p.starterKitchenOnly), ...p.tables.flatMap(tableParts), ...p.decor.filter(d => !d.wall).map(d => ({ left: d.x - .35, right: d.x + .35, top: d.y - .35, bottom: d.y + .35 }))]; }
+export function megaObstacles(p) { return [...(p.fixtures ?? []).flatMap(fixtureParts), ...fixedMega(p.level, p.kitchenAnchorWidth, p.prepIsland, p.starterKitchenOnly), ...p.tables.flatMap(tableParts), ...p.decor.filter(d => !d.wall).map(d => studioDecorBox(d) ?? ({ left: d.x - .35, right: d.x + .35, top: d.y - .35, bottom: d.y + .35 }))]; }
 export const megaPointClear = (p, engine) => { const q = toTile(engine), d = megaDimensions[p.level - 1]; return !!d && q.x >= .25 && q.y >= .25 && q.x <= d[0] - .25 && q.y <= d[1] - .25 && !megaObstacles(p).some(r => pointIn(q, r)); };
 /** Occupancy is built once per layout. Reverse BFS fields are shared by all workers heading to a fixed pickup/seat. Dynamic avoidance is temporary and never cached. */
 export function megaRoute(p, from, to, avoid = []) { const start = performance.now(); try {
@@ -255,8 +262,10 @@ function validateMegaUncached(p) {
         for (const d of p.decor) {
             if (![d.x, d.y].every(Number.isFinite) || !allDecorationCatalog.some(a => a.id === d.decorId) || ![0, 90, 180, 270].includes(d.rotation) || typeof d.wall !== 'boolean')
                 return ['장식 정보를 확인해 주세요.'];
+            if (studioItem(d.decorId) && studioItem(d.decorId).wall !== d.wall)
+                return ['가구의 바닥·벽면 위치를 확인해 주세요.'];
             if (!d.wall)
-                boxes.push({ id: d.id, parts: [{ left: d.x - .35, right: d.x + .35, top: d.y - .35, bottom: d.y + .35 }] });
+                boxes.push({ id: d.id, parts: [studioDecorBox(d) ?? { left: d.x - .35, right: d.x + .35, top: d.y - .35, bottom: d.y + .35 }] });
             else if (d.x < 0 || d.x > w || d.y !== 0)
                 errors.push('벽 장식은 뒤쪽 벽에 놓아요.');
         }

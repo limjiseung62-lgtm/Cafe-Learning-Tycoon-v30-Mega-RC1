@@ -1,4 +1,4 @@
-import { furnitureCatalog } from './furnitureCatalog.js?v=v31-5d872fe24674';
+import { furnitureCatalog } from './furnitureCatalog.js?v=v31-final-636a93f6f215';
 export function furnitureUnlocked(s, id) { return id.startsWith('classic-') || !!s?.furniture?.unlocks.some(r => r.id === id); }
 /** Durable monotonic unlock receipts. No currency, stats or learning rewards. */
 export function syncFurniture(c) {
@@ -13,9 +13,9 @@ export function syncFurniture(c) {
     };
     const added = [];
     for (const d of furnitureCatalog) {
-        if (d.theme === 'classic' || furnitureUnlocked(state, d.id))
+        if (d.studio && !c.renewal || d.theme === 'classic' && !d.studio || furnitureUnlocked(state, d.id))
             continue;
-        const [yes, source] = checks[d.id];
+        const [yes, source] = d.studio ? [level >= (d.unlockLevel ?? 30), 'level'] : checks[d.id];
         if (yes) {
             state.furniture ??= { version: 1, unlocks: [] };
             state.furniture.unlocks.push({ id: d.id, source });
@@ -24,4 +24,4 @@ export function syncFurniture(c) {
     }
     return added;
 }
-export function prepareFurniture(s) { const state = s.longTerm ?? (s.longTerm = { version: 1, owned: [], placed: {}, visitors: {}, titles: [], albums: [], boards: [] }); return syncFurniture({ state, level: s.cafeLevel, branch: s.growthBranch?.active, events: s.eventState?.records.filter(r => r.outcome === 'success').length ?? 0 }); }
+export function prepareFurniture(s) { const state = s.longTerm ?? (s.longTerm = { version: 1, owned: [], placed: {}, visitors: {}, titles: [], albums: [], boards: [] }); return syncFurniture({ state, renewal: s.mega?.finalGrowth?.renewal?.menuPolicy === 2, level: s.cafeLevel, branch: s.growthBranch?.active, events: s.eventState?.records.filter(r => r.outcome === 'success').length ?? 0 }); }

@@ -1,8 +1,8 @@
-import { renewalStaffAllowed } from './renewalRosterPolicy.js?v=v31-5d872fe24674';
-import { renewalStaffLimit } from './renewalPolicy.js?v=v31-5d872fe24674';
-import { legacyCrewLimit, finalCrewLimit } from './finalWorkforcePolicy.js?v=v31-5d872fe24674';
-import { unlocked } from './progressiveFeatures.js?v=v31-5d872fe24674';
-import { recruitCatalog, recruitById, recruitConfig, finalRecruitCatalog, finalProfile } from './recruitConfig.js?v=v31-5d872fe24674';
+import { renewalStaffAllowed } from './renewalRosterPolicy.js?v=v31-final-636a93f6f215';
+import { renewalStaffLimit } from './renewalPolicy.js?v=v31-final-636a93f6f215';
+import { legacyCrewLimit, finalCrewLimit } from './finalWorkforcePolicy.js?v=v31-final-636a93f6f215';
+import { unlocked } from './progressiveFeatures.js?v=v31-final-636a93f6f215';
+import { recruitCatalog, recruitById, recruitConfig, finalRecruitCatalog, finalProfile } from './recruitConfig.js?v=v31-final-636a93f6f215';
 export function rosterFor(s) { return structuredClone(s.roster ?? { version: 2, cafeId: 'cafe-' + hash(s.createdAt), owned: s.staffOwned.map(id => ({ id, level: s.staffLevels[id] })), active: [...s.staffOwned], windows: [], receipts: [], collections: { visitors: Object.keys(s.longTerm?.visitors ?? {}) }, titles: [], settlements: [] }); }
 export function hash(s) { let n = 2166136261; for (const c of s)
     n = Math.imul(n ^ c.charCodeAt(0), 16777619); n = Math.imul(n ^ (n >>> 16), 0x85ebca6b); n = Math.imul(n ^ (n >>> 13), 0xc2b2ae35); return (n ^ (n >>> 16)) >>> 0; }

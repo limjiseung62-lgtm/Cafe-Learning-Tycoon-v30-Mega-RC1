@@ -1,16 +1,16 @@
-import { validateGrowthSave } from './growthSave.js?v=v31-5d872fe24674';
-import { operatingSeatContract } from './finalGrowth.js?v=v31-5d872fe24674';
-import { ensureMegaPlan, megaKey, megaDimensions, validateMegaPlan, megaObstacles, tableParts, fixtureParts, megaCrewHomes } from './megaSpace.js?v=v31-5d872fe24674';
-import { inventorySku, tableSeatCount, includedSeats } from './megaInventory.js?v=v31-5d872fe24674';
-import { installedIds, interiorCandidate } from './interiorPlacement.js?v=v31-5d872fe24674';
-import { buyInterior } from './megaShop.js?v=v31-5d872fe24674';
-import { crewAssignment, configureFinalSupply } from './finalSupply.js?v=v31-5d872fe24674';
-import { megaZones } from './megaZones.js?v=v31-5d872fe24674';
-import { rosterFor, openRecruitment, candidateWeights, hireCandidate, recruitCost } from './staffRecruitment.js?v=v31-5d872fe24674';
-import { finalProfile, recruitById } from './recruitConfig.js?v=v31-5d872fe24674';
-import { finalSalary } from './finalPayroll.js?v=v31-5d872fe24674';
-import { kitchenStages } from './productionKitchen.js?v=v31-5d872fe24674';
-import { liveManagementRepository } from './liveManagement.js?v=v31-5d872fe24674';
+import { validateGrowthSave } from './growthSave.js?v=v31-final-636a93f6f215';
+import { operatingSeatContract } from './finalGrowth.js?v=v31-final-636a93f6f215';
+import { ensureMegaPlan, megaKey, megaDimensions, validateMegaPlan, megaObstacles, tableParts, fixtureParts, megaCrewHomes } from './megaSpace.js?v=v31-final-636a93f6f215';
+import { inventorySku, tableSeatCount, includedSeats } from './megaInventory.js?v=v31-final-636a93f6f215';
+import { installedIds, interiorCandidate } from './interiorPlacement.js?v=v31-final-636a93f6f215';
+import { buyInterior } from './megaShop.js?v=v31-final-636a93f6f215';
+import { crewAssignment, configureFinalSupply } from './finalSupply.js?v=v31-final-636a93f6f215';
+import { megaZones } from './megaZones.js?v=v31-final-636a93f6f215';
+import { rosterFor, openRecruitment, candidateWeights, hireCandidate, recruitCost } from './staffRecruitment.js?v=v31-final-636a93f6f215';
+import { finalProfile, recruitById } from './recruitConfig.js?v=v31-final-636a93f6f215';
+import { finalSalary } from './finalPayroll.js?v=v31-final-636a93f6f215';
+import { kitchenRequiredSpace, kitchenStages } from './productionKitchen.js?v=v31-final-636a93f6f215';
+import { liveManagementRepository } from './liveManagement.js?v=v31-final-636a93f6f215';
 const roleName = { floor: '홀 서빙', kitchen: '주방 지원', logistics: '재고 보급', vip: 'VIP 서비스', 'zone-manager': '구역 관리' };
 const zoneLabel = (g, id) => g.serviceSpace?.megaPlan ? megaZones(g.serviceSpace.megaPlan).find(z => z.id === id)?.name ?? '전체 구역' : '전체 구역';
 const serial = (g) => g.mega?.finalGrowth?.managerActions?.serial ?? 0;
@@ -137,7 +137,7 @@ export async function createManagerProposal(g, c, kind, choice) { if (!managerAv
 } if (kind === 'training') {
     const w = g.service.paid.filter(w => w.level < 5 && (!choice || w.staffId === choice)).sort((a, b) => b.walkDistance - a.walkDistance)[0];
     return { ...base, title: '직원 교육', trainingId: w?.staffId, cost: w ? g.getStaffUpgradeCost(w.staffId) ?? 0 : 0, changes: w ? [w.name + ' Lv.' + w.level + ' → ' + (w.level + 1)] : [], effect: '기존 직원 강화 비용·능력을 적용해요.' };
-} const next = kind === 'kitchen' ? kitchenStages[(g.mega?.production?.tier ?? 0) + 1] : g.nextWarehouse; const available = next && (kind !== 'kitchen' || g.cafeLevel >= ('level' in next ? next.level : 1) && (g.mega?.paid?.spaceLevel ?? 1) >= ('space' in next ? next.space : 1)); return { ...base, title: kind === 'kitchen' ? '생산 설비 강화' : '창고 확장', expectedTier: g.mega?.production?.tier ?? 0, cost: available ? next.cost : 0, changes: available ? [kind === 'kitchen' ? ('name' in next ? next.name : '생산량 증가') : '메뉴별 창고 ' + ('capacity' in next ? next.capacity : 0) + '개'] : [], effect: available ? '기존 구매 비용과 정답 생산 정책을 그대로 적용해요. 음식이나 현금을 무료로 지급하지 않아요.' : '해금 조건을 확인하거나 최고 단계에 도달했어요.' }; }
+} const next = kind === 'kitchen' ? kitchenStages[(g.mega?.production?.tier ?? 0) + 1] : g.nextWarehouse; const available = next && (kind !== 'kitchen' || g.cafeLevel >= ('level' in next ? next.level : 1) && (g.mega?.paid?.spaceLevel ?? 1) >= kitchenRequiredSpace(g, (g.mega?.production?.tier ?? 0) + 1)); return { ...base, title: kind === 'kitchen' ? '생산 설비 강화' : '창고 확장', expectedTier: g.mega?.production?.tier ?? 0, cost: available ? next.cost : 0, changes: available ? [kind === 'kitchen' ? ('name' in next ? next.name : '생산량 증가') : '메뉴별 창고 ' + ('capacity' in next ? next.capacity : 0) + '개'] : [], effect: available ? '기존 구매 비용과 정답 생산 정책을 그대로 적용해요. 음식이나 현금을 무료로 지급하지 않아요.' : '해금 조건을 확인하거나 최고 단계에 도달했어요.' }; }
 const reversals = new WeakMap();
 const undoFingerprint = (g) => JSON.stringify([g.mega?.plans, g.mega?.inventory, g.mega?.finalGrowth?.managerActions?.serial, Object.fromEntries(Object.entries(g.mega?.finalGrowth?.crew ?? {}).map(([id, a]) => [id, { ...a, ...a.pending, pending: undefined }]))]);
 export const canUndoManagerSettings = (g) => reversals.has(g);

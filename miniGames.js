@@ -1,13 +1,14 @@
+import { grantRenewalReward } from './renewalRewards.js?v=v31-final-636a93f6f215';
 export const miniSupported = (g) => g.mode === 'CAFE_GROWTH' || !!g.classRandom && g.durationSeconds === 1800;
-import { unlocked } from './progressiveFeatures.js?v=v31-5d872fe24674';
-import { desiredVillageMini } from './village.js?v=v31-5d872fe24674';
-import { newArcade, validArcade, tickArcade, arcadeStats } from './arcadeGames.js?v=v31-5d872fe24674';
-import { createCraft, validCraft, tickCraft, craftStats } from './craftGames.js?v=v31-5d872fe24674';
-import { newCakeRush, validCakeRush, validCakeRecords, tickCakeRush, rushStats, closeCakeRush, recordRush } from './cakeRush.js?v=v31-5d872fe24674';
-import { miniCatalog, miniInfo, miniPolicy } from './miniGameConfig.js?v=v31-5d872fe24674';
-import { cakeTarget, cakeMatches, cakeTokens } from './miniCake.js?v=v31-5d872fe24674';
-import { flowerTarget, flowersMatch, flowerTokens } from './miniFlowers.js?v=v31-5d872fe24674';
-import { ovenPosition, ovenResult } from './miniOven.js?v=v31-5d872fe24674';
+import { unlocked } from './progressiveFeatures.js?v=v31-final-636a93f6f215';
+import { desiredVillageMini } from './village.js?v=v31-final-636a93f6f215';
+import { newArcade, validArcade, tickArcade, arcadeStats } from './arcadeGames.js?v=v31-final-636a93f6f215';
+import { createCraft, validCraft, tickCraft, craftStats } from './craftGames.js?v=v31-final-636a93f6f215';
+import { newCakeRush, validCakeRush, validCakeRecords, tickCakeRush, rushStats, closeCakeRush, recordRush } from './cakeRush.js?v=v31-final-636a93f6f215';
+import { miniCatalog, miniInfo, miniPolicy } from './miniGameConfig.js?v=v31-final-636a93f6f215';
+import { cakeTarget, cakeMatches, cakeTokens } from './miniCake.js?v=v31-final-636a93f6f215';
+import { flowerTarget, flowersMatch, flowerTokens } from './miniFlowers.js?v=v31-final-636a93f6f215';
+import { ovenPosition, ovenResult } from './miniOven.js?v=v31-final-636a93f6f215';
 export const createMiniCollection = () => ({ version: 1, owned: [], practice: [], receipts: [] });
 const isKind = (v) => miniCatalog.some(c => c.id === v);
 const finite = (v, min = 0, max = Number.MAX_SAFE_INTEGER) => typeof v === 'number' && Number.isFinite(v) && v >= min && v <= max;
@@ -119,6 +120,10 @@ function receipt(g, a, outcome, now) {
     if (a.craft && outcome !== 'skipped') {
         const records = bank.craftRecords ??= {}, byKind = records[a.craft.kind] ??= {};
         byKind[a.craft.difficulty] = Math.max(byKind[a.craft.difficulty] ?? 0, craftStats(a.craft).score);
+    }
+    if (outcome === 'success') {
+        const stars = a.rush ? rushStats(a.rush).stars : a.craft ? craftStats(a.craft).stars : a.arcade ? arcadeStats(a.arcade).stars : a.tries === 1 ? 2 : 1;
+        grantRenewalReward(g, 'mini:' + a.id, 'mini', Math.max(1, Math.min(3, stars)));
     }
     const guest = g.guests.find(x => x.id === a.guestId);
     if (guest)

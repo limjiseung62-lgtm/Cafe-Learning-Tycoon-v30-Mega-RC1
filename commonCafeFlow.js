@@ -1,3 +1,4 @@
+import { compatibleCommonManifest } from './scienceOperational.js?v=v31-final-636a93f6f215';
 /** Game adapter: selection/assessment/review/reporting stay in the supplier engine.
  * The café owns only the per-basic-delivery production ledger, not a question-wide reward cap.
  * snapshot() belongs in the SAME atomic game checkpoint as stock and money, never a second key.
@@ -103,7 +104,7 @@ export class CommonCafeFlow {
     async snapshot() { const sources = []; for (const [id, s] of this.sources)
         sources.push({ id, backup: await s.engine.serialize(), sessionIds: [...s.sessionIds] }); return { version: 1, subject: this.loaded.subject, manifestSHA256: this.loaded.manifestSHA256, learningRecordId: this.learningRecordId, gameSessionId: this.gameSessionId, choices: structuredClone(this.choices), sources, sessions: structuredClone(this.sessions), pendingTwins: structuredClone(this.pendingTwins), turn: this.turn, current: this.current ? { ...structuredClone(this.current), answered: this.answered } : null, awards: structuredClone(this.awards), ...this.gameSpecific ? { gameSpecific: this.gameSpecific } : {}, ...this.firstReport ? { firstReport: this.firstReport } : {} }; }
     async restore(c) {
-        if (c.version !== 1 || c.subject !== this.loaded.subject || c.manifestSHA256 !== this.loaded.manifestSHA256 || c.learningRecordId !== this.learningRecordId || c.gameSessionId !== this.gameSessionId || (await this.loaded.module.encode(c.choices)) !== (await this.loaded.module.encode(this.choices)) || !Number.isSafeInteger(c.turn) || c.turn < 0 || c.awards.length > 2000 || new Set(c.awards.map(a => a.sourceId + ':' + a.flowId)).size !== c.awards.length)
+        if (c.version !== 1 || c.subject !== this.loaded.subject || !compatibleCommonManifest(c.subject, c.manifestSHA256, this.loaded.manifestSHA256, this.loaded.runtime) || c.learningRecordId !== this.learningRecordId || c.gameSessionId !== this.gameSessionId || (await this.loaded.module.encode(c.choices)) !== (await this.loaded.module.encode(this.choices)) || !Number.isSafeInteger(c.turn) || c.turn < 0 || c.awards.length > 2000 || new Set(c.awards.map(a => a.sourceId + ':' + a.flowId)).size !== c.awards.length)
             throw Error('공통 학습 백업 계약이 달라요. 원본은 유지돼요.');
         if (c.awards.some(a => !this.sources.has(a.sourceId)))
             throw Error('음식 생산 원천이 달라요.');

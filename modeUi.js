@@ -1,48 +1,49 @@
-import { mountRecoveryStart, mountBackupControls, mountPlayingBackup, mountEndBackup } from './backupRecoveryUi.js?v=v31-5d872fe24674';
-import { applyExternalPicker, preflightExternal, runExternalStart } from './externalLaunch.js?v=v31-5d872fe24674';
-import { modernCityNavigation } from './growthNavigationPolicy.js?v=v31-5d872fe24674';
-import { mountLiveManagement } from './liveManagementUi.js?v=v31-5d872fe24674';
-import { wrapCommonBackup, unpackCommonBackup, commonDeployment } from './commonBackup.js?v=v31-5d872fe24674';
-import { commonTransactionOpen } from './commonLearningTransaction.js?v=v31-5d872fe24674';
-import { mountCafeStudyPicker } from './cafeStudyPicker.js?v=v31-5d872fe24674';
-import { megaSetupActions } from './megaEditor.js?v=v31-5d872fe24674';
-import { v27Deployment } from './classRandom.js?v=v31-5d872fe24674';
-import { classRuntime } from './classRuntime.js?v=v31-5d872fe24674';
-import { createRandomClassMatch } from './sessionFactory.js?v=v31-5d872fe24674';
+import { prepareClassRestore } from './classBackupRecovery.js?v=v31-final-636a93f6f215';
+import { mountRecoveryStart, mountBackupControls, mountPlayingBackup, mountEndBackup } from './backupRecoveryUi.js?v=v31-final-636a93f6f215';
+import { applyExternalPicker, preflightExternal, runExternalStart } from './externalLaunch.js?v=v31-final-636a93f6f215';
+import { modernCityNavigation } from './growthNavigationPolicy.js?v=v31-final-636a93f6f215';
+import { mountLiveManagement } from './liveManagementUi.js?v=v31-final-636a93f6f215';
+import { wrapCommonBackup, commonDeployment } from './commonBackup.js?v=v31-final-636a93f6f215';
+import { commonTransactionOpen } from './commonLearningTransaction.js?v=v31-final-636a93f6f215';
+import { mountCafeStudyPicker } from './cafeStudyPicker.js?v=v31-final-636a93f6f215';
+import { megaSetupActions } from './megaEditor.js?v=v31-final-636a93f6f215';
+import { v27Deployment } from './classRandom.js?v=v31-final-636a93f6f215';
+import { classRuntime } from './classRuntime.js?v=v31-final-636a93f6f215';
+import { createRandomClassMatch } from './sessionFactory.js?v=v31-final-636a93f6f215';
 let preparedBackupUrl;
 if (typeof addEventListener === 'function')
     addEventListener('pagehide', () => { if (preparedBackupUrl)
         URL.revokeObjectURL(preparedBackupUrl); });
-import { goalsHtml } from './progressiveGoals.js?v=v31-5d872fe24674';
-import { openProgressiveHub } from './progressiveHub.js?v=v31-5d872fe24674';
-import { alignMissionBusiness, unlocked, featureLevels } from './progressiveFeatures.js?v=v31-5d872fe24674';
-import { openProgressiveBusiness } from './progressiveEconomy.js?v=v31-5d872fe24674';
-import { createProgressiveGrowthSave } from './growthSave.js?v=v31-5d872fe24674';
-import { v26Deployment } from './progressiveFeatures.js?v=v31-5d872fe24674';
-import { createProgressiveClassMatch } from './sessionFactory.js?v=v31-5d872fe24674';
-import { organizeGrowthMenu } from './studentNavigation.js?v=v31-5d872fe24674';
-import { openManagementHub } from './managementHub.js?v=v31-5d872fe24674';
-import { chooseManagementStrategy } from './managementUi.js?v=v31-5d872fe24674';
-import { managementFor } from './managementState.js?v=v31-5d872fe24674';
-import { deploymentLocalStorage } from './deploymentStorage.js?v=v31-5d872fe24674';
-import { openCafePicker } from './cafePicker.js?v=v31-5d872fe24674';
-import { cafeNames } from './cafePortfolio.js?v=v31-5d872fe24674';
-import { openVillage } from './villageUi.js?v=v31-5d872fe24674';
-import { openLayoutEditor } from './layoutEditor.js?v=v31-5d872fe24674';
-import { rosterFor, syncRosterSave } from './staffRecruitment.js?v=v31-5d872fe24674';
-import { openCrewDialog } from './recruitUi.js?v=v31-5d872fe24674';
-import { ensureGrowthWriteLock, releaseGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=v31-5d872fe24674';
-import { chooseLongMission, prepareLongState } from './longGrowthUi.js?v=v31-5d872fe24674';
-import { growthRuntime } from './growthRuntime.js?v=v31-5d872fe24674';
-import { concepts, seededRandom } from './cafeRun.js?v=v31-5d872fe24674';
-import { createClassMatch } from './sessionFactory.js?v=v31-5d872fe24674';
-import { createGrowthSave } from './growthSave.js?v=v31-5d872fe24674';
-import { GrowthSessionController } from './growthSession.js?v=v31-5d872fe24674';
-import { LocalSaveRepository, BrowserGrowthRepository, CandidateSaveRepository, growthStorageKey } from './saveRepository.js?v=v31-5d872fe24674';
-import { policyFor } from './sessionModes.js?v=v31-5d872fe24674';
-import { balance } from './config.js?v=v31-5d872fe24674';
-import { questionCatalog } from './questionPack.js?v=v31-5d872fe24674';
-import { escapeText } from './questionRenderer.js?v=v31-5d872fe24674';
+import { goalsHtml } from './progressiveGoals.js?v=v31-final-636a93f6f215';
+import { openProgressiveHub } from './progressiveHub.js?v=v31-final-636a93f6f215';
+import { alignMissionBusiness, unlocked, featureLevels } from './progressiveFeatures.js?v=v31-final-636a93f6f215';
+import { openProgressiveBusiness } from './progressiveEconomy.js?v=v31-final-636a93f6f215';
+import { createProgressiveGrowthSave } from './growthSave.js?v=v31-final-636a93f6f215';
+import { v26Deployment } from './progressiveFeatures.js?v=v31-final-636a93f6f215';
+import { createProgressiveClassMatch } from './sessionFactory.js?v=v31-final-636a93f6f215';
+import { organizeGrowthMenu } from './studentNavigation.js?v=v31-final-636a93f6f215';
+import { openManagementHub } from './managementHub.js?v=v31-final-636a93f6f215';
+import { chooseManagementStrategy } from './managementUi.js?v=v31-final-636a93f6f215';
+import { managementFor } from './managementState.js?v=v31-final-636a93f6f215';
+import { deploymentLocalStorage } from './deploymentStorage.js?v=v31-final-636a93f6f215';
+import { openCafePicker } from './cafePicker.js?v=v31-final-636a93f6f215';
+import { cafeNames } from './cafePortfolio.js?v=v31-final-636a93f6f215';
+import { openVillage } from './villageUi.js?v=v31-final-636a93f6f215';
+import { openLayoutEditor } from './layoutEditor.js?v=v31-final-636a93f6f215';
+import { rosterFor, syncRosterSave } from './staffRecruitment.js?v=v31-final-636a93f6f215';
+import { openCrewDialog } from './recruitUi.js?v=v31-final-636a93f6f215';
+import { ensureGrowthWriteLock, releaseGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=v31-final-636a93f6f215';
+import { chooseLongMission, prepareLongState } from './longGrowthUi.js?v=v31-final-636a93f6f215';
+import { growthRuntime } from './growthRuntime.js?v=v31-final-636a93f6f215';
+import { concepts, seededRandom } from './cafeRun.js?v=v31-final-636a93f6f215';
+import { createClassMatch } from './sessionFactory.js?v=v31-final-636a93f6f215';
+import { createGrowthSave } from './growthSave.js?v=v31-final-636a93f6f215';
+import { GrowthSessionController } from './growthSession.js?v=v31-final-636a93f6f215';
+import { LocalSaveRepository, BrowserGrowthRepository, CandidateSaveRepository, growthStorageKey } from './saveRepository.js?v=v31-final-636a93f6f215';
+import { policyFor } from './sessionModes.js?v=v31-final-636a93f6f215';
+import { balance } from './config.js?v=v31-final-636a93f6f215';
+import { questionCatalog } from './questionPack.js?v=v31-final-636a93f6f215';
+import { escapeText } from './questionRenderer.js?v=v31-final-636a93f6f215';
 const e = (id) => document.getElementById(id);
 const study = () => '<div id="study-content" class="study-content"><span>학습 내용</span><strong id="study-title">문제를 준비하고 있어요…</strong><select id="study-pack" aria-label="학습 내용" hidden></select></div><p id="pack-error" class="save-error" aria-live="polite"></p><button type="button" id="pack-retry" class="text-button pack-retry" hidden>다시 시도</button>';
 export function browserSaveRepository() { try {
@@ -226,16 +227,37 @@ export class ModeFlow {
         void launch(); }; e('class-resume')?.addEventListener('click', () => { void launch(saved); }); e('class-export').onclick = () => { const data = classRuntime.read(); if (!data) {
         e('class-message').textContent = '저장된 CLASS가 없어요.';
         return;
-    } const url = commonDeployment() ? 'data:application/json;charset=utf-8,' + encodeURIComponent(wrapCommonBackup(JSON.stringify(data, null, 2))) : URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })), a = document.createElement('a'); a.href = url; a.download = 'cafe-v27-class-backup.json'; a.textContent = 'CLASS 백업 파일 저장'; e('class-export').after(a); a.click(); }; e('class-restore').onclick = async () => { try {
+    } const url = commonDeployment() ? 'data:application/json;charset=utf-8,' + encodeURIComponent(wrapCommonBackup(JSON.stringify(data, null, 2))) : URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })), a = document.createElement('a'); a.href = url; a.download = 'cafe-v27-class-backup.json'; a.textContent = 'CLASS 백업 파일 저장'; e('class-export').after(a); a.click(); }; e('class-restore').onclick = async () => { const button = e('class-restore'); if (button.disabled || this.busy)
+        return; button.disabled = true; try {
         const text = e('class-import').value;
-        if (text.length > (commonDeployment() ? 32000000 : 3500000))
-            throw Error('백업이 너무 커요.');
-        const bundle = await unpackCommonBackup(text), value = JSON.parse(bundle.native);
-        this.confirm('현재 CLASS를 보관하고 복원할까요? 육성 카페는 바뀌지 않아요.', () => { const old = classRuntime.read(); if (old)
-            deploymentLocalStorage.setItem('class-random-previous', JSON.stringify(old)); void bundle.install().then(() => launch(value)).catch(error => e('class-message').textContent = error.message); });
+        const preview = await prepareClassRestore(text);
+        await preflightExternal(preview.checkpoint);
+        if (view !== this.view)
+            return;
+        this.confirm('검증된 카페 CLASS 기록이에요. 현재 CLASS를 보관하고 복원할까요? 육성 카페는 바뀌지 않아요.', () => { void (async () => { try {
+            if (view !== this.view)
+                return;
+            if (!await classRuntime.claim())
+                throw Error(classRuntime.message);
+            await preview.restore();
+            this.randomClassSetup();
+            e('class-message').textContent = 'CLASS 복원 완료 · 중단한 CLASS 이어하기를 눌러 주세요. 종료 시각은 유지돼요.';
+        }
+        catch (error) {
+            if (view === this.view)
+                e('class-message').textContent = error instanceof Error ? error.message : '복원 실패 · 기존 기록은 유지됩니다.';
+        }
+        finally {
+            classRuntime.release();
+        } })(); });
     }
-    catch {
-        e('class-message').textContent = 'JSON을 확인해 주세요. 기존 저장은 유지됩니다.';
+    catch (error) {
+        if (view === this.view)
+            e('class-message').textContent = (error instanceof Error ? error.message : 'JSON을 확인해 주세요.') + ' · 기존 저장과 백업은 유지됩니다.';
+    }
+    finally {
+        if (button.isConnected)
+            button.disabled = false;
     } }; }
     growthSetup(fresh = false) { if (v26Deployment()) {
         this.progressiveGrowthSetup(fresh);

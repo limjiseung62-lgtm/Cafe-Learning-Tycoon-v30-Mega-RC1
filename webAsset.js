@@ -1,3 +1,3 @@
-import { webAssets } from './webAssetCatalog.js?v=v31-5d872fe24674';
+import { webAssets } from './webAssetCatalog.js?v=v31-final-636a93f6f215';
 export function webAsset(file) { return webAssets[file]?.file ?? file; }
 export { webAssets };

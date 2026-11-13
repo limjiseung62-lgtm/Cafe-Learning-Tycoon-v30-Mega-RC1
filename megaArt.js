@@ -1,10 +1,12 @@
-import { architecturePalette, paintArchitectureWalls } from './renewalArchitectureArt.js?v=v31-5d872fe24674';
-import { renderPhase } from './renderPhaseTiming.js?v=v31-5d872fe24674';
-import { ActorSheetCache } from './finalActorCache.js?v=v31-5d872fe24674';
-import { megaZones } from './megaZones.js?v=v31-5d872fe24674';
-import { megaArtFrames } from './megaArtFrames.js?v=v31-5d872fe24674';
-import { webAsset } from './webAsset.js?v=v31-5d872fe24674';
-import { iso, megaDimensions, fixedMega } from './megaSpace.js?v=v31-5d872fe24674';
+import { studioItem } from './renewalFurnitureCatalog.js?v=v31-final-636a93f6f215';
+import { renewalFurnitureFrames } from './renewalFurnitureFrames.js?v=v31-final-636a93f6f215';
+import { architecturePalette, paintArchitectureWalls } from './renewalArchitectureArt.js?v=v31-final-636a93f6f215';
+import { renderPhase } from './renderPhaseTiming.js?v=v31-final-636a93f6f215';
+import { ActorSheetCache } from './finalActorCache.js?v=v31-final-636a93f6f215';
+import { megaZones } from './megaZones.js?v=v31-final-636a93f6f215';
+import { megaArtFrames } from './megaArtFrames.js?v=v31-final-636a93f6f215';
+import { webAsset } from './webAsset.js?v=v31-final-636a93f6f215';
+import { iso, megaDimensions, fixedMega } from './megaSpace.js?v=v31-final-636a93f6f215';
 export const environmentIds = ['fridge', 'sink', 'coffee', 'pastry', 'oven', 'prep', 'coffee-sage', 'shelf', 'wall-left', 'wall-right', 'window-left', 'window-right', 'entrance', 'plant', 'wall-shelf', 'wall-lamp'];
 const images = new Map();
 const decodedImages = new WeakSet();
@@ -115,7 +117,8 @@ export function paintArtFloor(c, p, asynchronous = false, includeWalls = true, a
 }
 export const environmentFootprint = (placement, plan) => fixedMega(plan.level, plan.kitchenAnchorWidth, plan.prepIsland, plan.starterKitchenOnly).some(b => placement.x >= b.left && placement.x <= b.right && placement.y >= b.top && placement.y <= b.bottom);
 /** Reuse approved isometric environment cutouts for large-hall floor decor. Collision footprints and ownership are unchanged. */
-export function paintMegaDecor(c, p, d) { const q = iso(d); if (p.level >= 20 && !d.wall) {
+export function paintMegaDecor(c, p, d) { const q = iso(d); if (paintStudioFurniture(c, d.decorId, q.x, q.y, d.rotation))
+    return; if (p.level >= 20 && !d.wall) {
     const id = { flower: 'plant', garden: 'plant', showcase: 'pastry', bread: 'shelf' }[d.decorId];
     if (id && paintEnvironment(c, id, q.x, q.y, 34, 6))
         return;
@@ -133,3 +136,10 @@ export function paintArtWalls(c, p, asynchronous = false, appearance) { if (appe
     const q = iso({ x: 0, y });
     paintEnvironment(c, y % 4 === 1 ? 'wall-left' : 'window-left', q.x, q.y, 48, 12, false, asynchronous);
 } }
+/** Runtime atlas cropping keeps original PNG/alpha untouched and reuses the existing bounded raster cache. */
+export function paintStudioFurniture(c, id, x, y, rotation = 0, asynchronous = false, thumbnail = false) { const item = studioItem(id); if (!item)
+    return false; const img = megaImage('assets/web/v31-final-furniture/' + item.atlas + '.png'); if (!img)
+    return true; const sheet = renewalFurnitureFrames[item.atlas], box = sheet?.boxes[item.cell]; if (!box)
+    return true; const width = thumbnail ? Math.min(100, 90 * box[2] / box[3]) : (item.size[0] + item.size[1]) * 24, height = width * box[3] / box[2], rise = thumbnail ? 0 : item.kind ? 15 : (item.size[0] + item.size[1]) * 6; const tile = asynchronous ? bitmapFragment(img, box, width, height) : cachedFragment(img, box, width, height); if (!tile)
+    return true; const flip = item.kind === 'long' ? rotation % 180 === 0 : rotation % 180 !== 0; c.save(); c.translate(x, y); if (flip)
+    c.scale(-1, 1); c.drawImage(tile, -width / 2, -height + rise, width, height); c.restore(); return true; }
