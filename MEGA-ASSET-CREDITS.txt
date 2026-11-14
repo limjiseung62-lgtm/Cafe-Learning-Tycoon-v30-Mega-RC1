@@ -1,0 +1,1 @@
+New roster and specialization art: original project-generated assets, retained generation and approval records in the development repository. No new external paid assets, fonts, publisher scans or real-company logos were added. Existing THIRD_PARTY_NOTICES.md and AUDIO_LICENSES.md remain in force. Generated artwork does not guarantee exclusivity or trademark clearance.
