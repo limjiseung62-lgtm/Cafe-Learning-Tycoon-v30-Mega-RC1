@@ -1,5 +1,5 @@
-import { newRenewalRewards, rewardCash } from './renewalRewardState.js?v=v31-final-636a93f6f215';
-import { outsideKitchenStock } from './finalSupply.js?v=v31-final-636a93f6f215';
+import { newRenewalRewards, rewardCash } from './renewalRewardState.js';
+import { outsideKitchenStock } from './finalSupply.js';
 export function rewardState(g) { const r = g.mode === 'CAFE_GROWTH' ? g.mega?.finalGrowth?.renewal : undefined; if (r?.menuPolicy !== 2)
     return; return r.rewards ??= newRenewalRewards(); }
 export function grantRenewalReward(g, id, kind, grade = 1) { if (!['mini', 'mission'].includes(kind) || ![1, 2, 3].includes(grade))
@@ -38,5 +38,5 @@ else {
     }
     target = target || v.kind;
 } v.used = true; s.uses.push({ id: 'reward-use-' + (s.uses.length + 1), voucher: id, kind: v.kind, amount, target }); return { ok: true, reason: v.kind === 'stock' ? '보급권으로 ' + amount + '개를 보관했어요. 정답 횟수는 바뀌지 않아요.' : '할인권 사용 · ' + amount.toLocaleString() + '원 할인' }; }
-import { kitchenStages } from './productionKitchen.js?v=v31-final-636a93f6f215';
+import { kitchenStages } from './productionKitchen.js';
 const awaitKitchen = (g) => kitchenStages[(g.mega?.production?.tier ?? 0) + 1];

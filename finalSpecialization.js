@@ -1,5 +1,5 @@
-import { newSpecializationStages } from './renewalSpecializationState.js?v=v31-final-636a93f6f215';
-import { finalSpecializationOffers, signatureMenusFor } from './finalSpecializationState.js?v=v31-final-636a93f6f215';
+import { newSpecializationStages } from './renewalSpecializationState.js';
+import { finalSpecializationOffers, signatureMenusFor } from './finalSpecializationState.js';
 export function finalSpecializationFor(g) { return g.mode === 'CAFE_GROWTH' ? g.mega?.finalGrowth?.specialization : undefined; }
 export function chooseFinalSpecialization(g, path, now = new Date().toISOString()) { const f = g.mega?.finalGrowth, offer = finalSpecializationOffers[path]; if (g.mode !== 'CAFE_GROWTH' || !f || !offer)
     return { ok: false, reason: 'GROWTH 최종 통합 카페 전용이에요.' }; if (f.specialization)

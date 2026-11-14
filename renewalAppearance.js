@@ -1,6 +1,6 @@
-import { appendRenewalFacilities } from './renewalFacilities.js?v=v31-final-636a93f6f215';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v31-final-636a93f6f215';
-import { appearanceCatalog, appearanceSlots, newAppearance } from './renewalAppearanceState.js?v=v31-final-636a93f6f215';
+import { appendRenewalFacilities } from './renewalFacilities.js';
+import { ensureGrowthWriteLock } from './growthWriteLock.js';
+import { appearanceCatalog, appearanceSlots, newAppearance } from './renewalAppearanceState.js';
 export function appearanceQuote(s, id) { const item = appearanceCatalog.find(x => x.id === id), state = s.mega?.finalGrowth?.renewal?.appearance ?? newAppearance(), owned = state.owned.includes(id), cost = owned ? 0 : item?.cost ?? 0; return { item, owned, cost, remaining: s.money - cost, eligible: !!s.mega?.finalGrowth?.renewal && !!item && (owned || s.cafeLevel >= item.level) && s.money >= cost }; }
 /** Explicit compare-and-swap purchase. Selecting an owned item never charges again. */
 export function commitAppearance(repo, expected, id) { const read = repo.read(); if (read.status !== 'ready')

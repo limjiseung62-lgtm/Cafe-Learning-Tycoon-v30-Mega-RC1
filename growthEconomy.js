@@ -1,4 +1,4 @@
-import { growthEconomyConfig as c } from './growthEconomyConfig.js?v=v31-final-636a93f6f215';
+import { growthEconomyConfig as c } from './growthEconomyConfig.js';
 export function economyState(save) { if (save.growthEconomy)
     return structuredClone(save.growthEconomy); const run = save.campaign?.run; return { version: 1, milestones: [7, 11].filter(n => n <= save.cafeLevel), reviewRoots: [], receipts: run?.closed ? [{ id: run.id, completion: 0, mission: 0, review: 0, milestone: 0, total: 0, unique: 0, correct: 0, reviewRoots: [], eligible: false, reason: 'legacy' }] : [] }; }
 export function validGrowthEconomy(value) { try {
@@ -10,14 +10,14 @@ catch {
     return false;
 } }
 /** One atomic settlement receipt per closed business. Never counted as sales or a correct answer. */
-export function settleGrowthEconomy(g, state, id, packId, attempts, previous, long) {
+export function settleGrowthEconomy(g, state, id, packId, attempts, previous, long, carry = []) {
     if (g.mode !== 'CAFE_GROWTH' || g.status !== 'CLOSED')
         return null;
     const old = state.receipts.find(r => r.id === id);
     if (old)
         return old;
     const root = (a) => a.sourceQuestionId ?? a.questionId;
-    const unique = new Set(attempts.map(root)).size, correct = new Set(attempts.filter(a => a.correct).map(root)).size;
+    const segments = [...carry, { packId, attempts, previous }], unique = new Set(segments.flatMap(s => s.attempts.map(a => s.packId + '::' + root(a)))).size, correct = new Set(segments.flatMap(s => s.attempts.filter(a => a.correct).map(a => s.packId + '::' + root(a)))).size;
     const eligible = g.elapsedTime >= c.minimumSeconds && unique >= c.minimumUnique && correct >= c.minimumCorrect;
     const receipt = { id, completion: 0, mission: 0, review: 0, milestone: 0, total: 0, unique, correct, reviewRoots: [], eligible };
     if (eligible) {
@@ -25,15 +25,17 @@ export function settleGrowthEconomy(g, state, id, packId, attempts, previous, lo
         const board = long?.boards.find(b => b.businessId === id);
         if (board?.complete)
             receipt.mission = c.missionBase + Math.min(15, g.cafeLevel) * c.missionPerLevel;
-        const wrong = new Set(Object.values(previous?.progress.questions ?? {}).filter(m => m.wrongCount > 0 && m.priority > 0).map(m => m.questionId));
-        for (const a of attempts) {
-            const source = root(a), key = packId + '::' + source;
-            if (!a.correct)
-                wrong.add(source);
-            if (a.correct && a.isRemediation && wrong.has(source) && !state.reviewRoots.includes(key) && receipt.reviewRoots.length < c.reviewLimit && state.reviewRoots.length < 2000) {
-                state.reviewRoots.push(key);
-                receipt.reviewRoots.push(key);
-                receipt.review += c.reviewBase + g.cafeLevel * c.reviewPerLevel;
+        for (const segment of segments) {
+            const wrong = new Set(Object.values(segment.previous?.progress.questions ?? {}).filter(m => m.wrongCount > 0 && m.priority > 0).map(m => m.questionId));
+            for (const a of segment.attempts) {
+                const source = root(a), key = segment.packId + '::' + source;
+                if (!a.correct)
+                    wrong.add(source);
+                if (a.correct && a.isRemediation && wrong.has(source) && !state.reviewRoots.includes(key) && receipt.reviewRoots.length < c.reviewLimit && state.reviewRoots.length < 2000) {
+                    state.reviewRoots.push(key);
+                    receipt.reviewRoots.push(key);
+                    receipt.review += c.reviewBase + g.cafeLevel * c.reviewPerLevel;
+                }
             }
         }
         for (const level of [7, 11])

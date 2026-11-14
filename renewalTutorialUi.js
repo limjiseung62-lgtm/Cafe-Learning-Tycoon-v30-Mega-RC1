@@ -1,26 +1,26 @@
-import { mountRewardWallet } from './renewalRewardUi.js?v=v31-final-636a93f6f215';
-import { MegaView } from './megaView.js?v=v31-final-636a93f6f215';
-import { SpatialScene } from './spatial.js?v=v31-final-636a93f6f215';
-import { newTutorialPause, beginTutorialPause, endTutorialPause } from './tutorialPause.js?v=v31-final-636a93f6f215';
-import { newRenewalTutorials, pendingTutorials, tutorialLevels, tutorialTitles } from './renewalTutorialState.js?v=v31-final-636a93f6f215';
-import { RenewalPractice } from './renewalPractice.js?v=v31-final-636a93f6f215';
-import { commonQuestion } from './commonLearningCatalog.js?v=v31-final-636a93f6f215';
-import { activeMini } from './miniGames.js?v=v31-final-636a93f6f215';
+import { mountRewardWallet } from './renewalRewardUi.js';
+import { MegaView } from './megaView.js';
+import { SpatialScene } from './spatial.js';
+import { newTutorialPause, beginTutorialPause, endTutorialPause } from './tutorialPause.js';
+import { newRenewalTutorials, pendingTutorials, tutorialLevels, tutorialTitles } from './renewalTutorialState.js';
+import { RenewalPractice } from './renewalPractice.js';
+import { commonQuestion } from './commonLearningCatalog.js';
+import { activeMini } from './miniGames.js';
 let current, flush = () => false, practiceFlow, dialog, disposePractice;
 function progress(g) { if (g.mega?.finalGrowth?.renewal)
     return g.mega.finalGrowth.renewal.tutorials ??= newRenewalTutorials(); g.tutorialPause ??= newTutorialPause(); return g.tutorialPause.progress ??= newRenewalTutorials(); }
-const enabled = (g) => !!g.mega?.finalGrowth?.renewal || g.mode === 'CLASS_MATCH' && document.querySelector('meta[name="cafe-renewal"]')?.getAttribute('content') === 'v31-candidate';
+const enabled = (g) => !!g.mega?.finalGrowth?.renewal;
 export function beginRenewalTutorials(g, save, flow) { disposePractice?.(); disposePractice = undefined; dialog?.remove(); dialog = undefined; current = g; flush = save; practiceFlow = flow; mountRewardWallet(g, save); document.getElementById('renewal-help')?.remove(); if (!enabled(g))
     return; const b = document.createElement('button'); b.id = 'renewal-help'; b.textContent = '직접 해보는 도움말'; b.style.minHeight = '48px'; b.onclick = () => help(g); document.getElementById('playing')?.append(b); }
 export function pollRenewalTutorials(g) { if (g !== current || !enabled(g) || dialog || g.status !== 'RUNNING' || activeMini(g) || document.querySelector('dialog[open]') || !document.getElementById('problem-panel')?.hidden)
-    return; const active = g.tutorialPause?.active?.reasons[0], level = active ? Number(active.slice(9)) : pendingTutorials(progress(g), g.mode === 'CLASS_MATCH' ? 1 : g.cafeLevel)[0]; if (level)
+    return; const active = g.tutorialPause?.active?.reasons[0], level = active ? Number(active.slice(9)) : pendingTutorials(progress(g), g.cafeLevel)[0]; if (level)
     void open(g, level); }
 function help(g) { if (dialog || document.querySelector('dialog[open]'))
     return; const d = document.createElement('dialog'); d.style.cssText = 'max-height:85vh;overflow:auto;width:min(600px,92vw)'; const h = document.createElement('h2'); h.textContent = '필요한 조작을 다시 연습해요'; d.append(h); for (const [i, level] of tutorialLevels.entries()) {
     const b = document.createElement('button');
     b.textContent = 'Lv.' + level + ' ' + tutorialTitles[i] + ' · ' + (progress(g).states[level] === 'complete' ? '완료' : progress(g).states[level] === 'skipped' ? '건너뜀' : '미시청');
     b.style.cssText = 'display:block;min-height:48px;margin:6px';
-    b.disabled = g.mode === 'CLASS_MATCH' ? level !== 1 : level > g.cafeLevel;
+    b.disabled = level > g.cafeLevel;
     b.onclick = () => { d.remove(); void open(g, level); };
     d.append(b);
 } const back = document.createElement('button'); back.textContent = '닫기'; back.onclick = () => d.remove(); d.append(back); document.body.append(d); d.showModal(); }
@@ -44,7 +44,7 @@ async function open(g, level) {
     status.setAttribute('role', 'status');
     d.append(h, frozen, area, status);
     const finish = (outcome, all = false) => { const before = structuredClone(g.tutorialPause), states = structuredClone(progress(g)); if (all)
-        for (const l of pendingTutorials(progress(g), g.mode === 'CLASS_MATCH' ? 1 : g.cafeLevel))
+        for (const l of pendingTutorials(progress(g), g.cafeLevel))
             progress(g).states[l] = 'skipped';
     else
         progress(g).states[level] = outcome; endTutorialPause(g.tutorialPause, reason); if (!flush()) {

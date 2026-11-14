@@ -1,11 +1,11 @@
-import { newSpecializationStages } from './renewalSpecializationState.js?v=v31-final-636a93f6f215';
-import { adoptFinalGrowth, operatingSeatContract } from './finalGrowth.js?v=v31-final-636a93f6f215';
-import { menuDefinitions } from './data.js?v=v31-final-636a93f6f215';
-import { crewLimit } from './staffRecruitment.js?v=v31-final-636a93f6f215';
-import { validateGrowthSave, createGrowthSave } from './growthSave.js?v=v31-final-636a93f6f215';
-import { newMegaState } from './megaSpace.js?v=v31-final-636a93f6f215';
-import { adoptInterior } from './megaInventory.js?v=v31-final-636a93f6f215';
-import { newProgressiveState } from './progressiveFeatures.js?v=v31-final-636a93f6f215';
+import { newSpecializationStages } from './renewalSpecializationState.js';
+import { adoptFinalGrowth, operatingSeatContract } from './finalGrowth.js';
+import { menuDefinitions } from './data.js';
+import { crewLimit } from './staffRecruitment.js';
+import { validateGrowthSave, createGrowthSave } from './growthSave.js';
+import { newMegaState } from './megaSpace.js';
+import { adoptInterior } from './megaInventory.js';
+import { newProgressiveState } from './progressiveFeatures.js';
 /** Explicit migration API, never invoked as a side effect of preview/validation. */
 export function adoptRenewal(source, now = new Date().toISOString()) {
     if (!validateGrowthSave(source))

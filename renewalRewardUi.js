@@ -1,11 +1,11 @@
-import { studioItem } from './renewalFurnitureCatalog.js?v=v31-final-636a93f6f215';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v31-final-636a93f6f215';
-import { validateGrowthSave } from './growthSave.js?v=v31-final-636a93f6f215';
-import { rewardState, useRewardVoucher } from './renewalRewards.js?v=v31-final-636a93f6f215';
-import { rewardCash } from './renewalRewardState.js?v=v31-final-636a93f6f215';
-import { interiorCatalog, inventorySku } from './megaInventory.js?v=v31-final-636a93f6f215';
-import { buyInterior } from './megaShop.js?v=v31-final-636a93f6f215';
-import { kitchenStages } from './productionKitchen.js?v=v31-final-636a93f6f215';
+import { studioItem } from './renewalFurnitureCatalog.js';
+import { ensureGrowthWriteLock } from './growthWriteLock.js';
+import { validateGrowthSave } from './growthSave.js';
+import { rewardState, useRewardVoucher } from './renewalRewards.js';
+import { rewardCash } from './renewalRewardState.js';
+import { interiorCatalog, inventorySku } from './megaInventory.js';
+import { buyInterior } from './megaShop.js';
+import { kitchenStages } from './productionKitchen.js';
 const names = { stock: '메뉴 재고 보급권', furniture: '가구 20% 할인권', training: '직원 교육 20% 할인권', kitchen: '주방 20% 할인권', warehouse: '창고 20% 할인권', decoration: '미션 전용 특별 장식권' };
 export function mountRewardWallet(g, flush) { document.getElementById('renewal-reward-wallet')?.remove(); if (g.mega?.finalGrowth?.renewal?.menuPolicy !== 2 || g.mode !== 'CAFE_GROWTH')
     return; const b = document.createElement('button'); b.id = 'renewal-reward-wallet'; b.textContent = '미션·미니게임 보상함'; b.style.minHeight = '48px'; b.onclick = () => { const d = document.createElement('dialog'); d.style.cssText = 'width:min(600px,92vw);max-height:80vh;overflow:auto;background:#fff9ed'; const paint = () => { d.replaceChildren(); const h = document.createElement('h2'); h.textContent = '운영 보상 · 학습 정답과 별도'; d.append(h); const s = rewardState(g), p = document.createElement('p'); p.textContent = '현재 레벨 미니게임 성공 ' + rewardCash(g.cafeLevel, 'mini').toLocaleString() + '원부터 · 미션 ' + rewardCash(g.cafeLevel, 'mission').toLocaleString() + '원부터. 실패·건너뛰기 보상0, 한 영업 최대3도전. 같은 보상은 한 번만 받아요.'; d.append(p); for (const v of s.vouchers.filter(v => !v.used)) {

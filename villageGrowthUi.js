@@ -1,6 +1,6 @@
-import { growthAlbum, growthMilestones, growthPhase, constructionDuration, townAtStage, growthStage } from './villageGrowthVisual.js?v=v31-final-636a93f6f215';
-import { sceneEnvironment, replaceSceneEnvironment } from './villageSceneArt.js?v=v31-final-636a93f6f215';
-import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=v31-final-636a93f6f215';
+import { growthAlbum, growthMilestones, growthPhase, constructionDuration, townAtStage, growthStage } from './villageGrowthVisual.js';
+import { sceneEnvironment, replaceSceneEnvironment } from './villageSceneArt.js';
+import { customerPoseArt, selectCustomerPose } from './customerPoses.js';
 /** Purely visual milestone presentation; the only write is an existing seenStage acknowledgement. */
 export class VillageGrowthUi {
     o;

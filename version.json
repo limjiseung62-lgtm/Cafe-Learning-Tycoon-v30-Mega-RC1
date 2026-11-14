@@ -1,6 +1,6 @@
 {
-  "version": "3.1.0-renewal-rc.2",
-  "status": "public-test",
+  "version": "3.2.0-growth-only-rc.1",
+  "status": "local-only",
   "officialUnchanged": true,
   "storagePrefix": "cafe-v30-mega-common-rc1/",
   "subjects": {
@@ -18,7 +18,7 @@
   "sourceCandidate": "636a93f6f2156c7103484e5581733ede6f5679a9",
   "testUrl": "https://limjiseung62-lgtm.github.io/Cafe-Learning-Tycoon-v30-Mega-RC1/",
   "cacheToken": "v31-final-636a93f6f215",
-  "build": "v31-final-636a93f",
+  "build": "phase32-growth-only-local",
   "baselinePublicBuild": "interior-placement-unblock-1",
   "approvedContentSubjects": [
     "math",
@@ -41,7 +41,7 @@
   "batchServing": false,
   "sourceFunctionalCheckpoint": "636a93f6f2156c7103484e5581733ede6f5679a9",
   "preparedAt": "2026-11-12T03:45:58.460Z",
-  "deployed": true,
+  "deployed": false,
   "renewalEconomyStatus": "USER_APPROVED_SYNTHETIC_10_25H_7_25H_NO_TIME_TARGET",
   "officialRepositoryModified": false,
   "releasePreparedAt": "2026-11-13T16:47:11.321Z",
@@ -52,5 +52,10 @@
   "menuUpgradeCostsRestored": true,
   "decoratingPause": true,
   "specializationStages": 4,
-  "tutorialCount": 12
+  "tutorialCount": 12,
+  "modes": [
+    "CAFE_GROWTH"
+  ],
+  "classRemoved": true,
+  "publicBaseline": "39b0fb6"
 }

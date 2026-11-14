@@ -1,8 +1,8 @@
-import { studioItem } from './renewalFurnitureCatalog.js?v=v31-final-636a93f6f215';
-import { adoptInterior, inventorySku } from './megaInventory.js?v=v31-final-636a93f6f215';
-import { buyInterior } from './megaShop.js?v=v31-final-636a93f6f215';
-import { ensureMegaPlan, validMega } from './megaSpace.js?v=v31-final-636a93f6f215';
-import { installedIds, removeInterior } from './interiorPlacement.js?v=v31-final-636a93f6f215';
+import { studioItem } from './renewalFurnitureCatalog.js';
+import { adoptInterior, inventorySku } from './megaInventory.js';
+import { buyInterior } from './megaShop.js';
+import { ensureMegaPlan, validMega } from './megaSpace.js';
+import { installedIds, removeInterior } from './interiorPlacement.js';
 export function purchaseLimit(s, sku) { const d = inventorySku(sku), v = s.mega?.inventory; if (!d || !v || studioItem(sku)?.rewardOnly)
     return 0; return Math.max(0, Math.min(256, Math.floor(s.money / d.cost), Math.floor((256 - v.items.length) / (1 + d.bundle)), 10000 - v.next)); }
 export function buyInteriorBatch(source, sku, quantity, expectedNext, now = new Date().toISOString()) { if (!Number.isSafeInteger(quantity) || quantity < 1 || quantity > 256)

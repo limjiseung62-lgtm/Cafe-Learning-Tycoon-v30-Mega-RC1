@@ -1,11 +1,11 @@
-import { openModernCity } from './modernCityUi.js?v=v31-final-636a93f6f215';
-import { enterpriseCity, cityDistricts, citySafePoint } from './enterpriseCity.js?v=v31-final-636a93f6f215';
-import { sceneEnvironment } from './villageSceneArt.js?v=v31-final-636a93f6f215';
-import { VillageExplorer } from './villageExplorer.js?v=v31-final-636a93f6f215';
-import { scenePath } from './villageNavigation.js?v=v31-final-636a93f6f215';
-import { investVillage, progressiveEconomyConfig } from './progressiveEconomy.js?v=v31-final-636a93f6f215';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v31-final-636a93f6f215';
-import { customerPoseArt, selectCustomerPose } from './customerPoses.js?v=v31-final-636a93f6f215';
+import { openModernCity } from './modernCityUi.js';
+import { enterpriseCity, cityDistricts, citySafePoint } from './enterpriseCity.js';
+import { sceneEnvironment } from './villageSceneArt.js';
+import { VillageExplorer } from './villageExplorer.js';
+import { scenePath } from './villageNavigation.js';
+import { investVillage, progressiveEconomyConfig } from './progressiveEconomy.js';
+import { ensureGrowthWriteLock } from './growthWriteLock.js';
+import { customerPoseArt, selectCustomerPose } from './customerPoses.js';
 export async function openEnterpriseCity(repo, onClose, readOnly = false) {
     if (!readOnly)
         return openModernCity(repo, onClose);

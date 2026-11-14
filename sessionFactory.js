@@ -1,25 +1,22 @@
-import { refreshMenuQuality } from './renewalMenuQuality.js?v=v31-final-636a93f6f215';
-import { adoptMenuStagePolicy } from './renewalMigration.js?v=v31-final-636a93f6f215';
-import { adoptFinalGrowth, finalLocalDeployment } from './finalGrowth.js?v=v31-final-636a93f6f215';
-import { ensureManager } from './managerState.js?v=v31-final-636a93f6f215';
-import { adoptInterior, isShopDeployment } from './megaInventory.js?v=v31-final-636a93f6f215';
-import { adoptPaidSpace } from './megaExpansion.js?v=v31-final-636a93f6f215';
-import { isPaidDeployment } from './megaSpace.js?v=v31-final-636a93f6f215';
-import { newClassState, seededStep } from './classRandom.js?v=v31-final-636a93f6f215';
-import { createManagement } from './managementState.js?v=v31-final-636a93f6f215';
-import { growthMenuDefinitions } from './menuResearch.js?v=v31-final-636a93f6f215';
-import { desiredLakeMini } from './lakeDistrict.js?v=v31-final-636a93f6f215';
-import { recruitById } from "./recruitConfig.js?v=v31-final-636a93f6f215";
-import { CafeGame } from './game.js?v=v31-final-636a93f6f215';
-import { policyFor } from './sessionModes.js?v=v31-final-636a93f6f215';
-import { createGrowthSave, validateGrowthSave } from './growthSave.js?v=v31-final-636a93f6f215';
+import { refreshMenuQuality } from './renewalMenuQuality.js';
+import { adoptMenuStagePolicy } from './renewalMigration.js';
+import { adoptFinalGrowth, finalLocalDeployment } from './finalGrowth.js';
+import { ensureManager } from './managerState.js';
+import { adoptInterior, isShopDeployment } from './megaInventory.js';
+import { adoptPaidSpace } from './megaExpansion.js';
+import { isPaidDeployment } from './megaSpace.js';
+import { createManagement } from './managementState.js';
+import { growthMenuDefinitions } from './menuResearch.js';
+import { desiredLakeMini } from './lakeDistrict.js';
+import { recruitById } from "./recruitConfig.js";
+import { CafeGame } from './game.js';
+import { policyFor } from './sessionModes.js';
+import { createGrowthSave, validateGrowthSave } from './growthSave.js';
 const growthExpected = new WeakMap();
 export const setGrowthExpected = (g, s) => growthExpected.set(g, structuredClone(s));
 export const growthExpectedFor = (g) => growthExpected.get(g);
 const growthBases = new WeakMap();
 export function growthBaseFor(game) { return growthBases.get(game); }
-export function createProgressiveClassMatch(random = Math.random) { return new CafeGame(900, random, 300, { mode: 'CLASS_MATCH', progressive: true }); }
-export function createClassMatch(seconds = policyFor().sessionSeconds, random = Math.random) { return new CafeGame(seconds, random, 300, { mode: 'CLASS_MATCH', phase4: true }); }
 export function createGrowthSession(save = createGrowthSave(), random = Math.random, seconds = save.eventState && !save.eventState.closed ? Math.max(1, save.eventState.duration - save.eventState.now) : policyFor('CAFE_GROWTH').sessionSeconds) { const sourceSave = save; if (!validateGrowthSave(save))
     throw Error('Invalid growth save'); if (isPaidDeployment() && save.mega)
     save = adoptPaidSpace(save); if (isShopDeployment() && save.mega)
@@ -43,4 +40,3 @@ export function createGrowthSession(save = createGrowthSave(), random = Math.ran
 } g.regularMemory = structuredClone(save.regularMemory); g.updateServiceLayout(); g.telemetry.snapshots = []; g.telemetry.record(g.snapshot); if (save.eventState)
     g.events.restore(save.eventState); growthBases.set(g, structuredClone(save)); if (JSON.stringify(sourceSave) !== JSON.stringify(save))
     setGrowthExpected(g, sourceSave); return g; }
-export function createRandomClassMatch(seconds = 900, seed = Math.floor(Math.random() * 4294967296), now = Date.now(), id = crypto.randomUUID()) { const state = newClassState(seconds, seed, now, id); const g = new CafeGame(seconds, () => seededStep(state), 300, { mode: "CLASS_MATCH", progressive: true }); g.classRandom = state; return g; }

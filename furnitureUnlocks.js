@@ -1,4 +1,4 @@
-import { furnitureCatalog } from './furnitureCatalog.js?v=v31-final-636a93f6f215';
+import { furnitureCatalog } from './furnitureCatalog.js';
 export function furnitureUnlocked(s, id) { return id.startsWith('classic-') || !!s?.furniture?.unlocks.some(r => r.id === id); }
 /** Durable monotonic unlock receipts. No currency, stats or learning rewards. */
 export function syncFurniture(c) {

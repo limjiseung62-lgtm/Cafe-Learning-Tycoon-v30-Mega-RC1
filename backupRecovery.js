@@ -1,8 +1,8 @@
-import { parseGrowthBackup, exportGrowth, checkBackupRun } from './growthBackup.js?v=v31-final-636a93f6f215';
-import { unpackCommonBackup, wrapCommonBackup } from './commonBackup.js?v=v31-final-636a93f6f215';
-import { questionCatalog } from './questionPack.js?v=v31-final-636a93f6f215';
+import { parseGrowthBackup, exportGrowth, checkBackupRun } from './growthBackup.js';
+import { unpackCommonBackup, wrapCommonBackup } from './commonBackup.js';
+import { questionCatalog } from './questionPack.js';
 export const backupLimit = 32000000;
-export function backupFilename(date = new Date()) { return '내-카페-백업-' + date.toISOString().replace(/[:.]/g, '-') + '.json'; }
+export function backupFilename(date = new Date()) { const pad = (n) => String(n).padStart(2, '0'); return '카페학습타이쿤_' + date.getFullYear() + '-' + pad(date.getMonth() + 1) + '-' + pad(date.getDate()) + '_' + pad(date.getHours()) + '-' + pad(date.getMinutes()) + '.json'; }
 export function checkedGrowthBackup(save) { const native = exportGrowth(save), parsed = parseGrowthBackup(native); if (JSON.stringify(parsed) !== JSON.stringify(save))
     throw Error('백업 데이터가 카페 기록과 달라요. 다운로드하지 않았어요.'); return wrapCommonBackup(native); }
 export async function prepareGrowthRestore(text, repo, preflight = checkBackupRun) { if (text.length > backupLimit)

@@ -1,4 +1,4 @@
-import { compatibleCommonManifest } from './scienceOperational.js?v=v31-final-636a93f6f215';
+import { compatibleCommonManifest } from './scienceOperational.js';
 /** Game adapter: selection/assessment/review/reporting stay in the supplier engine.
  * The café owns only the per-basic-delivery production ledger, not a question-wide reward cap.
  * snapshot() belongs in the SAME atomic game checkpoint as stock and money, never a second key.

@@ -1,12 +1,12 @@
-import { compatibleCommonManifest } from './scienceOperational.js?v=v31-final-636a93f6f215';
-import { replaceDownloadGroup } from './commonDownloadGroup.js?v=v31-final-636a93f6f215';
-import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js?v=v31-final-636a93f6f215';
-import { CommonCafeFlow } from './commonCafeFlow.js?v=v31-final-636a93f6f215';
-import { commonQuestion, commonAnswerText } from './commonLearningCatalog.js?v=v31-final-636a93f6f215';
-import { loadCommonRuntime } from './commonBankLoader.js?v=v31-final-636a93f6f215';
-import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js?v=v31-final-636a93f6f215';
-import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js?v=v31-final-636a93f6f215';
-import { worksheetHtml } from './twinWorksheet.js?v=v31-final-636a93f6f215';
+import { compatibleCommonManifest } from './scienceOperational.js';
+import { replaceDownloadGroup } from './commonDownloadGroup.js';
+import { commonRecordEntries, wrapCommonBackup, unpackCommonBackup } from './commonBackup.js';
+import { CommonCafeFlow } from './commonCafeFlow.js';
+import { commonQuestion, commonAnswerText } from './commonLearningCatalog.js';
+import { loadCommonRuntime } from './commonBankLoader.js';
+import { deploymentLocalStorage, deploymentPrefix } from './deploymentStorage.js';
+import { escapeText, renderQuestionText, renderDiagram } from './questionRenderer.js';
+import { worksheetHtml } from './twinWorksheet.js';
 const mounted = new WeakMap();
 const archiveExpected = new WeakMap();
 export async function restoreCommonArchive(flow, saved) { const raw = deploymentLocalStorage.getItem(archiveKey(saved.learningRecordId)); const cp = raw ? await flow.loaded.module.decode(raw) : saved; await flow.restore(cp); archiveExpected.set(flow, raw); }

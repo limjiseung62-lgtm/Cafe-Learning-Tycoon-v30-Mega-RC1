@@ -1,7 +1,7 @@
-import { renewalGuestAllowed } from './renewalRosterPolicy.js?v=v31-final-636a93f6f215';
-import { outsideKitchenStock } from './finalSupply.js?v=v31-final-636a93f6f215';
-import { unlocked } from './progressiveFeatures.js?v=v31-final-636a93f6f215';
-import { helperCatalog, hospitalityBalance as b } from './hospitalityConfig.js?v=v31-final-636a93f6f215';
+import { renewalGuestAllowed } from './renewalRosterPolicy.js';
+import { outsideKitchenStock } from './finalSupply.js';
+import { unlocked } from './progressiveFeatures.js';
+import { helperCatalog, hospitalityBalance as b } from './hospitalityConfig.js';
 export class Hospitality {
     enabled = false;
     questions = [];

@@ -1,4 +1,4 @@
-import { studioFurniture } from './renewalFurnitureCatalog.js?v=v31-final-636a93f6f215';
+import { studioFurniture } from './renewalFurnitureCatalog.js';
 const path = (theme) => theme === 'classic' ? 'assets/web/free-layout/furniture-atlas.webp' : 'assets/web/theme-furniture/' + theme + '.webp';
 export const furnitureCatalog = [
     { id: 'classic-two', name: '기본 원목 2인 테이블', kind: 'two', theme: 'classic', atlas: path('classic'), row: 0, chairRow: 3, chairWidth: 9, condition: '처음부터 사용' },

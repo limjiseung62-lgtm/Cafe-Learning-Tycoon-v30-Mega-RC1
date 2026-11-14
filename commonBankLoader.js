@@ -1,6 +1,6 @@
-import { assertScienceOperational } from './scienceOperational.js?v=v31-final-636a93f6f215';
-import { scopedMathKey, verifyScopedMathCode } from './scopedMathTransport.js?v=v31-final-636a93f6f215';
-import { commonBankPins } from './commonBankPins.js?v=v31-final-636a93f6f215';
+import { assertScienceOperational } from './scienceOperational.js';
+import { scopedMathKey, verifyScopedMathCode } from './scopedMathTransport.js';
+import { commonBankPins } from './commonBankPins.js';
 const cache = new Map();
 async function digest(b) { return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new Uint8Array(b).buffer)), x => x.toString(16).padStart(2, '0')).join(''); }
 /** Transport compression is lossless. Supplier manifest/data/reference hashes remain unchanged. */

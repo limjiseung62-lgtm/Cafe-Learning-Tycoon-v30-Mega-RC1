@@ -1,5 +1,5 @@
-import { hasGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=v31-final-636a93f6f215';
-import { validateGrowthSave, migrateGrowthSave } from './growthSave.js?v=v31-final-636a93f6f215';
+import { hasGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js';
+import { validateGrowthSave, migrateGrowthSave } from './growthSave.js';
 export const growthStorageKey = 'cafe-learning-tycoon.growth.v1';
 /** A local candidate reads a legacy cafe until its first write, then uses its own copy. */
 export class CandidateSaveRepository {
@@ -138,19 +138,52 @@ export class LocalSaveRepository {
     catch {
         return { ok: false, message: '저장할 수 없습니다. 브라우저 저장 공간을 확인해 주세요.' };
     } }
-    replace(save, confirmed) { if (!confirmed)
-        return { ok: false, message: '새로 시작 확인이 필요합니다.' }; if (!validateGrowthSave(save))
-        return { ok: false, message: '새 카페 정보가 올바르지 않습니다.' }; try {
-        if (!this.storage)
-            throw Error('unavailable');
-        const old = this.storage.getItem(this.key);
-        if (old !== null)
-            this.storage.setItem(this.key + '.backup.' + Date.now() + '.' + this.backupSequence++, old);
-        return this.write(save);
+    replace(save, confirmed) {
+        if (!confirmed)
+            return { ok: false, message: '새로 시작 확인이 필요합니다.' };
+        if (!validateGrowthSave(save))
+            return { ok: false, message: '새 카페 정보가 올바르지 않습니다.' };
+        const base = this.storage;
+        if (!base)
+            return { ok: false, message: '기존 저장을 보관할 수 없어 초기화하지 않았습니다.' };
+        // Restore is one synchronous transaction, including migration and manual backup slots.
+        const prior = new Map();
+        this.storage = { getItem: k => base.getItem(k), setItem: (k, v) => { if (!prior.has(k))
+                prior.set(k, base.getItem(k)); base.setItem(k, v); } };
+        try {
+            const old = this.storage.getItem(this.key);
+            if (old !== null)
+                this.storage.setItem(this.key + '.backup.' + Date.now() + '.' + this.backupSequence++, old);
+            const result = this.write(save);
+            if (!result.ok)
+                throw Error(result.message);
+            return result;
+        }
+        catch (error) {
+            let rolledBack = true;
+            for (const [k, raw] of [...prior].reverse())
+                try {
+                    if (base.getItem(k) === raw)
+                        continue;
+                    if (raw === null) {
+                        if (!base.removeItem)
+                            throw Error('remove unavailable');
+                        base.removeItem(k);
+                    }
+                    else
+                        base.setItem(k, raw);
+                    if (base.getItem(k) !== raw)
+                        throw Error('rollback verification');
+                }
+                catch {
+                    rolledBack = false;
+                }
+            return { ok: false, message: (error instanceof Error ? error.message : '기존 저장을 보관할 수 없어 초기화하지 않았습니다.') + (rolledBack ? '' : ' · 저장 되돌리기를 확인하지 못했어요. 백업 파일을 보관해 주세요.') };
+        }
+        finally {
+            this.storage = base;
+        }
     }
-    catch {
-        return { ok: false, message: '기존 저장을 보관할 수 없어 초기화하지 않았습니다.' };
-    } }
 }
 export class BrowserGrowthRepository extends LocalSaveRepository {
     write(save, expected) { if ((save.roster || supportsGrowthLock()) && !hasGrowthWriteLock())

@@ -1,14 +1,14 @@
-import { finishManagerConstructionInRepository } from './managerUi.js?v=v31-final-636a93f6f215';
-import { megaLateForecast } from './megaLateForecast.js?v=v31-final-636a93f6f215';
-import { adoptInterior, isShopDeployment } from './megaInventory.js?v=v31-final-636a93f6f215';
-import { environmentPlacements, paintEnvironment } from './megaArt.js?v=v31-final-636a93f6f215';
-import { expansionForecast } from './megaExpansionForecast.js?v=v31-final-636a93f6f215';
-import { AudioManager } from './audioManager.js?v=v31-final-636a93f6f215';
-import { deploymentLocalStorage } from './deploymentStorage.js?v=v31-final-636a93f6f215';
-import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js?v=v31-final-636a93f6f215';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v31-final-636a93f6f215';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=v31-final-636a93f6f215';
-import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js?v=v31-final-636a93f6f215';
+import { finishManagerConstructionInRepository } from './managerUi.js';
+import { megaLateForecast } from './megaLateForecast.js';
+import { adoptInterior, isShopDeployment } from './megaInventory.js';
+import { environmentPlacements, paintEnvironment } from './megaArt.js';
+import { expansionForecast } from './megaExpansionForecast.js';
+import { AudioManager } from './audioManager.js';
+import { deploymentLocalStorage } from './deploymentStorage.js';
+import { adoptPaidSpace, expansionQuote, prepareExpansion } from './megaExpansion.js';
+import { ensureGrowthWriteLock } from './growthWriteLock.js';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js';
+import { ensureMegaPlan, megaDimensions, megaChairs, iso } from './megaSpace.js';
 export function expansionAction(container, repo, source, refresh) {
     if (!source.mega || !document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.match(/^v30[cde]-/))
         return;

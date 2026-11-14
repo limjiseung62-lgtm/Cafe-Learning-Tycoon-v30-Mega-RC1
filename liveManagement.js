@@ -1,10 +1,10 @@
-import { supplyLayoutChangeError } from './finalSupply.js?v=v31-final-636a93f6f215';
-import { validInteriorSale } from './interiorCommerce.js?v=v31-final-636a93f6f215';
-import { longStateFor } from './longGrowthUi.js?v=v31-final-636a93f6f215';
-import { createLongGrowth } from './longGrowth.js?v=v31-final-636a93f6f215';
-import { inventorySku } from './megaInventory.js?v=v31-final-636a93f6f215';
-import { guestPose } from './spatial.js?v=v31-final-636a93f6f215';
-import { createMegaSpace, ensureMegaPlan, megaPointClear, megaRoute } from './megaSpace.js?v=v31-final-636a93f6f215';
+import { supplyLayoutChangeError } from './finalSupply.js';
+import { validInteriorSale } from './interiorCommerce.js';
+import { longStateFor } from './longGrowthUi.js';
+import { createLongGrowth } from './longGrowth.js';
+import { inventorySku } from './megaInventory.js';
+import { guestPose } from './spatial.js';
+import { createMegaSpace, ensureMegaPlan, megaPointClear, megaRoute } from './megaSpace.js';
 export let liveManagementOpen = false;
 const managementVersion = (s) => { const m = structuredClone(s.mega); if (m?.finalGrowth) {
     delete m.finalGrowth.supply;

@@ -1,10 +1,11 @@
 // @ts-nocheck
 import { portalURL } from './sq-learning/portal-url.mjs';
 import { decodeLaunch, validateLaunch } from './sq-learning/launch.mjs';
-import { nativeChoices, checkResume, checkStart } from './sq-learning/cafe-policy.mjs';
+import { nativeChoices, checkResume, checkStart, sameChoices } from './sq-learning/cafe-policy.mjs';
 import pin from './sq-learning/catalog-pin.json' with { type: 'json' };
-import { loadCommonRuntime } from './commonBankLoader.js?v=v31-final-636a93f6f215';
+import { loadCommonRuntime } from './commonBankLoader.js';
 let launch = null, catalog = null, choices = null, nativeCatalog = null, unit = null, lease = false, releaseLease = null, lastError = '', preflight = null, lastProbe = 0, lastProbeState = '';
+let historical = false;
 // Fragment edits must revalidate. Page teardown uses v3's native checkpoint handlers.
 addEventListener('hashchange', () => { if (launch || location.hash.startsWith('#sq'))
     location.reload(); });
@@ -21,7 +22,7 @@ function banner(error = '') {
     }
     box.replaceChildren();
     const title = document.createElement('strong'), p = document.createElement('p'), button = document.createElement('button'), back = document.createElement('a');
-    title.textContent = error ? '학습 설정을 적용하지 않았어요' : 'School Quest × Cafe v3.0 · 공통 문제은행';
+    title.textContent = error ? '학습 설정을 적용하지 않았어요' : 'School Quest × 내 카페 · 공통 문제은행';
     p.textContent = error || `${unit.grade}학년 · ${({ 'math': '수학', 'science': '과학', 'korean-literacy': '국어', 'social-studies': '사회' }[launch.subject])} · ${unit.semester}학기 · ${unit.title} · ${launch.scopes[0].learningObjectiveIds.length}개 학습목표`;
     p.setAttribute('role', error ? 'alert' : 'status');
     button.textContent = '기존 수동 선택으로 돌아가기';
@@ -62,14 +63,21 @@ export async function attachExternal(c) {
         if (launch.gameId !== 'cafe')
             throw Error('다른 게임용 학습 링크예요.');
         const version = await (await fetch('version.json', { cache: 'no-store' })).json();
-        if (!['3.0.0-mega-rc.1', '3.1.0-renewal-rc.1'].includes(version.version))
+        if (!['3.0.0-mega-rc.1', '3.1.0-renewal-rc.1', '3.1.0-renewal-rc.2', '3.2.0-growth-only-rc.1'].includes(version.version))
             throw Error('Cafe v3.0 실행 버전과 Pilot 기준 버전이 달라요.');
         const s = launch.scopes[0];
         unit = catalog.units.find(u => u.subject === launch.subject && u.sourceId === s.sourceId && u.id === s.unitId);
         choices = nativeChoices(launch, catalog);
         await acquire();
         const original = c.prepareResume.bind(c);
-        c.prepareResume = value => { try {
+        c.prepareResume = value => { if (historical) {
+            original(value);
+            return;
+        } if (externalStudyChangeRequested(value)) {
+            original();
+            c.setChoices(launch.subject, choices);
+            return;
+        } try {
             if (value && !value.learning?.session?.common)
                 throw Error('공통 문제은행 연결 전의 저장은 외부 학습 설정으로 덮어쓸 수 없어요.');
             checkResume(launch, choices, value?.learning?.session?.common, journal());
@@ -147,3 +155,15 @@ export function observeExternalGame(game, flow) { if (!game)
     probe.hidden = true;
     document.body.append(probe);
 } const q = flow?.current ? flow.question() : null; probe.textContent = JSON.stringify({ mode: game.mode, status: game.status, money: game.money, stats: game.stats, stock: game.menus.map(m => ({ id: m.menuId, stock: m.stock, maxStock: m.maxStock })), workers: game.service?.workers, guests: game.guests.length, paidStaff: game.service?.paid, level: game.cafeLevel, subject: flow?.loaded.subject, choices: flow?.choices, recordId: flow?.learningRecordId, gameSessionId: flow?.gameSessionId, awards: flow?.awards, turn: flow?.turn, current: flow?.current ? { role: flow.current.delivery.role, questionId: q.questionId, metadata: q.metadata, answered: flow.answered } : null }); }
+/** A new portal link may select a new study, but never another cafe. */
+export function externalStudyChangeRequested(value) { if (launch && journal()?.recordId)
+    return false; const old = value?.learning?.session?.common; return !!(launch && value && (!old || old.subject !== launch.subject || old.manifestSHA256 !== launch.manifestSHA256 || !sameChoices(old.choices, choices))); }
+export async function loadHistoricalStudy(run) { historical = true; try {
+    nativeCatalog.prepareResume(run);
+    return (await nativeCatalog.load(run.packId)).questions;
+}
+finally {
+    historical = false;
+    nativeCatalog.prepareResume();
+    nativeCatalog.setChoices(launch.subject, choices);
+} }

@@ -24,7 +24,7 @@ export function validateLaunch(e,catalog,now=Date.now()){
 }
 export function makeLaunch(unit,ids,catalog,now=Date.now(),id=crypto.randomUUID()){
  const levels=['korean-literacy','social-studies'].includes(unit.subject)?[...unit.levels]:[...new Set(unit.objectives.filter(o=>ids.includes(o.id)).flatMap(o=>o.levels))].sort();
- const provider=catalog.providers[unit.subject];
+ const provider=catalog.providers[unit.subject].games?.cafe??catalog.providers[unit.subject];
  return validateLaunch({schemaVersion:VERSION,launchId:id,issuedAt:now,expiresAt:now+TTL,gameId:'cafe',intent:'new-study-session',providerId:'common-public',releaseRef:provider.releaseRef,manifestSHA256:provider.manifestSHA256,subject:unit.subject,scopes:[{sourceId:unit.sourceId,grade:unit.grade,semester:unit.semester,unitId:unit.id,learningObjectiveIds:[...ids],levels}]},catalog,now);
 }
 export function encodeLaunch(e,catalog,now=Date.now()){

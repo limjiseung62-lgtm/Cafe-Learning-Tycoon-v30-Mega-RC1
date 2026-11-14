@@ -1,6 +1,6 @@
-import { renewalGuestAllowed } from './renewalRosterPolicy.js?v=v31-final-636a93f6f215';
-import { customers } from './data.js?v=v31-final-636a93f6f215';
-import { finalGuestProfiles } from './finalGuestProfiles.js?v=v31-final-636a93f6f215';
-import { hasFinalActor } from './finalActorArt.js?v=v31-final-636a93f6f215';
+import { renewalGuestAllowed } from './renewalRosterPolicy.js';
+import { customers } from './data.js';
+import { finalGuestProfiles } from './finalGuestProfiles.js';
+import { hasFinalActor } from './finalActorArt.js';
 export function finalGuestDefinitions(level, elapsed = 0, renewal) { return [...customers.filter(c => renewal ? renewalGuestAllowed(c.customerId, level, renewal) : c.unlockCafeLevel <= level), ...finalGuestProfiles.filter(p => (renewal ? renewalGuestAllowed(p.id, level, renewal) : p.unlockLevel <= level) && hasFinalActor(p.visualKey)).map(p => ({ customerId: p.id, name: p.archetype + ' ' + p.name, visualKey: p.visualKey, patienceSeconds: p.patience, personality: (p.category === 'busy' ? 'BUSY' : p.category === 'regular' ? 'KIND' : p.category === 'tourist' ? 'RELAXED' : 'NORMAL'), orderPreference: p.preference, characterTrait: p.archetype + ' · ' + (p.pattern === 'early' ? '초반 방문을 선호해요' : p.pattern === 'late' ? '후반에 여유롭게 방문해요' : '영업 시간에 고르게 방문해요'), unlockCafeLevel: p.unlockLevel, spawnWeight: p.pattern === 'early' ? (elapsed < 300 ? 1.4 : .7) : p.pattern === 'late' ? (elapsed >= 450 ? 1.4 : .7) : 1, orderProfile: { minQuantity: 1, ...p.order }, category: p.category }))]; }
 export const finalGuestByVisual = (key) => finalGuestDefinitions(30).find(c => c.visualKey === key);

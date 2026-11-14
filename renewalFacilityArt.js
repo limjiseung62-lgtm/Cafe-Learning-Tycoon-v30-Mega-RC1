@@ -1,5 +1,5 @@
-import { megaZones } from './megaZones.js?v=v31-final-636a93f6f215';
-import { iso } from './megaSpace.js?v=v31-final-636a93f6f215';
+import { megaZones } from './megaZones.js';
+import { iso } from './megaSpace.js';
 /** Surface finish only: same owned tiles, furniture, collisions and routing. */
 export function paintRenewalFinishes(c, p, f) { for (const receipt of f?.receipts ?? []) {
     if (!['terrace', 'vip'].includes(receipt.kind))

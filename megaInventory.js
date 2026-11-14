@@ -1,8 +1,8 @@
-import { studioFurniture } from './renewalFurnitureCatalog.js?v=v31-final-636a93f6f215';
-import { validateMegaPlan } from './megaSpace.js?v=v31-final-636a93f6f215';
-import { furnitureCatalog, furnitureFor } from './furnitureCatalog.js?v=v31-final-636a93f6f215';
-import { allDecorationCatalog, decorationCatalog } from './longGrowthConfig.js?v=v31-final-636a93f6f215';
-import { tableKinds } from './freeLayoutModel.js?v=v31-final-636a93f6f215';
+import { studioFurniture } from './renewalFurnitureCatalog.js';
+import { validateMegaPlan } from './megaSpace.js';
+import { furnitureCatalog, furnitureFor } from './furnitureCatalog.js';
+import { allDecorationCatalog, decorationCatalog } from './longGrowthConfig.js';
+import { tableKinds } from './freeLayoutModel.js';
 export const isShopDeployment = () => typeof document !== 'undefined' && document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.match(/^v30[de]-/) != null;
 const legacyInteriorCatalog = [...furnitureCatalog.filter(f => !f.studio).map((f, i) => ({ sku: f.id, name: f.name, type: 'table', baseCost: [8000, 16000, 26000, 12000, 24000, 28000, 34000, 24000, 36000][i], seatCost: ['dessert-sofa', 'bakery-bench'].includes(f.id) ? 0 : tableKinds[f.kind].seats * 1500, cost: [8000, 16000, 26000, 12000, 24000, 28000, 34000, 24000, 36000][i] + (['dessert-sofa', 'bakery-bench'].includes(f.id) ? 0 : tableKinds[f.kind].seats * 1500), bundle: f.id === 'dessert-sofa' ? 2 : f.id === 'bakery-bench' ? 4 : 0, level: [1, 3, 5, 3, 7, 5, 7, 7, 9][i] })), { sku: 'service-prep', name: '서빙 준비대', type: 'fixture', cost: 24000, bundle: 0, level: 4 }, { sku: 'chair', name: '호환 의자·좌석 쿠션', type: 'chair', cost: 1500, bundle: 0, level: 1 }, ...decorationCatalog.map((d, i) => ({ sku: 'decor-' + d.id, name: d.name, type: 'decor', cost: [3000, 5000, 5000, 4000, 6000, 12000, 8000, 4000][i], bundle: 0, level: i < 4 ? 1 : 3 }))];
 export const interiorCatalog = [...legacyInteriorCatalog, ...studioFurniture.map(x => ({ sku: x.sku, name: x.name, type: x.kind ? 'table' : 'decor', cost: x.cost, baseCost: x.cost, seatCost: 0, bundle: 0, level: x.level }))];

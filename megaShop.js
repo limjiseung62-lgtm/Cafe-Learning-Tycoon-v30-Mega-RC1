@@ -1,7 +1,7 @@
-import { studioItem } from './renewalFurnitureCatalog.js?v=v31-final-636a93f6f215';
-import { adoptInterior, inventorySku, interiorPlanOwned } from './megaInventory.js?v=v31-final-636a93f6f215';
-import { validateMegaPlan, megaKey, validMega } from './megaSpace.js?v=v31-final-636a93f6f215';
-import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js?v=v31-final-636a93f6f215';
+import { studioItem } from './renewalFurnitureCatalog.js';
+import { adoptInterior, inventorySku, interiorPlanOwned } from './megaInventory.js';
+import { validateMegaPlan, megaKey, validMega } from './megaSpace.js';
+import { prepareFurniture, furnitureUnlocked } from './furnitureUnlocks.js';
 export function buyInterior(source, sku, expectedNext, now = new Date().toISOString()) { const s = adoptInterior(source), item = inventorySku(sku), inv = s.mega?.inventory; if (studioItem(sku)?.rewardOnly)
     return { ok: false, reason: '이 장식은 미션 보상함에서 받아요. 현금으로 구매하지 않아요.' }; if (studioItem(sku) && s.mega?.finalGrowth?.renewal?.menuPolicy !== 2)
     return { ok: false, reason: '새 가구는 최신 리뉴얼 정책을 적용한 카페에서 구매해요.' }; if (!item || !inv)

@@ -1,10 +1,10 @@
-import { renewalPreferredRole } from './renewalRosterPolicy.js?v=v31-final-636a93f6f215';
-import { educationLevel } from './staffEducation.js?v=v31-final-636a93f6f215';
-import { finalProfile } from './recruitConfig.js?v=v31-final-636a93f6f215';
-import { finalSpecializationFor } from './finalSpecialization.js?v=v31-final-636a93f6f215';
-import { ensureMegaPlan, megaPickups, megaRoute, megaPointClear, megaAllPickups, toTile } from './megaSpace.js?v=v31-final-636a93f6f215';
-import { megaZones } from './megaZones.js?v=v31-final-636a93f6f215';
-import { newSupplyState } from './finalSupplyState.js?v=v31-final-636a93f6f215';
+import { renewalPreferredRole } from './renewalRosterPolicy.js';
+import { educationLevel } from './staffEducation.js';
+import { finalProfile } from './recruitConfig.js';
+import { finalSpecializationFor } from './finalSpecialization.js';
+import { ensureMegaPlan, megaPickups, megaRoute, megaPointClear, megaAllPickups, toTile } from './megaSpace.js';
+import { megaZones } from './megaZones.js';
+import { newSupplyState } from './finalSupplyState.js';
 export const hasFinalSupply = (g) => g.mode === 'CAFE_GROWTH' && !!g.mega?.finalGrowth;
 export function supplyState(g) { return g.mega.finalGrowth.supply ??= newSupplyState(); }
 const sum = (items, id) => items.filter(x => x === id).length;

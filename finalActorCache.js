@@ -1,4 +1,4 @@
-import { webAsset } from './webAsset.js?v=v31-final-636a93f6f215';
+import { webAsset } from './webAsset.js';
 /** A small lazy decoder pool, not a full-roster preload. Bitmaps are closed on eviction/scene teardown. */
 export class ActorSheetCache {
     decode;

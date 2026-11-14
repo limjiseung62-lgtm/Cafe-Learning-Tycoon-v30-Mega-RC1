@@ -1,4 +1,4 @@
-import { scenePath, sceneWalkable, sceneCamera, sceneSegmentOpen } from './villageNavigation.js?v=v31-final-636a93f6f215';
+import { scenePath, sceneWalkable, sceneCamera, sceneSegmentOpen } from './villageNavigation.js';
 export class VillageExplorer {
     o;
     position;

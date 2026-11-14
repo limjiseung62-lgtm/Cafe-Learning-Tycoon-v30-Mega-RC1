@@ -1,5 +1,5 @@
-import { ensureMegaPlan, validateMegaPlan, megaDimensions } from './megaSpace.js?v=v31-final-636a93f6f215';
-import { explicitDoors } from './finalDoors.js?v=v31-final-636a93f6f215';
+import { ensureMegaPlan, validateMegaPlan, megaDimensions } from './megaSpace.js';
+import { explicitDoors } from './finalDoors.js';
 export const renewalFacilityCatalog = [{ id: 'terrace', name: '정원 테라스 마감', level: 22, space: 20, cost: 180000 }, { id: 'vip', name: 'VIP 라운지 마감', level: 22, space: 30, cost: 280000 }, { id: 'landmark', name: '랜드마크 브랜드 간판', level: 29, space: 30, cost: 750000 }];
 export function validRenewalFacilities(v) { try {
     const f = v;

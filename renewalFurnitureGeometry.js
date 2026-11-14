@@ -1,4 +1,4 @@
-import { studioItem } from './renewalFurnitureCatalog.js?v=v31-final-636a93f6f215';
+import { studioItem } from './renewalFurnitureCatalog.js';
 export function studioDecorBox(d) { const s = studioItem(d.decorId); if (!s)
     return null; const [a, b] = s.size, w = d.rotation % 180 === 0 ? a : b, h = d.rotation % 180 === 0 ? b : a; return { left: d.x - w / 2, right: d.x + w / 2, top: d.y - h / 2, bottom: d.y + h / 2 }; }
 /** The square-set artwork has one chair per edge, not two on each long side. */

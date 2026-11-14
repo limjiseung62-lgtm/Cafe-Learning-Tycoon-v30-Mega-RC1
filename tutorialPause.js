@@ -1,4 +1,4 @@
-import { validRenewalTutorials } from './renewalTutorialState.js?v=v31-final-636a93f6f215';
+import { validRenewalTutorials } from './renewalTutorialState.js';
 export const newTutorialPause = () => ({ version: 1, segments: [] });
 export function validTutorialPause(v) { try {
     const p = v, finite = (n) => Number.isSafeInteger(n) && n >= 0;

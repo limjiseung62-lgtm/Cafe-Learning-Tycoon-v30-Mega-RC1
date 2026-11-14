@@ -1,6 +1,6 @@
-import { architectureStyles, newAppearance } from './renewalAppearanceState.js?v=v31-final-636a93f6f215';
-import { megaDimensions, iso } from './megaSpace.js?v=v31-final-636a93f6f215';
-import { megaImage, bitmapFragment, cachedFragment } from './megaArt.js?v=v31-final-636a93f6f215';
+import { architectureStyles, newAppearance } from './renewalAppearanceState.js';
+import { megaDimensions, iso } from './megaSpace.js';
+import { megaImage, bitmapFragment, cachedFragment } from './megaArt.js';
 export const appearanceFor = (g) => g.mode === 'CAFE_GROWTH' && g.mega?.finalGrowth?.renewal ? (g.mega.finalGrowth.renewal.appearance ?? (g.mega.finalGrowth.renewal.origin === 'new' ? newAppearance() : undefined)) : undefined;
 export function architectureSprite(style, row, width, async = false) { const img = megaImage('assets/art/renewal-v31/architecture.png'); if (!img)
     return null; const w = img.naturalWidth / 4, h = img.naturalHeight / 3, col = architectureStyles.indexOf(style), box = [col * w, row * h, w, h], height = width * h / w, tile = async ? bitmapFragment(img, box, width, height) : cachedFragment(img, box, width, height); return tile ? { tile, width, height } : null; }

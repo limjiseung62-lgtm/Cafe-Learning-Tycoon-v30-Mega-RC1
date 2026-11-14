@@ -1,4 +1,4 @@
-import { newTutorialPause, beginTutorialPause, endTutorialPause } from './tutorialPause.js?v=v31-final-636a93f6f215';
+import { newTutorialPause, beginTutorialPause, endTutorialPause } from './tutorialPause.js';
 /** Reuse the persisted clock credit, so decorating does not catch up all elapsed wall time on close. */
 export function beginInteriorEditing(g, save, now = Date.now()) {
     if (g.mode !== 'CAFE_GROWTH' || !g.mega?.finalGrowth?.renewal)

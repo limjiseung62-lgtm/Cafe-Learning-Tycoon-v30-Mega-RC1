@@ -1,5 +1,5 @@
-import { kitchenRequiredSpace, kitchenStages, kitchenFloorLabel } from './productionKitchen.js?v=v31-final-636a93f6f215';
-import { expansionQuote } from './megaExpansion.js?v=v31-final-636a93f6f215';
+import { kitchenRequiredSpace, kitchenStages, kitchenFloorLabel } from './productionKitchen.js';
+import { expansionQuote } from './megaExpansion.js';
 export function managerAdvice(g, save, now = Date.now()) {
     const id = g.mega?.manager?.selected;
     if (!id)

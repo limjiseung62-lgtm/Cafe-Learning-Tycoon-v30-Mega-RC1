@@ -1,76 +1,70 @@
-import { recoverInteriorEditing } from './interiorPause.js?v=v31-final-636a93f6f215';
-import { beginRenewalTutorials, pollRenewalTutorials } from './renewalTutorialUi.js?v=v31-final-636a93f6f215';
-import { finalizeExternal, observeExternalGame } from './externalLaunch.js?v=v31-final-636a93f6f215';
-import { releaseResultView } from './resultViewMemory.js?v=v31-final-636a93f6f215';
-import { kitchenRequiredSpace, kitchenStages, kitchenFloorLabel } from './productionKitchen.js?v=v31-final-636a93f6f215';
-import { pollManagerSession } from './managerUi.js?v=v31-final-636a93f6f215';
-import { liveManagementOpen } from './liveManagement.js?v=v31-final-636a93f6f215';
-import { mountCommonCafeResults, restoreCommonArchive } from './commonCafeResults.js?v=v31-final-636a93f6f215';
-import { CommonCafeFlow } from './commonCafeFlow.js?v=v31-final-636a93f6f215';
-import { loadCommonRuntime } from './commonBankLoader.js?v=v31-final-636a93f6f215';
-import { commonQuestion } from './commonLearningCatalog.js?v=v31-final-636a93f6f215';
-import { setCommonTransaction } from './commonLearningTransaction.js?v=v31-final-636a93f6f215';
-import { megaQualificationNotice } from './megaQualificationUi.js?v=v31-final-636a93f6f215';
-import { megaView } from './megaView.js?v=v31-final-636a93f6f215';
-import { classRuntime, captureClass } from './classRuntime.js?v=v31-final-636a93f6f215';
-import { pollClassUi } from './classRandomUi.js?v=v31-final-636a93f6f215';
-import { renderProgressiveGuidance } from './progressiveGuidance.js?v=v31-final-636a93f6f215';
-import { unlocked } from './progressiveFeatures.js?v=v31-final-636a93f6f215';
-import { applyProgressiveVisibility } from './progressiveVisibility.js?v=v31-final-636a93f6f215';
-import { prepareCompletedShowcase } from './cafeShowcase.js?v=v31-final-636a93f6f215';
-import { beginManagementUi, pollManagementUi } from './managementLive.js?v=v31-final-636a93f6f215';
-import { setArcadeSound } from './arcadeUi.js?v=v31-final-636a93f6f215';
-import { setCraftSound } from './craftUi.js?v=v31-final-636a93f6f215';
-import { setRushSound } from './cakeRushUi.js?v=v31-final-636a93f6f215';
-import { beginMiniUi, pollMiniUi } from './miniGameUi.js?v=v31-final-636a93f6f215';
-import { miniAnswer, activeMini } from './miniGames.js?v=v31-final-636a93f6f215';
-import { beginSpecializationUi, pollSpecializationUi, specializationArt } from './specializationUi.js?v=v31-final-636a93f6f215';
-import { specializationById } from './specializationConfig.js?v=v31-final-636a93f6f215';
-import { freeMealAnchor } from './furnitureAnchors.js?v=v31-final-636a93f6f215';
-import { freeFurniture, freeHallLayers, furnitureVisualVersion } from './freeFurniture.js?v=v31-final-636a93f6f215';
-import { growthStaffPanel } from './recruitUi.js?v=v31-final-636a93f6f215';
-import { workerBaseArt } from "./recruitArt.js?v=v31-final-636a93f6f215";
-import { branchCatalog, branchRoom } from "./growthBranch.js?v=v31-final-636a93f6f215";
-import { beginBranchUi, pollBranchUi } from "./growthBranchUi.js?v=v31-final-636a93f6f215";
-import { createGrowthSave } from './growthSave.js?v=v31-final-636a93f6f215';
-import { beginLongGrowth, pollLongGrowth } from './longGrowthUi.js?v=v31-final-636a93f6f215';
-import { growthRuntime } from './growthRuntime.js?v=v31-final-636a93f6f215';
-import { webAsset } from './webAsset.js?v=v31-final-636a93f6f215';
-import { imageReady } from './imageLoading.js?v=v31-final-636a93f6f215';
-import { motionFrame, bubbleCorrection } from './animationPresentation.js?v=v31-final-636a93f6f215';
-import { workerPoseArt, preloadMotionSheets, workerTrayPlacement } from './motionSprites.js?v=v31-final-636a93f6f215';
-import { EventRecovery } from './eventRecovery.js?v=v31-final-636a93f6f215';
-import { renderEventPanel } from './eventUi.js?v=v31-final-636a93f6f215';
-import { guestMotion, workerMotion, motionArt } from './characterMotion.js?v=v31-final-636a93f6f215';
-import { restoreClassroomCafe } from './classroomCheckpoint.js?v=v31-final-636a93f6f215';
-import { LearningAnalyticsV1 } from './learningAnalytics.js?v=v31-final-636a93f6f215';
-import { mountCafeResults } from './cafeResults.js?v=v31-final-636a93f6f215';
-import { questionCatalog } from './questionPack.js?v=v31-final-636a93f6f215';
-import { ClassroomUi } from './classroomUi.js?v=v31-final-636a93f6f215';
-import { passageHtml, materialHtml } from './reading.js?v=v31-final-636a93f6f215';
-import { CafeRunUi } from './cafeRunUi.js?v=v31-final-636a93f6f215';
-import { specialQuestions } from './hospitalityConfig.js?v=v31-final-636a93f6f215';
-import { productionReceipt, stockStatus } from './playLoop.js?v=v31-final-636a93f6f215';
-import { FinalUx } from './finalUx.js?v=v31-final-636a93f6f215';
-import { SessionClock, ActionGate } from './uxState.js?v=v31-final-636a93f6f215';
-import { installAssetFallbacks } from './assetFallback.js?v=v31-final-636a93f6f215';
-import { createLearning } from './learningIntegration.js?v=v31-final-636a93f6f215';
-import { renderQuestionText, escapeText, renderDiagram } from './questionRenderer.js?v=v31-final-636a93f6f215';
-import { GameFeel } from './gameFeel.js?v=v31-final-636a93f6f215';
-import { ModeFlow } from './modeUi.js?v=v31-final-636a93f6f215';
-import { itemCatalog, specialNames, specialIcons } from './phase4Config.js?v=v31-final-636a93f6f215';
-import { showOrderBubble, syncOrderBubble, assetSignature } from './presentation.js?v=v31-final-636a93f6f215';
-import { personalityLabels } from './customerRules.js?v=v31-final-636a93f6f215';
-import { selectCustomerPose, customerPoseArt, poseGeometry, preloadCustomerPoses, selectedPoseAsset } from './customerPoses.js?v=v31-final-636a93f6f215';
-import { SpatialScene, hallGrowthSpecs, createSpace } from './spatial.js?v=v31-final-636a93f6f215';
-import { DepartureDialogue } from './departureDialogue.js?v=v31-final-636a93f6f215';
-import { icon } from './uiIcons.js?v=v31-final-636a93f6f215';
-import { sprite } from './art.js?v=v31-final-636a93f6f215';
-import { staffBalance } from './config.js?v=v31-final-636a93f6f215';
-import { staffDefinitions } from './staff.js?v=v31-final-636a93f6f215';
-import { foodVisual } from './foodVisual.js?v=v31-final-636a93f6f215';
-import { CafeGame } from './game.js?v=v31-final-636a93f6f215';
-import { customers, menuDefinitions } from './data.js?v=v31-final-636a93f6f215';
+import { recoverInteriorEditing } from './interiorPause.js';
+import { beginRenewalTutorials, pollRenewalTutorials } from './renewalTutorialUi.js';
+import { finalizeExternal, observeExternalGame } from './externalLaunch.js';
+import { releaseResultView } from './resultViewMemory.js';
+import { kitchenRequiredSpace, kitchenStages, kitchenFloorLabel } from './productionKitchen.js';
+import { pollManagerSession } from './managerUi.js';
+import { liveManagementOpen } from './liveManagement.js';
+import { mountCommonCafeResults, restoreCommonArchive } from './commonCafeResults.js';
+import { CommonCafeFlow } from './commonCafeFlow.js';
+import { loadCommonRuntime } from './commonBankLoader.js';
+import { commonQuestion } from './commonLearningCatalog.js';
+import { setCommonTransaction } from './commonLearningTransaction.js';
+import { megaQualificationNotice } from './megaQualificationUi.js';
+import { megaView } from './megaView.js';
+import { renderProgressiveGuidance } from './progressiveGuidance.js';
+import { unlocked } from './progressiveFeatures.js';
+import { applyProgressiveVisibility } from './progressiveVisibility.js';
+import { prepareCompletedShowcase } from './cafeShowcase.js';
+import { beginManagementUi, pollManagementUi } from './managementLive.js';
+import { setArcadeSound } from './arcadeUi.js';
+import { setCraftSound } from './craftUi.js';
+import { setRushSound } from './cakeRushUi.js';
+import { beginMiniUi, pollMiniUi } from './miniGameUi.js';
+import { miniAnswer, activeMini } from './miniGames.js';
+import { beginSpecializationUi, pollSpecializationUi, specializationArt } from './specializationUi.js';
+import { specializationById } from './specializationConfig.js';
+import { freeMealAnchor } from './furnitureAnchors.js';
+import { freeFurniture, freeHallLayers, furnitureVisualVersion } from './freeFurniture.js';
+import { growthStaffPanel } from './recruitUi.js';
+import { workerBaseArt } from "./recruitArt.js";
+import { branchCatalog, branchRoom } from "./growthBranch.js";
+import { beginBranchUi, pollBranchUi } from "./growthBranchUi.js";
+import { createGrowthSave } from './growthSave.js';
+import { beginLongGrowth, pollLongGrowth } from './longGrowthUi.js';
+import { growthRuntime } from './growthRuntime.js';
+import { webAsset } from './webAsset.js';
+import { imageReady } from './imageLoading.js';
+import { motionFrame, bubbleCorrection } from './animationPresentation.js';
+import { workerPoseArt, preloadMotionSheets, workerTrayPlacement } from './motionSprites.js';
+import { renderEventPanel } from './eventUi.js';
+import { guestMotion, workerMotion, motionArt } from './characterMotion.js';
+import { LearningAnalyticsV1 } from './learningAnalytics.js';
+import { mountCafeResults } from './cafeResults.js';
+import { questionCatalog } from './questionPack.js';
+import { passageHtml, materialHtml } from './reading.js';
+import { CafeRunUi } from './cafeRunUi.js';
+import { specialQuestions } from './hospitalityConfig.js';
+import { productionReceipt, stockStatus } from './playLoop.js';
+import { FinalUx } from './finalUx.js';
+import { SessionClock, ActionGate } from './uxState.js';
+import { installAssetFallbacks } from './assetFallback.js';
+import { createLearning } from './learningIntegration.js';
+import { renderQuestionText, escapeText, renderDiagram } from './questionRenderer.js';
+import { GameFeel } from './gameFeel.js';
+import { ModeFlow } from './modeUi.js';
+import { itemCatalog, specialNames, specialIcons } from './phase4Config.js';
+import { showOrderBubble, syncOrderBubble, assetSignature } from './presentation.js';
+import { personalityLabels } from './customerRules.js';
+import { selectCustomerPose, customerPoseArt, poseGeometry, preloadCustomerPoses, selectedPoseAsset } from './customerPoses.js';
+import { SpatialScene, hallGrowthSpecs, createSpace } from './spatial.js';
+import { DepartureDialogue } from './departureDialogue.js';
+import { icon } from './uiIcons.js';
+import { sprite } from './art.js';
+import { staffBalance } from './config.js';
+import { staffDefinitions } from './staff.js';
+import { foodVisual } from './foodVisual.js';
+import { customers, menuDefinitions } from './data.js';
 let classroomElapsed = null;
 const developerMode = new URLSearchParams(location.search).has('dev');
 const clock = new SessionClock(), purchaseGate = new ActionGate();
@@ -136,16 +130,13 @@ let staffRecoveryUntil = 0;
 staffRecoveryButton.onclick = () => { advanceTime(); if (!game || game.status !== 'RUNNING' || commonBusy || performance.now() < staffRecoveryUntil)
     return; scene?.sync(game); const avoid = scene ? game.guests.map(g => scene.guest(g)) : []; const result = game.service.recoverPositions(avoid); el('service-hint').hidden = false; el('service-hint').textContent = result.reason; hintUntil = performance.now() + 10000; if (result.ok) {
     staffRecoveryUntil = performance.now() + 5000;
-    if (game.classRandom)
-        classRuntime.flush();
-    else
-        modeFlow.flush();
+    modeFlow.flush();
     render();
 } staffRecoveryButton.disabled = result.ok; if (result.ok)
     setTimeout(() => { staffRecoveryButton.disabled = false; }, 5000); };
-export async function startSession(session, pool, questionRandom, learningOptions = {}) { commonBusy = true; commonFlow = null; classroomElapsed = null; el('workers').innerHTML = ''; el('seats').innerHTML = ''; el('decor').innerHTML = ''; delete el('cafe-room').dataset.artLevel; guestLooks.clear(); preloadMotionSheets(); selectedGuest = null; detailKey = ''; app.classList.add('in-session'); game = session; recoverInteriorEditing(game); game.enableEvents(); if (game.mode === 'CLASS_MATCH' && game.status === 'RUNNING')
-    game.events.align(game.elapsedTime, game); if (game.status === 'CLOSED')
-    game.events.close(); runUi.start(); clearTimeout(outcomeTimer); game.service.manualOwner = true; game.enableHallGrowth(); departure = new DepartureDialogue(); departureKey = ''; manualTipShown = false; autoTipShown = game.service.paid.length > 0; lastStaffCount = game.service.paid.length; hintUntil = 0; el('service-hint').hidden = true; receipt = []; stockKey = ""; displayedResult = null; clock.start(); ux.start(); feel.start(session); scene = new SpatialScene(game.cafeLevel, game.cafe.maxCustomers, true); scene.sync(game); readVisits.clear(); rereading = false; engine = createLearning(pool, session.policy.persistence === 'saved-cafe', questionRandom, learningOptions); analytics = new LearningAnalyticsV1(engine.provider.packId); const growthState = growthRuntime.begin(session, pool, { engine, analytics, readVisits: [] }, () => ({ engine, analytics, readVisits: [...readVisits], specialAttempt })); const classState = classRuntime.begin(session, growthState.engine, growthState.analytics, growthState.readVisits); engine = classState.engine; analytics = classState.analytics; const commonSetup = pool?.[0]?.commonChoice; if (commonSetup) {
+export async function startSession(session, pool, questionRandom, learningOptions = {}) { if (session.mode !== 'CAFE_GROWTH')
+    throw Error('이 버전은 내 카페 키우기만 지원해요. 기존 기록은 유지돼요.'); commonBusy = true; commonFlow = null; classroomElapsed = null; el('workers').innerHTML = ''; el('seats').innerHTML = ''; el('decor').innerHTML = ''; delete el('cafe-room').dataset.artLevel; guestLooks.clear(); preloadMotionSheets(); selectedGuest = null; detailKey = ''; app.classList.add('in-session'); game = session; recoverInteriorEditing(game); game.enableEvents(); if (game.status === 'CLOSED')
+    game.events.close(); runUi.start(); clearTimeout(outcomeTimer); game.service.manualOwner = true; game.enableHallGrowth(); departure = new DepartureDialogue(); departureKey = ''; manualTipShown = false; autoTipShown = game.service.paid.length > 0; lastStaffCount = game.service.paid.length; hintUntil = 0; el('service-hint').hidden = true; receipt = []; stockKey = ""; displayedResult = null; clock.start(); ux.start(); feel.start(session); scene = new SpatialScene(game.cafeLevel, game.cafe.maxCustomers, true); scene.sync(game); readVisits.clear(); rereading = false; engine = createLearning(pool, session.policy.persistence === 'saved-cafe', questionRandom, learningOptions); analytics = new LearningAnalyticsV1(engine.provider.packId); const growthState = growthRuntime.begin(session, pool, { engine, analytics, readVisits: [] }, () => ({ engine, analytics, readVisits: [...readVisits], specialAttempt })); engine = growthState.engine; analytics = growthState.analytics; const commonSetup = pool?.[0]?.commonChoice; if (commonSetup) {
     try {
         const saved = engine.common, loaded = await loadCommonRuntime(commonSetup.subject, saved?.choices ?? commonSetup.choices);
         commonFlow = new CommonCafeFlow(loaded, saved?.choices ?? commonSetup.choices, saved);
@@ -165,9 +156,8 @@ export async function startSession(session, pool, questionRandom, learningOption
         app.classList.remove('in-session');
         throw error;
     }
-} commonBusy = false; readVisits.clear(); classState.readVisits.forEach(n => readVisits.add(n)); const sessionAnalytics = analytics; analytics.packName = pool?.[0]?.unit ?? '기본 학습'; void questionCatalog.list().then(list => { if (analytics === sessionAnalytics)
-    analytics.packName = list.find(p => p.packId === engine.provider.packId)?.selectionLabel ?? list.find(p => p.packId === engine.provider.packId)?.title ?? analytics.packName; }).catch(() => { }); game.enableHospitality(specialQuestions(engine.provider.list()).map(q => q.questionId)); specialAttempt = growthState.specialAttempt ?? null; active = null; feedback = null; panelOpen = false; investmentOpen = false; investmentMessage = ''; renderedInvestmentKey = ''; celebrationUntil = 0; productionUntil = 0; beginLongGrowth(session, growthRuntime.savedFor(session) ?? createGrowthSave(), growthRuntime.businessId(), () => modeFlow.flush()); modeFlow.attach(session, pool); beginMiniUi(session, () => session.classRandom ? classRuntime.flush() : modeFlow.flush()); beginManagementUi(session, () => modeFlow.flush()); beginSpecializationUi(session, () => modeFlow.flush(), () => growthRuntime.businessId()); beginBranchUi(session, growthRuntime.savedFor(session) ?? createGrowthSave(), () => modeFlow.flush()); if (session.classRandom)
-    classRuntime.bind(session, () => captureClass(session, engine.provider.packId, engine, analytics, [...readVisits])); el('setup').hidden = true; releaseResultView(el('results')); el('results').hidden = true; el('problem-panel').hidden = true; el('playing').hidden = false; el('make').disabled = false; el('investment-panel').hidden = true; last = performance.now(); render(); await finalizeExternal(commonFlow, session, () => session.classRandom ? classRuntime.flush() : modeFlow.flush()); beginRenewalTutorials(session, () => session.classRandom ? classRuntime.flush() : modeFlow.flush(), commonFlow ? () => new CommonCafeFlow(commonFlow.loaded, structuredClone(commonFlow.choices)) : undefined); }
+} commonBusy = false; readVisits.clear(); growthState.readVisits.forEach(n => readVisits.add(n)); const sessionAnalytics = analytics; analytics.packName = pool?.[0]?.unit ?? '기본 학습'; void questionCatalog.list().then(list => { if (analytics === sessionAnalytics)
+    analytics.packName = list.find(p => p.packId === engine.provider.packId)?.selectionLabel ?? list.find(p => p.packId === engine.provider.packId)?.title ?? analytics.packName; }).catch(() => { }); game.enableHospitality(specialQuestions(engine.provider.list()).map(q => q.questionId)); specialAttempt = growthState.specialAttempt ?? null; active = null; feedback = null; panelOpen = false; investmentOpen = false; investmentMessage = ''; renderedInvestmentKey = ''; celebrationUntil = 0; productionUntil = 0; beginLongGrowth(session, growthRuntime.savedFor(session) ?? createGrowthSave(), growthRuntime.businessId(), () => modeFlow.flush()); modeFlow.attach(session, pool); beginMiniUi(session, () => modeFlow.flush()); beginManagementUi(session, () => modeFlow.flush()); beginSpecializationUi(session, () => modeFlow.flush(), () => growthRuntime.businessId()); beginBranchUi(session, growthRuntime.savedFor(session) ?? createGrowthSave(), () => modeFlow.flush()); el('setup').hidden = true; releaseResultView(el('results')); el('results').hidden = true; el('problem-panel').hidden = true; el('playing').hidden = false; el('make').disabled = false; el('investment-panel').hidden = true; last = performance.now(); render(); await finalizeExternal(commonFlow, session, () => modeFlow.flush()); beginRenewalTutorials(session, () => modeFlow.flush(), commonFlow ? () => new CommonCafeFlow(commonFlow.loaded, structuredClone(commonFlow.choices)) : undefined); }
 document.querySelectorAll('[data-focus-tab]').forEach(b => b.onclick = () => { if (game?.status !== 'RUNNING')
     return; investmentTab = b.dataset.focusTab; selectedGuest = null; detailKey = ''; el('guest-detail').hidden = true; investmentOpen = true; panelOpen = false; renderProblem(); renderInvestment(true); });
 el('invest').addEventListener('click', () => { investmentTab = 'cafe'; if (game?.status !== 'RUNNING')
@@ -178,7 +168,7 @@ el('special-order').addEventListener('click', () => { const g = game?.specialOrd
 el('make').addEventListener('click', () => { if (commonFlow) {
     void openCommonQuestion();
     return;
-} if (game?.status !== 'RUNNING' || classRuntime.blocked || document.getElementById('class-event-dialog') || activeMini(game))
+} if (game?.status !== 'RUNNING' || document.getElementById('class-event-dialog') || activeMini(game))
     return; selectedGuest = null; detailKey = ''; el('guest-detail').hidden = true; investmentOpen = false; el('investment-panel').hidden = true; panelOpen = true; if (!active)
     active = engine.next(game?.events.mission?.id === 'gourmet' ? 'challenge' : game?.events.active ? 'standalone' : undefined); renderProblem(); if (active.type === 'short_answer' && !feedback)
     el('answer-input')?.focus(); });
@@ -222,7 +212,7 @@ function renderProblem() {
         p.querySelector('.feedback').append(done);
     }
     if (active.material && !feedback) {
-        void classroom.material(active, p);
+        p.dataset.materialReady = 'false';
         const m = active.material;
         if ((m.selectionCount ?? 1) > 1) {
             const choices = p.querySelector('.choices');
@@ -254,7 +244,7 @@ function renderProblem() {
 function submit(answer) { if (commonFlow) {
     void submitCommon(answer);
     return;
-} advanceTime(); if (classRuntime.blocked || !classroom.canSubmit() || game?.status !== 'RUNNING' || activeMini(game) || feedback || !answer.trim() || active?.material && el('problem-panel').dataset.materialReady !== 'true')
+} advanceTime(); if (game?.status !== 'RUNNING' || activeMini(game) || feedback || !answer.trim() || active?.material && el('problem-panel').dataset.materialReady !== 'true')
     return; const r = engine.submit(answer); if (!r)
     return; feedback = r; const aq = active; analytics.record({ questionId: aq.questionId ?? r.questionId, questionPackId: engine.provider.packId, questionType: aq.type, learningObjective: { id: aq.skillId ?? r.skillId, label: aq.skillLabel ?? aq.unit }, question: aq.question, choices: aq.choices, diagram: aq.diagram, answer: r.answer, explanation: r.explanation, passage: aq.readingContext ? [...aq.readingContext.paragraphs, ...aq.readingContext.tables.map(t => t.caption + '\n' + t.columns.join(' · ') + '\n' + t.rows.map(row => row.join(' · ')).join('\n'))].join('\n') : undefined, restricted: !!aq.material || aq.publicExportAllowed === false }, answer, r.correct, { isTwin: r.isTwin, isRemediation: r.isRemediation, sourceQuestionId: r.sourceQuestionId }); const learningSaved = true; const before = game.successfulProduction, quantity = aq.spacedReview ? 1 : game.boosterRemaining ? 3 : 1; const stocksBefore = new Map(game.menus.map(m => [m.menuId, m.stock])); game.recordAnswer(r.correct, aq.difficulty, aq.spacedReview ? 1 : undefined); analytics.spacedReview = engine.spacedReport(); miniAnswer(game, r.correct, aq.questionId ?? r.questionId); const signatureMade = specialAttempt !== null && game.completeSignature(specialAttempt, r.correct); specialAttempt = null; receipt = r.correct ? productionReceipt(stocksBefore, game.menus) : []; if (!r.correct)
     productionUntil = 0; if (r.correct)
@@ -298,17 +288,12 @@ export function render() {
     observeExternalGame(game, commonFlow);
     if (commonBusy)
         return;
-    if (game?.classRandom) {
-        classRuntime.poll(game);
-        pollClassUi(game, event => { void feel.audio.effect(event); });
-    }
     if (game) {
         applyProgressiveVisibility(game);
         renderProgressiveGuidance(game);
     }
     if (!game)
         return;
-    recovery.poll();
     runUi.poll();
     if (game.status === 'CLOSED' && displayedResult === game) {
         if (game.mode === 'CAFE_GROWTH') {
@@ -378,17 +363,6 @@ export function render() {
         renderProblem();
         el('make').disabled = true;
         el('playing').hidden = true;
-        if (game.policy.persistence === 'none') {
-            const r = game.result;
-            el('results').hidden = false;
-            el('results').innerHTML = `<p class="eyebrow">오늘도 수고했어요</p><h2>오늘의 카페 운영 결과</h2><p>작은 도전들이 맛있는 하루를 만들었어요.</p><p>${game.telemetry.phase4.vipVisits ? '★ VIP ' + game.telemetry.phase4.vipVisits + '명 방문 · ' : ''}${game.telemetry.phase4.regularHighestTier ? '♥ 단골 최고 단계 ' + game.telemetry.phase4.regularHighestTier : ''}</p><div class="result-grid">${[['최종 카페', game.cafeLevel + '단계'], ['총매출', r.revenue.toLocaleString() + ' 원'], ['손님', r.servedCustomers + '명'], ['판매 음식', r.soldFood + '개'], ['푼 문제', r.attempted + '개'], ['정답', r.correct + '개'], ['정답률', r.accuracy + '%']].map(([k, v]) => '<div>' + k + '<strong>' + v + '</strong></div>').join('')}</div><details class="analysis"><summary>개발자 플레이 분석</summary><p>재고 부족: ${game.stockoutEvents}개 주문 · 생산 낭비: ${game.wastedProduction}개 · 성공 생산: ${game.successfulProduction}개 · 대기 중 퇴장: ${game.customersLeft}명</p><button id="export-log" class="secondary">플레이 로그 JSON 저장</button><pre id="log-preview"></pre></details><button class="primary" id="restart">모드 선택으로</button>`;
-            el('log-preview').textContent = JSON.stringify(({ ...game.telemetry.export(game.snapshot), cafeRun: game.run?.report() ?? null, learning: engine.report() }), null, 2);
-            el('export-log').onclick = () => { if (!game)
-                return; const blob = new Blob([JSON.stringify(({ ...game.telemetry.export(game.snapshot), learning: engine.report() }), null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'cafe-play-log.json'; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000); };
-            el('restart').onclick = () => { classroom.leaveFinished(); modeFlow.showModes(); game = null; app.classList.remove('in-session'); investmentOpen = false; el('investment-panel').hidden = true; el('results').hidden = true; el('setup').hidden = false; el('make').disabled = false; };
-            if (!developerMode)
-                el('results').querySelector('.analysis')?.remove();
-        }
     }
     if (game.mode === 'CAFE_GROWTH') {
         pollLongGrowth(game, engine);
@@ -430,7 +404,7 @@ function frame(now) { if (game && !commonBusy && !liveManagementOpen)
     feel.poll(game);
     ux.poll(game);
 } last = now; if (game?.status === 'RUNNING') {
-    game.tick(classRuntime.delta(game) ?? growthRuntime.delta(game) ?? (classroomElapsed ? Math.max(0, classroomElapsed() - game.elapsedTime) : clock.take(Date.now(), now)));
+    game.tick(growthRuntime.delta(game) ?? (classroomElapsed ? Math.max(0, classroomElapsed() - game.elapsedTime) : clock.take(Date.now(), now)));
     scene.sync(game);
     if (!document.hidden && now >= nextActors) {
         renderActors(now);
@@ -794,7 +768,7 @@ function mountSessionLearningResults() { if (!game)
     mountCafeResults(game, analytics);
     return;
 } const flow = commonFlow; flow.gameSpecific = [{ label: '카페 단계', value: game.cafeLevel }, { label: '판매 매출', value: game.stats.revenue }, { label: '보유금', value: game.money }, { label: '서빙 손님', value: game.stats.servedCustomers }]; mountCommonCafeResults(flow, async () => { engine.common = await flow.snapshot(); return commonFlush(); }); }
-function commonFlush() { return game?.classRandom ? classRuntime.flush() : modeFlow.flush(); }
+function commonFlush() { return modeFlow.flush(); }
 function commonSaveBlocked(message, canRetry) { document.getElementById('save-blocker')?.remove(); let panel = document.getElementById('common-save-blocker'); if (!panel) {
     panel = document.createElement('section');
     panel.id = 'common-save-blocker';
@@ -806,7 +780,7 @@ function commonSaveBlocked(message, canRetry) { document.getElementById('save-bl
     panel?.remove();
     render();
 } }); panel.querySelector('#common-save-reload').addEventListener('click', () => location.reload()); }
-async function openCommonQuestion() { if (!commonFlow || commonBusy || classRuntime.blocked || game?.status !== 'RUNNING' || activeMini(game) || document.getElementById('class-event-dialog'))
+async function openCommonQuestion() { if (!commonFlow || commonBusy || game?.status !== 'RUNNING' || activeMini(game) || document.getElementById('class-event-dialog'))
     return; advanceTime(); if (game?.status !== 'RUNNING')
     return; const flow = commonFlow; commonBusy = true; setCommonTransaction(true); try {
     const next = await flow.next();
@@ -841,7 +815,7 @@ async function openCommonQuestion() { if (!commonFlow || commonBusy || classRunt
 catch (error) {
     commonSaveBlocked(error instanceof Error ? error.message : '출제 상태를 확인해 주세요.', false);
 } }
-async function submitCommon(answer) { if (!commonFlow || commonBusy || classRuntime.blocked || !classroom.canSubmit() || game?.status !== 'RUNNING' || activeMini(game) || feedback || !active)
+async function submitCommon(answer) { if (!commonFlow || commonBusy || game?.status !== 'RUNNING' || activeMini(game) || feedback || !active)
     return; advanceTime(); if (game.status !== 'RUNNING')
     return; const flow = commonFlow, aq = active, index = aq.choices.indexOf(answer); if (index < 0)
     return; commonBusy = true; setCommonTransaction(true); try {
@@ -912,13 +886,13 @@ catch (error) {
 function advanceTime() { if (game?.tutorialPause?.active)
     return; if (commonBusy || liveManagementOpen)
     return; if (game?.status !== 'RUNNING')
-    return; game.tick(classRuntime.delta(game) ?? growthRuntime.delta(game) ?? (classroomElapsed ? Math.max(0, classroomElapsed() - game.elapsedTime) : clock.take())); if (game.status === 'CLOSED')
+    return; game.tick(growthRuntime.delta(game) ?? (classroomElapsed ? Math.max(0, classroomElapsed() - game.elapsedTime) : clock.take())); if (game.status === 'CLOSED')
     render(); }
 addEventListener('visibilitychange', () => { advanceTime(); if (game) {
     render();
     modeFlow.flush();
 } });
-addEventListener('pagehide', () => { advanceTime(); modeFlow.flush(); classRuntime.flush(); classRuntime.release(); });
+addEventListener('pagehide', () => { advanceTime(); modeFlow.flush(); });
 export function configureUxPreference(storage, key) { ux.configure(storage, key); }
 export function uxDiagnostics() { return { tutorialCompleted: ux.preference.completed, status: game?.status, cafe: game?.snapshot, learning: engine.report() }; }
 export function refreshForQA() { render(); }
@@ -949,20 +923,6 @@ function renderServiceHint() { if (!game)
     box.textContent = text;
     hintUntil = performance.now() + 4500;
 } box.hidden = performance.now() > hintUntil || game.status !== 'RUNNING'; }
-const classroom = new ClassroomUi(() => game, startSession, () => { if (game?.status === "RUNNING") {
-    game.leaveClassMatch();
-    render();
-} }, (start, now) => { const mono = performance.now(); classroomElapsed = () => Math.max(0, (now + performance.now() - mono - start) / 1000); }, () => { const r = engine.report(); return { ...r, twinQuestionsGenerated: r.attempts.filter(a => a.isTwin).length }; }, () => ({ session: engine.checkpoint(), readVisits: [...readVisits], analytics: analytics.checkpoint() }), (snapshot) => { const s = snapshot; if (!s || !engine.restoreCheckpoint(s.session))
-    return false; if (s.analytics)
-    analytics.restore(s.analytics); readVisits.clear(); if (Array.isArray(s.readVisits))
-    s.readVisits.filter(n => Number.isSafeInteger(n) && n >= 0).forEach(n => readVisits.add(n)); return true; }, (n) => engine.resumeNormalCursor(n), (value, stats, room) => { const cp = value; const a = cp?.learning?.analytics; if (!a?.questionPackId)
-    return false; const restored = new LearningAnalyticsV1(a.questionPackId); if (!restored.restore(a))
-    return false; const g = new CafeGame(room.seconds); if (room.mode === 'run')
-    g.enableRun(room.room, 'coffee'); if (!restoreClassroomCafe(g, cp.cafe))
-    return false; startSession(g); analytics = restored; g.stats.attempted = Math.max(stats.attempted, analytics.report().total.attempted); g.stats.correct = Math.max(stats.correct, analytics.report().total.correct); g.remainingSeconds = Math.max(0, room.seconds - Math.max(0, ((room.endAt ?? room.serverNow) - (room.startAt ?? room.serverNow)) / 1000)); g.leaveClassMatch(); render(); return true; });
-const recovery = new EventRecovery(() => game, () => ({ packId: engine.provider.packId, learning: { session: engine.checkpoint(), readVisits: [...readVisits], analytics: analytics.checkpoint() } }), (g, pool) => startSession(g, pool), (value) => { const s = value; if (!s || !engine.restoreCheckpoint(s.session) || !analytics.restore(s.analytics))
-    return false; readVisits.clear(); if (Array.isArray(s.readVisits))
-    s.readVisits.forEach(n => readVisits.add(n)); return true; });
 document.addEventListener('v15-restored', () => { document.getElementById('learning-report')?.remove(); render(); });
 function fitFarewells() { if (!roomVisible)
     return; const pops = document.querySelectorAll('.farewell-pop'); if (!pops.length)

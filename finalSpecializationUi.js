@@ -1,8 +1,8 @@
-import { openRenewalSpecialization } from './renewalSpecializationUi.js?v=v31-final-636a93f6f215';
-import { chooseFinalSpecialization, finalSpecializationFor } from './finalSpecialization.js?v=v31-final-636a93f6f215';
-import { finalSpecializationOffers, finalSignatureMenus, signatureImage } from './finalSpecializationState.js?v=v31-final-636a93f6f215';
-import { configureFinalSupply } from './finalSupply.js?v=v31-final-636a93f6f215';
-import { specializationRoom } from './specializationConfig.js?v=v31-final-636a93f6f215';
+import { openRenewalSpecialization } from './renewalSpecializationUi.js';
+import { chooseFinalSpecialization, finalSpecializationFor } from './finalSpecialization.js';
+import { finalSpecializationOffers, finalSignatureMenus, signatureImage } from './finalSpecializationState.js';
+import { configureFinalSupply } from './finalSupply.js';
+import { specializationRoom } from './specializationConfig.js';
 export function openFinalSpecialization(g, flush, done = () => { }) { if (document.querySelector('dialog.final-specialization'))
     return; if (g.mega?.finalGrowth?.renewal)
     return openRenewalSpecialization(g, flush, done); const dialog = document.createElement('dialog'); dialog.className = 'final-specialization live-mega-hub'; dialog.style.cssText = 'max-width:850px;width:94vw;max-height:85vh;overflow:auto'; document.body.append(dialog); const close = () => { dialog.remove(); done(); }; const render = () => { dialog.replaceChildren(); const h = document.createElement('h2'); h.textContent = '우리 카페의 두 가지 꿈'; dialog.append(h); const current = finalSpecializationFor(g), info = document.createElement('p'); info.textContent = '내 돈 ' + g.money.toLocaleString() + '원 · 현재 정답 생산 ' + g.productionAmount + '개/메뉴 · 창고 ' + g.warehouse.capacity + '개/메뉴. 선택은 한 번만 하며 현재 후보에서는 변경할 수 없어요.'; dialog.append(info); if (current) {

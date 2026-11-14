@@ -1,7 +1,7 @@
-import { finalActive } from './finalGrowth.js?v=v31-final-636a93f6f215';
-import { finalLevelNotice } from './finalLevelCatalog.js?v=v31-final-636a93f6f215';
-import { deploymentLocalStorage } from './deploymentStorage.js?v=v31-final-636a93f6f215';
-import { AudioManager } from './audioManager.js?v=v31-final-636a93f6f215';
+import { finalActive } from './finalGrowth.js';
+import { finalLevelNotice } from './finalLevelCatalog.js';
+import { deploymentLocalStorage } from './deploymentStorage.js';
+import { AudioManager } from './audioManager.js';
 export class FeelTracker {
     guests = new Map();
     workers = new Map();

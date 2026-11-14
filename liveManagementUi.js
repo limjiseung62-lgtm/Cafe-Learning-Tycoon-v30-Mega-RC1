@@ -1,14 +1,14 @@
-import { beginInteriorEditing, finishInteriorEditing } from './interiorPause.js?v=v31-final-636a93f6f215';
-import { openAppearance } from './renewalAppearance.js?v=v31-final-636a93f6f215';
-import { openFinalSpecialization } from './finalSpecializationUi.js?v=v31-final-636a93f6f215';
-import { openFinalSupply } from './finalSupplyUi.js?v=v31-final-636a93f6f215';
-import { openFinalDoors } from './finalDoorsUi.js?v=v31-final-636a93f6f215';
-import { finalActive } from './finalGrowth.js?v=v31-final-636a93f6f215';
-import { finalGrowthSummary } from './finalGrowthUi.js?v=v31-final-636a93f6f215';
-import { attachManagerSession } from './managerUi.js?v=v31-final-636a93f6f215';
-import { expansionAction } from './megaExpansionUi.js?v=v31-final-636a93f6f215';
-import { openInteriorShop, openInteriorEditor } from './megaShopUi.js?v=v31-final-636a93f6f215';
-import { liveManagementRepository, liveManagementOpen, setLiveManagementOpen } from './liveManagement.js?v=v31-final-636a93f6f215';
+import { beginInteriorEditing, finishInteriorEditing } from './interiorPause.js';
+import { openAppearance } from './renewalAppearance.js';
+import { openFinalSpecialization } from './finalSpecializationUi.js';
+import { openFinalSupply } from './finalSupplyUi.js';
+import { openFinalDoors } from './finalDoorsUi.js';
+import { finalActive } from './finalGrowth.js';
+import { finalGrowthSummary } from './finalGrowthUi.js';
+import { attachManagerSession } from './managerUi.js';
+import { expansionAction } from './megaExpansionUi.js';
+import { openInteriorShop, openInteriorEditor } from './megaShopUi.js';
+import { liveManagementRepository, liveManagementOpen, setLiveManagementOpen } from './liveManagement.js';
 export function mountLiveManagement(g, c) { document.getElementById('live-mega-management')?.remove(); if (!c || g.mode !== 'CAFE_GROWTH' || !g.mega) {
     attachManagerSession(g, null);
     return;

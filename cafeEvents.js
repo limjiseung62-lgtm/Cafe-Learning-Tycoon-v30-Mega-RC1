@@ -1,7 +1,7 @@
-import { grantRenewalReward } from './renewalRewards.js?v=v31-final-636a93f6f215';
-import { unlocked } from './progressiveFeatures.js?v=v31-final-636a93f6f215';
-import { specializationById } from './specializationConfig.js?v=v31-final-636a93f6f215';
-import { eventBalance as b, eventSchedule, allMissionCatalog, incidentCatalog } from './eventConfig.js?v=v31-final-636a93f6f215';
+import { grantRenewalReward } from './renewalRewards.js';
+import { unlocked } from './progressiveFeatures.js';
+import { specializationById } from './specializationConfig.js';
+import { eventBalance as b, eventSchedule, allMissionCatalog, incidentCatalog } from './eventConfig.js';
 export class CafeEvents {
     enabled = false;
     duration = 0;

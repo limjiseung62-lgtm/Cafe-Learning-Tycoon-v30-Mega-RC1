@@ -1,8 +1,8 @@
-import { finalSalary } from './finalPayroll.js?v=v31-final-636a93f6f215';
-import { staffEffect } from './recruitConfig.js?v=v31-final-636a93f6f215';
-import { finalRoles } from './finalSupplyState.js?v=v31-final-636a93f6f215';
-import { configureFinalSupply, crewAssignment, supplyState } from './finalSupply.js?v=v31-final-636a93f6f215';
-import { megaZones } from './megaZones.js?v=v31-final-636a93f6f215';
+import { finalSalary } from './finalPayroll.js';
+import { staffEffect } from './recruitConfig.js';
+import { finalRoles } from './finalSupplyState.js';
+import { configureFinalSupply, crewAssignment, supplyState } from './finalSupply.js';
+import { megaZones } from './megaZones.js';
 const labels = { floor: '홀 서빙', kitchen: '주방 지원', logistics: '재고 보급', vip: 'VIP 서비스', 'zone-manager': '구역 관리' };
 export function openFinalSupply(g, c, done) { if (g.mega?.finalGrowth?.renewal && g.cafeLevel < 14 && g.mega.finalGrowth.renewal.origin !== 'legacy') {
     const d = document.createElement('dialog');

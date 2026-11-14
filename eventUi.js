@@ -1,7 +1,7 @@
-import { rewardCash } from './renewalRewardState.js?v=v31-final-636a93f6f215';
-import { eventBalance } from './eventConfig.js?v=v31-final-636a93f6f215';
-import { escapeText as esc } from './questionRenderer.js?v=v31-final-636a93f6f215';
-import { missionGoal, noticeTone } from './eventPresentation.js?v=v31-final-636a93f6f215';
+import { rewardCash } from './renewalRewardState.js';
+import { eventBalance } from './eventConfig.js';
+import { escapeText as esc } from './questionRenderer.js';
+import { missionGoal, noticeTone } from './eventPresentation.js';
 let previous = '', previousGame = null, collapsed = false;
 export function renderEventPanel(game, problemOpen) {
     if (previousGame !== game) {

@@ -1,8 +1,8 @@
-import { helperCatalog } from './hospitalityConfig.js?v=v31-final-636a93f6f215';
-import { phase4Balance, specialTypes } from './phase4Config.js?v=v31-final-636a93f6f215';
-import { customers } from './data.js?v=v31-final-636a93f6f215';
-import { finalGuestProfiles } from './finalGuestProfiles.js?v=v31-final-636a93f6f215';
-import { finalStaffProfiles } from './finalStaffProfiles.js?v=v31-final-636a93f6f215';
+import { helperCatalog } from './hospitalityConfig.js';
+import { phase4Balance, specialTypes } from './phase4Config.js';
+import { customers } from './data.js';
+import { finalGuestProfiles } from './finalGuestProfiles.js';
+import { finalStaffProfiles } from './finalStaffProfiles.js';
 const guestMilestones = [[1, 8], [5, 18], [10, 32], [15, 48], [20, 65], [25, 82], [30, 100]];
 const staffMilestones = [[1, 0], [3, 3], [5, 8], [10, 16], [15, 25], [20, 34], [25, 43], [30, 50]];
 function count(level, points) { let previous = points[0]; for (const next of points.slice(1)) {

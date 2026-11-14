@@ -1,23 +1,26 @@
-import { tutorialPauseCredit, validTutorialPause } from './tutorialPause.js?v=v31-final-636a93f6f215';
-import { validBatchWorkers } from './batchServing.js?v=v31-final-636a93f6f215';
-import { guestPose } from './spatial.js?v=v31-final-636a93f6f215';
-import { megaPointClear } from './megaSpace.js?v=v31-final-636a93f6f215';
-import { validManagement } from './managementState.js?v=v31-final-636a93f6f215';
-import { validMiniSession, validMiniCollection, pauseCredit, expireMini } from './miniGames.js?v=v31-final-636a93f6f215';
-import { validSpecialization } from './specialization.js?v=v31-final-636a93f6f215';
-import { validBranch } from "./growthBranch.js?v=v31-final-636a93f6f215";
-import { validateGrowthSave } from './growthSave.js?v=v31-final-636a93f6f215';
-import { createGrowthSession } from './sessionFactory.js?v=v31-final-636a93f6f215';
-import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js?v=v31-final-636a93f6f215';
-import { LearningSession, LearningProgressRepository } from './learningSession.js?v=v31-final-636a93f6f215';
-import { LearningAnalyticsV1 } from './learningAnalytics.js?v=v31-final-636a93f6f215';
-import { providerForPool } from './learningIntegration.js?v=v31-final-636a93f6f215';
-import { validAbilityRun } from "./staffAbilities.js?v=v31-final-636a93f6f215";
+import { validBusinessStudies } from './growthBusinessStudies.js';
+import { tutorialPauseCredit, validTutorialPause } from './tutorialPause.js';
+import { validBatchWorkers } from './batchServing.js';
+import { guestPose } from './spatial.js';
+import { megaPointClear } from './megaSpace.js';
+import { validManagement } from './managementState.js';
+import { validMiniSession, validMiniCollection, pauseCredit, expireMini } from './miniGames.js';
+import { validSpecialization } from './specialization.js';
+import { validBranch } from "./growthBranch.js";
+import { validateGrowthSave } from './growthSave.js';
+import { createGrowthSession } from './sessionFactory.js';
+import { classroomCafeCheckpoint, restoreCafeCheckpoint } from './classroomCheckpoint.js';
+import { LearningSession, LearningProgressRepository } from './learningSession.js';
+import { LearningAnalyticsV1 } from './learningAnalytics.js';
+import { providerForPool } from './learningIntegration.js';
+import { validAbilityRun } from "./staffAbilities.js";
 export const withoutCampaign = (save) => { const copy = structuredClone(save); delete copy.campaign; delete copy.eventState; delete copy.portfolio; return copy; };
 const goodInt = (n) => Number.isSafeInteger(n) && Number(n) >= 0;
 export function validCampaign(value) { try {
     const s = value;
     if (!s || s.version !== 1 || !s.studies || Array.isArray(s.studies) || Object.keys(s.studies).length > 100)
+        return false;
+    if (s.run?.learning?.businessStudies && !validBusinessStudies(s.run.learning.businessStudies))
         return false;
     for (const [id, r] of Object.entries(s.studies)) {
         if (!r || !Array.isArray(r.recent) || r.recent.length > 5 || !r.recent.every(x => typeof x === 'boolean') || ![r.level, r.attempted, r.correct, r.reviewCorrect].every(goodInt) || r.level < 1 || r.level > 3 || r.correct > r.attempted || !Array.isArray(r.seen) || r.seen.length > 2000 || !r.seen.every(x => typeof x === 'string'))

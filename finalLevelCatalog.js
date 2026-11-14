@@ -1,16 +1,16 @@
-import { studioFurniture } from './renewalFurnitureCatalog.js?v=v31-final-636a93f6f215';
-import { menuEnhancementCap } from './renewalMenuQuality.js?v=v31-final-636a93f6f215';
-import { appearanceCatalog } from './renewalAppearanceState.js?v=v31-final-636a93f6f215';
-import { specializationLevels, specializationUpgradeCosts } from './renewalSpecializationState.js?v=v31-final-636a93f6f215';
-import { renewalFacilityCatalog } from './renewalFacilities.js?v=v31-final-636a93f6f215';
-import { renewalGuestCount, renewalStaffCount } from './renewalRosterPolicy.js?v=v31-final-636a93f6f215';
-import { renewalMenus, renewalSeats, renewalGrowthCosts, renewalStaffLimit, renewalExpansionLevel } from './renewalPolicy.js?v=v31-final-636a93f6f215';
-import { finalCrewLimit } from './finalWorkforcePolicy.js?v=v31-final-636a93f6f215';
-import { menuDefinitions } from './data.js?v=v31-final-636a93f6f215';
-import { levelOperatingSeats } from './levelSeatPolicy.js?v=v31-final-636a93f6f215';
-import { expansionStages, megaExpansionCosts } from './megaExpansion.js?v=v31-final-636a93f6f215';
-import { kitchenStages } from './productionKitchen.js?v=v31-final-636a93f6f215';
-import { finalSpecializationOffers } from './finalSpecializationState.js?v=v31-final-636a93f6f215';
+import { studioFurniture } from './renewalFurnitureCatalog.js';
+import { menuEnhancementCap } from './renewalMenuQuality.js';
+import { appearanceCatalog } from './renewalAppearanceState.js';
+import { specializationLevels, specializationUpgradeCosts } from './renewalSpecializationState.js';
+import { renewalFacilityCatalog } from './renewalFacilities.js';
+import { renewalGuestCount, renewalStaffCount } from './renewalRosterPolicy.js';
+import { renewalMenus, renewalSeats, renewalGrowthCosts, renewalStaffLimit, renewalExpansionLevel } from './renewalPolicy.js';
+import { finalCrewLimit } from './finalWorkforcePolicy.js';
+import { menuDefinitions } from './data.js';
+import { levelOperatingSeats } from './levelSeatPolicy.js';
+import { expansionStages, megaExpansionCosts } from './megaExpansion.js';
+import { kitchenStages } from './productionKitchen.js';
+import { finalSpecializationOffers } from './finalSpecializationState.js';
 /** Read-only catalog of actual entitlements. Purchase entries are never free grants. */
 export function finalLevelCatalog(renewal) {
     return (renewal ? renewalSeats : levelOperatingSeats).map((operatingSeats, i) => {

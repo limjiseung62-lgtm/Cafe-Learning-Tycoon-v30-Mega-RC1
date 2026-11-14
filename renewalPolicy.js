@@ -1,8 +1,8 @@
-import { validRenewalRewards } from './renewalRewardState.js?v=v31-final-636a93f6f215';
-import { validRenewalFacilities } from './renewalFacilities.js?v=v31-final-636a93f6f215';
-import { validRenewalTutorials } from './renewalTutorialState.js?v=v31-final-636a93f6f215';
-import { validAppearance } from './renewalAppearanceState.js?v=v31-final-636a93f6f215';
-import { menuDefinitions } from './data.js?v=v31-final-636a93f6f215';
+import { validRenewalRewards } from './renewalRewardState.js';
+import { validRenewalFacilities } from './renewalFacilities.js';
+import { validRenewalTutorials } from './renewalTutorialState.js';
+import { validAppearance } from './renewalAppearanceState.js';
+import { menuDefinitions } from './data.js';
 /** Growth-only draft policy. CLASS and saves without renewal metadata keep v3.0 rules. */
 export const legacyRenewalMenuLevels = [1, 2, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 26, 27, 28, 30];
 /** Original six menu stages, three dishes each. Floor ownership is independent. */

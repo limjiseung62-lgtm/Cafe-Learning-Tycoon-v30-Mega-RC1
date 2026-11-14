@@ -1,23 +1,23 @@
-import { rewardSetupAction } from './renewalRewardUi.js?v=v31-final-636a93f6f215';
-import { renewalMigrationAction } from './renewalMigrationUi.js?v=v31-final-636a93f6f215';
-import { appearanceAction } from './renewalAppearance.js?v=v31-final-636a93f6f215';
-import { renewalGrowthCosts } from './renewalPolicy.js?v=v31-final-636a93f6f215';
-import { enterpriseAction } from './enterpriseUi.js?v=v31-final-636a93f6f215';
-import { managerPreparationAction } from './managerUi.js?v=v31-final-636a93f6f215';
-import { megaGrowthBalance } from './megaGrowthEconomy.js?v=v31-final-636a93f6f215';
-import { expansionQuote } from './megaExpansion.js?v=v31-final-636a93f6f215';
-import { interiorActions, openInteriorEditor } from './megaShopUi.js?v=v31-final-636a93f6f215';
-import { isShopDeployment } from './megaInventory.js?v=v31-final-636a93f6f215';
-import { expansionAction } from './megaExpansionUi.js?v=v31-final-636a93f6f215';
-import { environmentPlacements, paintEnvironment } from './megaArt.js?v=v31-final-636a93f6f215';
-import { megaDimensions, megaKey, validateMegaPlan, defaultMegaPlan, iso, uniso, validMega, isMegaDeployment } from './megaSpace.js?v=v31-final-636a93f6f215';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=v31-final-636a93f6f215';
-import { megaChairs } from './megaSpace.js?v=v31-final-636a93f6f215';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v31-final-636a93f6f215';
-import { allDecorationCatalog } from './longGrowthConfig.js?v=v31-final-636a93f6f215';
-import { freeKey } from './freeLayoutModel.js?v=v31-final-636a93f6f215';
-import { furnitureCatalog } from './furnitureCatalog.js?v=v31-final-636a93f6f215';
-import { furnitureUnlocked } from './furnitureUnlocks.js?v=v31-final-636a93f6f215';
+import { rewardSetupAction } from './renewalRewardUi.js';
+import { renewalMigrationAction } from './renewalMigrationUi.js';
+import { appearanceAction } from './renewalAppearance.js';
+import { renewalGrowthCosts } from './renewalPolicy.js';
+import { enterpriseAction } from './enterpriseUi.js';
+import { managerPreparationAction } from './managerUi.js';
+import { megaGrowthBalance } from './megaGrowthEconomy.js';
+import { expansionQuote } from './megaExpansion.js';
+import { interiorActions, openInteriorEditor } from './megaShopUi.js';
+import { isShopDeployment } from './megaInventory.js';
+import { expansionAction } from './megaExpansionUi.js';
+import { environmentPlacements, paintEnvironment } from './megaArt.js';
+import { megaDimensions, megaKey, validateMegaPlan, defaultMegaPlan, iso, uniso, validMega, isMegaDeployment } from './megaSpace.js';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js';
+import { megaChairs } from './megaSpace.js';
+import { ensureGrowthWriteLock } from './growthWriteLock.js';
+import { allDecorationCatalog } from './longGrowthConfig.js';
+import { freeKey } from './freeLayoutModel.js';
+import { furnitureCatalog } from './furnitureCatalog.js';
+import { furnitureUnlocked } from './furnitureUnlocks.js';
 const mega30Deployment = () => typeof document !== 'undefined' && document.querySelector('meta[name="cafe-deployment"]')?.getAttribute('content')?.startsWith('v30e-') === true;
 export function proposeMega(save, extended = false) { const level = extended ? Math.min(10, save.cafeLevel) : save.cafeLevel, branch = save.growthBranch?.active ?? null; if (level > 10)
     throw Error('Phase 1은 Lv.1~10만 지원해요. 기존 높은 레벨은 기존 화면에서 계속 운영해요.'); const source = save.freeLayouts?.plans[freeKey(save.cafeLevel, branch)] ?? save.layouts?.plans[megaKey(save.cafeLevel, branch)]; const [w, h] = megaDimensions[level - 1], snap = (x) => Math.round(x * 2) / 2; const p = source ? { version: 1, level, branch, tables: source.tables.map((t, i) => ({ id: t.id, kind: 'kind' in t ? t.kind : 'two', ...'furnitureId' in t ? { furnitureId: t.furnitureId } : {}, x: snap(2.75 + (t.x - 4) / 92 * (w - 4)), y: snap(1.75 + (t.y - 42) / 54 * (h - 3.5)), rotation: t.rotation })), decor: source.decor.map(d => ({ id: d.id, decorId: d.decorId, x: snap(2.5 + (d.x - 4) / 92 * (w - 3)), y: allDecorationCatalog.find(x => x.id === d.decorId)?.slot === 'wall' ? 0 : snap(2 + (d.y - 42) / 54 * (h - 3)), rotation: d.rotation, wall: allDecorationCatalog.find(x => x.id === d.decorId)?.slot === 'wall' })) } : defaultMegaPlan(level, branch); return { ...(extended ? { extended: true, paid: { spaceLevel: level, receipts: [] } } : {}), version: 1, source: 'confirmed-copy', plans: { [megaKey(level, branch)]: p } }; }
@@ -156,7 +156,7 @@ export function megaSetupActions(container, repo, save, refresh) { if (!isMegaDe
         if (p.textContent?.startsWith('다음 돈 목표:'))
             p.textContent = p.textContent.replace('카페 확장', '카페 레벨 올리기 · 매장 면적 유지'); for (const n of document.querySelectorAll('.hint'))
     if (n.textContent === 'v2.6 전용 카페예요. 이전 버전 카페는 그대로 보관돼요.')
-        n.textContent = save.mega?.finalGrowth?.renewal ? 'v3.1 통합 공개 테스트판이에요. 기존 기록을 유지해요. 가구 방향별 시각 검수·갤럭시탭 검증은 후속 과제예요.' : 'v3.0 테스트 전용 카페예요. 이전 버전 카페는 그대로 보관돼요.'; if (save.mega?.extended) {
+        n.textContent = save.mega?.finalGrowth?.renewal ? 'v3.1 외관·전문화·체험 통합 검수 중이에요. 공개 배포본이 아니며 경제·장시간 검증을 확인해 주세요.' : 'v3.0 테스트 전용 카페예요. 이전 버전 카페는 그대로 보관돼요.'; if (save.mega?.extended) {
     const quote = expansionQuote(save), baseQualification = megaGrowthBalance.cafes[save.cafeLevel], qualification = baseQualification && save.mega.finalGrowth?.renewal ? { ...baseQualification, expansionCost: renewalGrowthCosts[baseQualification.level - 1] } : baseQualification;
     for (const p of container.parentElement?.querySelectorAll('p') ?? []) {
         if (p.textContent?.startsWith('다음 돈 목표:'))

@@ -1,16 +1,16 @@
-import { studioItem, interiorTags, styleLabels, categoryLabels } from './renewalFurnitureCatalog.js?v=v31-final-636a93f6f215';
-import { paintStudioFurniture } from './megaArt.js?v=v31-final-636a93f6f215';
-import { buyInteriorBatch, sellInteriorBatch, purchaseLimit, saleCandidates, saleQuote } from './interiorCommerce.js?v=v31-final-636a93f6f215';
-import { iso, uniso, megaDimensions, megaChairs } from './megaSpace.js?v=v31-final-636a93f6f215';
-import { adoptInterior, interiorCatalog, inventorySku, tableSeatCount, includedSeats } from './megaInventory.js?v=v31-final-636a93f6f215';
-import { interiorUnlockReason, checkInteriorLayout } from './megaShop.js?v=v31-final-636a93f6f215';
-import { placementSamples } from './interiorPlacementSamples.js?v=v31-final-636a93f6f215';
-import { InteriorHistory, installedIds, interiorCandidate, removeInterior } from './interiorPlacement.js?v=v31-final-636a93f6f215';
-import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js?v=v31-final-636a93f6f215';
-import { paintMegaDecor, environmentPlacements, paintEnvironment, megaImage } from './megaArt.js?v=v31-final-636a93f6f215';
-import { furnitureFor } from './furnitureCatalog.js?v=v31-final-636a93f6f215';
-import { prepareFurniture } from './furnitureUnlocks.js?v=v31-final-636a93f6f215';
-import { ensureGrowthWriteLock } from './growthWriteLock.js?v=v31-final-636a93f6f215';
+import { studioItem, interiorTags, styleLabels, categoryLabels } from './renewalFurnitureCatalog.js';
+import { paintStudioFurniture } from './megaArt.js';
+import { buyInteriorBatch, sellInteriorBatch, purchaseLimit, saleCandidates, saleQuote } from './interiorCommerce.js';
+import { iso, uniso, megaDimensions, megaChairs } from './megaSpace.js';
+import { adoptInterior, interiorCatalog, inventorySku, tableSeatCount, includedSeats } from './megaInventory.js';
+import { interiorUnlockReason, checkInteriorLayout } from './megaShop.js';
+import { placementSamples } from './interiorPlacementSamples.js';
+import { InteriorHistory, installedIds, interiorCandidate, removeInterior } from './interiorPlacement.js';
+import { paintMegaFloor, paintMegaTable, paintMegaChair } from './megaView.js';
+import { paintMegaDecor, environmentPlacements, paintEnvironment, megaImage } from './megaArt.js';
+import { furnitureFor } from './furnitureCatalog.js';
+import { prepareFurniture } from './furnitureUnlocks.js';
+import { ensureGrowthWriteLock } from './growthWriteLock.js';
 export async function openTouchInterior(repo, refresh, initial, tab = 'inventory') {
     if (!await ensureGrowthWriteLock())
         return;

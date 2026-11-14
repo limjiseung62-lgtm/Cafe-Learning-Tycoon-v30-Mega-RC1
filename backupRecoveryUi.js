@@ -1,8 +1,8 @@
-import { backupLimit, backupFilename, checkedGrowthBackup, prepareGrowthRestore } from './backupRecovery.js?v=v31-final-636a93f6f215';
-import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js?v=v31-final-636a93f6f215';
-import { escapeText as esc } from './questionRenderer.js?v=v31-final-636a93f6f215';
-import { createGrowthSave, createProgressiveGrowthSave } from './growthSave.js?v=v31-final-636a93f6f215';
-import { v26Deployment } from './progressiveFeatures.js?v=v31-final-636a93f6f215';
+import { backupLimit, backupFilename, checkedGrowthBackup, prepareGrowthRestore } from './backupRecovery.js';
+import { ensureGrowthWriteLock, supportsGrowthLock } from './growthWriteLock.js';
+import { escapeText as esc } from './questionRenderer.js';
+import { createGrowthSave, createProgressiveGrowthSave } from './growthSave.js';
+import { v26Deployment } from './progressiveFeatures.js';
 let url;
 if (typeof addEventListener === 'function')
     addEventListener('pagehide', () => { if (url)
@@ -33,12 +33,12 @@ export function downloadCafeBackup(repo, host, before) { const status = host.que
 catch (e) {
     status.textContent = e instanceof Error ? e.message : '백업을 준비하지 못했어요. 기존 카페는 유지돼요.';
 } }
-export function mountBackupControls(host, repo, onRestored, { download = true, before } = {}) { const wrap = document.createElement('section'); wrap.className = 'growth-backup'; wrap.style.cssText = 'max-width:100%;box-sizing:border-box;word-break:keep-all'; const note = document.createElement('p'); note.textContent = '브라우저 기록 삭제·학교 기기 정리로 저장이 사라질 수 있어요. 매 수업이 끝나면 JSON 파일을 받아 보관해 주세요. 파일 복원은 이 기기 안에서 처리해요.'; wrap.append(note); if (download) {
-    const b = button('내 카페 백업하기');
+export function mountBackupControls(host, repo, onRestored, { download = true, before } = {}) { const wrap = document.createElement('section'); wrap.className = 'growth-backup'; wrap.style.cssText = 'max-width:100%;box-sizing:border-box;word-break:keep-all'; const note = document.createElement('p'); note.textContent = '내 카페 성장·학습 기록을 파일로 보관해요. 브라우저 기록 삭제·학교 기기 정리로 저장이 사라질 수 있어요. 매 수업이 끝나면 JSON 파일을 받아 보관해 주세요. 파일 복원은 이 기기 안에서 처리해요.'; wrap.append(note); if (download) {
+    const b = button('내 기록 저장하기');
     b.id = 'export-growth';
     b.onclick = () => downloadCafeBackup(repo, wrap, before);
     wrap.append(b);
-} const restore = button('백업 파일로 이어하기'); restore.dataset.backupRestore = ''; const input = document.createElement('input'); input.type = 'file'; input.accept = '.json,application/json'; input.id = 'import-growth'; input.setAttribute('aria-label', '카페 백업 JSON 파일 선택'); input.hidden = true; const status = document.createElement('p'); status.dataset.backupStatus = ''; status.setAttribute('role', 'status'); wrap.append(restore, input, status); restore.onclick = () => { input.value = ''; input.click(); }; let generation = 0; input.onchange = async () => { const file = input.files?.[0], token = ++generation; if (!file)
+} const restore = button('저장한 기록 불러오기'); restore.dataset.backupRestore = ''; const input = document.createElement('input'); input.type = 'file'; input.accept = '.json,application/json'; input.id = 'import-growth'; input.setAttribute('aria-label', '카페 백업 JSON 파일 선택'); input.hidden = true; const status = document.createElement('p'); status.dataset.backupStatus = ''; status.setAttribute('role', 'status'); wrap.append(restore, input, status); restore.onclick = () => { input.value = ''; input.click(); }; let generation = 0; input.onchange = async () => { const file = input.files?.[0], token = ++generation; if (!file)
     return; restore.disabled = true; status.textContent = '백업 파일을 확인하고 있어요. 기존 카페는 바뀌지 않아요.'; try {
     if (file.size > backupLimit)
         throw Error('백업 파일은32MB까지 확인할 수 있어요.');
@@ -109,14 +109,14 @@ export function mountPlayingBackup(repo, before) { document.querySelectorAll('[d
         continue;
     const wrap = document.createElement('div');
     wrap.dataset.playingBackup = '';
-    const b = button('내 카페 백업하기');
+    const b = button('내 기록 저장하기');
     b.onclick = () => downloadCafeBackup(repo, wrap, before);
     wrap.append(b);
     target.append(wrap);
 } }
 /** Inline guidance rather than an unrequested automatic download (Android requires a user gesture). */
-export function mountEndBackup(host, repo, before) { host.querySelector('#growth-backup-reminder')?.remove(); const section = document.createElement('section'); section.id = 'growth-backup-reminder'; section.setAttribute('aria-label', '수업 끝 백업 안내'); section.style.cssText = 'padding:20px;margin:0 0 20px;border:3px solid #448b5a;border-radius:18px;background:#eff9ef;word-break:keep-all;box-sizing:border-box;max-width:100%'; const title = document.createElement('h2'); title.textContent = '오늘 키운 카페를 파일로 보관해요!'; const text = document.createElement('p'); text.textContent = '이 기기의 자동 저장과 별도로, JSON 파일을 받아 두면 다음 수업에도 이어할 수 있어요. 학교 기기의 브라우저 기록이 지워져도 파일이 있으면 복원할 수 있어요.'; const steps = document.createElement('ol'); for (const line of ['아래 초록색 버튼을 눌러 JSON 백업 파일을 받아요.', 'Chrome 오른쪽 위 ⋮ → 다운로드 또는 내 파일 → 다운로드에서 파일 이름과 날짜를 확인해요.', '다음 수업에는 시작 화면의 백업 파일로 이어하기 → JSON 선택 → 이 카페로 복원하기를 눌러요.']) {
+export function mountEndBackup(host, repo, before) { host.querySelector('#growth-backup-reminder')?.remove(); const section = document.createElement('section'); section.id = 'growth-backup-reminder'; section.setAttribute('aria-label', '수업 끝 백업 안내'); section.style.cssText = 'padding:20px;margin:0 0 20px;border:3px solid #448b5a;border-radius:18px;background:#eff9ef;word-break:keep-all;box-sizing:border-box;max-width:100%'; const title = document.createElement('h2'); title.textContent = '오늘 키운 카페를 파일로 보관해요!'; const text = document.createElement('p'); text.textContent = '이 기기의 자동 저장과 별도로, JSON 파일을 받아 두면 다음 수업에도 이어할 수 있어요. 학교 기기의 브라우저 기록이 지워져도 파일이 있으면 복원할 수 있어요.'; const steps = document.createElement('ol'); for (const line of ['아래 초록색 버튼을 눌러 JSON 백업 파일을 받아요.', 'Chrome 오른쪽 위 ⋮ → 다운로드 또는 내 파일 → 다운로드에서 파일 이름과 날짜를 확인해요.', '다음 수업에는 시작 화면의 저장한 기록 불러오기 → JSON 선택 → 이 카페로 복원하기를 눌러요.']) {
     const li = document.createElement('li');
     li.textContent = line;
     steps.append(li);
-} const save = button('내 카페 백업하기 · JSON 파일 저장'); save.id = 'result-backup-growth'; save.style.background = '#27663c'; save.style.color = 'white'; save.style.fontWeight = '800'; save.onclick = () => downloadCafeBackup(repo, section, before); const note = document.createElement('p'); note.textContent = '다운로드 안내만 뜬 것은 완료 확인이 아니에요. 실제 파일이 보이는지 확인하고 수업을 마쳐요. 파일에는 카페와 학습 기록이 담겨요.'; section.append(title, text, steps, save, note); host.prepend(section); }
+} const save = button('내 기록 저장하기 · JSON 파일'); save.id = 'result-backup-growth'; save.style.background = '#27663c'; save.style.color = 'white'; save.style.fontWeight = '800'; save.onclick = () => downloadCafeBackup(repo, section, before); const note = document.createElement('p'); note.textContent = '다운로드 안내만 뜬 것은 완료 확인이 아니에요. 실제 파일이 보이는지 확인하고 수업을 마쳐요. 파일에는 카페와 학습 기록이 담겨요.'; section.append(title, text, steps, save, note); host.prepend(section); }

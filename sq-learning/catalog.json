@@ -35,6 +35,10 @@
       "runtimeVersion": "common-public-runtime/1.1.0-unified-candidate",
       "dataVersion": "science-unified/0.1.3-1.0.0-candidate",
       "games": {
+        "cafe": {
+          "releaseRef": "common-learning/1.1.2-math-science-operational",
+          "manifestSHA256": "6adfd9434e8b23e17ad37e5cab32b8c7255862a4f053e90c06043c96d6327f1f"
+        },
         "math-defense": {
           "releaseRef": "93bbdda4c4585b54cb8e8f275b73fc2fe46d31febb76f4d4d420c4d173b1d650",
           "manifestSHA256": "93bbdda4c4585b54cb8e8f275b73fc2fe46d31febb76f4d4d420c4d173b1d650"
